@@ -1,0 +1,67 @@
+// ============================================================================
+// android/app/build.gradle — trechos de release (após flutter create .)
+// Padrão à prova de CI: se NÃO houver keystore de produção (key.properties),
+// o build release cai na assinatura de DEBUG e mesmo assim gera um APK/AAB
+// instalável para teste. Quando você criar o keystore, ele passa a assinar
+// para produção automaticamente — sem mexer no código.
+// ============================================================================
+
+// --- No TOPO do arquivo (antes de android { }): carrega o keystore se existir.
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+def hasReleaseKeystore = keystorePropertiesFile.exists()
+
+android {
+    namespace "com.metodo1dia.app"        // <-- CONFIRME seu domínio (ver README)
+    compileSdkVersion 34
+
+    defaultConfig {
+        applicationId "com.metodo1dia.app" // package name DEFINITIVO (confirmar)
+        minSdkVersion 23                   // geolocator/notifications exigem >= 23
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0.0"
+        multiDexEnabled true
+    }
+
+    // Assinatura de produção — só é montada se key.properties existir.
+    signingConfigs {
+        if (hasReleaseKeystore) {
+            release {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            // Com keystore -> assina produção. Sem keystore (CI) -> debug.
+            signingConfig hasReleaseKeystore
+                ? signingConfigs.release
+                : signingConfigs.debug
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                'proguard-rules.pro'
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------
+// android/key.properties (NÃO comitar — já está no .gitignore). Modelo:
+// ----------------------------------------------------------------------------
+// storePassword=SENHA_DA_STORE
+// keyPassword=SENHA_DA_CHAVE
+// keyAlias=upload
+// storeFile=/caminho/absoluto/upload-keystore.jks
+//
+// Gerar o keystore de upload:
+//   keytool -genkey -v -keystore upload-keystore.jks \
+//     -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+// ----------------------------------------------------------------------------

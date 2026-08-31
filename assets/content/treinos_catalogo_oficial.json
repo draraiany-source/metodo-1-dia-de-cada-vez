@@ -1,0 +1,2108 @@
+{
+  "app": "Método 1 Dia de Cada Vez – Vida Saudável",
+  "versao_catalogo": "2.0",
+  "total_treinos": 117,
+  "treinos": [
+    {
+      "id": "treino_001",
+      "id_original": "treino_001",
+      "nome": "Bike – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo_muscular": null,
+      "equipamento": "Bike",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min de aquecimento; cardio mínimo de 15 min e máximo de 1 h",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/yirpahOImBs?si=8YufptI_E0HdBvrs",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_002",
+      "id_original": "treino_002",
+      "nome": "Bike Horizontal – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo_muscular": null,
+      "equipamento": "Bike horizontal",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min de aquecimento; cardio mínimo de 15 min e máximo de 1 h",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/4mBJliQoI8g?si=ZssJk_664_6-hg9X",
+      "status": "revisar_link_duplicado_com_caminhada",
+      "observacao": null
+    },
+    {
+      "id": "treino_003",
+      "id_original": "treino_001 (duplicado no material)",
+      "nome": "Caminhada – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo_muscular": null,
+      "equipamento": "Livre / esteira",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "20 min",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/4mBJliQoI8g?si=iKCS860VZfuy-LEl",
+      "status": "revisar_link_duplicado_com_bike_horizontal",
+      "observacao": null
+    },
+    {
+      "id": "treino_004",
+      "id_original": "treino_003",
+      "nome": "Esteira – Caminhada/Corrida – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo_muscular": null,
+      "equipamento": "Esteira",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min de aquecimento; caminhada ou corrida por no mínimo 15 min e no máximo 1 h",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/leJO-flyPDY?si=_pggWV5Q4FjovTpN",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_005",
+      "id_original": "treino_004",
+      "nome": "Bike Spinning – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo_muscular": null,
+      "equipamento": "Bike spinning",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min de aquecimento; cardio mínimo de 15 min e máximo de 1 h",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/G7F5uB99jfM?si=e5jlgXxt1XUqP80w",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_006",
+      "id_original": "treino_005",
+      "nome": "Simulador de Escada – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo_muscular": null,
+      "equipamento": "Simulador de escada",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "Cardio mínimo de 15 min e máximo de 1 h",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/POATWbGnldc?si=Yl9Hg-kwWbffHueE",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_007",
+      "id_original": "treino_006",
+      "nome": "Elíptico – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo_muscular": null,
+      "equipamento": "Elíptico",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min de aquecimento; cardio mínimo de 15 min e máximo de 1 h",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/-uiqrqMfGIk?si=TK6k8U74-2mCNuHv",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_008",
+      "id_original": "treino_007",
+      "nome": "Abdominal Supra no Solo",
+      "categoria": "Hipertrofia / Core",
+      "grupo_muscular": "Abdômen",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Fortalecimento abdominal / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/k4NfeFjj2D8?si=mnaFJ0dirzaR8-EK",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_009",
+      "id_original": "treino_008",
+      "nome": "Abdominal – Queima Gordura",
+      "categoria": "Hipertrofia / Core",
+      "grupo_muscular": "Abdômen",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Fortalecimento abdominal / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/1ddzMcIDvA0?si=x6hvTokb_DmVNBR6",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_010",
+      "id_original": "treino_009",
+      "nome": "Abdominal Supra com Toque nos Joelhos – Unilateral",
+      "categoria": "Hipertrofia / Core",
+      "grupo_muscular": "Abdômen",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Fortalecimento abdominal",
+      "link_youtube": "https://youtube.com/shorts/2Ln9Q1MVRK0?si=8ws6ogwGVGMf6hSz",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_011",
+      "id_original": "treino_010",
+      "nome": "Abdominal Remador",
+      "categoria": "Hipertrofia / Core",
+      "grupo_muscular": "Abdômen",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Fortalecimento abdominal / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/tIleTzoq8zI?si=O0M2UMt4x1YalE94",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_012",
+      "id_original": "treino_011",
+      "nome": "Prancha Abdominal – Isometria",
+      "categoria": "Hipertrofia / Core",
+      "grupo_muscular": "Core / abdômen",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries; mínimo informado como 20 min e máximo 3 min",
+      "intervalo": null,
+      "objetivo": "Fortalecimento do core / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/SLLfnl6bdlU?si=LHvGwnJMh9en6gEP",
+      "status": "confirmar_duracao_provavel_20_segundos",
+      "observacao": null
+    },
+    {
+      "id": "treino_013",
+      "id_original": "treino_012",
+      "nome": "Abdominal na Máquina",
+      "categoria": "Hipertrofia / Core",
+      "grupo_muscular": "Abdômen",
+      "equipamento": "Máquina abdominal",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 10 / 15 / 20 repetições",
+      "intervalo": null,
+      "objetivo": "Fortalecimento abdominal / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/758wZZ3oKmU?si=01zcpC2W94VLe0J7",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_014",
+      "id_original": "treino_013",
+      "nome": "Abdominal Infra na Paralela",
+      "categoria": "Hipertrofia / Core",
+      "grupo_muscular": "Abdômen inferior",
+      "equipamento": "Paralela",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 10 / 12 / 15 repetições",
+      "intervalo": null,
+      "objetivo": "Fortalecimento abdominal / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/nd_mlcU0cxQ?si=1_c-5Q1Uj4udpIdu",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_015",
+      "id_original": "treino_014",
+      "nome": "Mobilidade de Ombros",
+      "categoria": "Flexibilidade / Mobilidade",
+      "grupo_muscular": "Ombros",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "2 min",
+      "intervalo": null,
+      "objetivo": "Mobilidade",
+      "link_youtube": "https://youtube.com/shorts/_gUE10Qfowo?si=O6jhIrVdEQKnDZuH",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_016",
+      "id_original": "treino_014 (duplicado no material)",
+      "nome": "Alongamento de Superiores no Espaldar",
+      "categoria": "Flexibilidade / Mobilidade",
+      "grupo_muscular": "Membros superiores",
+      "equipamento": "Espaldar",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Alongamento / flexibilidade",
+      "link_youtube": "https://youtube.com/shorts/TTQVrv0C3Rg?si=d9WDhbpZruo8duhU",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_017",
+      "id_original": "treino_015",
+      "nome": "Aquecimento de Membros Inferiores com Agachamento e Afundo",
+      "categoria": "Aquecimento / Mobilidade",
+      "grupo_muscular": "Membros inferiores",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "10 min",
+      "intervalo": null,
+      "objetivo": "Aquecimento rápido",
+      "link_youtube": "https://youtube.com/shorts/xuhVul5UDiQ?si=5qy_tibhvXzOQgdc",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_018",
+      "id_original": "treino_016",
+      "nome": "Alongamento de Membros Inferiores no Espaldar",
+      "categoria": "Flexibilidade / Mobilidade",
+      "grupo_muscular": "Membros inferiores",
+      "equipamento": "Espaldar",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Alongamento / flexibilidade",
+      "link_youtube": "https://youtube.com/shorts/k_3dTw9n5X4?si=81m-wbEqWUIT5By-",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_019",
+      "id_original": "treino_017",
+      "nome": "Simulação de Pular Corda",
+      "categoria": "Cardio",
+      "grupo_muscular": null,
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/MDhxgtIcT1g?si=t_sG-M97m0E-aDwr",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_020",
+      "id_original": "treino_018",
+      "nome": "Agachamento com Salto",
+      "categoria": "Hipertrofia / Cardio",
+      "grupo_muscular": "Membros inferiores",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento / força",
+      "link_youtube": "https://youtube.com/shorts/pEmUIyw1uBY?si=eczT17nzi0ns19Ig",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_021",
+      "id_original": "treino_019",
+      "nome": "Agachamento com Passada Lateral",
+      "categoria": "Hipertrofia / Cardio",
+      "grupo_muscular": "Membros inferiores",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento / força",
+      "link_youtube": "https://youtube.com/shorts/Xl07Ws1S7iE?si=PKZuzgF4800GMFNp",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_022",
+      "id_original": "treino_020",
+      "nome": "Agachamento com Salto Lateral no Step",
+      "categoria": "Cardio",
+      "grupo_muscular": "Membros inferiores",
+      "equipamento": "Step",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/yzrGaDYac4A?si=8Qhwne13d9Aby2ZS",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_023",
+      "id_original": "treino_021",
+      "nome": "Polichinelo",
+      "categoria": "Cardio",
+      "grupo_muscular": null,
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/It6qK10vZXc?si=2zdZG9KYdC_gO8PE",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_024",
+      "id_original": "treino_022",
+      "nome": "Burpee",
+      "categoria": "Cardio",
+      "grupo_muscular": "Corpo inteiro",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/9bvu1V0y8fQ?si=MzICXqtWt96Zs0_t",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_025",
+      "id_original": "treino_023",
+      "nome": "Escalador",
+      "categoria": "Cardio",
+      "grupo_muscular": "Core / corpo inteiro",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento cardiovascular",
+      "link_youtube": "https://youtube.com/shorts/cbI1RcL-oy0?si=ZastuvTJb1T9oqfT",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_026",
+      "id_original": "treino_01",
+      "nome": "Aquecimento com Agachamento + Recuo + Avanço",
+      "categoria": "Cardio / Aquecimento",
+      "grupo_muscular": "Membros inferiores",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "5 min",
+      "intervalo": null,
+      "objetivo": "Aquecimento / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/RTph1PxyQiA?si=32SXL18TwscOi_ja",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_027",
+      "id_original": "treino_02",
+      "nome": "Agachamento no TRX",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Membros inferiores",
+      "equipamento": "TRX",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/YrTUqOU38TU?si=DiJGSooxpdNFeuDf",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_028",
+      "id_original": "treino_03",
+      "nome": "Afundo no TRX",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Membros inferiores",
+      "equipamento": "TRX",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/gfpouEYdvrE?si=cSeZd2E7Ogd1MnOp",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_029",
+      "id_original": "treino_04",
+      "nome": "Afundo no Step sem Peso",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Membros inferiores",
+      "equipamento": "Step",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/wXt_LljU0Eg?si=5-fhEWB2LkiPSzqb",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_030",
+      "id_original": "treino_05",
+      "nome": "Agachamento no Banco/Cadeira/Caixote",
+      "categoria": "Cardio / Funcional",
+      "grupo_muscular": "Membros inferiores",
+      "equipamento": "Banco, cadeira ou caixote",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Queima de gordura / condicionamento",
+      "link_youtube": "https://youtube.com/shorts/PyBrW3YQxTw?si=iEE3_4eacXmup5h6",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_031",
+      "id_original": "treino_06",
+      "nome": "Afundo com Halteres",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/pap0SG2aCP4?si=3tMp-vWTsL-POsV6",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_032",
+      "id_original": "treino_07",
+      "nome": "Afundo com Halteres no Step",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Halteres e step",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/OQSVGNaOs08?si=zRRnhOp1AvUzvsIC",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_033",
+      "id_original": "treino_08",
+      "nome": "Agachamento Taça",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps / glúteos",
+      "equipamento": "Halter ou kettlebell",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/eY5fFXM-Vlk?si=-CHcvbDP-FzGvag7",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_034",
+      "id_original": "treino_09",
+      "nome": "Cadeira Extensora",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps",
+      "equipamento": "Cadeira extensora",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/75ytAlJR2sM?si=5pOCbXsHVovDewpz",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_035",
+      "id_original": "treino_10",
+      "nome": "Leg Press 45°",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Leg press 45°",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/TSlnWLSdh2I?si=leyWoCcrJnYTMkWM",
+      "status": "pronto_link_atualizado",
+      "observacao": null
+    },
+    {
+      "id": "treino_036",
+      "id_original": "treino_11",
+      "nome": "Agachamento Hack Squat",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps / glúteos",
+      "equipamento": "Hack squat",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/GE8s9FHQr-M?si=AmtrYi7_3I6QBSbv",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_037",
+      "id_original": "treino 12",
+      "nome": "Agachamento Livre",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Livre",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/ySvn7ckhwwo?si=CuNJQZfq5MYdPhxA",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_038",
+      "id_original": "treino_12 (duplicado no material)",
+      "nome": "Agachamento Smith",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Smith",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia / queima de gordura",
+      "link_youtube": "https://youtube.com/shorts/_9nQzUNjfvc?si=pNzBZL2mTH8bfQy6",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_039",
+      "id_original": "ID 14",
+      "nome": "Agachamento Smith Profundo",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Smith",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "2 min",
+      "objetivo": "Quadríceps",
+      "link_youtube": "https://youtube.com/shorts/p3J6enrTzBM?si=G5JSqrmG5xDWVnsb",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_040",
+      "id_original": "ID 15",
+      "nome": "Afundo no Smith",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Smith",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "2 min",
+      "objetivo": "Quadríceps",
+      "link_youtube": "https://youtube.com/shorts/85rvs19HF3k?si=IMfKr16HkSHoWxoU",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_041",
+      "id_original": "ID 16",
+      "nome": "Leg Press Horizontal",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps / isquiotibiais",
+      "equipamento": "Leg press horizontal",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "2 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/d_8-oa7iXuo?si=uMW-Ao5p73zUiNp9",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_042",
+      "id_original": "ID 17",
+      "nome": "Agachamento Livre com Halteres",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "3 séries de 12 repetições",
+      "intervalo": "45 s",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/tan_NmtrO0o?si=tSgoNeI6LSWrTlHl",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_043",
+      "id_original": "ID 18",
+      "nome": "Máquina Adutora",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Adutores",
+      "equipamento": "Máquina adutora",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "observacao": "A carga define o nível do atleta.",
+      "link_youtube": "https://youtube.com/shorts/ZGgd7HZlC_Q?si=ByQ_UcGBXiIoSvLQ",
+      "status": "pronto"
+    },
+    {
+      "id": "treino_044",
+      "id_original": "ID 19",
+      "nome": "Agachamento Pêndulo",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Quadríceps",
+      "equipamento": "Pêndulo",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "2 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/z8_JPPUD24Q?si=7UNkRaE8wRDI9ehP",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_045",
+      "id_original": "ID 20",
+      "nome": "Elevação Pélvica no Solo com Peso Corporal",
+      "categoria": "Ativação / Hipertrofia",
+      "grupo_muscular": "Glúteos",
+      "equipamento": "Nenhum",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "4 séries de 20 repetições",
+      "intervalo": "45 s",
+      "objetivo": "Ativação de glúteos",
+      "link_youtube": "https://youtube.com/shorts/d0916AxqWYU?si=Opfj6icsh5hblfvv",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_046",
+      "id_original": "ID 21",
+      "nome": "Cadeira Abdutora",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Abdutores",
+      "equipamento": "Máquina abdutora",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "45 s",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/8NZq6doH4e8?si=A93orLFDcutnNgTX",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_047",
+      "id_original": "ID 22",
+      "nome": "Stiff Unilateral",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Glúteos / isquiotibiais",
+      "equipamento": "Peso do corpo",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "30 s",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/l7JzAO44-ug?si=o-53fxKHdAW7Ih0e",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_048",
+      "id_original": "ID 23",
+      "nome": "Glúteo 4 Apoios com Perna Estendida e Caneleira",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Glúteos / isquiotibiais",
+      "equipamento": "Caneleira",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "45 s",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/jYJWodhepQ8?si=hoGoq9U_iubSN_pL",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_049",
+      "id_original": "ID 24",
+      "nome": "Glúteo 4 Apoios com Caneleira",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Glúteos / isquiotibiais",
+      "equipamento": "Caneleira",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "35 s",
+      "objetivo": "Hipertrofia de glúteos",
+      "link_youtube": "https://youtube.com/shorts/2LLqyldCC1o?si=zOUm8V3BrAYaPTqT",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_050",
+      "id_original": "ID 25",
+      "nome": "Abdução com Caneleira",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Abdutores / glúteos",
+      "equipamento": "Caneleira",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "30 s",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/YDahr-nnILI?si=Up4DPweWdHabPmRP",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_051",
+      "id_original": "ID 26",
+      "nome": "Glúteo em Pé – Coice",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Glúteos / isquiotibiais",
+      "equipamento": "Máquina de glúteo em pé",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia de glúteos",
+      "link_youtube": "https://youtube.com/shorts/-ePb7y_2pps?si=6CAvtiZRnOYVEldd",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_052",
+      "id_original": "ID 27",
+      "nome": "Agachamento Búlgaro com Halteres",
+      "categoria": "Hipertrofia",
+      "grupo_muscular": "Glúteos / isquiotibiais / quadríceps",
+      "equipamento": "Banco, caixote, step ou aparelho de búlgaro + halteres",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "2 min",
+      "objetivo": "Hipertrofia de glúteos",
+      "link_youtube": "https://youtube.com/shorts/AUyW87iK3-o?si=wr3nFE89TUUXlOcb",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_053",
+      "id_original": "treino 89",
+      "nome": "Afundo com Recuo e Rosca Direta",
+      "categoria": "Emagrecimento / Funcional",
+      "grupo_muscular": "Membros inferiores / bíceps",
+      "equipamento": null,
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "3 séries de 1 min de execução",
+      "intervalo": null,
+      "objetivo": "Emagrecimento / condicionamento",
+      "link_youtube": "https://youtube.com/shorts/zNP0o_9o-6E?si=2NVXvlOscZah13Rl",
+      "status": "pronto",
+      "observacao": null
+    },
+    {
+      "id": "treino_054",
+      "id_original": "28",
+      "nome": "Afundo com Recuo e Halteres",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Quadríceps / Glúteos / Isquiotibiais",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "35 s",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/tHZSzehWIlQ?si=2CHpdqwHvuM5Z26V",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_055",
+      "id_original": "29",
+      "nome": "Glúteo Coice no Cabo – Polia Baixa",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Glúteos / Isquiotibiais",
+      "equipamento": "Crossover",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/TwwPcrYt-CM?si=yqPDKb51lkzFmzjT",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_056",
+      "id_original": "30",
+      "nome": "Glúteo na Polia com Cabo no Quadríceps",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Glúteos / Isquiotibiais",
+      "equipamento": "Crossover",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia de glúteos",
+      "link_youtube": "https://youtube.com/shorts/h6sCPo6_oJA?si=NiAkg5OtKGVs-pO2",
+      "observacao": "Nome preservado conforme informado; revisar nomenclatura técnica se desejado.",
+      "status": "revisar"
+    },
+    {
+      "id": "treino_057",
+      "id_original": "32",
+      "nome": "Agachamento Sumô no Step",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Glúteos / Isquiotibiais",
+      "equipamento": "Halteres / Dumbbells / Step",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia de isquiotibiais",
+      "link_youtube": "https://youtube.com/shorts/Fh-9MyLkIQM?si=iN4k17AIUTOTGa_p",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_058",
+      "id_original": "33",
+      "nome": "Levantamento Terra Sumô",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Isquiotibiais",
+      "equipamento": "Barra livre",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "2 min",
+      "objetivo": "Hipertrofia muscular",
+      "link_youtube": "https://youtube.com/shorts/tiUsxRN1AN0?si=XEssqSkvEmASLTeJ",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_059",
+      "id_original": "34",
+      "nome": "Agachamento Sumô na Máquina",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Isquiotibiais",
+      "equipamento": "Máquina sumô",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia muscular",
+      "link_youtube": "https://youtube.com/shorts/Xp4rt7_7q0A?si=F33nOVglh8_3qDKy",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_060",
+      "id_original": "35",
+      "nome": "Búlgaro no Smith",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Glúteos / Isquiotibiais",
+      "equipamento": "Smith + aparelho de búlgaro, banco ou caixote",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "2 min",
+      "objetivo": "Hipertrofia muscular",
+      "link_youtube": "https://youtube.com/shorts/tytxNh9osL4?si=w_k_5mhgr5WNxRqG",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_061",
+      "id_original": "36",
+      "nome": "Elevação Pélvica",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Glúteos / Isquiotibiais",
+      "equipamento": "Máquina de elevação pélvica",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "2 min",
+      "objetivo": "Hipertrofia de glúteos",
+      "link_youtube": "https://youtube.com/shorts/s2-O675h0SY?si=fiB7YcrAtAYCn1hZ",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_062",
+      "id_original": "37",
+      "nome": "Máquina de Elevação Pélvica",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Glúteos / Isquiotibiais",
+      "equipamento": "Máquina de elevação pélvica",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia de glúteos",
+      "link_youtube": "https://youtube.com/shorts/IewprR7AoVA?si=g6I_jeVVNJdgsi-O",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_063",
+      "id_original": "38",
+      "nome": "Cadeira Flexora",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Isquiotibiais",
+      "equipamento": "Cadeira flexora",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "2 min",
+      "objetivo": "Hipertrofia de isquiotibiais",
+      "link_youtube": "https://youtube.com/shorts/LAntVFSgwFc?si=t3sKhNM-ag93MUeV",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_064",
+      "id_original": "39",
+      "nome": "Mesa Flexora",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Isquiotibiais",
+      "equipamento": "Mesa flexora",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia de bíceps femoral",
+      "link_youtube": "https://youtube.com/shorts/W7Zz9uL-HHU?si=X8aVs9kCE2gB_npJ",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_065",
+      "id_original": "40",
+      "nome": "Stiff",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Isquiotibiais",
+      "equipamento": "Barra livre",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "2 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/0GNrMc7NO4k?si=IP1e6MBCi9AfMAAZ",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_066",
+      "id_original": "41",
+      "nome": "Panturrilha Sentada",
+      "categoria": "Hipertrofia – Panturrilhas",
+      "grupo_muscular": "Panturrilhas / Gêmeos",
+      "equipamento": "Máquina de panturrilha sentada",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia de panturrilhas",
+      "link_youtube": "https://youtube.com/shorts/V4pwGhq7qpA?si=P1KV3VL2Aj5w60Ix",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_067",
+      "id_original": "42",
+      "nome": "Subida no Caixote Segurando no Espaldar",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Isquiotibiais / Quadríceps",
+      "equipamento": "Caixote e espaldar",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/jl8OaKKaFwE?si=vM6d2xE96QH790DR",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_068",
+      "id_original": "43",
+      "nome": "Full Body – Agachamento Sumô com Elevação Frontal",
+      "categoria": "Full Body / Funcional",
+      "grupo_muscular": "Membros inferiores / Ombros",
+      "equipamento": "Kettlebell",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "3 séries de 20 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia e emagrecimento",
+      "link_youtube": "https://youtube.com/shorts/0MKFEj7z5Yk?si=2Rtq7MMYsoC39GZh",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_069",
+      "id_original": "44",
+      "nome": "Agachamento com Desenvolvimento",
+      "categoria": "Full Body / Funcional",
+      "grupo_muscular": "Quadríceps / Glúteos / Isquiotibiais / Ombros",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia e emagrecimento",
+      "link_youtube": "https://youtube.com/shorts/gaE0M36EdwE?si=X2RMD3WZAbv4ukfp",
+      "observacao": "Mesmo link informado no ID original 45; revisar se os dois exercícios usam o mesmo vídeo.",
+      "status": "revisar"
+    },
+    {
+      "id": "treino_070",
+      "id_original": "45",
+      "nome": "Full Body – Agachamento com Desenvolvimento Unilateral Alternado",
+      "categoria": "Full Body / Funcional",
+      "grupo_muscular": "Quadríceps / Isquiotibiais / Glúteos",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Iniciante"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia e emagrecimento",
+      "link_youtube": "https://youtube.com/shorts/gaE0M36EdwE?si=X2RMD3WZAbv4ukfp",
+      "observacao": "Mesmo link informado no ID original 44; revisar se os dois exercícios usam o mesmo vídeo.",
+      "status": "revisar"
+    },
+    {
+      "id": "treino_071",
+      "id_original": "46",
+      "nome": "Supino Reto Articulado – Pegada Neutra",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo_muscular": "Peitoral",
+      "equipamento": "Máquina de supino articulada",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia peitoral",
+      "link_youtube": "https://youtube.com/shorts/kEcWDobhIO0?si=M01Yu7LFX-kpmZkW",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_072",
+      "id_original": "47",
+      "nome": "Supino Reto – Pegada Supinada na Máquina Articulada",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo_muscular": "Peitoral",
+      "equipamento": "Supino reto articulado",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/jmzpzl77boY?si=mCpXXkwkUiyyBvDq",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_073",
+      "id_original": "48",
+      "nome": "Supino Inclinado – Pegada Neutra",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo_muscular": "Peitoral",
+      "equipamento": "Máquina de supino inclinado articulado",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/tC0Oq1eDNeI?si=yjuLHG3A-MkZI3hn",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_074",
+      "id_original": "49",
+      "nome": "Supino Inclinado – Pegada Supinada",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo_muscular": "Peitoral",
+      "equipamento": "Supino articulado inclinado",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/YkX3QnccXrA?si=UnyhIyQjBKCmF8EG",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_075",
+      "id_original": "50",
+      "nome": "Supino com Halteres no Banco Inclinado",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo_muscular": "Peitoral",
+      "equipamento": "Banco e halteres",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/BThtw2B2-tM?si=TgT9DWV96VyFJ-_Q",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_076",
+      "id_original": "51",
+      "nome": "Peitoral no Peck Fly",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo_muscular": "Peitoral",
+      "equipamento": "Peck Fly",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Peitoral / hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/J66_ke7Gg24?si=JJ7fedb72yXv43PZ",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_077",
+      "id_original": "53",
+      "nome": "Puxada com Barra Longa",
+      "categoria": "Hipertrofia – Costas",
+      "grupo_muscular": "Dorsal",
+      "equipamento": "Máquina de puxada alta",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/TmQCiCrhKi8?si=XRMd25V8X8fPyN9Z",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_078",
+      "id_original": "54",
+      "nome": "Barra Fixa no Graviton",
+      "categoria": "Hipertrofia – Costas",
+      "grupo_muscular": "Grande dorsal",
+      "equipamento": "Graviton",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia muscular",
+      "link_youtube": "https://youtube.com/shorts/7GVmUYU4ylg?si=f602auXmvscYdj_p",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_079",
+      "id_original": "55",
+      "nome": "Puxada com Triângulo",
+      "categoria": "Hipertrofia – Costas",
+      "grupo_muscular": "Dorsal",
+      "equipamento": "Máquina de puxada",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/-iocIY-QNpk?si=tkSKrK1xwfEjAoMh",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_080",
+      "id_original": "56",
+      "nome": "Puxada com Barra W",
+      "categoria": "Hipertrofia – Costas",
+      "grupo_muscular": "Dorsal",
+      "equipamento": "Máquina de puxada",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/Qq5haPnLDKQ?si=6Gz7pCOLCRZ1RHpf",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_081",
+      "id_original": "57",
+      "nome": "Face Pull",
+      "categoria": "Hipertrofia – Costas",
+      "grupo_muscular": "Ombros / Dorsal",
+      "equipamento": "Crossover ou Crosmith",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/Q9eCRp2RbWI?si=J3mZsu42iEnarrNw",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_082",
+      "id_original": "58",
+      "nome": "Pulldown com Barra Reta",
+      "categoria": "Hipertrofia – Costas",
+      "grupo_muscular": "Ombros / Dorsal",
+      "equipamento": "Crossover ou Crosmith",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/8rsYp8jmRcw?si=yjmEi76KJpDFAnIp",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_083",
+      "id_original": "59",
+      "nome": "Puxada Alta com Corda",
+      "categoria": "Hipertrofia – Costas",
+      "grupo_muscular": "Dorsal",
+      "equipamento": "Crossover ou Crosmith",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/sC7YdLAYy4c?si=RFoLiegkJAYpp80l",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_084",
+      "id_original": "60",
+      "nome": "Remada Sentada com Triângulo",
+      "categoria": "Hipertrofia – Costas",
+      "grupo_muscular": "Dorsal",
+      "equipamento": "Máquina de remada",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": null,
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/lN9zwH-SFDY?si=pdv2B5FbUEJqoqqo",
+      "observacao": "Intervalo veio sem número no texto original; confirmar.",
+      "status": "revisar"
+    },
+    {
+      "id": "treino_085",
+      "id_original": "61",
+      "nome": "Remada Curvada com Barra",
+      "categoria": "Hipertrofia – Costas",
+      "grupo_muscular": "Dorsal",
+      "equipamento": "Barra longa",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/sMuQuVGdzH4?si=J5xey8a4yCVSkfhU",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_086",
+      "id_original": "62",
+      "nome": "Rosca Direta na Polia Baixa com Barra Reta",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo_muscular": "Bíceps",
+      "equipamento": "Crossover ou Crosmith + barra reta",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/-nHHx4w_z58?si=h7Jour7zcclYbvyC",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_087",
+      "id_original": "63",
+      "nome": "Rosca Direta com Halteres",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo_muscular": "Bíceps",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/B99EvbkQlSg?si=ZXUplRA1L_1dxDS5",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_088",
+      "id_original": "64",
+      "nome": "Bíceps Alternado / Unilateral",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo_muscular": "Bíceps",
+      "equipamento": "Máquina de bíceps",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/Gj75IWVUtZE?si=l3Us6Z1Wqx-haXGf",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_089",
+      "id_original": "65",
+      "nome": "Rosca Direta na Máquina",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo_muscular": "Bíceps",
+      "equipamento": "Máquina de bíceps",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "45 s",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/JfSq8ZY8u7o?si=vivwxlQLQedqQGKH",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_090",
+      "id_original": "66",
+      "nome": "Rosca Direta Alternada com Rotação de Cotovelos",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo_muscular": "Bíceps",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/e_WyY6qexxs?si=Nb2wZWFJwmCt6fwx",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_091",
+      "id_original": "67",
+      "nome": "Rosca Martelo com Corda",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo_muscular": "Bíceps",
+      "equipamento": "Crossover ou Crosmith + corda",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/ho2xYGl4jMc?si=5qb2UZ-l0TGUkFUx",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_092",
+      "id_original": "68",
+      "nome": "Rosca Unilateral na Polia Baixa",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo_muscular": "Bíceps",
+      "equipamento": "Crossover ou Crosmith + pegador",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/Ihbj7gvP1jM?si=uBZk6p8lYNL3qWO1",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_093",
+      "id_original": "69",
+      "nome": "Remada Alta na Polia",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo_muscular": "Ombros / Trapézio",
+      "equipamento": "Crossover ou Crosmith + barra reta",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/34KR3KY7MTU?si=v7yPHd7bnyJtzzFR",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_094",
+      "id_original": "70",
+      "nome": "Remada Alta com Barra",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo_muscular": "Ombros / Trapézio",
+      "equipamento": "Barra montada ou desmontada",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/W-l_RcPfcmQ?si=am9tiT1I011v9eEp",
+      "observacao": "Instrução original: elevar a barra até a altura do peito, deixando os ombros alinhados.",
+      "status": "revisar"
+    },
+    {
+      "id": "treino_095",
+      "id_original": "71",
+      "nome": "Remada Alta + Desenvolvimento com Barra",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo_muscular": "Ombros / Trapézio",
+      "equipamento": "Barra reta",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "2 min",
+      "objetivo": "Hipertrofia e resistência",
+      "link_youtube": "https://youtube.com/shorts/padLB1_wPCI?si=DOs4CwD7KKVlZzrp",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_096",
+      "id_original": "72",
+      "nome": "Desenvolvimento com Halteres",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo_muscular": "Ombros",
+      "equipamento": "Halteres e banco",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/8N4zSvFhK70?si=MswGhYDyRbshKLa4",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_097",
+      "id_original": "73",
+      "nome": "Desenvolvimento Arnold em Pé",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo_muscular": "Ombros",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/PaZ5hKF9vOM?si=SFiDy2Fg99I_0lyZ",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_098",
+      "id_original": "74",
+      "nome": "Desenvolvimento na Máquina",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo_muscular": "Ombros",
+      "equipamento": "Máquina de desenvolvimento",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/N4tBs0INJ74?si=l9sSah8KTnA0L0rJ",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_099",
+      "id_original": "75",
+      "nome": "Elevação Frontal na Polia com Barra Reta",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo_muscular": "Ombros",
+      "equipamento": "Crossover ou Crosmith + barra reta",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/CWPHxF7aupI?si=Dz9Ux9gLhEgsKQd0",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_100",
+      "id_original": "76",
+      "nome": "Elevação Frontal – Ombro e Peitoral",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo_muscular": "Ombros / Peitoral",
+      "equipamento": "Crossover ou Crosmith + barra reta",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/QqTHPbfYNYA?si=u3KeZNmJc-xzVEGo",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_101",
+      "id_original": "77",
+      "nome": "Elevação Lateral + Desenvolvimento com Cotovelos à Frente",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo_muscular": "Ombros",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/SCGgjjgwCTU?si=DJlCIQLwZKVxOXcF",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_102",
+      "id_original": "78",
+      "nome": "Elevação Frontal com Halteres",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo_muscular": "Ombros / Peitoral",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/_bUAUAzix24?si=dKUi2P6D-d6T0hba",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_103",
+      "id_original": "79",
+      "nome": "Elevação Lateral na Polia",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo_muscular": "Ombros",
+      "equipamento": "Crossover ou Crosmith + pegador",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/gCWL7BWg-Bw?si=H2_yvdiTxWSxEK-9",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_104",
+      "id_original": "80",
+      "nome": "Elevação Lateral no Banco",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo_muscular": "Ombros",
+      "equipamento": "Halteres e banco",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/gfHSUJwfXno?si=C9S8PPGM_jKnDnTF",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_105",
+      "id_original": "81",
+      "nome": "Elevação Frontal com Anilha",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo_muscular": "Ombros / Peitoral",
+      "equipamento": "Anilhas",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/l9tii1W0o0o?si=3gP2FSoeMEjIQYPK",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_106",
+      "id_original": "83A",
+      "nome": "Elevação Lateral com Halteres",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo_muscular": "Ombros",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Ombros / hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/uTbSbR6ldCA?si=d8jryjIzgxazq6B3",
+      "observacao": "ID original 83 duplicado; diferenciado como 83A apenas para rastreio.",
+      "status": "revisar"
+    },
+    {
+      "id": "treino_107",
+      "id_original": "83B",
+      "nome": "Tríceps com Corda",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo_muscular": "Tríceps",
+      "equipamento": "Crossover ou Crosmith + corda",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/DdkHt6iDgkc?si=aVWeat1GxZvr1Bu5",
+      "observacao": "ID original 83 duplicado; diferenciado como 83B apenas para rastreio.",
+      "status": "revisar"
+    },
+    {
+      "id": "treino_108",
+      "id_original": "84",
+      "nome": "Tríceps Francês com Corda",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo_muscular": "Tríceps",
+      "equipamento": "Crossover ou Crosmith + corda",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/al3tbFYX0sk?si=zt6pTdT6NPKvVtSW",
+      "observacao": "Texto original veio como “Tríceps francês concorda”; padronizado para “com corda”. Mesmo vídeo-base informado também nos IDs 86 e 88.",
+      "status": "revisar"
+    },
+    {
+      "id": "treino_109",
+      "id_original": "85",
+      "nome": "Tríceps Paralelo",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo_muscular": "Tríceps",
+      "equipamento": "Máquina de tríceps",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/TqNUzUfXaHo?si=WMPJpd0znd8zXuWd",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_110",
+      "id_original": "86",
+      "nome": "Tríceps Francês com Corda",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo_muscular": "Tríceps",
+      "equipamento": "Crossover ou Crosmith + corda",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/al3tbFYX0sk?si=CHfwzLo46Gk52kfA",
+      "observacao": "Mesmo vídeo-base dos IDs originais 84 e 88; revisar se são duplicatas.",
+      "status": "revisar"
+    },
+    {
+      "id": "treino_111",
+      "id_original": "87",
+      "nome": "Tríceps Testa na Polia",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo_muscular": "Tríceps",
+      "equipamento": "Crossover ou Crosmith + barra reta",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/oyKBbsr5uLk?si=Dp4FDtY45bYv9Xdx",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_112",
+      "id_original": "88",
+      "nome": "Tríceps Francês com Corda",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo_muscular": "Tríceps",
+      "equipamento": "Crossover ou Crosmith + corda",
+      "nivel": [
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/al3tbFYX0sk?si=6wEqQscxxwinKmcZ",
+      "observacao": "Mesmo vídeo-base dos IDs originais 84 e 86; revisar se são duplicatas.",
+      "status": "revisar"
+    },
+    {
+      "id": "treino_113",
+      "id_original": "89",
+      "nome": "Full Body – Afundo com Recuo e Rosca Direta",
+      "categoria": "Full Body / Funcional",
+      "grupo_muscular": "Corpo todo",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia, resistência e emagrecimento",
+      "link_youtube": "https://youtube.com/shorts/zNP0o_9o-6E?si=eI9H28gUlKtnuSt5",
+      "observacao": "Mesmo vídeo-base do treino_053 já existente; provável duplicata/versão mais completa.",
+      "status": "revisar"
+    },
+    {
+      "id": "treino_114",
+      "id_original": "90",
+      "nome": "Full Body – Agachamento Sumô com Elevação Lateral",
+      "categoria": "Full Body / Funcional",
+      "grupo_muscular": "Corpo todo",
+      "equipamento": "Halteres",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia, resistência e emagrecimento",
+      "link_youtube": "https://youtube.com/shorts/swkOBzTV_Go?si=mSuxE_M-XTZjjG-q",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_115",
+      "id_original": "91",
+      "nome": "Full Body – Afundo com Recuo e Remada Curvada",
+      "categoria": "Full Body / Funcional",
+      "grupo_muscular": "Corpo todo",
+      "equipamento": "Anilhas",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia, emagrecimento e resistência",
+      "link_youtube": "https://youtube.com/shorts/Hc6YrnfIqfM?si=l6fYFUTjTe0eHsf9",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_116",
+      "id_original": "92",
+      "nome": "Búlgaro sem Peso",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo_muscular": "Glúteos / Isquiotibiais / Quadríceps",
+      "equipamento": "Aparelho de búlgaro, banco ou caixote",
+      "nivel": [
+        "Iniciante",
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/aVBOKGQ3KDg?si=RCZPycavG1K3dxO7",
+      "observacao": null,
+      "status": "pronto"
+    },
+    {
+      "id": "treino_117",
+      "id_original": "93",
+      "nome": "Remada Articulada",
+      "categoria": "Hipertrofia – Costas",
+      "grupo_muscular": "Dorsal",
+      "equipamento": "Remada articulada",
+      "nivel": [
+        "Intermediário",
+        "Avançado"
+      ],
+      "prescricao": "3 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia",
+      "link_youtube": "https://youtube.com/shorts/31iMfebta4s?si=GueVQDOzXrA-cy9M",
+      "observacao": null,
+      "status": "pronto"
+    }
+  ],
+  "pendencias_nao_importar": [
+    {
+      "id_original": "31",
+      "motivo": "Cadastro incompleto: nome do exercício não informado.",
+      "grupo_muscular": "Posteriores",
+      "equipamento": "Dumbbells",
+      "nivel": [
+        "Intermediário"
+      ],
+      "prescricao": "4 séries de 15 repetições",
+      "intervalo": "1 min",
+      "objetivo": "Hipertrofia de isquiotibiais",
+      "link_youtube": "https://youtube.com/shorts/PgcXNuW7XUA?si=qR7p3EmxVveIeU1m"
+    }
+  ]
+}

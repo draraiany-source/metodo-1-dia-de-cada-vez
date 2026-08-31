@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="440" viewBox="0 0 600 440">
+  <defs><radialGradient id="r" cx="0.5" cy="0.4" r="0.8"><stop offset="0" stop-color="#2A1055"/><stop offset="1" stop-color="#0E0A18"/></radialGradient></defs>
+  <rect width="600" height="440" rx="32" fill="url(#r)"/>
+  <circle cx="300" cy="180" r="96" fill="#9B5DE5" opacity="0.15"/>
+  <circle cx="300" cy="180" r="96" fill="none" stroke="#9B5DE5" stroke-opacity="0.5" stroke-width="3" stroke-dasharray="6 8"/>
+  <text x="300" y="188" font-size="90" text-anchor="middle" dominant-baseline="central">✅</text>
+  <text x="300" y="330" font-family="Poppins,Arial,sans-serif" font-weight="700" font-size="30" fill="#EDEBF3" text-anchor="middle">Hábitos</text>
+  <text x="300" y="372" font-family="Inter,Arial,sans-serif" font-size="20" fill="#A78BFA" text-anchor="middle">Um dia de cada vez 💜</text>
+</svg>

@@ -1,0 +1,50 @@
+rules_version = '2';
+
+// Regras do Cloud Storage — Método 1 Dia de Cada Vez.
+//
+// Correções aplicadas na auditoria RC1:
+//  - /public/ não é mais gravável por qualquer usuário logado (só admin).
+//  - Uploads do usuário limitados a imagens de até 8 MB (custo + abuso).
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid));
+    }
+
+    function isImage() {
+      return request.resource.contentType.matches('image/.*');
+    }
+
+    function underSize(mb) {
+      return request.resource.size < mb * 1024 * 1024;
+    }
+
+    // Fotos de progresso e avatar — só o dono.
+    match /users/{userId}/{allPaths=**} {
+      allow read: if signedIn() && request.auth.uid == userId;
+      allow write: if signedIn()
+        && request.auth.uid == userId
+        && isImage()
+        && underSize(8);
+      allow delete: if signedIn() && request.auth.uid == userId;
+    }
+
+    // Conteúdo público do app (banners, capas de treino).
+    // Leitura aberta; escrita SOMENTE admin.
+    match /public/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && underSize(10);
+    }
+
+    // Nega o resto.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

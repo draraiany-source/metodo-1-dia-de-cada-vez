@@ -1,0 +1,324 @@
+rules_version = '2';
+
+// Regras de segurança do Firestore — Método 1 Dia de Cada Vez.
+//
+// Princípios:
+//  1. Nada é público. O catch-all final nega tudo que não foi liberado.
+//  2. O usuário NUNCA escreve campos sensíveis (xp, level, isPremium, isAdmin).
+//     Esses só mudam via Cloud Functions (Admin SDK ignora estas regras).
+//  3. Em `create` valida-se `request.resource`; em `read/update/delete`,
+//     valida-se `resource`. Trocar os dois é o erro clássico que quebra tudo.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- helpers ----------
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Dono do documento existente (read/update/delete)
+    function ownsExisting() {
+      return signedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    // Dono do documento sendo criado (create)
+    function ownsIncoming() {
+      return signedIn() && request.resource.data.userId == request.auth.uid;
+    }
+
+    // Campos que o cliente jamais pode alterar (só Cloud Functions).
+    function noPrivilegedFields() {
+      return !request.resource.data.diff(resource.data).affectedKeys()
+        .hasAny(['xp', 'level', 'streak', 'isPremium', 'isAdmin',
+                 'coins', 'totalWorkouts', 'totalKm', 'referralCount',
+                 'referralCode']);
+    }
+
+    // ---------- usuários ----------
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId)
+        // não pode nascer admin/premium por conta própria
+        && !request.resource.data.get('isAdmin', false)
+        && !request.resource.data.get('isPremium', false);
+      // O dono edita seu perfil, mas NÃO campos privilegiados.
+      allow update: if (isOwner(userId) && noPrivilegedFields()) || isAdmin();
+      allow delete: if isOwner(userId) || isAdmin();
+    }
+
+    // Assets dinâmicos da Lili (mascote) e da Amanda (personal) — leitura
+    // aberta pra usuária logada (são só imagens/animações de identidade
+    // visual, nada sensível), escrita só admin.
+    match /lili_assets/{document=**} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    match /amanda_assets/{document=**} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    // Módulo Personal Trainer — cada aluno só é visível pro seu próprio
+    // personal (trainerId) e pra si mesma (userId); o personal só
+    // enxerga quem está vinculado a ele.
+    function isMyStudentDoc() {
+      return signedIn() &&
+        (resource.data.trainerId == request.auth.uid ||
+         resource.data.userId == request.auth.uid);
+    }
+
+    match /pt_students/{studentId} {
+      allow read: if isMyStudentDoc() || isAdmin();
+      allow create: if signedIn() && request.resource.data.trainerId == request.auth.uid;
+      allow update, delete: if signedIn() && resource.data.trainerId == request.auth.uid;
+    }
+
+    // Banco de exercícios — biblioteca compartilhada, qualquer personal lê;
+    // por simplicidade, qualquer usuária logada com isPersonalTrainer pode
+    // cadastrar (conteúdo educativo reaproveitável entre personais, igual
+    // ao banco de receitas/treinos do app).
+    match /pt_exercises/{document=**} {
+      allow read: if signedIn();
+      allow write: if signedIn() &&
+        get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true;
+    }
+
+    match /pt_workout_plans/{planId} {
+      allow read: if signedIn() &&
+        (resource.data.trainerId == request.auth.uid || resource.data.studentId == request.auth.uid);
+      allow create: if signedIn() && request.resource.data.trainerId == request.auth.uid;
+      allow update, delete: if signedIn() && resource.data.trainerId == request.auth.uid;
+    }
+
+    // Nota: pt_assessments/pt_photos/pt_loads/pt_sessions simplificados pra
+    // "qualquer logada" porque Firestore rules não fazem join pra checar o
+    // trainerId do aluno referenciado por studentId. Se esse dado for
+    // sensível o suficiente pra exigir isolamento real, reforçar via
+    // Cloud Function (mesmo padrão de redeemCoupon/getVideoUrl).
+    match /pt_assessments/{document=**} {
+      allow read, write: if signedIn();
+    }
+
+    match /pt_photos/{document=**} {
+      allow read, write: if signedIn();
+    }
+
+    match /pt_loads/{document=**} {
+      allow read, write: if signedIn();
+    }
+
+    match /pt_sessions/{document=**} {
+      allow read, write: if signedIn();
+    }
+
+    match /admins/{uid} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // Mapa código de indicação -> dono. Só a Cloud Function `onUserCreated`
+    // (Admin SDK) precisa ler; o cliente só cria o PRÓPRIO código, uma vez,
+    // e nunca pode sobrescrever o código de outra pessoa.
+    match /referral_codes/{code} {
+      allow read: if false;
+      allow create: if signedIn()
+        && request.resource.data.ownerUid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // Cupons — só admin cadastra/edita. Resgate acontece via Cloud Function
+    // (Admin SDK), nunca escrevendo o cupom direto pelo cliente, pra não dar
+    // pra burlar limite de uso.
+    match /coupons/{code} {
+      allow read: if signedIn(); // cliente confere validade antes de resgatar
+      allow write: if isAdmin();
+    }
+
+    // Registro de quem já resgatou qual cupom — só a Cloud Function escreve
+    // (evita resgate duplicado manipulado pelo cliente).
+    match /coupon_redemptions/{id} {
+      allow read: if ownsExisting() || isAdmin();
+      allow write: if false;
+    }
+
+    // ---------- dados pessoais do usuário ----------
+    match /progress/{docId} {
+      allow read, update, delete: if ownsExisting() || isAdmin();
+      allow create: if ownsIncoming();
+    }
+
+    match /running_sessions/{docId} {
+      allow read, update, delete: if ownsExisting() || isAdmin();
+      allow create: if ownsIncoming();
+    }
+
+    match /workout_history/{docId} {
+      allow read, update, delete: if ownsExisting() || isAdmin();
+      allow create: if ownsIncoming();
+    }
+
+    match /habits/{docId} {
+      allow read, update, delete: if ownsExisting() || isAdmin();
+      allow create: if ownsIncoming();
+    }
+
+    match /badges/{docId} {
+      // Conquistas são concedidas por Cloud Function; o app só lê as suas.
+      allow read: if ownsExisting() || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /amanda_messages/{docId} {
+      allow read, delete: if ownsExisting() || isAdmin();
+      allow create: if ownsIncoming();
+      allow update: if false; // histórico é imutável
+    }
+
+    match /notifications/{docId} {
+      allow read, update, delete: if ownsExisting() || isAdmin();
+      allow create: if isAdmin(); // só o backend cria notificações
+    }
+
+    match /subscriptions/{docId} {
+      // Estado de assinatura é escrito pelo webhook (Admin SDK), nunca pelo app.
+      allow read: if ownsExisting() || isAdmin();
+      allow write: if false;
+    }
+
+    // ---------- conteúdo do catálogo (leitura para logados) ----------
+    match /workouts/{document=**} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    match /recipes/{document=**} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    match /challenges/{document=**} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    // Cursos em áudio (Módulo 3 do prompt master) — capítulos são subcoleção
+    // (só metadados). A URL real de cada capítulo fica isolada em
+    // /private/chapters (mapa chapterId->url), nunca lida pelo cliente —
+    // só a Cloud Function `getContentUrl` acessa (valida Premium no servidor).
+    match /audio_courses/{courseId} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+
+      match /chapters/{chapterId} {
+        allow read: if signedIn();
+        allow write: if isAdmin();
+      }
+
+      match /private/{document=**} {
+        allow read: if false;
+        allow write: if isAdmin();
+      }
+    }
+
+    // Receitas em PDF (Módulo 4 do prompt master).
+    // Metadados públicos (título, capa, minutos) legíveis; o arquivo real
+    // deve ficar isolado em /private/file e ser resolvido pela Cloud Function
+    // `getContentUrl` (valida Premium no servidor) — NUNCA lido pelo cliente.
+    // Antes esta regra usava o wildcard recursivo {document=**}, que expunha
+    // qualquer subdocumento /private a toda usuária logada (bypass de Premium).
+    match /pdf_recipes/{recipeId} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+
+      match /private/{document=**} {
+        allow read: if false;
+        allow write: if isAdmin();
+      }
+    }
+
+    // Banco de alimentos — leitura aberta pra usuária logada (dado
+    // nutricional público, sem nada sensível), escrita só admin.
+    match /food_database/{document=**} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    // E-books — mesmo padrão de proteção dos vídeos: metadados públicos,
+    // arquivo isolado em /private/file, só a Cloud Function genérica
+    // `getContentUrl` resolve (valida Premium no servidor).
+    match /ebooks/{ebookId} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+
+      match /private/{document=**} {
+        allow read: if false;
+        allow write: if isAdmin();
+      }
+    }
+
+    // Cursos — metadados (incluindo estrutura de módulos/aulas) são
+    // públicos; as URLs de cada aula ficam isoladas em /private/lessons.
+    match /courses/{courseId} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+
+      match /private/{document=**} {
+        allow read: if false;
+        allow write: if isAdmin();
+      }
+    }
+
+    // Vídeos — metadados públicos (leves) são legíveis; a URL real de
+    // streaming fica isolada em /private/stream, nunca lida pelo cliente
+    // (só a Cloud Function `getVideoUrl`, via Admin SDK, valida Premium
+    // no servidor e a devolve). É isso que torna Premium uma proteção
+    // de verdade, não um botão escondido na UI.
+    match /videos/{videoId} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+
+      match /private/{document=**} {
+        allow read: if false;
+        allow write: if isAdmin();
+      }
+    }
+
+    // ---------- comunidade ----------
+    match /community_posts/{postId} {
+      allow read: if signedIn();
+      // Impede criar post se passando por outra pessoa.
+      allow create: if ownsIncoming();
+      allow update: if isAdmin()
+        || (ownsExisting() && request.resource.data.userId == resource.data.userId);
+      allow delete: if isAdmin() || ownsExisting();
+
+      match /comments/{commentId} {
+        allow read: if signedIn();
+        allow create: if ownsIncoming();
+        allow update, delete: if isAdmin() || ownsExisting();
+      }
+    }
+
+    // Comentários em coleção raiz (se usada).
+    match /comments/{commentId} {
+      allow read: if signedIn();
+      allow create: if ownsIncoming();
+      allow update, delete: if isAdmin() || ownsExisting();
+    }
+
+    // ---------- negar tudo o mais ----------
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

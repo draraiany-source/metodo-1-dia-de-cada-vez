@@ -1,0 +1,182 @@
+name: build
+
+# Compila o Método 1 Dia de Cada Vez num ambiente REAL com Flutter SDK
+# (o container onde o projeto foi desenvolvido não tem SDK nem rede).
+# Entrega analyze.txt, APK debug/release, AAB e Web como artefatos.
+#
+# COMO USAR:
+#  1. Suba o projeto para um repositório no GitHub (com esta pasta .github/).
+#  2. Aba "Actions" -> workflow "build" -> "Run workflow" (ou faça um push).
+#  3. Ao terminar, baixe os artefatos no rodapé da execução.
+#
+# A PRIMEIRA execução provavelmente vai acusar erros no `flutter analyze`
+# (o código nunca foi compilado). Isso é esperado: o passo de analyze SEMPRE
+# publica `analyze.txt` como artefato, mesmo se os builds falharem. Baixe esse
+# arquivo e me envie o conteúdo — corrijo os erros reais em lote.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java (17)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Flutter (stable)
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          # Satisfaz o constraint do pubspec (sdk: ">=3.3.0 <4.0.0").
+          flutter-version: '3.27.1'
+          cache: true
+
+      - name: Versões
+        run: |
+          flutter --version
+          dart --version
+
+      # As pastas nativas (android/ios/web) não existem no repositório.
+      # `flutter create .` gera todas SEM tocar em lib/, assets/, test/, pubspec.
+      - name: Gerar pastas nativas
+        run: |
+          flutter create . \
+            --project-name metodo_1_dia \
+            --org com.metodo1dia \
+            --platforms=android,ios,web
+
+      # Converte os ícones SVG -> PNG que o flutter_launcher_icons espera
+      # (o pubspec aponta para app_icon.png / android_adaptive_foreground.png,
+      # mas só existem .svg no repositório). Best-effort: não derruba o build.
+      - name: Converter ícones SVG -> PNG
+        continue-on-error: true
+        run: |
+          sudo apt-get update && sudo apt-get install -y librsvg2-bin
+          cd assets/app_icon
+          rsvg-convert -w 1024 -h 1024 app_icon.svg -o app_icon.png || true
+          rsvg-convert -w 1024 -h 1024 android_adaptive_foreground.svg \
+            -o android_adaptive_foreground.png || true
+          ls -la
+
+      - name: pub get
+        run: flutter pub get
+
+      # Formatação: informativo, nunca derruba o build.
+      - name: dart format (informativo)
+        continue-on-error: true
+        run: dart format . --set-exit-if-changed
+
+      # ANALYZE — o passo mais importante desta primeira rodada.
+      # Publica o log mesmo com erros (|| true), para você me enviar a lista.
+      - name: flutter analyze
+        continue-on-error: true
+        run: flutter analyze 2>&1 | tee analyze.txt
+
+      - name: Publicar analyze.txt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: analyze-log
+          path: analyze.txt
+          if-no-files-found: warn
+
+      - name: flutter test (informativo)
+        continue-on-error: true
+        run: flutter test 2>&1 | tee test.txt
+
+      - name: Publicar test.txt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-log
+          path: test.txt
+          if-no-files-found: warn
+
+      # Ícones e splash — best-effort (dependem dos PNGs convertidos acima).
+      - name: Ícones e splash
+        continue-on-error: true
+        run: |
+          dart run flutter_launcher_icons || true
+          dart run flutter_native_splash:create || true
+
+      # BUILDS. continue-on-error para que uma falha em um alvo não impeça os
+      # demais nem o upload do que deu certo. Se o analyze acima acusou erros
+      # de compilação, estes passos vão falhar — o analyze.txt explica o porquê.
+      - name: APK Debug
+        continue-on-error: true
+        run: flutter build apk --debug
+
+      - name: APK Release
+        continue-on-error: true
+        run: flutter build apk --release
+
+      - name: AAB Release
+        continue-on-error: true
+        run: flutter build appbundle --release
+
+      - name: Web Release
+        continue-on-error: true
+        run: flutter build web --release
+
+      - name: Publicar APKs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: build/app/outputs/flutter-apk/*.apk
+          if-no-files-found: warn
+
+      - name: Publicar AAB
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-aab
+          path: build/app/outputs/bundle/release/*.aab
+          if-no-files-found: warn
+
+      - name: Publicar Web
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-release
+          path: build/web
+          if-no-files-found: warn
+
+  # -------------------------------------------------------------------------
+  # iOS: COMPILA sem assinatura (pega erros específicos de iOS e gera o .app).
+  # O IPA ASSINADO exige seus certificados/provisioning (credenciais Apple) —
+  # isso NÃO é feito aqui e não é simulado. Este job só prova que compila no iOS.
+  # -------------------------------------------------------------------------
+  ios:
+    runs-on: macos-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.27.1'
+          cache: true
+      - run: flutter create . --project-name metodo_1_dia --org com.metodo1dia --platforms=ios
+      - run: flutter pub get
+      - name: Build iOS (sem assinatura)
+        continue-on-error: true
+        run: flutter build ios --release --no-codesign
+      - name: Publicar .app iOS
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-app-unsigned
+          path: build/ios/iphoneos/*.app
+          if-no-files-found: warn

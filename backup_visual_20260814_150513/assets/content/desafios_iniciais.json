@@ -1,0 +1,17 @@
+[
+  {
+    "titulo": "Desafio 7 dias",
+    "objetivo": "Concluir 1 hábito saudável por dia",
+    "recompensaXP": 200
+  },
+  {
+    "titulo": "Desafio 21 dias",
+    "objetivo": "Criar rotina com treino, água e alimentação",
+    "recompensaXP": 800
+  },
+  {
+    "titulo": "Primeiros 5 km",
+    "objetivo": "Completar o plano de corrida até 5 km",
+    "recompensaXP": 1000
+  }
+]

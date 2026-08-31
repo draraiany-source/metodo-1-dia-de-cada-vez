@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Método 1 Dia de Cada Vez — App fitness feminino premium.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Método 1 Dia">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>Método 1 Dia de Cada Vez</title>
+  <link rel="manifest" href="manifest.json">
+
+  <meta name="theme-color" content="#5A189A">
+
+  <!-- Login com Google no Web (google_sign_in_web).
+       Hoje o app não instancia GoogleSignIn em lib/, então nada quebra.
+       Ao implementar login com Google no navegador, descomente a linha
+       abaixo e cole o Client ID OAuth 2.0 de tipo "Web application"
+       (Google Cloud Console → APIs e Serviços → Credenciais).
+       Sem isso o plugin lança "ClientID not set" ao ser usado.
+  <meta name="google-signin-client_id" content="SEU_CLIENT_ID.apps.googleusercontent.com">
+  -->
+</head>
+<body>
+  <!-- ============================================================
+       pdf.js — exigido pelo pacote `pdfx` (usado no Leitor de
+       E-books e no Visualizador de Receitas em PDF) para funcionar
+       no Flutter Web. Precisa estar presente e executar ANTES do
+       flutter_bootstrap.js, porque o plugin `pdfx` é registrado
+       automaticamente no boot do app (independente de qual tela o
+       usuário está vendo), e falha com
+       "Assertion failed: pdf.js not added in web/index.html" se
+       `window.pdfjsLib` ainda não existir nesse momento.
+       Equivalente ao que `flutter pub run pdfx:install_web` geraria.
+       ============================================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.min.js"
+          type="text/javascript"></script>
+  <script type="text/javascript">
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.worker.min.js";
+    var pdfRenderOptions = {
+      cMapUrl: "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/cmaps/",
+      cMapPacked: true,
+    };
+  </script>
+
+  <!-- flutter_bootstrap.js é gerado automaticamente por `flutter build web` /
+       `flutter run -d chrome` a partir do SDK — não precisa (e não deve)
+       existir manualmente dentro de web/; o tooling do Flutter o injeta
+       aqui no build de saída (build/web/flutter_bootstrap.js). -->
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

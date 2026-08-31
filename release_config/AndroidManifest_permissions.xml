@@ -1,0 +1,54 @@
+<!-- ===========================================================================
+     PERMISSÕES ANDROID — conjunto EXATO auditado a partir do uso real do código
+     (V40). Cole dentro de android/app/src/main/AndroidManifest.xml, ACIMA da
+     tag <application>. Gere a pasta android/ antes com: flutter create .
+
+     Princípio: pedir só o que o app usa. Permissão a mais = risco de reprovação
+     na Play Store e prompts desnecessários para a usuária.
+     =========================================================================== -->
+
+<!-- Rede: Firebase, http, streaming de conteúdo -->
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+<!-- Corrida / GPS — SOMENTE em primeiro plano.
+     O código usa Geolocator.getPositionStream com a tela de corrida aberta;
+     NÃO há rastreamento em segundo plano. Por isso NÃO declaramos
+     ACCESS_BACKGROUND_LOCATION (evita o fluxo de revisão pesada da Play). -->
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+<!-- Câmera + galeria: scanner de calorias e upload de fotos (admin) -->
+<uses-permission android:name="android.permission.CAMERA"/>
+<!-- Android 13+ (API 33): acesso a imagens da galeria -->
+<uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+<!-- Android 12 e abaixo: galeria via armazenamento (limitado por maxSdkVersion) -->
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    android:maxSdkVersion="32"/>
+
+<!-- Notificações push + lembretes locais (Android 13+) -->
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+<!-- Lembretes agendados (flutter_local_notifications) -->
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+<uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
+<uses-permission android:name="android.permission.VIBRATE"/>
+
+<!-- ===========================================================================
+     OPCIONAL — só descomente se, no futuro, você implementar rastreamento de
+     corrida com o app em SEGUNDO PLANO (foreground service de localização).
+     Exige preencher a "Declaração de permissão de localização" na Play Console.
+     Hoje o código NÃO usa isto.
+     ---------------------------------------------------------------------------
+<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION"/>
+     =========================================================================== -->
+
+<!-- ===========================================================================
+     DENTRO de <application>, só se for usar Google Maps no rastreamento:
+     ---------------------------------------------------------------------------
+<meta-data
+    android:name="com.google.android.geo.API_KEY"
+    android:value="SUA_CHAVE_GOOGLE_MAPS_ANDROID"/>
+     =========================================================================== -->

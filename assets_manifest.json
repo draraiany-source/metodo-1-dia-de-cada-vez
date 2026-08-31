@@ -1,0 +1,188 @@
+{
+  "brand": "Lili Fit",
+  "generated": "design pack v1",
+  "categories": {
+    "icons": {
+      "status": "ready",
+      "count": 25,
+      "files": [
+        "assets/icons/ic_agua.svg",
+        "assets/icons/ic_alimentacao.svg",
+        "assets/icons/ic_alongamento.svg",
+        "assets/icons/ic_bike.svg",
+        "assets/icons/ic_calendario.svg",
+        "assets/icons/ic_caminhada.svg",
+        "assets/icons/ic_chat.svg",
+        "assets/icons/ic_comunidade.svg",
+        "assets/icons/ic_configuracoes.svg",
+        "assets/icons/ic_corrida.svg",
+        "assets/icons/ic_fotos.svg",
+        "assets/icons/ic_habitos.svg",
+        "assets/icons/ic_hiit.svg",
+        "assets/icons/ic_ia.svg",
+        "assets/icons/ic_medidas.svg",
+        "assets/icons/ic_meditacao.svg",
+        "assets/icons/ic_musculacao.svg",
+        "assets/icons/ic_perfil.svg",
+        "assets/icons/ic_peso.svg",
+        "assets/icons/ic_premium.svg",
+        "assets/icons/ic_ranking.svg",
+        "assets/icons/ic_receitas.svg",
+        "assets/icons/ic_sono.svg",
+        "assets/icons/ic_treinos.svg",
+        "assets/icons/ic_yoga.svg"
+      ]
+    },
+    "badges": {
+      "status": "ready",
+      "count": 23,
+      "files": [
+        "assets/badges/ach_15_dias.svg",
+        "assets/badges/ach_180_dias.svg",
+        "assets/badges/ach_30_dias.svg",
+        "assets/badges/ach_365_dias.svg",
+        "assets/badges/ach_60_dias.svg",
+        "assets/badges/ach_7_dias.svg",
+        "assets/badges/ach_90_dias.svg",
+        "assets/badges/ach_agua_completa.svg",
+        "assets/badges/ach_alimentacao_perfeita.svg",
+        "assets/badges/ach_constancia.svg",
+        "assets/badges/ach_meta_concluida.svg",
+        "assets/badges/ach_peso_perdido.svg",
+        "assets/badges/ach_primeiro_treino.svg",
+        "assets/badges/ach_superacao.svg",
+        "assets/badges/badge_bronze.svg",
+        "assets/badges/badge_diamante.svg",
+        "assets/badges/badge_elite.svg",
+        "assets/badges/badge_lendario.svg",
+        "assets/badges/badge_master.svg",
+        "assets/badges/badge_ouro.svg",
+        "assets/badges/badge_prata.svg",
+        "assets/badges/badge_premium.svg",
+        "assets/badges/badge_vip.svg"
+      ]
+    },
+    "backgrounds": {
+      "status": "ready",
+      "count": 8,
+      "files": [
+        "assets/backgrounds/bg_academia.svg",
+        "assets/backgrounds/bg_fitness.svg",
+        "assets/backgrounds/bg_glassmorphism.svg",
+        "assets/backgrounds/bg_gradiente_roxo.svg",
+        "assets/backgrounds/bg_minimalista.svg",
+        "assets/backgrounds/bg_neon.svg",
+        "assets/backgrounds/bg_preto.svg",
+        "assets/backgrounds/bg_roxo_escuro.svg"
+      ]
+    },
+    "banners": {
+      "status": "ready",
+      "count": 7,
+      "files": [
+        "assets/illustrations/banners/banner_alimentacao.svg",
+        "assets/illustrations/banners/banner_assinatura.svg",
+        "assets/illustrations/banners/banner_conquistas.svg",
+        "assets/illustrations/banners/banner_desafios.svg",
+        "assets/illustrations/banners/banner_premium.svg",
+        "assets/illustrations/banners/banner_ranking.svg",
+        "assets/illustrations/banners/banner_treinos.svg"
+      ]
+    },
+    "animations_lottie": {
+      "status": "ready",
+      "count": 6,
+      "files": [
+        "assets/animations/confetti.json",
+        "assets/animations/heart_pulse.json",
+        "assets/animations/level_up.json",
+        "assets/animations/loading.json",
+        "assets/animations/success_check.json",
+        "assets/animations/water_drop.json"
+      ]
+    },
+    "onboarding": {
+      "status": "ready",
+      "count": 12,
+      "files": [
+        "assets/onboarding/onb_agua.svg",
+        "assets/onboarding/onb_alimentacao.svg",
+        "assets/onboarding/onb_bemvindo.svg",
+        "assets/onboarding/onb_comunidade.svg",
+        "assets/onboarding/onb_conquistas.svg",
+        "assets/onboarding/onb_exercicios.svg",
+        "assets/onboarding/onb_habitos.svg",
+        "assets/onboarding/onb_ia.svg",
+        "assets/onboarding/onb_objetivos.svg",
+        "assets/onboarding/onb_premium.svg",
+        "assets/onboarding/onb_ranking.svg",
+        "assets/onboarding/onb_sono.svg"
+      ]
+    },
+    "empty_states": {
+      "status": "ready",
+      "count": 7,
+      "files": [
+        "assets/empty/empty_alimentacao.svg",
+        "assets/empty/empty_amigos.svg",
+        "assets/empty/empty_desafios.svg",
+        "assets/empty/empty_notificacoes.svg",
+        "assets/empty/empty_progresso.svg",
+        "assets/empty/empty_resultados.svg",
+        "assets/empty/empty_treinos.svg"
+      ]
+    },
+    "errors": {
+      "status": "ready",
+      "count": 3,
+      "files": [
+        "assets/error/error_inesperado.svg",
+        "assets/error/error_sem_conexao.svg",
+        "assets/error/error_sem_internet.svg"
+      ]
+    },
+    "brand_images": {
+      "status": "ready",
+      "count": 3,
+      "files": [
+        "assets/images/logo.svg",
+        "assets/images/logo_mark.svg",
+        "assets/images/splash.svg"
+      ]
+    },
+    "app_icon": {
+      "status": "ready",
+      "count": 6,
+      "files": [
+        "assets/app_icon/android_adaptive_background.svg",
+        "assets/app_icon/android_adaptive_foreground.svg",
+        "assets/app_icon/app_icon.svg",
+        "assets/app_icon/favicon.svg",
+        "assets/app_icon/ios_icon.svg",
+        "assets/app_icon/notification_icon.svg"
+      ]
+    },
+    "avatars_vector": {
+      "status": "ready",
+      "count": 1,
+      "files": [
+        "assets/avatars/lili_placeholder.svg"
+      ]
+    }
+  },
+  "to_generate": {
+    "status": "needs_image_generation",
+    "see": "PROMPTS_LILI_FIT.md",
+    "items": {
+      "character_poses": 28,
+      "expressions": 20,
+      "stickers": 20,
+      "scene_illustrations": 14,
+      "character_lottie": 28,
+      "avatars_png": "200 (100 F + 100 M)"
+    }
+  },
+  "summary": {
+    "assets_ready": 101
+  }
+}

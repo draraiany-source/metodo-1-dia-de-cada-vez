@@ -1,0 +1,59 @@
+# REGISTRO INICIAL — passagem v35 (2026-07-20)
+
+## Métricas
+- Arquivos Dart: 169
+- Linhas Dart: 27437
+- Arquivos de asset: 140
+- Rotas GoRoute: 53
+
+## Dependências (pubspec)
+-   sdk: ">=3.3.0 <4.0.0"
+-   flutter: ">=3.19.0"
+-   flutter:
+-   cupertino_icons: ^1.0.6
+-   flutter_riverpod: ^2.5.1
+-   go_router: ^14.2.0
+-   firebase_core: ^3.1.0
+-   firebase_auth: ^5.1.0
+-   cloud_firestore: ^5.0.1
+-   firebase_storage: ^12.0.1
+-   firebase_messaging: ^15.0.1
+-   firebase_analytics: ^11.1.0
+-   firebase_crashlytics: ^4.0.1
+-   google_sign_in: ^6.2.1
+-   geolocator: ^12.0.0
+-   google_fonts: ^6.2.1
+-   flutter_svg: ^2.0.10+1
+-   cached_network_image: ^3.3.1
+-   image_picker: ^1.1.2
+-   intl: ^0.19.0
+-   shared_preferences: ^2.2.3
+-   fl_chart: ^0.68.0
+-   percent_indicator: ^4.2.3
+-   lottie: ^3.1.2
+-   url_launcher: ^6.3.0
+-   http: ^1.2.1
+-   flutter_local_notifications: ^17.1.2
+-   timezone: ^0.9.4
+-   table_calendar: ^3.1.2
+-   just_audio: ^0.9.40
+-   pdfx: ^2.6.0
+-   pdf: ^3.10.8
+-   printing: ^5.13.1
+-   share_plus: ^10.0.2
+-   video_player: ^2.9.2
+-   chewie: ^1.8.5
+-   path_provider: ^2.1.4
+-   flutter_test:
+-   flutter_lints: ^4.0.0
+-   flutter_launcher_icons: ^0.14.1
+-   flutter_native_splash: ^2.4.1
+-   android: true
+-   ios: true
+-   image_path: "assets/app_icon/app_icon.png"
+-   adaptive_icon_background: "#111111"
+-   adaptive_icon_foreground: "assets/app_icon/android_adaptive_foreground.png"
+-   remove_alpha_ios: true
+-   color: "#111111"
+-   image: "assets/app_icon/app_icon.png"
+-   assets:

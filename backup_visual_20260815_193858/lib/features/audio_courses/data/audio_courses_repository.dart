@@ -1,0 +1,107 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
+
+import '../../../core/constants/app_constants.dart';
+import '../../../core/services/firebase_service.dart';
+import '../domain/audio_course_models.dart';
+
+class ChapterUrlResult {
+  const ChapterUrlResult({this.url, this.error});
+  final String? url;
+  final String? error;
+  bool get ok => url != null;
+}
+
+/// Busca cursos em áudio no Firestore (`audio_courses` + subcoleção
+/// `chapters`, só metadados). Sem Firebase configurado, ou sem conteúdo
+/// cadastrado ainda, devolve lista vazia — a tela mostra um estado vazio
+/// amigável, não quebra.
+///
+/// A URL real de cada capítulo NÃO fica mais no documento público (era uma
+/// brecha: um curso Premium com a URL exposta permitia assistir sem
+/// assinar, mesmo com o botão escondido). Agora fica em
+/// `audio_courses/{id}/private/chapters` (mapa chapterId -> url), só
+/// resolvida pela Cloud Function `getContentUrl` — mesmo padrão já usado
+/// em vídeos/e-books/cursos.
+///
+/// Estrutura esperada no Firestore:
+/// ```
+/// audio_courses/{courseId}
+///   title, teacher, category, coverUrl, isPremium, order
+/// audio_courses/{courseId}/chapters/{chapterId}
+///   title, durationSeconds, order   (SEM audioUrl)
+/// audio_courses/{courseId}/private/chapters
+///   { chapterId: audioUrl, ... }
+/// ```
+class AudioCoursesRepository {
+  bool get isAvailable => FirebaseService.isReady;
+
+  Future<List<AudioCourse>> fetchAll() async {
+    if (!isAvailable) return [];
+    try {
+      final db = FirebaseFirestore.instance;
+      final coursesSnap =
+          await db.collection('audio_courses').orderBy('order').get();
+      final courses = <AudioCourse>[];
+      for (final doc in coursesSnap.docs) {
+        final chaptersSnap = await doc.reference
+            .collection('chapters')
+            .orderBy('order')
+            .get();
+        final chapters = chaptersSnap.docs
+            .map((c) => AudioChapter.fromMap(c.id, c.data()))
+            .toList();
+        courses.add(AudioCourse.fromMap(doc.id, doc.data(), chapters));
+      }
+      return courses;
+    } catch (_) {
+      return [];
+    }
+  }
+
+  /// Resolve a URL real de um capítulo via Cloud Function (protegida —
+  /// valida Premium no servidor antes de devolver).
+  Future<ChapterUrlResult> resolveChapterUrl(
+      String courseId, String chapterId) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return const ChapterUrlResult(error: 'Entre na sua conta pra ouvir.');
+    }
+    final functionUrl = AppConstants.getContentUrlFunctionUrl;
+    if (functionUrl.contains('SEU-PROJETO')) {
+      return const ChapterUrlResult(
+          error: 'Biblioteca ainda não configurada neste app.');
+    }
+    try {
+      final token = await user.getIdToken();
+      final res = await http
+          .post(
+            Uri.parse(functionUrl),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer $token',
+            },
+            body: jsonEncode({'collection': 'audio_courses', 'docId': courseId}),
+          )
+          .timeout(const Duration(seconds: 15));
+      final data = jsonDecode(res.body) as Map<String, dynamic>;
+      if (res.statusCode == 200 && data['data'] != null) {
+        final chapters = data['data'] as Map<String, dynamic>;
+        final url = chapters[chapterId] as String?;
+        if (url == null || url.isEmpty) {
+          return const ChapterUrlResult(error: 'Áudio não configurado.');
+        }
+        return ChapterUrlResult(url: url);
+      }
+      return ChapterUrlResult(
+          error: (data['error'] ?? 'Não foi possível carregar o áudio.')
+              as String);
+    } catch (_) {
+      return const ChapterUrlResult(
+          error: 'Não consegui carregar o áudio agora.');
+    }
+  }
+}

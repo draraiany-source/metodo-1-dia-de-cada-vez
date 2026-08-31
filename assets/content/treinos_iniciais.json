@@ -1,0 +1,38 @@
+[
+  {
+    "titulo": "Full Body Iniciante",
+    "nivel": "Iniciante",
+    "exercicios": [
+      "Agachamento livre",
+      "Flexão inclinada",
+      "Remada com elástico",
+      "Prancha",
+      "Polichinelo"
+    ],
+    "duracao": 30
+  },
+  {
+    "titulo": "Glúteos e Pernas",
+    "nivel": "Intermediário",
+    "exercicios": [
+      "Agachamento sumô",
+      "Elevação pélvica",
+      "Afundo",
+      "Cadeira abdutora",
+      "Panturrilha"
+    ],
+    "duracao": 45
+  },
+  {
+    "titulo": "Abdômen e Core",
+    "nivel": "Iniciante",
+    "exercicios": [
+      "Prancha",
+      "Abdominal curto",
+      "Elevação de pernas",
+      "Dead bug",
+      "Prancha lateral"
+    ],
+    "duracao": 20
+  }
+]

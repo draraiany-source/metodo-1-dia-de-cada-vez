@@ -1,0 +1,42 @@
+<!-- ===========================================================================
+     CHAVES iOS (Info.plist) — conjunto EXATO auditado do uso real (V40).
+     Cole dentro de ios/Runner/Info.plist, no <dict> raiz.
+     Gere a pasta ios/ antes com: flutter create .
+     =========================================================================== -->
+
+<!-- Localização — SOMENTE em uso (corrida em primeiro plano).
+     O código não rastreia em segundo plano, então NÃO usamos a chave
+     "Always" nem UIBackgroundModes:location (evita revisão extra da App Store). -->
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Usamos sua localização para registrar a distância e o trajeto das suas corridas e caminhadas.</string>
+
+<!-- Câmera — scanner de calorias e foto de perfil/progresso -->
+<key>NSCameraUsageDescription</key>
+<string>Usada para escanear alimentos e tirar fotos de progresso e de perfil.</string>
+
+<!-- Galeria — seleção de imagens -->
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Selecione fotos de progresso e de perfil da sua galeria.</string>
+
+<!-- Notificações remotas (push). Necessário para o Firebase Messaging. -->
+<key>UIBackgroundModes</key>
+<array>
+  <string>remote-notification</string>
+  <string>fetch</string>
+</array>
+
+<!-- Conformidade de exportação: o app não usa criptografia não isenta.
+     Evita o questionário de export compliance a cada envio ao TestFlight. -->
+<key>ITSAppUsesNonExemptEncryption</key>
+<false/>
+
+<!-- ===========================================================================
+     NÃO incluído de propósito (o código não usa):
+       • NSMicrophoneUsageDescription  — não há gravação de áudio (just_audio é
+         só reprodução; os "record" no código são Crashlytics.recordError).
+       • HealthKit entitlement         — o pacote `health` não está no pubspec.
+       • NSUserTrackingUsageDescription (ATT) — só necessário se coletar IDFA
+         para rastreamento entre apps. O Firebase Analytics padrão não exige.
+         Adicione APENAS se ativar publicidade/atribuição com IDFA.
+       • NSLocationAlwaysAndWhenInUseUsageDescription — só para background.
+     =========================================================================== -->

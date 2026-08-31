@@ -1,0 +1,114 @@
+{
+  "workouts": [
+    {
+      "id": "treino_iniciante_a",
+      "titulo": "Treino Iniciante A",
+      "categoria": "Full Body",
+      "nivel": "Iniciante",
+      "duracaoMin": 30,
+      "xp": 50
+    },
+    {
+      "id": "gluteo_pernas_1",
+      "titulo": "Glúteo e Pernas",
+      "categoria": "Inferiores",
+      "nivel": "Intermediário",
+      "duracaoMin": 45,
+      "xp": 80
+    },
+    {
+      "id": "alongamento_relax",
+      "titulo": "Alongamento Relax",
+      "categoria": "Mobilidade",
+      "nivel": "Iniciante",
+      "duracaoMin": 15,
+      "xp": 25
+    }
+  ],
+  "running_plans": [
+    {
+      "id": "5k_iniciante",
+      "titulo": "Do zero aos 5 km",
+      "semanas": 8,
+      "nivel": "Iniciante"
+    },
+    {
+      "id": "10k_intermediario",
+      "titulo": "Evolução para 10 km",
+      "semanas": 10,
+      "nivel": "Intermediário"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "omelete_fit",
+      "titulo": "Omelete Fit",
+      "categoria": "Café da manhã",
+      "calorias": 280,
+      "proteinas": 24
+    },
+    {
+      "id": "frango_legumes",
+      "titulo": "Frango com Legumes",
+      "categoria": "Almoço",
+      "calorias": 420,
+      "proteinas": 38
+    },
+    {
+      "id": "iogurte_frutas",
+      "titulo": "Iogurte com Frutas",
+      "categoria": "Lanche",
+      "calorias": 220,
+      "proteinas": 12
+    }
+  ],
+  "habits": [
+    {
+      "id": "agua",
+      "titulo": "Beber água",
+      "meta": "2 litros por dia",
+      "xp": 10
+    },
+    {
+      "id": "treino",
+      "titulo": "Concluir treino",
+      "meta": "1 treino por dia",
+      "xp": 50
+    },
+    {
+      "id": "sono",
+      "titulo": "Dormir melhor",
+      "meta": "7 a 8 horas",
+      "xp": 20
+    }
+  ],
+  "badges": [
+    {
+      "id": "primeiro_treino",
+      "titulo": "Primeiro treino",
+      "xp": 50
+    },
+    {
+      "id": "sete_dias",
+      "titulo": "7 dias seguidos",
+      "xp": 200
+    },
+    {
+      "id": "primeira_corrida",
+      "titulo": "Primeira corrida",
+      "xp": 70
+    }
+  ],
+  "notifications": [
+    {
+      "id": "agua_manha",
+      "titulo": "Hora da água",
+      "mensagem": "Beba água. Seu corpo agradece!"
+    },
+    {
+      "id": "treino_dia",
+      "titulo": "Treino do dia",
+      "mensagem": "Vamos cuidar de você hoje?"
+    }
+  ]
+}

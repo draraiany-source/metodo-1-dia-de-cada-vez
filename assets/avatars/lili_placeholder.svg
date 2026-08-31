@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="520" viewBox="0 0 400 520">
+  <defs><linearGradient id="top" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9B5DE5"/><stop offset="1" stop-color="#7B3FD1"/></linearGradient></defs>
+  <!-- rabo de cavalo -->
+  <path d="M243 96 C300 90 320 150 300 210 C292 232 270 236 262 214 C276 176 268 132 236 120 Z" fill="#141018"/>
+  <!-- cabelo -->
+  <path d="M132 118 C132 66 268 66 268 118 C268 138 262 150 262 150 L138 150 C138 150 132 138 132 118 Z" fill="#1B1622"/>
+  <!-- rosto -->
+  <ellipse cx="200" cy="150" rx="60" ry="66" fill="#F3C9A8"/>
+  <path d="M140 132 C140 96 260 96 260 132 L260 120 C260 78 140 78 140 120 Z" fill="#1B1622"/>
+  <!-- olhos -->
+  <ellipse cx="180" cy="150" rx="8" ry="11" fill="#241B33"/><ellipse cx="220" cy="150" rx="8" ry="11" fill="#241B33"/>
+  <circle cx="182.5" cy="146" r="2.6" fill="#fff"/><circle cx="222.5" cy="146" r="2.6" fill="#fff"/>
+  <!-- sorriso -->
+  <path d="M184 176 Q200 190 216 176" stroke="#B5654D" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- corpo / top roxo -->
+  <path d="M158 224 Q200 208 242 224 L250 330 Q200 344 150 330 Z" fill="url(#top)"/>
+  <!-- legging preta -->
+  <path d="M156 330 Q200 344 244 330 L250 456 L214 456 L200 360 L186 456 L150 456 Z" fill="#15121C"/>
+  <!-- tênis -->
+  <path d="M146 456 h44 v20 q-22 10 -44 0 Z" fill="#0E0B14"/>
+  <path d="M210 456 h44 v20 q-22 10 -44 0 Z" fill="#0E0B14"/>
+  <!-- braço acenando -->
+  <path d="M242 232 Q300 210 306 168" stroke="#F3C9A8" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <path d="M158 232 Q120 270 128 320" stroke="#F3C9A8" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <!-- detalhe roxo tênis -->
+  <path d="M146 470 h44" stroke="#9B5DE5" stroke-width="4"/><path d="M210 470 h44" stroke="#9B5DE5" stroke-width="4"/>
+</svg>

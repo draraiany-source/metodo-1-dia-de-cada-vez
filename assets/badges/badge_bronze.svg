@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="240" viewBox="0 0 200 240">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E8A15C"/><stop offset="1" stop-color="#8C5A2B"/>
+    </linearGradient>
+    <radialGradient id="shine" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- fitas -->
+  <path d="M72 30 L58 120 L88 104 L100 128 Z" fill="#8C5A2B"/>
+  <path d="M128 30 L142 120 L112 104 L100 128 Z" fill="#E8A15C"/>
+  <!-- medalha -->
+  <circle cx="100" cy="150" r="66" fill="url(#g)" stroke="#ffffff" stroke-opacity="0.35" stroke-width="4"/>
+  <circle cx="100" cy="150" r="52" fill="none" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2" stroke-dasharray="4 6"/>
+  <circle cx="100" cy="150" r="66" fill="url(#shine)"/>
+  <text x="100" y="150" font-size="52" text-anchor="middle" dominant-baseline="central">🥉</text>
+  <text x="100" y="205" font-size="15" font-family="Poppins,Arial,sans-serif" font-weight="700"
+        fill="#ffffff" text-anchor="middle" letter-spacing="1">BRONZE</text>
+</svg>

@@ -1,0 +1,38 @@
+\"*.png\"))\n        if existing:\n            need_backup = False\n            print(f\"Backup already has {len(existing)} files — skipping copy\", flush=True)\n    if need_backup:\n        BACKUP.mkdir(parents=True, exist_ok=True)\n        for p in files:\n            shutil.copy2(p, BACKUP / p.name)\n        print(f\"Backed up {len(files)} files to {BACKUP}\", flush=True)\n\n    n_processed = n_black = n_white = n_already = 0\n\n    for p in files:\n        im = Image.open(p)\n        rgba = im.convert(\"RGBA\")\n        r0, g0, b0, a0 = rgba.getpixel((0, 0))\n        kind = classify_corner(r0, g0, b0, a0)\n        if kind == \"black\":\n            n_black += 1\n        elif kind == \"white\":\n            n_white += 1\n        elif kind == \"already_transparent\":\n            n_already += 1\n\n        data = bytearray(rgba.tobytes())\n        process_bytes(data)\n        out = Image.frombytes(\"RGBA\", rgba.size, bytes(data))\n        out.save(p, optimize=True)\n        n_processed += 1\n        ra, ga, ba, aa = out.getpixel((0, 0))\n        print(\n            f\"  [{n_processed}/{len(files)}] {p.name}: before=({r0},{g0},{b0},{a0}) ({kind}) -> after=({ra},{ga},{ba},{aa})\",\n            flush=True,\n        )\n\n    print(\"\\n=== SUMMARY ===\", flush=True)\n    print(f\"Processed: {n_processed}\", flush=True)\n    print(f\"Had black/near-black bg (corner): {n_black}\", flush=True)\n    print(f\"Had white/near-white bg (corner): {n_white}\", flush=True)\n    print(f\"Already transparent (corner): {n_already}\", flush=True)\n    print(f\"Other/unclassified corner: {n_processed - n_black - n_white - n_already}\", flush=True)\n\n\nif __name__ == \"__main__\":\n    main()\n'@ | Set-Content -Encoding UTF8 \"_remove_icon_bg_fast.py\"; python -u \"_remove_icon_bg_fast.py\""
+started_at: 2026-08-23T00:21:51.018Z
+running_for_ms: 573984   
+---
+Found 40 icon_*.png files
+Backup already has 40 files � skipping copy
+  [1/40] icon_achievement.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [2/40] icon_audio.png: before=(253,253,255,0) (already_transparent) -> after=(253,253,255,0)
+  [3/40] icon_back.png: before=(243,244,244,34) (white) -> after=(243,244,244,34)
+  [4/40] icon_before_after.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [5/40] icon_bmi.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [6/40] icon_calendar.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [7/40] icon_calories.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [8/40] icon_camera.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [9/40] icon_checkin.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [10/40] icon_community.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [11/40] icon_complete.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [12/40] icon_diary.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [13/40] icon_evolution.png: before=(242,243,242,51) (white) -> after=(242,243,242,51)
+  [14/40] icon_favorites.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [15/40] icon_filter.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [16/40] icon_gallery.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [17/40] icon_goal.png: before=(242,243,242,51) (white) -> after=(242,243,242,51)
+  [18/40] icon_gps.png: before=(239,241,240,102) (white) -> after=(239,241,240,102)
+  [19/40] icon_habits.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [20/40] icon_home.png: before=(243,244,243,34) (white) -> after=(243,244,243,34)
+  [21/40] icon_hydration_goal.png: before=(248,248,248,0) (already_transparent) -> after=(248,248,248,0)
+  [22/40] icon_next.png: before=(253,253,254,0) (already_transparent) -> after=(253,253,254,0)
+  [23/40] icon_notifications.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [24/40] icon_pause.png: before=(253,255,255,0) (already_transparent) -> after=(253,255,255,0)
+  [25/40] icon_personal.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [26/40] icon_play.png: before=(243,244,243,34) (white) -> after=(243,244,243,34)
+  [27/40] icon_premium.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [28/40] icon_profile.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [29/40] icon_progress.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [30/40] icon_recipes.png: before=(253,253,253,0) (already_transparent) -> after=(253,253,253,0)
+  [31/40] icon_search.png: before=(253,253,255,0) (already_transparent) -> after=(253,253,255,0)
+  [32/40] icon_security.png: before=(253,253,255,0) (already_transparent) -> after=(253,253,255,0)

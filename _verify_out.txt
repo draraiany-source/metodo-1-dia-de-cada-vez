@@ -1,0 +1,61 @@
+=== PASS2 tighten soft white ===')\nicons = sorted(ROOT.glob('icon_*.png'))\nfor idx,p in enumerate(icons,1):\n    rgba = Image.open(p).convert('RGBA')\n    data = bytearray(rgba.tobytes())\n    process(data)\n    out = Image.frombytes('RGBA', rgba.size, bytes(data))\n    out.save(p, optimize=True)\n    c0 = out.getpixel((0,0))\n    print(f'  [{idx}/{len(icons)}] {p.name} corner={c0}', flush=True)\n\nprint('\\\\n=== VERIFICATION ===')\nfor name in ['icon_home.png','icon_water.png','icon_gps.png']:\n    im = Image.open(ROOT/name)\n    rgba = im.convert('RGBA')\n    w,h = rgba.size\n    c0 = rgba.getpixel((0,0))\n    # sample center and nearby colorful pixels\n    cx,cy = w//2, h//2\n    samples = []\n    for dx,dy in [(0,0),(50,0),(-50,0),(0,50),(0,-50),(100,100),(-100,-100),(80,-60)]:\n        x,y = cx+dx, cy+dy\n        if 0<=x<w and 0<=y<h:\n            px = rgba.getpixel((x,y))\n            samples.append(((x,y), px))\n    # find highest chroma opaque-ish pixel near center\n    best = None\n    best_c = -1\n    for (x,y), (r,g,b,a) in samples:\n        ch = max(r,g,b)-min(r,g,b)\n        if a > 200 and ch > best_c:\n            best_c = ch; best = ((x,y),(r,g,b,a))\n    # also scan a small region for colorful pixel\n    if best_c < 30:\n        for y in range(cy-150, cy+151, 20):\n            for x in range(cx-150, cx+151, 20):\n                if 0<=x<w and 0<=y<h:\n                    r,g,b,a = rgba.getpixel((x,y))\n                    ch = max(r,g,b)-min(r,g,b)\n                    if a>200 and ch>best_c:\n                        best_c=ch; best=((x,y),(r,g,b,a))\n    print(f'{name}: mode={im.mode} size={im.size} corner={c0} corner_alpha={c0[3]} centerish={best}')\n\""
+started_at: 2026-08-23T00:34:51.072Z
+running_for_ms: 320461   
+---
+=== DIAGNOSIS (from backup originals) ===
+icon_achievement.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_audio.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 255, 255)	near-white
+icon_back.png	mode=RGB	size=(1024, 1024)	corner=(243, 244, 244, 255)	near-white
+icon_before_after.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_bmi.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_calendar.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_calories.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_camera.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_checkin.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_community.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_complete.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_diary.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_evolution.png	mode=RGB	size=(1024, 1024)	corner=(242, 243, 242, 255)	near-white
+icon_favorites.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_filter.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_gallery.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_goal.png	mode=RGB	size=(1024, 1024)	corner=(242, 243, 242, 255)	near-white
+icon_gps.png	mode=RGB	size=(1024, 1024)	corner=(239, 241, 240, 255)	near-white-gray
+icon_habits.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_home.png	mode=RGB	size=(1024, 1024)	corner=(243, 244, 243, 255)	near-white
+icon_hydration_goal.png	mode=RGB	size=(1024, 1024)	corner=(248, 248, 248, 255)	near-white
+icon_next.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 254, 255)	near-white
+icon_notifications.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_pause.png	mode=RGB	size=(1024, 1024)	corner=(253, 255, 255, 255)	near-white
+icon_personal.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_play.png	mode=RGB	size=(1024, 1024)	corner=(243, 244, 243, 255)	near-white
+icon_premium.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_profile.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_progress.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_recipes.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_search.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 255, 255)	near-white
+icon_security.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 255, 255)	near-white
+icon_settings.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_streak.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_support.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+icon_upload_photo.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 254, 255)	near-white
+icon_videos.png	mode=RGB	size=(1024, 1024)	corner=(243, 245, 244, 255)	near-white
+icon_water.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 255, 255)	near-white
+icon_weight.png	mode=RGB	size=(1024, 1024)	corner=(240, 240, 240, 255)	near-white-gray
+icon_workout_goal.png	mode=RGB	size=(1024, 1024)	corner=(253, 253, 253, 255)	near-white
+DIAG_COUNTS black=0 white=40 already_alpha=0 total=40
+\n=== PASS2 tighten soft white ===
+  [1/40] icon_achievement.png corner=(253, 253, 253, 0)
+  [2/40] icon_audio.png corner=(253, 253, 255, 0)
+  [3/40] icon_back.png corner=(243, 244, 244, 0)
+  [4/40] icon_before_after.png corner=(253, 253, 253, 0)
+  [5/40] icon_bmi.png corner=(253, 253, 253, 0)
+  [6/40] icon_calendar.png corner=(253, 253, 253, 0)
+  [7/40] icon_calories.png corner=(253, 253, 253, 0)
+  [8/40] icon_camera.png corner=(253, 253, 253, 0)
+  [9/40] icon_checkin.png corner=(253, 253, 253, 0)
+  [10/40] icon_community.png corner=(253, 253, 253, 0)
+  [11/40] icon_complete.png corner=(253, 253, 253, 0)
+  [12/40] icon_diary.png corner=(253, 253, 253, 0)
+  [13/40] icon_evolution.png corner=(242, 243, 242, 0)
+  [14/40] icon_favorites.png corner=(253, 253, 253, 0)
