@@ -2,9 +2,10 @@ include: package:flutter_lints/flutter.yaml
 
 analyzer:
   errors:
-    # Avisos de depreciação (ex.: withOpacity) não bloqueiam a build.
     deprecated_member_use: ignore
     deprecated_member_use_from_same_package: ignore
+  exclude:
+    - backup_nav_running_20260816/**
 
 linter:
   rules:
