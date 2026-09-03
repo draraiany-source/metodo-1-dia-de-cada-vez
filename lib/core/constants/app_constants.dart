@@ -21,16 +21,15 @@ class AppConstants {
 
   /// Modo de desenvolvimento/demonstração: quando `true`, o botão "Entrar
   /// como visitante" fica disponível já na primeira tela, permitindo abrir
-  /// a Home sem precisar criar conta. Deixe `false` caso queira exigir
-  /// cadastro/login obrigatório em produção.
-  static const bool enableGuestMode = true;
+  /// a Home sem precisar criar conta. `false` em builds de produção —
+  /// exige cadastro/login real.
+  static const bool enableGuestMode = false;
 
   /// Auditoria/teste: quando `true`, TODO o conteúdo Premium fica liberado
   /// no app inteiro (vídeos, e-books, cursos, IA, etc.), sem precisar
-  /// assinar. Único lugar que precisa mudar — [PremiumNotifier] lê esta
-  /// flag antes de consultar o serviço real. Deixe `false` antes de
-  /// publicar a versão final para as usuárias.
-  static const bool debugUnlockAllPremiumContent = true;
+  /// assinar. OBRIGATÓRIO `false` em release — caso contrário o paywall
+  /// não funciona e todo conteúdo pago fica grátis.
+  static const bool debugUnlockAllPremiumContent = false;
 
   // ---- Coleções Firestore (alinhadas ao KIT MASTER) ----
   static const String cUsers = 'users';
