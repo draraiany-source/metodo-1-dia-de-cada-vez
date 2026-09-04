@@ -13,3 +13,9 @@ GoogleService-Info.plist
 functions/node_modules/
 functions/.env
 .env
+
+# Assinatura Android — NÃO commitar
+android/key.properties
+*.jks
+*.keystore
+upload-keystore.jks
