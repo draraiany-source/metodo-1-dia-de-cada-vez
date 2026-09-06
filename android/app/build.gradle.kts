@@ -7,7 +7,7 @@ plugins {
 }
 
 // Assinatura de release: se android/key.properties existir, usa keystore de
-// upload. Sem ele, cai em debug signing (só para teste local — NÃO Play Store).
+// upload. Sem ele, cai em debug signing (sÃ³ para teste local â€” NÃƒO Play Store).
 val keystorePropertiesFile = rootProject.file("key.properties")
 val keystoreProperties = Properties()
 val hasReleaseKeystore = keystorePropertiesFile.exists()
@@ -15,7 +15,7 @@ if (hasReleaseKeystore) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-// Plugin Google Services só quando google-services.json estiver presente.
+// Plugins Google sÃ³ quando google-services.json estiver presente.
 val hasGoogleServices = file("google-services.json").exists()
 
 android {
@@ -31,12 +31,20 @@ android {
 
     defaultConfig {
         applicationId = "com.metodo1dia.app"
-        // geolocator / notifications: mínimo 23 (requisito Play + plugins)
+        // geolocator / notifications: mínimo 23 (Play + plugins).
+        // NÃO use flutter.minSdkVersion — o Flutter sobrescreve este arquivo
+        // em "Upgrading build.gradle.kts" e pode baixar o mínimo.
         minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
+    }
+
+    // Evita OOM do Lint no Windows durante bundleRelease
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
     }
 
     signingConfigs {
@@ -83,4 +91,5 @@ flutter {
 
 if (hasGoogleServices) {
     apply(plugin = "com.google.gms.google-services")
+    apply(plugin = "com.google.firebase.crashlytics")
 }

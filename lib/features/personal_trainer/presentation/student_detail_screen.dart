@@ -114,6 +114,7 @@ class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
       await ref.read(ptRepositoryProvider).createAssessment(PhysicalAssessment(
             id: '',
             studentId: widget.student.id,
+            trainerId: widget.student.trainerId,
             date: DateTime.now(),
             weightKg: d('weightKg'),
             heightM: d('heightM'),

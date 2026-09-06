@@ -109,15 +109,31 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () async {
-                          await ref
-                              .read(authRepositoryProvider)
-                              .resetPassword(_email.text);
-                          if (!context.mounted) return;
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text(
-                                    'Se o e-mail existir, enviamos um link.')),
-                          );
+                          final email = _email.text.trim();
+                          if (email.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      'Digite seu e-mail para recuperar a senha.')),
+                            );
+                            return;
+                          }
+                          try {
+                            await ref
+                                .read(authRepositoryProvider)
+                                .resetPassword(email);
+                            if (!context.mounted) return;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      'Se o e-mail existir, enviamos um link.')),
+                            );
+                          } catch (e) {
+                            if (!context.mounted) return;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('$e')),
+                            );
+                          }
                         },
                         child: const Text('Esqueci a senha'),
                       ),

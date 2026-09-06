@@ -24,6 +24,7 @@ import '../providers/running_providers.dart';
 enum _LocState {
   checking,
   needPermission,
+  deniedForever,
   gpsOff,
   ready,
   error,
@@ -130,8 +131,16 @@ class _RunningScreenState extends ConsumerState<RunningScreen> {
         permission = await Geolocator.requestPermission();
       }
 
-      if (permission == LocationPermission.denied ||
-          permission == LocationPermission.deniedForever) {
+      if (permission == LocationPermission.deniedForever) {
+        if (!mounted) return;
+        if (kIsWeb) {
+          _activateWebFallback();
+          return;
+        }
+        setState(() => _locState = _LocState.deniedForever);
+        return;
+      }
+      if (permission == LocationPermission.denied) {
         if (!mounted) return;
         if (kIsWeb) {
           _activateWebFallback();
@@ -467,7 +476,13 @@ class _RunningScreenState extends ConsumerState<RunningScreen> {
                   state: _locState,
                   isWeb: kIsWeb,
                   webDemoMode: _webDemoMode,
-                  onActivate: () => _refreshPermission(request: true),
+                  onActivate: () async {
+                    if (_locState == _LocState.deniedForever) {
+                      await Geolocator.openAppSettings();
+                      return;
+                    }
+                    await _refreshPermission(request: true);
+                  },
                 ),
                 const SizedBox(height: 12),
                 AspectRatio(
@@ -719,15 +734,29 @@ class _RunningScreenState extends ConsumerState<RunningScreen> {
           Text(
             _locState == _LocState.needPermission
                 ? 'Aguardando permissão de localização'
-                : _locState == _LocState.gpsOff
-                    ? 'Localização indisponível — ative o GPS'
-                    : kIsWeb
-                        ? 'Ative a localização ou use o modo demonstração abaixo'
-                        : 'Ative a localização para ver o mapa e o percurso',
+                : _locState == _LocState.deniedForever
+                    ? 'Permissão de localização bloqueada. Abra as configurações do app para liberar.'
+                    : _locState == _LocState.gpsOff
+                        ? 'Localização indisponível — ative o GPS'
+                        : kIsWeb
+                            ? 'Ative a localização ou use o modo demonstração abaixo'
+                            : 'Ative a localização para ver o mapa e o percurso',
             textAlign: TextAlign.center,
             style: AppTextStyles.bodySecondary(),
           ),
-          if (_locState == _LocState.needPermission ||
+          if (_locState == _LocState.deniedForever) ...[
+            const SizedBox(height: 14),
+            OutlinedButton.icon(
+              onPressed: () => Geolocator.openAppSettings(),
+              icon: const Icon(Icons.settings_rounded),
+              label: const Text('Abrir configurações'),
+            ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: () => _refreshPermission(request: false),
+              child: const Text('Já libertei — verificar'),
+            ),
+          ] else if (_locState == _LocState.needPermission ||
               _locState == _LocState.gpsOff ||
               _locState == _LocState.error) ...[
             const SizedBox(height: 14),
@@ -890,10 +919,15 @@ class _LocationBanner extends StatelessWidget {
           'Ativar localização',
           AppColors.warning,
         ),
+      _LocState.deniedForever => (
+          'Localização bloqueada nas configurações do app',
+          'Abrir configurações',
+          AppColors.danger,
+        ),
       _LocState.gpsOff => (
           'GPS desligado — ative a localização do aparelho',
           'Tentar novamente',
-          AppColors.danger,
+          AppColors.warning,
         ),
       _LocState.ready => (
           webDemoMode

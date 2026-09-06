@@ -1,16 +1,1 @@
-{
-  "firestore": {
-    "rules": "firebase/firestore.rules",
-    "indexes": "firebase/firestore.indexes.json"
-  },
-  "storage": {
-    "rules": "firebase/storage.rules"
-  },
-  "functions": [
-    {
-      "source": "functions",
-      "codebase": "default",
-      "runtime": "nodejs20"
-    }
-  ]
-}
+{"firestore":{"rules":"firebase/firestore.rules","indexes":"firebase/firestore.indexes.json"},"storage":{"rules":"firebase/storage.rules"},"functions":[{"source":"functions","codebase":"default","runtime":"nodejs22"}],"flutter":{"platforms":{"android":{"default":{"projectId":"metodo1dia-app","appId":"1:990266923824:android:2febdfc7c2fc1e03d886f5","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"metodo1dia-app","configurations":{"android":"1:990266923824:android:2febdfc7c2fc1e03d886f5"}}}}}}

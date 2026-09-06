@@ -62,8 +62,12 @@ enum TrainerIntent {
 /// **Sem chave**: usa o [TrainerEngine] + regras de intenção — respostas reais
 /// e personalizadas, não frases genéricas.
 class AiTrainerRepository {
-  /// True quando a IA remota (OpenAI) está disponível.
-  bool get isRemoteAvailable => FirebaseService.isReady && AppConfig.aiConfigured;
+  /// True quando a URL da Cloud Function está apontando para um projeto real.
+  bool get isRemoteAvailable {
+    if (!FirebaseService.isReady) return false;
+    final url = _functionUrl;
+    return url.isNotEmpty && !url.contains('SEU-PROJETO');
+  }
 
   /// URL efetiva: prioriza a injetada por --dart-define.
   String get _functionUrl => AppConfig.amandaFunctionUrl.isNotEmpty

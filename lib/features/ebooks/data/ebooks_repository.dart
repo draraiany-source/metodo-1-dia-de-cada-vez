@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/app_constants.dart';
+import '../../../core/services/auth_http_headers.dart';
 import '../../../core/services/firebase_service.dart';
 import '../domain/ebook_models.dart';
 
@@ -45,14 +46,11 @@ class EbooksRepository {
           error: 'Biblioteca ainda não configurada neste app.');
     }
     try {
-      final token = await user.getIdToken();
+      final headers = await AuthHttpHeaders.forCloudFunction();
       final res = await http
           .post(
             Uri.parse(functionUrl),
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer $token',
-            },
+            headers: headers,
             body: jsonEncode({'collection': 'ebooks', 'docId': ebookId}),
           )
           .timeout(const Duration(seconds: 15));

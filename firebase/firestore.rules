@@ -53,6 +53,19 @@ service cloud.firestore {
       // O dono edita seu perfil, mas NÃO campos privilegiados.
       allow update: if (isOwner(userId) && noPrivilegedFields()) || isAdmin();
       allow delete: if isOwner(userId) || isAdmin();
+
+      // Subcoleções do perfil (nutrição, favoritos, receitas próprias, etc.).
+      // O doc raiz `users/{userId}` continua com a proteção de campos
+      // privilegiados acima; este bloco só cobre paths aninhados.
+      match /{document=**} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
+    }
+
+    // Banco de alimentos do módulo Nutrição IA (catálogo compartilhado).
+    match /foods/{document=**} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
     }
 
     // Assets dinâmicos da Lili (mascote) e da Amanda (personal) — leitura
@@ -100,25 +113,46 @@ service cloud.firestore {
       allow update, delete: if signedIn() && resource.data.trainerId == request.auth.uid;
     }
 
-    // Nota: pt_assessments/pt_photos/pt_loads/pt_sessions simplificados pra
-    // "qualquer logada" porque Firestore rules não fazem join pra checar o
-    // trainerId do aluno referenciado por studentId. Se esse dado for
-    // sensível o suficiente pra exigir isolamento real, reforçar via
-    // Cloud Function (mesmo padrão de redeemCoupon/getVideoUrl).
-    match /pt_assessments/{document=**} {
-      allow read, write: if signedIn();
+    // Nota: pt_assessments/pt_photos/pt_loads/pt_sessions — acesso só para
+    // admin, trainer dono (trainerId denormalizado) ou aluno/trainer via
+    // lookup em pt_students/{studentId}.
+    function isPtRelatedExisting() {
+      return isAdmin() || (signedIn() && (
+        (resource.data.keys().hasAny(['trainerId']) && resource.data.trainerId == request.auth.uid) ||
+        (resource.data.keys().hasAny(['studentId']) &&
+          exists(/databases/$(database)/documents/pt_students/$(resource.data.studentId)) &&
+          (get(/databases/$(database)/documents/pt_students/$(resource.data.studentId)).data.trainerId == request.auth.uid ||
+           get(/databases/$(database)/documents/pt_students/$(resource.data.studentId)).data.userId == request.auth.uid))
+      ));
+    }
+    function isPtRelatedIncoming() {
+      return isAdmin() || (signedIn() && (
+        (request.resource.data.keys().hasAny(['trainerId']) && request.resource.data.trainerId == request.auth.uid) ||
+        (request.resource.data.keys().hasAny(['studentId']) &&
+          exists(/databases/$(database)/documents/pt_students/$(request.resource.data.studentId)) &&
+          (get(/databases/$(database)/documents/pt_students/$(request.resource.data.studentId)).data.trainerId == request.auth.uid ||
+           get(/databases/$(database)/documents/pt_students/$(request.resource.data.studentId)).data.userId == request.auth.uid))
+      ));
     }
 
-    match /pt_photos/{document=**} {
-      allow read, write: if signedIn();
+    match /pt_assessments/{id} {
+      allow read, update, delete: if isPtRelatedExisting();
+      allow create: if isPtRelatedIncoming();
     }
 
-    match /pt_loads/{document=**} {
-      allow read, write: if signedIn();
+    match /pt_photos/{id} {
+      allow read, update, delete: if isPtRelatedExisting();
+      allow create: if isPtRelatedIncoming();
     }
 
-    match /pt_sessions/{document=**} {
-      allow read, write: if signedIn();
+    match /pt_loads/{id} {
+      allow read, update, delete: if isPtRelatedExisting();
+      allow create: if isPtRelatedIncoming();
+    }
+
+    match /pt_sessions/{id} {
+      allow read, update, delete: if isPtRelatedExisting();
+      allow create: if isPtRelatedIncoming();
     }
 
     match /admins/{uid} {

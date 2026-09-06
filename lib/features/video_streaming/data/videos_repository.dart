@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/app_constants.dart';
+import '../../../core/services/auth_http_headers.dart';
 import '../../../core/services/firebase_service.dart';
 import '../domain/video_models.dart';
 
@@ -54,14 +55,11 @@ class VideosRepository {
           error: 'Streaming ainda não configurado neste app.');
     }
     try {
-      final token = await user.getIdToken();
+      final headers = await AuthHttpHeaders.forCloudFunction();
       final res = await http
           .post(
             Uri.parse(_functionUrl),
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer $token',
-            },
+            headers: headers,
             body: jsonEncode({'videoId': videoId}),
           )
           .timeout(const Duration(seconds: 15));

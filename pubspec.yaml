@@ -24,6 +24,7 @@ dependencies:
   firebase_messaging: ^15.0.1
   firebase_analytics: ^11.1.0
   firebase_crashlytics: ^4.0.1
+  firebase_app_check: ^0.3.2+1
 
   # ---- Auth helpers ----
   google_sign_in: ^6.2.1
@@ -75,8 +76,8 @@ dependencies:
   chewie: ^1.8.5
   path_provider: ^2.1.4
 
-  # ---- Pagamentos (preparado) ----
-  # purchases_flutter: ^6.29.0   # RevenueCat — habilite ao integrar
+  # ---- Pagamentos (RevenueCat) ----
+  purchases_flutter: ^8.1.0
 
 dev_dependencies:
   flutter_test:

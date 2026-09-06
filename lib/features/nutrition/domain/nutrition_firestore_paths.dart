@@ -3,7 +3,9 @@ class NutritionFirestorePaths {
 
   static const String foods = 'foods';
 
-  static String nutritionGoalsDoc(String uid) => 'users/$uid/nutritionGoals';
+  // Firestore exige path com nº par de segmentos (col/doc/col/doc).
+  static String nutritionGoalsDoc(String uid) =>
+      'users/$uid/nutritionGoals/current';
 
   static String dailyLogDoc(String uid, String dateKey) =>
       'users/$uid/dailyLogs/$dateKey';

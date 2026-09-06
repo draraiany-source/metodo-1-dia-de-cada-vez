@@ -51,10 +51,20 @@ class YoutubeLaunch {
     BuildContext context,
     String rawUrl, {
     String unavailableMessage = 'Link de vídeo indisponível.',
-    String failureMessage = 'Não foi possível abrir o vídeo.',
+    String failureMessage =
+        'Não foi possível abrir o vídeo. Se estiver privado ou indisponível, ajuste a privacidade no YouTube.',
   }) async {
     final uri = normalize(rawUrl);
     if (uri == null) {
+      _snack(context, unavailableMessage);
+      return false;
+    }
+
+    final host = uri.host.toLowerCase().replaceFirst('www.', '');
+    final isYoutube = host == 'youtube.com' ||
+        host == 'youtu.be' ||
+        host == 'm.youtube.com';
+    if (!isYoutube) {
       _snack(context, unavailableMessage);
       return false;
     }

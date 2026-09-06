@@ -274,6 +274,7 @@ class PhysicalAssessment {
   const PhysicalAssessment({
     required this.id,
     required this.studentId,
+    required this.trainerId,
     required this.date,
     this.weightKg,
     this.heightM,
@@ -291,6 +292,7 @@ class PhysicalAssessment {
 
   final String id;
   final String studentId;
+  final String trainerId;
   final DateTime date;
   final double? weightKg;
   final double? heightM;
@@ -311,6 +313,7 @@ class PhysicalAssessment {
 
   Map<String, dynamic> toMap() => {
         'studentId': studentId,
+        'trainerId': trainerId,
         'date': date.toIso8601String(),
         'weightKg': weightKg,
         'heightM': heightM,
@@ -330,6 +333,7 @@ class PhysicalAssessment {
       PhysicalAssessment(
         id: id,
         studentId: (m['studentId'] ?? '') as String,
+        trainerId: (m['trainerId'] ?? '') as String,
         date: DateTime.tryParse(m['date'] as String? ?? '') ?? DateTime.now(),
         weightKg: (m['weightKg'] as num?)?.toDouble(),
         heightM: (m['heightM'] as num?)?.toDouble(),
@@ -352,6 +356,7 @@ class EvolutionPhoto {
   const EvolutionPhoto({
     required this.id,
     required this.studentId,
+    required this.trainerId,
     required this.date,
     required this.tipo,
     required this.url,
@@ -359,12 +364,14 @@ class EvolutionPhoto {
 
   final String id;
   final String studentId;
+  final String trainerId;
   final DateTime date;
   final FotoTipo tipo;
   final String url;
 
   Map<String, dynamic> toMap() => {
         'studentId': studentId,
+        'trainerId': trainerId,
         'date': date.toIso8601String(),
         'tipo': tipo.name,
         'url': url,
@@ -374,6 +381,7 @@ class EvolutionPhoto {
       EvolutionPhoto(
         id: id,
         studentId: (m['studentId'] ?? '') as String,
+        trainerId: (m['trainerId'] ?? '') as String,
         date: DateTime.tryParse(m['date'] as String? ?? '') ?? DateTime.now(),
         tipo: FotoTipo.values.firstWhere((t) => t.name == m['tipo'],
             orElse: () => FotoTipo.frente),
@@ -386,6 +394,7 @@ class LoadEntry {
   const LoadEntry({
     required this.id,
     required this.studentId,
+    required this.trainerId,
     required this.exerciseId,
     required this.exerciseName,
     required this.date,
@@ -394,6 +403,7 @@ class LoadEntry {
 
   final String id;
   final String studentId;
+  final String trainerId;
   final String exerciseId;
   final String exerciseName;
   final DateTime date;
@@ -401,6 +411,7 @@ class LoadEntry {
 
   Map<String, dynamic> toMap() => {
         'studentId': studentId,
+        'trainerId': trainerId,
         'exerciseId': exerciseId,
         'exerciseName': exerciseName,
         'date': date.toIso8601String(),
@@ -410,6 +421,7 @@ class LoadEntry {
   factory LoadEntry.fromMap(String id, Map<String, dynamic> m) => LoadEntry(
         id: id,
         studentId: (m['studentId'] ?? '') as String,
+        trainerId: (m['trainerId'] ?? '') as String,
         exerciseId: (m['exerciseId'] ?? '') as String,
         exerciseName: (m['exerciseName'] ?? '') as String,
         date: DateTime.tryParse(m['date'] as String? ?? '') ?? DateTime.now(),
@@ -422,6 +434,7 @@ class WorkoutSessionLog {
   const WorkoutSessionLog({
     required this.id,
     required this.studentId,
+    required this.trainerId,
     required this.workoutPlanId,
     required this.workoutName,
     required this.date,
@@ -430,6 +443,7 @@ class WorkoutSessionLog {
 
   final String id;
   final String studentId;
+  final String trainerId;
   final String workoutPlanId;
   final String workoutName;
   final DateTime date;
@@ -437,6 +451,7 @@ class WorkoutSessionLog {
 
   Map<String, dynamic> toMap() => {
         'studentId': studentId,
+        'trainerId': trainerId,
         'workoutPlanId': workoutPlanId,
         'workoutName': workoutName,
         'date': date.toIso8601String(),
@@ -447,6 +462,7 @@ class WorkoutSessionLog {
       WorkoutSessionLog(
         id: id,
         studentId: (m['studentId'] ?? '') as String,
+        trainerId: (m['trainerId'] ?? '') as String,
         workoutPlanId: (m['workoutPlanId'] ?? '') as String,
         workoutName: (m['workoutName'] ?? '') as String,
         date: DateTime.tryParse(m['date'] as String? ?? '') ?? DateTime.now(),

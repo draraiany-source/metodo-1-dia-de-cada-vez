@@ -3,8 +3,10 @@ import 'dart:math';
 
 import 'package:http/http.dart' as http;
 
+import '../../../core/config/app_config.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/constants/seed_data.dart';
+import '../../../core/services/auth_http_headers.dart';
 import '../../../core/services/firebase_service.dart';
 
 /// Repositório da Amanda IA.
@@ -18,10 +20,13 @@ import '../../../core/services/firebase_service.dart';
 class AmandaRepository {
   final _rnd = Random();
 
+  String get _functionUrl => AppConfig.amandaFunctionUrl.isNotEmpty
+      ? AppConfig.amandaFunctionUrl
+      : AppConstants.amandaFunctionUrl;
+
   Future<String> send(String userMessage, {String userName = 'você'}) async {
     // Se a Cloud Function estiver configurada e o Firebase pronto, usa a IA real.
-    if (FirebaseService.isReady &&
-        !AppConstants.amandaFunctionUrl.contains('SEU-PROJETO')) {
+    if (FirebaseService.isReady && !_functionUrl.contains('SEU-PROJETO')) {
       try {
         return await _callFunction(userMessage, userName);
       } catch (_) {
@@ -32,15 +37,18 @@ class AmandaRepository {
   }
 
   Future<String> _callFunction(String message, String userName) async {
-    final res = await http.post(
-      Uri.parse(AppConstants.amandaFunctionUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'message': message,
-        'userName': userName,
-        // O system prompt real fica na Cloud Function (personalidade da Amanda).
-      }),
-    ).timeout(const Duration(seconds: 20));
+    final headers = await AuthHttpHeaders.forCloudFunction();
+    final res = await http
+        .post(
+          Uri.parse(_functionUrl),
+          headers: headers,
+          body: jsonEncode({
+            'message': message,
+            'userName': userName,
+            // O system prompt real fica na Cloud Function (personalidade da Amanda).
+          }),
+        )
+        .timeout(const Duration(seconds: 20));
     if (res.statusCode == 200) {
       final data = jsonDecode(res.body) as Map<String, dynamic>;
       return (data['reply'] ?? _localReply(message, userName)) as String;

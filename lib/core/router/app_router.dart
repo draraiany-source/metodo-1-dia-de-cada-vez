@@ -75,6 +75,7 @@ import '../../features/audio_courses/presentation/meditations_screen.dart';
 import '../../features/audio_courses/presentation/lili_audios_screen.dart';
 import '../../features/audio_courses/presentation/audio_courses_admin_screen.dart';
 import '../constants/app_constants.dart';
+import '../services/analytics_service.dart';
 import 'main_shell.dart';
 
 /// Rotas nomeadas do app.
@@ -216,6 +217,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     initialLocation: Routes.splash,
     debugLogDiagnostics: kDebugMode, // não logar navegação em release
     refreshListenable: refreshStream,
+    observers: [
+      if (AnalyticsService.observer != null) AnalyticsService.observer!,
+    ],
     // ---------------------------------------------------------------
     // Guarda global de navegação.
     //
@@ -276,6 +280,16 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           !isGuest &&
           path == Routes.home) {
         return Routes.personalTrainer;
+      }
+
+      // 5) Rotas /admin* exigem isAdmin — bloqueia deep-link / URL direta.
+      if (path.startsWith('/admin')) {
+        if (user == null || !user.isAdmin) {
+          if (user != null && user.isPersonalTrainer && !isGuest) {
+            return Routes.personalTrainer;
+          }
+          return Routes.home;
+        }
       }
 
       return null;

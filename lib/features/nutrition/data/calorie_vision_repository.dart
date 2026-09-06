@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../core/config/app_config.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../../core/services/auth_http_headers.dart';
 
 /// Resultado da estimativa de calorias a partir de uma foto de comida.
 class CalorieEstimate {
@@ -57,7 +58,10 @@ class CalorieVisionUnavailable implements Exception {
 /// **Sem chave configurada**: lança [CalorieVisionUnavailable] — a tela
 /// trata isso oferecendo o registro manual, sem quebrar o app.
 class CalorieVisionRepository {
-  bool get isAvailable => AppConfig.calorieVisionConfigured;
+  bool get isAvailable {
+    final url = _functionUrl;
+    return url.isNotEmpty && !url.contains('SEU-PROJETO');
+  }
 
   String get _functionUrl => AppConfig.calorieVisionFunctionUrl.isNotEmpty
       ? AppConfig.calorieVisionFunctionUrl
@@ -69,10 +73,11 @@ class CalorieVisionRepository {
     if (!isAvailable) throw const CalorieVisionUnavailable();
 
     final base64Image = base64Encode(imageBytes);
+    final headers = await AuthHttpHeaders.forCloudFunction();
     final res = await http
         .post(
           Uri.parse(_functionUrl),
-          headers: {'Content-Type': 'application/json'},
+          headers: headers,
           body: jsonEncode({'imageBase64': base64Image}),
         )
         .timeout(const Duration(seconds: 30));

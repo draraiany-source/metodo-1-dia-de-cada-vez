@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/app_constants.dart';
+import '../../../core/services/auth_http_headers.dart';
 import '../../../core/services/firebase_service.dart';
 import '../domain/audio_course_models.dart';
 
@@ -76,14 +77,11 @@ class AudioCoursesRepository {
           error: 'Biblioteca ainda não configurada neste app.');
     }
     try {
-      final token = await user.getIdToken();
+      final headers = await AuthHttpHeaders.forCloudFunction();
       final res = await http
           .post(
             Uri.parse(functionUrl),
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer $token',
-            },
+            headers: headers,
             body: jsonEncode({'collection': 'audio_courses', 'docId': courseId}),
           )
           .timeout(const Duration(seconds: 15));

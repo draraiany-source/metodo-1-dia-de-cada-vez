@@ -66,32 +66,32 @@ class AppConstants {
   /// Endpoint da Cloud Function que faz proxy para a OpenAI.
   /// A chave da OpenAI NUNCA deve ficar no app cliente.
   static const String amandaFunctionUrl =
-      'https://us-central1-SEU-PROJETO.cloudfunctions.net/amandaChat';
+      'https://us-central1-metodo1dia-app.cloudfunctions.net/amandaChat';
 
   // ---- Calculadora de calorias por foto ----
   /// Endpoint da Cloud Function que faz proxy para a OpenAI Vision.
   /// Mesma lógica da Amanda: a chave da OpenAI nunca fica no app.
   static const String calorieVisionFunctionUrl =
-      'https://us-central1-SEU-PROJETO.cloudfunctions.net/calorieVision';
+      'https://us-central1-metodo1dia-app.cloudfunctions.net/calorieVision';
 
   // ---- Resgate de cupons ----
   /// Endpoint da Cloud Function que valida e credita cupons com segurança
   /// (exige token de autenticação — ver `functions/src/index.js`).
   static const String redeemCouponFunctionUrl =
-      'https://us-central1-SEU-PROJETO.cloudfunctions.net/redeemCoupon';
+      'https://us-central1-metodo1dia-app.cloudfunctions.net/redeemCoupon';
 
   // ---- Streaming de vídeo ----
   /// Endpoint da Cloud Function que resolve a URL real de streaming,
   /// validando acesso Premium no servidor (a URL nunca fica exposta no
   /// Firestore público). Ver `docs/ARQUITETURA_STREAMING.md`.
   static const String getVideoUrlFunctionUrl =
-      'https://us-central1-SEU-PROJETO.cloudfunctions.net/getVideoUrl';
+      'https://us-central1-metodo1dia-app.cloudfunctions.net/getVideoUrl';
 
   // ---- Biblioteca (e-books, cursos) ----
   /// Endpoint genérico que resolve arquivos protegidos por Premium —
   /// reutilizado por e-books e cursos (evita uma function por tipo).
   static const String getContentUrlFunctionUrl =
-      'https://us-central1-SEU-PROJETO.cloudfunctions.net/getContentUrl';
+      'https://us-central1-metodo1dia-app.cloudfunctions.net/getContentUrl';
 
   /// Frase de segurança da Amanda (nunca substitui profissionais).
   static const String amandaDisclaimer =

@@ -1,8 +1,11 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../firebase_options.dart';
+import '../config/app_config.dart';
+import 'premium_service.dart';
 
 /// Inicialização centralizada do Firebase.
 ///
@@ -29,10 +32,25 @@ class FirebaseService {
     try {
       await Firebase.initializeApp(options: opts);
 
+      // App Check — debug provider em debug; Play Integrity / DeviceCheck em release.
+      try {
+        await FirebaseAppCheck.instance.activate(
+          androidProvider: kDebugMode
+              ? AndroidProvider.debug
+              : AndroidProvider.playIntegrity,
+          appleProvider:
+              kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
+        );
+      } catch (e) {
+        debugPrint('App Check activate falhou (segue sem enforce): $e');
+      }
+
       // Crashlytics não tem suporte ao Flutter Web — no navegador mantemos
       // apenas os handlers globais já registrados em main.dart
       // (FlutterError.onError / PlatformDispatcher.instance.onError).
       if (!kIsWeb) {
+        await FirebaseCrashlytics.instance
+            .setCrashlyticsCollectionEnabled(!kDebugMode);
         FlutterError.onError =
             FirebaseCrashlytics.instance.recordFlutterFatalError;
         PlatformDispatcher.instance.onError = (error, stack) {
@@ -43,6 +61,10 @@ class FirebaseService {
 
       _initialized = true;
       debugPrint('✅ Firebase inicializado.');
+
+      if (AppConfig.billingConfigured) {
+        await RevenueCatPremiumService.ensureConfigured();
+      }
     } catch (e, s) {
       debugPrint('❌ Falha ao inicializar Firebase: $e\n$s');
     }

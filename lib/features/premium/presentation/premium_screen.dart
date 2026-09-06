@@ -5,7 +5,10 @@ import '../../../core/assets/app_icons.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/services/analytics_service.dart';
-import '../../../core/services/premium_service.dart';
+import '../../../core/services/premium_service.dart'
+    show
+        BillingNotConfiguredException,
+        premiumStatusProvider;
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -158,7 +161,8 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
             ),
           const Center(
             child: Text(
-              'Pagamento processado via loja. Preparado para RevenueCat.',
+              'Cobrança real na loja ainda não está ativada. '
+              'Nenhuma compra será processada até a configuração oficial.',
               textAlign: TextAlign.center,
               style: TextStyle(color: AppColors.textTertiary, fontSize: 11),
             ),
@@ -180,6 +184,11 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
         const SnackBar(
             content: Text('Premium ativado! 🎉'),
             backgroundColor: AppColors.success),
+      );
+    } on BillingNotConfiguredException catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message)),
       );
     } catch (e) {
       if (!mounted) return;

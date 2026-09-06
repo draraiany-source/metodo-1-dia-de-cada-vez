@@ -1,13 +1,9 @@
-// GENERATED PLACEHOLDER — SUBSTITUA rodando `flutterfire configure`.
+// Firebase options — Android configurado para o projeto metodo1dia-app.
 //
-// Este arquivo é gerado automaticamente pela CLI do FlutterFire e conterá
-// as chaves reais do SEU projeto Firebase. Os valores abaixo são apenas
-// placeholders para permitir a compilação inicial. NÃO use em produção.
-//
-// Passos:
-//   1. dart pub global activate flutterfire_cli
-//   2. flutterfire configure
-//   3. Este arquivo será sobrescrito com as chaves corretas.
+// iOS: projectId / messagingSenderId / storageBucket alinhados ao Android.
+// apiKey e appId continuam REPLACE_ME até rodar `flutterfire configure`
+// (ou colar GoogleService-Info.plist real). Sem isso o FirebaseService
+// faz graceful degradation no iOS e o app roda em modo local.
 
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
@@ -29,28 +25,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'REPLACE_ME',
-    appId: 'REPLACE_ME',
-    messagingSenderId: 'REPLACE_ME',
-    projectId: 'REPLACE_ME',
-    storageBucket: 'REPLACE_ME',
+    apiKey: 'AIzaSyD8Jv09MJseLLibPMAONmvqf5_f3m3dtGI',
+    appId: '1:990266923824:android:2febdfc7c2fc1e03d886f5',
+    messagingSenderId: '990266923824',
+    projectId: 'metodo1dia-app',
+    storageBucket: 'metodo1dia-app.firebasestorage.app',
   );
 
+  // ACTION NEEDED: substituir apiKey/appId via `flutterfire configure`
+  // após registrar o app iOS no Firebase Console.
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'REPLACE_ME',
     appId: 'REPLACE_ME',
-    messagingSenderId: 'REPLACE_ME',
-    projectId: 'REPLACE_ME',
-    storageBucket: 'REPLACE_ME',
+    messagingSenderId: '990266923824',
+    projectId: 'metodo1dia-app',
+    storageBucket: 'metodo1dia-app.firebasestorage.app',
     iosBundleId: 'com.metodo1dia.app',
   );
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'REPLACE_ME',
     appId: 'REPLACE_ME',
-    messagingSenderId: 'REPLACE_ME',
-    projectId: 'REPLACE_ME',
-    authDomain: 'REPLACE_ME',
-    storageBucket: 'REPLACE_ME',
+    messagingSenderId: '990266923824',
+    projectId: 'metodo1dia-app',
+    authDomain: 'metodo1dia-app.firebaseapp.com',
+    storageBucket: 'metodo1dia-app.firebasestorage.app',
   );
 }

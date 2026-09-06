@@ -100,6 +100,9 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
     await ref.read(ptRepositoryProvider).logLoad(LoadEntry(
           id: '',
           studentId: widget.student.id,
+          trainerId: widget.student.trainerId.isNotEmpty
+              ? widget.student.trainerId
+              : widget.plan.trainerId,
           exerciseId: _exercicio.exerciseId,
           exerciseName: _exercicio.exerciseName,
           date: DateTime.now(),
@@ -128,6 +131,9 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
     await ref.read(ptRepositoryProvider).logSession(WorkoutSessionLog(
           id: '',
           studentId: widget.student.id,
+          trainerId: widget.student.trainerId.isNotEmpty
+              ? widget.student.trainerId
+              : widget.plan.trainerId,
           workoutPlanId: widget.plan.id,
           workoutName: widget.plan.name,
           date: DateTime.now(),

@@ -1,5 +1,12 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const {
+  setCors,
+  handleOptions,
+  requireAuth,
+  verifyAppCheck,
+  isPremiumActive,
+} = require('./auth_helpers');
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -131,11 +138,12 @@ function buildUserContent(message, userName, profile, context) {
 
 
 exports.amandaChat = functions.https.onRequest(async (req, res) => {
-  // CORS básico
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'Content-Type');
-  if (req.method === 'OPTIONS') return res.status(204).send('');
+  setCors(res);
+  if (handleOptions(req, res)) return;
+
+  const uid = await requireAuth(req, res);
+  if (!uid) return;
+  if (!(await verifyAppCheck(req, res))) return;
 
   try {
     const { message, userName, profile, context } = req.body || {};
@@ -209,10 +217,12 @@ Nunca invente que é impossível estimar — sempre devolva números.
 `;
 
 exports.calorieVision = functions.https.onRequest(async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'Content-Type');
-  if (req.method === 'OPTIONS') return res.status(204).send('');
+  setCors(res);
+  if (handleOptions(req, res)) return;
+
+  const uid = await requireAuth(req, res);
+  if (!uid) return;
+  if (!(await verifyAppCheck(req, res))) return;
 
   try {
     const { imageBase64 } = req.body || {};
@@ -308,19 +318,13 @@ exports.calorieVision = functions.https.onRequest(async (req, res) => {
 // ultrapassar o limite de uso mesmo com resgates simultâneos.
 // ---------------------------------------------------------------------------
 exports.redeemCoupon = functions.https.onRequest(async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === 'OPTIONS') return res.status(204).send('');
+  setCors(res);
+  if (handleOptions(req, res)) return;
 
   try {
-    const authHeader = req.headers.authorization || '';
-    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
-    if (!token) {
-      return res.status(401).json({ success: false, message: 'Não autenticada.' });
-    }
-    const decoded = await admin.auth().verifyIdToken(token);
-    const uid = decoded.uid;
+    const uid = await requireAuth(req, res);
+    if (!uid) return;
+    if (!(await verifyAppCheck(req, res))) return;
 
     const code = (req.body && req.body.code || '').toUpperCase().trim();
     if (!code) {
@@ -332,9 +336,10 @@ exports.redeemCoupon = functions.https.onRequest(async (req, res) => {
     const userRef = db.collection('users').doc(uid);
 
     const result = await db.runTransaction(async (tx) => {
-      const [couponSnap, redemptionSnap] = await Promise.all([
+      const [couponSnap, redemptionSnap, userSnap] = await Promise.all([
         tx.get(couponRef),
         tx.get(redemptionRef),
+        tx.get(userRef),
       ]);
 
       if (!couponSnap.exists) return { success: false, message: 'Cupom não encontrado.' };
@@ -349,16 +354,37 @@ exports.redeemCoupon = functions.https.onRequest(async (req, res) => {
         return { success: false, message: 'Cupom esgotado.' };
       }
 
-      const rewardField = c.reward === 'xp' ? 'xp'
-        : c.reward === 'premiumDays' ? 'premiumUntilExtraDays'
-        : 'coins';
+      const userUpdates = {
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      };
+
+      if (c.reward === 'xp') {
+        userUpdates.xp = admin.firestore.FieldValue.increment(c.value || 0);
+      } else if (c.reward === 'coins') {
+        userUpdates.coins = admin.firestore.FieldValue.increment(c.value || 0);
+      } else if (c.reward === 'premiumDays') {
+        const days = Number(c.value) || 0;
+        const now = new Date();
+        let base = now;
+        const existing = userSnap.exists ? userSnap.data().premiumExpiresAt : null;
+        if (existing) {
+          let exp;
+          if (typeof existing.toDate === 'function') exp = existing.toDate();
+          else if (existing instanceof Date) exp = existing;
+          else if (typeof existing === 'string') exp = new Date(existing);
+          else if (existing._seconds) exp = new Date(existing._seconds * 1000);
+          if (exp && !isNaN(exp.getTime()) && exp > now) base = exp;
+        }
+        const newExpiry = new Date(base.getTime() + days * 24 * 60 * 60 * 1000);
+        userUpdates.isPremium = true;
+        userUpdates.premiumExpiresAt = newExpiry.toISOString();
+      } else {
+        userUpdates.coins = admin.firestore.FieldValue.increment(c.value || 0);
+      }
 
       tx.update(couponRef, { usageCount: admin.firestore.FieldValue.increment(1) });
       tx.set(redemptionRef, { uid, code, redeemedAt: admin.firestore.FieldValue.serverTimestamp() });
-      tx.set(userRef, {
-        [rewardField]: admin.firestore.FieldValue.increment(c.value || 0),
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      }, { merge: true });
+      tx.set(userRef, userUpdates, { merge: true });
 
       return {
         success: true,
@@ -382,17 +408,13 @@ exports.redeemCoupon = functions.https.onRequest(async (req, res) => {
 // o que torna "Premium" uma proteção de verdade, não só um botão escondido.
 // ---------------------------------------------------------------------------
 exports.getVideoUrl = functions.https.onRequest(async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === 'OPTIONS') return res.status(204).send('');
+  setCors(res);
+  if (handleOptions(req, res)) return;
 
   try {
-    const authHeader = req.headers.authorization || '';
-    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
-    if (!token) return res.status(401).json({ error: 'Não autenticada.' });
-    const decoded = await admin.auth().verifyIdToken(token);
-    const uid = decoded.uid;
+    const uid = await requireAuth(req, res);
+    if (!uid) return;
+    if (!(await verifyAppCheck(req, res))) return;
 
     const videoId = req.body && req.body.videoId;
     if (!videoId) return res.status(400).json({ error: 'videoId ausente.' });
@@ -405,10 +427,8 @@ exports.getVideoUrl = functions.https.onRequest(async (req, res) => {
 
     if (video.isPremium) {
       const userSnap = await db.collection('users').doc(uid).get();
-      const isPremium = userSnap.exists && userSnap.data().isPremium === true;
-      if (!isPremium) {
-        // §28: registrar tentativa indevida de acesso a conteúdo Premium.
-        console.warn('acesso Premium negado', { uid, collection: (typeof collection !== 'undefined' ? collection : 'videos'), docId: (typeof docId !== 'undefined' ? docId : (typeof videoId !== 'undefined' ? videoId : null)) });
+      if (!isPremiumActive(userSnap.exists ? userSnap.data() : null)) {
+        console.warn('acesso Premium negado', { uid, collection: 'videos', docId: videoId });
         return res.status(403).json({ error: 'Conteúdo exclusivo para assinantes Premium.' });
       }
     }
@@ -445,17 +465,13 @@ const CONTENT_COLLECTIONS = {
 };
 
 exports.getContentUrl = functions.https.onRequest(async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === 'OPTIONS') return res.status(204).send('');
+  setCors(res);
+  if (handleOptions(req, res)) return;
 
   try {
-    const authHeader = req.headers.authorization || '';
-    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
-    if (!token) return res.status(401).json({ error: 'Não autenticada.' });
-    const decoded = await admin.auth().verifyIdToken(token);
-    const uid = decoded.uid;
+    const uid = await requireAuth(req, res);
+    if (!uid) return;
+    if (!(await verifyAppCheck(req, res))) return;
 
     const { collection, docId } = req.body || {};
     const config = CONTENT_COLLECTIONS[collection];
@@ -471,10 +487,8 @@ exports.getContentUrl = functions.https.onRequest(async (req, res) => {
 
     if (content.isPremium) {
       const userSnap = await db.collection('users').doc(uid).get();
-      const isPremium = userSnap.exists && userSnap.data().isPremium === true;
-      if (!isPremium) {
-        // §28: registrar tentativa indevida de acesso a conteúdo Premium.
-        console.warn('acesso Premium negado', { uid, collection: (typeof collection !== 'undefined' ? collection : 'videos'), docId: (typeof docId !== 'undefined' ? docId : (typeof videoId !== 'undefined' ? videoId : null)) });
+      if (!isPremiumActive(userSnap.exists ? userSnap.data() : null)) {
+        console.warn('acesso Premium negado', { uid, collection, docId });
         return res.status(403).json({ error: 'Conteúdo exclusivo para assinantes Premium.' });
       }
     }

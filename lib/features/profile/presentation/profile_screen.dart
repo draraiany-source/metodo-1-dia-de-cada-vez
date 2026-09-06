@@ -157,6 +157,8 @@ class ProfileScreen extends ConsumerWidget {
                 ),
                 onPressed: () async {
                   await ref.read(authRepositoryProvider).signOut();
+                  ref.read(localSessionProvider.notifier).clear();
+                  await ref.read(guestSessionProvider.notifier).exit();
                   if (context.mounted) context.go(Routes.login);
                 },
                 icon: AppIconImage(

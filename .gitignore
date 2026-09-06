@@ -3,19 +3,47 @@
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
-pubspec.lock
 *.iml
 .idea/
 .vscode/
+
 # Firebase / chaves — NÃO commitar
 google-services.json
 GoogleService-Info.plist
+**/google-services.json
+**/GoogleService-Info.plist
 functions/node_modules/
 functions/.env
 .env
+.env.*
+!.env.example
+**/serviceAccount*.json
+**/firebase-adminsdk*.json
+**/credentials.json
+**/secrets.json
 
 # Assinatura Android — NÃO commitar
 android/key.properties
+**/key.properties
 *.jks
 *.keystore
 upload-keystore.jks
+android/keystore/
+android/app/keystore/
+
+# Backups / cache local
+backup_visual_*/
+backup_nav_*/
+.gradle-home/
+android/.gradle/
+android/.kotlin/
+**/.kotlin/
+*.log
+analyze_out.txt
+analyze_phase*.txt
+build_release*.txt
+test_phase*.txt
+_deploy_*.txt
+functions/src/_patch_index.js
+.DS_Store
+Thumbs.db

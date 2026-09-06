@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/app_constants.dart';
+import '../../../core/services/auth_http_headers.dart';
 import '../../../core/services/firebase_service.dart';
 import '../../ebooks/data/ebooks_repository.dart' show ContentUrlResult;
 import '../domain/pdf_recipe_models.dart';
@@ -47,14 +48,11 @@ class PdfRecipesRepository {
           error: 'Receitas ainda não configuradas neste app.');
     }
     try {
-      final token = await user.getIdToken();
+      final headers = await AuthHttpHeaders.forCloudFunction();
       final res = await http
           .post(
             Uri.parse(functionUrl),
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer $token',
-            },
+            headers: headers,
             body: jsonEncode({'collection': 'pdf_recipes', 'docId': recipeId}),
           )
           .timeout(const Duration(seconds: 15));
