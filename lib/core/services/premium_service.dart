@@ -169,8 +169,12 @@ class RevenueCatPremiumService implements PremiumService {
     if (kIsWeb) return;
 
     final apiKey = defaultTargetPlatform == TargetPlatform.iOS
-        ? AppConfig.revenueCatIosKey
-        : AppConfig.revenueCatAndroidKey;
+        ? (AppConfig.revenueCatIosKey.isNotEmpty
+            ? AppConfig.revenueCatIosKey
+            : AppConfig.revenueCatAndroidKey)
+        : (AppConfig.revenueCatAndroidKey.isNotEmpty
+            ? AppConfig.revenueCatAndroidKey
+            : AppConfig.revenueCatIosKey);
     if (apiKey.isEmpty) return;
 
     await Purchases.setLogLevel(kDebugMode ? LogLevel.debug : LogLevel.info);
@@ -266,12 +270,12 @@ class RevenueCatPremiumService implements PremiumService {
           'Confira IDs na Play Console / App Store Connect.',
         );
       }
-      final result = await Purchases.purchasePackage(pkg);
-      return _merge(_fromCustomerInfo(result.customerInfo), await _firestoreStatus());
+      final info = await Purchases.purchasePackage(pkg);
+      return _merge(_fromCustomerInfo(info), await _firestoreStatus());
     }
 
-    final result = await Purchases.purchaseStoreProduct(products.first);
-    return _merge(_fromCustomerInfo(result.customerInfo), await _firestoreStatus());
+    final info = await Purchases.purchaseStoreProduct(products.first);
+    return _merge(_fromCustomerInfo(info), await _firestoreStatus());
   }
 
   @override

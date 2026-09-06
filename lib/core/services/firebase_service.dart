@@ -4,8 +4,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../firebase_options.dart';
-import '../config/app_config.dart';
-import 'premium_service.dart';
 
 /// Inicialização centralizada do Firebase.
 ///
@@ -61,10 +59,6 @@ class FirebaseService {
 
       _initialized = true;
       debugPrint('✅ Firebase inicializado.');
-
-      if (AppConfig.billingConfigured) {
-        await RevenueCatPremiumService.ensureConfigured();
-      }
     } catch (e, s) {
       debugPrint('❌ Falha ao inicializar Firebase: $e\n$s');
     }

@@ -8,10 +8,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'app.dart';
+import 'core/config/app_config.dart';
 import 'core/services/firebase_service.dart';
 import 'core/services/feedback_service.dart';
 import 'core/services/notifications_service.dart';
 import 'core/services/local_reminders_service.dart';
+import 'core/services/premium_service.dart';
 
 /// Tela de erro legível exibida caso a inicialização falhe de forma
 /// irrecuperável — nunca deixamos a página em branco.
@@ -105,6 +107,9 @@ Future<void> main() async {
     // Inicializa Firebase (com degradação graciosa se não configurado).
     try {
       await FirebaseService.init();
+      if (FirebaseService.isReady && AppConfig.billingConfigured) {
+        await RevenueCatPremiumService.ensureConfigured();
+      }
     } catch (e, s) {
       debugPrint('⚠️  Falha ao inicializar Firebase: $e');
       debugPrintStack(stackTrace: s);
