@@ -1,5 +1,5 @@
-name: metodo_1_dia
-description: "Método 1 Dia de Cada Vez — App fitness feminino premium."
+﻿name: metodo_1_dia
+description: "MÃ©todo 1 Dia de Cada Vez â€” App fitness feminino premium."
 publish_to: "none"
 version: 1.0.0+1
 
@@ -34,7 +34,7 @@ dependencies:
   flutter_map: ^7.0.2
   latlong2: ^0.9.1
   # geocoding: ^3.0.0   # removido da build: nenhum import em lib/ (0 usos).
-  #                       Reative se for exibir endereço/reverse-geocoding.
+  #                       Reative se for exibir endereÃ§o/reverse-geocoding.
   # google_maps_flutter: ^2.7.0   # opcional com chave Google Maps
 
   # ---- UI / util ----
@@ -47,31 +47,31 @@ dependencies:
   fl_chart: ^0.68.0
   percent_indicator: ^4.2.3
   lottie: ^3.1.2
-  # rive: ^0.13.20   # descomente para ativar animações Rive (.riv)
+  # rive: ^0.13.20   # descomente para ativar animaÃ§Ãµes Rive (.riv)
   url_launcher: ^6.3.0
   http: ^1.2.1
 
-  # ---- Notificações locais ----
+  # ---- NotificaÃ§Ãµes locais ----
   flutter_local_notifications: ^17.1.2
   timezone: ^0.9.4
 
-  # ---- Calendário ----
+  # ---- CalendÃ¡rio ----
   table_calendar: ^3.1.2
 
-  # ---- Cursos em áudio ----
+  # ---- Cursos em Ã¡udio ----
   just_audio: ^0.9.40
 
   # ---- Receitas em PDF ----
   pdfx: ^2.6.0
 
-  # ---- Geração de PDF (certificados, relatórios) ----
+  # ---- GeraÃ§Ã£o de PDF (certificados, relatÃ³rios) ----
   pdf: ^3.10.8
   printing: ^5.13.1
 
   # ---- Compartilhamento nativo ----
   share_plus: ^10.0.2
 
-  # ---- Streaming de vídeo ----
+  # ---- Streaming de vÃ­deo ----
   video_player: ^2.9.2
   chewie: ^1.8.5
   path_provider: ^2.1.4
@@ -87,9 +87,9 @@ dev_dependencies:
   flutter_native_splash: ^2.4.1
 
 # -----------------------------------------------------------------------------
-# Ícone do app — gera pra Android/iOS a partir de 1 PNG 1024x1024 com fundo.
-# PENDÊNCIA: exporte assets/app_icon/app_icon.svg como PNG 1024x1024
-# (o SVG já existe; falta rasterizar — Figma/Illustrator/qualquer conversor).
+# Ãcone do app â€” gera pra Android/iOS a partir de 1 PNG 1024x1024 com fundo.
+# PENDÃŠNCIA: exporte assets/app_icon/app_icon.svg como PNG 1024x1024
+# (o SVG jÃ¡ existe; falta rasterizar â€” Figma/Illustrator/qualquer conversor).
 # Depois rode: flutter pub run flutter_launcher_icons
 # -----------------------------------------------------------------------------
 flutter_launcher_icons:
@@ -101,7 +101,7 @@ flutter_launcher_icons:
   remove_alpha_ios: true
 
 # -----------------------------------------------------------------------------
-# Splash screen nativa — mesma pendência: exportar o SVG como PNG antes.
+# Splash screen nativa â€” mesma pendÃªncia: exportar o SVG como PNG antes.
 # Depois rode: flutter pub run flutter_native_splash:create
 # -----------------------------------------------------------------------------
 flutter_native_splash:
@@ -140,7 +140,7 @@ flutter:
     - assets/stickers/
     - assets/badges/
     - assets/backgrounds/
-    # assets/illustrations/ (raiz) não é declarada: não contém arquivos
+    # assets/illustrations/ (raiz) nÃ£o Ã© declarada: nÃ£o contÃ©m arquivos
     # diretamente, apenas a subpasta banners/ abaixo. Declarar uma pasta
     # vazia gera "No file or variants found for asset" no build.
     - assets/illustrations/banners/
@@ -154,4 +154,5 @@ flutter:
     - assets/recipes/
     - assets/habits/
     - assets/challenges/
+    - assets/audio_programs/
     - assets/app_icon/

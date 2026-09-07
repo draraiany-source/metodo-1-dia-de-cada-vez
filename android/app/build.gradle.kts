@@ -7,7 +7,7 @@ plugins {
 }
 
 // Assinatura de release: se android/key.properties existir, usa keystore de
-// upload. Sem ele, cai em debug signing (sÃ³ para teste local â€” NÃƒO Play Store).
+// upload. Sem ele, cai em debug signing (somente teste local — NAO Play Store).
 val keystorePropertiesFile = rootProject.file("key.properties")
 val keystoreProperties = Properties()
 val hasReleaseKeystore = keystorePropertiesFile.exists()
@@ -15,7 +15,7 @@ if (hasReleaseKeystore) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-// Plugins Google sÃ³ quando google-services.json estiver presente.
+// Plugins Google so quando google-services.json estiver presente.
 val hasGoogleServices = file("google-services.json").exists()
 
 android {
@@ -31,17 +31,15 @@ android {
 
     defaultConfig {
         applicationId = "com.metodo1dia.app"
-        // geolocator / notifications: mínimo 23 (Play + plugins).
-        // NÃO use flutter.minSdkVersion — o Flutter sobrescreve este arquivo
-        // em "Upgrading build.gradle.kts" e pode baixar o mínimo.
-        minSdk = 23
+        // Force minimo 23 (geolocator/notifications). gradle.properties tambem
+        // define flutter.minSdkVersion=23 para o plugin Flutter.
+        minSdk = maxOf(23, flutter.minSdkVersion)
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
     }
 
-    // Evita OOM do Lint no Windows durante bundleRelease
     lint {
         checkReleaseBuilds = false
         abortOnError = false
@@ -77,7 +75,7 @@ android {
 
 kotlin {
     compilerOptions {
-        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 }
 

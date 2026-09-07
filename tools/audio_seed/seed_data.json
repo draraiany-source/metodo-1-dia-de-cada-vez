@@ -1,0 +1,107 @@
+{
+  "program": {
+    "id": "programa_7_dias_um_dia_de_cada_vez",
+    "title": "Programa 7 Dias — Um Dia de Cada Vez",
+    "description": "Sequência de 7 áudios para foco, disciplina, mudança de hábitos, constância e autoconfiança.",
+    "category": "Foco, Disciplina e Mudança de Hábitos",
+    "author": "Amanda Lopes",
+    "coverUrl": "",
+    "active": true,
+    "premium": false,
+    "totalDays": 7,
+    "orderIndex": 0
+  },
+  "audios": [
+    {
+      "id": "01_como_vencer_a_procrastinacao",
+      "day": 1,
+      "order": 1,
+      "title": "Como Vencer a Procrastinação",
+      "description": "Aprenda a sair do adiamento e começar com pequenas atitudes possíveis hoje.",
+      "storagePath": "programs/programa_7_dias_um_dia_de_cada_vez/audios/01_como_vencer_a_procrastinacao.mp3",
+      "audioUrl": "",
+      "coverUrl": "",
+      "durationSeconds": 85,
+      "active": true,
+      "premium": false
+    },
+    {
+      "id": "02_como_criar_disciplina",
+      "day": 2,
+      "order": 2,
+      "title": "Como Criar Disciplina",
+      "description": "Entenda como construir disciplina mesmo nos dias em que a motivação estiver baixa.",
+      "storagePath": "programs/programa_7_dias_um_dia_de_cada_vez/audios/02_como_criar_disciplina.mp3",
+      "audioUrl": "",
+      "coverUrl": "",
+      "durationSeconds": 62,
+      "active": true,
+      "premium": false
+    },
+    {
+      "id": "03_como_vencer_a_preguica",
+      "day": 3,
+      "order": 3,
+      "title": "Como Vencer a Preguiça",
+      "description": "Estratégias simples para vencer a inércia e colocar o corpo e a mente em movimento.",
+      "storagePath": "programs/programa_7_dias_um_dia_de_cada_vez/audios/03_como_vencer_a_preguica.mp3",
+      "audioUrl": "",
+      "coverUrl": "",
+      "durationSeconds": 56,
+      "active": true,
+      "premium": false
+    },
+    {
+      "id": "04_como_manter_a_constancia",
+      "day": 4,
+      "order": 4,
+      "title": "Como Manter a Constância",
+      "description": "Descubra como continuar mesmo quando os resultados ainda parecem pequenos.",
+      "storagePath": "programs/programa_7_dias_um_dia_de_cada_vez/audios/04_como_manter_a_constancia.mp3",
+      "audioUrl": "",
+      "coverUrl": "",
+      "durationSeconds": 51,
+      "active": true,
+      "premium": false
+    },
+    {
+      "id": "05_como_voltar_depois_de_errar",
+      "day": 5,
+      "order": 5,
+      "title": "Como Voltar Depois de Errar",
+      "description": "Aprenda a retomar sem culpa e sem abandonar todo o processo por causa de um deslize.",
+      "storagePath": "programs/programa_7_dias_um_dia_de_cada_vez/audios/05_como_voltar_depois_de_errar.mp3",
+      "audioUrl": "",
+      "coverUrl": "",
+      "durationSeconds": 44,
+      "active": true,
+      "premium": false
+    },
+    {
+      "id": "06_como_criar_habitos_saudaveis",
+      "day": 6,
+      "order": 6,
+      "title": "Como Criar Hábitos Saudáveis",
+      "description": "Transforme pequenas escolhas em uma rotina mais saudável e sustentável.",
+      "storagePath": "programs/programa_7_dias_um_dia_de_cada_vez/audios/06_como_criar_habitos_saudaveis.mp3",
+      "audioUrl": "",
+      "coverUrl": "",
+      "durationSeconds": 41,
+      "active": true,
+      "premium": false
+    },
+    {
+      "id": "07_como_acreditar_em_voce",
+      "day": 7,
+      "order": 7,
+      "title": "Como Acreditar em Você",
+      "description": "Fortaleça sua confiança e reconheça que você é capaz de continuar evoluindo.",
+      "storagePath": "programs/programa_7_dias_um_dia_de_cada_vez/audios/07_como_acreditar_em_voce.mp3",
+      "audioUrl": "",
+      "coverUrl": "",
+      "durationSeconds": 51,
+      "active": true,
+      "premium": false
+    }
+  ]
+}

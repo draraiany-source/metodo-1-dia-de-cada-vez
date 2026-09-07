@@ -42,6 +42,27 @@ service firebase.storage {
       allow write: if isAdmin() && underSize(10);
     }
 
+    // Áudios de programas (Programa 7 Dias, etc.).
+    // Leitura autenticada; escrita só admin. Premium continua protegido
+    // via Firestore private + getContentUrl (não exponha URL no doc público).
+    match /audio_programs/{allPaths=**} {
+      allow read: if signedIn();
+      allow write: if isAdmin()
+        && request.resource.size < 80 * 1024 * 1024
+        && (request.resource.contentType.matches('audio/.*')
+            || request.resource.contentType.matches('image/.*'));
+      allow delete: if isAdmin();
+    }
+
+    // Caminho canônico do seed (programs/{id}/audios/*.mp3).
+    match /programs/{programId}/audios/{fileName} {
+      allow read: if signedIn();
+      allow write: if isAdmin()
+        && request.resource.size < 80 * 1024 * 1024
+        && request.resource.contentType.matches('audio/.*');
+      allow delete: if isAdmin();
+    }
+
     // Nega o resto.
     match /{allPaths=**} {
       allow read, write: if false;

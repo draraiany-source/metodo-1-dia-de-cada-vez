@@ -130,6 +130,16 @@ class HomeScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 12),
               FadeInUp(
+                delayMs: 115,
+                child: _Programa7DiasHomeCard(
+                  onOpen: () => AppNavigation.open(
+                    context,
+                    '/audio-programs/programa_7_dias_um_dia_de_cada_vez',
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              FadeInUp(
                   delayMs: 120, child: SectionHeader(title: 'Acesso rápido')),
               const SizedBox(height: 6),
               FadeInUp(delayMs: 130, child: const _QuickGrid()),
@@ -849,11 +859,11 @@ class _QuickGrid extends StatelessWidget {
       ),
       (
         title: 'Áudios',
-        subtitle: 'Curso e meditações',
+        subtitle: 'Meditações e 7 dias',
         icon: AppIcons.audio,
         fallback: Icons.headphones_rounded,
         accent: AppColors.primaryDark,
-        onTap: () => AppNavigation.open(context, Routes.audioCourses),
+        onTap: () => AppNavigation.open(context, Routes.audiosMeditations),
       ),
       (
         title: 'Personal',
@@ -896,6 +906,82 @@ class _QuickGrid extends StatelessWidget {
             onTap: it.onTap,
           ),
       ],
+    );
+  }
+}
+
+class _Programa7DiasHomeCard extends StatelessWidget {
+  final VoidCallback onOpen;
+
+  const _Programa7DiasHomeCard({required this.onOpen});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onOpen,
+        borderRadius: BorderRadius.circular(16),
+        child: Ink(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            gradient: AppColors.brandGradient,
+          ),
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Container(
+                width: 52,
+                height: 52,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.18),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: const Icon(
+                  Icons.self_improvement_rounded,
+                  color: Colors.white,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(width: 14),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'PROGRAMA 7 DIAS',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 0.4,
+                        fontSize: 13,
+                      ),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      'Um Dia de Cada Vez',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      'Amanda Lopes · Foco e disciplina',
+                      style: TextStyle(
+                        color: Color(0xE6FFFFFF),
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.chevron_right, color: Colors.white),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

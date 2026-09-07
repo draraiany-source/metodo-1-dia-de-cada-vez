@@ -74,6 +74,9 @@ import '../../features/courses/presentation/courses_screen.dart';
 import '../../features/audio_courses/presentation/meditations_screen.dart';
 import '../../features/audio_courses/presentation/lili_audios_screen.dart';
 import '../../features/audio_courses/presentation/audio_courses_admin_screen.dart';
+import '../../features/audio_programs/presentation/screens/audios_meditations_hub_screen.dart';
+import '../../features/audio_programs/presentation/screens/program_detail_screen.dart';
+import '../../features/audio_programs/presentation/screens/program_player_screen.dart';
 import '../constants/app_constants.dart';
 import '../services/analytics_service.dart';
 import 'main_shell.dart';
@@ -115,6 +118,10 @@ class Routes {
   static const reminders = '/reminders';
   static const checkin = '/checkin';
   static const audioCourses = '/audio-courses';
+  static const audiosMeditations = '/audios-meditations';
+  static const audioProgramDetail = '/audio-programs/:programId';
+  static const audioProgramPlayer =
+      '/audio-programs/:programId/play/:audioId';
   static const pdfRecipes = '/pdf-recipes';
   static const recipes = '/recipes';
   static const measurements = '/measurements';
@@ -487,6 +494,29 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.audioCourses,
         pageBuilder: (_, s) => _fadeSlide(s, const AudioCoursesScreen()),
+      ),
+      GoRoute(
+        path: Routes.audiosMeditations,
+        pageBuilder: (_, s) =>
+            _fadeSlide(s, const AudiosMeditationsHubScreen()),
+      ),
+      GoRoute(
+        path: '/audio-programs/:programId',
+        pageBuilder: (_, s) {
+          final id = s.pathParameters['programId']!;
+          return _fadeSlide(s, ProgramDetailScreen(programId: id));
+        },
+      ),
+      GoRoute(
+        path: '/audio-programs/:programId/play/:audioId',
+        pageBuilder: (_, s) {
+          final programId = s.pathParameters['programId']!;
+          final audioId = s.pathParameters['audioId']!;
+          return _fadeSlide(
+            s,
+            ProgramPlayerScreen(programId: programId, audioId: audioId),
+          );
+        },
       ),
       GoRoute(
         path: Routes.pdfRecipes,

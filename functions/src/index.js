@@ -462,6 +462,7 @@ const CONTENT_COLLECTIONS = {
   courses: { privateDoc: 'lessons', urlField: null }, // retorna o mapa inteiro
   audio_courses: { privateDoc: 'chapters', urlField: null }, // idem — mapa chapterId->url
   pdf_recipes: { privateDoc: 'file', urlField: 'pdfUrl' }, // arquivo isolado em /private/file
+  programs: { privateDoc: 'audios', urlField: null }, // Programa 7 Dias etc. — mapa audioId->url
 };
 
 exports.getContentUrl = functions.https.onRequest(async (req, res) => {
@@ -485,7 +486,7 @@ exports.getContentUrl = functions.https.onRequest(async (req, res) => {
     }
     const content = docSnap.data();
 
-    if (content.isPremium) {
+    if (content.isPremium || content.premium === true) {
       const userSnap = await db.collection('users').doc(uid).get();
       if (!isPremiumActive(userSnap.exists ? userSnap.data() : null)) {
         console.warn('acesso Premium negado', { uid, collection, docId });

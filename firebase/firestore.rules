@@ -264,6 +264,23 @@ service cloud.firestore {
       }
     }
 
+    // Programas de áudio (ex.: Programa 7 Dias). Metadados legíveis;
+    // URLs premium ficam em /private/audios e saem só via getContentUrl.
+    match /programs/{programId} {
+      allow read: if signedIn() && resource.data.active == true;
+      allow write: if isAdmin();
+
+      match /audios/{audioId} {
+        allow read: if signedIn() && resource.data.active == true;
+        allow write: if isAdmin();
+      }
+
+      match /private/{document=**} {
+        allow read: if false;
+        allow write: if isAdmin();
+      }
+    }
+
     // Receitas em PDF (Módulo 4 do prompt master).
     // Metadados públicos (título, capa, minutos) legíveis; o arquivo real
     // deve ficar isolado em /private/file e ser resolvido pela Cloud Function

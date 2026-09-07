@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/config/app_config.dart';
@@ -6,6 +7,7 @@ import '../../../core/mascot/mascot_config.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/router/app_router.dart';
+import '../../auth/providers/auth_providers.dart';
 import '../../nutrition/presentation/food_database_screen.dart';
 import 'admin_treinos_catalog_tab.dart';
 
@@ -14,11 +16,32 @@ import 'admin_treinos_catalog_tab.dart';
 /// Estrutura base com dashboard + abas de CRUD. As operações de escrita
 /// exigem que o UID esteja na coleção `admins` (ver firestore.rules).
 /// Treinos: catálogo oficial local (117) com alertas de revisão.
-class AdminScreen extends StatelessWidget {
+class AdminScreen extends ConsumerWidget {
   const AdminScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(currentUserProvider);
+    if (user == null || !user.isAdmin) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Painel Admin')),
+        body: const Center(
+          child: Padding(
+            padding: EdgeInsets.all(24),
+            child: Text(
+              'Acesso restrito',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -177,6 +200,22 @@ class AdminScreen extends StatelessWidget {
             trailing: const Icon(Icons.chevron_right,
                 color: AppColors.textTertiary),
             onTap: () => context.push(Routes.audioCoursesAdmin),
+          ),
+        ),
+        Card(
+          margin: const EdgeInsets.only(bottom: 8),
+          child: ListTile(
+            leading: const Icon(Icons.self_improvement,
+                color: AppColors.primary),
+            title: const Text('Programa 7 Dias (áudio)',
+                style: TextStyle(color: Colors.white)),
+            subtitle: const Text(
+                'Abre o programa; seed via tools/audio_seed (ver docs/AUDIO_PROGRAMS.md)',
+                style: TextStyle(color: AppColors.textTertiary, fontSize: 11)),
+            trailing: const Icon(Icons.chevron_right,
+                color: AppColors.textTertiary),
+            onTap: () => context.push(
+                '/audio-programs/programa_7_dias_um_dia_de_cada_vez'),
           ),
         ),
         Card(
