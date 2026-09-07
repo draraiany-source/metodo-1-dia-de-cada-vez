@@ -1,4 +1,4 @@
-﻿name: metodo_1_dia
+name: metodo_1_dia
 description: "MÃ©todo 1 Dia de Cada Vez â€” App fitness feminino premium."
 publish_to: "none"
 version: 1.0.0+1
@@ -81,6 +81,8 @@ dependencies:
 
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
   flutter_lints: ^4.0.0
   flutter_launcher_icons: ^0.14.1
