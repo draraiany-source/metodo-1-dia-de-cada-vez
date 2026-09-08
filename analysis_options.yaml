@@ -13,6 +13,9 @@ analyzer:
     - RELATORIO_ANALYZE_TMP.txt
     - build/**
     - .dart_tool/**
+    # Pacote removido do pubspec para não entrar no release Android;
+    # o teste de device fica fora do analyze até reintroduzir com cuidado.
+    - integration_test/**
 linter:
   rules:
     prefer_const_constructors: false
