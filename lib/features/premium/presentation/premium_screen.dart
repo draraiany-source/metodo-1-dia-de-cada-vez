@@ -8,6 +8,7 @@ import '../../../core/services/analytics_service.dart';
 import '../../../core/services/premium_service.dart'
     show
         BillingNotConfiguredException,
+        PurchaseCancelledException,
         premiumStatusProvider;
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
@@ -185,6 +186,9 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
             content: Text('Premium ativado! 🎉'),
             backgroundColor: AppColors.success),
       );
+    } on PurchaseCancelledException {
+      // Usuário fechou o sheet da loja — sem snack de erro.
+      if (!mounted) return;
     } on BillingNotConfiguredException catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -211,6 +215,13 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
               ? 'Assinatura restaurada! 🎉'
               : 'Nenhuma assinatura encontrada.'),
         ),
+      );
+    } on PurchaseCancelledException {
+      if (!mounted) return;
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Não foi possível restaurar: $e')),
       );
     } finally {
       if (mounted) setState(() => _loading = false);

@@ -13,6 +13,15 @@ GoogleService-Info.plist
 **/google-services.json
 **/GoogleService-Info.plist
 functions/node_modules/
+tools/audio_seed/node_modules/
+tools/audio_seed/mp3/
+adc_login.txt
+gcloud_install.txt
+seed_upload_log*.txt
+deploy_fn*.txt
+deploy_rules*.txt
+validate_*.txt
+*_shell_test.txt
 functions/.env
 .env
 .env.*
@@ -31,6 +40,10 @@ upload-keystore.jks
 android/keystore/
 android/app/keystore/
 
+# Segredos locais de recuperação / auditoria
+RECUPERACAO_PROJETO_COMPLETO/SOMENTE_LOCAL_SEGREDOS_NAO_COPIADOS.txt
+**/SOMENTE_LOCAL_SEGREDOS*.txt
+
 # Backups / cache local
 backup_visual_*/
 backup_nav_*/
@@ -41,6 +54,8 @@ android/.kotlin/
 *.log
 analyze_out.txt
 analyze_phase*.txt
+analyze_agent_run.txt
+analyze_*_out.txt
 build_release*.txt
 test_phase*.txt
 _deploy_*.txt

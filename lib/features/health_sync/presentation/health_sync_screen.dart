@@ -33,9 +33,11 @@ class HealthSyncScreen extends ConsumerWidget {
                     state: state,
                     plataforma: plataforma,
                   ),
+                  const SizedBox(height: 12),
+                  const _ComingSoonBanner(),
                   const SizedBox(height: 16),
 
-                  // Permissão
+                  // Permissão / stub Health Connect
                   if (!state.conectado)
                     _PermissionCard(
                       plataforma: plataforma,
@@ -49,7 +51,8 @@ class HealthSyncScreen extends ConsumerWidget {
                           HealthPermission.negada =>
                             'Sem problemas — o app continua funcionando com seus registros manuais.',
                           HealthPermission.indisponivel =>
-                            '${plataforma.label} não está disponível neste dispositivo. Usando registros manuais.',
+                            'Em breve: configure o Health Connect / Apple Health. '
+                            'Por enquanto usamos seus registros manuais.',
                           HealthPermission.naoSolicitada => 'Permissão pendente.',
                         };
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -199,6 +202,39 @@ class _StatusCard extends StatelessWidget {
 
 }
 
+class _ComingSoonBanner extends StatelessWidget {
+  const _ComingSoonBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppTheme.radius),
+        border: Border.all(color: AppColors.surface2),
+      ),
+      child: const Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.schedule, color: AppColors.primary, size: 20),
+          SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              'Em breve: sincronização com Health Connect / Apple Health. '
+              'Configure o app de saúde do sistema quando a integração for '
+              'liberada. Até lá, o app usa só seus registros manuais — sem crash.',
+              style: TextStyle(
+                  color: AppColors.textSecondary, fontSize: 13, height: 1.4),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _PermissionCard extends StatelessWidget {
   const _PermissionCard({
     required this.plataforma,
@@ -223,15 +259,19 @@ class _PermissionCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Conectar ao ${plataforma.label}',
+          Text(
+              indisponivel
+                  ? 'Health Connect / Apple Health — em breve'
+                  : 'Conectar ao ${plataforma.label}',
               style: const TextStyle(
                   color: Colors.white, fontWeight: FontWeight.w600)),
           const SizedBox(height: 6),
           Text(
             indisponivel
-                ? 'Esta plataforma ainda não está ativa neste build. O app '
-                    'continua funcionando normalmente com seus registros manuais — '
-                    'nada é perdido.'
+                ? 'A integração nativa ainda não está ativa neste build. '
+                    'O app continua funcionando com registros manuais — '
+                    'nada é perdido. Quando liberarmos, você poderá '
+                    'configurar o Health Connect (Android) ou Apple Health (iOS).'
                 : 'Permita o acesso para importar passos, distância, calorias, '
                     'frequência cardíaca e peso automaticamente.',
             style: const TextStyle(

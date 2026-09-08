@@ -1,24 +1,96 @@
 /**
- * Upload dos 7 MP3s + seed Firestore (Programa 7 Dias).
+ * Seed Programa 7 Dias usando login do Firebase CLI (sem gcloud ADC).
  * Uso: node upload_and_seed.js [bucket]
  */
 const { initializeApp, applicationDefault, cert, getApps } = require('firebase-admin/app');
 const { getFirestore, FieldValue } = require('firebase-admin/firestore');
 const { getStorage } = require('firebase-admin/storage');
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
-const bucketName = process.argv[2] || 'metodo1dia-app.appspot.com';
+const PROJECT_ID = 'metodo1dia-app';
+const bucketName = process.argv[2] || 'metodo1dia-app.firebasestorage.app';
+
+// OAuth client publico do firebase-tools (mesmo do CLI)
+const FB_CLIENT_ID =
+  '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com';
+const FB_CLIENT_SECRET = 'j9iVZmc2NZrAnyLXhJbE8wwU';
+
+function loadFirebaseCliRefreshToken() {
+  const configPath = path.join(
+    os.homedir(),
+    '.config',
+    'configstore',
+    'firebase-tools.json',
+  );
+  if (!fs.existsSync(configPath)) {
+    throw new Error('Firebase CLI nao logado. Rode: firebase login');
+  }
+  const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  const refreshToken = cfg.tokens && cfg.tokens.refresh_token;
+  if (!refreshToken) {
+    throw new Error(
+      'Sem refresh_token do Firebase CLI. Rode: firebase login --reauth',
+    );
+  }
+  return refreshToken;
+}
+
+/** ADC authorized_user — aceito pelo Firestore Admin SDK. */
+function writeTempAdcFromFirebaseCli() {
+  const adc = {
+    type: 'authorized_user',
+    client_id: FB_CLIENT_ID,
+    client_secret: FB_CLIENT_SECRET,
+    refresh_token: loadFirebaseCliRefreshToken(),
+  };
+  const tmp = path.join(
+    os.tmpdir(),
+    'firebase-adc-metodo1dia-' + process.pid + '.json',
+  );
+  fs.writeFileSync(tmp, JSON.stringify(adc), { encoding: 'utf8', mode: 0o600 });
+  process.env.GOOGLE_APPLICATION_CREDENTIALS = tmp;
+  process.on('exit', () => {
+    try {
+      fs.unlinkSync(tmp);
+    } catch (_) {}
+  });
+  return tmp;
+}
+
+function gcloudAdcPath() {
+  return path.join(
+    process.env.APPDATA || path.join(os.homedir(), 'AppData', 'Roaming'),
+    'gcloud',
+    'application_default_credentials.json',
+  );
+}
 
 function init() {
   if (getApps().length) return;
+  const opts = { projectId: PROJECT_ID, storageBucket: bucketName };
   const saPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
   if (saPath && fs.existsSync(saPath)) {
     const sa = JSON.parse(fs.readFileSync(saPath, 'utf8'));
-    initializeApp({ credential: cert(sa), projectId: 'metodo1dia-app', storageBucket: bucketName });
+    if (sa.type === 'service_account') {
+      initializeApp({ credential: cert(sa), ...opts });
+      return;
+    }
+    // ADC authorized_user já apontado por env (ex.: gcloud)
+    initializeApp({ credential: applicationDefault(), ...opts });
     return;
   }
-  initializeApp({ credential: applicationDefault(), projectId: 'metodo1dia-app', storageBucket: bucketName });
+  const adc = gcloudAdcPath();
+  if (fs.existsSync(adc)) {
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = adc;
+    initializeApp({ credential: applicationDefault(), ...opts });
+    return;
+  }
+  // Fallback legado (Firebase CLI) — pode falhar com invalid_client
+  writeTempAdcFromFirebaseCli();
+  initializeApp({ credential: applicationDefault(), ...opts });
 }
 
 async function main() {
@@ -37,6 +109,7 @@ async function main() {
   const audioDir = audioDirCandidates.find((d) => fs.existsSync(d));
   if (!audioDir) throw new Error('Pasta de MP3 nao encontrada');
 
+  console.log('Project: ' + PROJECT_ID);
   console.log('Bucket: gs://' + bucketName);
   console.log('MP3 dir: ' + audioDir);
 
@@ -59,15 +132,25 @@ async function main() {
 
     await bucket.upload(localFile, {
       destination: audio.storagePath,
-      metadata: { contentType: 'audio/mpeg', cacheControl: 'public,max-age=3600' },
+      metadata: {
+        contentType: 'audio/mpeg',
+        cacheControl: 'public,max-age=3600',
+        metadata: { firebaseStorageDownloadTokens: crypto.randomUUID() },
+      },
     });
 
-    const file = bucket.file(audio.storagePath);
-    const [signedUrl] = await file.getSignedUrl({
-      action: 'read',
-      expires: Date.now() + 1000 * 60 * 60 * 24 * 365,
-    });
-    privateMap[audio.id] = signedUrl;
+    const token =
+      (await bucket.file(audio.storagePath).getMetadata())[0].metadata
+        .firebaseStorageDownloadTokens;
+    const encoded = encodeURIComponent(audio.storagePath);
+    const downloadUrl =
+      'https://firebasestorage.googleapis.com/v0/b/' +
+      bucketName +
+      '/o/' +
+      encoded +
+      '?alt=media&token=' +
+      token;
+    privateMap[audio.id] = downloadUrl;
 
     const { id, ...data } = audio;
     await db
@@ -97,6 +180,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error(err);
+  console.error(err && err.message ? err.message : err);
   process.exit(1);
 });

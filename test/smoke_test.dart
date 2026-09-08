@@ -9,11 +9,8 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(() => SharedPreferences.setMockInitialValues({}));
   test('LocalPremiumService: assina e expira corretamente', () async {
-    // Usa um container Riverpod isolado.
-    final container = ProviderContainer();
-    addTearDown(container.dispose);
-
-    final service = container.read(premiumServiceProvider);
+    // Serviço local explícito — o provider de produção usa Firestore/RevenueCat.
+    final service = LocalPremiumService();
     final antes = await service.current();
     expect(antes.isPremium, isFalse);
 

@@ -6,7 +6,13 @@ analyzer:
     deprecated_member_use_from_same_package: ignore
   exclude:
     - backup_nav_running_20260816/**
-
+    - backup_visual_*/**
+    - backup_assets_*/**
+    - backup_icons_*/**
+    - RECUPERACAO_PROJETO_COMPLETO/**
+    - RELATORIO_ANALYZE_TMP.txt
+    - build/**
+    - .dart_tool/**
 linter:
   rules:
     prefer_const_constructors: false

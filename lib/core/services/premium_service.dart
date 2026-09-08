@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,6 +51,34 @@ class BillingNotConfiguredException implements Exception {
   final String message;
   @override
   String toString() => message;
+}
+
+/// Usuário cancelou o sheet da loja — não é falha; a UI só fecha o loading.
+class PurchaseCancelledException implements Exception {
+  const PurchaseCancelledException([
+    this.message = 'Compra cancelada.',
+  ]);
+  final String message;
+  @override
+  String toString() => message;
+}
+
+bool _isPurchaseCancelled(Object error) {
+  if (error is PlatformException) {
+    try {
+      return PurchasesErrorHelper.getErrorCode(error) ==
+          PurchasesErrorCode.purchaseCancelledError;
+    } catch (_) {
+      // Fallback se o helper mudar de assinatura.
+      final code = error.code.toLowerCase();
+      final msg = (error.message ?? '').toLowerCase();
+      return code.contains('purchase_cancelled') ||
+          code.contains('cancelled') ||
+          msg.contains('purchase was cancelled') ||
+          msg.contains('user cancelled');
+    }
+  }
+  return false;
 }
 
 DateTime? _parseExpiry(dynamic rawExp) {
@@ -257,32 +286,49 @@ class RevenueCatPremiumService implements PremiumService {
         ? AppConfig.productYearly
         : AppConfig.productMonthly;
 
-    final products = await Purchases.getProducts([productId]);
-    if (products.isEmpty) {
-      // Fallback: offerings
-      final offerings = await Purchases.getOfferings();
-      final pkg = planId == 'yearly'
-          ? offerings.current?.annual
-          : offerings.current?.monthly;
-      if (pkg == null) {
-        throw BillingNotConfiguredException(
-          'Produto/oferta "$productId" não encontrado no RevenueCat. '
-          'Confira IDs na Play Console / App Store Connect.',
-        );
+    try {
+      final products = await Purchases.getProducts([productId]);
+      if (products.isEmpty) {
+        final offerings = await Purchases.getOfferings();
+        final pkg = planId == 'yearly'
+            ? offerings.current?.annual
+            : offerings.current?.monthly;
+        if (pkg == null) {
+          throw BillingNotConfiguredException(
+            'Produto/oferta "$productId" não encontrado no RevenueCat. '
+            'Confira IDs na Play Console / App Store Connect.',
+          );
+        }
+        final info = await Purchases.purchasePackage(pkg);
+        return _merge(_fromCustomerInfo(info), await _firestoreStatus());
       }
-      final info = await Purchases.purchasePackage(pkg);
-      return _merge(_fromCustomerInfo(info), await _firestoreStatus());
-    }
 
-    final info = await Purchases.purchaseStoreProduct(products.first);
-    return _merge(_fromCustomerInfo(info), await _firestoreStatus());
+      final info = await Purchases.purchaseStoreProduct(products.first);
+      return _merge(_fromCustomerInfo(info), await _firestoreStatus());
+    } on BillingNotConfiguredException {
+      rethrow;
+    } on PurchaseCancelledException {
+      rethrow;
+    } catch (e) {
+      if (_isPurchaseCancelled(e)) {
+        throw const PurchaseCancelledException();
+      }
+      rethrow;
+    }
   }
 
   @override
   Future<PremiumStatus> restore() async {
     await _ensureConfigured();
-    final info = await Purchases.restorePurchases();
-    return _merge(_fromCustomerInfo(info), await _firestoreStatus());
+    try {
+      final info = await Purchases.restorePurchases();
+      return _merge(_fromCustomerInfo(info), await _firestoreStatus());
+    } catch (e) {
+      if (_isPurchaseCancelled(e)) {
+        throw const PurchaseCancelledException();
+      }
+      rethrow;
+    }
   }
 }
 
