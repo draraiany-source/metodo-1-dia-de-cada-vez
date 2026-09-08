@@ -83,12 +83,11 @@ class TreinoCatalogEntry {
   TreinoVisualSection get visualSection {
     final cat = _norm(categoria);
     final grupo = _norm(grupoMuscular);
+    final hay = '$cat $grupo';
 
+    // Grupo muscular antes de categorias híbridas (ex.: Hipertrofia / Cardio).
     if (grupo.contains('panturrilha') || cat.contains('panturrilha')) {
       return TreinoVisualSection.panturrilhas;
-    }
-    if (cat.contains('cardio') && !cat.contains('hipertrofia')) {
-      return TreinoVisualSection.cardio;
     }
     if (cat.contains('core') ||
         cat.contains('abdomen') ||
@@ -96,15 +95,12 @@ class TreinoCatalogEntry {
         grupo.contains('core')) {
       return TreinoVisualSection.core;
     }
-    if (cat.contains('flexibilidade') ||
-        cat.contains('mobilidade') ||
-        cat.contains('aquecimento')) {
-      return TreinoVisualSection.mobilidade;
-    }
     if (grupo.contains('peitoral') || cat.contains('peitoral')) {
       return TreinoVisualSection.peitoral;
     }
-    if (grupo.contains('costas') || cat.contains('costas')) {
+    if (grupo.contains('costas') ||
+        grupo.contains('dorsal') ||
+        cat.contains('costas')) {
       return TreinoVisualSection.costas;
     }
     if (grupo.contains('biceps') || cat.contains('biceps')) {
@@ -116,20 +112,31 @@ class TreinoCatalogEntry {
     if (grupo.contains('ombro') || cat.contains('ombro')) {
       return TreinoVisualSection.ombros;
     }
-    if (cat.contains('full body') ||
-        cat.contains('funcional') ||
-        cat.contains('emagrecimento')) {
-      return TreinoVisualSection.fullBody;
-    }
     if (cat.contains('membros inferiores') ||
         grupo.contains('gluteo') ||
         grupo.contains('quadriceps') ||
         grupo.contains('posterior') ||
         grupo.contains('isquio') ||
-        grupo.contains('adutor')) {
+        grupo.contains('adutor') ||
+        grupo.contains('abdut') ||
+        grupo.contains('membros inferiores')) {
       return TreinoVisualSection.inferioresGluteos;
     }
-    if (cat.contains('cardio')) return TreinoVisualSection.cardio;
+    if (cat.contains('flexibilidade') ||
+        cat.contains('mobilidade') ||
+        cat.contains('aquecimento') ||
+        hay.contains('along')) {
+      return TreinoVisualSection.mobilidade;
+    }
+    if (cat.contains('full body') ||
+        cat.contains('funcional') ||
+        cat.contains('emagrecimento')) {
+      return TreinoVisualSection.fullBody;
+    }
+    // Cardio puro (sem hipertrofia) — evita coração em hipertrofia híbrida.
+    if (cat.contains('cardio') && !cat.contains('hipertrofia')) {
+      return TreinoVisualSection.cardio;
+    }
     return TreinoVisualSection.fullBody;
   }
 

@@ -133,7 +133,7 @@ _KindLook _lookOf(WorkoutVisualKind kind) => switch (kind) {
           asset: AppIcons.workout,
         ),
       WorkoutVisualKind.cardio => _KindLook(
-          // Sem coração — usa cardio 3D / fallback de ritmo.
+          // Coração + batimento apenas para cardio genérico.
           icon: Icons.monitor_heart_outlined,
           asset: AppIcons.cardio,
         ),
@@ -143,11 +143,11 @@ _KindLook _lookOf(WorkoutVisualKind kind) => switch (kind) {
         ),
       WorkoutVisualKind.caminhada => _KindLook(
           icon: Icons.directions_walk_rounded,
-          asset: AppIcons.running,
+          asset: null,
         ),
       WorkoutVisualKind.bike => _KindLook(
           icon: Icons.pedal_bike_rounded,
-          asset: AppIcons.workoutGoal,
+          asset: null,
         ),
       WorkoutVisualKind.corridaGps => _KindLook(
           icon: Icons.directions_run_rounded,

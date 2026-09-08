@@ -2084,7 +2084,11 @@ class _RecommendedCard extends StatelessWidget {
 
 
 
-          TreinoSectionIcon(section: treino.visualSection, size: 56),
+          TreinoSectionIcon(
+            section: treino.visualSection,
+            treino: treino,
+            size: 56,
+          ),
 
 
 
@@ -2376,7 +2380,11 @@ class _TreinoCard extends StatelessWidget {
 
 
 
-                TreinoSectionIcon(section: treino.visualSection, size: 52),
+                TreinoSectionIcon(
+                  section: treino.visualSection,
+                  treino: treino,
+                  size: 52,
+                ),
 
 
 

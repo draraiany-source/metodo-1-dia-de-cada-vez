@@ -78,12 +78,13 @@ dependencies:
 
   # ---- Pagamentos (RevenueCat) ----
   purchases_flutter: ^8.1.0
+  webview_flutter: ^4.14.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  integration_test:
-    sdk: flutter
+  # integration_test fica fora do app release (evita GeneratedPluginRegistrant
+  # falhar em assembleRelease). Use em pacote/tooling separado se necessário.
   flutter_lints: ^4.0.0
   flutter_launcher_icons: ^0.14.1
   flutter_native_splash: ^2.4.1

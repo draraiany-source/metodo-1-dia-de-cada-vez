@@ -609,7 +609,7 @@ class _ExercisePlayer extends StatelessWidget {
                               exercise.videoUrl!,
                             ),
                             child: Text(
-                              'Abrir no YouTube',
+                              'Assistir vídeo',
                               style: AppTextStyles.caption(
                                   color: AppColors.secondary),
                             ),

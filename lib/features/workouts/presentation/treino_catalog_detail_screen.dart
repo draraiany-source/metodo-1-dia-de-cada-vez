@@ -64,7 +64,11 @@ class TreinoCatalogDetailScreen extends ConsumerWidget {
           children: [
             Row(
               children: [
-                TreinoSectionIcon(section: treino.visualSection, size: 52),
+                TreinoSectionIcon(
+                  section: treino.visualSection,
+                  treino: treino,
+                  size: 52,
+                ),
                 const SizedBox(width: 14),
                 Expanded(
                   child: Column(
