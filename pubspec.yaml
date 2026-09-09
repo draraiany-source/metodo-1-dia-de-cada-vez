@@ -126,6 +126,8 @@ flutter:
     - assets/images/corrida/
     - assets/images/hidratacao/
     - assets/images/receitas/
+    - assets/images/recipes/
+    - assets/images/recipes/neon/
     - assets/images/alimentacao/
     - assets/images/progresso/
     - assets/images/rotina/
@@ -135,6 +137,14 @@ flutter:
     - assets/mascot/png/
     - assets/mascot/extras/
     - assets/icons/
+    - assets/icons/neon/
+    - assets/icons/neon/navegacao/
+    - assets/icons/neon/saude/
+    - assets/icons/neon/nutricao/
+    - assets/icons/neon/corrida/
+    - assets/icons/neon/treinos/
+    - assets/icons/neon/conquistas/
+    - assets/icons/neon/perfil/
     - assets/content/
     - assets/content/treinos_catalogo_oficial.json
     - assets/animations/

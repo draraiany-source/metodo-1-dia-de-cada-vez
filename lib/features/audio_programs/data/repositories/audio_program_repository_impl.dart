@@ -98,31 +98,36 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
   @override
   Future<String> resolvePlaybackUrl(
       String programId, ProgramAudio audio) async {
+    // Offline-first: os 7 áudios do Programa 7 Dias estão em assets.
+    // Evita CORS/Storage lento/URL remota quebrada e funciona sem login.
+    if (!audio.premium) {
+      final local = _localAssetFor(audio.id);
+      if (local != null) return local;
+    }
+
     if (!audio.premium && audio.audioUrl.isNotEmpty) {
       return audio.audioUrl;
     }
 
-    if (!audio.premium &&
-        audio.storagePath.isNotEmpty &&
-        _isFirebaseAvailable &&
-        _auth.currentUser != null) {
-      try {
-        return await _storage.ref(audio.storagePath).getDownloadURL();
-      } catch (_) {
-        // CF / asset abaixo
-      }
-    }
-
     if (!_isFirebaseAvailable) {
-      final asset = _localAssetFor(audio.id);
-      if (asset != null) return asset;
       if (audio.audioUrl.isNotEmpty) return audio.audioUrl;
       throw StateError(
-          'Arquivo de áudio ainda não disponível. Faça upload no Firebase Storage.');
+          'Arquivo de áudio ainda não disponível neste dispositivo.');
     }
 
     if (_auth.currentUser == null) {
-      throw StateError('Entre na sua conta pra ouvir.');
+      throw StateError('Entre na sua conta pra ouvir este conteúdo.');
+    }
+
+    if (!audio.premium && audio.storagePath.isNotEmpty) {
+      try {
+        return await _storage
+            .ref(audio.storagePath)
+            .getDownloadURL()
+            .timeout(const Duration(seconds: 5));
+      } catch (_) {
+        // CF / audioUrl abaixo
+      }
     }
 
     if (audio.premium || audio.storagePath.isNotEmpty) {
@@ -139,7 +144,7 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
                   'docId': programId,
                 }),
               )
-              .timeout(const Duration(seconds: 15));
+              .timeout(const Duration(seconds: 8));
 
           final body = jsonDecode(res.body) as Map<String, dynamic>;
           if (res.statusCode == 200 && body['data'] != null) {
@@ -154,17 +159,18 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
             throw StateError(err);
           }
         } catch (e) {
-          if (audio.premium) rethrow;
+          if (audio.premium) {
+            if (e is StateError) rethrow;
+            throw StateError('Não consegui carregar este áudio agora.');
+          }
         }
       }
     }
 
-    final asset = _localAssetFor(audio.id);
-    if (asset != null) return asset;
     if (audio.audioUrl.isNotEmpty) return audio.audioUrl;
 
     throw StateError(
-        'Áudio não configurado. Rode o seed (tools/audio_seed) ou confira o Storage.');
+        'Áudio não disponível no momento. Tente de novo em instantes.');
   }
 
   String? _localAssetFor(String audioId) {

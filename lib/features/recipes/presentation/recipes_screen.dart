@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/seed_data.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -14,6 +12,7 @@ import '../../../core/widgets/app_page.dart';
 import '../../../core/widgets/lili_widgets.dart';
 import '../providers/recipe_favorites_providers.dart';
 import 'recipe_detail_screen.dart';
+import 'widgets/recipe_cover_image.dart';
 
 /// ============================================================================
 /// RECEITAS — catálogo com busca, categorias, favoritos, recomendação do dia
@@ -576,31 +575,9 @@ class _RecommendedCard extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  (recipe.photoUrl == null || recipe.photoUrl!.isEmpty)
-                      ? Image.asset(
-                          AppAssets.illustReceitasFit,
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => Container(
-                            color: AppColors.surface2,
-                            alignment: Alignment.center,
-                            child: Text(recipe.emoji,
-                                style: const TextStyle(fontSize: 56)),
-                          ),
-                        )
-                      : CachedNetworkImage(
-                          imageUrl: recipe.photoUrl!,
-                          fit: BoxFit.cover,
-                          errorWidget: (_, __, ___) => Image.asset(
-                            AppAssets.illustReceitasFit,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => Container(
-                              color: AppColors.surface2,
-                              alignment: Alignment.center,
-                              child: Text(recipe.emoji,
-                                  style: const TextStyle(fontSize: 56)),
-                            ),
-                          ),
-                        ),
+                  RecipeCoverImage(
+                    recipe: recipe,
+                  ),
                   DecoratedBox(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -780,32 +757,9 @@ class _RecipeCard extends StatelessWidget {
                     color: AppColors.surface2,
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  child: (recipe.photoUrl == null || recipe.photoUrl!.isEmpty)
-                      ? Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            Image.asset(
-                              AppAssets.illustReceitasNutricaoDark,
-                              fit: BoxFit.cover,
-                              opacity: const AlwaysStoppedAnimation(0.45),
-                              errorBuilder: (_, __, ___) =>
-                                  const ColoredBox(color: AppColors.surface2),
-                            ),
-                            Center(
-                              child: Text(recipe.emoji,
-                                  style: TextStyle(fontSize: wide ? 34 : 30)),
-                            ),
-                          ],
-                        )
-                      : CachedNetworkImage(
-                          imageUrl: recipe.photoUrl!,
-                          fit: BoxFit.cover,
-                          width: thumb,
-                          height: thumb,
-                          errorWidget: (_, __, ___) => Center(
-                              child: Text(recipe.emoji,
-                                  style: TextStyle(fontSize: wide ? 34 : 30))),
-                        ),
+                  child: RecipeCoverImage(
+                    recipe: recipe,
+                  ),
                 ),
                 SizedBox(width: wide ? 14 : 10),
                 Expanded(

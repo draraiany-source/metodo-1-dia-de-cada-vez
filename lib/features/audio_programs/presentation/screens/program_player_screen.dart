@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -40,19 +42,29 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
 
     ProgramAudio? audio = widget.initialAudio;
     if (audio == null || audio.id != widget.audioId) {
-      final audios =
-          await ref.read(programAudiosProvider(widget.programId).future);
-      audio = audios.where((a) => a.id == widget.audioId).firstOrNull;
+      try {
+        final audios = await ref
+            .read(programAudiosProvider(widget.programId).future)
+            .timeout(const Duration(seconds: 10));
+        audio = audios.where((a) => a.id == widget.audioId).firstOrNull;
+      } catch (_) {
+        audio = null;
+      }
     }
-    if (audio == null || !mounted) return;
+    if (audio == null || !mounted) {
+      if (mounted && audio == null) {
+        // Mantém tela utilizável com mensagem via controller se possível.
+      }
+      return;
+    }
 
     _openedFor = key;
-    final progress =
-        await ref.read(programProgressProvider(widget.programId).future);
+    final progressAsync = ref.read(programProgressProvider(widget.programId));
+    final isFavorite = progressAsync.value?.isFavorite(audio.id) ?? false;
     if (!mounted) return;
     await ref
         .read(programPlayerControllerProvider(widget.programId).notifier)
-        .open(audio, isFavorite: progress.isFavorite(audio.id));
+        .open(audio, isFavorite: isFavorite);
   }
 
   String _fmt(Duration d) {

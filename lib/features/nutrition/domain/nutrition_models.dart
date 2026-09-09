@@ -100,15 +100,25 @@ class WaterCalculator {
   static const int mlPerGlass = 250;
   static const int mlPerKg = 35;
   static const int defaultGoalMl = 2000; // usado quando não há peso cadastrado
+  /// Evita UI travada se o peso vier inválido (ex.: gramas, altura em m).
+  static const int minGoalGlasses = 4;
+  static const int maxGoalGlasses = 16;
+
+  /// Aceita só pesos corporais plausíveis em kg; caso contrário usa o default.
+  static double? sanitizeWeightKg(double? weightKg) {
+    if (weightKg == null || weightKg < 20 || weightKg > 300) return null;
+    return weightKg;
+  }
 
   static int goalMlFor(double? weightKg) {
-    if (weightKg == null || weightKg <= 0) return defaultGoalMl;
-    return (weightKg * mlPerKg).round();
+    final w = sanitizeWeightKg(weightKg);
+    if (w == null) return defaultGoalMl;
+    return (w * mlPerKg).round();
   }
 
   static int goalGlassesFor(double? weightKg) {
     final ml = goalMlFor(weightKg);
-    return (ml / mlPerGlass).ceil();
+    return (ml / mlPerGlass).ceil().clamp(minGoalGlasses, maxGoalGlasses);
   }
 }
 

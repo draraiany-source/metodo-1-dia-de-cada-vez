@@ -6,6 +6,7 @@ import '../../audio_courses/providers/audio_course_providers.dart';
 import '../data/services/audio_playback_engine.dart';
 import '../data/services/shared_audio_playback_engine.dart';
 import '../domain/entities/audio_program.dart';
+import '../domain/entities/program_progress.dart';
 import 'audio_program_providers.dart';
 
 class ProgramPlayerState {
@@ -96,23 +97,76 @@ class ProgramPlayerController extends StateNotifier<ProgramPlayerState> {
     );
     try {
       final repo = ref.read(audioProgramRepositoryProvider);
-      final url = await repo.resolvePlaybackUrl(programId, audio);
-      await _engine.load(url, title: audio.title, artUrl: audio.coverUrl);
+      final url = await repo
+          .resolvePlaybackUrl(programId, audio)
+          .timeout(const Duration(seconds: 12));
 
-      final progress = await ref.read(programProgressProvider(programId).future);
+      if (url.trim().isEmpty) {
+        throw StateError('Áudio sem URL válida.');
+      }
+
+      try {
+        await _engine
+            .load(url, title: audio.title, artUrl: audio.coverUrl)
+            .timeout(const Duration(seconds: 20));
+      } catch (_) {
+        // Se a URL remota falhar, tenta asset local (IDs do Programa 7 Dias).
+        final local = _localAssetFallback(audio.id);
+        if (local == null) rethrow;
+        await _engine
+            .load(local, title: audio.title, artUrl: audio.coverUrl)
+            .timeout(const Duration(seconds: 10));
+      }
+
+      final progressAsync = ref.read(programProgressProvider(programId));
+      ProgramProgress progress;
+      try {
+        progress = progressAsync.value ??
+            await ref
+                .read(programProgressProvider(programId).future)
+                .timeout(const Duration(seconds: 5));
+      } catch (_) {
+        progress = ProgramProgress.empty(programId);
+      }
+
       final resumeSeconds = progress.positionFor(audio.id);
       if (resumeSeconds > 0) {
         await _engine.seek(Duration(seconds: resumeSeconds));
       }
-      await repo.setCurrentAudio(programId, audio.id);
+      // Progresso/favoritos exigem login — não bloqueia o play.
+      try {
+        await repo.setCurrentAudio(programId, audio.id);
+      } catch (_) {}
       await _engine.play();
       state = state.copyWith(isLoading: false);
+    } on TimeoutException {
+      state = state.copyWith(
+        isLoading: false,
+        error:
+            'Demorou demais para carregar. Verifique a conexão e tente de novo.',
+      );
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
-        error: e is StateError ? e.message : e.toString(),
+        error: e is StateError
+            ? e.message
+            : 'Não consegui tocar este áudio agora.',
       );
     }
+  }
+
+  String? _localAssetFallback(String audioId) {
+    const ids = {
+      '01_como_vencer_a_procrastinacao',
+      '02_como_criar_disciplina',
+      '03_como_vencer_a_preguica',
+      '04_como_manter_a_constancia',
+      '05_como_voltar_depois_de_errar',
+      '06_como_criar_habitos_saudaveis',
+      '07_como_acreditar_em_voce',
+    };
+    if (!ids.contains(audioId)) return null;
+    return 'asset:///assets/audio_programs/$audioId.mp3';
   }
 
   Future<void> togglePlayPause() async {

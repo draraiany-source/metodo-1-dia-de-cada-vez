@@ -18,12 +18,15 @@ import '../domain/nutrition_models.dart';
 import '../providers/water_log_providers.dart';
 
 /// Tela de água — lógica real ([waterLogProvider] + [WaterCalculator]).
+///
+/// Funciona sem meta/peso cadastrado (default 2 L / 8 copos).
 class HydrationScreen extends ConsumerWidget {
   const HydrationScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(currentUserProvider);
+    final hasWeight = WaterCalculator.sanitizeWeightKg(user?.currentWeight) != null;
     final goal = WaterCalculator.goalGlassesFor(user?.currentWeight);
     final glasses = ref.watch(waterLogProvider).clamp(0, goal);
     final litrosAtual = glasses * WaterCalculator.mlPerGlass / 1000;
@@ -53,9 +56,11 @@ class HydrationScreen extends ConsumerWidget {
       backgroundColor: AppColors.background,
       appBar: const PremiumAppBar(title: 'Meta de água'),
       body: SafeArea(
+        // AppPage já faz scroll — NÃO aninhar ListView (causava tela vazia).
         child: AppPage(
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
+          scrollable: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               FadeInUp(
                 child: AppCard(
@@ -67,6 +72,14 @@ class HydrationScreen extends ConsumerWidget {
                       Text(
                         '${litrosAtual.toStringAsFixed(1)} / ${litrosMeta.toStringAsFixed(1)} litros',
                         style: AppTextStyles.h2(),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        hasWeight
+                            ? '$glasses de $goal copos (${WaterCalculator.mlPerGlass} ml)'
+                            : 'Meta padrão ($goal copos) — cadastre seu peso no perfil para personalizar',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.caption(),
                       ),
                       const SizedBox(height: 22),
                       CircularPercentIndicator(
@@ -130,31 +143,27 @@ class HydrationScreen extends ConsumerWidget {
               const SizedBox(height: 18),
               Text('Histórico do dia', style: AppTextStyles.h3()),
               const SizedBox(height: 10),
-              Row(
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
                 children: List.generate(goal, (i) {
                   final filled = i < glasses;
-                  return Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 2),
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: filled
-                              ? AppColors.info.withOpacity(0.85)
-                              : AppColors.surface,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: filled
-                                ? AppColors.info
-                                : AppColors.border,
-                          ),
-                        ),
-                        child: AppIconImage(
-                          AppIcons.water,
-                          size: 18,
-                          fallbackIcon: Icons.water_drop_rounded,
-                        ),
+                  return Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: filled
+                          ? AppColors.info.withOpacity(0.85)
+                          : AppColors.surface,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: filled ? AppColors.info : AppColors.border,
                       ),
+                    ),
+                    child: AppIconImage(
+                      AppIcons.water,
+                      size: 18,
+                      fallbackIcon: Icons.water_drop_rounded,
                     ),
                   );
                 }),

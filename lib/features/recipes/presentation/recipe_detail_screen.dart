@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,6 +8,7 @@ import '../../../core/widgets/animations.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/common_widgets.dart';
 import '../providers/recipe_favorites_providers.dart';
+import 'widgets/recipe_cover_image.dart';
 
 /// Página de detalhe de UMA receita — recebe a [Recipe] completa (id, nome,
 /// imagem, categoria, calorias, tempo, dificuldade, ingredientes, modo de
@@ -61,18 +61,9 @@ class RecipeDetailScreen extends ConsumerWidget {
                     ),
                   ],
                 ),
-                child: (recipe.photoUrl == null || recipe.photoUrl!.isEmpty)
-                    ? Center(
-                        child: Text(recipe.emoji,
-                            style: const TextStyle(fontSize: 72)))
-                    : CachedNetworkImage(
-                        imageUrl: recipe.photoUrl!,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        errorWidget: (_, __, ___) => Center(
-                            child: Text(recipe.emoji,
-                                style: const TextStyle(fontSize: 72))),
-                      ),
+                child: RecipeCoverImage(
+                  recipe: recipe,
+                ),
               ),
             ),
             const SizedBox(height: 18),
