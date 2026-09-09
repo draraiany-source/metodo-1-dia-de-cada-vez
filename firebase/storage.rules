@@ -2,9 +2,10 @@ rules_version = '2';
 
 // Regras do Cloud Storage — Método 1 Dia de Cada Vez.
 //
-// Correções aplicadas na auditoria RC1:
-//  - /public/ não é mais gravável por qualquer usuário logado (só admin).
-//  - Uploads do usuário limitados a imagens de até 8 MB (custo + abuso).
+// Papéis:
+//  - Admin Técnico: admins/{uid}
+//  - Personal: users.isPersonalTrainer
+//  - Aluno: dono do próprio path / vinculado em pt_students
 service firebase.storage {
   match /b/{bucket}/o {
 
@@ -17,6 +18,12 @@ service firebase.storage {
         && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid));
     }
 
+    function isPersonalTrainer() {
+      return signedIn()
+        && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+        && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true;
+    }
+
     function isImage() {
       return request.resource.contentType.matches('image/.*');
     }
@@ -25,45 +32,47 @@ service firebase.storage {
       return request.resource.size < mb * 1024 * 1024;
     }
 
-    // Fotos de progresso e avatar — só o dono.
+    function ptStudentDoc(studentId) {
+      return firestore.get(/databases/(default)/documents/pt_students/$(studentId));
+    }
+
+    function canAccessPtStudent(studentId) {
+      return isAdmin() || (
+        signedIn()
+        && firestore.exists(/databases/(default)/documents/pt_students/$(studentId))
+        && (
+          ptStudentDoc(studentId).data.trainerId == request.auth.uid
+          || ptStudentDoc(studentId).data.userId == request.auth.uid
+        )
+      );
+    }
+
+    // Avatar / arquivos do usuário — dono ou Admin Técnico.
     match /users/{userId}/{allPaths=**} {
-      allow read: if signedIn() && request.auth.uid == userId;
+      allow read: if isAdmin() || (signedIn() && request.auth.uid == userId);
       allow write: if signedIn()
         && request.auth.uid == userId
         && isImage()
         && underSize(8);
-      allow delete: if signedIn() && request.auth.uid == userId;
+      allow delete: if isAdmin() || (signedIn() && request.auth.uid == userId);
     }
 
-    // Conteúdo público do app (banners, capas de treino).
-    // Leitura aberta; escrita SOMENTE admin.
+    // Conteúdo público do app (banners, capas).
     match /public/{allPaths=**} {
       allow read: if true;
       allow write: if isAdmin() && underSize(10);
     }
 
-    // Fotos Quem Sou Eu / Amanda — admin OU personal trainer.
-    // Mais específico que /public/{allPaths=**} para upload pelo painel da Personal.
+    // Fotos públicas Quem Sou Eu / Amanda.
     match /public/amanda_assets/{allPaths=**} {
       allow read: if true;
       allow write: if signedIn()
         && underSize(10)
         && isImage()
-        && (
-          isAdmin() ||
-          (firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
-            && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true)
-        );
-      allow delete: if signedIn() && (
-        isAdmin() ||
-        (firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
-          && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true)
-      );
+        && (isAdmin() || isPersonalTrainer());
+      allow delete: if signedIn() && (isAdmin() || isPersonalTrainer());
     }
 
-    // Áudios de programas (Programa 7 Dias, etc.).
-    // Leitura autenticada; escrita só admin. Premium continua protegido
-    // via Firestore private + getContentUrl (não exponha URL no doc público).
     match /audio_programs/{allPaths=**} {
       allow read: if signedIn();
       allow write: if isAdmin()
@@ -73,7 +82,6 @@ service firebase.storage {
       allow delete: if isAdmin();
     }
 
-    // Caminho canônico do seed (programs/{id}/audios/*.mp3).
     match /programs/{programId}/audios/{fileName} {
       allow read: if signedIn();
       allow write: if isAdmin()
@@ -82,22 +90,16 @@ service firebase.storage {
       allow delete: if isAdmin();
     }
 
-    // Mídia do Personal Trainer (fotos de evolução + vídeos de exercícios).
+    // Fotos de evolução — PRIVADAS (trainer/aluno vinculado/admin).
     match /pt_photos/{studentId}/{allPaths=**} {
-      allow read: if signedIn();
-      allow write: if signedIn()
+      allow read: if canAccessPtStudent(studentId);
+      allow write: if canAccessPtStudent(studentId)
         && underSize(12)
-        && (isImage() || request.resource.contentType.matches('video/.*'))
-        && (
-          isAdmin() ||
-          (firestore.exists(/databases/(default)/documents/pt_students/$(studentId))
-            && (firestore.get(/databases/(default)/documents/pt_students/$(studentId)).data.trainerId == request.auth.uid
-                || firestore.get(/databases/(default)/documents/pt_students/$(studentId)).data.userId == request.auth.uid))
-        );
-      allow delete: if signedIn() && (
-        isAdmin() ||
-        (firestore.exists(/databases/(default)/documents/pt_students/$(studentId))
-          && firestore.get(/databases/(default)/documents/pt_students/$(studentId)).data.trainerId == request.auth.uid)
+        && (isImage() || request.resource.contentType.matches('video/.*'));
+      allow delete: if isAdmin() || (
+        signedIn()
+        && firestore.exists(/databases/(default)/documents/pt_students/$(studentId))
+        && ptStudentDoc(studentId).data.trainerId == request.auth.uid
       );
     }
 
@@ -105,21 +107,11 @@ service firebase.storage {
       allow read: if signedIn();
       allow write: if signedIn()
         && underSize(80)
-        && (request.resource.contentType.matches('video/.*')
-            || isImage())
-        && (
-          isAdmin() ||
-          (firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
-            && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true)
-        );
-      allow delete: if signedIn() && (
-        isAdmin() ||
-        (firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
-          && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true)
-      );
+        && (request.resource.contentType.matches('video/.*') || isImage())
+        && (isAdmin() || isPersonalTrainer());
+      allow delete: if isAdmin() || isPersonalTrainer();
     }
 
-    // Nega o resto.
     match /{allPaths=**} {
       allow read, write: if false;
     }

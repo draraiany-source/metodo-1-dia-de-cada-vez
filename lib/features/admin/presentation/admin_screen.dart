@@ -24,12 +24,13 @@ class AdminScreen extends ConsumerWidget {
     final user = ref.watch(currentUserProvider);
     if (user == null || !user.isAdmin) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Painel Admin')),
+        appBar: AppBar(title: const Text('Painel Técnico')),
         body: const Center(
           child: Padding(
             padding: EdgeInsets.all(24),
             child: Text(
-              'Acesso restrito',
+              'Acesso restrito ao Admin Técnico.\n'
+              'Personal e alunos não acessam esta área.',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
@@ -46,7 +47,7 @@ class AdminScreen extends ConsumerWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Painel Admin ⚙️'),
+          title: const Text('Painel Técnico'),
           bottom: const TabBar(
             isScrollable: true,
             indicatorColor: AppColors.primary,
@@ -79,6 +80,35 @@ class AdminScreen extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
+        Card(
+          margin: const EdgeInsets.only(bottom: 8),
+          child: ListTile(
+            leading: const Icon(Icons.manage_accounts_outlined,
+                color: AppColors.secondary),
+            title: const Text('Usuários e papéis',
+                style: TextStyle(color: Colors.white)),
+            subtitle: const Text(
+                'Admin Técnico · Personal · Aluno — via admins/{uid}',
+                style: TextStyle(color: AppColors.textTertiary, fontSize: 11)),
+            trailing: const Icon(Icons.chevron_right,
+                color: AppColors.textTertiary),
+            onTap: () => context.push(Routes.adminUsers),
+          ),
+        ),
+        Card(
+          margin: const EdgeInsets.only(bottom: 12),
+          child: ListTile(
+            leading: const Icon(Icons.fitness_center_outlined,
+                color: AppColors.secondary),
+            title: const Text('Central da Personal',
+                style: TextStyle(color: Colors.white)),
+            subtitle: const Text('Alunos, treinos e evolução',
+                style: TextStyle(color: AppColors.textTertiary, fontSize: 11)),
+            trailing: const Icon(Icons.chevron_right,
+                color: AppColors.textTertiary),
+            onTap: () => context.push(Routes.personalTrainer),
+          ),
+        ),
         // Diagnóstico de configuração externa (chaves injetadas em build).
         Container(
           margin: const EdgeInsets.only(bottom: 16),

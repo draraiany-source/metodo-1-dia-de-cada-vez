@@ -157,6 +157,7 @@ class AppUser {
     double? totalKm,
     bool? isPremium,
     bool? isAdmin,
+    bool? isPersonalTrainer,
   }) {
     return AppUser(
       id: id,
@@ -175,8 +176,11 @@ class AppUser {
       streak: streak ?? this.streak,
       totalWorkouts: totalWorkouts ?? this.totalWorkouts,
       totalKm: totalKm ?? this.totalKm,
+      referralCode: referralCode,
+      referralCount: referralCount,
       isPremium: isPremium ?? this.isPremium,
       isAdmin: isAdmin ?? this.isAdmin,
+      isPersonalTrainer: isPersonalTrainer ?? this.isPersonalTrainer,
     );
   }
 

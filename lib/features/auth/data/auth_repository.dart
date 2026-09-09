@@ -71,27 +71,45 @@ class AuthRepository {
   Future<AppUser> _loadProfile(String uid, String email, String name,
       {String? referredByCode}) async {
     final doc = await _db.collection(AppConstants.cUsers).doc(uid).get();
+    AppUser user;
     if (doc.exists) {
-      return AppUser.fromMap(uid, doc.data()!);
+      user = AppUser.fromMap(uid, doc.data()!);
+    } else {
+      // Cria perfil inicial — inclui o código de indicação próprio da usuária.
+      final myCode = uid.substring(0, 6).toUpperCase();
+      user = AppUser(
+        id: uid,
+        name: name.isEmpty ? 'Nova usuária' : name,
+        email: email,
+        memberSince: DateTime.now(),
+        referralCode: myCode,
+      );
+      final data = user.toMap();
+      // Campo só lido pela Cloud Function `onUserCreated` (concede a
+      // recompensa a quem indicou); não é reutilizado depois.
+      if (referredByCode != null && referredByCode.trim().isNotEmpty) {
+        data['referredByCode'] = referredByCode.trim().toUpperCase();
+      }
+      await _db.collection(AppConstants.cUsers).doc(uid).set(data);
+      // Mapa código -> dono, pra Cloud Function encontrar quem indicou em O(1).
+      await _db.collection('referral_codes').doc(myCode).set({'ownerUid': uid});
     }
-    // Cria perfil inicial — inclui o código de indicação próprio da usuária.
-    final myCode = uid.substring(0, 6).toUpperCase();
-    final user = AppUser(
-      id: uid,
-      name: name.isEmpty ? 'Nova usuária' : name,
-      email: email,
-      memberSince: DateTime.now(),
-      referralCode: myCode,
-    );
-    final data = user.toMap();
-    // Campo só lido pela Cloud Function `onUserCreated` (concede a
-    // recompensa a quem indicou); não é reutilizado depois.
-    if (referredByCode != null && referredByCode.trim().isNotEmpty) {
-      data['referredByCode'] = referredByCode.trim().toUpperCase();
+
+    // Fonte de verdade do Admin Técnico: coleção `admins/{uid}` (não e-mail).
+    try {
+      final adminDoc = await _db.collection('admins').doc(uid).get();
+      if (adminDoc.exists) {
+        user = user.copyWith(isAdmin: true, isPersonalTrainer: true);
+      } else if (user.isAdmin) {
+        // Flag órfã no doc users sem membership em admins → não eleva no app.
+        user = user.copyWith(isAdmin: false);
+      }
+    } catch (_) {
+      // Sem permissão de leitura em admins = não é técnico.
+      if (user.isAdmin) {
+        user = user.copyWith(isAdmin: false);
+      }
     }
-    await _db.collection(AppConstants.cUsers).doc(uid).set(data);
-    // Mapa código -> dono, pra Cloud Function encontrar quem indicou em O(1).
-    await _db.collection('referral_codes').doc(myCode).set({'ownerUid': uid});
     return user;
   }
 

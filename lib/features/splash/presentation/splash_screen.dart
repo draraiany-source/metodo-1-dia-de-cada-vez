@@ -48,10 +48,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     if (!onboardingDone) {
       context.go(Routes.onboarding);
     } else if (user != null || isGuest) {
-      // Personal/Admin → painel de gestão; aluno/visitante → Home.
-      if (user != null &&
-          (user.isPersonalTrainer || user.isAdmin) &&
-          !isGuest) {
+      if (user != null && !isGuest && user.isAdmin) {
+        context.go(Routes.admin);
+      } else if (user != null && !isGuest && user.isPersonalTrainer) {
         context.go(Routes.personalTrainer);
       } else {
         context.go(Routes.home);

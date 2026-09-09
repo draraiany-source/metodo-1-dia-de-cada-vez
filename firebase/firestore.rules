@@ -25,6 +25,18 @@ service cloud.firestore {
         && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 
+    // Personal / Admin profissional (Amanda) — flag em users/{uid}.
+    function isPersonalTrainer() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true;
+    }
+
+    // Staff = Admin Técnico OU Personal.
+    function isStaff() {
+      return isAdmin() || isPersonalTrainer();
+    }
+
     // Dono do documento existente (read/update/delete)
     function ownsExisting() {
       return signedIn() && resource.data.userId == request.auth.uid;
@@ -79,20 +91,14 @@ service cloud.firestore {
 
     match /amanda_assets/{document=**} {
       allow read: if signedIn();
-      allow write: if signedIn() && (
-        isAdmin() ||
-        get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true
-      );
+      allow write: if isAdmin() || isPersonalTrainer();
     }
 
     // Textos do perfil público Quem Sou Eu (Amanda) — leitura autenticada;
-    // escrita só admin / personal (isPersonalTrainer).
+    // escrita Admin Técnico / Personal.
     match /amanda_profile/{docId} {
       allow read: if signedIn();
-      allow write: if signedIn() && (
-        isAdmin() ||
-        get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true
-      );
+      allow write: if isAdmin() || isPersonalTrainer();
     }
 
     // Módulo Personal Trainer — cada aluno só é visível pro seu próprio
@@ -109,16 +115,18 @@ service cloud.firestore {
           request.auth.token.email != null &&
           resource.data.email.lower() == request.auth.token.email.lower())
       ));
-      allow create: if signedIn() && request.resource.data.trainerId == request.auth.uid;
-      allow update: if signedIn() && (
+      allow create: if isAdmin() ||
+        (signedIn() && request.resource.data.trainerId == request.auth.uid);
+      allow update: if isAdmin() || (signedIn() && (
         resource.data.trainerId == request.auth.uid ||
         // Aluno só pode gravar o próprio userId (vínculo).
         (request.auth.token.email != null &&
           resource.data.email.lower() == request.auth.token.email.lower() &&
           request.resource.data.diff(resource.data).affectedKeys().hasOnly(['userId', 'email']) &&
           request.resource.data.userId == request.auth.uid)
-      );
-      allow delete: if signedIn() && resource.data.trainerId == request.auth.uid;
+      ));
+      allow delete: if isAdmin() ||
+        (signedIn() && resource.data.trainerId == request.auth.uid);
     }
 
     // Banco de exercícios — biblioteca compartilhada, qualquer personal lê;
@@ -127,10 +135,7 @@ service cloud.firestore {
     // ao banco de receitas/treinos do app).
     match /pt_exercises/{document=**} {
       allow read: if signedIn();
-      allow write: if signedIn() && (
-        isAdmin() ||
-        get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true
-      );
+      allow write: if isAdmin() || isPersonalTrainer();
     }
 
     match /pt_workout_plans/{planId} {
@@ -143,8 +148,14 @@ service cloud.firestore {
            (request.auth.token.email != null &&
             get(/databases/$(database)/documents/pt_students/$(resource.data.studentId)).data.email.lower() == request.auth.token.email.lower())))
       );
-      allow create: if signedIn() && request.resource.data.trainerId == request.auth.uid;
-      allow update, delete: if signedIn() && resource.data.trainerId == request.auth.uid;
+      allow create: if signedIn() && (
+        isAdmin() ||
+        request.resource.data.trainerId == request.auth.uid
+      );
+      allow update, delete: if signedIn() && (
+        isAdmin() ||
+        resource.data.trainerId == request.auth.uid
+      );
     }
 
     // Nota: pt_assessments/pt_photos/pt_loads/pt_sessions — acesso só para
@@ -204,9 +215,13 @@ service cloud.firestore {
       ));
     }
 
+    // Admin Técnico: membership em admins/{uid}.
+    // Create/update por outro Admin Técnico; delete nunca remove a si mesmo.
+    // Bootstrap do primeiro admin: Console Firebase / Admin SDK.
     match /admins/{uid} {
-      allow read: if isAdmin();
-      allow write: if false;
+      allow read: if isAdmin() || (signedIn() && request.auth.uid == uid);
+      allow create, update: if isAdmin();
+      allow delete: if isAdmin() && request.auth.uid != uid;
     }
 
     // Mapa código de indicação -> dono. Só a Cloud Function `onUserCreated`
@@ -269,7 +284,13 @@ service cloud.firestore {
 
     match /notifications/{docId} {
       allow read, update, delete: if ownsExisting() || isAdmin();
-      allow create: if isAdmin(); // só o backend cria notificações
+      // Backend OU Personal (mensagem/aviso ao aluno — userId obrigatório).
+      allow create: if isAdmin() || (
+        isPersonalTrainer()
+        && request.resource.data.keys().hasAll(['userId'])
+        && request.resource.data.userId is string
+        && request.resource.data.userId.size() > 0
+      );
     }
 
     match /subscriptions/{docId} {
@@ -286,7 +307,7 @@ service cloud.firestore {
 
     match /recipes/{document=**} {
       allow read: if signedIn();
-      allow write: if isAdmin();
+      allow write: if isAdmin() || isPersonalTrainer();
     }
 
     match /challenges/{document=**} {
@@ -300,11 +321,11 @@ service cloud.firestore {
     // só a Cloud Function `getContentUrl` acessa (valida Premium no servidor).
     match /audio_courses/{courseId} {
       allow read: if signedIn();
-      allow write: if isAdmin();
+      allow write: if isAdmin() || isPersonalTrainer();
 
       match /chapters/{chapterId} {
         allow read: if signedIn();
-        allow write: if isAdmin();
+        allow write: if isAdmin() || isPersonalTrainer();
       }
 
       match /private/{document=**} {
@@ -317,11 +338,11 @@ service cloud.firestore {
     // URLs premium ficam em /private/audios e saem só via getContentUrl.
     match /programs/{programId} {
       allow read: if signedIn() && resource.data.active == true;
-      allow write: if isAdmin();
+      allow write: if isAdmin() || isPersonalTrainer();
 
       match /audios/{audioId} {
         allow read: if signedIn() && resource.data.active == true;
-        allow write: if isAdmin();
+        allow write: if isAdmin() || isPersonalTrainer();
       }
 
       match /private/{document=**} {

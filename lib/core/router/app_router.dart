@@ -24,6 +24,7 @@ import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/premium/presentation/premium_screen.dart';
 import '../../features/amanda/presentation/amanda_screen.dart';
 import '../../features/admin/presentation/admin_screen.dart';
+import '../../features/admin/presentation/admin_users_roles_screen.dart';
 import '../../features/showcase/presentation/asset_showcase_screen.dart';
 import '../../features/diary/presentation/diary_screen.dart';
 import '../../features/goals/presentation/goals_screen.dart';
@@ -80,6 +81,7 @@ import '../../features/audio_programs/presentation/screens/program_detail_screen
 import '../../features/audio_programs/presentation/screens/program_player_screen.dart';
 import '../constants/app_constants.dart';
 import '../services/analytics_service.dart';
+import '../../core/auth/user_role.dart';
 import 'main_shell.dart';
 
 /// Rotas nomeadas do app.
@@ -101,6 +103,7 @@ class Routes {
   static const premium = '/premium';
   static const amanda = '/amanda';
   static const admin = '/admin';
+  static const adminUsers = '/admin/users';
   static const showcase = '/showcase';
   static const diary = '/diary';
   static const goals = '/goals';
@@ -274,31 +277,42 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       // 3) Já autenticada (ou visitante) → não deixamos "voltar sozinha"
       //    para onboarding/login/cadastro.
       if (isOnboarding || isAuthRoute) {
-        // Personal/Admin entram no painel de gestão — não na Home do aluno.
-        if (user != null &&
-            (user.isPersonalTrainer || user.isAdmin) &&
-            !isGuest) {
+        if (user != null && !isGuest) {
+          if (user.isAdmin) return Routes.admin; // Painel Técnico
+          if (user.isPersonalTrainer) return Routes.personalTrainer;
+        }
+        return Routes.home;
+      }
+
+      // 4) Staff na Home do aluno → painel adequado.
+      if (user != null && !isGuest && path == Routes.home) {
+        if (user.isAdmin) return Routes.admin;
+        if (user.isPersonalTrainer) return Routes.personalTrainer;
+      }
+
+      // 5) Rotas /admin* — Admin Técnico: tudo.
+      //    Personal: só ferramentas profissionais (whitelist).
+      //    Aluno: bloqueado.
+      if (path.startsWith('/admin')) {
+        if (user == null || isGuest) {
+          return Routes.login;
+        }
+        if (user.isAdmin) {
+          return null;
+        }
+        if (user.isPersonalTrainer && isPersonalAllowedAdminPath(path)) {
+          return null;
+        }
+        if (user.isPersonalTrainer) {
           return Routes.personalTrainer;
         }
         return Routes.home;
       }
 
-      // 4) Personal autenticada que caiu na Home do aluno → redireciona.
-      if (user != null &&
-          (user.isPersonalTrainer || user.isAdmin) &&
-          !isGuest &&
-          path == Routes.home) {
-        return Routes.personalTrainer;
-      }
-
-      // 5) Rotas /admin* exigem isAdmin — bloqueia deep-link / URL direta.
-      if (path.startsWith('/admin')) {
-        if (user == null || !user.isAdmin) {
-          if (user != null && user.isPersonalTrainer && !isGuest) {
-            return Routes.personalTrainer;
-          }
-          return Routes.home;
-        }
+      // 6) Área PT: aluno ok; guest bloqueado do hub de gestão profunda
+      //    (PtHub decide Personal vs Aluno na UI).
+      if (path == Routes.personalTrainer && (user == null || isGuest)) {
+        return Routes.login;
       }
 
       return null;
@@ -404,6 +418,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.admin,
         pageBuilder: (_, s) => _fadeSlide(s, const AdminScreen()),
+      ),
+      GoRoute(
+        path: Routes.adminUsers,
+        pageBuilder: (_, s) =>
+            _fadeSlide(s, const AdminUsersRolesScreen()),
       ),
       GoRoute(
         path: Routes.showcase,

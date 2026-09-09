@@ -142,10 +142,20 @@ class ProfileScreen extends ConsumerWidget {
                 const SizedBox(height: 6),
                 QuickAccessTile(
                   icon: Icons.admin_panel_settings_outlined,
-                  title: 'Painel administrativo',
+                  title: 'Painel Técnico',
                   accent: AppColors.info,
                   showChevron: true,
                   onTap: () => context.push(Routes.admin),
+                ),
+              ],
+              if (user.isPersonalTrainer && !user.isAdmin) ...[
+                const SizedBox(height: 6),
+                QuickAccessTile(
+                  icon: Icons.fitness_center_outlined,
+                  title: 'Central da Personal',
+                  accent: AppColors.secondary,
+                  showChevron: true,
+                  onTap: () => context.push(Routes.personalTrainer),
                 ),
               ],
               const SizedBox(height: 16),
