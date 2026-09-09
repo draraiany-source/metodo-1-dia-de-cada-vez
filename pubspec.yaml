@@ -138,6 +138,12 @@ flutter:
     - assets/mascot/png/
     - assets/mascot/extras/
     - assets/icons/
+    - assets/icons/navigation/
+    - assets/icons/health/
+    - assets/icons/actions/
+    - assets/icons/mood/
+    - assets/icons/achievements/
+    - assets/icons/premium/
     - assets/icons/neon/
     - assets/icons/neon/navegacao/
     - assets/icons/neon/saude/

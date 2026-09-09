@@ -1,109 +1,186 @@
 /// ============================================================================
-/// CATÁLOGO CENTRALIZADO DE ÍCONES — kit neon rosa/roxo/azul (PNG).
+/// CATÁLOGO CENTRALIZADO DE ÍCONES — Método 1 Dia de Cada Vez.
 ///
-/// Fonte: `assets/icons/neon/` (pacote metodo_1_dia_icones_neon_completo).
-/// Use sempre `AppIcons.x` — nunca caminhos soltos pelo app.
+/// Pacote oficial (Cursor): `assets/icons/{navigation,health,actions,mood,
+/// achievements,premium}/` — JPG neon preto/lilás/rosa.
 ///
-/// Treinos: preferir ícone específico → categoria → [workoutPlaceholder].
-/// Nunca usar coração como fallback geral.
+/// Exercícios específicos de treino continuam em `assets/icons/neon/treinos/`
+/// (não há equivalentes no pacote Cursor).
+///
+/// Use sempre `AppIcons.x` + `AppIconImage` — nunca caminhos soltos.
 /// ============================================================================
 class AppIcons {
   AppIcons._();
 
-  static const String _nav = 'assets/icons/neon/navegacao/';
-  static const String _saude = 'assets/icons/neon/saude/';
-  static const String _nutri = 'assets/icons/neon/nutricao/';
-  static const String _corrida = 'assets/icons/neon/corrida/';
+  static const String _nav = 'assets/icons/navigation/';
+  static const String _health = 'assets/icons/health/';
+  static const String _actions = 'assets/icons/actions/';
+  static const String _mood = 'assets/icons/mood/';
+  static const String _ach = 'assets/icons/achievements/';
+  static const String _prem = 'assets/icons/premium/';
   static const String _treino = 'assets/icons/neon/treinos/';
-  static const String _conquista = 'assets/icons/neon/conquistas/';
-  static const String _perfil = 'assets/icons/neon/perfil/';
 
-  // ---- Navegação / sistema ----
-  static const String home = '${_nav}icone_neon_de_casa_fitness.png';
-  static const String homeAlt = '${_nav}icone_de_casa_neon_em_vidro_3d.png';
-  static const String settings = '${_nav}02_configuracoes.png';
-  static const String notifications = '${_nav}01_notificacoes.png';
-  static const String favorite = '${_nav}03_favoritos.png';
-  static const String calendar = '${_nav}icone_neon_de_calendario_com_checkmark.png';
-  static const String checklist = '${_nav}icone_neon_de_checklist_em_vidro.png';
-  static const String video = '${_nav}icone_neon_de_player_de_video.png';
-  static const String search = '${_saude}icone_neon_de_busca_e_pulso.png';
-
-  // ---- Treinos (nav + placeholder) ----
-  static const String workout = '${_treino}icone_neon_de_halteres_fitness.png';
+  // ---- Navegação ----
+  static const String home = '${_nav}home.jpg';
+  static const String homeAlt = home;
+  static const String workout = '${_nav}workouts.jpg';
   static const String workoutDumbbell = workout;
-  static const String workoutPlaceholder =
-      '${_treino}icone_fitness_neon_em_vidro_3d.png';
-  static const String workoutGoal =
-      '${_treino}icone_fitness_neon_com_halter_futurista.png';
-  static const String stopwatch = '${_treino}icone_neon_de_cronometro_em_vidro.png';
-
-  // ---- Nutrição / receitas ----
-  static const String recipes = '${_nutri}tigela_de_salada_neon_vibrante.png';
+  static const String recipes = '${_nav}recipes.jpg';
   static const String nutrition = recipes;
-  static const String food = '${_nutri}icone_neon_de_alimentacao_saudavel.png';
-  static const String cameraFood = '${_nutri}icone_neon_de_camera_com_salada.png';
-  static const String salad = '${_nutri}icone_neon_de_salada_saudavel.png';
-  static const String bowl = '${_nutri}icone_neon_de_bowl_saudavel.png';
+  static const String evolution = '${_nav}evolution.jpg';
+  static const String profile = '${_nav}profile.jpg';
+  static const String checkin = '${_nav}checkin.jpg';
+  static const String diary = '${_nav}diary.jpg';
+  static const String photos = '${_nav}photos.jpg';
+  static const String gallery = photos;
+  static const String measurement = '${_nav}measurements.jpg';
+  static const String measurements = measurement;
+  static const String history = '${_nav}history.jpg';
+  static const String notifications = '${_nav}notifications.jpg';
+  static const String settings = '${_nav}settings.jpg';
+  static const String premium = '${_nav}premium.jpg';
+  static const String subscription = '${_nav}subscription.jpg';
 
   // ---- Saúde / métricas ----
-  static const String hydration =
-      '${_saude}icone_neon_de_hidratacao_fitness.png';
-  static const String water = hydration;
-  static const String hydrationGoal =
-      '${_saude}garrafa_neon_com_gota_luminosa.png';
-  static const String calories = '${_saude}07_calorias.png';
-  static const String sleep = '${_saude}08_sono.png';
-  static const String weight = '${_saude}09_peso_balanca.png';
-  static const String bmiMeasure = '${_saude}06_imc.png';
-  static const String meditation =
-      '${_saude}icone_neon_de_meditacao_com_fones.png';
+  static const String running = '${_health}running_gps.jpg';
+  static const String gpsRunning = running;
+  static const String gps = running;
+  static const String water = '${_health}water.jpg';
+  static const String hydration = water;
+  static const String hydrationGoal = '${_health}hydration_alt.jpg';
+  static const String sleep = '${_health}sleep.jpg';
+  static const String steps = '${_health}steps.jpg';
+  static const String walk = steps;
+  static const String weight = '${_health}weight_bmi.jpg';
+  static const String bmiMeasure = weight;
+  static const String calories = '${_health}calories.jpg';
+  static const String camera = '${_health}camera.jpg';
+  static const String cameraFood = '${_health}food_ai.jpg';
+  static const String food = cameraFood;
+  static const String scanner = cameraFood;
+  static const String stretching = '${_health}stretching.jpg';
+  static const String meditation = '${_health}meditation.jpg';
   static const String yoga = meditation;
-  static const String healthHeart = '${_saude}icone_neon_de_pulso_vital.png';
-  static const String pulseSearch = '${_saude}icone_neon_de_busca_cardiaca.png';
+  static const String favorite = '${_health}favorite.jpg';
+  static const String favorites = favorite;
+  static const String search = '${_health}search.jpg';
+  static const String filter = search;
+  static const String audio = '${_health}audio.jpg';
+  static const String calendar = '${_health}calendar.jpg';
+  static const String goals = '${_health}goals.jpg';
+  static const String goal = goals;
+  static const String healthHeart = '${_health}health_fitness.jpg';
+  static const String healthFitness = healthHeart;
 
-  // ---- Corrida / GPS / cardio ----
-  static const String running =
-      '${_corrida}icone_neon_de_corrida_em_movimento.png';
-  static const String gpsRunning = '${_corrida}icone_neon_de_rota_gps.png';
-  static const String gps = gpsRunning;
-  static const String location = gpsRunning;
-  static const String bike =
-      '${_corrida}ciclista_neon_em_bicicleta_spinning.png';
-  static const String walk = '${_corrida}icone_neon_de_atleta_caminhando.png';
-  static const String treadmill = '${_corrida}icone_fitness_neon_na_esteira.png';
-  static const String stairs = '${_corrida}icone_neon_de_treino_na_escada.png';
-  static const String cardioRun =
-      '${_corrida}icone_neon_de_corredor_cardiaco.png';
-  /// Apenas cardio genuíno — NÃO usar como fallback de treino.
+  // ---- Ações ----
+  static const String edit = '${_actions}edit.jpg';
+  static const String delete = '${_actions}delete.jpg';
+  static const String share = '${_actions}share.jpg';
+  static const String back = '${_actions}back.jpg';
+  static const String add = '${_actions}add.jpg';
+  static const String play = '${_actions}play.jpg';
+  static const String pause = '${_actions}pause.jpg';
+  static const String upload = '${_actions}upload.jpg';
+  static const String uploadPhoto = upload;
+  static const String location = '${_actions}location_map.jpg';
+  static const String retry = '${_actions}retry_refresh.jpg';
+  static const String refresh = retry;
+  static const String logout = '${_actions}logout.jpg';
+  static const String target = '${_actions}target.jpg';
+
+  // ---- Humor / check-in ----
+  static const String moodSad = '${_mood}sad.jpg';
+  static const String moodSleepy = '${_mood}sleepy.jpg';
+  static const String moodNeutral = '${_mood}neutral.jpg';
+  static const String moodHappy = '${_mood}happy.jpg';
+  static const String moodCalm = '${_mood}calm.jpg';
+  static const String moodVeryHappy = '${_mood}very_happy.jpg';
+  static const String moodWink = '${_mood}wink.jpg';
+  static const String moodSurprised = '${_mood}surprised.jpg';
+  static const String moodDetermined = '${_mood}determined.jpg';
+
+  /// Ordem alinhada ao check-in (0..4): muito bem → cansada.
+  static const List<String> moodCheckin = [
+    moodVeryHappy,
+    moodHappy,
+    moodNeutral,
+    moodSad,
+    moodSleepy,
+  ];
+
+  // ---- Premium / conquistas genéricas ----
+  static const String trophy = '${_prem}achievement_trophy.jpg';
+  static const String premiumCrown = '${_prem}premium_crown.jpg';
+  static const String achievement = trophy;
+  static const String medalRanking = trophy;
+  static const String medal = trophy;
+  static const String ranking = trophy;
+  static const String streak = '${_ach}streak_7_days.jpg';
+
+  // ---- Emblemas (achievements) ----
+  static const String achStreak7 = '${_ach}streak_7_days.jpg';
+  static const String achStreak30 = '${_ach}streak_30_days.jpg';
+  static const String achStreak60 = '${_ach}streak_60_days.jpg';
+  static const String achStreak100 = '${_ach}streak_100_days.jpg';
+  static const String achWorkouts25 = '${_ach}workouts_25.jpg';
+  static const String achWorkouts50 = '${_ach}workouts_50.jpg';
+  static const String achWorkouts100 = '${_ach}workouts_100.jpg';
+  static const String achWeightLoss5 = '${_ach}weight_loss_5kg.jpg';
+  static const String achWeightLoss10 = '${_ach}weight_loss_10kg.jpg';
+  static const String achWeightGoal = '${_ach}weight_goal.jpg';
+  static const String achFirstRun = '${_ach}first_run.jpg';
+  static const String achRun5k = '${_ach}run_5km.jpg';
+  static const String achRun10k = '${_ach}run_10km.jpg';
+  static const String achHydration = '${_ach}hydration_achievement.jpg';
+  static const String achFirstWorkout = '${_ach}first_workout.jpg';
+  static const String achHabits = '${_ach}habits_goal.jpg';
+  static const String achWeightProgress = '${_ach}weight_progress.jpg';
+  static const String achDailyWater = '${_ach}daily_water_goal.jpg';
+  static const String achWeeklyWorkout = '${_ach}weekly_workout_goal.jpg';
+  static const String achSevenDay = '${_ach}seven_day_goal.jpg';
+  static const String achThirtyDay = '${_ach}thirty_day_goal.jpg';
+  static const String achPerfectWeek = '${_ach}perfect_week.jpg';
+
+  // ---- Compat / aliases (telas existentes) ----
+  static const String checklist = checkin;
+  static const String habits = checkin;
+  static const String video = play;
+  static const String videos = play;
+  static const String stopwatch = history;
+  static const String timer = history;
+  static const String progress = evolution;
+  static const String statistics = evolution;
+  static const String beforeAfter = photos;
+  static const String program7Days = achSevenDay;
+  static const String course = program7Days;
+  static const String courses = program7Days;
+  static const String ebook = diary;
+  static const String community = profile;
+  static const String messages = profile;
+  static const String personal = profile;
+  static const String support = profile;
+  static const String reminders = notifications;
+  static const String security = settings;
+  static const String privacy = settings;
+  static const String login = profile;
+  static const String complete = checkin;
+  static const String next = evolution;
+  static const String shoppingList = recipes;
+  static const String salad = recipes;
+  static const String bowl = recipes;
+  static const String pulseSearch = search;
+  static const String bike = running;
+  static const String treadmill = running;
+  static const String stairs = steps;
+  static const String cardioRun = running;
+  /// Cardio genuíno — ícone neon legado (não confundir com favorito/coração).
   static const String cardio =
-      '${_corrida}icone_neon_de_corrida_e_saude_cardiaca.png';
+      'assets/icons/neon/corrida/icone_neon_de_corrida_e_saude_cardiaca.png';
+  static const String workoutPlaceholder =
+      'assets/icons/neon/treinos/icone_fitness_neon_em_vidro_3d.png';
+  static const String workoutGoal = target;
 
-  // ---- Progresso / conquistas / premium ----
-  static const String progress =
-      '${_conquista}icone_neon_de_progresso_fitness.png';
-  static const String evolution =
-      '${_conquista}icone_neon_de_crescimento_progressivo.png';
-  static const String statistics =
-      '${_conquista}icone_neon_de_grafico_ascendente.png';
-  static const String trophy = '${_conquista}icone_neon_de_trofeu_glorioso.png';
-  static const String premium = '${_conquista}coroa_neon_em_icone_premium.png';
-  static const String achievement =
-      '${_conquista}icone_neon_de_coroa_dourada.png';
-  static const String medalRanking = achievement;
-  static const String program7Days =
-      '${_conquista}icone_neon_de_plano_fitness_7_dias.png';
-  static const String audio = meditation;
-
-  // ---- Perfil / comunidade ----
-  static const String profile = '${_perfil}icone_neon_de_avatar_feminino.png';
-  static const String community = '${_perfil}04_comunidade.png';
-  static const String messages = '${_perfil}05_chat_ia.png';
-  static const String personal = messages;
-  static const String support = messages;
-  static const String reminders = '${_perfil}10_lembretes.png';
-
-  // ---- Exercícios específicos (treinos) ----
+  // ---- Exercícios específicos (kit neon legado — sem equivalentes no pacote) ----
   static const String exAbs = '${_treino}icone_neon_de_abdominais_futurista.png';
   static const String abs = exAbs;
   static const String exAbsAlt =
@@ -169,48 +246,25 @@ class AppIcons {
   static const String exFunctional =
       '${_treino}icone_fitness_neon_em_movimento.png';
 
-  // ---- Apelidos / aliases (compatibilidade com telas existentes) ----
-  static const String camera = cameraFood;
-  static const String timer = stopwatch;
-  static const String measurement = bmiMeasure;
-  static const String medal = medalRanking;
-  static const String ranking = medalRanking;
-  static const String course = program7Days;
-  static const String courses = program7Days;
-  static const String ebook = program7Days;
-  static const String habits = checklist;
-  static const String security = settings;
-  static const String privacy = settings;
-  static const String favorites = favorite;
-  static const String videos = video;
-  static const String diary = checklist;
-  static const String checkin = calendar;
-  static const String goal = evolution;
-  static const String beforeAfter = evolution;
-  static const String streak = trophy;
-  static const String play = video;
-  static const String pause = stopwatch;
-  static const String complete = checklist;
-  static const String back = home;
-  static const String next = evolution;
-  static const String filter = search;
-  static const String gallery = cameraFood;
-  static const String uploadPhoto = cameraFood;
-  static const String edit = settings;
-  static const String login = profile;
-  static const String logout = settings;
-  static const String share = community;
-  static const String shoppingList = food;
-  static const String scanner = cameraFood;
+  /// Principais do pacote Cursor (auditoria / pré-cache).
+  static const List<String> allCursor = [
+    home, workout, recipes, evolution, profile, checkin, diary, photos,
+    measurement, history, notifications, settings, premium, subscription,
+    running, water, sleep, steps, weight, calories, camera, cameraFood,
+    stretching, meditation, favorite, search, audio, calendar, goals,
+    healthHeart, hydrationGoal, edit, delete, share, back, add, play, pause,
+    upload, location, retry, logout, target,
+    moodSad, moodSleepy, moodNeutral, moodHappy, moodCalm, moodVeryHappy,
+    moodWink, moodSurprised, moodDetermined,
+    trophy, premiumCrown, achStreak7, achStreak30, achStreak60, achStreak100,
+    achWorkouts25, achWorkouts50, achWorkouts100, achWeightLoss5,
+    achWeightLoss10, achWeightGoal, achFirstRun, achRun5k, achRun10k,
+    achHydration, achFirstWorkout, achHabits, achWeightProgress,
+    achDailyWater, achWeeklyWorkout, achSevenDay, achThirtyDay, achPerfectWeek,
+  ];
 
-  /// Lista para pré-cache / auditoria (principais + exercícios).
   static const List<String> all = [
-    home, settings, notifications, favorite, calendar, checklist, video,
-    search, workout, workoutPlaceholder, workoutGoal, stopwatch, recipes,
-    food, cameraFood, hydration, calories, sleep, weight, bmiMeasure,
-    meditation, running, gpsRunning, bike, walk, treadmill, stairs, cardio,
-    progress, evolution, statistics, trophy, premium, achievement,
-    program7Days, profile, community, messages, reminders,
+    ...allCursor,
     exAbs, glutes, exSquat, exSquatBar, exSquatSumo, exHipThrust, exLegPress,
     exLegExtension, exLegCurl, exLunge, exCalf, exLegRaise, exCurl, exArm,
     exTriceps, exTricepsExt, exLateralRaise, exBench, exBenchDb, exRow,

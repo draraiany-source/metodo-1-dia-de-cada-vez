@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/assets/app_icons.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
 import '../../missions/providers/missions_providers.dart';
@@ -19,8 +21,6 @@ class CheckinScreen extends ConsumerStatefulWidget {
 }
 
 class _CheckinScreenState extends ConsumerState<CheckinScreen> {
-  static const _moods = ['😄', '🙂', '😐', '😔', '😫'];
-
   bool _dormiuBem = true;
   int _humor = 1;
   int _energia = 3;
@@ -146,12 +146,12 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                for (var i = 0; i < _moods.length; i++)
+                for (var i = 0; i < AppIcons.moodCheckin.length; i++)
                   GestureDetector(
                     onTap: () => setState(() => _humor = i),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
                         color: _humor == i
                             ? AppColors.primary.withOpacity(0.25)
@@ -164,7 +164,12 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                           width: 2,
                         ),
                       ),
-                      child: Text(_moods[i], style: const TextStyle(fontSize: 26)),
+                      child: AppIconImage(
+                        AppIcons.moodCheckin[i],
+                        size: 36,
+                        fallbackIcon: Icons.emoji_emotions_outlined,
+                        semanticLabel: 'Humor $i',
+                      ),
                     ),
                   ),
               ],

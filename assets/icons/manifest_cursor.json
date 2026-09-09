@@ -1,0 +1,534 @@
+[
+  {
+    "category": "navigation",
+    "name": "home",
+    "file": "assets/icons/navigation/home.jpg",
+    "source": "ícone_de_casa_neon_roxo_glossy.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "workouts",
+    "file": "assets/icons/navigation/workouts.jpg",
+    "source": "ícone_neon_de_halteres_fitness.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "recipes",
+    "file": "assets/icons/navigation/recipes.jpg",
+    "source": "ícone_neon_de_tigela_saudável.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "evolution",
+    "file": "assets/icons/navigation/evolution.jpg",
+    "source": "ícone_neon_de_crescimento_financeiro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "profile",
+    "file": "assets/icons/navigation/profile.jpg",
+    "source": "ícone_de_perfil_neon_roxo.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "checkin",
+    "file": "assets/icons/navigation/checkin.jpg",
+    "source": "ícone_neon_de_checklist_com_coração.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "diary",
+    "file": "assets/icons/navigation/diary.jpg",
+    "source": "ícone_neon_de_caderno_e_caneta.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "photos",
+    "file": "assets/icons/navigation/photos.jpg",
+    "source": "ícone_neon_de_cartões_fotográficos.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "measurements",
+    "file": "assets/icons/navigation/measurements.jpg",
+    "source": "ícone_neon_de_fita_métrica.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "history",
+    "file": "assets/icons/navigation/history.jpg",
+    "source": "ícone_neon_de_histórico_e_relógio.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "notifications",
+    "file": "assets/icons/navigation/notifications.jpg",
+    "source": "ícone_de_sino_neon_em_vidro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "settings",
+    "file": "assets/icons/navigation/settings.jpg",
+    "source": "ícone_de_engrenagem_neon_roxo_e_rosa.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "premium",
+    "file": "assets/icons/navigation/premium.jpg",
+    "source": "ícone_de_coroa_neon_roxo_e_rosa.png",
+    "size": "256x256"
+  },
+  {
+    "category": "navigation",
+    "name": "subscription",
+    "file": "assets/icons/navigation/subscription.jpg",
+    "source": "ícone_neon_de_assinatura_premium.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "running_gps",
+    "file": "assets/icons/health/running_gps.jpg",
+    "source": "ícone_neon_de_corrida_e_gps.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "water",
+    "file": "assets/icons/health/water.jpg",
+    "source": "ícone_neon_de_garrafa_hidratante.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "sleep",
+    "file": "assets/icons/health/sleep.jpg",
+    "source": "ícone_neon_de_lua_e_estrelas.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "steps",
+    "file": "assets/icons/health/steps.jpg",
+    "source": "ícone_neon_de_passos_fitness.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "weight_bmi",
+    "file": "assets/icons/health/weight_bmi.jpg",
+    "source": "ícone_neon_de_balança_fitness.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "calories",
+    "file": "assets/icons/health/calories.jpg",
+    "source": "ícone_de_chama_neon_em_vidro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "camera",
+    "file": "assets/icons/health/camera.jpg",
+    "source": "ícone_de_câmera_neon_em_vidro_glossy.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "food_ai",
+    "file": "assets/icons/health/food_ai.jpg",
+    "source": "ícone_neon_de_nutrição_inteligente.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "stretching",
+    "file": "assets/icons/health/stretching.jpg",
+    "source": "ícone_neon_de_alongamento_em_vidro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "meditation",
+    "file": "assets/icons/health/meditation.jpg",
+    "source": "ícone_neon_de_meditação_em_vidro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "favorite",
+    "file": "assets/icons/health/favorite.jpg",
+    "source": "ícone_de_coração_neon_em_vidro_glossy.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "search",
+    "file": "assets/icons/health/search.jpg",
+    "source": "ícone_de_busca_neon_em_vidro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "audio",
+    "file": "assets/icons/health/audio.jpg",
+    "source": "ícone_neon_de_fones_e_ondas.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "calendar",
+    "file": "assets/icons/health/calendar.jpg",
+    "source": "ícone_neon_de_calendário_com_check.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "goals",
+    "file": "assets/icons/health/goals.jpg",
+    "source": "ícone_neon_de_metas_fitness.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "hydration_alt",
+    "file": "assets/icons/health/hydration_alt.jpg",
+    "source": "ícone_neon_de_hidratação_esportiva.png",
+    "size": "256x256"
+  },
+  {
+    "category": "health",
+    "name": "health_fitness",
+    "file": "assets/icons/health/health_fitness.jpg",
+    "source": "ícone_neon_de_saúde_e_fitness.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "edit",
+    "file": "assets/icons/actions/edit.jpg",
+    "source": "ícone_neon_de_edição_em_vidro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "delete",
+    "file": "assets/icons/actions/delete.jpg",
+    "source": "ícone_de_lixeira_neon_em_vidro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "share",
+    "file": "assets/icons/actions/share.jpg",
+    "source": "ícone_neon_de_compartilhamento_em_vidro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "back",
+    "file": "assets/icons/actions/back.jpg",
+    "source": "botão_neon_roxo_com_seta_de_retorno.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "add",
+    "file": "assets/icons/actions/add.jpg",
+    "source": "ícone_neon_de_vidro_roxo.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "play",
+    "file": "assets/icons/actions/play.jpg",
+    "source": "botão_de_play_em_vidro_neon_roxo.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "pause",
+    "file": "assets/icons/actions/pause.jpg",
+    "source": "ícone_neon_de_pausa_em_vidro_roxo.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "upload",
+    "file": "assets/icons/actions/upload.jpg",
+    "source": "ícone_de_upload_em_nuvem_neon.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "location_map",
+    "file": "assets/icons/actions/location_map.jpg",
+    "source": "ícone_de_mapa_neon_em_vidro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "retry_refresh",
+    "file": "assets/icons/actions/retry_refresh.jpg",
+    "source": "ícone_neon_de_atualização_em_vidro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "logout",
+    "file": "assets/icons/actions/logout.jpg",
+    "source": "ícone_neon_de_saída_futurista.png",
+    "size": "256x256"
+  },
+  {
+    "category": "actions",
+    "name": "target",
+    "file": "assets/icons/actions/target.jpg",
+    "source": "alvo_neon_com_flecha_certeira.png",
+    "size": "256x256"
+  },
+  {
+    "category": "mood",
+    "name": "sad",
+    "file": "assets/icons/mood/sad.jpg",
+    "source": "ícone_neon_de_rosto_triste.png",
+    "size": "256x256"
+  },
+  {
+    "category": "mood",
+    "name": "sleepy",
+    "file": "assets/icons/mood/sleepy.jpg",
+    "source": "ícone_de_emoji_sonolento_neon.png",
+    "size": "256x256"
+  },
+  {
+    "category": "mood",
+    "name": "neutral",
+    "file": "assets/icons/mood/neutral.jpg",
+    "source": "ícone_neon_de_rosto_neutro.png",
+    "size": "256x256"
+  },
+  {
+    "category": "mood",
+    "name": "happy",
+    "file": "assets/icons/mood/happy.jpg",
+    "source": "ícone_neon_de_carinha_sorridente.png",
+    "size": "256x256"
+  },
+  {
+    "category": "mood",
+    "name": "calm",
+    "file": "assets/icons/mood/calm.jpg",
+    "source": "ícone_neon_de_rosto_sereno.png",
+    "size": "256x256"
+  },
+  {
+    "category": "mood",
+    "name": "very_happy",
+    "file": "assets/icons/mood/very_happy.jpg",
+    "source": "ícone_neon_de_emoji_sorridente.png",
+    "size": "256x256"
+  },
+  {
+    "category": "mood",
+    "name": "wink",
+    "file": "assets/icons/mood/wink.jpg",
+    "source": "ícone_neon_de_carinha_piscando.png",
+    "size": "256x256"
+  },
+  {
+    "category": "mood",
+    "name": "surprised",
+    "file": "assets/icons/mood/surprised.jpg",
+    "source": "ícone_neon_de_rosto_surpreso.png",
+    "size": "256x256"
+  },
+  {
+    "category": "mood",
+    "name": "determined",
+    "file": "assets/icons/mood/determined.jpg",
+    "source": "ícone_neon_de_emoji_determinado.png",
+    "size": "256x256"
+  },
+  {
+    "category": "achievements",
+    "name": "streak_30_days",
+    "file": "assets/icons/achievements/streak_30_days.jpg",
+    "source": "emblema_neon_de_sequência_de_30_dias.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "streak_60_days",
+    "file": "assets/icons/achievements/streak_60_days.jpg",
+    "source": "distintivo_neon_de_60_dias.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "streak_100_days",
+    "file": "assets/icons/achievements/streak_100_days.jpg",
+    "source": "distintivo_neon_de_sequência_de_100_dias.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "streak_7_days",
+    "file": "assets/icons/achievements/streak_7_days.jpg",
+    "source": "emblema_neon_de_7_dias_de_sequência.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "workouts_25",
+    "file": "assets/icons/achievements/workouts_25.jpg",
+    "source": "emblema_neon_25_com_halteres_e_louros.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "workouts_50",
+    "file": "assets/icons/achievements/workouts_50.jpg",
+    "source": "distintivo_fitness_neon_50.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "workouts_100",
+    "file": "assets/icons/achievements/workouts_100.jpg",
+    "source": "emblema_neon_de_troféu_100.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "weight_loss_10kg",
+    "file": "assets/icons/achievements/weight_loss_10kg.jpg",
+    "source": "emblema_neon_de_10_kg.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "weight_loss_5kg",
+    "file": "assets/icons/achievements/weight_loss_5kg.jpg",
+    "source": "emblema_neon_de_conquista_5_kg.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "weight_goal",
+    "file": "assets/icons/achievements/weight_goal.jpg",
+    "source": "medalha_neon_de_balança_realizada.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "first_run",
+    "file": "assets/icons/achievements/first_run.jpg",
+    "source": "medalha_neon_de_corrida_em_primeiro_lugar.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "run_5km",
+    "file": "assets/icons/achievements/run_5km.jpg",
+    "source": "medalha_neon_de_corrida_5_km.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "run_10km",
+    "file": "assets/icons/achievements/run_10km.jpg",
+    "source": "emblema_neon_de_corrida_10_km.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "hydration_achievement",
+    "file": "assets/icons/achievements/hydration_achievement.jpg",
+    "source": "garrafa_neon_com_emblema_de_hidratação.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "first_workout",
+    "file": "assets/icons/achievements/first_workout.jpg",
+    "source": "primeiro_treino_concluído.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "habits_goal",
+    "file": "assets/icons/achievements/habits_goal.jpg",
+    "source": "meta_de_hábitos_neon.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "weight_progress",
+    "file": "assets/icons/achievements/weight_progress.jpg",
+    "source": "meta_de_peso_com_progresso_neon.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "daily_water_goal",
+    "file": "assets/icons/achievements/daily_water_goal.jpg",
+    "source": "meta_diária_de_água_neon.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "weekly_workout_goal",
+    "file": "assets/icons/achievements/weekly_workout_goal.jpg",
+    "source": "meta_semanal_de_treino_neon.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "seven_day_goal",
+    "file": "assets/icons/achievements/seven_day_goal.jpg",
+    "source": "calendário_neon_de_sete_dias.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "thirty_day_goal",
+    "file": "assets/icons/achievements/thirty_day_goal.jpg",
+    "source": "calendário_neon_30_dias_em_chamas.png",
+    "size": "512x512"
+  },
+  {
+    "category": "achievements",
+    "name": "perfect_week",
+    "file": "assets/icons/achievements/perfect_week.jpg",
+    "source": "checklist_fitness_neon_3d.png",
+    "size": "512x512"
+  },
+  {
+    "category": "premium",
+    "name": "achievement_trophy",
+    "file": "assets/icons/premium/achievement_trophy.jpg",
+    "source": "troféu_neon_em_vidro_roxo.png",
+    "size": "256x256"
+  },
+  {
+    "category": "premium",
+    "name": "premium_crown",
+    "file": "assets/icons/premium/premium_crown.jpg",
+    "source": "ícone_de_coroa_neon_roxo_e_rosa.png",
+    "size": "256x256"
+  }
+]

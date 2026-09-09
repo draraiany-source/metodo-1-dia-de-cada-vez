@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../assets/app_icons.dart';
@@ -66,11 +67,16 @@ class AppIconImage extends StatelessWidget {
       fit: fit,
       filterQuality: filterQuality,
       cacheWidth: cacheW,
-      errorBuilder: (_, __, ___) => SizedBox(
-        width: _w,
-        height: _h,
-        child: Icon(fallbackIcon, size: _w),
-      ),
+      errorBuilder: (context, error, stack) {
+        if (kDebugMode) {
+          debugPrint('AppIconImage falhou: $assetPath → $error');
+        }
+        return SizedBox(
+          width: _w,
+          height: _h,
+          child: Icon(fallbackIcon, size: (_w ?? 24) * 0.85),
+        );
+      },
     );
 
     if (borderRadius != null) {
