@@ -9,6 +9,7 @@ import '../../../core/router/premium_app_bar.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/youtube_launch.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
@@ -128,6 +129,112 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
   }
 
   Future<void> _finalizarTreino() async {
+    String difficulty = 'adequado';
+    bool? feltPain;
+    String tiredness = 'medio';
+    final notesCtrl = TextEditingController();
+
+    final confirmed = await showModalBottomSheet<bool>(
+      context: context,
+      backgroundColor: AppColors.surface,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setSheet) => Padding(
+          padding: EdgeInsets.fromLTRB(
+              24, 24, 24, 24 + MediaQuery.of(ctx).viewInsets.bottom),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Text('Como foi o treino?',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 18)),
+                const SizedBox(height: 12),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (final e in const [
+                      ('muito_leve', 'Muito leve'),
+                      ('adequado', 'Adequado'),
+                      ('dificil', 'Difícil'),
+                      ('muito_dificil', 'Muito difícil'),
+                    ])
+                      ChoiceChip(
+                        label: Text(e.$2),
+                        selected: difficulty == e.$1,
+                        onSelected: (_) =>
+                            setSheet(() => difficulty = e.$1),
+                      ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                const Text('Sentiu dor?',
+                    style: TextStyle(color: AppColors.textSecondary)),
+                Row(
+                  children: [
+                    ChoiceChip(
+                      label: const Text('Não'),
+                      selected: feltPain == false,
+                      onSelected: (_) => setSheet(() => feltPain = false),
+                    ),
+                    const SizedBox(width: 8),
+                    ChoiceChip(
+                      label: const Text('Sim'),
+                      selected: feltPain == true,
+                      onSelected: (_) => setSheet(() => feltPain = true),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                const Text('Cansaço',
+                    style: TextStyle(color: AppColors.textSecondary)),
+                Wrap(
+                  spacing: 8,
+                  children: [
+                    for (final e in const [
+                      ('baixo', 'Baixo'),
+                      ('medio', 'Médio'),
+                      ('alto', 'Alto'),
+                    ])
+                      ChoiceChip(
+                        label: Text(e.$2),
+                        selected: tiredness == e.$1,
+                        onSelected: (_) =>
+                            setSheet(() => tiredness = e.$1),
+                      ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: notesCtrl,
+                  maxLines: 3,
+                  decoration:
+                      const InputDecoration(labelText: 'Observações (opcional)'),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () => Navigator.pop(ctx, true),
+                  child: const Text('Concluir treino'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    if (confirmed != true) {
+      notesCtrl.dispose();
+      return;
+    }
+
     await ref.read(ptRepositoryProvider).logSession(WorkoutSessionLog(
           id: '',
           studentId: widget.student.id,
@@ -138,7 +245,16 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
           workoutName: widget.plan.name,
           date: DateTime.now(),
           completedExerciseIds: _concluidos.toList(),
+          difficulty: difficulty,
+          feltPain: feltPain,
+          tiredness: tiredness,
+          feedbackNotes: notesCtrl.text.trim(),
         ));
+    notesCtrl.dispose();
+    ref.invalidate(ptSessionsProvider(widget.student.id));
+    ref.invalidate(ptDashboardStatsProvider(widget.student.trainerId.isNotEmpty
+        ? widget.student.trainerId
+        : widget.plan.trainerId));
     ref.read(missionsProvider.notifier).report(MissionEvent.treinoConcluido);
     await FeedbackService.play(FeedbackEvent.sucesso);
     if (mounted) {
@@ -232,6 +348,29 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
                     fontSize: 22,
                     fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
+            Builder(builder: (context) {
+              final exercises = ref.watch(ptExercisesProvider).valueOrNull ?? [];
+              Exercise? lib;
+              for (final e in exercises) {
+                if (e.id == ex.exerciseId) {
+                  lib = e;
+                  break;
+                }
+              }
+              final video = lib?.videoUrl ?? '';
+              if (video.isEmpty) return const SizedBox.shrink();
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: () => YoutubeLaunch.open(context, video),
+                    icon: const Icon(Icons.play_circle_fill),
+                    label: const Text('Assistir vídeo do exercício'),
+                  ),
+                ),
+              );
+            }),
             Wrap(
               spacing: 8,
               runSpacing: 8,

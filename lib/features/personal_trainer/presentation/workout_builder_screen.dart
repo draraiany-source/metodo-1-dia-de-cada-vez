@@ -55,9 +55,10 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
     );
     if (exercicio == null || !mounted) return;
 
-    final seriesController = TextEditingController(text: '3');
-    final repsController = TextEditingController(text: '12');
+    final seriesController = TextEditingController(text: '${exercicio.defaultSeries}');
+    final repsController = TextEditingController(text: exercicio.defaultReps);
     final intervaloController = TextEditingController(text: '60');
+    final tempoController = TextEditingController(text: '0');
     final cargaController = TextEditingController(text: 'peso corporal');
     final metodoController = TextEditingController();
     final obsController = TextEditingController();
@@ -109,6 +110,12 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
                 ],
               ),
               const SizedBox(height: 12),
+              const Text('Duração / tempo (segundos, opcional)',
+                  style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+              TextField(
+                  controller: tempoController,
+                  keyboardType: TextInputType.number),
+              const SizedBox(height: 12),
               const Text('Intervalo / descanso (segundos)',
                   style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
               TextField(
@@ -147,6 +154,7 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
           exerciseName: exercicio.name,
           series: int.tryParse(seriesController.text) ?? 3,
           repeticoes: repsController.text.trim(),
+          tempoSegundos: int.tryParse(tempoController.text) ?? 0,
           intervaloSegundos: int.tryParse(intervaloController.text) ?? 60,
           carga: cargaController.text.trim(),
           metodo: metodoController.text.trim(),
@@ -154,6 +162,17 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
           order: _exercicios.length,
         ));
       });
+    }
+    for (final c in [
+      seriesController,
+      repsController,
+      intervaloController,
+      tempoController,
+      cargaController,
+      metodoController,
+      obsController,
+    ]) {
+      c.dispose();
     }
   }
 
@@ -245,6 +264,27 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
                 style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
             const SizedBox(height: 6),
             TextField(controller: _nameController),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final nome in const [
+                  'Treino A',
+                  'Treino B',
+                  'Treino C',
+                  'Superior',
+                  'Inferior',
+                  'Cardio',
+                  'Treino personalizado',
+                ])
+                  ActionChip(
+                    label: Text(nome),
+                    onPressed: () =>
+                        setState(() => _nameController.text = nome),
+                  ),
+              ],
+            ),
             const SizedBox(height: 16),
             const Text('Objetivo',
                 style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
@@ -306,54 +346,75 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
                     style: TextStyle(color: AppColors.textSecondary)),
               )
             else
-              ...List.generate(_exercicios.length, (i) {
-                final ex = _exercicios[i];
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 8),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(AppTheme.radiusSm),
-                    border: Border.all(color: AppColors.border),
-                  ),
-                  child: Row(
-                    children: [
-                      Text('${i + 1}.',
-                          style:
-                              const TextStyle(color: AppColors.textTertiary)),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(ex.exerciseName,
-                                style: const TextStyle(color: Colors.white)),
-                            Text(
-                                '${ex.series}x${ex.repeticoes} · descanso ${ex.intervaloSegundos}s'
-                                '${ex.carga.isNotEmpty ? ' · ${ex.carga}' : ''}',
-                                style: const TextStyle(
-                                    color: AppColors.textSecondary,
-                                    fontSize: 12)),
-                            if (ex.observacoes.isNotEmpty)
-                              Text(ex.observacoes,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                      color: AppColors.textTertiary,
-                                      fontSize: 11)),
-                          ],
+              ReorderableListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: _exercicios.length,
+                onReorder: (oldIndex, newIndex) {
+                  setState(() {
+                    if (newIndex > oldIndex) newIndex--;
+                    final item = _exercicios.removeAt(oldIndex);
+                    _exercicios.insert(newIndex, item);
+                  });
+                },
+                itemBuilder: (context, i) {
+                  final ex = _exercicios[i];
+                  return Container(
+                    key: ValueKey('${ex.exerciseId}-$i-${ex.order}'),
+                    margin: const EdgeInsets.only(bottom: 8),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      borderRadius: BorderRadius.circular(AppTheme.radiusSm),
+                      border: Border.all(color: AppColors.border),
+                    ),
+                    child: Row(
+                      children: [
+                        ReorderableDragStartListener(
+                          index: i,
+                          child: const Icon(Icons.drag_handle,
+                              color: AppColors.textTertiary),
                         ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.close,
-                            color: AppColors.danger, size: 18),
-                        onPressed: () =>
-                            setState(() => _exercicios.removeAt(i)),
-                      ),
-                    ],
-                  ),
-                );
-              }),
+                        const SizedBox(width: 8),
+                        Text('${i + 1}.',
+                            style: const TextStyle(
+                                color: AppColors.textTertiary)),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(ex.exerciseName,
+                                  style:
+                                      const TextStyle(color: Colors.white)),
+                              Text(
+                                  '${ex.series}x${ex.repeticoes} · descanso ${ex.intervaloSegundos}s'
+                                  '${ex.tempoSegundos > 0 ? ' · ${ex.tempoSegundos}s' : ''}'
+                                  '${ex.carga.isNotEmpty ? ' · ${ex.carga}' : ''}',
+                                  style: const TextStyle(
+                                      color: AppColors.textSecondary,
+                                      fontSize: 12)),
+                              if (ex.observacoes.isNotEmpty)
+                                Text(ex.observacoes,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        color: AppColors.textTertiary,
+                                        fontSize: 11)),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.close,
+                              color: AppColors.danger, size: 18),
+                          onPressed: () =>
+                              setState(() => _exercicios.removeAt(i)),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,

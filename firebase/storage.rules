@@ -42,6 +42,25 @@ service firebase.storage {
       allow write: if isAdmin() && underSize(10);
     }
 
+    // Fotos Quem Sou Eu / Amanda — admin OU personal trainer.
+    // Mais específico que /public/{allPaths=**} para upload pelo painel da Personal.
+    match /public/amanda_assets/{allPaths=**} {
+      allow read: if true;
+      allow write: if signedIn()
+        && underSize(10)
+        && isImage()
+        && (
+          isAdmin() ||
+          (firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+            && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true)
+        );
+      allow delete: if signedIn() && (
+        isAdmin() ||
+        (firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+          && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true)
+      );
+    }
+
     // Áudios de programas (Programa 7 Dias, etc.).
     // Leitura autenticada; escrita só admin. Premium continua protegido
     // via Firestore private + getContentUrl (não exponha URL no doc público).
@@ -61,6 +80,43 @@ service firebase.storage {
         && request.resource.size < 80 * 1024 * 1024
         && request.resource.contentType.matches('audio/.*');
       allow delete: if isAdmin();
+    }
+
+    // Mídia do Personal Trainer (fotos de evolução + vídeos de exercícios).
+    match /pt_photos/{studentId}/{allPaths=**} {
+      allow read: if signedIn();
+      allow write: if signedIn()
+        && underSize(12)
+        && (isImage() || request.resource.contentType.matches('video/.*'))
+        && (
+          isAdmin() ||
+          (firestore.exists(/databases/(default)/documents/pt_students/$(studentId))
+            && (firestore.get(/databases/(default)/documents/pt_students/$(studentId)).data.trainerId == request.auth.uid
+                || firestore.get(/databases/(default)/documents/pt_students/$(studentId)).data.userId == request.auth.uid))
+        );
+      allow delete: if signedIn() && (
+        isAdmin() ||
+        (firestore.exists(/databases/(default)/documents/pt_students/$(studentId))
+          && firestore.get(/databases/(default)/documents/pt_students/$(studentId)).data.trainerId == request.auth.uid)
+      );
+    }
+
+    match /pt_videos/{exerciseId}/{allPaths=**} {
+      allow read: if signedIn();
+      allow write: if signedIn()
+        && underSize(80)
+        && (request.resource.contentType.matches('video/.*')
+            || isImage())
+        && (
+          isAdmin() ||
+          (firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+            && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true)
+        );
+      allow delete: if signedIn() && (
+        isAdmin() ||
+        (firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+          && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true)
+      );
     }
 
     // Nega o resto.

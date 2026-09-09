@@ -63,6 +63,12 @@ class Exercise {
     this.photoUrl = '',
     this.technique = '',
     this.commonMistakes = '',
+    this.equipment = '',
+    this.level = NivelTreino.iniciante,
+    this.defaultSeries = 3,
+    this.defaultReps = '12',
+    this.observacoes = '',
+    this.storageVideoPath = '',
     this.active = true,
   });
 
@@ -75,6 +81,12 @@ class Exercise {
   final String photoUrl;
   final String technique;
   final String commonMistakes;
+  final String equipment;
+  final NivelTreino level;
+  final int defaultSeries;
+  final String defaultReps;
+  final String observacoes;
+  final String storageVideoPath;
   final bool active;
 
   Map<String, dynamic> toMap() => {
@@ -86,6 +98,12 @@ class Exercise {
         'photoUrl': photoUrl,
         'technique': technique,
         'commonMistakes': commonMistakes,
+        'equipment': equipment,
+        'level': level.name,
+        'defaultSeries': defaultSeries,
+        'defaultReps': defaultReps,
+        'observacoes': observacoes,
+        'storageVideoPath': storageVideoPath,
         'active': active,
       };
 
@@ -101,7 +119,50 @@ class Exercise {
         photoUrl: (m['photoUrl'] ?? '') as String,
         technique: (m['technique'] ?? '') as String,
         commonMistakes: (m['commonMistakes'] ?? '') as String,
+        equipment: (m['equipment'] ?? '') as String,
+        level: NivelTreino.values.firstWhere((l) => l.name == m['level'],
+            orElse: () => NivelTreino.iniciante),
+        defaultSeries: (m['defaultSeries'] ?? 3) as int,
+        defaultReps: (m['defaultReps'] ?? '12') as String,
+        observacoes: (m['observacoes'] ?? '') as String,
+        storageVideoPath: (m['storageVideoPath'] ?? '') as String,
         active: (m['active'] ?? true) as bool,
+      );
+
+  Exercise copyWith({
+    String? name,
+    MuscleGroup? muscleGroup,
+    String? description,
+    String? videoUrl,
+    String? gifUrl,
+    String? photoUrl,
+    String? technique,
+    String? commonMistakes,
+    String? equipment,
+    NivelTreino? level,
+    int? defaultSeries,
+    String? defaultReps,
+    String? observacoes,
+    String? storageVideoPath,
+    bool? active,
+  }) =>
+      Exercise(
+        id: id,
+        name: name ?? this.name,
+        muscleGroup: muscleGroup ?? this.muscleGroup,
+        description: description ?? this.description,
+        videoUrl: videoUrl ?? this.videoUrl,
+        gifUrl: gifUrl ?? this.gifUrl,
+        photoUrl: photoUrl ?? this.photoUrl,
+        technique: technique ?? this.technique,
+        commonMistakes: commonMistakes ?? this.commonMistakes,
+        equipment: equipment ?? this.equipment,
+        level: level ?? this.level,
+        defaultSeries: defaultSeries ?? this.defaultSeries,
+        defaultReps: defaultReps ?? this.defaultReps,
+        observacoes: observacoes ?? this.observacoes,
+        storageVideoPath: storageVideoPath ?? this.storageVideoPath,
+        active: active ?? this.active,
       );
 }
 
@@ -120,6 +181,7 @@ class WorkoutExerciseConfig {
     this.metodo = '',
     this.observacoes = '',
     this.order = 0,
+    this.intensidade = '',
   });
 
   final String exerciseId;
@@ -132,6 +194,7 @@ class WorkoutExerciseConfig {
   final String metodo; // ex.: "bi-set", "drop-set", "piramidal"
   final String observacoes;
   final int order;
+  final String intensidade; // leve | moderada | intensa
 
   Map<String, dynamic> toMap() => {
         'exerciseId': exerciseId,
@@ -144,6 +207,7 @@ class WorkoutExerciseConfig {
         'metodo': metodo,
         'observacoes': observacoes,
         'order': order,
+        'intensidade': intensidade,
       };
 
   factory WorkoutExerciseConfig.fromMap(Map<String, dynamic> m) =>
@@ -158,6 +222,7 @@ class WorkoutExerciseConfig {
         metodo: (m['metodo'] ?? '') as String,
         observacoes: (m['observacoes'] ?? '') as String,
         order: (m['order'] ?? 0) as int,
+        intensidade: (m['intensidade'] ?? '') as String,
       );
 }
 
@@ -230,6 +295,13 @@ class Student {
     this.objective = '',
     this.active = true,
     required this.startDate,
+    this.phone = '',
+    this.age,
+    this.sex = '',
+    this.weightKg,
+    this.heightM,
+    this.level = NivelTreino.iniciante,
+    this.notes = '',
   });
 
   final String id;
@@ -243,6 +315,13 @@ class Student {
   final String objective;
   final bool active;
   final DateTime startDate;
+  final String phone;
+  final int? age;
+  final String sex; // feminino | masculino | outro | ''
+  final double? weightKg;
+  final double? heightM;
+  final NivelTreino level;
+  final String notes;
 
   Map<String, dynamic> toMap() => {
         'trainerId': trainerId,
@@ -253,6 +332,13 @@ class Student {
         'objective': objective,
         'active': active,
         'startDate': startDate.toIso8601String(),
+        'phone': phone,
+        'age': age,
+        'sex': sex,
+        'weightKg': weightKg,
+        'heightM': heightM,
+        'level': level.name,
+        'notes': notes,
       };
 
   factory Student.fromMap(String id, Map<String, dynamic> m) => Student(
@@ -266,6 +352,49 @@ class Student {
         active: (m['active'] ?? true) as bool,
         startDate: DateTime.tryParse(m['startDate'] as String? ?? '') ??
             DateTime.now(),
+        phone: (m['phone'] ?? '') as String,
+        age: (m['age'] as num?)?.toInt(),
+        sex: (m['sex'] ?? '') as String,
+        weightKg: (m['weightKg'] as num?)?.toDouble(),
+        heightM: (m['heightM'] as num?)?.toDouble(),
+        level: NivelTreino.values.firstWhere((l) => l.name == m['level'],
+            orElse: () => NivelTreino.iniciante),
+        notes: (m['notes'] ?? m['observacoes'] ?? '') as String,
+      );
+
+  Student copyWith({
+    String? userId,
+    String? name,
+    String? email,
+    String? photoUrl,
+    String? objective,
+    bool? active,
+    DateTime? startDate,
+    String? phone,
+    int? age,
+    String? sex,
+    double? weightKg,
+    double? heightM,
+    NivelTreino? level,
+    String? notes,
+  }) =>
+      Student(
+        id: id,
+        trainerId: trainerId,
+        userId: userId ?? this.userId,
+        name: name ?? this.name,
+        email: email ?? this.email,
+        photoUrl: photoUrl ?? this.photoUrl,
+        objective: objective ?? this.objective,
+        active: active ?? this.active,
+        startDate: startDate ?? this.startDate,
+        phone: phone ?? this.phone,
+        age: age ?? this.age,
+        sex: sex ?? this.sex,
+        weightKg: weightKg ?? this.weightKg,
+        heightM: heightM ?? this.heightM,
+        level: level ?? this.level,
+        notes: notes ?? this.notes,
       );
 }
 
@@ -350,7 +479,7 @@ class PhysicalAssessment {
       );
 }
 
-enum FotoTipo { frente, perfil, costas }
+enum FotoTipo { frente, perfil, costas, outras }
 
 class EvolutionPhoto {
   const EvolutionPhoto({
@@ -439,6 +568,11 @@ class WorkoutSessionLog {
     required this.workoutName,
     required this.date,
     required this.completedExerciseIds,
+    this.difficulty = '',
+    this.feltPain,
+    this.tiredness = '',
+    this.feedbackNotes = '',
+    this.durationMinutes,
   });
 
   final String id;
@@ -449,6 +583,15 @@ class WorkoutSessionLog {
   final DateTime date;
   final List<String> completedExerciseIds;
 
+  /// muito_leve | adequado | dificil | muito_dificil
+  final String difficulty;
+  final bool? feltPain;
+
+  /// baixo | medio | alto
+  final String tiredness;
+  final String feedbackNotes;
+  final int? durationMinutes;
+
   Map<String, dynamic> toMap() => {
         'studentId': studentId,
         'trainerId': trainerId,
@@ -456,6 +599,11 @@ class WorkoutSessionLog {
         'workoutName': workoutName,
         'date': date.toIso8601String(),
         'completedExerciseIds': completedExerciseIds,
+        'difficulty': difficulty,
+        'feltPain': feltPain,
+        'tiredness': tiredness,
+        'feedbackNotes': feedbackNotes,
+        'durationMinutes': durationMinutes,
       };
 
   factory WorkoutSessionLog.fromMap(String id, Map<String, dynamic> m) =>
@@ -468,5 +616,92 @@ class WorkoutSessionLog {
         date: DateTime.tryParse(m['date'] as String? ?? '') ?? DateTime.now(),
         completedExerciseIds:
             (m['completedExerciseIds'] as List?)?.cast<String>() ?? [],
+        difficulty: (m['difficulty'] ?? '') as String,
+        feltPain: m['feltPain'] as bool?,
+        tiredness: (m['tiredness'] ?? '') as String,
+        feedbackNotes: (m['feedbackNotes'] ?? '') as String,
+        durationMinutes: (m['durationMinutes'] as num?)?.toInt(),
       );
+}
+
+/// Ficha de anamnese do aluno (editável; 1 documento por aluno).
+class StudentAnamnesis {
+  const StudentAnamnesis({
+    required this.studentId,
+    required this.trainerId,
+    this.mainObjective = '',
+    this.trainingExperience = '',
+    this.diseases = '',
+    this.injuries = '',
+    this.surgeries = '',
+    this.limitations = '',
+    this.medications = '',
+    this.pains = '',
+    this.availability = '',
+    this.weekDays = const [],
+    this.trainingLocation = '',
+    this.equipment = '',
+    this.notes = '',
+    this.updatedAt,
+  });
+
+  final String studentId;
+  final String trainerId;
+  final String mainObjective;
+  final String trainingExperience;
+  final String diseases;
+  final String injuries;
+  final String surgeries;
+  final String limitations;
+  final String medications;
+  final String pains;
+  final String availability;
+  final List<String> weekDays;
+  final String trainingLocation;
+  final String equipment;
+  final String notes;
+  final DateTime? updatedAt;
+
+  Map<String, dynamic> toMap() => {
+        'studentId': studentId,
+        'trainerId': trainerId,
+        'mainObjective': mainObjective,
+        'trainingExperience': trainingExperience,
+        'diseases': diseases,
+        'injuries': injuries,
+        'surgeries': surgeries,
+        'limitations': limitations,
+        'medications': medications,
+        'pains': pains,
+        'availability': availability,
+        'weekDays': weekDays,
+        'trainingLocation': trainingLocation,
+        'equipment': equipment,
+        'notes': notes,
+        'updatedAt': DateTime.now().toIso8601String(),
+      };
+
+  factory StudentAnamnesis.fromMap(String studentId, Map<String, dynamic>? m) {
+    if (m == null || m.isEmpty) {
+      return StudentAnamnesis(studentId: studentId, trainerId: '');
+    }
+    return StudentAnamnesis(
+      studentId: studentId,
+      trainerId: (m['trainerId'] ?? '') as String,
+      mainObjective: (m['mainObjective'] ?? '') as String,
+      trainingExperience: (m['trainingExperience'] ?? '') as String,
+      diseases: (m['diseases'] ?? '') as String,
+      injuries: (m['injuries'] ?? '') as String,
+      surgeries: (m['surgeries'] ?? '') as String,
+      limitations: (m['limitations'] ?? '') as String,
+      medications: (m['medications'] ?? '') as String,
+      pains: (m['pains'] ?? '') as String,
+      availability: (m['availability'] ?? '') as String,
+      weekDays: (m['weekDays'] as List?)?.cast<String>() ?? const [],
+      trainingLocation: (m['trainingLocation'] ?? '') as String,
+      equipment: (m['equipment'] ?? '') as String,
+      notes: (m['notes'] ?? '') as String,
+      updatedAt: DateTime.tryParse(m['updatedAt'] as String? ?? ''),
+    );
+  }
 }

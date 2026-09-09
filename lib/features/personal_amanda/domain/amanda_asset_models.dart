@@ -8,6 +8,7 @@ enum AmandaAssetCategory {
   profissional,
   categoria,
   banner,
+  capa,
   desafio,
   motivacional,
   premium,
@@ -22,27 +23,30 @@ extension AmandaAssetCategoryInfo on AmandaAssetCategory {
         AmandaAssetCategory.profissional => 'Foto profissional principal',
         AmandaAssetCategory.categoria => 'Fotos por categoria',
         AmandaAssetCategory.banner => 'Banner da Home',
+        AmandaAssetCategory.capa => 'Capa (Quem Sou Eu)',
         AmandaAssetCategory.desafio => 'Fotos para desafios',
         AmandaAssetCategory.motivacional => 'Fotos motivacionais',
         AmandaAssetCategory.premium => 'Fotos Premium',
         AmandaAssetCategory.galeria => 'Galeria (Quem Sou Eu)',
-        AmandaAssetCategory.trajetoria => 'Trajetória profissional',
-        AmandaAssetCategory.treinos => 'Treinos e atendimentos',
+        AmandaAssetCategory.trajetoria => 'Trajetória / eventos',
+        AmandaAssetCategory.treinos => 'Treinos e academia',
       };
 
   String get hint => switch (this) {
         AmandaAssetCategory.principal =>
-          'Usada no perfil e em cartões compactos.',
+          'Avatar circular no perfil Quem Sou Eu.',
         AmandaAssetCategory.profissional =>
-          'Foto principal da área Quem Sou Eu.',
+          'Retrato grande (fallback da capa).',
         AmandaAssetCategory.banner =>
           'Banner grande no topo da Home (BoxFit.cover).',
+        AmandaAssetCategory.capa =>
+          'Foto de capa no topo da página Quem Sou Eu.',
         AmandaAssetCategory.galeria =>
-          '2 ou 3 fotos extras na área Quem Sou Eu.',
+          'Fotos gerais da galeria profissional.',
         AmandaAssetCategory.trajetoria =>
-          'Fotos da formação e da carreira.',
+          'Formação, certificações, eventos e carreira.',
         AmandaAssetCategory.treinos =>
-          'Fotos de treinos e atendimentos.',
+          'Treinos, academia e rotina profissional.',
         _ => 'Exibida nas áreas correspondentes do aplicativo.',
       };
 }

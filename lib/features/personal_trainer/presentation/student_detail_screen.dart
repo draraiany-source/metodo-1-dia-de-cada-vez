@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../core/assets/app_icons.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import '../domain/pt_models.dart';
 import '../providers/pt_providers.dart';
+import 'evolution_pt_screen.dart';
+import 'student_anamnesis_screen.dart';
 import 'workout_builder_screen.dart';
 
 class StudentDetailScreen extends ConsumerStatefulWidget {
@@ -20,17 +23,143 @@ class StudentDetailScreen extends ConsumerStatefulWidget {
 class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
     with SingleTickerProviderStateMixin {
   late final TabController _tabs;
+  late Student _student;
 
   @override
   void initState() {
     super.initState();
-    _tabs = TabController(length: 3, vsync: this);
+    _student = widget.student;
+    _tabs = TabController(length: 4, vsync: this);
   }
 
   @override
   void dispose() {
     _tabs.dispose();
     super.dispose();
+  }
+
+  Future<void> _editarAluno() async {
+    final name = TextEditingController(text: _student.name);
+    final email = TextEditingController(text: _student.email);
+    final phone = TextEditingController(text: _student.phone);
+    final objective = TextEditingController(text: _student.objective);
+    final notes = TextEditingController(text: _student.notes);
+    final age = TextEditingController(
+        text: _student.age == null ? '' : '${_student.age}');
+    final weight = TextEditingController(
+        text: _student.weightKg == null
+            ? ''
+            : _student.weightKg!.toStringAsFixed(1));
+    final height = TextEditingController(
+        text: _student.heightM == null
+            ? ''
+            : _student.heightM!.toStringAsFixed(2));
+    var sex = _student.sex;
+    var level = _student.level;
+
+    final ok = await showModalBottomSheet<bool>(
+      context: context,
+      backgroundColor: AppColors.surface,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setSheet) => Padding(
+          padding: EdgeInsets.fromLTRB(
+              24, 24, 24, 24 + MediaQuery.of(ctx).viewInsets.bottom),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Editar aluno', style: Theme.of(ctx).textTheme.titleLarge),
+                const SizedBox(height: 12),
+                TextField(controller: name, decoration: const InputDecoration(labelText: 'Nome')),
+                TextField(controller: email, decoration: const InputDecoration(labelText: 'E-mail')),
+                TextField(controller: phone, decoration: const InputDecoration(labelText: 'Telefone'), keyboardType: TextInputType.phone),
+                TextField(controller: age, decoration: const InputDecoration(labelText: 'Idade'), keyboardType: TextInputType.number),
+                DropdownButtonFormField<String>(
+                  value: sex.isEmpty ? null : sex,
+                  decoration: const InputDecoration(labelText: 'Sexo'),
+                  items: const [
+                    DropdownMenuItem(value: 'feminino', child: Text('Feminino')),
+                    DropdownMenuItem(value: 'masculino', child: Text('Masculino')),
+                    DropdownMenuItem(value: 'outro', child: Text('Outro')),
+                  ],
+                  onChanged: (v) => setSheet(() => sex = v ?? ''),
+                ),
+                TextField(controller: weight, decoration: const InputDecoration(labelText: 'Peso (kg)'), keyboardType: const TextInputType.numberWithOptions(decimal: true)),
+                TextField(controller: height, decoration: const InputDecoration(labelText: 'Altura (m)'), keyboardType: const TextInputType.numberWithOptions(decimal: true)),
+                DropdownButtonFormField<NivelTreino>(
+                  value: level,
+                  decoration: const InputDecoration(labelText: 'Nível'),
+                  items: [
+                    for (final l in NivelTreino.values)
+                      DropdownMenuItem(value: l, child: Text(l.label)),
+                  ],
+                  onChanged: (v) => setSheet(() => level = v ?? level),
+                ),
+                TextField(controller: objective, decoration: const InputDecoration(labelText: 'Objetivo')),
+                TextField(controller: notes, decoration: const InputDecoration(labelText: 'Observações'), maxLines: 3),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(ctx, true),
+                    child: const Text('Salvar'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    if (ok == true && name.text.trim().isNotEmpty) {
+      final updated = _student.copyWith(
+        name: name.text.trim(),
+        email: email.text.trim().toLowerCase(),
+        phone: phone.text.trim(),
+        age: int.tryParse(age.text.trim()),
+        sex: sex,
+        weightKg: double.tryParse(weight.text.replaceAll(',', '.')),
+        heightM: double.tryParse(height.text.replaceAll(',', '.')),
+        level: level,
+        objective: objective.text.trim(),
+        notes: notes.text.trim(),
+      );
+      await ref.read(ptRepositoryProvider).updateStudent(updated);
+      ref.invalidate(ptStudentsProvider(_student.trainerId));
+      if (mounted) setState(() => _student = updated);
+    }
+  }
+
+  Future<void> _arquivarAluno() async {
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.surface,
+        title: const Text('Arquivar aluno?'),
+        content: const Text(
+          'O aluno deixa de aparecer na lista ativa e não vê mais o treino.',
+          style: TextStyle(color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancelar')),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Arquivar'),
+          ),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    await ref.read(ptRepositoryProvider).deactivateStudent(_student.id);
+    ref.invalidate(ptStudentsProvider(_student.trainerId));
+    ref.invalidate(ptDashboardStatsProvider(_student.trainerId));
+    if (mounted) Navigator.pop(context);
   }
 
   Future<void> _novaAvaliacao(BuildContext context) async {
@@ -113,8 +242,8 @@ class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
           double.tryParse(controllers[k]!.text.replaceAll(',', '.'));
       await ref.read(ptRepositoryProvider).createAssessment(PhysicalAssessment(
             id: '',
-            studentId: widget.student.id,
-            trainerId: widget.student.trainerId,
+            studentId: _student.id,
+            trainerId: _student.trainerId,
             date: DateTime.now(),
             weightKg: d('weightKg'),
             heightM: d('heightM'),
@@ -128,21 +257,102 @@ class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
             circCoxa: d('circCoxa'),
             circPanturrilha: d('circPanturrilha'),
           ));
-      ref.invalidate(ptAssessmentsProvider(widget.student.id));
+      ref.invalidate(ptAssessmentsProvider(_student.id));
     }
+  }
+
+  Future<void> _vincularConta() async {
+    final controller = TextEditingController(text: _student.userId);
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.surface,
+        title: const Text('Vincular conta do aluno'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'E-mail cadastrado: ${_student.email.isEmpty ? '(não informado)' : _student.email}\n\n'
+              'Se o aluno já usa o app, ele vincula automaticamente ao abrir '
+              'Meu Treino com o mesmo e-mail. Ou cole o UID da conta Firebase:',
+              style: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: controller,
+              decoration: const InputDecoration(labelText: 'UID do usuário'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('Cancelar')),
+          ElevatedButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: const Text('Salvar')),
+        ],
+      ),
+    );
+    if (ok == true && controller.text.trim().isNotEmpty) {
+      await ref
+          .read(ptRepositoryProvider)
+          .linkStudentUserId(_student.id, controller.text.trim());
+      if (mounted) {
+        setState(() => _student = _student.copyWith(userId: controller.text.trim()));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Conta vinculada.')),
+        );
+      }
+    }
+    controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.student.name),
+        title: Text(_student.name),
+        actions: [
+          IconButton(
+            tooltip: 'Editar dados',
+            icon: const Icon(Icons.edit_outlined),
+            onPressed: _editarAluno,
+          ),
+          IconButton(
+            tooltip: 'Anamnese',
+            icon: const Icon(Icons.assignment_outlined),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => StudentAnamnesisScreen(student: _student),
+            )),
+          ),
+          IconButton(
+            tooltip: 'Evolução',
+            icon: const Icon(Icons.show_chart),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => EvolutionPtScreen(student: _student),
+            )),
+          ),
+          IconButton(
+            tooltip: 'Vincular conta',
+            icon: const Icon(Icons.link),
+            onPressed: _vincularConta,
+          ),
+          IconButton(
+            tooltip: 'Arquivar',
+            icon: const Icon(Icons.archive_outlined),
+            onPressed: _arquivarAluno,
+          ),
+        ],
         bottom: TabBar(
           controller: _tabs,
+          isScrollable: true,
           tabs: const [
             Tab(text: 'Avaliações'),
             Tab(text: 'Fotos'),
             Tab(text: 'Treinos'),
+            Tab(text: 'Histórico'),
           ],
         ),
       ),
@@ -150,9 +360,10 @@ class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
         controller: _tabs,
         children: [
           _AssessmentsTab(
-              student: widget.student, onAdd: () => _novaAvaliacao(context)),
-          _PhotosTab(student: widget.student),
-          _WorkoutsTab(student: widget.student),
+              student: _student, onAdd: () => _novaAvaliacao(context)),
+          _PhotosTab(student: _student),
+          _WorkoutsTab(student: _student),
+          _SessionsHistoryTab(student: _student),
         ],
       ),
     );
@@ -238,35 +449,234 @@ class _PhotosTab extends ConsumerWidget {
   const _PhotosTab({required this.student});
   final Student student;
 
+  Future<void> _upload(BuildContext context, WidgetRef ref) async {
+    var tipo = FotoTipo.frente;
+    final picker = ImagePicker();
+    final ok = await showModalBottomSheet<bool>(
+      context: context,
+      backgroundColor: AppColors.surface,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setSheet) => Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text('Nova foto de evolução',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16)),
+              const SizedBox(height: 12),
+              DropdownButtonFormField<FotoTipo>(
+                value: tipo,
+                items: FotoTipo.values
+                    .map((t) => DropdownMenuItem(
+                        value: t, child: Text(t.name.toUpperCase())))
+                    .toList(),
+                onChanged: (v) => setSheet(() => tipo = v ?? tipo),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton.icon(
+                onPressed: () => Navigator.pop(ctx, true),
+                icon: const Icon(Icons.photo_library_outlined),
+                label: const Text('Escolher da galeria'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    if (ok != true) return;
+    final x = await picker.pickImage(
+        source: ImageSource.gallery, imageQuality: 82, maxWidth: 1600);
+    if (x == null) return;
+    final bytes = await x.readAsBytes();
+    final url = await ref.read(ptRepositoryProvider).uploadEvolutionPhoto(
+          studentId: student.id,
+          bytes: bytes,
+          fileName: '${tipo.name}.jpg',
+        );
+    if (url == null || url.isEmpty) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Falha no upload. Verifique o Storage.')),
+        );
+      }
+      return;
+    }
+    await ref.read(ptRepositoryProvider).createPhoto(EvolutionPhoto(
+          id: '',
+          studentId: student.id,
+          trainerId: student.trainerId,
+          date: DateTime.now(),
+          tipo: tipo,
+          url: url,
+        ));
+    ref.invalidate(ptPhotosProvider(student.id));
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final photosAsync = ref.watch(ptPhotosProvider(student.id));
-    return photosAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, __) => const Center(
-          child: Text('Não consegui carregar.',
-              style: TextStyle(color: AppColors.textSecondary))),
-      data: (photos) => photos.isEmpty
-          ? const Center(
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primary,
+        onPressed: () => _upload(context, ref),
+        child: const Icon(Icons.add_a_photo_outlined),
+      ),
+      body: photosAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (_, __) => const Center(
+            child: Text('Não consegui carregar.',
+                style: TextStyle(color: AppColors.textSecondary))),
+        data: (photos) {
+          if (photos.isEmpty) {
+            return const Center(
               child: Padding(
                 padding: EdgeInsets.all(24),
                 child: Text(
                     'Nenhuma foto de evolução ainda.\n'
-                    '(upload via Firebase Storage: pt_photos/{studentId})',
+                    'Toque em + para enviar frontal, lateral, costas ou outras.',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: AppColors.textSecondary)),
               ),
-            )
-          : GridView.builder(
-              padding: const EdgeInsets.all(20),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, mainAxisSpacing: 8, crossAxisSpacing: 8),
-              itemCount: photos.length,
-              itemBuilder: (_, i) => ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(photos[i].url, fit: BoxFit.cover),
+            );
+          }
+          final first = photos.first;
+          final last = photos.last;
+          return ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              if (photos.length >= 2) ...[
+                const Text('Comparação',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w800)),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: AspectRatio(
+                              aspectRatio: 0.75,
+                              child: Image.network(first.url, fit: BoxFit.cover),
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            'Primeira\n${first.date.day}/${first.date.month}/${first.date.year}',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                color: AppColors.textSecondary, fontSize: 11),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: AspectRatio(
+                              aspectRatio: 0.75,
+                              child: Image.network(last.url, fit: BoxFit.cover),
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            'Atual\n${last.date.day}/${last.date.month}/${last.date.year}',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                color: AppColors.textSecondary, fontSize: 11),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+              ],
+              const Text('Galeria',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w800)),
+              const SizedBox(height: 10),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3, mainAxisSpacing: 8, crossAxisSpacing: 8),
+                itemCount: photos.length,
+                itemBuilder: (_, i) => ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(photos[i].url, fit: BoxFit.cover),
+                ),
               ),
-            ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _SessionsHistoryTab extends ConsumerWidget {
+  const _SessionsHistoryTab({required this.student});
+  final Student student;
+
+  String _diffLabel(String d) => switch (d) {
+        'muito_leve' => 'Muito leve',
+        'adequado' => 'Adequado',
+        'dificil' => 'Difícil',
+        'muito_dificil' => 'Muito difícil',
+        _ => d.isEmpty ? '—' : d,
+      };
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sessionsAsync = ref.watch(ptSessionsProvider(student.id));
+    return sessionsAsync.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (_, __) => const Center(
+          child: Text('Não consegui carregar.',
+              style: TextStyle(color: AppColors.textSecondary))),
+      data: (list) {
+        if (list.isEmpty) {
+          return const Center(
+            child: Text('Nenhum treino concluído ainda.',
+                style: TextStyle(color: AppColors.textSecondary)),
+          );
+        }
+        final ordered = [...list]..sort((a, b) => b.date.compareTo(a.date));
+        return ListView.builder(
+          padding: const EdgeInsets.all(20),
+          itemCount: ordered.length,
+          itemBuilder: (_, i) {
+            final s = ordered[i];
+            return Card(
+              margin: const EdgeInsets.only(bottom: 10),
+              child: ListTile(
+                title: Text(s.workoutName,
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w700)),
+                subtitle: Text(
+                  '${s.date.day.toString().padLeft(2, '0')}/'
+                  '${s.date.month.toString().padLeft(2, '0')}/'
+                  '${s.date.year} · ${s.completedExerciseIds.length} exercícios'
+                  '${s.difficulty.isNotEmpty ? ' · ${_diffLabel(s.difficulty)}' : ''}'
+                  '${s.feltPain == true ? ' · sentiu dor' : ''}'
+                  '${s.feedbackNotes.isNotEmpty ? '\n${s.feedbackNotes}' : ''}',
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 12.5),
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

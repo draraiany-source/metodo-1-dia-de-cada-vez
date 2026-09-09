@@ -39,6 +39,7 @@ service cloud.firestore {
     function noPrivilegedFields() {
       return !request.resource.data.diff(resource.data).affectedKeys()
         .hasAny(['xp', 'level', 'streak', 'isPremium', 'isAdmin',
+                 'isPersonalTrainer',
                  'coins', 'totalWorkouts', 'totalKm', 'referralCount',
                  'referralCode']);
     }
@@ -78,22 +79,46 @@ service cloud.firestore {
 
     match /amanda_assets/{document=**} {
       allow read: if signedIn();
-      allow write: if isAdmin();
+      allow write: if signedIn() && (
+        isAdmin() ||
+        get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true
+      );
+    }
+
+    // Textos do perfil público Quem Sou Eu (Amanda) — leitura autenticada;
+    // escrita só admin / personal (isPersonalTrainer).
+    match /amanda_profile/{docId} {
+      allow read: if signedIn();
+      allow write: if signedIn() && (
+        isAdmin() ||
+        get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true
+      );
     }
 
     // Módulo Personal Trainer — cada aluno só é visível pro seu próprio
-    // personal (trainerId) e pra si mesma (userId); o personal só
+    // personal (trainerId) e pra si mesma (userId / e-mail); o personal só
     // enxerga quem está vinculado a ele.
-    function isMyStudentDoc() {
-      return signedIn() &&
-        (resource.data.trainerId == request.auth.uid ||
-         resource.data.userId == request.auth.uid);
-    }
 
     match /pt_students/{studentId} {
-      allow read: if isMyStudentDoc() || isAdmin();
+      // Personal dono, aluno já vinculado (userId) ou aluno com mesmo e-mail
+      // (permite auto-vínculo na primeira abertura de "Meu Treino").
+      allow read: if isAdmin() || (signedIn() && (
+        resource.data.trainerId == request.auth.uid ||
+        resource.data.userId == request.auth.uid ||
+        (resource.data.keys().hasAny(['email']) &&
+          request.auth.token.email != null &&
+          resource.data.email.lower() == request.auth.token.email.lower())
+      ));
       allow create: if signedIn() && request.resource.data.trainerId == request.auth.uid;
-      allow update, delete: if signedIn() && resource.data.trainerId == request.auth.uid;
+      allow update: if signedIn() && (
+        resource.data.trainerId == request.auth.uid ||
+        // Aluno só pode gravar o próprio userId (vínculo).
+        (request.auth.token.email != null &&
+          resource.data.email.lower() == request.auth.token.email.lower() &&
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['userId', 'email']) &&
+          request.resource.data.userId == request.auth.uid)
+      );
+      allow delete: if signedIn() && resource.data.trainerId == request.auth.uid;
     }
 
     // Banco de exercícios — biblioteca compartilhada, qualquer personal lê;
@@ -102,13 +127,22 @@ service cloud.firestore {
     // ao banco de receitas/treinos do app).
     match /pt_exercises/{document=**} {
       allow read: if signedIn();
-      allow write: if signedIn() &&
-        get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true;
+      allow write: if signedIn() && (
+        isAdmin() ||
+        get(/databases/(default)/documents/users/$(request.auth.uid)).data.isPersonalTrainer == true
+      );
     }
 
     match /pt_workout_plans/{planId} {
-      allow read: if signedIn() &&
-        (resource.data.trainerId == request.auth.uid || resource.data.studentId == request.auth.uid);
+      allow read: if signedIn() && (
+        isAdmin() ||
+        resource.data.trainerId == request.auth.uid ||
+        // Aluno vinculado: studentId é o doc pt_students, não o Auth UID.
+        (exists(/databases/$(database)/documents/pt_students/$(resource.data.studentId)) &&
+          (get(/databases/$(database)/documents/pt_students/$(resource.data.studentId)).data.userId == request.auth.uid ||
+           (request.auth.token.email != null &&
+            get(/databases/$(database)/documents/pt_students/$(resource.data.studentId)).data.email.lower() == request.auth.token.email.lower())))
+      );
       allow create: if signedIn() && request.resource.data.trainerId == request.auth.uid;
       allow update, delete: if signedIn() && resource.data.trainerId == request.auth.uid;
     }
@@ -153,6 +187,21 @@ service cloud.firestore {
     match /pt_sessions/{id} {
       allow read, update, delete: if isPtRelatedExisting();
       allow create: if isPtRelatedIncoming();
+    }
+
+    match /pt_anamnesis/{studentId} {
+      allow read, update, delete: if isAdmin() || (signedIn() && (
+        resource.data.trainerId == request.auth.uid ||
+        (exists(/databases/$(database)/documents/pt_students/$(studentId)) &&
+          (get(/databases/$(database)/documents/pt_students/$(studentId)).data.trainerId == request.auth.uid ||
+           get(/databases/$(database)/documents/pt_students/$(studentId)).data.userId == request.auth.uid))
+      ));
+      allow create: if isAdmin() || (signedIn() && (
+        request.resource.data.trainerId == request.auth.uid ||
+        (exists(/databases/$(database)/documents/pt_students/$(studentId)) &&
+          (get(/databases/$(database)/documents/pt_students/$(studentId)).data.trainerId == request.auth.uid ||
+           get(/databases/$(database)/documents/pt_students/$(studentId)).data.userId == request.auth.uid))
+      ));
     }
 
     match /admins/{uid} {

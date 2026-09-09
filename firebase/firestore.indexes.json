@@ -47,6 +47,71 @@
         {"fieldPath": "trainerId", "order": "ASCENDING"},
         {"fieldPath": "active", "order": "ASCENDING"}
       ]
+    },
+    {
+      "collectionGroup": "pt_students",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "userId", "order": "ASCENDING"},
+        {"fieldPath": "active", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_students",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "email", "order": "ASCENDING"},
+        {"fieldPath": "active", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_workout_plans",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "studentId", "order": "ASCENDING"},
+        {"fieldPath": "active", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_assessments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "studentId", "order": "ASCENDING"},
+        {"fieldPath": "date", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_photos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "studentId", "order": "ASCENDING"},
+        {"fieldPath": "date", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_sessions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "studentId", "order": "ASCENDING"},
+        {"fieldPath": "date", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_loads",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "studentId", "order": "ASCENDING"},
+        {"fieldPath": "exerciseId", "order": "ASCENDING"},
+        {"fieldPath": "date", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_loads",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "studentId", "order": "ASCENDING"},
+        {"fieldPath": "date", "order": "ASCENDING"}
+      ]
     }
   ],
   "fieldOverrides": []

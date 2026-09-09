@@ -15,6 +15,7 @@ import '../../personal_amanda/presentation/amanda_image.dart';
 import '../domain/pt_models.dart';
 import '../providers/pt_providers.dart';
 import 'exercise_library_screen.dart';
+import 'evolution_pt_screen.dart';
 import 'student_detail_screen.dart';
 
 /// Painel administrativo da Personal — visual profissional (não Home do aluno).
@@ -81,16 +82,25 @@ class _PersonalDashboardScreenState
     );
 
     if (ok == true && nameController.text.trim().isNotEmpty) {
+      final email = emailController.text.trim().toLowerCase();
       await ref.read(ptRepositoryProvider).createStudent(Student(
             id: '',
             trainerId: trainerId,
             userId: '',
             name: nameController.text.trim(),
-            email: emailController.text.trim(),
+            email: email,
             objective: objectiveController.text.trim(),
             startDate: DateTime.now(),
           ));
       ref.invalidate(ptStudentsProvider(trainerId));
+      ref.invalidate(ptDashboardStatsProvider(trainerId));
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(email.isEmpty
+              ? 'Aluno cadastrado. Informe o e-mail da conta do app para vincular.'
+              : 'Aluno cadastrado. Quando entrar com $email, o treino aparece em Meu Treino.'),
+        ));
+      }
     }
     nameController.dispose();
     emailController.dispose();
@@ -128,6 +138,8 @@ class _PersonalDashboardScreenState
               builder: (_) => const ExerciseLibraryScreen(isAdmin: true))),
           onManagePhotos: () =>
               AppNavigation.open(context, Routes.amandaAssetsAdmin),
+          onEditProfile: () =>
+              AppNavigation.open(context, Routes.amandaProfileEdit),
         );
       },
     );
@@ -136,8 +148,18 @@ class _PersonalDashboardScreenState
       return Scaffold(
         backgroundColor: const Color(0xFF0E0E14),
         appBar: PremiumAppBar(
-          title: 'Painel da Personal',
+          title: 'Central da Personal',
           actions: [
+            IconButton(
+              icon: AppIconImage(
+                AppIcons.personal,
+                size: 24,
+                fallbackIcon: Icons.edit_outlined,
+              ),
+              tooltip: 'Editar meu perfil',
+              onPressed: () =>
+                  AppNavigation.open(context, Routes.amandaProfileEdit),
+            ),
             IconButton(
               icon: AppIconImage(
                 AppIcons.gallery,
@@ -277,7 +299,7 @@ class _PersonalDashboardScreenState
   }
 }
 
-class _PersonalBody extends StatelessWidget {
+class _PersonalBody extends ConsumerWidget {
   const _PersonalBody({
     required this.trainer,
     required this.students,
@@ -287,6 +309,7 @@ class _PersonalBody extends StatelessWidget {
     required this.onNewStudent,
     required this.onOpenLibrary,
     required this.onManagePhotos,
+    required this.onEditProfile,
   });
 
   final AppUser trainer;
@@ -297,13 +320,16 @@ class _PersonalBody extends StatelessWidget {
   final VoidCallback onNewStudent;
   final VoidCallback onOpenLibrary;
   final VoidCallback onManagePhotos;
+  final VoidCallback onEditProfile;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final role = resolveUserRole(
       isPersonalTrainer: trainer.isPersonalTrainer,
       isAdmin: trainer.isAdmin,
     );
+    final statsAsync = ref.watch(ptDashboardStatsProvider(trainer.id));
+    final stats = statsAsync.valueOrNull;
 
     return Align(
       alignment: Alignment.topCenter,
@@ -323,30 +349,30 @@ class _PersonalBody extends StatelessWidget {
               final items = [
                 _Kpi(
                   label: 'Alunos ativos',
-                  value: '$totalStudents',
+                  value: '${stats?.activeStudents ?? totalStudents}',
                   iconAsset: AppIcons.community,
                   fallbackIcon: Icons.people_alt_rounded,
                   color: AppColors.primary,
                 ),
                 _Kpi(
                   label: 'Treinos de hoje',
-                  value: '${(totalStudents * 0.4).round()}',
+                  value: '${stats?.sessionsToday ?? '…'}',
                   iconAsset: AppIcons.workout,
                   fallbackIcon: Icons.fitness_center_rounded,
                   color: AppColors.secondary,
                 ),
                 _Kpi(
-                  label: 'Sem treinar',
-                  value: '${(totalStudents * 0.2).round()}',
+                  label: 'Sem treinar (5d+)',
+                  value: '${stats?.inactiveStudents ?? '…'}',
                   iconAsset: AppIcons.notifications,
                   fallbackIcon: Icons.warning_amber_rounded,
                   color: AppColors.warning,
                 ),
                 _Kpi(
-                  label: 'Avaliações pendentes',
-                  value: '${(totalStudents * 0.15).round()}',
+                  label: 'Com histórico',
+                  value: '${stats?.completionRatePercent ?? 0}%',
                   iconAsset: AppIcons.checklist,
-                  fallbackIcon: Icons.assignment_late_outlined,
+                  fallbackIcon: Icons.assignment_turned_in_outlined,
                   color: AppColors.info,
                 ),
               ];
@@ -361,6 +387,138 @@ class _PersonalBody extends StatelessWidget {
               );
             }),
             const SizedBox(height: 16),
+            const Text('Atalhos',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 15)),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                _ShortcutChip(
+                  label: 'Novo aluno',
+                  icon: Icons.person_add_alt,
+                  onTap: onNewStudent,
+                ),
+                _ShortcutChip(
+                  label: 'Criar treino',
+                  icon: Icons.fitness_center,
+                  onTap: () {
+                    if (students.isEmpty) {
+                      onNewStudent();
+                      return;
+                    }
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => StudentDetailScreen(student: students.first),
+                    ));
+                  },
+                ),
+                _ShortcutChip(
+                  label: 'Biblioteca',
+                  icon: Icons.menu_book_outlined,
+                  onTap: onOpenLibrary,
+                ),
+                _ShortcutChip(
+                  label: 'Evolução',
+                  icon: Icons.show_chart,
+                  onTap: () {
+                    if (students.isEmpty) return;
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => EvolutionPtScreen(student: students.first),
+                    ));
+                  },
+                ),
+                _ShortcutChip(
+                  label: 'Receitas',
+                  icon: Icons.restaurant_outlined,
+                  onTap: () =>
+                      AppNavigation.open(context, Routes.recipes),
+                ),
+                _ShortcutChip(
+                  label: 'Áudios',
+                  icon: Icons.headphones_outlined,
+                  onTap: () =>
+                      AppNavigation.open(context, Routes.audiosMeditations),
+                ),
+                _ShortcutChip(
+                  label: 'Perfil',
+                  icon: Icons.person_outline,
+                  onTap: onEditProfile,
+                ),
+                _ShortcutChip(
+                  label: 'Fotos',
+                  icon: Icons.photo_library_outlined,
+                  onTap: onManagePhotos,
+                ),
+                _ShortcutChip(
+                  label: 'Quem Sou Eu',
+                  icon: Icons.badge_outlined,
+                  onTap: () =>
+                      AppNavigation.open(context, Routes.amandaProfile),
+                ),
+                _ShortcutChip(
+                  label: 'Config',
+                  icon: Icons.settings_outlined,
+                  onTap: () =>
+                      AppNavigation.open(context, Routes.settings),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Material(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(16),
+              child: InkWell(
+                onTap: onEditProfile,
+                borderRadius: BorderRadius.circular(16),
+                child: Padding(
+                  padding: const EdgeInsets.all(14),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 52,
+                        height: 52,
+                        decoration: BoxDecoration(
+                          color: AppColors.surface2,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Icon(Icons.edit_note_rounded,
+                            color: AppColors.secondary),
+                      ),
+                      const SizedBox(width: 14),
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Editar meu perfil',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 15)),
+                            SizedBox(height: 4),
+                            Text(
+                              'Quem Sou Eu: textos, especialidades, redes e contato.',
+                              style: TextStyle(
+                                  color: AppColors.textSecondary,
+                                  fontSize: 12.5,
+                                  height: 1.35),
+                            ),
+                          ],
+                        ),
+                      ),
+                      AppIconImage(
+                        AppIcons.next,
+                        size: 18,
+                        fallbackIcon: Icons.chevron_right_rounded,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
             Material(
               color: AppColors.surface,
               borderRadius: BorderRadius.circular(16),
@@ -390,7 +548,7 @@ class _PersonalBody extends StatelessWidget {
                                     fontSize: 15)),
                             SizedBox(height: 4),
                             Text(
-                              'Perfil, banner, galeria e fotos profissionais.',
+                              'Capa, perfil, galeria, treinos e trajetória.',
                               style: TextStyle(
                                   color: AppColors.textSecondary,
                                   fontSize: 12.5,
@@ -553,12 +711,21 @@ class _AmandaProfessionalHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Olá, $trainerFirstName',
-                  style: const TextStyle(
+                const Text(
+                  'Central da Personal',
+                  style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
                     fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Olá, $trainerFirstName',
+                  style: const TextStyle(
+                    color: AppColors.textSecondary,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -756,6 +923,30 @@ class _StudentRow extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ShortcutChip extends StatelessWidget {
+  const _ShortcutChip({
+    required this.label,
+    required this.icon,
+    required this.onTap,
+  });
+
+  final String label;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ActionChip(
+      onPressed: onTap,
+      avatar: Icon(icon, size: 16, color: AppColors.secondary),
+      label: Text(label),
+      backgroundColor: AppColors.surface2,
+      side: const BorderSide(color: AppColors.border),
+      labelStyle: const TextStyle(color: Colors.white, fontSize: 12.5),
     );
   }
 }

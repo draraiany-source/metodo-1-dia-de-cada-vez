@@ -10,9 +10,13 @@ final ptStudentsProvider =
   return ref.read(ptRepositoryProvider).fetchStudents(trainerId);
 });
 
+/// Resolve o perfil do aluno: por userId e, se preciso, auto-vínculo por e-mail.
 final ptMyStudentProfileProvider =
-    FutureProvider.family<Student?, String>((ref, userId) {
-  return ref.read(ptRepositoryProvider).fetchStudentByUserId(userId);
+    FutureProvider.family<Student?, ({String userId, String email})>((ref, key) {
+  return ref.read(ptRepositoryProvider).ensureStudentLinked(
+        userId: key.userId,
+        email: key.email,
+      );
 });
 
 final ptExercisesProvider = FutureProvider<List<Exercise>>((ref) {
@@ -34,7 +38,27 @@ final ptPhotosProvider =
   return ref.read(ptRepositoryProvider).fetchPhotos(studentId);
 });
 
+final ptAnamnesisProvider =
+    FutureProvider.family<StudentAnamnesis, String>((ref, studentId) {
+  return ref.read(ptRepositoryProvider).fetchAnamnesis(studentId);
+});
+
 final ptSessionsProvider =
     FutureProvider.family<List<WorkoutSessionLog>, String>((ref, studentId) {
   return ref.read(ptRepositoryProvider).fetchSessions(studentId);
+});
+
+final ptLoadsProvider =
+    FutureProvider.family<List<LoadEntry>, String>((ref, studentId) {
+  return ref.read(ptRepositoryProvider).fetchAllLoads(studentId);
+});
+
+final ptDashboardStatsProvider =
+    FutureProvider.family<TrainerDashboardStats, String>((ref, trainerId) async {
+  final students =
+      await ref.watch(ptStudentsProvider(trainerId).future);
+  return ref.read(ptRepositoryProvider).fetchDashboardStats(
+        trainerId: trainerId,
+        students: students,
+      );
 });

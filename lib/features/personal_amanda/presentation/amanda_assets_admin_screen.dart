@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/router/app_navigation.dart';
+import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../data/amanda_assets_admin_repository.dart';
@@ -132,7 +134,17 @@ class AmandaAssetsAdminScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: const PremiumAppBar(title: 'Fotos da Amanda'),
+      appBar: PremiumAppBar(
+        title: 'Fotos da Amanda',
+        actions: [
+          IconButton(
+            tooltip: 'Editar textos do perfil',
+            icon: const Icon(Icons.edit_note_outlined),
+            onPressed: () =>
+                AppNavigation.open(context, Routes.amandaProfileEdit),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () => _novaFoto(context, ref),

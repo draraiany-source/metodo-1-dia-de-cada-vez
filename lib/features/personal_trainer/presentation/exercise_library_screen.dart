@@ -3,13 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/assets/app_icons.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/youtube_launch.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import '../domain/pt_models.dart';
 import '../providers/pt_providers.dart';
 
-/// Banco de exercícios — usado tanto pelo Personal pra cadastrar/consultar
-/// (`isAdmin: true`) quanto pelo criador de treinos pra escolher um
-/// exercício (`selectMode: true`, retorna o [Exercise] escolhido via pop).
+/// Banco de exercícios — cadastrar/editar/prévia de vídeo sem recompilar o app.
 class ExerciseLibraryScreen extends ConsumerStatefulWidget {
   const ExerciseLibraryScreen(
       {super.key, this.isAdmin = false, this.selectMode = false});
@@ -24,15 +23,29 @@ class ExerciseLibraryScreen extends ConsumerStatefulWidget {
 class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
   MuscleGroup? _filtro;
 
-  Future<void> _novoExercicio(BuildContext context, WidgetRef ref) async {
-    final nameController = TextEditingController();
-    final descController = TextEditingController();
-    final videoController = TextEditingController();
-    final gifController = TextEditingController();
-    final photoController = TextEditingController();
-    final techniqueController = TextEditingController();
-    final mistakesController = TextEditingController();
-    var grupo = MuscleGroup.peito;
+  Future<void> _abrirFormulario({Exercise? existing}) async {
+    final nameController = TextEditingController(text: existing?.name ?? '');
+    final descController =
+        TextEditingController(text: existing?.description ?? '');
+    final videoController =
+        TextEditingController(text: existing?.videoUrl ?? '');
+    final gifController = TextEditingController(text: existing?.gifUrl ?? '');
+    final photoController =
+        TextEditingController(text: existing?.photoUrl ?? '');
+    final techniqueController =
+        TextEditingController(text: existing?.technique ?? '');
+    final mistakesController =
+        TextEditingController(text: existing?.commonMistakes ?? '');
+    final equipmentController =
+        TextEditingController(text: existing?.equipment ?? '');
+    final seriesController =
+        TextEditingController(text: '${existing?.defaultSeries ?? 3}');
+    final repsController =
+        TextEditingController(text: existing?.defaultReps ?? '12');
+    final obsController =
+        TextEditingController(text: existing?.observacoes ?? '');
+    var grupo = existing?.muscleGroup ?? MuscleGroup.peito;
+    var nivel = existing?.level ?? NivelTreino.iniciante;
 
     final ok = await showModalBottomSheet<bool>(
       context: context,
@@ -50,7 +63,8 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Novo exercício', style: Theme.of(ctx).textTheme.titleLarge),
+                Text(existing == null ? 'Novo exercício' : 'Editar exercício',
+                    style: Theme.of(ctx).textTheme.titleLarge),
                 const SizedBox(height: 16),
                 _label('Nome'),
                 TextField(controller: nameController),
@@ -59,9 +73,27 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
                 DropdownButtonFormField<MuscleGroup>(
                   value: grupo,
                   items: MuscleGroup.values
-                      .map((g) => DropdownMenuItem(value: g, child: Text(g.label)))
+                      .map((g) =>
+                          DropdownMenuItem(value: g, child: Text(g.label)))
                       .toList(),
                   onChanged: (v) => setSheetState(() => grupo = v ?? grupo),
+                ),
+                const SizedBox(height: 12),
+                _label('Nível'),
+                DropdownButtonFormField<NivelTreino>(
+                  value: nivel,
+                  items: NivelTreino.values
+                      .map((n) =>
+                          DropdownMenuItem(value: n, child: Text(n.label)))
+                      .toList(),
+                  onChanged: (v) => setSheetState(() => nivel = v ?? nivel),
+                ),
+                const SizedBox(height: 12),
+                _label('Equipamento'),
+                TextField(
+                  controller: equipmentController,
+                  decoration: const InputDecoration(
+                      hintText: 'Halteres, máquina, peso corporal…'),
                 ),
                 const SizedBox(height: 12),
                 _label('Descrição'),
@@ -71,27 +103,80 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
                 TextField(
                   controller: videoController,
                   decoration: const InputDecoration(
-                    hintText: 'https://youtube.com/...',
+                    hintText: 'https://youtube.com/watch?v=…',
                   ),
+                  onChanged: (_) => setSheetState(() {}),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        onPressed: videoController.text.trim().isEmpty
+                            ? null
+                            : () => YoutubeLaunch.open(
+                                ctx, videoController.text.trim()),
+                        icon: const Icon(Icons.play_circle_outline),
+                        label: const Text('Prévia do vídeo'),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'Dica: use links públicos do YouTube. Vídeos privados não abrem no app.',
+                  style: TextStyle(
+                      color: AppColors.textTertiary, fontSize: 11),
                 ),
                 const SizedBox(height: 12),
-                _label('URL do GIF'),
+                _label('URL do GIF (opcional)'),
                 TextField(controller: gifController),
                 const SizedBox(height: 12),
-                _label('URL da foto'),
+                _label('URL da capa/foto (opcional)'),
                 TextField(controller: photoController),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _label('Séries padrão'),
+                          TextField(
+                              controller: seriesController,
+                              keyboardType: TextInputType.number),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _label('Reps padrão'),
+                          TextField(controller: repsController),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 12),
                 _label('Técnica correta'),
                 TextField(controller: techniqueController, maxLines: 2),
                 const SizedBox(height: 12),
                 _label('Erros comuns'),
                 TextField(controller: mistakesController, maxLines: 2),
+                const SizedBox(height: 12),
+                _label('Observações'),
+                TextField(controller: obsController, maxLines: 2),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () => Navigator.pop(ctx, true),
-                    child: const Text('Salvar no banco de exercícios'),
+                    child: Text(existing == null
+                        ? 'Salvar no banco de exercícios'
+                        : 'Salvar alterações'),
                   ),
                 ),
               ],
@@ -102,19 +187,34 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
     );
 
     if (ok == true && nameController.text.trim().isNotEmpty) {
-      await ref.read(ptRepositoryProvider).createExercise(Exercise(
-            id: '',
-            name: nameController.text.trim(),
-            muscleGroup: grupo,
-            description: descController.text.trim(),
-            videoUrl: videoController.text.trim(),
-            gifUrl: gifController.text.trim(),
-            photoUrl: photoController.text.trim(),
-            technique: techniqueController.text.trim(),
-            commonMistakes: mistakesController.text.trim(),
-          ));
+      final exercise = Exercise(
+        id: existing?.id ?? '',
+        name: nameController.text.trim(),
+        muscleGroup: grupo,
+        description: descController.text.trim(),
+        videoUrl: videoController.text.trim(),
+        gifUrl: gifController.text.trim(),
+        photoUrl: photoController.text.trim(),
+        technique: techniqueController.text.trim(),
+        commonMistakes: mistakesController.text.trim(),
+        equipment: equipmentController.text.trim(),
+        level: nivel,
+        defaultSeries: int.tryParse(seriesController.text) ?? 3,
+        defaultReps: repsController.text.trim().isEmpty
+            ? '12'
+            : repsController.text.trim(),
+        observacoes: obsController.text.trim(),
+        storageVideoPath: existing?.storageVideoPath ?? '',
+        active: true,
+      );
+      if (existing == null) {
+        await ref.read(ptRepositoryProvider).createExercise(exercise);
+      } else {
+        await ref.read(ptRepositoryProvider).updateExercise(exercise);
+      }
       ref.invalidate(ptExercisesProvider);
     }
+
     for (final c in [
       nameController,
       descController,
@@ -123,6 +223,10 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
       photoController,
       techniqueController,
       mistakesController,
+      equipmentController,
+      seriesController,
+      repsController,
+      obsController,
     ]) {
       c.dispose();
     }
@@ -157,7 +261,7 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
       floatingActionButton: widget.isAdmin
           ? FloatingActionButton(
               backgroundColor: AppColors.primary,
-              onPressed: () => _novoExercicio(context, ref),
+              onPressed: () => _abrirFormulario(),
               child: const AppIconImage(
                 AppIcons.complete,
                 size: 24,
@@ -208,9 +312,10 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
                           child: Padding(
                             padding: EdgeInsets.all(24),
                             child: Text(
-                                'Nenhum exercício cadastrado ainda.',
+                                'Nenhum exercício cadastrado ainda.\nCadastre pelo painel — sem alterar o código.',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(color: AppColors.textSecondary)),
+                                style:
+                                    TextStyle(color: AppColors.textSecondary)),
                           ),
                         )
                       : ListView.builder(
@@ -237,23 +342,45 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
                                 title: Text(e.name,
                                     style: const TextStyle(color: Colors.white)),
                                 subtitle: Text(
-                                  e.videoUrl.isNotEmpty
-                                      ? '${e.muscleGroup.label} · YouTube'
-                                      : e.muscleGroup.label,
+                                  [
+                                    e.muscleGroup.label,
+                                    if (e.equipment.isNotEmpty) e.equipment,
+                                    if (e.videoUrl.isNotEmpty) 'YouTube',
+                                  ].join(' · '),
                                   style: const TextStyle(
                                       color: AppColors.textSecondary,
                                       fontSize: 12),
                                 ),
-                                trailing: e.videoUrl.isNotEmpty
-                                    ? const AppIconImage(
-                                        AppIcons.videos,
-                                        size: 22,
-                                        fallbackIcon: Icons.play_circle_outline,
-                                      )
-                                    : null,
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (e.videoUrl.isNotEmpty)
+                                      IconButton(
+                                        tooltip: 'Assistir',
+                                        icon: const Icon(
+                                            Icons.play_circle_outline,
+                                            color: AppColors.secondary),
+                                        onPressed: () => YoutubeLaunch.open(
+                                            context, e.videoUrl),
+                                      ),
+                                    if (widget.isAdmin && !widget.selectMode)
+                                      IconButton(
+                                        tooltip: 'Editar',
+                                        icon: const Icon(Icons.edit_outlined,
+                                            color: AppColors.textSecondary),
+                                        onPressed: () =>
+                                            _abrirFormulario(existing: e),
+                                      ),
+                                  ],
+                                ),
                                 onTap: widget.selectMode
                                     ? () => Navigator.of(context).pop(e)
-                                    : null,
+                                    : widget.isAdmin
+                                        ? () => _abrirFormulario(existing: e)
+                                        : e.videoUrl.isNotEmpty
+                                            ? () => YoutubeLaunch.open(
+                                                context, e.videoUrl)
+                                            : null,
                               ),
                             );
                           },

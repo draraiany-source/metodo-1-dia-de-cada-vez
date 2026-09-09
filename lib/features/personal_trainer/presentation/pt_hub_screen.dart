@@ -16,7 +16,7 @@ class PtHubScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(currentUserProvider) ?? AppUser.demo();
-    return user.isPersonalTrainer
+    return user.isPersonalTrainer || user.isAdmin
         ? const PersonalDashboardScreen()
         : const StudentHomeScreen();
   }

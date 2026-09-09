@@ -10,8 +10,10 @@ import '../../../core/widgets/lili_widgets.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../gamification/providers/gamification_providers.dart';
+import '../domain/pt_models.dart';
 import '../providers/pt_providers.dart';
 import 'evolution_pt_screen.dart';
+import 'student_anamnesis_screen.dart';
 import 'workout_session_screen.dart';
 
 class StudentHomeScreen extends ConsumerWidget {
@@ -20,7 +22,9 @@ class StudentHomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(currentUserProvider) ?? AppUser.demo();
-    final studentAsync = ref.watch(ptMyStudentProfileProvider(user.id));
+    final studentAsync = ref.watch(
+      ptMyStudentProfileProvider((userId: user.id, email: user.email)),
+    );
     final gamification = ref.watch(gamificationProvider);
 
     return Scaffold(
@@ -117,6 +121,16 @@ class StudentHomeScreen extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
+                plansAsync.when(
+                  loading: () => const SizedBox.shrink(),
+                  error: (_, __) => const SizedBox.shrink(),
+                  data: (plans) => _WeekCalendar(
+                    plans: plans,
+                    sessions: ref.watch(ptSessionsProvider(student.id)).valueOrNull ??
+                        const [],
+                  ),
+                ),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -134,6 +148,13 @@ class StudentHomeScreen extends ConsumerWidget {
                       label: const Text('Minha evolução'),
                     ),
                   ],
+                ),
+                const SizedBox(height: 8),
+                TextButton.icon(
+                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => StudentAnamnesisScreen(student: student))),
+                  icon: const Icon(Icons.assignment_outlined, size: 18),
+                  label: const Text('Minha anamnese'),
                 ),
                 const SizedBox(height: 8),
                 plansAsync.when(
@@ -226,6 +247,105 @@ class _StatChip extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _WeekCalendar extends StatelessWidget {
+  const _WeekCalendar({required this.plans, required this.sessions});
+  final List<WorkoutPlan> plans;
+  final List<WorkoutSessionLog> sessions;
+
+  static const _labels = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
+
+  @override
+  Widget build(BuildContext context) {
+    final now = DateTime.now();
+    final monday = now.subtract(Duration(days: (now.weekday - 1) % 7));
+    final planned = <String>{};
+    for (final p in plans) {
+      planned.addAll(p.diasSemana.map((e) => e.toUpperCase()));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Semana',
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.w600)),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            for (var i = 0; i < 7; i++)
+              Expanded(
+                child: Builder(builder: (_) {
+                  final day = monday.add(Duration(days: i));
+                  final key = _labels[i];
+                  final isToday = day.year == now.year &&
+                      day.month == now.month &&
+                      day.day == now.day;
+                  final done = sessions.any((s) =>
+                      s.date.year == day.year &&
+                      s.date.month == day.month &&
+                      s.date.day == day.day);
+                  final hasPlan = planned.contains(key);
+                  Color bg;
+                  if (done) {
+                    bg = AppColors.success.withOpacity(0.25);
+                  } else if (hasPlan) {
+                    bg = AppColors.secondary.withOpacity(0.2);
+                  } else {
+                    bg = AppColors.surface;
+                  }
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 2),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    decoration: BoxDecoration(
+                      color: bg,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: isToday
+                            ? AppColors.secondary
+                            : AppColors.border,
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(key,
+                            style: const TextStyle(
+                                color: AppColors.textSecondary, fontSize: 10)),
+                        const SizedBox(height: 4),
+                        Text('${day.day}',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700)),
+                        const SizedBox(height: 4),
+                        Icon(
+                          done
+                              ? Icons.check_circle
+                              : hasPlan
+                                  ? Icons.fitness_center
+                                  : Icons.hotel,
+                          size: 12,
+                          color: done
+                              ? AppColors.success
+                              : hasPlan
+                                  ? AppColors.secondary
+                                  : AppColors.textTertiary,
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          'Verde = concluído · Rosa = programado · Cinza = descanso',
+          style: TextStyle(color: AppColors.textTertiary, fontSize: 11),
+        ),
+      ],
     );
   }
 }

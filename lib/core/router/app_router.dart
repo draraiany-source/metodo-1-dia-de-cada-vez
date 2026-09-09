@@ -62,6 +62,7 @@ import '../../features/video_streaming/presentation/videos_screen.dart';
 import '../../features/video_streaming/presentation/videos_admin_screen.dart';
 import '../../features/personal_amanda/presentation/amanda_profile_screen.dart';
 import '../../features/personal_amanda/presentation/amanda_assets_admin_screen.dart';
+import '../../features/personal_amanda/presentation/amanda_profile_edit_screen.dart';
 import '../../features/mascot_lili/presentation/lili_assets_admin_screen.dart';
 import '../../features/personal_trainer/presentation/pt_hub_screen.dart';
 import '../../features/nutrition/presentation/food_database_screen.dart';
@@ -141,6 +142,7 @@ class Routes {
   static const videos = '/videos';
   static const videosAdmin = '/admin/videos';
   static const amandaProfile = '/amanda/perfil';
+  static const amandaProfileEdit = '/admin/amanda-profile';
   static const amandaAssetsAdmin = '/admin/amanda-assets';
   static const liliAssetsAdmin = '/admin/lili-assets';
   static const personalTrainer = '/personal-trainer';
@@ -327,6 +329,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.amandaProfile,
         pageBuilder: (_, s) => _fadeSlide(s, const AmandaProfileScreen()),
+      ),
+      GoRoute(
+        path: Routes.amandaProfileEdit,
+        pageBuilder: (_, s) =>
+            _fadeSlide(s, const AmandaProfileEditScreen()),
       ),
       GoRoute(
         path: Routes.amandaAssetsAdmin,

@@ -163,11 +163,26 @@ class AdminScreen extends ConsumerWidget {
         Card(
           margin: const EdgeInsets.only(bottom: 8),
           child: ListTile(
+            leading: const Icon(Icons.person_outline,
+                color: AppColors.secondary),
+            title: const Text('Editar perfil Quem Sou Eu',
+                style: TextStyle(color: Colors.white)),
+            subtitle: const Text(
+                'Textos, especialidades, formação, redes e contato',
+                style: TextStyle(color: AppColors.textTertiary, fontSize: 11)),
+            trailing: const Icon(Icons.chevron_right,
+                color: AppColors.textTertiary),
+            onTap: () => context.push(Routes.amandaProfileEdit),
+          ),
+        ),
+        Card(
+          margin: const EdgeInsets.only(bottom: 8),
+          child: ListTile(
             leading: const Icon(Icons.photo_camera_outlined,
                 color: AppColors.secondary),
             title: const Text('Fotos da Amanda (personal)',
                 style: TextStyle(color: Colors.white)),
-            subtitle: Text('Fotos por categoria, independentes da ${MascotConfig.shortName}',
+            subtitle: Text('Capa, perfil, galeria — independentes da ${MascotConfig.shortName}',
                 style: TextStyle(color: AppColors.textTertiary, fontSize: 11)),
             trailing: const Icon(Icons.chevron_right,
                 color: AppColors.textTertiary),
