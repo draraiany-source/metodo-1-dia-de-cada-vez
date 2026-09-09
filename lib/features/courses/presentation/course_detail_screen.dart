@@ -25,7 +25,7 @@ class CourseDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final bloqueado = course.isPremium && !user.isPremium;
     final favoritos = ref.watch(courseFavoritesProvider);
     final isFavorite = favoritos.contains(course.id);

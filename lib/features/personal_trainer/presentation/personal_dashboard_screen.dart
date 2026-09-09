@@ -109,7 +109,7 @@ class _PersonalDashboardScreenState
 
   @override
   Widget build(BuildContext context) {
-    final trainer = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final trainer = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final studentsAsync = ref.watch(ptStudentsProvider(trainer.id));
     final wide = MediaQuery.sizeOf(context).width >= 900;
 

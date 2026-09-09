@@ -38,6 +38,13 @@ class NotificationsService {
       return;
     }
     try {
+      // FCM Web exige VAPID + SW — sem isso getToken() estoura FirebaseException
+      // e no Flutter Web vira TypeError (JavaScriptObject).
+      if (kIsWeb) {
+        _log('🔕 FCM Web: pulando getToken (configure VAPID/SW para ativar).');
+        return;
+      }
+
       // Permissão (iOS pede explicitamente; Android 13+ também).
       final settings = await fm.requestPermission(
         alert: true,

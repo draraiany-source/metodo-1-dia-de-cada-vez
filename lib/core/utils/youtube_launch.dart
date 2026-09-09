@@ -1,15 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/youtube_in_app_screen.dart';
 
 /// Abre links do YouTube preferencialmente **dentro do app**.
-/// Aceita URLs normais, youtu.be, /shorts/ e embed.
-///
-/// Fluxo:
-/// 1) Extrai o videoId e navega para [YoutubeInAppScreen] (pilha Flutter) —
-///    Voltar do Android / AppBar restaura a tela anterior.
-/// 2) Se não for possível embutir, usa Custom Tab / in-app browser.
+/// Aceita URLs normais, youtu.be, /shorts/, /embed/, /live/ e /v/.
 class YoutubeLaunch {
   YoutubeLaunch._();
 
@@ -26,9 +22,7 @@ class YoutubeLaunch {
     }
 
     final host = uri.host.toLowerCase().replaceFirst('www.', '');
-    if (host != 'youtube.com' && host != 'youtu.be' && host != 'm.youtube.com') {
-      return uri;
-    }
+    if (!_isYoutubeHost(host)) return uri;
 
     if (host == 'youtu.be' && uri.pathSegments.isNotEmpty) {
       final id = uri.pathSegments.first;
@@ -37,17 +31,12 @@ class YoutubeLaunch {
       }
     }
 
-    if (uri.pathSegments.length >= 2 && uri.pathSegments[0] == 'shorts') {
-      final id = uri.pathSegments[1];
-      if (id.isNotEmpty) {
-        return Uri.https('www.youtube.com', '/watch', {'v': id});
-      }
-    }
-
-    if (uri.pathSegments.length >= 2 && uri.pathSegments[0] == 'embed') {
-      final id = uri.pathSegments[1];
-      if (id.isNotEmpty) {
-        return Uri.https('www.youtube.com', '/watch', {'v': id});
+    for (final kind in ['shorts', 'embed', 'live', 'v']) {
+      if (uri.pathSegments.length >= 2 && uri.pathSegments[0] == kind) {
+        final id = uri.pathSegments[1];
+        if (id.isNotEmpty) {
+          return Uri.https('www.youtube.com', '/watch', {'v': id});
+        }
       }
     }
 
@@ -60,22 +49,38 @@ class YoutubeLaunch {
     if (uri == null) return null;
     final host = uri.host.toLowerCase().replaceFirst('www.', '');
     if (host == 'youtu.be' && uri.pathSegments.isNotEmpty) {
-      return uri.pathSegments.first;
+      final id = uri.pathSegments.first;
+      if (_looksLikeVideoId(id)) return id;
     }
     final v = uri.queryParameters['v'];
-    if (v != null && v.isNotEmpty) return v;
+    if (v != null && _looksLikeVideoId(v)) return v;
     if (uri.pathSegments.length >= 2 &&
-        (uri.pathSegments[0] == 'shorts' || uri.pathSegments[0] == 'embed')) {
-      return uri.pathSegments[1];
+        (uri.pathSegments[0] == 'shorts' ||
+            uri.pathSegments[0] == 'embed' ||
+            uri.pathSegments[0] == 'live' ||
+            uri.pathSegments[0] == 'v')) {
+      final id = uri.pathSegments[1];
+      if (_looksLikeVideoId(id)) return id;
     }
     return null;
   }
 
-  static bool _isYoutube(Uri uri) {
-    final host = uri.host.toLowerCase().replaceFirst('www.', '');
+  static bool _looksLikeVideoId(String id) {
+    final clean = id.split('&').first.split('?').first;
+    return RegExp(r'^[\w-]{6,}$').hasMatch(clean);
+  }
+
+  static bool _isYoutubeHost(String host) {
     return host == 'youtube.com' ||
         host == 'youtu.be' ||
-        host == 'm.youtube.com';
+        host == 'm.youtube.com' ||
+        host == 'music.youtube.com' ||
+        host == 'gaming.youtube.com';
+  }
+
+  static bool _isYoutube(Uri uri) {
+    final host = uri.host.toLowerCase().replaceFirst('www.', '');
+    return _isYoutubeHost(host);
   }
 
   static Future<bool> open(
@@ -92,6 +97,12 @@ class YoutubeLaunch {
     }
 
     final videoId = extractVideoId(rawUrl);
+
+    // WebView embutido é instável no Flutter Web — abre externo.
+    if (kIsWeb) {
+      return _launchExternal(context, uri, failureMessage);
+    }
+
     if (videoId != null && videoId.isNotEmpty && context.mounted) {
       await Navigator.of(context).push(
         MaterialPageRoute<void>(
@@ -104,7 +115,14 @@ class YoutubeLaunch {
       return true;
     }
 
-    // Fallback: Custom Tab / Safari View — Voltar fecha e retorna ao app.
+    return _launchExternal(context, uri, failureMessage);
+  }
+
+  static Future<bool> _launchExternal(
+    BuildContext context,
+    Uri uri,
+    String failureMessage,
+  ) async {
     try {
       final ok = await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
       if (!ok && context.mounted) {

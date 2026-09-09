@@ -264,7 +264,7 @@ class _EvolutionScreenState extends ConsumerState<EvolutionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final fullHistory = ref.watch(weightHistoryProvider);
     final gam = ref.watch(gamificationProvider);
     final missions = ref.watch(missionsProvider);

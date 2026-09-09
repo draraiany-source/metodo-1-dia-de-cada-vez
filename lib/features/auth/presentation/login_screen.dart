@@ -6,9 +6,11 @@ import '../../../core/constants/app_constants.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/firebase_error_mapper.dart';
 import '../../../core/widgets/auth_hero_header.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
+import '../data/auth_repository.dart';
 import '../providers/auth_providers.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -43,8 +45,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     } catch (e) {
       FeedbackService.play(FeedbackEvent.erro);
       if (mounted && context.mounted) {
+        final msg = e is AuthFailure
+            ? e.message
+            : FirebaseErrorMapper.toUserMessage(
+                e,
+                fallback: 'Não foi possível entrar. Verifique e-mail e senha.',
+              );
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('$e')), // AuthFailure já vem traduzida
+          SnackBar(content: Text(msg)),
         );
       }
     } finally {
@@ -131,7 +139,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           } catch (e) {
                             if (!context.mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('$e')),
+                              SnackBar(
+                                content: Text(
+                                  FirebaseErrorMapper.toUserMessage(
+                                    e,
+                                    fallback:
+                                        'Não foi possível enviar o e-mail de recuperação.',
+                                  ),
+                                ),
+                              ),
                             );
                           }
                         },

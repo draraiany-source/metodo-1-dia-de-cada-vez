@@ -7,7 +7,7 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 import '../theme/app_colors.dart';
 
 /// Reproduz um vídeo do YouTube dentro do app (WebView + embed).
-/// O botão Voltar (AppBar e sistema) fecha esta tela e restaura a anterior.
+/// Em falha de embed, oferece “Abrir no YouTube” sem quebrar o fluxo.
 class YoutubeInAppScreen extends StatefulWidget {
   const YoutubeInAppScreen({
     super.key,
@@ -28,24 +28,36 @@ class _YoutubeInAppScreenState extends State<YoutubeInAppScreen> {
   WebViewController? _controller;
   var _loading = true;
   var _hasError = false;
+  var _usedFallbackHost = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _initPlayer();
-  }
+  Uri get _watchUri =>
+      widget.watchUrl ??
+      Uri.https('www.youtube.com', '/watch', {'v': widget.videoId});
 
-  Future<void> _initPlayer() async {
-    final embed = Uri.https(
-      'www.youtube-nocookie.com',
+  Uri _embedUri({required bool useNocookie}) {
+    final host =
+        useNocookie ? 'www.youtube-nocookie.com' : 'www.youtube.com';
+    return Uri.https(
+      host,
       '/embed/${widget.videoId}',
       {
         'playsinline': '1',
         'rel': '0',
         'modestbranding': '1',
-        'autoplay': '1',
+        'autoplay': '0',
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Começa com youtube.com/embed (mais compatível que nocookie em Android).
+    _initPlayer(useNocookie: false);
+  }
+
+  Future<void> _initPlayer({required bool useNocookie}) async {
+    final embed = _embedUri(useNocookie: useNocookie);
 
     try {
       final controller = WebViewController()
@@ -57,12 +69,16 @@ class _YoutubeInAppScreenState extends State<YoutubeInAppScreen> {
               if (mounted) setState(() => _loading = true);
             },
             onPageFinished: (_) {
-              if (mounted) setState(() => _loading = false);
+              if (mounted) {
+                setState(() {
+                  _loading = false;
+                  _hasError = false;
+                });
+              }
             },
             onWebResourceError: (error) {
-              if (error.isForMainFrame ?? true) {
-                if (mounted) setState(() => _hasError = true);
-              }
+              if (!(error.isForMainFrame ?? true)) return;
+              _handleEmbedFailure();
             },
             onNavigationRequest: (request) {
               final uri = Uri.tryParse(request.url);
@@ -96,18 +112,41 @@ class _YoutubeInAppScreenState extends State<YoutubeInAppScreen> {
         _loading = false;
       });
     } catch (_) {
-      if (!mounted) return;
-      setState(() {
-        _hasError = true;
-        _loading = false;
-      });
+      _handleEmbedFailure();
     }
   }
 
+  void _handleEmbedFailure() {
+    if (!mounted) return;
+    // Tenta nocookie uma vez; se já tentou, mostra fallback amigável.
+    if (!_usedFallbackHost) {
+      _usedFallbackHost = true;
+      _initPlayer(useNocookie: true);
+      return;
+    }
+    setState(() {
+      _hasError = true;
+      _loading = false;
+    });
+  }
+
   Future<void> _openExternal() async {
-    final uri = widget.watchUrl ??
-        Uri.https('www.youtube.com', '/watch', {'v': widget.videoId});
-    await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
+    try {
+      final ok =
+          await launchUrl(_watchUri, mode: LaunchMode.inAppBrowserView);
+      if (!ok) {
+        await launchUrl(_watchUri, mode: LaunchMode.externalApplication);
+      }
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Não foi possível abrir o YouTube. Verifique se o app está instalado.',
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -127,9 +166,9 @@ class _YoutubeInAppScreenState extends State<YoutubeInAppScreen> {
         title: Text(widget.title),
         actions: [
           IconButton(
-            tooltip: 'Abrir no navegador',
+            tooltip: 'Abrir no YouTube',
             onPressed: _openExternal,
-            icon: const Icon(Icons.open_in_browser_rounded),
+            icon: const Icon(Icons.open_in_new_rounded),
           ),
         ],
       ),
@@ -145,12 +184,20 @@ class _YoutubeInAppScreenState extends State<YoutubeInAppScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.error_outline, color: Colors.white70, size: 40),
+                    const Icon(Icons.error_outline,
+                        color: Colors.white70, size: 40),
                     const SizedBox(height: 12),
                     const Text(
                       'Não foi possível carregar o vídeo aqui.',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Ele pode estar privado, com incorporação bloqueada '
+                      'ou temporariamente indisponível.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white70, fontSize: 13),
                     ),
                     const SizedBox(height: 16),
                     FilledButton(
@@ -161,6 +208,20 @@ class _YoutubeInAppScreenState extends State<YoutubeInAppScreen> {
                       child: const Text('Abrir no YouTube'),
                     ),
                     const SizedBox(height: 8),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _hasError = false;
+                          _usedFallbackHost = false;
+                          _loading = true;
+                        });
+                        _initPlayer(useNocookie: false);
+                      },
+                      child: const Text(
+                        'Tentar novamente',
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                    ),
                     TextButton(
                       onPressed: () => Navigator.of(context).maybePop(),
                       child: const Text(

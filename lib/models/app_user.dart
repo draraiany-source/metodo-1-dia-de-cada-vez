@@ -1,4 +1,5 @@
 import '../core/constants/app_constants.dart';
+import '../core/services/firebase_service.dart';
 
 /// Modelo da usuária do app.
 class AppUser {
@@ -184,7 +185,8 @@ class AppUser {
     );
   }
 
-  /// Usuária demo usada no modo local (sem Firebase).
+  /// Usuária demo usada no modo local (sem Firebase) — NÃO usar em produção
+  /// autenticada. Preferir [uiFallback].
   static AppUser demo() => AppUser(
         id: 'demo',
         name: 'Ana Silva',
@@ -205,6 +207,19 @@ class AppUser {
         // conteúdo Premium liberado — sem precisar editar cada tela.
         isPremium: AppConstants.debugUnlockAllPremiumContent,
       );
+
+  /// Visitante sem dados fictícios (Firebase pronto, sessão nula).
+  static AppUser guest() => AppUser(
+        id: 'guest',
+        name: 'Visitante',
+        email: '',
+        memberSince: DateTime.now(),
+        isPremium: AppConstants.debugUnlockAllPremiumContent,
+      );
+
+  /// Fallback de UI: demo só em modo local; visitante sem “Ana Silva” com Firebase.
+  static AppUser uiFallback() =>
+      FirebaseService.isReady ? guest() : demo();
 
   static double? _toDouble(dynamic v) =>
       v == null ? null : (v as num).toDouble();

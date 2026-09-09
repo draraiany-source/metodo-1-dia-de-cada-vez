@@ -51,7 +51,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> {
       _erro = null;
     });
 
-    final user = ref.read(currentUserProvider) ?? AppUser.demo();
+    final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
     if (_current.isPremium && !user.isPremium) {
       setState(() {
         _loading = false;
@@ -181,7 +181,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> {
   Widget build(BuildContext context) {
     final favoritos = ref.watch(videoFavoritesProvider);
     final isFavorite = favoritos.contains(_current.id);
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
 
     return Scaffold(
       backgroundColor: Colors.black,

@@ -65,7 +65,7 @@ class _PremiumDashboardScreenState
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final gamification = ref.watch(gamificationProvider);
     final pesoHist = ref.watch(weightHistoryProvider);
     final taxaHabitos = ref.watch(calendarCompletionRateProvider);

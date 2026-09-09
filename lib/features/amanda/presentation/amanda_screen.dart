@@ -45,7 +45,7 @@ class _AmandaScreenState extends ConsumerState<AmandaScreen> {
   Future<void> _send() async {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
-    final user = ref.read(currentUserProvider) ?? AppUser.demo();
+    final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
 
     setState(() {
       _messages.add(ChatMessage(text: text, fromUser: true));

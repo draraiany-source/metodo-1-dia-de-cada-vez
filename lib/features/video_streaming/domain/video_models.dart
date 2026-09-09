@@ -84,23 +84,46 @@ class VideoContent {
     return VideoContent(
       id: id,
       category: VideoCategory.values.firstWhere(
-          (c) => c.name == m['category'],
+          (c) => c.name == (m['category'] ?? '').toString(),
           orElse: () => VideoCategory.corpoInteiro),
-      subcategory: (m['subcategory'] ?? '') as String,
-      name: (m['name'] ?? '') as String,
-      description: (m['description'] ?? '') as String,
-      teacher: (m['teacher'] ?? '') as String,
-      thumbnailUrl: (m['thumbnailUrl'] ?? '') as String,
-      durationSeconds: (m['durationSeconds'] ?? 0) as int,
-      level: VideoLevel.values.firstWhere((l) => l.name == m['level'],
+      subcategory: '${m['subcategory'] ?? ''}',
+      name: '${m['name'] ?? ''}',
+      description: '${m['description'] ?? ''}',
+      teacher: '${m['teacher'] ?? ''}',
+      thumbnailUrl: '${m['thumbnailUrl'] ?? ''}',
+      durationSeconds: _asInt(m['durationSeconds']),
+      level: VideoLevel.values.firstWhere(
+          (l) => l.name == (m['level'] ?? '').toString(),
           orElse: () => VideoLevel.iniciante),
-      isPremium: (m['isPremium'] ?? false) as bool,
-      order: (m['order'] ?? 0) as int,
-      active: (m['active'] ?? true) as bool,
-      publishedAt: m['publishedAt'] != null
-          ? DateTime.tryParse(m['publishedAt'] as String)
-          : null,
+      isPremium: _asBool(m['isPremium']),
+      order: _asInt(m['order']),
+      active: m.containsKey('active') ? _asBool(m['active']) : true,
+      publishedAt: _asDate(m['publishedAt']),
     );
+  }
+
+  static int _asInt(dynamic v, [int d = 0]) {
+    if (v is int) return v;
+    if (v is num) return v.toInt();
+    return int.tryParse('$v') ?? d;
+  }
+
+  static bool _asBool(dynamic v) {
+    if (v is bool) return v;
+    if (v is num) return v != 0;
+    final s = '$v'.toLowerCase();
+    return s == 'true' || s == '1';
+  }
+
+  static DateTime? _asDate(dynamic v) {
+    if (v == null) return null;
+    if (v is DateTime) return v;
+    if (v is String) return DateTime.tryParse(v);
+    try {
+      return (v as dynamic).toDate() as DateTime;
+    } catch (_) {
+      return null;
+    }
   }
 
   Map<String, dynamic> toMap() => {

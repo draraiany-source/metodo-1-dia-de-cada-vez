@@ -27,7 +27,7 @@ class _EbooksScreenState extends ConsumerState<EbooksScreen> {
   Widget build(BuildContext context) {
     final ebooksAsync = ref.watch(ebooksProvider);
     final favoritos = ref.watch(ebookFavoritesProvider);
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
 
     return Scaffold(
       appBar: AppBar(title: const Text('E-books 📚')),

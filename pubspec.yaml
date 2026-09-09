@@ -79,6 +79,7 @@ dependencies:
   # ---- Pagamentos (RevenueCat) ----
   purchases_flutter: ^8.1.0
   webview_flutter: ^4.14.1
+  webview_flutter_android: ^4.0.0
 
 dev_dependencies:
   flutter_test:

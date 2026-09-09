@@ -30,15 +30,24 @@ class FirebaseService {
     try {
       await Firebase.initializeApp(options: opts);
 
-      // App Check — debug provider em debug; Play Integrity / DeviceCheck em release.
+      // App Check — em Web só ativa se houver provider configurado.
+      // Sem webProvider, activate/getToken geram FirebaseException que no
+      // Flutter Web vira TypeError (JavaScriptObject) e quebra a UI.
       try {
-        await FirebaseAppCheck.instance.activate(
-          androidProvider: kDebugMode
-              ? AndroidProvider.debug
-              : AndroidProvider.playIntegrity,
-          appleProvider:
-              kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
-        );
+        if (kIsWeb) {
+          debugPrint(
+            'App Check: pulado no Web (configure ReCaptchaV3Provider '
+            'antes de ativar).',
+          );
+        } else {
+          await FirebaseAppCheck.instance.activate(
+            androidProvider: kDebugMode
+                ? AndroidProvider.debug
+                : AndroidProvider.playIntegrity,
+            appleProvider:
+                kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
+          );
+        }
       } catch (e) {
         debugPrint('App Check activate falhou (segue sem enforce): $e');
       }

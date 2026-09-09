@@ -82,7 +82,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
   Widget build(BuildContext context) {
     final favoritos = ref.watch(pdfRecipeFavoritesProvider);
     final isFavorite = favoritos.contains(widget.recipe.id);
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final bloqueado = widget.recipe.isPremium && !user.isPremium;
     final r = widget.recipe;
 

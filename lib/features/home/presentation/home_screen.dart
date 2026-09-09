@@ -34,7 +34,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final gamification = ref.watch(gamificationProvider);
     final streak = gamification.streak;
     final glasses = ref.watch(waterLogProvider);

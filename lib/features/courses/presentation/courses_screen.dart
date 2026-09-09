@@ -28,7 +28,7 @@ class _CoursesScreenState extends ConsumerState<CoursesScreen> {
     final coursesAsync = ref.watch(coursesProvider);
     final favoritos = ref.watch(courseFavoritesProvider);
     final progresso = ref.watch(courseProgressProvider.notifier);
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Cursos 📖')),

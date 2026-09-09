@@ -31,9 +31,13 @@ class AuthHttpHeaders {
     headers['Authorization'] = 'Bearer $token';
 
     try {
-      final appCheckToken = await FirebaseAppCheck.instance.getToken();
-      if (appCheckToken != null && appCheckToken.isNotEmpty) {
-        headers['X-Firebase-AppCheck'] = appCheckToken;
+      // App Check no Web ainda não é ativado neste app — getToken() quebra
+      // com TypeError/FirebaseException via interop JS.
+      if (!kIsWeb) {
+        final appCheckToken = await FirebaseAppCheck.instance.getToken();
+        if (appCheckToken != null && appCheckToken.isNotEmpty) {
+          headers['X-Firebase-AppCheck'] = appCheckToken;
+        }
       }
     } catch (e) {
       debugPrint('App Check token indisponivel: $e');

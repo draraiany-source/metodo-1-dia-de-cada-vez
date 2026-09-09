@@ -46,7 +46,7 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
   @override
   void initState() {
     super.initState();
-    final user = ref.read(currentUserProvider) ?? AppUser.demo();
+    final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
     _pesoController = TextEditingController(
         text: user.currentWeight?.toStringAsFixed(1) ?? '');
     _alturaController = TextEditingController(
@@ -217,7 +217,7 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final waterGoalGlasses = WaterCalculator.goalGlassesFor(user.currentWeight);
     final goal = waterGoalGlasses;
     final glasses = ref.watch(waterLogProvider).clamp(0, goal);

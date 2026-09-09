@@ -19,6 +19,14 @@ void main() {
       YoutubeLaunch.extractVideoId('https://www.youtube.com/embed/abc123XYZ01'),
       'abc123XYZ01',
     );
+    expect(
+      YoutubeLaunch.extractVideoId('https://www.youtube.com/live/abc123XYZ01'),
+      'abc123XYZ01',
+    );
+    expect(
+      YoutubeLaunch.extractVideoId('https://m.youtube.com/watch?v=abc123XYZ01&t=10'),
+      'abc123XYZ01',
+    );
   });
 
   test('extractVideoId works for 3 catalog sample videos', () {

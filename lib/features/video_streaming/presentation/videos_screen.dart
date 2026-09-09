@@ -5,11 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/firebase_error_mapper.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/app_states.dart';
 import '../../../core/widgets/common_widgets.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
+import '../data/videos_repository.dart';
 import '../domain/video_models.dart';
 import '../providers/video_providers.dart';
 import 'video_player_screen.dart';
@@ -29,15 +31,19 @@ class _VideosScreenState extends ConsumerState<VideosScreen> {
   Widget build(BuildContext context) {
     final videosAsync = ref.watch(videosProvider);
     final favoritos = ref.watch(videoFavoritesProvider);
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
 
     return Scaffold(
       appBar: const PremiumAppBar(title: 'Treinos em vídeo 🎥'),
       body: SafeArea(
         child: videosAsync.when(
           loading: () => const AppListSkeleton(),
-          error: (_, __) =>
-              AppErrorState(onRetry: () => ref.invalidate(videosProvider)),
+          error: (error, _) => AppErrorState(
+            message: error is VideosFetchException
+                ? error.userMessage
+                : FirebaseErrorMapper.toUserMessage(error),
+            onRetry: () => ref.invalidate(videosProvider),
+          ),
           data: (videos) {
             final filtrados = videos.where((v) {
               if (_filtro != null && v.category != _filtro) return false;
@@ -105,10 +111,12 @@ class _VideosScreenState extends ConsumerState<VideosScreen> {
                         else if (filtrados.isEmpty)
                           const Padding(
                             padding: EdgeInsets.only(top: 40),
-                            child: Center(
-                              child: Text('Nenhum vídeo com esse filtro.',
-                                  style:
-                                      TextStyle(color: AppColors.textSecondary)),
+                            child: ComingSoonView(
+                              emoji: '🎥',
+                              title: 'Nenhum vídeo nesta categoria',
+                              description:
+                                  'Não há vídeos com este filtro ainda. '
+                                  'Escolha “Todas” ou outra categoria.',
                             ),
                           ),
                       ],

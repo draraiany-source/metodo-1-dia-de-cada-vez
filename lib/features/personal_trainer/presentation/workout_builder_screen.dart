@@ -183,7 +183,7 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
               Text('Dê um nome ao treino e adicione ao menos 1 exercício.')));
       return;
     }
-    final trainer = ref.read(currentUserProvider) ?? AppUser.demo();
+    final trainer = ref.read(currentUserProvider) ?? AppUser.uiFallback();
     final existing = widget.existingPlan;
     final plan = WorkoutPlan(
       id: existing?.id ?? '',

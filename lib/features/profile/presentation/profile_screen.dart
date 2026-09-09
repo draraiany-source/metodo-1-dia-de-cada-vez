@@ -26,7 +26,7 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final gam = ref.watch(gamificationProvider);
     final trainerProfile = ref.watch(trainerProfileProvider);
 

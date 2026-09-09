@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/services/auth_http_headers.dart';
 import '../../../core/services/firebase_service.dart';
+import '../../../core/utils/firebase_error_mapper.dart';
 import '../domain/video_models.dart';
 
 class VideoUrlResult {
@@ -16,30 +18,83 @@ class VideoUrlResult {
   bool get ok => url != null;
 }
 
-/// Busca metadados de vídeo (público, leve) e resolve a URL de streaming
-/// sob demanda (protegida — ver Cloud Function `getVideoUrl`).
-///
-/// Por quê separado: se a URL do vídeo Premium ficasse no mesmo documento
-/// público, qualquer usuária logada conseguiria ler o link direto do
-/// Firestore e assistir sem pagar, mesmo com o botão escondido na UI. A
-/// URL real mora em `videos/{id}/private/stream`, com `allow read: if
-/// false` nas regras — só a Cloud Function (Admin SDK) enxerga.
+/// Erro tipado para a UI de vídeos (retry + mensagem amigável).
+class VideosFetchException implements Exception {
+  VideosFetchException(this.userMessage, {this.cause});
+  final String userMessage;
+  final Object? cause;
+  @override
+  String toString() => userMessage;
+}
+
+/// Busca metadados de vídeo (público) e resolve URL via Cloud Function.
 class VideosRepository {
   bool get isAvailable => FirebaseService.isReady;
 
   Future<List<VideoContent>> fetchAll() async {
     if (!isAvailable) return [];
+
     try {
-      final snap = await FirebaseFirestore.instance
-          .collection('videos')
-          .where('active', isEqualTo: true)
-          .orderBy('order')
-          .get();
-      return snap.docs
-          .map((d) => VideoContent.fromMap(d.id, d.data()))
-          .toList();
-    } catch (_) {
-      return [];
+      QuerySnapshot<Map<String, dynamic>> snap;
+      try {
+        snap = await FirebaseFirestore.instance
+            .collection('videos')
+            .where('active', isEqualTo: true)
+            .orderBy('order')
+            .get();
+      } on FirebaseException catch (e) {
+        debugPrint(
+            'videos query composta falhou (${e.code}); tentando fallback.');
+        snap = await FirebaseFirestore.instance
+            .collection('videos')
+            .where('active', isEqualTo: true)
+            .get();
+      }
+
+      final out = <VideoContent>[];
+      for (final d in snap.docs) {
+        try {
+          final parsed = VideoContent.fromMap(d.id, d.data());
+          if (parsed.active) out.add(parsed);
+        } catch (e) {
+          debugPrint('Video parse falhou ${d.id}: $e');
+        }
+      }
+      out.sort((a, b) => a.order.compareTo(b.order));
+      return out;
+    } on FirebaseException catch (e) {
+      try {
+        final all = await FirebaseFirestore.instance.collection('videos').get();
+        final out = <VideoContent>[];
+        for (final d in all.docs) {
+          try {
+            final v = VideoContent.fromMap(d.id, d.data());
+            if (v.active) out.add(v);
+          } catch (err) {
+            debugPrint('Video parse falhou ${d.id}: $err');
+          }
+        }
+        out.sort((a, b) => a.order.compareTo(b.order));
+        if (out.isNotEmpty) return out;
+      } catch (_) {/* segue para throw amigável */}
+
+      throw VideosFetchException(
+        FirebaseErrorMapper.toUserMessage(
+          e,
+          fallback:
+              'Não foi possível carregar os vídeos. Verifique a conexão e tente novamente.',
+        ),
+        cause: e,
+      );
+    } catch (e) {
+      if (e is VideosFetchException) rethrow;
+      throw VideosFetchException(
+        FirebaseErrorMapper.toUserMessage(
+          e,
+          fallback: 'Não foi possível carregar os vídeos. Tente novamente.',
+        ),
+        cause: e,
+      );
     }
   }
 
@@ -70,9 +125,13 @@ class VideosRepository {
       return VideoUrlResult(
           error: (data['error'] ?? 'Não foi possível carregar o vídeo.')
               as String);
-    } catch (_) {
-      return const VideoUrlResult(
-          error: 'Não consegui carregar o vídeo agora.');
+    } catch (e) {
+      return VideoUrlResult(
+        error: FirebaseErrorMapper.toUserMessage(
+          e,
+          fallback: 'Não conseguimos carregar o vídeo agora.',
+        ),
+      );
     }
   }
 }

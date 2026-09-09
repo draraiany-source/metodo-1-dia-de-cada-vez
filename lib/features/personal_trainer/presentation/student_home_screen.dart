@@ -21,7 +21,7 @@ class StudentHomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final studentAsync = ref.watch(
       ptMyStudentProfileProvider((userId: user.id, email: user.email)),
     );

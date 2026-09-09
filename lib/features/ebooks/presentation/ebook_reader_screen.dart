@@ -117,7 +117,7 @@ class _EbookReaderScreenState extends ConsumerState<EbookReaderScreen> {
   Widget build(BuildContext context) {
     final favoritos = ref.watch(ebookFavoritesProvider);
     final isFavorite = favoritos.contains(widget.ebook.id);
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final bloqueado = widget.ebook.isPremium && !user.isPremium;
 
     return Scaffold(

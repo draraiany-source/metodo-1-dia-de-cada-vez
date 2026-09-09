@@ -26,7 +26,7 @@ class _ReportsScreenState extends ConsumerState<ReportsScreen> {
   Future<void> _gerar() async {
     setState(() => _gerando = true);
     try {
-      final user = ref.read(currentUserProvider) ?? AppUser.demo();
+      final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
       final desde = DateTime.now().subtract(Duration(days: _periodDays));
 
       final pesoHist = ref

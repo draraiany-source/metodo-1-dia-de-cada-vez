@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../theme/app_colors.dart';
 import '../design_system/app_spacing.dart';
 import '../design_system/app_typography.dart';
+import '../utils/firebase_error_mapper.dart';
 import 'animations.dart';
 import 'lili_animated.dart';
 import 'lili_widgets.dart';
@@ -245,7 +246,10 @@ class AppAsyncView<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return value.when(
       loading: () => skeleton ?? const AppListSkeleton(),
-      error: (_, __) => AppErrorState(onRetry: onRetry),
+      error: (error, _) => AppErrorState(
+        message: FirebaseErrorMapper.toUserMessage(error),
+        onRetry: onRetry,
+      ),
       data: (d) {
         if (isEmpty != null && isEmpty!(d) && emptyBuilder != null) {
           return emptyBuilder!(d);

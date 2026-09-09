@@ -15,7 +15,7 @@ class CertificatesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final gamification = ref.watch(gamificationProvider);
     final runningAsync = ref.watch(runningHistoryProvider(user.id));
     final totalKm = runningAsync.maybeWhen(

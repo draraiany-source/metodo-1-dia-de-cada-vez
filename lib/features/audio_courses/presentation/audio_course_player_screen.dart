@@ -35,7 +35,7 @@ class _AudioCoursePlayerScreenState
   @override
   void initState() {
     super.initState();
-    final user = ref.read(currentUserProvider) ?? AppUser.demo();
+    final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
     if (widget.course.isPremium && !user.isPremium) return; // gate: ver build()
     if (widget.course.chapters.isNotEmpty) {
       final historico = ref.read(audioHistoryProvider)[widget.course.id];
@@ -117,7 +117,7 @@ class _AudioCoursePlayerScreenState
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(currentUserProvider) ?? AppUser.demo();
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final bloqueado = widget.course.isPremium && !user.isPremium;
 
     if (bloqueado) {

@@ -14,6 +14,7 @@ import 'core/services/feedback_service.dart';
 import 'core/services/notifications_service.dart';
 import 'core/services/local_reminders_service.dart';
 import 'core/services/premium_service.dart';
+import 'core/utils/firebase_error_mapper.dart';
 
 /// Tela de erro legível exibida caso a inicialização falhe de forma
 /// irrecuperável — nunca deixamos a página em branco.
@@ -48,7 +49,7 @@ class _StartupErrorApp extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '$error',
+                    FirebaseErrorMapper.toUserMessage(error),
                     style: const TextStyle(color: Colors.white70),
                     textAlign: TextAlign.center,
                   ),

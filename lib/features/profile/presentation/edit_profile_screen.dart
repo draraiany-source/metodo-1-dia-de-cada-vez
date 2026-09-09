@@ -44,7 +44,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    final user = ref.read(currentUserProvider) ?? AppUser.demo();
+    final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
     final profile = ref.read(trainerProfileProvider);
     _nome = TextEditingController(text: user.name);
     _altura = TextEditingController(
@@ -123,7 +123,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   }
 
   Future<void> _salvar() async {
-    final user = ref.read(currentUserProvider) ?? AppUser.demo();
+    final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
 
     double? parse(String s) => double.tryParse(s.trim().replaceAll(',', '.'));
     final alturaCm = parse(_altura.text);
