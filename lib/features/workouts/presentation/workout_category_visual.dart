@@ -130,11 +130,10 @@ _KindLook _lookOf(WorkoutVisualKind kind) => switch (kind) {
         ),
       WorkoutVisualKind.bracos => _KindLook(
           icon: Icons.sports_gymnastics_rounded,
-          asset: AppIcons.workout,
+          asset: AppIcons.exArm,
         ),
       WorkoutVisualKind.cardio => _KindLook(
-          // Coração + batimento apenas para cardio genérico.
-          icon: Icons.monitor_heart_outlined,
+          icon: Icons.directions_run_rounded,
           asset: AppIcons.cardio,
         ),
       WorkoutVisualKind.corrida => _KindLook(
@@ -143,11 +142,11 @@ _KindLook _lookOf(WorkoutVisualKind kind) => switch (kind) {
         ),
       WorkoutVisualKind.caminhada => _KindLook(
           icon: Icons.directions_walk_rounded,
-          asset: null,
+          asset: AppIcons.walk,
         ),
       WorkoutVisualKind.bike => _KindLook(
           icon: Icons.pedal_bike_rounded,
-          asset: null,
+          asset: AppIcons.bike,
         ),
       WorkoutVisualKind.corridaGps => _KindLook(
           icon: Icons.directions_run_rounded,

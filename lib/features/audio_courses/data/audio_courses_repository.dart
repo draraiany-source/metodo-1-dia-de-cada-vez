@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -71,7 +72,7 @@ class AudioCoursesRepository {
     if (user == null) {
       return const ChapterUrlResult(error: 'Entre na sua conta pra ouvir.');
     }
-    final functionUrl = AppConstants.getContentUrlFunctionUrl;
+    const functionUrl = AppConstants.getContentUrlFunctionUrl;
     if (functionUrl.contains('SEU-PROJETO')) {
       return const ChapterUrlResult(
           error: 'Biblioteca ainda não configurada neste app.');
@@ -84,22 +85,41 @@ class AudioCoursesRepository {
             headers: headers,
             body: jsonEncode({'collection': 'audio_courses', 'docId': courseId}),
           )
-          .timeout(const Duration(seconds: 15));
+          .timeout(const Duration(seconds: 12));
       final data = jsonDecode(res.body) as Map<String, dynamic>;
       if (res.statusCode == 200 && data['data'] != null) {
         final chapters = data['data'] as Map<String, dynamic>;
         final url = chapters[chapterId] as String?;
         if (url == null || url.isEmpty) {
-          return const ChapterUrlResult(error: 'Áudio não configurado.');
+          return const ChapterUrlResult(
+              error:
+                  'Este áudio ainda não foi publicado. Tente outro ou volte mais tarde.');
         }
         return ChapterUrlResult(url: url);
       }
+      if (res.statusCode == 401) {
+        return const ChapterUrlResult(
+            error: 'Sessão expirada. Entre de novo pra ouvir.');
+      }
+      if (res.statusCode == 403) {
+        return const ChapterUrlResult(
+            error: 'Conteúdo Premium. Assine para liberar este áudio.');
+      }
+      if (res.statusCode == 404) {
+        return const ChapterUrlResult(
+            error:
+                'Áudio não encontrado na biblioteca. Pode ainda não estar cadastrado.');
+      }
       return ChapterUrlResult(
-          error: (data['error'] ?? 'Não foi possível carregar o áudio.')
+          error: (data['error'] ??
+                  'Não foi possível carregar o áudio. Tente de novo.')
               as String);
+    } on TimeoutException {
+      return const ChapterUrlResult(
+          error: 'Demorou demais para carregar. Verifique a conexão.');
     } catch (_) {
       return const ChapterUrlResult(
-          error: 'Não consegui carregar o áudio agora.');
+          error: 'Não consegui carregar o áudio agora. A tela continua ok — tente outro.');
     }
   }
 }

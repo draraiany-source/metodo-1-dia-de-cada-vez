@@ -9,6 +9,7 @@ import '../../../core/widgets/animations.dart';
 import '../../missions/providers/missions_providers.dart';
 import '../../nutrition/domain/nutrition_models.dart';
 import '../../nutrition/providers/food_log_providers.dart';
+import '../../recipes/presentation/widgets/recipe_cover_image.dart';
 
 /// Página de detalhe de UMA refeição do plano do dia.
 ///
@@ -51,10 +52,11 @@ class MealDetailScreen extends ConsumerWidget {
             FadeInUp(
               child: Center(
                 child: Container(
-                  width: 110,
-                  height: 110,
+                  width: 140,
+                  height: 140,
+                  clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle,
+                    borderRadius: BorderRadius.circular(24),
                     gradient: AppColors.heroPinkGradient,
                     boxShadow: [
                       BoxShadow(
@@ -64,10 +66,7 @@ class MealDetailScreen extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  child: Center(
-                    child: Text(recipe.emoji,
-                        style: const TextStyle(fontSize: 52)),
-                  ),
+                  child: RecipeCoverImage(recipe: recipe),
                 ),
               ),
             ),
@@ -96,7 +95,7 @@ class MealDetailScreen extends ConsumerWidget {
                     label: '${recipe.kcal} kcal',
                     color: AppColors.warning),
                 const SizedBox(width: 10),
-                _InfoChip(icon: Icons.fitness_center,
+                _InfoChip(icon: Icons.restaurant_rounded,
                     label: '${recipe.protein}g proteína',
                     color: AppColors.info),
               ],

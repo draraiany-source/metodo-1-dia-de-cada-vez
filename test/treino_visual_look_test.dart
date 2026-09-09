@@ -49,12 +49,31 @@ void main() {
     expect(look.label, 'HIIT');
   });
 
-  test('cardio without modality uses heart', () {
+  test('cardio without modality uses cardio neon icon', () {
     final look = treinoVisualLookOf(
       entry(categoria: 'Cardio', grupo: '', nome: 'Cardio steady'),
     );
     expect(look.label, 'Cardio');
-    expect(look.asset, contains('cardio'));
+    expect(look.asset, isNotNull);
+    expect(look.asset!.contains('corrida') || look.asset!.contains('cardio'),
+        isTrue);
+    expect(look.asset, isNot(contains('halter')));
+  });
+
+  test('agachamento uses specific squat icon', () {
+    final look = treinoVisualLookOf(
+      entry(nome: 'Agachamento livre', categoria: 'Hipertrofia', grupo: 'Quadríceps'),
+    );
+    expect(look.source, TreinoVisualSource.exercise);
+    expect(look.asset, contains('agachamento'));
+  });
+
+  test('placeholder never uses heart path', () {
+    final look = treinoVisualLookOf(
+      entry(nome: 'Treino misterioso XYZ', categoria: 'Outros', grupo: ''),
+    );
+    expect(look.source, TreinoVisualSource.placeholder);
+    expect(look.asset, contains('vidro_3d'));
   });
 
   test('visualSection prefers muscle over hybrid cardio', () {

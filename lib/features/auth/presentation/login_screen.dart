@@ -74,7 +74,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               pose: MascotePose.boasVindas,
               mood: LiliMood.viva,
               title: 'Bem-vinda de volta',
-              subtitle: 'Continue de onde parou, um dia de cada vez. 💜',
+              subtitle: 'Continue de onde parou, um dia de cada vez.',
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 28, 24, 24),
@@ -173,21 +173,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     // Abre a Home direto, sem exigir cadastro. Continua
                     // disponível mesmo fora do modo de desenvolvimento —
                     // funções Premium seguem bloqueadas para a visitante.
-                    if (AppConstants.enableGuestMode)
+                    if (AppConstants.enableGuestMode) ...[
                       AuthGhostButton(
                         label: 'Entrar como visitante',
                         onPressed: _continueAsGuest,
                       ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: Text(
-                        'Conhecer o aplicativo sem compromisso — você pode '
-                        'criar sua conta quando quiser.',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            color: AppColors.textSecondary, fontSize: 12),
+                      const SizedBox(height: 20),
+                      Center(
+                        child: Text(
+                          'Conhecer o aplicativo sem compromisso — você pode '
+                          'criar sua conta quando quiser.',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: AppColors.textSecondary, fontSize: 12),
+                        ),
                       ),
-                    ),
+                    ],
                   ],
                 ),
               ),
