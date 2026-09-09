@@ -207,14 +207,124 @@ exports.amandaChat = functions.https.onRequest(async (req, res) => {
 // O app cliente chama esta função em AppConfig.calorieVisionFunctionUrl.
 // ---------------------------------------------------------------------------
 const CALORIE_VISION_PROMPT = `
-Você é um assistente que estima calorias e macros a partir de uma foto de comida.
-Responda SOMENTE com um JSON válido, sem texto antes ou depois, no formato:
-{"name": "nome curto do prato", "kcal": numero_inteiro, "protein": numero_inteiro, "carbs": numero_inteiro, "fat": numero_inteiro, "confidence": "alta" | "media" | "baixa", "detalhe": "explicação breve em 1 frase"}
-protein, carbs e fat são em gramas. Seja conservador: se não der pra
-identificar bem os alimentos ou as porções, use "confidence": "baixa" e
-ainda assim dê a melhor estimativa possível para todos os campos.
-Nunca invente que é impossível estimar — sempre devolva números.
+Você é um assistente que estima calorias e macronutrientes a partir de uma foto de comida.
+Responda SOMENTE com um JSON válido, sem texto antes ou depois, neste formato:
+{
+  "foods": [
+    {
+      "name": "nome do alimento em português",
+      "estimated_grams": 120,
+      "calories": 156,
+      "protein_g": 3.0,
+      "carbs_g": 34.0,
+      "fat_g": 0.4,
+      "fiber_g": 0.5,
+      "confidence": 0.86
+    }
+  ],
+  "totals": {
+    "calories": 520,
+    "protein_g": 32,
+    "carbs_g": 61,
+    "fat_g": 17,
+    "fiber_g": 7
+  },
+  "detalhe": "explicação breve em 1 frase"
+}
+Identifique cada alimento visível no prato (mínimo 1). Valores são ESTIMATIVAS.
+confidence é de 0 a 1. Seja conservador nas porções. Sempre devolva números.
+Se não identificar nada, retorne foods: [] e detalhe explicando.
 `;
+
+function normalizeCalorieVisionResponse(parsed) {
+  if (parsed && Array.isArray(parsed.foods)) {
+    const foods = parsed.foods.map((f) => ({
+      name: (f && f.name) || 'Alimento',
+      estimated_grams: Number(f && f.estimated_grams) || 100,
+      calories: Number(f && (f.calories != null ? f.calories : f.kcal)) || 0,
+      protein_g: Number(f && (f.protein_g != null ? f.protein_g : f.protein)) || 0,
+      carbs_g: Number(f && (f.carbs_g != null ? f.carbs_g : f.carbs)) || 0,
+      fat_g: Number(f && (f.fat_g != null ? f.fat_g : f.fat)) || 0,
+      fiber_g: Number(f && (f.fiber_g != null ? f.fiber_g : f.fiber)) || 0,
+      confidence: Math.min(
+        1,
+        Math.max(0, Number(f && f.confidence) || 0.5),
+      ),
+    }));
+    const totalsFromFoods = foods.reduce(
+      (acc, f) => ({
+        calories: acc.calories + (f.calories || 0),
+        protein_g: acc.protein_g + (f.protein_g || 0),
+        carbs_g: acc.carbs_g + (f.carbs_g || 0),
+        fat_g: acc.fat_g + (f.fat_g || 0),
+        fiber_g: acc.fiber_g + (f.fiber_g || 0),
+      }),
+      { calories: 0, protein_g: 0, carbs_g: 0, fat_g: 0, fiber_g: 0 },
+    );
+    const t = (parsed && parsed.totals) || {};
+    const totals = {
+      calories: Number(t.calories) || totalsFromFoods.calories,
+      protein_g: Number(t.protein_g) || totalsFromFoods.protein_g,
+      carbs_g: Number(t.carbs_g) || totalsFromFoods.carbs_g,
+      fat_g: Number(t.fat_g) || totalsFromFoods.fat_g,
+      fiber_g: Number(t.fiber_g) || totalsFromFoods.fiber_g,
+    };
+    // Compat legado (tela antiga): agregados no topo.
+    return {
+      foods,
+      totals,
+      name: foods.map((f) => f.name).join(' + ') || 'Refeição',
+      kcal: Math.round(totals.calories),
+      protein: Math.round(totals.protein_g),
+      carbs: Math.round(totals.carbs_g),
+      fat: Math.round(totals.fat_g),
+      confidence:
+        foods.length === 0
+          ? 'baixa'
+          : foods.every((f) => f.confidence >= 0.75)
+            ? 'alta'
+            : foods.every((f) => f.confidence >= 0.45)
+              ? 'media'
+              : 'baixa',
+      detalhe: (parsed && parsed.detalhe) || '',
+    };
+  }
+
+  // Formato legado (prato único).
+  return {
+    foods: [
+      {
+        name: (parsed && parsed.name) || 'Refeição',
+        estimated_grams: Number(parsed && parsed.estimated_grams) || 250,
+        calories: Number(parsed && parsed.kcal) || 0,
+        protein_g: Number(parsed && parsed.protein) || 0,
+        carbs_g: Number(parsed && parsed.carbs) || 0,
+        fat_g: Number(parsed && parsed.fat) || 0,
+        fiber_g: Number(parsed && parsed.fiber) || 0,
+        confidence:
+          parsed && parsed.confidence === 'alta'
+            ? 0.85
+            : parsed && parsed.confidence === 'media'
+              ? 0.6
+              : 0.35,
+      },
+    ],
+    totals: {
+      calories: Number(parsed && parsed.kcal) || 0,
+      protein_g: Number(parsed && parsed.protein) || 0,
+      carbs_g: Number(parsed && parsed.carbs) || 0,
+      fat_g: Number(parsed && parsed.fat) || 0,
+      fiber_g: Number(parsed && parsed.fiber) || 0,
+    },
+    name: (parsed && parsed.name) || 'Refeição',
+    kcal: Number(parsed && parsed.kcal) || 0,
+    protein: Number(parsed && parsed.protein) || 0,
+    carbs: Number(parsed && parsed.carbs) || 0,
+    fat: Number(parsed && parsed.fat) || 0,
+    confidence: (parsed && parsed.confidence) || 'baixa',
+    detalhe: (parsed && parsed.detalhe) || '',
+  };
+}
 
 exports.calorieVision = functions.https.onRequest(async (req, res) => {
   setCors(res);
@@ -235,16 +345,18 @@ exports.calorieVision = functions.https.onRequest(async (req, res) => {
       process.env.OPENAI_API_KEY;
 
     if (!apiKey) {
-      return res.status(200).json({
-        name: 'Refeição',
-        kcal: 0,
-        protein: 0,
-        carbs: 0,
-        fat: 0,
-        confidence: 'baixa',
-        detalhe:
-          'Chave da OpenAI não configurada na Cloud Function — registre manualmente.',
-      });
+      return res.status(200).json(
+        normalizeCalorieVisionResponse({
+          name: 'Refeição',
+          kcal: 0,
+          protein: 0,
+          carbs: 0,
+          fat: 0,
+          confidence: 'baixa',
+          detalhe:
+            'Chave da OpenAI não configurada na Cloud Function — registre manualmente.',
+        }),
+      );
     }
 
     const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -260,7 +372,11 @@ exports.calorieVision = functions.https.onRequest(async (req, res) => {
           {
             role: 'user',
             content: [
-              { type: 'text', text: 'Estime as calorias desta refeição.' },
+              {
+                type: 'text',
+                text:
+                  'Identifique os alimentos desta refeição e estime gramas, calorias e macros.',
+              },
               {
                 type: 'image_url',
                 image_url: { url: `data:image/jpeg;base64,${imageBase64}` },
@@ -268,7 +384,7 @@ exports.calorieVision = functions.https.onRequest(async (req, res) => {
             ],
           },
         ],
-        max_tokens: 200,
+        max_tokens: 900,
         temperature: 0.3,
       }),
     });
@@ -281,33 +397,22 @@ exports.calorieVision = functions.https.onRequest(async (req, res) => {
 
     let parsed;
     try {
-      // Remove eventuais cercas de código (```json ... ```) antes de parsear.
       const cleaned = raw.replace(/```json|```/g, '').trim();
       parsed = JSON.parse(cleaned);
     } catch (_) {
-      parsed = { name: 'Refeição', kcal: 0, confidence: 'baixa' };
+      parsed = { foods: [], detalhe: 'Resposta inválida da IA.' };
     }
 
-    return res.status(200).json({
-      name: parsed.name || 'Refeição',
-      kcal: Number(parsed.kcal) || 0,
-      protein: Number(parsed.protein) || 0,
-      carbs: Number(parsed.carbs) || 0,
-      fat: Number(parsed.fat) || 0,
-      confidence: parsed.confidence || 'baixa',
-      detalhe: parsed.detalhe || '',
-    });
+    return res.status(200).json(normalizeCalorieVisionResponse(parsed));
   } catch (e) {
     console.error('calorieVision error', e);
-    return res.status(200).json({
-      name: 'Refeição',
-      kcal: 0,
-      protein: 0,
-      carbs: 0,
-      fat: 0,
-      confidence: 'baixa',
-      detalhe: 'Não consegui analisar a foto agora — registre manualmente.',
-    });
+    return res.status(200).json(
+      normalizeCalorieVisionResponse({
+        foods: [],
+        detalhe:
+          'Não conseguimos analisar essa imagem. Tente tirar outra foto com os alimentos mais visíveis.',
+      }),
+    );
   }
 });
 

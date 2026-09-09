@@ -5,8 +5,9 @@ import 'package:http/http.dart' as http;
 import '../../../core/config/app_config.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/services/auth_http_headers.dart';
+import '../domain/food_analysis_models.dart';
 
-/// Resultado da estimativa de calorias a partir de uma foto de comida.
+/// Resultado legado (prato agregado) — mantido para compatibilidade.
 class CalorieEstimate {
   const CalorieEstimate({
     required this.name,
@@ -23,21 +24,40 @@ class CalorieEstimate {
   final int protein;
   final int carbs;
   final int fat;
-
-  /// 'alta' | 'media' | 'baixa' — a IA nunca tem certeza absoluta a partir
-  /// de uma única foto, então sempre exibimos isso e permitimos ajuste manual.
   final String confidence;
   final String? detalhe;
 
   factory CalorieEstimate.fromMap(Map<String, dynamic> m) => CalorieEstimate(
         name: (m['name'] ?? 'Refeição') as String,
-        kcal: ((m['kcal'] ?? 0) as num).round(),
-        protein: ((m['protein'] ?? 0) as num).round(),
-        carbs: ((m['carbs'] ?? 0) as num).round(),
-        fat: ((m['fat'] ?? 0) as num).round(),
-        confidence: (m['confidence'] ?? 'baixa') as String,
+        kcal: ((m['kcal'] ?? m['calories'] ?? 0) as num).round(),
+        protein: ((m['protein'] ?? m['protein_g'] ?? 0) as num).round(),
+        carbs: ((m['carbs'] ?? m['carbs_g'] ?? 0) as num).round(),
+        fat: ((m['fat'] ?? m['fat_g'] ?? 0) as num).round(),
+        confidence: (m['confidence'] ?? 'baixa').toString(),
         detalhe: m['detalhe'] as String?,
       );
+
+  factory CalorieEstimate.fromAnalysis(NutritionAnalysisResult r) {
+    final t = r.totals;
+    final conf = r.foods.isEmpty
+        ? 'baixa'
+        : r.foods.every((f) => f.confidence >= 0.75)
+            ? 'alta'
+            : r.foods.every((f) => f.confidence >= 0.45)
+                ? 'media'
+                : 'baixa';
+    return CalorieEstimate(
+      name: r.foods.map((f) => f.name).join(' + ').isEmpty
+          ? 'Refeição'
+          : r.foods.map((f) => f.name).join(' + '),
+      kcal: t.kcal,
+      protein: t.proteinG,
+      carbs: t.carbsG,
+      fat: t.fatG,
+      confidence: conf,
+      detalhe: r.notes,
+    );
+  }
 }
 
 class CalorieVisionUnavailable implements Exception {
@@ -48,15 +68,7 @@ class CalorieVisionUnavailable implements Exception {
       '(falta o endpoint da Cloud Function calorieVision).';
 }
 
-/// Repositório da calculadora de calorias por foto.
-///
-/// **Produção**: chama a Cloud Function `calorieVision`, que guarda a chave
-/// da OpenAI no servidor (nunca no app) e usa um modelo com visão para
-/// estimar o prato e as calorias. Configure `AppConfig.calorieVisionFunctionUrl`
-/// (via --dart-define) e faça o deploy da function em `functions/src/index.js`.
-///
-/// **Sem chave configurada**: lança [CalorieVisionUnavailable] — a tela
-/// trata isso oferecendo o registro manual, sem quebrar o app.
+/// Proxy seguro para a Cloud Function `calorieVision` (chave OpenAI só no servidor).
 class CalorieVisionRepository {
   bool get isAvailable {
     final url = _functionUrl;
@@ -67,9 +79,8 @@ class CalorieVisionRepository {
       ? AppConfig.calorieVisionFunctionUrl
       : AppConstants.calorieVisionFunctionUrl;
 
-  /// [imageBytes] já deve vir comprimido (ver [ImagePicker.imageQuality])
-  /// para manter a chamada rápida e barata.
-  Future<CalorieEstimate> estimate(List<int> imageBytes) async {
+  /// Análise multi-alimento estruturada.
+  Future<NutritionAnalysisResult> analyzeMeal(List<int> imageBytes) async {
     if (!isAvailable) throw const CalorieVisionUnavailable();
 
     final base64Image = base64Encode(imageBytes);
@@ -80,12 +91,21 @@ class CalorieVisionRepository {
           headers: headers,
           body: jsonEncode({'imageBase64': base64Image}),
         )
-        .timeout(const Duration(seconds: 30));
+        .timeout(const Duration(seconds: 45));
 
     if (res.statusCode == 200) {
       final data = jsonDecode(res.body) as Map<String, dynamic>;
-      return CalorieEstimate.fromMap(data);
+      return NutritionAnalysisResult.fromApiMap(data);
+    }
+    if (res.statusCode == 401 || res.statusCode == 403) {
+      throw Exception('Usuário não autenticado. Faça login e tente novamente.');
     }
     throw Exception('Falha ao estimar calorias (${res.statusCode})');
+  }
+
+  /// Compatibilidade com chamadores antigos.
+  Future<CalorieEstimate> estimate(List<int> imageBytes) async {
+    final analysis = await analyzeMeal(imageBytes);
+    return CalorieEstimate.fromAnalysis(analysis);
   }
 }

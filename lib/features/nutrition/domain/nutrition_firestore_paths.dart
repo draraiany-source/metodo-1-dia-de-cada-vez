@@ -24,5 +24,22 @@ class NutritionFirestorePaths {
   static String mealPhoto(String uid, String mealId) =>
       'users/$uid/mealPhotos/$mealId.jpg';
 
+  /// Fotos de análise de refeição (comprimidas).
+  static String nutritionPhoto(
+    String uid,
+    int year,
+    int month,
+    String imageId,
+  ) {
+    final m = month.toString().padLeft(2, '0');
+    return 'users/$uid/nutrition/$year/$m/$imageId.jpg';
+  }
+
+  static String nutritionDiary(String uid) =>
+      'users/$uid/nutritionDiary';
+
+  static String nutritionDiaryEntry(String uid, String entryId) =>
+      'users/$uid/nutritionDiary/$entryId';
+
   static const legacyFoodDatabase = 'food_database';
 }

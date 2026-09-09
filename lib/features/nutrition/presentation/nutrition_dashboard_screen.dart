@@ -160,7 +160,7 @@ class NutritionDashboardScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 16),
                   PrimaryButton(
-                    label: 'Fotografar minha refeicao',
+                    label: 'Analisar refeicao com IA',
                     onPressed: () => context.push(Routes.calorieScanner),
                   ),
                   const SizedBox(height: 12),

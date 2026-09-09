@@ -26,6 +26,7 @@ import '../domain/food_database_models.dart';
 import '../providers/food_log_providers.dart';
 import '../providers/water_log_providers.dart';
 import 'food_database_screen.dart';
+import '../../recipes/presentation/widgets/recipe_cover_image.dart';
 
 class NutritionScreen extends ConsumerStatefulWidget {
   const NutritionScreen({super.key});
@@ -146,6 +147,72 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
           .report(MissionEvent.refeicaoRegistrada);
       await FeedbackService.play(FeedbackEvent.sucesso);
     }
+  }
+
+  Future<void> _showFoodEntryDetails(FoodEntry e) async {
+    final hh = e.date.hour.toString().padLeft(2, '0');
+    final mm = e.date.minute.toString().padLeft(2, '0');
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: AppColors.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.fromLTRB(24, 20, 24, 28),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(e.name,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700)),
+            const SizedBox(height: 8),
+            Text(
+              '$hh:$mm · ${e.mealType.label}',
+              style: const TextStyle(color: AppColors.textSecondary),
+            ),
+            const SizedBox(height: 12),
+            Text('${e.kcal} kcal',
+                style: const TextStyle(
+                    color: AppColors.secondary,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            Text(
+              'Proteína ${e.protein} g · Carbo ${e.carbs} g · Gordura ${e.fat} g',
+              style: const TextStyle(
+                  color: AppColors.textSecondary, fontSize: 13),
+            ),
+            if (e.source == FoodEntrySource.foto) ...[
+              const SizedBox(height: 8),
+              const Text(
+                'Origem: análise por foto (estimativa IA)',
+                style: TextStyle(color: AppColors.textTertiary, fontSize: 12),
+              ),
+            ],
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () async {
+                  Navigator.pop(ctx);
+                  await ref.read(foodLogProvider.notifier).remove(e.id);
+                  if (!mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Refeição removida.')),
+                  );
+                },
+                icon: const Icon(Icons.delete_outline),
+                label: const Text('Excluir'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -388,7 +455,7 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('🔥 Calorias de hoje',
+                      const Text('Calorias de hoje',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600)),
@@ -413,26 +480,84 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
                       minHeight: 8,
                     ),
                   ),
-                  const SizedBox(height: 6),
-                  Text(
-                    'Proteína ${macros.$1}/${trainerProfile.metaProteinaG.round()}g · '
-                    'Carbo ${macros.$2}/${trainerProfile.metaCarboidratoG.round()}g · '
-                    'Gordura ${macros.$3}/${trainerProfile.metaGorduraG.round()}g',
-                    style: const TextStyle(
-                        color: AppColors.textTertiary, fontSize: 11),
-                  ),
                   const SizedBox(height: 14),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          onPressed: () =>
-                              context.push(Routes.calorieScanner),
-                          icon: const Icon(Icons.camera_alt_outlined),
-                          label: const Text('Tirar foto'),
+                  _MacroProgressRow(
+                    label: 'Proteínas',
+                    current: macros.$1,
+                    goal: trainerProfile.metaProteinaG.round(),
+                    unit: 'g',
+                  ),
+                  const SizedBox(height: 8),
+                  _MacroProgressRow(
+                    label: 'Carboidratos',
+                    current: macros.$2,
+                    goal: trainerProfile.metaCarboidratoG.round(),
+                    unit: 'g',
+                  ),
+                  const SizedBox(height: 8),
+                  _MacroProgressRow(
+                    label: 'Gorduras',
+                    current: macros.$3,
+                    goal: trainerProfile.metaGorduraG.round(),
+                    unit: 'g',
+                  ),
+                  const SizedBox(height: 16),
+                  Material(
+                    color: AppColors.background,
+                    borderRadius: BorderRadius.circular(AppTheme.radiusSm),
+                    child: InkWell(
+                      borderRadius:
+                          BorderRadius.circular(AppTheme.radiusSm),
+                      onTap: () => context.push(Routes.calorieScanner),
+                      child: Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 44,
+                              height: 44,
+                              decoration: BoxDecoration(
+                                color: AppColors.secondary.withOpacity(0.18),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(Icons.camera_alt_outlined,
+                                  color: AppColors.secondary),
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Column(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Analisar refeição com IA',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    'Tire uma foto da sua refeição e veja uma estimativa de calorias e macronutrientes.',
+                                    style: TextStyle(
+                                      color: AppColors.textSecondary,
+                                      fontSize: 12,
+                                      height: 1.3,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(Icons.chevron_right,
+                                color: AppColors.textTertiary),
+                          ],
                         ),
                       ),
-                      const SizedBox(width: 12),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
                       Expanded(
                         child: OutlinedButton.icon(
                           onPressed: _abrirRegistroManual,
@@ -440,74 +565,89 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
                           label: const Text('Manual'),
                         ),
                       ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () async {
+                            final item = await Navigator.of(context)
+                                .push<FoodItem>(MaterialPageRoute(
+                                    builder: (_) =>
+                                        const FoodDatabaseScreen(
+                                            selectMode: true)));
+                            if (item == null) return;
+                            await ref.read(foodLogProvider.notifier).add(
+                                  item.name,
+                                  item.kcal,
+                                  protein: item.protein,
+                                  carbs: item.carbs,
+                                  fat: item.fat,
+                                );
+                            ref
+                                .read(missionsProvider.notifier)
+                                .report(MissionEvent.refeicaoRegistrada);
+                            await FeedbackService.play(
+                                FeedbackEvent.sucesso);
+                          },
+                          icon: const Icon(Icons.search),
+                          label: const Text('Banco'),
+                        ),
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 8),
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton.icon(
-                      onPressed: () async {
-                        final item = await Navigator.of(context)
-                            .push<FoodItem>(MaterialPageRoute(
-                                builder: (_) => const FoodDatabaseScreen(
-                                    selectMode: true)));
-                        if (item == null) return;
-                        await ref.read(foodLogProvider.notifier).add(
-                              item.name,
-                              item.kcal,
-                              protein: item.protein,
-                              carbs: item.carbs,
-                              fat: item.fat,
-                            );
-                        ref
-                            .read(missionsProvider.notifier)
-                            .report(MissionEvent.refeicaoRegistrada);
-                        await FeedbackService.play(FeedbackEvent.sucesso);
-                      },
-                      icon: const Icon(Icons.search),
-                      label: const Text('Buscar no banco de alimentos'),
-                    ),
-                  ),
                   if (foodEntries.isNotEmpty) ...[
-                    const SizedBox(height: 16),
-                    for (final tipo in MealType.values)
-                      if (foodEntries.any((e) => e.mealType == tipo)) ...[
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 4, top: 4),
-                          child: Text(tipo.label,
-                              style: const TextStyle(
-                                  color: AppColors.secondary,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600)),
-                        ),
-                        ...foodEntries
-                            .where((e) => e.mealType == tipo)
-                            .map((e) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 8),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        e.source == FoodEntrySource.foto
-                                            ? Icons.camera_alt_outlined
-                                            : Icons.edit_outlined,
-                                        size: 14,
-                                        color: AppColors.textTertiary,
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Expanded(
-                                        child: Text(e.name,
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 13)),
-                                      ),
-                                      Text('${e.kcal} kcal',
-                                          style: const TextStyle(
-                                              color: AppColors.textSecondary,
-                                              fontSize: 12)),
-                                    ],
+                    const SizedBox(height: 18),
+                    const Text(
+                      'Refeições de hoje',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(height: 8),
+                    ...foodEntries.map((e) {
+                      final hh = e.date.hour.toString().padLeft(2, '0');
+                      final mm =
+                          e.date.minute.toString().padLeft(2, '0');
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Material(
+                          color: AppColors.background,
+                          borderRadius:
+                              BorderRadius.circular(AppTheme.radiusSm),
+                          child: InkWell(
+                            borderRadius:
+                                BorderRadius.circular(AppTheme.radiusSm),
+                            onTap: () => _showFoodEntryDetails(e),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 12),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    e.source == FoodEntrySource.foto
+                                        ? Icons.camera_alt_outlined
+                                        : Icons.restaurant_outlined,
+                                    size: 16,
+                                    color: AppColors.textTertiary,
                                   ),
-                                )),
-                      ],
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: Text(
+                                      '$hh:$mm — ${e.mealType.label} — ${e.kcal} kcal',
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13),
+                                    ),
+                                  ),
+                                  const Icon(Icons.chevron_right,
+                                      size: 18,
+                                      color: AppColors.textTertiary),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
                   ],
                 ],
               ),
@@ -527,13 +667,12 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
                       Container(
                         width: 56,
                         height: 56,
+                        clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
                           color: AppColors.background,
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Center(
-                            child: Text(r.emoji,
-                                style: const TextStyle(fontSize: 28))),
+                        child: RecipeCoverImage(recipe: r),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -582,10 +721,19 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
           children: [
             Row(
               children: [
-                Text(r.emoji, style: const TextStyle(fontSize: 32)),
+                SizedBox(
+                  width: 48,
+                  height: 48,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: RecipeCoverImage(recipe: r),
+                  ),
+                ),
                 const SizedBox(width: 12),
-                Text(r.title,
-                    style: Theme.of(context).textTheme.titleLarge),
+                Expanded(
+                  child: Text(r.title,
+                      style: Theme.of(context).textTheme.titleLarge),
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -628,6 +776,52 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MacroProgressRow extends StatelessWidget {
+  const _MacroProgressRow({
+    required this.label,
+    required this.current,
+    required this.goal,
+    required this.unit,
+  });
+
+  final String label;
+  final int current;
+  final int goal;
+  final String unit;
+
+  @override
+  Widget build(BuildContext context) {
+    final safeGoal = goal <= 0 ? 1 : goal;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(label,
+                style: const TextStyle(
+                    color: AppColors.textSecondary, fontSize: 12)),
+            Text(
+              '$current / $goal $unit',
+              style: const TextStyle(color: Colors.white, fontSize: 12),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: LinearProgressIndicator(
+            value: (current / safeGoal).clamp(0, 1).toDouble(),
+            backgroundColor: AppColors.background,
+            color: AppColors.secondary,
+            minHeight: 6,
+          ),
+        ),
+      ],
     );
   }
 }

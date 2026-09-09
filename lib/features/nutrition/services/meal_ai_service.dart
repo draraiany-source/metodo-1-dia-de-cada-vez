@@ -1,57 +1,49 @@
 import '../data/calorie_vision_repository.dart';
-import '../domain/macro_totals.dart';
+import '../domain/food_analysis_models.dart';
 import '../domain/meal_item.dart';
 import '../domain/nutrition_enums.dart';
 
 class MealAiAnalysisResult {
   const MealAiAnalysisResult({
     required this.items,
+    required this.analysis,
     this.overallConfidence = AiConfidence.medium,
     this.notes,
   });
 
   final List<MealItem> items;
+  final NutritionAnalysisResult analysis;
   final AiConfidence overallConfidence;
   final String? notes;
 }
 
 class MealAiService {
-  MealAiService(this._legacyVision);
+  MealAiService(this._vision);
 
-  final CalorieVisionRepository _legacyVision;
+  final CalorieVisionRepository _vision;
 
-  bool get isAvailable => _legacyVision.isAvailable;
+  bool get isAvailable => _vision.isAvailable;
 
   Future<MealAiAnalysisResult> analyzePhoto(List<int> imageBytes) async {
-    final estimate = await _legacyVision.estimate(imageBytes);
-    final item = MealItem(
-      id: DateTime.now().microsecondsSinceEpoch.toString(),
-      name: estimate.name,
-      quantity: 1,
-      unit: FoodUnit.portion,
-      weightGrams: 100,
-      source: MealItemSource.iaEstimate,
-      macros: MacroTotals(
-        kcal: estimate.kcal,
-        proteinG: estimate.protein,
-        carbsG: estimate.carbs,
-        fatG: estimate.fat,
-      ),
-      aiConfidence: _mapConfidence(estimate.confidence),
-      notes: estimate.detalhe,
-    );
-    return MealAiAnalysisResult(
-      items: [item],
-      overallConfidence: item.aiConfidence ?? AiConfidence.medium,
-      notes: estimate.detalhe,
-    );
-  }
+    final analysis = await _vision.analyzeMeal(imageBytes);
+    final items = analysis.foods
+        .map((f) => f.toMealItem(source: MealItemSource.iaEstimate))
+        .toList();
 
-  AiConfidence _mapConfidence(String raw) {
-    return switch (raw.toLowerCase()) {
-      'alta' || 'high' => AiConfidence.high,
-      'media' || 'medium' => AiConfidence.medium,
-      _ => AiConfidence.low,
-    };
+    AiConfidence overall = AiConfidence.medium;
+    if (items.isEmpty) {
+      overall = AiConfidence.low;
+    } else if (items.every((i) => i.aiConfidence == AiConfidence.high)) {
+      overall = AiConfidence.high;
+    } else if (items.any((i) => i.aiConfidence == AiConfidence.low)) {
+      overall = AiConfidence.low;
+    }
+
+    return MealAiAnalysisResult(
+      items: items,
+      analysis: analysis,
+      overallConfidence: overall,
+      notes: analysis.notes,
+    );
   }
 }
