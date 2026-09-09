@@ -2,7 +2,17 @@
 
 **Branch:** `consolidacao-recuperacao`  
 **Checkpoint pré-correções:** `d6df97e`  
+**Commit das correções:** `a8c8500`  
 **Data:** 2026-09-09
+
+### APKs disponíveis (teste — NÃO é AAB final)
+
+| Arquivo | Caminho |
+|---------|---------|
+| Debug | `C:\Users\Lenovo\Desktop\metodo 1 dia perfil premium 2\build\app\outputs\flutter-apk\app-debug.apk` |
+| Release (teste) | `C:\Users\Lenovo\Desktop\metodo 1 dia perfil premium 2\build\app\outputs\flutter-apk\app-release.apk` |
+
+> AAB **não** foi gerado (conforme solicitado).
 
 ---
 
