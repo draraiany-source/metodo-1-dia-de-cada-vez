@@ -193,7 +193,7 @@ class _TopBar extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Olá, $first! 👋',
+              Text('Olá, $first!',
                   style: AppTextStyles.h3().copyWith(fontSize: 18)),
               const SizedBox(height: 2),
               Text(
@@ -945,10 +945,10 @@ class _Programa7DiasHomeCard extends StatelessWidget {
                   color: Colors.white.withValues(alpha: 0.18),
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: const Icon(
-                  Icons.self_improvement_rounded,
-                  color: Colors.white,
+                child: AppIconImage(
+                  AppIcons.meditation,
                   size: 28,
+                  fallbackIcon: Icons.self_improvement_rounded,
                 ),
               ),
               const SizedBox(width: 14),

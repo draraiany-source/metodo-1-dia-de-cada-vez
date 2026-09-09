@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../core/assets/app_icons.dart';
 import '../../../core/services/feedback_service.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
@@ -40,7 +42,6 @@ class DiaryScreen extends ConsumerStatefulWidget {
 
 class _DiaryScreenState extends ConsumerState<DiaryScreen> {
   static const _kKey = 'diary_entries';
-  static const _moods = ['😄', '🙂', '😐', '😔', '😫'];
 
   final _controller = TextEditingController();
   int _mood = 1;
@@ -124,12 +125,12 @@ class _DiaryScreenState extends ConsumerState<DiaryScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                for (var i = 0; i < _moods.length; i++)
+                for (var i = 0; i < AppIcons.moodCheckin.length; i++)
                   GestureDetector(
                     onTap: () => setState(() => _mood = i),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
                         color: _mood == i
                             ? AppColors.primary.withOpacity(0.25)
@@ -142,8 +143,12 @@ class _DiaryScreenState extends ConsumerState<DiaryScreen> {
                           width: 2,
                         ),
                       ),
-                      child: Text(_moods[i],
-                          style: const TextStyle(fontSize: 26)),
+                      child: AppIconImage(
+                        AppIcons.moodCheckin[i],
+                        size: 36,
+                        fallbackIcon: Icons.emoji_emotions_outlined,
+                        semanticLabel: 'Humor $i',
+                      ),
                     ),
                   ),
               ],
@@ -195,8 +200,12 @@ class _DiaryScreenState extends ConsumerState<DiaryScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(_moods[e.mood],
-                              style: const TextStyle(fontSize: 24)),
+                          AppIconImage(
+                            AppIcons.moodCheckin[
+                                e.mood.clamp(0, AppIcons.moodCheckin.length - 1)],
+                            size: 28,
+                            fallbackIcon: Icons.emoji_emotions_outlined,
+                          ),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Column(

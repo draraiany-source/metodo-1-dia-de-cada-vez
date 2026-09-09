@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/assets/app_icons.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/date_format.dart';
 import '../../../core/widgets/animations.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../providers/progress_photos_providers.dart';
 
 /// Página de Fotos de progresso — 100% privada e local (nunca sobe pra
@@ -38,12 +40,14 @@ class _ProgressPhotosScreenState extends ConsumerState<ProgressPhotosScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: const Icon(Icons.camera_alt_outlined, color: Colors.white),
+              leading: AppIconImage(AppIcons.camera, size: 24,
+                  fallbackIcon: Icons.camera_alt_outlined),
               title: const Text('Câmera', style: TextStyle(color: Colors.white)),
               onTap: () => Navigator.pop(ctx, ImageSource.camera),
             ),
             ListTile(
-              leading: const Icon(Icons.photo_library_outlined, color: Colors.white),
+              leading: AppIconImage(AppIcons.photos, size: 24,
+                  fallbackIcon: Icons.photo_library_outlined),
               title: const Text('Galeria', style: TextStyle(color: Colors.white)),
               onTap: () => Navigator.pop(ctx, ImageSource.gallery),
             ),
@@ -61,7 +65,7 @@ class _ProgressPhotosScreenState extends ConsumerState<ProgressPhotosScreen> {
         await FeedbackService.play(FeedbackEvent.sucesso);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Foto salva com privacidade! 🔒')),
+            const SnackBar(content: Text('Foto salva com privacidade!')),
           );
         }
       }
@@ -339,8 +343,11 @@ class _EmptyPhotos extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.photo_camera_back_outlined,
-                color: AppColors.textTertiary, size: 56),
+            AppIconImage(
+              AppIcons.photos,
+              size: 56,
+              fallbackIcon: Icons.photo_camera_back_outlined,
+            ),
             const SizedBox(height: 16),
             const Text(
                 'Adicione suas primeiras fotos para acompanhar sua evolução.',

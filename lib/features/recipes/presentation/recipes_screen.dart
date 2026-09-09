@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/assets/app_icons.dart';
 import '../../../core/constants/seed_data.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -45,7 +46,7 @@ extension _CategoriaX on _Categoria {
         _Categoria.airFryer => 'Air Fryer',
         _Categoria.sobremesas => 'Sobremesas',
         _Categoria.shakes => 'Shakes',
-        _Categoria.favoritas => '❤️ Favoritas',
+        _Categoria.favoritas => 'Favoritas',
       };
 
   /// Tag correspondente em `Recipe.tags` — `null` para "Todas"/"Favoritas",
@@ -439,7 +440,8 @@ class _SearchField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'Buscar receitas...',
               prefixIcon:
-                  const Icon(Icons.search, color: AppColors.textSecondary),
+                  const AppIconImage(AppIcons.search,
+                      size: 22, fallbackIcon: Icons.search),
               suffixIcon: ValueListenableBuilder<TextEditingValue>(
                 valueListenable: controller,
                 builder: (context, value, _) {
@@ -632,6 +634,7 @@ class _RecommendedCard extends StatelessWidget {
                     runSpacing: 8,
                     children: [
                       _RecipeMeta(
+                          iconAsset: AppIcons.calories,
                           icon: Icons.local_fire_department_rounded,
                           label: '${recipe.kcal} kcal'),
                       _RecipeMeta(
@@ -641,6 +644,7 @@ class _RecommendedCard extends StatelessWidget {
                           icon: Icons.signal_cellular_alt_rounded,
                           label: recipe.difficulty),
                       _RecipeMeta(
+                          iconAsset: AppIcons.recipes,
                           icon: Icons.restaurant_rounded,
                           label: recipe.category),
                     ],
@@ -675,8 +679,14 @@ class _RecommendedCard extends StatelessWidget {
 }
 
 class _RecipeMeta extends StatelessWidget {
-  const _RecipeMeta({required this.icon, required this.label});
-  final IconData icon;
+  const _RecipeMeta({
+    this.icon,
+    this.iconAsset,
+    required this.label,
+  }) : assert(icon != null || iconAsset != null);
+
+  final IconData? icon;
+  final String? iconAsset;
   final String label;
 
   @override
@@ -690,7 +700,10 @@ class _RecipeMeta extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: AppColors.secondary),
+          if (iconAsset != null)
+            AppIconImage(iconAsset!, size: 14, fallbackIcon: icon ?? Icons.info)
+          else
+            Icon(icon, size: 14, color: AppColors.secondary),
           const SizedBox(width: 5),
           Text(
             label,
@@ -907,7 +920,8 @@ class _ErrorState extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: onRetry,
-              icon: const Icon(Icons.refresh),
+              icon: AppIconImage(AppIcons.retry, size: 20,
+                  fallbackIcon: Icons.refresh),
               label: const Text('Tentar novamente'),
             ),
           ],

@@ -232,7 +232,7 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
           children: [
-            Text('Nutrição 🥗',
+            Text('Nutrição',
                 style: Theme.of(context).textTheme.headlineMedium),
             const Text('Coma bem, um dia de cada vez',
                 style: TextStyle(color: AppColors.textSecondary)),
@@ -315,7 +315,7 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
                               pose: MascotePose.hidratacao,
                               mood: LiliMood.respirando,
                               height: MascotSizes.header),
-                      const Text('💧 Água do dia',
+                      const Text('Água do dia',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600)),
@@ -520,8 +520,11 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
                                 color: AppColors.secondary.withOpacity(0.18),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: const Icon(Icons.camera_alt_outlined,
-                                  color: AppColors.secondary),
+                              child: AppIconImage(
+                                AppIcons.cameraFood,
+                                size: 26,
+                                fallbackIcon: Icons.camera_alt_outlined,
+                              ),
                             ),
                             const SizedBox(width: 12),
                             const Expanded(

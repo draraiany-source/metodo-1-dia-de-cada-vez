@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/assets/app_icons.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/date_format.dart';
 import '../../../core/widgets/animations.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../providers/measurement_history_providers.dart';
 
 /// Página dedicada de Medidas — registrar, consultar histórico, comparar
@@ -171,7 +173,7 @@ class _MeasurementsScreenState extends ConsumerState<MeasurementsScreen> {
     await FeedbackService.play(FeedbackEvent.sucesso);
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Medidas registradas! 📏')),
+        const SnackBar(content: Text('Medidas registradas!')),
       );
     }
   }
@@ -369,7 +371,8 @@ class _EmptyMeasurements extends StatelessWidget {
       padding: const EdgeInsets.only(top: 40),
       child: Column(
         children: [
-          const Icon(Icons.straighten, color: AppColors.textTertiary, size: 56),
+          AppIconImage(AppIcons.measurement, size: 56,
+              fallbackIcon: Icons.straighten),
           const SizedBox(height: 16),
           const Text('Nenhuma medida registrada ainda.',
               textAlign: TextAlign.center,

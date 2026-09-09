@@ -11,6 +11,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/date_format.dart';
 import '../../../core/mascot/mascot_widget.dart';
 import '../../../core/widgets/animations.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/app_page.dart';
 import '../../../core/widgets/lili_widgets.dart';
 import '../../../core/widgets/quick_access_tile.dart';
@@ -257,7 +258,7 @@ class _EvolutionScreenState extends ConsumerState<EvolutionScreen> {
     await FeedbackService.play(FeedbackEvent.sucesso);
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Peso registrado! ⚖️')),
+        const SnackBar(content: Text('Peso registrado!')),
       );
     }
   }
@@ -1053,12 +1054,12 @@ class _ConquistasSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final metaAgua = WaterCalculator.goalGlassesFor(user.currentWeight);
     final conquistas = <String>[
-      if (user.totalWorkouts >= 1) 'Primeiro treino concluído 🏅',
-      if (gam.streak >= 7) '7 dias de sequência 🔥',
+      if (user.totalWorkouts >= 1) 'Primeiro treino concluído',
+      if (gam.streak >= 7) '7 dias de sequência',
       if ((user.lostWeight ?? 0) > 0)
-        '${user.lostWeight!.toStringAsFixed(1)} kg eliminados 🎯',
-      if (metaAgua > 0 && glasses >= metaAgua) 'Meta de água cumprida 💧',
-      if (user.totalWorkouts >= 10) '10 treinos concluídos 💪',
+        '${user.lostWeight!.toStringAsFixed(1)} kg eliminados',
+      if (metaAgua > 0 && glasses >= metaAgua) 'Meta de água cumprida',
+      if (user.totalWorkouts >= 10) '10 treinos concluídos',
     ];
 
     if (conquistas.isEmpty) {
@@ -1136,8 +1137,11 @@ class _EmptyProgressState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.monitor_weight_outlined,
-                color: AppColors.textTertiary, size: 56),
+            AppIconImage(
+              AppIcons.weight,
+              size: 56,
+              fallbackIcon: Icons.monitor_weight_outlined,
+            ),
             const SizedBox(height: 16),
             const Text(
                 'Comece registrando seu peso para acompanhar sua evolução.',
@@ -1184,7 +1188,8 @@ class _ErrorState extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: onRetry,
-              icon: const Icon(Icons.refresh),
+              icon: AppIconImage(AppIcons.retry, size: 20,
+                  fallbackIcon: Icons.refresh),
               label: const Text('Tentar novamente'),
             ),
           ],

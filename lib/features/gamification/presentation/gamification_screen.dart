@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import '../../../core/assets/app_icons.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/seed_data.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/widgets/animations.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -43,7 +45,7 @@ class GamificationScreen extends ConsumerWidget {
                   mood: LiliMood.comemorando,
                   height: 130),
               const SizedBox(height: 12),
-              Text('Nível ${next.level}! 🎉',
+              Text('Nível ${next.level}!',
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -64,7 +66,7 @@ class GamificationScreen extends ConsumerWidget {
     });
 
     return Scaffold(
-      appBar: const PremiumAppBar(title: 'Conquistas 🏆'),
+      appBar: const PremiumAppBar(title: 'Conquistas'),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
@@ -213,8 +215,11 @@ class GamificationScreen extends ConsumerWidget {
                         children: [
                           Opacity(
                             opacity: a.unlocked ? 1 : 0.3,
-                            child: Text(a.emoji,
-                                style: const TextStyle(fontSize: 34)),
+                            child: AppIconImage(
+                              AppIcons.forAchievementId(a.id),
+                              size: 40,
+                              fallbackIcon: Icons.emoji_events_outlined,
+                            ),
                           ),
                           const SizedBox(height: 6),
                           Padding(

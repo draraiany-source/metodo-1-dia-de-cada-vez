@@ -7,10 +7,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/assets/app_icons.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/services/firebase_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
 import '../../auth/providers/auth_providers.dart';
@@ -490,7 +492,8 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
                       onPressed: busy
                           ? null
                           : () => _pick(ImageSource.camera),
-                      icon: const Icon(Icons.camera_alt_outlined),
+                      icon: AppIconImage(AppIcons.camera, size: 22,
+                          fallbackIcon: Icons.camera_alt_outlined),
                       label: const Text('Tirar foto'),
                     ),
                   ),
@@ -500,7 +503,8 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
                       onPressed: busy
                           ? null
                           : () => _pick(ImageSource.gallery),
-                      icon: const Icon(Icons.photo_library_outlined),
+                      icon: AppIconImage(AppIcons.photos, size: 22,
+                          fallbackIcon: Icons.photo_library_outlined),
                       label: const Text('Escolher da galeria'),
                     ),
                   ),
@@ -514,7 +518,8 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
                       onPressed: busy
                           ? null
                           : () => _pick(ImageSource.gallery),
-                      icon: const Icon(Icons.swap_horiz),
+                      icon: AppIconImage(AppIcons.retry, size: 22,
+                          fallbackIcon: Icons.swap_horiz),
                       label: const Text('Trocar foto'),
                     ),
                   ),
@@ -522,7 +527,8 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
                   Expanded(
                     child: ElevatedButton.icon(
                       onPressed: busy || _photoBytes == null ? null : _analyze,
-                      icon: const Icon(Icons.auto_awesome),
+                      icon: AppIconImage(AppIcons.cameraFood, size: 22,
+                          fallbackIcon: Icons.auto_awesome),
                       label: const Text('Analisar refeição'),
                     ),
                   ),
@@ -557,7 +563,8 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
                                 _pick(ImageSource.camera);
                               }
                             },
-                      icon: const Icon(Icons.refresh),
+                      icon: AppIconImage(AppIcons.retry, size: 20,
+                          fallbackIcon: Icons.refresh),
                       label: const Text('Tentar novamente'),
                     ),
                   ],
@@ -632,7 +639,8 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
               ),
               TextButton.icon(
                 onPressed: busy ? null : _addFood,
-                icon: const Icon(Icons.add),
+                icon: AppIconImage(AppIcons.add, size: 20,
+                    fallbackIcon: Icons.add),
                 label: const Text('Adicionar alimento'),
               ),
               const SizedBox(height: 12),
@@ -765,12 +773,12 @@ class _FoodTile extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: onDelete,
-                  icon: const Icon(Icons.delete_outline,
-                      color: AppColors.textTertiary),
+                  icon: AppIconImage(AppIcons.delete, size: 20,
+                      fallbackIcon: Icons.delete_outline),
                   tooltip: 'Excluir alimento',
                 ),
-                const Icon(Icons.edit_outlined,
-                    size: 18, color: AppColors.textTertiary),
+                AppIconImage(AppIcons.edit, size: 18,
+                    fallbackIcon: Icons.edit_outlined),
               ],
             ),
           ),

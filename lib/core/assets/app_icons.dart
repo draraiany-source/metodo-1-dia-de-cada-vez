@@ -273,4 +273,17 @@ class AppIcons {
   ];
 
   static const List<String> all3d = all;
+
+  /// Mapa id de conquista (seed) → asset do pacote Cursor.
+  static String forAchievementId(String id) {
+    return switch (id) {
+      'primeiro_treino' => achFirstWorkout,
+      'sete_dias' => achStreak7,
+      'primeira_corrida' => achFirstRun,
+      'dez_treinos' => achWorkouts25,
+      'meta_peso' => achWeightGoal,
+      'cinco_km' => achRun5k,
+      _ => trophy,
+    };
+  }
 }
