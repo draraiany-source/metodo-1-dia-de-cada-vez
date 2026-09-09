@@ -198,7 +198,7 @@ class AdminScreen extends ConsumerWidget {
             title: const Text('Editar perfil Quem Sou Eu',
                 style: TextStyle(color: Colors.white)),
             subtitle: const Text(
-                'Textos, especialidades, formação, redes e contato',
+                'Conheça a Amanda: textos, CTAs, formação, redes e contato',
                 style: TextStyle(color: AppColors.textTertiary, fontSize: 11)),
             trailing: const Icon(Icons.chevron_right,
                 color: AppColors.textTertiary),

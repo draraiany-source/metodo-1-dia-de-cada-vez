@@ -156,7 +156,7 @@ class _PersonalDashboardScreenState
                 size: 24,
                 fallbackIcon: Icons.edit_outlined,
               ),
-              tooltip: 'Editar meu perfil',
+              tooltip: 'Editar Quem Sou Eu',
               onPressed: () =>
                   AppNavigation.open(context, Routes.amandaProfileEdit),
             ),
@@ -492,14 +492,14 @@ class _PersonalBody extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Editar meu perfil',
+                            Text('Editar Quem Sou Eu',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w800,
                                     fontSize: 15)),
                             SizedBox(height: 4),
                             Text(
-                              'Quem Sou Eu: textos, especialidades, redes e contato.',
+                              'Apresentação, história, método, redes e contato.',
                               style: TextStyle(
                                   color: AppColors.textSecondary,
                                   fontSize: 12.5,
