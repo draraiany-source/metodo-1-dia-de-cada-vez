@@ -31,7 +31,7 @@ class AudiosMeditationsHubScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Áudios & Meditações'),
+        title: const Text('Áudios de transformação'),
         backgroundColor: AppColors.surfaceDeep,
       ),
       body: ListView(

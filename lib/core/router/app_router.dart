@@ -66,6 +66,10 @@ import '../../features/personal_amanda/presentation/amanda_assets_admin_screen.d
 import '../../features/personal_amanda/presentation/amanda_profile_edit_screen.dart';
 import '../../features/mascot_lili/presentation/lili_assets_admin_screen.dart';
 import '../../features/personal_trainer/presentation/pt_hub_screen.dart';
+import '../../features/personal_cms/presentation/personal_cms_hub_screen.dart';
+import '../../features/personal_cms/presentation/treinos_cms_screen.dart';
+import '../../features/personal_cms/presentation/recipes_cms_screen.dart';
+import '../../features/personal_cms/presentation/meditations_cms_screen.dart';
 import '../../features/nutrition/presentation/food_database_screen.dart';
 import '../../features/nutrition/presentation/shopping_list_screen.dart';
 import '../../features/nutrition/presentation/nutrition_dashboard_screen.dart';
@@ -158,6 +162,11 @@ class Routes {
   static const meditations = '/meditations';
   static const liliAudios = '/lili-audios';
   static const audioCoursesAdmin = '/admin/audio-courses';
+  static const painelPersonal = '/painel-personal';
+  static const personalCms = '/painel-personal'; // alias
+  static const personalCmsTreinos = '/painel-personal/treinos';
+  static const personalCmsRecipes = '/painel-personal/receitas';
+  static const personalCmsMeditations = '/painel-personal/meditacoes';
 }
 
 /// Provider que indica se o onboarding já foi concluído.
@@ -309,7 +318,15 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         return Routes.home;
       }
 
-      // 6) Área PT: aluno ok; guest bloqueado do hub de gestão profunda
+      // 6) Painel da Personal (CMS) — só admin/personal (inclui sub-rotas).
+      if (path == Routes.painelPersonal ||
+          path.startsWith('${Routes.painelPersonal}/')) {
+        if (user == null || isGuest) return Routes.login;
+        if (user.isAdmin || user.isPersonalTrainer) return null;
+        return Routes.home;
+      }
+
+      // 7) Área PT: aluno ok; guest bloqueado do hub de gestão profunda
       //    (PtHub decide Personal vs Aluno na UI).
       if (path == Routes.personalTrainer && (user == null || isGuest)) {
         return Routes.login;
@@ -361,6 +378,23 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.personalTrainer,
         pageBuilder: (_, s) => _fadeSlide(s, const PtHubScreen()),
+      ),
+      GoRoute(
+        path: Routes.painelPersonal,
+        pageBuilder: (_, s) =>
+            _fadeSlide(s, const PersonalCmsHubScreen()),
+      ),
+      GoRoute(
+        path: Routes.personalCmsTreinos,
+        pageBuilder: (_, s) => _fadeSlide(s, const TreinosCmsScreen()),
+      ),
+      GoRoute(
+        path: Routes.personalCmsRecipes,
+        pageBuilder: (_, s) => _fadeSlide(s, const RecipesCmsScreen()),
+      ),
+      GoRoute(
+        path: Routes.personalCmsMeditations,
+        pageBuilder: (_, s) => _fadeSlide(s, const MeditationsCmsScreen()),
       ),
       GoRoute(
         path: Routes.foodDatabase,

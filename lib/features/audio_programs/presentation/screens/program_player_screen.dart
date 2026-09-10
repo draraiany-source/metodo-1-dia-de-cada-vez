@@ -1,11 +1,11 @@
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/design_system/app_spacing.dart';
+import '../../../../core/mascot/lily_catalog.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/lily_character_widget.dart';
 import '../../domain/entities/audio_program.dart';
 import '../../providers/audio_program_providers.dart';
 import '../../providers/program_player_controller.dart';
@@ -29,6 +29,7 @@ class ProgramPlayerScreen extends ConsumerStatefulWidget {
 
 class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
   String? _openedFor;
+  bool _celebrationSheetOpen = false;
 
   @override
   void didChangeDependencies() {
@@ -51,17 +52,27 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
         audio = null;
       }
     }
-    if (audio == null || !mounted) {
-      if (mounted && audio == null) {
-        // Mantém tela utilizável com mensagem via controller se possível.
-      }
-      return;
-    }
+    if (audio == null || !mounted) return;
 
     _openedFor = key;
     final progressAsync = ref.read(programProgressProvider(widget.programId));
     final isFavorite = progressAsync.value?.isFavorite(audio.id) ?? false;
     if (!mounted) return;
+    await ref
+        .read(programPlayerControllerProvider(widget.programId).notifier)
+        .open(audio, isFavorite: isFavorite);
+  }
+
+  Future<void> _retryOpen() async {
+    final state = ref.read(programPlayerControllerProvider(widget.programId));
+    final audio = state.audio ?? widget.initialAudio;
+    if (audio == null) {
+      _openedFor = null;
+      await _tryOpen();
+      return;
+    }
+    final progressAsync = ref.read(programProgressProvider(widget.programId));
+    final isFavorite = progressAsync.value?.isFavorite(audio.id) ?? false;
     await ref
         .read(programPlayerControllerProvider(widget.programId).notifier)
         .open(audio, isFavorite: isFavorite);
@@ -73,6 +84,64 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
     return '$m:$s';
   }
 
+  Future<void> _showCelebrationSheet() async {
+    if (_celebrationSheetOpen || !mounted) return;
+    _celebrationSheetOpen = true;
+    final controller =
+        ref.read(programPlayerControllerProvider(widget.programId).notifier);
+    controller.acknowledgeCelebration();
+
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: AppColors.surfaceDeep,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 20, 24, 28),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const LilyCharacterWidget(
+                  situation: LilySituation.celebrating,
+                  height: 140,
+                  animated: false,
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Você concluiu mais um passo da sua jornada.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppColors.textPrimary,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
+                    height: 1.35,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(ctx).pop(),
+                    child: const Text('Continuar'),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(ctx).pop(),
+                  child: const Text('Fechar'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    if (mounted) _celebrationSheetOpen = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller =
@@ -81,6 +150,17 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
     final programAsync = ref.watch(programByIdProvider(widget.programId));
     final audio = state.audio ?? widget.initialAudio;
     final author = programAsync.value?.author ?? 'Amanda Lopes';
+
+    ref.listen<ProgramPlayerState>(
+      programPlayerControllerProvider(widget.programId),
+      (prev, next) {
+        if (next.celebrationPending && !(prev?.celebrationPending ?? false)) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _showCelebrationSheet();
+          });
+        }
+      },
+    );
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -119,7 +199,7 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
               ),
             ),
             Text(
-              audio?.title ?? 'Carregando…',
+              audio?.title ?? 'Preparando seu áudio…',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 20,
@@ -141,7 +221,7 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
               ),
             ],
             const SizedBox(height: AppSpacing.xxl),
-            if (state.error != null)
+            if (state.error != null) ...[
               Padding(
                 padding: const EdgeInsets.only(bottom: AppSpacing.md),
                 child: Text(
@@ -150,9 +230,24 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
                   style: const TextStyle(color: AppColors.danger),
                 ),
               ),
+              ElevatedButton(
+                onPressed: _retryOpen,
+                child: const Text('Tentar novamente'),
+              ),
+              const SizedBox(height: AppSpacing.lg),
+            ],
             if (state.isLoading)
-              const CircularProgressIndicator(color: AppColors.secondary)
-            else ...[
+              const Column(
+                children: [
+                  CircularProgressIndicator(color: AppColors.secondary),
+                  SizedBox(height: AppSpacing.md),
+                  Text(
+                    'Preparando seu áudio…',
+                    style: TextStyle(color: AppColors.textSecondary),
+                  ),
+                ],
+              )
+            else if (state.error == null) ...[
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(
                   activeTrackColor: AppColors.secondary,
@@ -179,7 +274,7 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
                     Text(_fmt(state.position),
                         style:
                             const TextStyle(color: AppColors.textSecondary)),
-                    Text(_fmt(state.duration),
+                    Text('-${_fmt(state.remaining)}',
                         style:
                             const TextStyle(color: AppColors.textSecondary)),
                   ],
@@ -191,8 +286,8 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
                 children: [
                   IconButton(
                     iconSize: 32,
-                    tooltip: '-15s',
-                    icon: const Icon(Icons.replay,
+                    tooltip: '-10s',
+                    icon: const Icon(Icons.replay_10,
                         color: AppColors.textPrimary),
                     onPressed: controller.back15,
                   ),
@@ -210,8 +305,8 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
                   const SizedBox(width: AppSpacing.lg),
                   IconButton(
                     iconSize: 32,
-                    tooltip: '+15s',
-                    icon: const Icon(Icons.forward_30,
+                    tooltip: '+10s',
+                    icon: const Icon(Icons.forward_10,
                         color: AppColors.textPrimary),
                     onPressed: controller.forward15,
                   ),

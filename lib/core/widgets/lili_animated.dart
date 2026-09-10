@@ -98,6 +98,7 @@ class _AnimatedLiliMascotState extends State<AnimatedLiliMascot>
       pose: widget.pose,
       height: widget.height,
       fit: widget.fit,
+      alignment: Alignment.center,
     );
     if (widget.mood == LiliMood.estatica) return mascot;
 

@@ -63,7 +63,7 @@ class MotivationalLilyCard extends StatelessWidget {
                 child: ColoredBox(
                   color: Colors.black,
                   child: Align(
-                    alignment: Alignment.bottomCenter,
+                    alignment: Alignment.center,
                     child: AnimatedLiliMascot(
                       pose: pose,
                       mood: mood,

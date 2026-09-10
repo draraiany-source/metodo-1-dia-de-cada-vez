@@ -12,6 +12,11 @@ final videosProvider = FutureProvider<List<VideoContent>>((ref) {
   return ref.read(videosRepositoryProvider).fetchAll();
 });
 
+/// Inclui desativados — só para telas de CMS / admin.
+final videosAdminListProvider = FutureProvider<List<VideoContent>>((ref) {
+  return ref.read(videosRepositoryProvider).fetchAllForAdmin();
+});
+
 class VideoFavoritesNotifier extends StateNotifier<Set<String>> {
   VideoFavoritesNotifier() : super({}) {
     _load();

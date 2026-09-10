@@ -8,9 +8,11 @@ import 'package:share_plus/share_plus.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../../core/mascot/lily_catalog.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/widgets/lily_character_widget.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../domain/audio_course_models.dart';
@@ -27,10 +29,22 @@ class AudioCoursePlayerScreen extends ConsumerStatefulWidget {
 
 class _AudioCoursePlayerScreenState
     extends ConsumerState<AudioCoursePlayerScreen> {
+  static const _meditationCategories = {
+    AudioCourseCategory.meditacao,
+    AudioCourseCategory.respiracao,
+    AudioCourseCategory.ansiedade,
+    AudioCourseCategory.sono,
+  };
+
   AudioChapter? _current;
   double _speed = 1.0;
   bool _loading = false;
+  String? _error;
+  bool _completionSheetOpen = false;
   StreamSubscription<PlayerState>? _stateSub;
+
+  bool get _isMeditation =>
+      _meditationCategories.contains(widget.course.category);
 
   @override
   void initState() {
@@ -65,6 +79,7 @@ class _AudioCoursePlayerScreenState
     setState(() {
       _current = chapter;
       _loading = true;
+      _error = null;
     });
     try {
       final result = await ref
@@ -72,10 +87,10 @@ class _AudioCoursePlayerScreenState
           .resolveChapterUrl(widget.course.id, chapter.id);
       if (!result.ok) {
         if (mounted) {
-          setState(() => _loading = false);
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(result.error ?? 'Não consegui tocar este áudio.')),
-          );
+          setState(() {
+            _loading = false;
+            _error = result.error ?? 'Não consegui tocar este áudio.';
+          });
         }
         return;
       }
@@ -88,23 +103,87 @@ class _AudioCoursePlayerScreenState
       ref.read(nowPlayingProvider.notifier).state =
           (widget.course, chapter);
 
-      // Ao terminar, avança pro próximo capítulo automaticamente.
       await _stateSub?.cancel();
       _stateSub = player.playerStateStream.listen((s) {
         if (s.processingState == ProcessingState.completed) {
-          _proximoCapitulo();
+          _onChapterCompleted();
         }
       });
     } catch (_) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Não consegui carregar este áudio agora.')),
-        );
+        setState(() {
+          _error = 'Não consegui carregar este áudio agora.';
+        });
       }
     } finally {
       if (mounted) setState(() => _loading = false);
     }
+  }
+
+  Future<void> _retry() async {
+    final chapter = _current;
+    if (chapter == null) return;
+    await _play(chapter);
+  }
+
+  Future<void> _onChapterCompleted() async {
+    if (!mounted || _completionSheetOpen) return;
+    _completionSheetOpen = true;
+
+    final message = _isMeditation
+        ? 'Parabéns. Você separou alguns minutos para cuidar de você.'
+        : 'Você concluiu mais um passo da sua jornada.';
+    final buttonLabel = _isMeditation ? 'Concluir' : 'Continuar';
+
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: AppColors.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (ctx) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 20, 24, 28),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                LilyCharacterWidget(
+                  situation: _isMeditation
+                      ? LilySituation.meditating
+                      : LilySituation.celebrating,
+                  height: 140,
+                  animated: false,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  message,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
+                    height: 1.35,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(ctx).pop(),
+                    child: Text(buttonLabel),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    if (!mounted) return;
+    _completionSheetOpen = false;
+    _proximoCapitulo();
   }
 
   void _proximoCapitulo() {
@@ -176,7 +255,7 @@ class _AudioCoursePlayerScreenState
             icon: const Icon(Icons.share_outlined),
             onPressed: () => Share.share(
                 '"${widget.course.title}" com ${widget.course.teacher} — '
-                'disponível no Método 1 Dia de Cada Vez 💜'),
+                'disponível no Método 1 Dia de Cada Vez'),
           ),
         ],
       ),
@@ -198,8 +277,11 @@ class _AudioCoursePlayerScreenState
                               child: const Icon(Icons.headphones,
                                   size: 48, color: AppColors.textTertiary),
                             )
-                          : CachedNetworkImage(imageUrl: widget.course.coverUrl,
-                              width: 180, height: 180, fit: BoxFit.cover),
+                          : CachedNetworkImage(
+                              imageUrl: widget.course.coverUrl,
+                              width: 180,
+                              height: 180,
+                              fit: BoxFit.cover),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -208,6 +290,30 @@ class _AudioCoursePlayerScreenState
                         style:
                             const TextStyle(color: AppColors.textSecondary)),
                   ),
+                  if (_loading) ...[
+                    const SizedBox(height: 16),
+                    const Center(
+                      child: Text(
+                        'Preparando seu áudio…',
+                        style: TextStyle(color: AppColors.textSecondary),
+                      ),
+                    ),
+                  ],
+                  if (_error != null) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      _error!,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: AppColors.danger),
+                    ),
+                    const SizedBox(height: 12),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: _retry,
+                        child: const Text('Tentar novamente'),
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 20),
                   const Text('Capítulos',
                       style: TextStyle(
@@ -259,7 +365,7 @@ class _AudioCoursePlayerScreenState
                     builder: (context, snap) {
                       final pos = snap.data ?? Duration.zero;
                       final total = player.duration ?? Duration.zero;
-                      // Persiste a posição periodicamente pra "continuar de onde parou".
+                      final remaining = total > pos ? total - pos : Duration.zero;
                       if (_current != null && pos.inSeconds % 5 == 0) {
                         ref
                             .read(audioHistoryProvider.notifier)
@@ -287,7 +393,7 @@ class _AudioCoursePlayerScreenState
                                   style: const TextStyle(
                                       color: AppColors.textSecondary,
                                       fontSize: 11)),
-                              Text(_fmt(total),
+                              Text('-${_fmt(remaining)}',
                                   style: const TextStyle(
                                       color: AppColors.textSecondary,
                                       fontSize: 11)),

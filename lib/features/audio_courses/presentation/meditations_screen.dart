@@ -12,8 +12,8 @@ class MeditationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AudioCoursesScreen(
-      title: 'Meditações 🧘',
-      subtitle: 'Respire, acalme a mente, um dia de cada vez',
+      title: 'Meditações',
+      subtitle: 'Um espaço calmo para respirar, soltar a mente e voltar a si.',
       onlyCategories: {
         AudioCourseCategory.meditacao,
         AudioCourseCategory.respiracao,

@@ -109,6 +109,21 @@ class AdminScreen extends ConsumerWidget {
             onTap: () => context.push(Routes.personalTrainer),
           ),
         ),
+        Card(
+          margin: const EdgeInsets.only(bottom: 12),
+          child: ListTile(
+            leading: const Icon(Icons.dashboard_customize_outlined,
+                color: AppColors.primary),
+            title: const Text('Painel da Personal (conteúdos)',
+                style: TextStyle(color: Colors.white)),
+            subtitle: const Text(
+                'Treinos, vídeos, receitas, áudios, meditações e Lily',
+                style: TextStyle(color: AppColors.textTertiary, fontSize: 11)),
+            trailing: const Icon(Icons.chevron_right,
+                color: AppColors.textTertiary),
+            onTap: () => context.push(Routes.painelPersonal),
+          ),
+        ),
         // Diagnóstico de configuração externa (chaves injetadas em build).
         Container(
           margin: const EdgeInsets.only(bottom: 16),

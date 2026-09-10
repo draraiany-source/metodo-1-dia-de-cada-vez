@@ -56,8 +56,28 @@ class MascotAssets {
     }
   }
 
-  /// Caminho da nova arte para a pose.
-  static String newPath(MascotPose pose) => newBasePath + newPoseFile(pose);
+  /// Poses cujo PNG padronizado ainda carrega arte de sprite sheet (pés no
+  /// topo, duplicata lateral ou wrap) após o crop automático — redireciona
+  /// para um asset limpo conhecido.
+  static String? safeNewOverride(MascotPose pose) {
+    switch (pose) {
+      case MascotePose.celebrando:
+      case MascotePose.trofeu:
+        return officialCelebratingRing;
+      case MascotePose.rainha:
+        return lily02Paz;
+      case MascotePose.checklist:
+        return lily04Apontando;
+      case MascotePose.perfil:
+        return officialArmsCrossed;
+      default:
+        return null;
+    }
+  }
+
+  /// Caminho da nova arte para a pose (com override seguro quando necessário).
+  static String newPath(MascotPose pose) =>
+      safeNewOverride(pose) ?? (newBasePath + newPoseFile(pose));
 
   /// Caminho da arte LEGADA (Lili Fit) — fallback garantido, arquivos reais.
   static String legacyPath(MascotPose pose) {

@@ -79,27 +79,10 @@ enum MascotePose {
   rainha,
 }
 
-/// Caminho da pose — arte nova em `assets/mascot/png/` com fallback legado.
+/// Caminho da pose — arte nova via [MascotAssets.resolve] com fallback legado.
 String _mascoteAsset(MascotePose pose) {
   if (MascotConfig.useNewMascot) {
-    final file = switch (pose) {
-      MascotePose.perfil => 'mascot_profile.png',
-      MascotePose.padrao => 'mascot_default.png',
-      MascotePose.boasVindas => 'mascot_welcome.png',
-      MascotePose.apontando => 'mascot_pointing.png',
-      MascotePose.joinha => 'mascot_thumbs_up.png',
-      MascotePose.hidratacao => 'mascot_hydration.png',
-      MascotePose.checklist => 'mascot_checklist.png',
-      MascotePose.halteres => 'mascot_dumbbell.png',
-      MascotePose.forte => 'mascot_strong.png',
-      MascotePose.meditacao => 'mascot_meditation.png',
-      MascotePose.coracao => 'mascot_heart.png',
-      MascotePose.triste => 'mascot_sad.png',
-      MascotePose.trofeu => 'mascot_trophy.png',
-      MascotePose.celebrando => 'mascot_celebrating.png',
-      MascotePose.rainha => 'mascot_queen.png',
-    };
-    return 'assets/mascot/png/$file';
+    return MascotAssets.resolve(pose);
   }
   return switch (pose) {
     MascotePose.perfil => AppAssets.mascotePerfil,
@@ -175,12 +158,14 @@ class LiliMascot extends ConsumerWidget {
     this.pose = MascotePose.padrao,
     this.height = 220,
     this.fit = BoxFit.contain,
+    this.alignment = Alignment.center,
     this.category,
   });
 
   final MascotePose pose;
   final double height;
   final BoxFit fit;
+  final Alignment alignment;
 
   /// Categoria explícita pra buscar asset dinâmico — quando omitida, é
   /// derivada automaticamente de [pose] via [liliCategoryForPose].
@@ -199,23 +184,27 @@ class LiliMascot extends ConsumerWidget {
     if (dinamico != null && dinamico.url.isNotEmpty) {
       switch (dinamico.type) {
         case LiliAssetType.lottie:
-          return Lottie.network(
-            dinamico.url,
-            height: height,
-            fit: fit,
-            errorBuilder: (_, __, ___) => _staticFallback(),
+          return _framed(
+            Lottie.network(
+              dinamico.url,
+              height: height,
+              fit: fit,
+              errorBuilder: (_, __, ___) => _staticFallback(),
+            ),
           );
         case LiliAssetType.imagem:
-          return CachedNetworkImage(
-            imageUrl: dinamico.url,
-            height: height,
-            fit: fit,
-            placeholder: (_, __) => SizedBox(
-                height: height,
-                width: height,
-                child: const Center(
-                    child: CircularProgressIndicator(strokeWidth: 2))),
-            errorWidget: (_, __, ___) => _staticFallback(),
+          return _framed(
+            CachedNetworkImage(
+              imageUrl: dinamico.url,
+              height: height,
+              fit: fit,
+              placeholder: (_, __) => SizedBox(
+                  height: height,
+                  width: height,
+                  child: const Center(
+                      child: CircularProgressIndicator(strokeWidth: 2))),
+              errorWidget: (_, __, ___) => _staticFallback(),
+            ),
           );
         case LiliAssetType.rive:
           // Rive ainda não integrado (pacote `rive` não é dependência do
@@ -227,45 +216,63 @@ class LiliMascot extends ConsumerWidget {
     return _staticFallback();
   }
 
+  /// Área segura padronizada — evita corte da personagem nas bordas.
+  Widget _framed(Widget child) {
+    return SizedBox(
+      height: height,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: (height * 0.04).clamp(2.0, 10.0),
+          vertical: (height * 0.03).clamp(2.0, 8.0),
+        ),
+        child: child,
+      ),
+    );
+  }
+
   Widget _staticFallback() {
     final primary = _mascoteAsset(pose);
     final legacy = MascotAssets.legacyPath(pose);
     // PNG real sempre preferido ao SVG placeholder (que derrubava a tela no Web
     // quando SvgPicture.asset falhava sem errorBuilder).
-    const officialSafe = MascotAssets.officialThumbsUp;
+    const officialSafe = MascotAssets.lily02Paz;
     const lilyJoinha = MascotAssets.lily01Joinha;
 
-    return Image.asset(
-      primary,
-      height: height,
-      fit: fit,
-      filterQuality: FilterQuality.high,
-      alignment: Alignment.bottomCenter,
-      semanticLabel: _mascoteLabel(pose),
-      errorBuilder: (_, __, ___) => Image.asset(
-        legacy == primary ? officialSafe : legacy,
+    return _framed(
+      Image.asset(
+        primary,
         height: height,
         fit: fit,
         filterQuality: FilterQuality.high,
-        alignment: Alignment.bottomCenter,
+        alignment: alignment,
+        gaplessPlayback: true,
+        isAntiAlias: true,
         semanticLabel: _mascoteLabel(pose),
         errorBuilder: (_, __, ___) => Image.asset(
-          lilyJoinha,
+          legacy == primary ? officialSafe : legacy,
           height: height,
           fit: fit,
           filterQuality: FilterQuality.high,
-          alignment: Alignment.bottomCenter,
+          alignment: alignment,
           semanticLabel: _mascoteLabel(pose),
           errorBuilder: (_, __, ___) => Image.asset(
-            officialSafe,
+            lilyJoinha,
             height: height,
             fit: fit,
             filterQuality: FilterQuality.high,
-            alignment: Alignment.bottomCenter,
+            alignment: alignment,
             semanticLabel: _mascoteLabel(pose),
-            errorBuilder: (_, __, ___) => _MascotIconFallback(
+            errorBuilder: (_, __, ___) => Image.asset(
+              officialSafe,
               height: height,
-              label: _mascoteLabel(pose),
+              fit: fit,
+              filterQuality: FilterQuality.high,
+              alignment: alignment,
+              semanticLabel: _mascoteLabel(pose),
+              errorBuilder: (_, __, ___) => _MascotIconFallback(
+                height: height,
+                label: _mascoteLabel(pose),
+              ),
             ),
           ),
         ),

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -98,11 +97,9 @@ class YoutubeLaunch {
 
     final videoId = extractVideoId(rawUrl);
 
-    // WebView embutido é instável no Flutter Web — abre externo.
-    if (kIsWeb) {
-      return _launchExternal(context, uri, failureMessage);
-    }
-
+    // Preferir player embutido (mobile WebView ou iframe no Web).
+    // Vídeos Privados no YouTube continuam sem reprodução — precisam
+    // estar Público ou Não listado no canal.
     if (videoId != null && videoId.isNotEmpty && context.mounted) {
       await Navigator.of(context).push(
         MaterialPageRoute<void>(

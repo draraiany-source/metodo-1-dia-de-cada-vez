@@ -88,6 +88,14 @@ class HomeScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 10),
               FadeInUp(
+                delayMs: 55,
+                child: _MealAiHomeCard(
+                  onOpen: () =>
+                      AppNavigation.open(context, Routes.calorieScanner),
+                ),
+              ),
+              const SizedBox(height: 10),
+              FadeInUp(
                 delayMs: 70,
                 child: _SummaryGrid(
                   waterLabel:
@@ -140,17 +148,27 @@ class HomeScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 12),
               FadeInUp(
+                delayMs: 118,
+                child: const _MomentoParaVoceCard(),
+              ),
+              const SizedBox(height: 12),
+              FadeInUp(
                   delayMs: 120, child: SectionHeader(title: 'Acesso rápido')),
               const SizedBox(height: 6),
               FadeInUp(delayMs: 130, child: const _QuickGrid()),
               const SizedBox(height: 12),
               const ContinueJourneyCard(),
-              if (user.isAdmin) ...[
+              if (user.isAdmin || user.isPersonalTrainer) ...[
                 const SizedBox(height: 12),
                 OutlinedButton.icon(
-                  onPressed: () => AppNavigation.open(context, Routes.admin),
+                  onPressed: () => AppNavigation.open(
+                    context,
+                    user.isAdmin ? Routes.admin : Routes.painelPersonal,
+                  ),
                   icon: const Icon(Icons.admin_panel_settings_outlined),
-                  label: const Text('Painel Administrativo'),
+                  label: Text(user.isAdmin
+                      ? 'Painel Administrativo'
+                      : 'Painel da Personal'),
                 ),
               ],
               const SizedBox(height: 8),
@@ -519,7 +537,8 @@ class _SummaryGrid extends StatelessWidget {
             icon: Icons.local_fire_department_rounded,
             accent: AppColors.calories,
             progress: caloriesProgress,
-            onTap: () => AppNavigation.open(context, Routes.nutrition),
+            onTap: () =>
+                AppNavigation.open(context, Routes.calorieScanner),
           ),
           _CompactStat(
             label: 'Sequência',
@@ -682,6 +701,59 @@ class _TodayWorkoutCard extends StatelessWidget {
   }
 }
 
+class _MealAiHomeCard extends StatelessWidget {
+  const _MealAiHomeCard({required this.onOpen});
+  final VoidCallback onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppCard(
+      onTap: onOpen,
+      padding: const EdgeInsets.all(14),
+      child: Row(
+        children: [
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: AppColors.surface2,
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: AppColors.secondary.withOpacity(0.45)),
+            ),
+            alignment: Alignment.center,
+            child: const AppIconImage(
+              AppIcons.cameraFood,
+              size: 36,
+              fallbackIcon: Icons.camera_alt_rounded,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Analisar minha refeição',
+                  style: AppTextStyles.title().copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Foto da comida → calorias e macros com IA',
+                  style: AppTextStyles.caption(),
+                ),
+              ],
+            ),
+          ),
+          Icon(Icons.chevron_right_rounded,
+              color: AppColors.secondary.withOpacity(0.9)),
+        ],
+      ),
+    );
+  }
+}
+
 class _TodayNutritionCard extends StatelessWidget {
   const _TodayNutritionCard({required this.onOpen});
   final VoidCallback onOpen;
@@ -753,6 +825,14 @@ class _QuickGrid extends StatelessWidget {
       Color accent,
       VoidCallback onTap,
     })>[
+      (
+        title: 'Analisar refeição',
+        subtitle: 'Foto → calorias com IA',
+        icon: AppIcons.cameraFood,
+        fallback: Icons.camera_alt_rounded,
+        accent: AppColors.calories,
+        onTap: () => AppNavigation.open(context, Routes.calorieScanner),
+      ),
       (
         title: 'Treinos',
         subtitle: 'Força, cardio e mais',
@@ -859,11 +939,19 @@ class _QuickGrid extends StatelessWidget {
       ),
       (
         title: 'Áudios',
-        subtitle: 'Meditações e 7 dias',
+        subtitle: 'Jornada e transformação',
         icon: AppIcons.program7Days,
         fallback: Icons.headphones_rounded,
         accent: AppColors.primaryDark,
         onTap: () => AppNavigation.open(context, Routes.audiosMeditations),
+      ),
+      (
+        title: 'Meditações',
+        subtitle: 'Calma, foco e respiração',
+        icon: AppIcons.meditation,
+        fallback: Icons.self_improvement_rounded,
+        accent: AppColors.primary,
+        onTap: () => AppNavigation.open(context, Routes.meditations),
       ),
       (
         title: 'Meu Treino',
@@ -986,6 +1074,125 @@ class _Programa7DiasHomeCard extends StatelessWidget {
                 ),
               ),
               const Icon(Icons.chevron_right, color: Colors.white),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Destaque calm/focus — Meditar, ouvir áudio ou respirar.
+class _MomentoParaVoceCard extends StatelessWidget {
+  const _MomentoParaVoceCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.28)),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppColors.primary.withValues(alpha: 0.22),
+            AppColors.surface,
+            AppColors.hotPink.withValues(alpha: 0.12),
+          ],
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Momento para você',
+            style: TextStyle(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w800,
+              fontSize: 17,
+            ),
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            'Alguns minutos de presença já mudam o dia.',
+            style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
+          ),
+          const SizedBox(height: 14),
+          Row(
+            children: [
+              Expanded(
+                child: _MomentoAction(
+                  icon: Icons.self_improvement_rounded,
+                  label: 'Meditar agora',
+                  onTap: () =>
+                      AppNavigation.open(context, Routes.meditations),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _MomentoAction(
+                  icon: Icons.headphones_rounded,
+                  label: 'Ouvir um áudio',
+                  onTap: () =>
+                      AppNavigation.open(context, Routes.audiosMeditations),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _MomentoAction(
+                  icon: Icons.air_rounded,
+                  label: 'Respirar',
+                  onTap: () =>
+                      AppNavigation.open(context, Routes.meditations),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MomentoAction extends StatelessWidget {
+  const _MomentoAction({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: AppColors.surfaceElevated,
+      borderRadius: BorderRadius.circular(14),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(14),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+          child: Column(
+            children: [
+              Icon(icon, color: AppColors.secondary, size: 22),
+              const SizedBox(height: 6),
+              Text(
+                label,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                style: const TextStyle(
+                  color: AppColors.textPrimary,
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.w600,
+                  height: 1.2,
+                ),
+              ),
             ],
           ),
         ),

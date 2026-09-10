@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/favorites/unified_favorites.dart';
 import '../../audio_courses/providers/audio_course_providers.dart';
 import '../data/services/audio_playback_engine.dart';
 import '../data/services/shared_audio_playback_engine.dart';
@@ -17,6 +18,8 @@ class ProgramPlayerState {
   final bool isLoading;
   final bool isFavorite;
   final String? error;
+  /// True once when the current track completes — UI shows celebration sheet.
+  final bool celebrationPending;
 
   const ProgramPlayerState({
     this.audio,
@@ -26,11 +29,17 @@ class ProgramPlayerState {
     this.isLoading = false,
     this.isFavorite = false,
     this.error,
+    this.celebrationPending = false,
   });
 
   double get progressFraction {
     if (duration.inMilliseconds == 0) return 0;
     return position.inMilliseconds / duration.inMilliseconds;
+  }
+
+  Duration get remaining {
+    final left = duration - position;
+    return left.isNegative ? Duration.zero : left;
   }
 
   ProgramPlayerState copyWith({
@@ -42,6 +51,7 @@ class ProgramPlayerState {
     bool? isFavorite,
     String? error,
     bool clearError = false,
+    bool? celebrationPending,
   }) {
     return ProgramPlayerState(
       audio: audio ?? this.audio,
@@ -51,6 +61,7 @@ class ProgramPlayerState {
       isLoading: isLoading ?? this.isLoading,
       isFavorite: isFavorite ?? this.isFavorite,
       error: clearError ? null : (error ?? this.error),
+      celebrationPending: celebrationPending ?? this.celebrationPending,
     );
   }
 }
@@ -94,6 +105,7 @@ class ProgramPlayerController extends StateNotifier<ProgramPlayerState> {
       isFavorite: isFavorite,
       position: Duration.zero,
       clearError: true,
+      celebrationPending: false,
     );
     try {
       final repo = ref.read(audioProgramRepositoryProvider);
@@ -178,8 +190,8 @@ class ProgramPlayerController extends StateNotifier<ProgramPlayerState> {
   }
 
   Future<void> seek(Duration position) => _engine.seek(position);
-  Future<void> forward15() => _engine.seekBy(const Duration(seconds: 15));
-  Future<void> back15() => _engine.seekBy(const Duration(seconds: -15));
+  Future<void> forward15() => _engine.seekBy(const Duration(seconds: 10));
+  Future<void> back15() => _engine.seekBy(const Duration(seconds: -10));
 
   Future<void> toggleFavorite() async {
     final audio = state.audio;
@@ -189,6 +201,13 @@ class ProgramPlayerController extends StateNotifier<ProgramPlayerState> {
     await ref
         .read(audioProgramRepositoryProvider)
         .toggleFavorite(programId, audio.id, newValue);
+    try {
+      await ref.read(unifiedFavoritesProvider.notifier).setFavorite(
+            FavoriteKind.audio,
+            audio.id,
+            newValue,
+          );
+    } catch (_) {}
   }
 
   void _onPosition(Duration pos) {
@@ -216,6 +235,12 @@ class ProgramPlayerController extends StateNotifier<ProgramPlayerState> {
     if (audio == null || _completedFiredForCurrent) return;
     _completedFiredForCurrent = true;
     ref.read(audioProgramRepositoryProvider).markCompleted(programId, audio.id);
+    state = state.copyWith(celebrationPending: true);
+  }
+
+  void acknowledgeCelebration() {
+    if (!state.celebrationPending) return;
+    state = state.copyWith(celebrationPending: false);
   }
 
   @override

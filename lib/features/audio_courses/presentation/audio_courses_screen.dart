@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../../core/favorites/unified_favorites.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -184,17 +185,43 @@ class _CourseCard extends ConsumerWidget {
               : CachedNetworkImage(imageUrl: course.coverUrl,
                   width: 56, height: 56, fit: BoxFit.cover),
         ),
-        title: Text(course.title,
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w600)),
+        title: Row(
+          children: [
+            Expanded(
+              child: Text(course.title,
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w600)),
+            ),
+            IconButton(
+              icon: FavoriteAssetIcon(active: isFavorite, size: 22),
+              onPressed: () async {
+                await ref
+                    .read(audioFavoritesProvider.notifier)
+                    .toggle(course.id);
+                const meditationCats = {
+                  AudioCourseCategory.meditacao,
+                  AudioCourseCategory.respiracao,
+                  AudioCourseCategory.ansiedade,
+                  AudioCourseCategory.sono,
+                };
+                if (meditationCats.contains(course.category)) {
+                  await ref
+                      .read(unifiedFavoritesProvider.notifier)
+                      .toggle(FavoriteKind.meditation, course.id);
+                }
+              },
+            ),
+          ],
+        ),
         subtitle: Text(
           '${course.teacher} · ${course.chapters.length} capítulos · ${minutos}min',
           style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
         ),
-        trailing: IconButton(
-          icon: FavoriteAssetIcon(active: isFavorite, size: 22),
-          onPressed: () =>
-              ref.read(audioFavoritesProvider.notifier).toggle(course.id),
+        trailing: TextButton(
+          onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => AudioCoursePlayerScreen(course: course),
+          )),
+          child: const Text('Começar'),
         ),
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => AudioCoursePlayerScreen(course: course),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../personal_cms/presentation/cms_confirm.dart';
 import '../data/lili_assets_admin_repository.dart';
 import '../domain/lili_asset_models.dart';
 import '../providers/lili_assets_providers.dart';
@@ -195,6 +196,13 @@ class LiliAssetsAdminScreen extends ConsumerWidget {
                               value: a.active,
                               activeTrackColor: AppColors.primary,
                               onChanged: (v) async {
+                                if (!v) {
+                                  final ok = await confirmDeactivate(
+                                    context,
+                                    title: 'Desativar imagem Lily?',
+                                  );
+                                  if (!ok) return;
+                                }
                                 await ref
                                     .read(liliAssetsAdminRepositoryProvider)
                                     .toggleActive(a.id, v);
@@ -205,6 +213,14 @@ class LiliAssetsAdminScreen extends ConsumerWidget {
                               icon: const Icon(Icons.delete_outline,
                                   color: AppColors.danger),
                               onPressed: () async {
+                                final ok = await confirmDeactivate(
+                                  context,
+                                  title: 'Excluir asset Lily?',
+                                  message:
+                                      'Remove o asset. Prefira desativar se puder reusar.',
+                                  confirmLabel: 'Excluir',
+                                );
+                                if (!ok) return;
                                 await ref
                                     .read(liliAssetsAdminRepositoryProvider)
                                     .delete(a.id);

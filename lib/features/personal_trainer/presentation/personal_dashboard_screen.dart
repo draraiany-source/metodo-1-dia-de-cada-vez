@@ -437,6 +437,12 @@ class _PersonalBody extends ConsumerWidget {
                       AppNavigation.open(context, Routes.recipes),
                 ),
                 _ShortcutChip(
+                  label: 'Painel de conteúdo',
+                  icon: Icons.dashboard_customize_outlined,
+                  onTap: () =>
+                      AppNavigation.open(context, Routes.painelPersonal),
+                ),
+                _ShortcutChip(
                   label: 'Áudios',
                   icon: Icons.headphones_outlined,
                   onTap: () =>

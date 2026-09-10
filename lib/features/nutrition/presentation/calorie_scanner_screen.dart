@@ -1,5 +1,6 @@
-import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,8 +32,8 @@ final calorieVisionRepositoryProvider =
 
 const _privacyPrefKey = 'nutrition_ai_privacy_accepted_v1';
 const _estimateDisclaimer =
-    'Os valores são estimativas geradas por IA e podem variar conforme o '
-    'preparo, quantidade e ingredientes utilizados.';
+    'Os valores são estimativas geradas por inteligência artificial e podem '
+    'variar conforme a quantidade e o preparo dos alimentos.';
 
 /// Analisar minha refeição — foto → IA → edição → diário.
 class CalorieScannerScreen extends ConsumerStatefulWidget {
@@ -44,7 +45,6 @@ class CalorieScannerScreen extends ConsumerStatefulWidget {
 }
 
 class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
-  File? _photo;
   List<int>? _photoBytes;
   bool _loading = false;
   bool _saving = false;
@@ -125,7 +125,6 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
       }
 
       setState(() {
-        _photo = File(xfile.path);
         _photoBytes = bytes;
         _foods = [];
         _error = null;
@@ -185,12 +184,20 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
   }
 
   Future<void> _openAppSettings() async {
+    if (kIsWeb) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'No navegador, permita o acesso à câmera/arquivos quando o '
+            'Chrome solicitar.',
+          ),
+        ),
+      );
+      return;
+    }
     try {
-      if (Platform.isAndroid) {
-        await launchUrl(Uri.parse('app-settings:'));
-      } else if (Platform.isIOS) {
-        await launchUrl(Uri.parse('app-settings:'));
-      }
+      await launchUrl(Uri.parse('app-settings:'));
     } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -440,15 +447,48 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
             ),
             const SizedBox(height: 16),
 
+            // Ações primeiro — no Web a área da foto era tão alta que
+            // escondia Tirar foto / Galeria abaixo da dobra.
+            if (_photoBytes == null) ...[
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: busy
+                          ? null
+                          : () => _pick(ImageSource.camera),
+                      icon: AppIconImage(AppIcons.camera, size: 22,
+                          fallbackIcon: Icons.camera_alt_outlined),
+                      label: Text(kIsWeb ? 'Usar câmera' : 'Tirar foto'),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: busy
+                          ? null
+                          : () => _pick(ImageSource.gallery),
+                      icon: AppIconImage(AppIcons.upload, size: 22,
+                          fallbackIcon: Icons.photo_library_outlined),
+                      label: const Text('Escolher da galeria'),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 14),
+            ],
+
             AspectRatio(
-              aspectRatio: 1.15,
+              aspectRatio: kIsWeb ? 1.6 : 1.15,
               child: Container(
                 decoration: BoxDecoration(
                   color: AppColors.surface,
                   borderRadius: BorderRadius.circular(AppTheme.radius),
-                  image: _photo != null
+                  image: _photoBytes != null
                       ? DecorationImage(
-                          image: FileImage(_photo!),
+                          image: MemoryImage(
+                            Uint8List.fromList(_photoBytes!),
+                          ),
                           fit: BoxFit.cover,
                         )
                       : null,
@@ -456,9 +496,20 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    if (_photo == null)
-                      const Icon(Icons.restaurant_menu,
-                          size: 48, color: AppColors.textTertiary),
+                    if (_photoBytes == null)
+                      const Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.restaurant_menu,
+                              size: 48, color: AppColors.textTertiary),
+                          SizedBox(height: 8),
+                          Text(
+                            'Sua foto aparece aqui',
+                            style: TextStyle(
+                                color: AppColors.textTertiary, fontSize: 12),
+                          ),
+                        ],
+                      ),
                     if (_loading)
                       Container(
                         color: Colors.black54,
@@ -484,33 +535,7 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
             ),
             const SizedBox(height: 14),
 
-            if (_photo == null) ...[
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: busy
-                          ? null
-                          : () => _pick(ImageSource.camera),
-                      icon: AppIconImage(AppIcons.camera, size: 22,
-                          fallbackIcon: Icons.camera_alt_outlined),
-                      label: const Text('Tirar foto'),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: OutlinedButton.icon(
-                      onPressed: busy
-                          ? null
-                          : () => _pick(ImageSource.gallery),
-                      icon: AppIconImage(AppIcons.photos, size: 22,
-                          fallbackIcon: Icons.photo_library_outlined),
-                      label: const Text('Escolher da galeria'),
-                    ),
-                  ),
-                ],
-              ),
-            ] else ...[
+            if (_photoBytes != null) ...[
               Row(
                 children: [
                   Expanded(
@@ -526,7 +551,7 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: busy || _photoBytes == null ? null : _analyze,
+                      onPressed: busy ? null : _analyze,
                       icon: AppIconImage(AppIcons.cameraFood, size: 22,
                           fallbackIcon: Icons.auto_awesome),
                       label: const Text('Analisar refeição'),
@@ -575,18 +600,26 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
             if (_foods.isNotEmpty) ...[
               const SizedBox(height: 24),
               const Text(
-                'Sua refeição',
+                'Análise da sua refeição',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 8),
+              const Text(
+                'Estimativa nutricional',
+                style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 8),
               Text(
-                '${totals.kcal} kcal',
+                'Calorias: ${totals.kcal} kcal',
                 style: const TextStyle(
                   color: AppColors.secondary,
-                  fontSize: 36,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -687,7 +720,7 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
                         )
                       : const Icon(Icons.check_circle_outline),
                   label: Text(
-                      _saving ? 'Salvando…' : 'Adicionar ao meu dia'),
+                      _saving ? 'Salvando…' : 'Salvar refeição'),
                 ),
               ),
             ],

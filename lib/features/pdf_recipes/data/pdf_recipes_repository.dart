@@ -29,6 +29,7 @@ class PdfRecipesRepository {
           await FirebaseFirestore.instance.collection('pdf_recipes').get();
       return snap.docs
           .map((d) => PdfRecipe.fromMap(d.id, d.data()))
+          .where((r) => r.active)
           .toList();
     } catch (_) {
       return [];

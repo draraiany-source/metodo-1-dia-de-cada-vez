@@ -102,6 +102,7 @@ const kPersonalAllowedAdminPaths = <String>{
   '/admin/ebooks',
   '/admin/audio-courses',
   '/admin/videos',
+  '/admin/lili-assets',
 };
 
 bool isPersonalAllowedAdminPath(String path) {

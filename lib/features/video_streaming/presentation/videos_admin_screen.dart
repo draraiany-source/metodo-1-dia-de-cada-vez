@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../personal_cms/presentation/cms_confirm.dart';
 import '../data/videos_admin_repository.dart';
 import '../domain/video_models.dart';
 import '../providers/video_providers.dart';
@@ -148,6 +149,7 @@ class VideosAdminScreen extends ConsumerWidget {
             urlController.text.trim(),
           );
       ref.invalidate(videosProvider);
+      ref.invalidate(videosAdminListProvider);
     }
   }
 
@@ -159,14 +161,15 @@ class VideosAdminScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final videosAsync = ref.watch(videosProvider);
+    final videosAsync = ref.watch(videosAdminListProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Vídeos (admin) 🎥')),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         backgroundColor: AppColors.primary,
         onPressed: () => _novoVideo(context, ref),
-        child: const Icon(Icons.add),
+        icon: const Icon(Icons.add),
+        label: const Text('Adicionar'),
       ),
       body: SafeArea(
         child: videosAsync.when(
@@ -179,29 +182,47 @@ class VideosAdminScreen extends ConsumerWidget {
                   child: Text('Nenhum vídeo cadastrado ainda.',
                       style: TextStyle(color: AppColors.textSecondary)))
               : ListView.builder(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 96),
                   itemCount: videos.length,
                   itemBuilder: (_, i) {
                     final v = videos[i];
                     return Card(
                       margin: const EdgeInsets.only(bottom: 10),
                       child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 6),
                         title: Text(v.name,
                             style: const TextStyle(color: Colors.white)),
                         subtitle: Text(
-                          '${v.category.label} · ${v.level.label}${v.isPremium ? ' · Premium' : ''}',
+                          '${v.category.label} · ${v.level.label}'
+                          '${v.isPremium ? ' · Premium' : ''}'
+                          '${v.active ? '' : ' · Desativado'}',
                           style: const TextStyle(
                               color: AppColors.textSecondary, fontSize: 12),
                         ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete_outline,
-                              color: AppColors.danger),
-                          onPressed: () async {
-                            await ref
-                                .read(videosAdminRepositoryProvider)
-                                .delete(v.id);
-                            ref.invalidate(videosProvider);
-                          },
+                        trailing: SizedBox(
+                          height: 44,
+                          child: TextButton(
+                            onPressed: () async {
+                              if (v.active) {
+                                final ok = await confirmDeactivate(
+                                  context,
+                                  title: 'Desativar "${v.name}"?',
+                                );
+                                if (!ok) return;
+                                await ref
+                                    .read(videosAdminRepositoryProvider)
+                                    .setActive(v.id, false);
+                              } else {
+                                await ref
+                                    .read(videosAdminRepositoryProvider)
+                                    .setActive(v.id, true);
+                              }
+                              ref.invalidate(videosProvider);
+                              ref.invalidate(videosAdminListProvider);
+                            },
+                            child: Text(v.active ? 'Desativar' : 'Reativar'),
+                          ),
                         ),
                       ),
                     );

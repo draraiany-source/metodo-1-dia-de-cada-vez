@@ -98,6 +98,33 @@ class VideosRepository {
     }
   }
 
+  /// Lista completa (ativos + desativados) para o CMS / admin.
+  Future<List<VideoContent>> fetchAllForAdmin() async {
+    if (!isAvailable) return [];
+    try {
+      final snap =
+          await FirebaseFirestore.instance.collection('videos').get();
+      final out = <VideoContent>[];
+      for (final d in snap.docs) {
+        try {
+          out.add(VideoContent.fromMap(d.id, d.data()));
+        } catch (e) {
+          debugPrint('Video parse falhou ${d.id}: $e');
+        }
+      }
+      out.sort((a, b) => a.order.compareTo(b.order));
+      return out;
+    } catch (e) {
+      throw VideosFetchException(
+        FirebaseErrorMapper.toUserMessage(
+          e,
+          fallback: 'Não foi possível carregar os vídeos. Tente novamente.',
+        ),
+        cause: e,
+      );
+    }
+  }
+
   String get _functionUrl => AppConstants.getVideoUrlFunctionUrl;
 
   Future<VideoUrlResult> resolveStreamUrl(String videoId) async {

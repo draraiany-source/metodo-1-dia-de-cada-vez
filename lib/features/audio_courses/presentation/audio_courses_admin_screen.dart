@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../personal_cms/presentation/cms_confirm.dart';
 import '../data/audio_courses_admin_repository.dart';
 import '../domain/audio_course_models.dart';
 import '../providers/audio_course_providers.dart';
@@ -173,10 +174,11 @@ class AudioCoursesAdminScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Cursos em áudio (admin) 🎧')),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         backgroundColor: AppColors.primary,
         onPressed: () => _novoCurso(context, ref),
-        child: const Icon(Icons.add),
+        icon: const Icon(Icons.add),
+        label: const Text('Adicionar'),
       ),
       body: SafeArea(
         child: coursesAsync.when(
@@ -189,13 +191,15 @@ class AudioCoursesAdminScreen extends ConsumerWidget {
                   child: Text('Nenhum curso cadastrado ainda.',
                       style: TextStyle(color: AppColors.textSecondary)))
               : ListView.builder(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 96),
                   itemCount: courses.length,
                   itemBuilder: (_, i) {
                     final c = courses[i];
                     return Card(
                       margin: const EdgeInsets.only(bottom: 10),
                       child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
                         title: Text(c.title,
                             style: const TextStyle(color: Colors.white)),
                         subtitle: Text(
@@ -215,7 +219,16 @@ class AudioCoursesAdminScreen extends ConsumerWidget {
                             IconButton(
                               icon: const Icon(Icons.delete_outline,
                                   color: AppColors.danger),
+                              tooltip: 'Excluir curso',
                               onPressed: () async {
+                                final ok = await confirmDeactivate(
+                                  context,
+                                  title: 'Excluir "${c.title}"?',
+                                  message:
+                                      'Isso remove o curso e os capítulos. Prefira só se não for mais usar.',
+                                  confirmLabel: 'Excluir',
+                                );
+                                if (!ok) return;
                                 await ref
                                     .read(audioCoursesAdminRepositoryProvider)
                                     .deleteCourse(c.id);

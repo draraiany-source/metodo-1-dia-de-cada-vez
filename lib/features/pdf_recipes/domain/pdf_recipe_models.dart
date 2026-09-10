@@ -54,6 +54,7 @@ class PdfRecipe {
     required this.carbs,
     required this.fat,
     this.isPremium = false,
+    this.active = true,
   });
 
   final String id;
@@ -68,6 +69,7 @@ class PdfRecipe {
   final int carbs;
   final int fat;
   final bool isPremium;
+  final bool active;
 
   factory PdfRecipe.fromMap(String id, Map<String, dynamic> m) {
     return PdfRecipe(
@@ -87,6 +89,7 @@ class PdfRecipe {
       carbs: (m['carbs'] ?? 0) as int,
       fat: (m['fat'] ?? 0) as int,
       isPremium: (m['isPremium'] ?? false) as bool,
+      active: m.containsKey('active') ? (m['active'] == true) : true,
     );
   }
 }

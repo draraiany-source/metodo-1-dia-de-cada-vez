@@ -12,6 +12,14 @@ class VideosAdminRepository {
     await ref.collection('private').doc('stream').set({'videoUrl': streamUrl});
   }
 
+  /// Soft-delete: esconde o vídeo das alunas sem apagar o doc / private.
+  Future<void> setActive(String videoId, bool active) async {
+    await FirebaseFirestore.instance
+        .collection('videos')
+        .doc(videoId)
+        .set({'active': active}, SetOptions(merge: true));
+  }
+
   Future<void> delete(String videoId) async {
     final ref = FirebaseFirestore.instance.collection('videos').doc(videoId);
     await ref.collection('private').doc('stream').delete();

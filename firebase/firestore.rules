@@ -86,7 +86,7 @@ service cloud.firestore {
     // visual, nada sensível), escrita só admin.
     match /lili_assets/{document=**} {
       allow read: if signedIn();
-      allow write: if isAdmin();
+      allow write: if isAdmin() || isPersonalTrainer();
     }
 
     match /amanda_assets/{document=**} {
@@ -302,7 +302,7 @@ service cloud.firestore {
     // ---------- conteúdo do catálogo (leitura para logados) ----------
     match /workouts/{document=**} {
       allow read: if signedIn();
-      allow write: if isAdmin();
+      allow write: if isAdmin() || isPersonalTrainer();
     }
 
     match /recipes/{document=**} {
@@ -330,24 +330,30 @@ service cloud.firestore {
 
       match /private/{document=**} {
         allow read: if false;
-        allow write: if isAdmin();
+        // CMS da Personal precisa gravar URL privada; cliente nunca lê.
+        allow write: if isAdmin() || isPersonalTrainer();
       }
     }
 
     // Programas de áudio (ex.: Programa 7 Dias). Metadados legíveis;
     // URLs premium ficam em /private/audios e saem só via getContentUrl.
     match /programs/{programId} {
-      allow read: if signedIn() && resource.data.active == true;
+      // Staff lê também inativos (CMS); alunas só ativos.
+      allow read: if signedIn() && (
+        resource.data.active == true || isAdmin() || isPersonalTrainer()
+      );
       allow write: if isAdmin() || isPersonalTrainer();
 
       match /audios/{audioId} {
-        allow read: if signedIn() && resource.data.active == true;
+        allow read: if signedIn() && (
+          resource.data.active == true || isAdmin() || isPersonalTrainer()
+        );
         allow write: if isAdmin() || isPersonalTrainer();
       }
 
       match /private/{document=**} {
         allow read: if false;
-        allow write: if isAdmin();
+        allow write: if isAdmin() || isPersonalTrainer();
       }
     }
 
@@ -359,11 +365,12 @@ service cloud.firestore {
     // qualquer subdocumento /private a toda usuária logada (bypass de Premium).
     match /pdf_recipes/{recipeId} {
       allow read: if signedIn();
-      allow write: if isAdmin();
+      allow write: if isAdmin() || isPersonalTrainer();
 
       match /private/{document=**} {
         allow read: if false;
-        allow write: if isAdmin();
+        // Personal pode anexar o PDF privado; alunas continuam sem leitura.
+        allow write: if isAdmin() || isPersonalTrainer();
       }
     }
 
@@ -406,11 +413,12 @@ service cloud.firestore {
     // de verdade, não um botão escondido na UI.
     match /videos/{videoId} {
       allow read: if signedIn();
-      allow write: if isAdmin();
+      allow write: if isAdmin() || isPersonalTrainer();
 
       match /private/{document=**} {
         allow read: if false;
-        allow write: if isAdmin();
+        // CMS grava URL de stream; alunas só resolvem via Cloud Function.
+        allow write: if isAdmin() || isPersonalTrainer();
       }
     }
 

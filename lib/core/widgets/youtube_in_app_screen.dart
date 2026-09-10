@@ -5,6 +5,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 import '../theme/app_colors.dart';
+import 'youtube_web_embed.dart';
 
 /// Reproduz um vídeo do YouTube dentro do app (WebView + embed).
 /// Em falha de embed, oferece “Abrir no YouTube” sem quebrar o fluxo.
@@ -52,11 +53,17 @@ class _YoutubeInAppScreenState extends State<YoutubeInAppScreen> {
   @override
   void initState() {
     super.initState();
+    if (kIsWeb) {
+      // No Web usamos iframe HTML (webview_flutter não é confiável).
+      _loading = false;
+      return;
+    }
     // Começa com youtube.com/embed (mais compatível que nocookie em Android).
     _initPlayer(useNocookie: false);
   }
 
   Future<void> _initPlayer({required bool useNocookie}) async {
+    if (kIsWeb) return;
     final embed = _embedUri(useNocookie: useNocookie);
 
     try {
@@ -98,11 +105,9 @@ class _YoutubeInAppScreenState extends State<YoutubeInAppScreen> {
           ),
         );
 
-      if (!kIsWeb) {
-        final platform = controller.platform;
-        if (platform is AndroidWebViewController) {
-          await platform.setMediaPlaybackRequiresUserGesture(false);
-        }
+      final platform = controller.platform;
+      if (platform is AndroidWebViewController) {
+        await platform.setMediaPlaybackRequiresUserGesture(false);
       }
 
       await controller.loadRequest(embed);
@@ -175,7 +180,9 @@ class _YoutubeInAppScreenState extends State<YoutubeInAppScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          if (controller != null && !_hasError)
+          if (kIsWeb && !_hasError)
+            buildYoutubeWebEmbed(widget.videoId)
+          else if (controller != null && !_hasError)
             WebViewWidget(controller: controller),
           if (_hasError)
             Center(
@@ -194,8 +201,10 @@ class _YoutubeInAppScreenState extends State<YoutubeInAppScreen> {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Ele pode estar privado, com incorporação bloqueada '
-                      'ou temporariamente indisponível.',
+                      'Se aparecer “Private video” no YouTube, a privacidade '
+                      'do vídeo precisa ser alterada no canal para '
+                      'Não listado ou Público. Vídeos privados não '
+                      'reproduzem no aplicativo.',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white70, fontSize: 13),
                     ),

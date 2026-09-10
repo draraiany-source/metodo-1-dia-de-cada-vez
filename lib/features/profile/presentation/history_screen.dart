@@ -149,6 +149,32 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
               ),
             ),
             const SizedBox(height: 8),
+            if (_period == _Period.hoje)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+                child: _HojeChecklist(
+                  treino: missions.history.any((r) =>
+                      r.id == 'd_treino' &&
+                      r.date.year == DateTime.now().year &&
+                      r.date.month == DateTime.now().month &&
+                      r.date.day == DateTime.now().day),
+                  agua: missions.history.any((r) =>
+                      r.id == 'd_agua' &&
+                      r.date.year == DateTime.now().year &&
+                      r.date.month == DateTime.now().month &&
+                      r.date.day == DateTime.now().day),
+                  refeicao: missions.history.any((r) =>
+                      r.id == 'd_refeicao' &&
+                      r.date.year == DateTime.now().year &&
+                      r.date.month == DateTime.now().month &&
+                      r.date.day == DateTime.now().day),
+                  checkin: missions.history.any((r) =>
+                      r.id == 'd_checkin' &&
+                      r.date.year == DateTime.now().year &&
+                      r.date.month == DateTime.now().month &&
+                      r.date.day == DateTime.now().day),
+                ),
+              ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -250,6 +276,88 @@ class _SummaryChip extends StatelessWidget {
                   color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
           Text(label,
               style: const TextStyle(color: AppColors.textSecondary, fontSize: 11)),
+        ],
+      ),
+    );
+  }
+}
+
+class _HojeChecklist extends StatelessWidget {
+  const _HojeChecklist({
+    required this.treino,
+    required this.agua,
+    required this.refeicao,
+    required this.checkin,
+  });
+
+  final bool treino;
+  final bool agua;
+  final bool refeicao;
+  final bool checkin;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.25)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Hoje',
+            style: TextStyle(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w800,
+              fontSize: 15,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Wrap(
+            spacing: 10,
+            runSpacing: 8,
+            children: [
+              _check('Treino', treino),
+              _check('Água', agua),
+              _check('Refeição', refeicao),
+              _check('Check-in', checkin),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _check(String label, bool done) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: done
+            ? AppColors.success.withValues(alpha: 0.18)
+            : AppColors.surfaceElevated,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            done ? Icons.check_circle : Icons.radio_button_unchecked,
+            size: 16,
+            color: done ? AppColors.success : AppColors.textTertiary,
+          ),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: TextStyle(
+              color: done ? AppColors.textPrimary : AppColors.textSecondary,
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+            ),
+          ),
         ],
       ),
     );

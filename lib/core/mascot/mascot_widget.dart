@@ -43,7 +43,7 @@ class LiliFitMascot extends StatelessWidget {
     this.maxHeight,
     this.maxWidth,
     this.fit = BoxFit.contain,
-    this.alignment = Alignment.bottomCenter,
+    this.alignment = Alignment.center,
     this.semanticsLabel,
     /// Fração da altura da tela (0.35–0.50 nas telas principais).
     this.heightFraction,
@@ -113,10 +113,16 @@ class LiliFitMascot extends StatelessWidget {
           pose: pose,
           height: cappedH.toDouble(),
           fit: fit,
+          alignment: alignment,
         ),
       );
     } else if (!MascotConfig.useNewMascot) {
-      image = LiliMascot(pose: pose, height: cappedH.toDouble(), fit: fit);
+      image = LiliMascot(
+        pose: pose,
+        height: cappedH.toDouble(),
+        fit: fit,
+        alignment: alignment,
+      );
     } else {
       image = Image.asset(
         MascotAssets.resolve(pose),
@@ -129,6 +135,7 @@ class LiliFitMascot extends StatelessWidget {
           pose: pose,
           height: cappedH.toDouble(),
           fit: fit,
+          alignment: alignment,
         ),
       );
     }
