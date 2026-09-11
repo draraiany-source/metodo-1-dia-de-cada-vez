@@ -157,7 +157,8 @@ class AppIcons {
 
   // ---- Compat / aliases (telas existentes) ----
   static const String checklist = checkin;
-  static const String habits = checkin;
+  static const String habits = '${_app}habitos.png';
+  static const String habitos = habits;
   static const String video = '${_app}videos.png';
   static const String videos = video;
   static const String stopwatch = history;
