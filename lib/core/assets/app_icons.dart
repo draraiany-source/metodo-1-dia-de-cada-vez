@@ -29,10 +29,10 @@ class AppIcons {
   static const String workoutDumbbell = workout;
   static const String recipes = '${_app}receitas.png';
   static const String nutrition = recipes;
-  static const String evolution = '${_nav}evolution.jpg';
+  static const String evolution = '${_app}evolucao.png';
   static const String profile = '${_app}perfil.png';
-  static const String checkin = '${_nav}checkin.jpg';
-  static const String diary = '${_nav}diary.jpg';
+  static const String checkin = '${_app}checkin.png';
+  static const String diary = '${_app}diario.png';
   static const String photos = '${_nav}photos.jpg';
   static const String gallery = photos;
   static const String measurement = '${_nav}measurements.jpg';
@@ -120,7 +120,9 @@ class AppIcons {
   ];
 
   // ---- Premium / conquistas genéricas ----
-  static const String trophy = '${_prem}achievement_trophy.jpg';
+  static const String trophy = '${_app}desafios.png';
+  static const String desafios = trophy;
+  static const String challenges = trophy;
   static const String premiumCrown = '${_app}premium.png';
   static const String achievement = trophy;
   static const String medalRanking = trophy;
