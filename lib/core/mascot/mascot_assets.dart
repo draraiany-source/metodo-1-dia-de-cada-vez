@@ -1,6 +1,7 @@
 import '../constants/app_assets.dart';
 import '../widgets/lili_widgets.dart' show MascotePose;
 import 'mascot_config.dart';
+import '../lily/lily_assets.dart';
 
 /// Alias em inglês para o enum de poses existente — dá o vocabulário pedido
 /// (`MascotPose.celebrating` etc. podem ser adicionados aqui no futuro) sem
@@ -59,19 +60,39 @@ class MascotAssets {
   /// Poses cujo PNG padronizado ainda carrega arte de sprite sheet (pés no
   /// topo, duplicata lateral ou wrap) após o crop automático — redireciona
   /// para um asset limpo conhecido.
+  /// Preferência: pacote oficial Lily Fit (assets/lily/) — corpo inteiro, HD.
   static String? safeNewOverride(MascotPose pose) {
     switch (pose) {
-      case MascotePose.celebrando:
+      case MascotePose.boasVindas:
+        return LilyAssets.boasVindas;
+      case MascotePose.joinha:
+        return LilyAssets.joinha;
+      case MascotePose.hidratacao:
+        return LilyAssets.tomandoAgua;
+      case MascotePose.halteres:
+        return LilyAssets.treinoHalteres;
+      case MascotePose.forte:
+        return LilyAssets.forca;
+      case MascotePose.meditacao:
+        return LilyAssets.meditacao;
       case MascotePose.trofeu:
-        return officialCelebratingRing;
-      case MascotePose.rainha:
-        return lily02Paz;
+        return LilyAssets.trofeu;
+      case MascotePose.celebrando:
+        return LilyAssets.vitoria;
+      case MascotePose.apontando:
+        return LilyAssets.apontandoDireita;
       case MascotePose.checklist:
-        return lily04Apontando;
+        return LilyAssets.calendarioCheck;
+      case MascotePose.padrao:
+        return LilyAssets.apresentandoAberta;
       case MascotePose.perfil:
-        return officialArmsCrossed;
-      default:
-        return null;
+        return LilyAssets.mostrandoApp;
+      case MascotePose.coracao:
+        return LilyAssets.metaConcluida;
+      case MascotePose.triste:
+        return LilyAssets.tentarNovamente;
+      case MascotePose.rainha:
+        return LilyAssets.trofeu;
     }
   }
 
@@ -115,9 +136,12 @@ class MascotAssets {
     }
   }
 
-  /// Caminho efetivo respeitando a flag de transição.
-  static String resolve(MascotPose pose) =>
-      MascotConfig.useNewMascot ? newPath(pose) : legacyPath(pose);
+  /// Caminho efetivo: pacote Lily Fit oficial tem prioridade (sem corte).
+  static String resolve(MascotPose pose) {
+    final lily = safeNewOverride(pose);
+    if (lily != null) return lily;
+    return MascotConfig.useNewMascot ? newPath(pose) : legacyPath(pose);
+  }
 
   // ==========================================================================
   // POSES EXTRAS da arte oficial (não mapeadas no enum de 15 poses).
@@ -168,4 +192,12 @@ class MascotAssets {
       'assets/mascot/extras/lily_running_official.png';
   static const String officialCelebratingRing =
       'assets/mascot/extras/lily_celebrating_ring_official.png';
+
+  // Pacote Lily Fit completo (atalhos)
+  static const String lilyPackRunning = LilyAssets.corrida;
+  static const String lilyPackStretch = LilyAssets.alongamento;
+  static const String lilyPackNutrition = LilyAssets.pratoSaudavel;
+  static const String lilyPackPostWorkout = LilyAssets.posTreino;
+  static const String lilyPackHydrationReminder = LilyAssets.lembreteHidratacao;
 }
+
