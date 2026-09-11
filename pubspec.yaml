@@ -179,6 +179,7 @@ flutter:
     - assets/challenges/
     - assets/audio_programs/
     - assets/lily/
+    - assets/lily_treinos/
     - assets/amanda/
     - assets/amanda/promo/
     - assets/amanda/optimized/

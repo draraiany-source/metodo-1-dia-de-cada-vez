@@ -12,6 +12,8 @@ import '../../gamification/providers/gamification_providers.dart';
 import '../../missions/providers/missions_providers.dart';
 import '../../rewards/providers/rewards_providers.dart';
 import '../domain/treino_catalog_models.dart';
+import '../../../core/lily/lily_treino_assets.dart';
+import '../../../core/lily/lily_treino_image.dart';
 import 'treino_catalog_visual.dart';
 
 /// Detalhe de um exercício do catálogo oficial (117 treinos).
@@ -98,6 +100,18 @@ class TreinoCatalogDetailScreen extends ConsumerWidget {
                 ),
               ],
             ),
+            Center(
+              child: LilyTreinoImage(
+                asset: LilyTreinoAssets.resolve(
+                  '${treino.nome} ${treino.grupoMuscular ?? ''} ${treino.categoria ?? ''}',
+                  genericSeed: treino.nome.hashCode,
+                ),
+                maxHeight: 280,
+                maxWidth: 420,
+                semanticLabel: treino.nome,
+              ),
+            ),
+            const SizedBox(height: 16),
             const SizedBox(height: 20),
             for (final (label, value) in fields) ...[
               _DetailRow(label: label, value: value!),

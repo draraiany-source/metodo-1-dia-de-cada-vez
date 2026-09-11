@@ -19,7 +19,7 @@ import '../../../models/domain_models.dart';
 import '../../gamification/providers/gamification_providers.dart';
 import '../../missions/providers/missions_providers.dart';
 import '../../rewards/providers/rewards_providers.dart';
-import 'workout_category_visual.dart';
+import '../../../core/lily/lily_treino_image.dart';
 
 const _kDescansoPadraoSegundos = 45;
 
@@ -529,11 +529,14 @@ class _Hero extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: AspectRatio(
         aspectRatio: wide ? 21 / 9 : 16 / 10,
-        child: WorkoutCoverImage(
-          workout: workout,
-          fit: BoxFit.cover,
-          alignment: Alignment.center,
-          fallbackIconSize: wide ? 120 : 96,
+        child: ColoredBox(
+          color: const Color(0xFF0A0A0F),
+          child: LilyTreinoImage.forExercise(
+            workout.title,
+            maxHeight: wide ? 220 : 200,
+            alignment: Alignment.center,
+            genericSeed: workout.title.hashCode,
+          ),
         ),
       ),
     );
@@ -618,10 +621,14 @@ class _ExercisePlayer extends StatelessWidget {
                       ),
                     )
                   else
-                    WorkoutCoverImage(
-                      workout: workout,
-                      fit: BoxFit.cover,
-                      fallbackIconSize: wide ? 110 : 88,
+                    ColoredBox(
+                      color: const Color(0xFF0A0A0F),
+                      child: LilyTreinoImage.forExercise(
+                        exercise.name,
+                        maxHeight: wide ? 260 : 220,
+                        alignment: Alignment.center,
+                        genericSeed: index,
+                      ),
                     ),
                   if (pausado)
                     Container(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/assets/app_icons.dart';
 import '../../../core/widgets/app_icon_image.dart';
+import '../../../core/lily/lily_treino_assets.dart';
 import '../domain/treino_catalog_models.dart';
 
 /// Identidade visual profissional de um treino do catálogo.
@@ -691,4 +692,13 @@ String treinoMetaLine(TreinoCatalogEntry t) {
   if (equip != null) parts.add(equip);
   if (presc != null) parts.add(presc);
   return parts.join('  ·  ');
+}
+
+
+/// Asset Lily Fit (treino) para o exercício/treino do catálogo.
+String lilyTreinoAssetFor(TreinoCatalogEntry treino) {
+  return LilyTreinoAssets.resolve(
+    '${treino.nome} ${treino.grupoMuscular ?? ''} ${treino.categoria ?? ''}',
+    genericSeed: treino.nome.hashCode,
+  );
 }
