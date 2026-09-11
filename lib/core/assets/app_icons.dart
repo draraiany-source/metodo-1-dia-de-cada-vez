@@ -39,12 +39,12 @@ class AppIcons {
   static const String measurements = measurement;
   static const String history = '${_nav}history.jpg';
   static const String notifications = '${_app}notificacoes.png';
-  static const String settings = '${_nav}settings.jpg';
+  static const String settings = '${_app}configuracoes.png';
   static const String premium = '${_app}premium.png';
   static const String subscription = '${_nav}subscription.jpg';
 
   // ---- Saúde / métricas ----
-  static const String running = '${_health}running_gps.jpg';
+  static const String running = '${_app}corrida_gps.png';
   static const String gpsRunning = running;
   static const String gps = running;
   static const String water = '${_app}hidratacao.png';
@@ -65,7 +65,7 @@ class AppIcons {
   static const String bmiMeasure = weight;
   static const String calories = '${_health}calories.jpg';
   static const String camera = '${_health}camera.jpg';
-  static const String cameraFood = '${_health}food_ai.jpg';
+  static const String cameraFood = '${_app}analisar_refeicao_ia.png';
   static const String food = cameraFood;
   static const String scanner = cameraFood;
   static const String stretching = '${_health}stretching.jpg';
@@ -80,7 +80,8 @@ class AppIcons {
   static const String goals = '${_app}metas.png';
   static const String goal = goals;
   static const String healthHeart = '${_health}health_fitness.jpg';
-  static const String healthFitness = healthHeart;
+  static const String healthFitness = '${_app}bem_estar.png';
+  static const String bemEstar = healthFitness;
 
   // ---- Ações ----
   static const String edit = '${_actions}edit.jpg';
@@ -166,9 +167,11 @@ class AppIcons {
   static const String courses = program7Days;
   static const String ebook = diary;
   static const String community = '${_app}comunidade.png';
-  static const String messages = community;
+  static const String messages = '${_app}suporte.png';
   static const String personal = profile;
-  static const String support = community;
+  static const String support = '${_app}suporte.png';
+  static const String help = '${_app}ajuda.png';
+  static const String ajuda = help;
   static const String reminders = notifications;
   static const String security = settings;
   static const String privacy = settings;
