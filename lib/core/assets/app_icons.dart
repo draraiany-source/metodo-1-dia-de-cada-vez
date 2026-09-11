@@ -27,7 +27,7 @@ class AppIcons {
   static const String homeAlt = home;
   static const String workout = '${_app}treinos.png';
   static const String workoutDumbbell = workout;
-  static const String recipes = '${_nav}recipes.jpg';
+  static const String recipes = '${_app}receitas.png';
   static const String nutrition = recipes;
   static const String evolution = '${_nav}evolution.jpg';
   static const String profile = '${_app}perfil.png';
@@ -47,7 +47,7 @@ class AppIcons {
   static const String running = '${_health}running_gps.jpg';
   static const String gpsRunning = running;
   static const String gps = running;
-  static const String water = '${_health}water.jpg';
+  static const String water = '${_app}hidratacao.png';
   static const String hydration = water;
   static const String hydrationGoal = '${_health}hydration_alt.jpg';
 
@@ -58,7 +58,7 @@ class AppIcons {
   static const String hydrationCheck = '${_hydrationDir}hydration_check.png';
   static const String hydrationBottle = '${_hydrationDir}hydration_bottle.png';
   static const String hydrationGlass = '${_hydrationDir}hydration_glass.png';
-  static const String sleep = '${_health}sleep.jpg';
+  static const String sleep = '${_app}sono.png';
   static const String steps = '${_health}steps.jpg';
   static const String walk = steps;
   static const String weight = '${_health}weight_bmi.jpg';
@@ -95,7 +95,7 @@ class AppIcons {
   static const String location = '${_actions}location_map.jpg';
   static const String retry = '${_actions}retry_refresh.jpg';
   static const String refresh = retry;
-  static const String logout = '${_actions}logout.jpg';
+  static const String logout = '${_app}sair.png';
   static const String target = '${_actions}target.jpg';
 
   // ---- Humor / check-in ----
