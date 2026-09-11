@@ -280,4 +280,11 @@ class AppAssets {
   static const String amandaCorrida = 'assets/amanda/promo/amanda_corrida.png';
   static const String amandaForca = 'assets/amanda/promo/amanda_forca.png';
 
+  static const String amandaJoinha = 'assets/amanda/promo/amanda_joinha.png';
+  static const String amandaLembreteHidratacao = 'assets/amanda/promo/amanda_lembrete_hidratacao.png';
+  static const String amandaMeditacao = 'assets/amanda/promo/amanda_meditacao.png';
+  static const String amandaMetaConcluida = 'assets/amanda/promo/amanda_meta_concluida.png';
+  static const String amandaMostrandoApp = 'assets/amanda/promo/amanda_mostrando_app.png';
+  static const String amandaAlongamentoAlt = 'assets/amanda/promo/amanda_alongamento_alt.png';
+
 }
