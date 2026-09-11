@@ -42,9 +42,11 @@ class VideosRepository {
             .where('active', isEqualTo: true)
             .orderBy('order')
             .get();
-      } on FirebaseException catch (e) {
+      } catch (e) {
+        // Web: FirebaseException pode chegar como TypeError/JS interop —
+        // nunca use só `on FirebaseException` sem fallback genérico.
         debugPrint(
-            'videos query composta falhou (${e.code}); tentando fallback.');
+            'videos query composta falhou ($e); tentando fallback.');
         snap = await FirebaseFirestore.instance
             .collection('videos')
             .where('active', isEqualTo: true)
@@ -62,7 +64,7 @@ class VideosRepository {
       }
       out.sort((a, b) => a.order.compareTo(b.order));
       return out;
-    } on FirebaseException catch (e) {
+    } catch (e) {
       try {
         final all = await FirebaseFirestore.instance.collection('videos').get();
         final out = <VideoContent>[];
@@ -78,20 +80,12 @@ class VideosRepository {
         if (out.isNotEmpty) return out;
       } catch (_) {/* segue para throw amigável */}
 
+      if (e is VideosFetchException) rethrow;
       throw VideosFetchException(
         FirebaseErrorMapper.toUserMessage(
           e,
           fallback:
               'Não foi possível carregar os vídeos. Verifique a conexão e tente novamente.',
-        ),
-        cause: e,
-      );
-    } catch (e) {
-      if (e is VideosFetchException) rethrow;
-      throw VideosFetchException(
-        FirebaseErrorMapper.toUserMessage(
-          e,
-          fallback: 'Não foi possível carregar os vídeos. Tente novamente.',
         ),
         cause: e,
       );

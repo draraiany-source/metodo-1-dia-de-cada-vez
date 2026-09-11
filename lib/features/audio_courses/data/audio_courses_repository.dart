@@ -3,11 +3,13 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/services/auth_http_headers.dart';
 import '../../../core/services/firebase_service.dart';
+import '../../../core/utils/firebase_error_mapper.dart';
 import '../domain/audio_course_models.dart';
 
 class ChapterUrlResult {
@@ -15,6 +17,15 @@ class ChapterUrlResult {
   final String? url;
   final String? error;
   bool get ok => url != null;
+}
+
+/// Erro tipado para a UI (retry + mensagem amigável).
+class AudioCoursesFetchException implements Exception {
+  AudioCoursesFetchException(this.userMessage, {this.cause});
+  final String userMessage;
+  final Object? cause;
+  @override
+  String toString() => userMessage;
 }
 
 /// Busca cursos em áudio no Firestore (`audio_courses` + subcoleção
@@ -45,22 +56,46 @@ class AudioCoursesRepository {
     if (!isAvailable) return [];
     try {
       final db = FirebaseFirestore.instance;
-      final coursesSnap =
-          await db.collection('audio_courses').orderBy('order').get();
+      QuerySnapshot<Map<String, dynamic>> coursesSnap;
+      try {
+        coursesSnap =
+            await db.collection('audio_courses').orderBy('order').get();
+      } catch (e) {
+        debugPrint('audio_courses orderBy falhou ($e); fallback sem order.');
+        coursesSnap = await db.collection('audio_courses').get();
+      }
       final courses = <AudioCourse>[];
       for (final doc in coursesSnap.docs) {
-        final chaptersSnap = await doc.reference
-            .collection('chapters')
-            .orderBy('order')
-            .get();
-        final chapters = chaptersSnap.docs
-            .map((c) => AudioChapter.fromMap(c.id, c.data()))
-            .toList();
-        courses.add(AudioCourse.fromMap(doc.id, doc.data(), chapters));
+        try {
+          QuerySnapshot<Map<String, dynamic>> chaptersSnap;
+          try {
+            chaptersSnap = await doc.reference
+                .collection('chapters')
+                .orderBy('order')
+                .get();
+          } catch (_) {
+            chaptersSnap = await doc.reference.collection('chapters').get();
+          }
+          final chapters = chaptersSnap.docs
+              .map((c) => AudioChapter.fromMap(c.id, c.data()))
+              .toList()
+            ..sort((a, b) => a.order.compareTo(b.order));
+          courses.add(AudioCourse.fromMap(doc.id, doc.data(), chapters));
+        } catch (e) {
+          debugPrint('Audio course parse falhou ${doc.id}: $e');
+        }
       }
+      courses.sort((a, b) => a.order.compareTo(b.order));
       return courses;
-    } catch (_) {
-      return [];
+    } catch (e) {
+      throw AudioCoursesFetchException(
+        FirebaseErrorMapper.toUserMessage(
+          e,
+          fallback:
+              'Não foi possível carregar os cursos. Verifique a conexão e tente novamente.',
+        ),
+        cause: e,
+      );
     }
   }
 

@@ -147,28 +147,41 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 for (var i = 0; i < AppIcons.moodCheckin.length; i++)
-                  GestureDetector(
-                    onTap: () => setState(() => _humor = i),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: _humor == i
-                            ? AppColors.primary.withOpacity(0.25)
-                            : AppColors.surface,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: _humor == i
-                              ? AppColors.primary
-                              : Colors.transparent,
-                          width: 2,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 3),
+                      child: Semantics(
+                        button: true,
+                        selected: _humor == i,
+                        label: 'Humor ${i + 1} de ${AppIcons.moodCheckin.length}',
+                        child: InkWell(
+                          onTap: () => setState(() => _humor = i),
+                          borderRadius: BorderRadius.circular(16),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            decoration: BoxDecoration(
+                              color: _humor == i
+                                  ? AppColors.primary.withOpacity(0.28)
+                                  : AppColors.surface,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                color: _humor == i
+                                    ? AppColors.primary
+                                    : AppColors.border,
+                                width: _humor == i ? 2 : 1,
+                              ),
+                            ),
+                            child: AppIconImage(
+                              AppIcons.moodCheckin[i],
+                              size: 48,
+                              fit: BoxFit.contain,
+                              filterQuality: FilterQuality.high,
+                              fallbackIcon: Icons.emoji_emotions_outlined,
+                              semanticLabel: 'Humor $i',
+                            ),
+                          ),
                         ),
-                      ),
-                      child: AppIconImage(
-                        AppIcons.moodCheckin[i],
-                        size: 36,
-                        fallbackIcon: Icons.emoji_emotions_outlined,
-                        semanticLabel: 'Humor $i',
                       ),
                     ),
                   ),

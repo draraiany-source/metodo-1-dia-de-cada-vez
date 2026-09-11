@@ -49,7 +49,8 @@ class RemindersNotifier extends StateNotifier<List<Reminder>> {
   }
 
   String _bodyFor(ReminderCategory c) => switch (c) {
-        ReminderCategory.agua => 'Hora de beber um copo de água 💜',
+        ReminderCategory.agua =>
+          'Hora de beber água 💧 Um copo agora ajuda você a chegar à sua meta.',
         ReminderCategory.checkin => 'Como foi seu dia? Faça seu check-in.',
         ReminderCategory.metaDiaria => 'Falta pouco pra bater sua meta hoje!',
         _ => 'Um dia de cada vez — vamos lá!',

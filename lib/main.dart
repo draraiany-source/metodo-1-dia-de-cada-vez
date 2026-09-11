@@ -163,9 +163,48 @@ Future<void> main() async {
 /// (ex.: erros assíncronos fora de builds/callbacks de widgets).
 /// Mantido aqui para diagnóstico contínuo após o app já estar rodando.
 void _installGlobalErrorHandlers() {
+  // Evita a tela vermelha padrão no usuário final (Web/mobile).
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    final msg = FirebaseErrorMapper.toUserMessage(details.exception);
+    return Material(
+      color: const Color(0xFF121018),
+      child: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.cloud_off_outlined,
+                    color: Color(0xFFC9A0FF), size: 40),
+                const SizedBox(height: 12),
+                const Text(
+                  'Não foi possível carregar agora.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  msg,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white70, fontSize: 13),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  };
+
   PlatformDispatcher.instance.onError = (error, stack) {
     debugPrint('ERRO NÃO TRATADO: $error');
     debugPrintStack(stackTrace: stack);
+    // true = erro tratado (não propaga como fatal no Web).
     return true;
   };
 }

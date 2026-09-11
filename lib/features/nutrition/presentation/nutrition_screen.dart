@@ -339,7 +339,9 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
                           onTap: () {
                             final novo = i + 1;
                             final bateuMeta = glasses < goal && novo >= goal;
-                            ref.read(waterLogProvider.notifier).setGlasses(novo);
+                            ref
+                                .read(waterDayProvider.notifier)
+                                .setGlasses(novo);
                             // Missão de hidratação usa progresso absoluto.
                             ref
                                 .read(missionsProvider.notifier)

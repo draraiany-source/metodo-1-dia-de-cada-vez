@@ -6,9 +6,11 @@ import '../../../core/favorites/unified_favorites.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/firebase_error_mapper.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/app_states.dart';
 import '../../../core/widgets/common_widgets.dart';
+import '../data/audio_courses_repository.dart';
 import '../domain/audio_course_models.dart';
 import '../providers/audio_course_providers.dart';
 import 'audio_course_player_screen.dart';
@@ -50,8 +52,12 @@ class _AudioCoursesScreenState extends ConsumerState<AudioCoursesScreen> {
       body: SafeArea(
         child: coursesAsync.when(
           loading: () => const AppListSkeleton(),
-          error: (_, __) =>
-              AppErrorState(onRetry: () => ref.invalidate(audioCoursesProvider)),
+          error: (error, _) => AppErrorState(
+            message: error is AudioCoursesFetchException
+                ? error.userMessage
+                : FirebaseErrorMapper.toUserMessage(error),
+            onRetry: () => ref.invalidate(audioCoursesProvider),
+          ),
           data: (allCourses) {
             final courses = widget.onlyCategories == null
                 ? allCourses

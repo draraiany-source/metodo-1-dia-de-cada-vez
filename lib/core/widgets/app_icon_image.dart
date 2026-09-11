@@ -31,7 +31,7 @@ class AppIconImage extends StatelessWidget {
     this.borderRadius,
     this.fallbackIcon = Icons.image_not_supported_outlined,
     this.onTap,
-    this.filterQuality = FilterQuality.medium,
+    this.filterQuality = FilterQuality.high,
   });
 
   final String assetPath;
@@ -57,8 +57,10 @@ class AppIconImage extends StatelessWidget {
     // Decodifica no tamanho de exibição (x devicePixelRatio) para economizar
     // memória. Só aplica quando há uma largura conhecida.
     final dpr = MediaQuery.maybeOf(context)?.devicePixelRatio ?? 2.0;
+    // Preferir resolução nativa suficiente (×3) para ícones não pixelarem
+    // em telas densas; teto 2048 evita decodificar assets enormes à toa.
     final int? cacheW =
-        _w != null ? (_w! * dpr).round().clamp(1, 1024) : null;
+        _w != null ? (_w! * dpr * 1.5).round().clamp(48, 2048) : null;
 
     Widget image = Image.asset(
       assetPath,

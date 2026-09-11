@@ -140,6 +140,7 @@ flutter:
     - assets/icons/
     - assets/icons/navigation/
     - assets/icons/health/
+    - assets/icons/hydration/
     - assets/icons/actions/
     - assets/icons/mood/
     - assets/icons/achievements/
