@@ -266,4 +266,11 @@ class AppAssets {
   static const String amandaTreinoHalteres = 'assets/amanda/promo/amanda_treino_halteres.png';
   static const String amandaVitoria = 'assets/amanda/promo/amanda_vitoria.png';
 
+  static const String amandaAlongamento = 'assets/amanda/promo/amanda_alongamento.png';
+  static const String amandaApontandoBaixo = 'assets/amanda/promo/amanda_apontando_baixo.png';
+  static const String amandaApontandoCima = 'assets/amanda/promo/amanda_apontando_cima.png';
+  static const String amandaApontandoDireita = 'assets/amanda/promo/amanda_apontando_direita.png';
+  static const String amandaApontandoEsquerda = 'assets/amanda/promo/amanda_apontando_esquerda.png';
+  static const String amandaApresentando = 'assets/amanda/promo/amanda_apresentando.png';
+
 }
