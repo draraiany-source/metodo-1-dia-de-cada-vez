@@ -19,16 +19,18 @@ class AppIcons {
   static const String _ach = 'assets/icons/achievements/';
   static const String _prem = 'assets/icons/premium/';
   static const String _treino = 'assets/icons/neon/treinos/';
+  /// Pacote neon 3D gloss (finalizacao) — PNG em assets/icons/app/.
+  static const String _app = 'assets/icons/app/';
 
   // ---- Navegação ----
-  static const String home = '${_nav}home.jpg';
+  static const String home = '${_app}inicio.png';
   static const String homeAlt = home;
-  static const String workout = '${_nav}workouts.jpg';
+  static const String workout = '${_app}treinos.png';
   static const String workoutDumbbell = workout;
   static const String recipes = '${_nav}recipes.jpg';
   static const String nutrition = recipes;
   static const String evolution = '${_nav}evolution.jpg';
-  static const String profile = '${_nav}profile.jpg';
+  static const String profile = '${_app}perfil.png';
   static const String checkin = '${_nav}checkin.jpg';
   static const String diary = '${_nav}diary.jpg';
   static const String photos = '${_nav}photos.jpg';
@@ -36,9 +38,9 @@ class AppIcons {
   static const String measurement = '${_nav}measurements.jpg';
   static const String measurements = measurement;
   static const String history = '${_nav}history.jpg';
-  static const String notifications = '${_nav}notifications.jpg';
+  static const String notifications = '${_app}notificacoes.png';
   static const String settings = '${_nav}settings.jpg';
-  static const String premium = '${_nav}premium.jpg';
+  static const String premium = '${_app}premium.png';
   static const String subscription = '${_nav}subscription.jpg';
 
   // ---- Saúde / métricas ----
@@ -67,7 +69,7 @@ class AppIcons {
   static const String food = cameraFood;
   static const String scanner = cameraFood;
   static const String stretching = '${_health}stretching.jpg';
-  static const String meditation = '${_health}meditation.jpg';
+  static const String meditation = '${_app}meditacoes.png';
   static const String yoga = meditation;
   static const String favorite = '${_health}favorite.jpg';
   static const String favorites = favorite;
@@ -75,7 +77,7 @@ class AppIcons {
   static const String filter = search;
   static const String audio = '${_health}audio.jpg';
   static const String calendar = '${_health}calendar.jpg';
-  static const String goals = '${_health}goals.jpg';
+  static const String goals = '${_app}metas.png';
   static const String goal = goals;
   static const String healthHeart = '${_health}health_fitness.jpg';
   static const String healthFitness = healthHeart;
@@ -118,7 +120,7 @@ class AppIcons {
 
   // ---- Premium / conquistas genéricas ----
   static const String trophy = '${_prem}achievement_trophy.jpg';
-  static const String premiumCrown = '${_prem}premium_crown.jpg';
+  static const String premiumCrown = '${_app}premium.png';
   static const String achievement = trophy;
   static const String medalRanking = trophy;
   static const String medal = trophy;
@@ -152,8 +154,8 @@ class AppIcons {
   // ---- Compat / aliases (telas existentes) ----
   static const String checklist = checkin;
   static const String habits = checkin;
-  static const String video = play;
-  static const String videos = play;
+  static const String video = '${_app}videos.png';
+  static const String videos = video;
   static const String stopwatch = history;
   static const String timer = history;
   static const String progress = evolution;
@@ -163,10 +165,10 @@ class AppIcons {
   static const String course = program7Days;
   static const String courses = program7Days;
   static const String ebook = diary;
-  static const String community = profile;
-  static const String messages = profile;
+  static const String community = '${_app}comunidade.png';
+  static const String messages = community;
   static const String personal = profile;
-  static const String support = profile;
+  static const String support = community;
   static const String reminders = notifications;
   static const String security = settings;
   static const String privacy = settings;

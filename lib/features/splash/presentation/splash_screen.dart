@@ -68,10 +68,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.sizeOf(context).height;
+    // Lily grande na abertura (~48% da tela), sem cortar e sem overflow.
+    final lilyH = (h * 0.48).clamp(MascotSizes.auth, MascotSizes.showcaseMax);
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(gradient: AppColors.splashGradient),
-        child: Center(
+        child: SafeArea(
+          child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -80,11 +84,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   CurvedAnimation(
                       parent: _controller, curve: Curves.easeInOut),
                 ),
-                child: const PopIn(
+                child: PopIn(
                   child: AnimatedLiliMascot(
                       pose: MascotePose.boasVindas,
                       mood: LiliMood.viva,
-                      height: MascotSizes.auth),
+                      height: lilyH,
+                      fit: BoxFit.contain),
                 ),
               ),
               const SizedBox(height: 24),
@@ -117,6 +122,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
               ),
             ],
           ),
+        ),
         ),
       ),
     );

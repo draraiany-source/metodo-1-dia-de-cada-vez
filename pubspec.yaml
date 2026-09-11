@@ -138,6 +138,8 @@ flutter:
     - assets/mascot/png/
     - assets/mascot/extras/
     - assets/icons/
+    - assets/icons/app/
+    - assets/icons/app/extras_hidratacao/
     - assets/icons/navigation/
     - assets/icons/health/
     - assets/icons/hydration/
@@ -177,4 +179,6 @@ flutter:
     - assets/challenges/
     - assets/audio_programs/
     - assets/lily/
+    - assets/amanda/
+    - assets/amanda/promo/
     - assets/app_icon/

@@ -257,4 +257,13 @@ class AppAssets {
     'assets/icons/ic_treinos.svg',
     'assets/icons/ic_yoga.svg',
   ];
+
+
+  // ===== Amanda promo (finalizacao) =====
+  static const String amandaNutricaoPrato = 'assets/amanda/promo/amanda_nutricao_prato.png';
+  static const String amandaCicloMetodo = 'assets/amanda/promo/amanda_ciclo_metodo.png';
+  static const String amandaHidratacao = 'assets/amanda/promo/amanda_hidratacao.png';
+  static const String amandaTreinoHalteres = 'assets/amanda/promo/amanda_treino_halteres.png';
+  static const String amandaVitoria = 'assets/amanda/promo/amanda_vitoria.png';
+
 }
