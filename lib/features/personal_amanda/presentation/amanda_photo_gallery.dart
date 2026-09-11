@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/amanda/amanda_photos.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../domain/amanda_asset_models.dart';
@@ -27,10 +28,13 @@ class AmandaPhotoGallery extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final all = ref.watch(amandaAssetsProvider).valueOrNull ?? const [];
     final list = amandaAssetsFor(all, category);
-    final n = list.isEmpty ? count.clamp(2, 4) : list.length.clamp(1, 12);
+    final localCount = AmandaPhotos.forCategoryName(category.name).length;
+    final n = list.isEmpty
+        ? count.clamp(1, localCount.clamp(1, 8))
+        : list.length.clamp(1, 12);
 
     return LayoutBuilder(builder: (context, c) {
-      final gap = 10.0;
+      const gap = 10.0;
       final cols = c.maxWidth >= 520 ? 3 : 2;
       final w = (c.maxWidth - gap * (cols - 1)) / cols;
       return Wrap(
@@ -43,9 +47,18 @@ class AmandaPhotoGallery extends ConsumerWidget {
               child: AspectRatio(
                 aspectRatio: aspectRatio,
                 child: GestureDetector(
-                  onTap: list.isEmpty || i >= list.length
-                      ? null
-                      : () => _openLightbox(context, list, i),
+                  onTap: () {
+                    if (list.isNotEmpty && i < list.length) {
+                      _openLightbox(context, list.map((e) => e.url).toList(),
+                          i,
+                          fromNetwork: true);
+                      return;
+                    }
+                    final locals = AmandaPhotos.forCategoryName(category.name);
+                    if (locals.isEmpty) return;
+                    _openLightbox(context, locals, i.clamp(0, locals.length - 1),
+                        fromNetwork: false);
+                  },
                   child: AmandaImage(
                     category: category,
                     fallbacks: fallbacks,
@@ -74,52 +87,56 @@ class AmandaFullGalleryGrid extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final all = ref.watch(amandaAssetsProvider).valueOrNull ?? const [];
     final list = amandaPublicGallery(all);
-
-    if (list.isEmpty) {
-      return Container(
-        height: 120,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.border),
-        ),
-        child: const Text(
-          'Galeria em breve — fotos cadastradas no painel aparecem aqui.',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: AppColors.textSecondary),
-        ),
-      );
-    }
+    final useLocal = list.isEmpty;
+    final localPaths = AmandaPhotos.all;
 
     return LayoutBuilder(builder: (context, c) {
-      final gap = 10.0;
+      const gap = 10.0;
       final cols = c.maxWidth >= 520 ? 3 : 2;
       final w = (c.maxWidth - gap * (cols - 1)) / cols;
+      final total = useLocal ? localPaths.length : list.length;
       return Wrap(
         spacing: gap,
         runSpacing: gap,
         children: [
-          for (var i = 0; i < list.length; i++)
+          for (var i = 0; i < total; i++)
             SizedBox(
               width: w,
               child: AspectRatio(
                 aspectRatio: 0.85,
                 child: GestureDetector(
-                  onTap: () => _openLightbox(context, list, i),
+                  onTap: () {
+                    if (useLocal) {
+                      _openLightbox(context, localPaths, i, fromNetwork: false);
+                    } else {
+                      _openLightbox(
+                          context, list.map((e) => e.url).toList(), i,
+                          fromNetwork: true);
+                    }
+                  },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: CachedNetworkImage(
-                      imageUrl: list[i].url,
-                      fit: BoxFit.cover,
-                      placeholder: (_, __) =>
-                          const ColoredBox(color: AppColors.surface2),
-                      errorWidget: (_, __, ___) => const ColoredBox(
-                        color: AppColors.surface2,
-                        child: Icon(Icons.broken_image_outlined,
-                            color: AppColors.textTertiary),
-                      ),
-                    ),
+                    child: useLocal
+                        ? Image.asset(
+                            localPaths[i],
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) => const ColoredBox(
+                              color: AppColors.surface2,
+                              child: Icon(Icons.broken_image_outlined,
+                                  color: AppColors.textTertiary),
+                            ),
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: list[i].url,
+                            fit: BoxFit.cover,
+                            placeholder: (_, __) =>
+                                const ColoredBox(color: AppColors.surface2),
+                            errorWidget: (_, __, ___) => const ColoredBox(
+                              color: AppColors.surface2,
+                              child: Icon(Icons.broken_image_outlined,
+                                  color: AppColors.textTertiary),
+                            ),
+                          ),
                   ),
                 ),
               ),
@@ -131,21 +148,30 @@ class AmandaFullGalleryGrid extends ConsumerWidget {
 }
 
 void _openLightbox(
-    BuildContext context, List<AmandaAsset> list, int initialIndex) {
+  BuildContext context,
+  List<String> urls, int initialIndex, {
+  required bool fromNetwork,
+}) {
   Navigator.of(context).push(
     MaterialPageRoute(
       builder: (_) => _AmandaLightbox(
-        urls: list.map((e) => e.url).toList(),
+        urls: urls,
         initialIndex: initialIndex,
+        fromNetwork: fromNetwork,
       ),
     ),
   );
 }
 
 class _AmandaLightbox extends StatefulWidget {
-  const _AmandaLightbox({required this.urls, required this.initialIndex});
+  const _AmandaLightbox({
+    required this.urls,
+    required this.initialIndex,
+    required this.fromNetwork,
+  });
   final List<String> urls;
   final int initialIndex;
+  final bool fromNetwork;
 
   @override
   State<_AmandaLightbox> createState() => _AmandaLightboxState();
@@ -182,10 +208,15 @@ class _AmandaLightboxState extends State<_AmandaLightbox> {
         onPageChanged: (i) => setState(() => _index = i),
         itemBuilder: (_, i) => InteractiveViewer(
           child: Center(
-            child: CachedNetworkImage(
-              imageUrl: widget.urls[i],
-              fit: BoxFit.contain,
-            ),
+            child: widget.fromNetwork
+                ? CachedNetworkImage(
+                    imageUrl: widget.urls[i],
+                    fit: BoxFit.contain,
+                  )
+                : Image.asset(
+                    widget.urls[i],
+                    fit: BoxFit.contain,
+                  ),
           ),
         ),
       ),

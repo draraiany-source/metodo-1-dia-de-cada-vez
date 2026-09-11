@@ -2,12 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/amanda/amanda_photos.dart';
 import '../../../core/theme/app_colors.dart';
 import '../domain/amanda_asset_models.dart';
 import '../providers/amanda_assets_providers.dart';
 
 /// Foto dinâmica da Amanda. Lê o asset ativo da categoria; se não houver,
-/// mostra placeholder elegante — nunca usa a arte da Lili.
+/// usa o pacote local WebP — nunca a arte da Lily.
 class AmandaImage extends ConsumerWidget {
   const AmandaImage({
     super.key,
@@ -21,6 +22,7 @@ class AmandaImage extends ConsumerWidget {
     this.fallbacks = const [],
     this.assetIndex = 0,
     this.placeholderIcon = Icons.person_rounded,
+    this.useLocalFallback = true,
   });
 
   final AmandaAssetCategory category;
@@ -33,6 +35,7 @@ class AmandaImage extends ConsumerWidget {
   final List<AmandaAssetCategory> fallbacks;
   final int assetIndex;
   final IconData placeholderIcon;
+  final bool useLocalFallback;
 
   double get _w => width ?? size;
   double get _h => height ?? size;
@@ -41,6 +44,17 @@ class AmandaImage extends ConsumerWidget {
     if (borderRadius != null) return borderRadius!;
     if (shape == BoxShape.circle) return BorderRadius.circular(_w / 2);
     return BorderRadius.circular(18);
+  }
+
+  String? _resolveLocal() {
+    if (!useLocalFallback) return null;
+    final primary = AmandaPhotos.localFor(category.name, index: assetIndex);
+    if (primary != null) return primary;
+    for (final fb in fallbacks) {
+      final path = AmandaPhotos.localFor(fb.name, index: 0);
+      if (path != null) return path;
+    }
+    return AmandaPhotos.profile;
   }
 
   @override
@@ -69,12 +83,32 @@ class AmandaImage extends ConsumerWidget {
             fit: fit,
             alignment: Alignment.topCenter,
             placeholder: (_, __) => _placeholder(),
-            errorWidget: (_, __, ___) => _placeholder(),
+            errorWidget: (_, __, ___) => _localOrPlaceholder(),
           ),
         ),
       );
     }
-    return _placeholder();
+    return _localOrPlaceholder();
+  }
+
+  Widget _localOrPlaceholder() {
+    final local = _resolveLocal();
+    if (local == null) return _placeholder();
+    return ClipRRect(
+      borderRadius: _radius,
+      child: SizedBox(
+        width: _w.isFinite ? _w : null,
+        height: _h.isFinite ? _h : null,
+        child: Image.asset(
+          local,
+          width: double.infinity,
+          height: double.infinity,
+          fit: fit,
+          alignment: Alignment.topCenter,
+          errorBuilder: (_, __, ___) => _placeholder(),
+        ),
+      ),
+    );
   }
 
   Widget _placeholder() {

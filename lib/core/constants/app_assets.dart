@@ -1,9 +1,9 @@
-// GERADO AUTOMATICAMENTE — catálogo central de assets do Lili Fit.
+// GERADO AUTOMATICAMENTE â€” catÃ¡logo central de assets do Lili Fit.
 // Uso: SvgPicture.asset(AppAssets.icTreinos), Lottie.asset(AppAssets.animLoading)
 class AppAssets {
   AppAssets._();
 
-  // ===== Ícones (25) =====
+  // ===== Ãcones (25) =====
   static const String icAgua = 'assets/icons/ic_agua.svg';
   static const String icAlimentacao = 'assets/icons/ic_alimentacao.svg';
   static const String icAlongamento = 'assets/icons/ic_alongamento.svg';
@@ -76,7 +76,7 @@ class AppAssets {
   static const String bannerRanking = 'assets/illustrations/banners/banner_ranking.svg';
   static const String bannerTreinos = 'assets/illustrations/banners/banner_treinos.svg';
 
-  // ===== Animações Lottie (6) =====
+  // ===== AnimaÃ§Ãµes Lottie (6) =====
   static const String animConfetti = 'assets/animations/confetti.json';
   static const String animHeartPulse = 'assets/animations/heart_pulse.json';
   static const String animLevelUp = 'assets/animations/level_up.json';
@@ -124,8 +124,8 @@ class AppAssets {
   static const String imgLogoMark = 'assets/images/logo_mark.svg';
   static const String imgSplash = 'assets/images/splash.svg';
 
-  // ===== Ilustrações de módulo (JPEG oficiais — decorativas) =====
-  // Números desenhados NÃO são dados reais do usuário.
+  // ===== IlustraÃ§Ãµes de mÃ³dulo (JPEG oficiais â€” decorativas) =====
+  // NÃºmeros desenhados NÃƒO sÃ£o dados reais do usuÃ¡rio.
   static const String illustHomeBranca = 'assets/images/home/home_branca.jpeg';
   static const String illustHomePrincipal = 'assets/images/home/home_principal.jpeg';
 
@@ -186,7 +186,7 @@ class AppAssets {
   static const String illustMonitoramentoAtividade =
       'assets/images/bem_estar/monitoramento_atividade.jpeg';
 
-  /// Pranchas de ícones — SOMENTE referência visual (não usar como botão).
+  /// Pranchas de Ã­cones â€” SOMENTE referÃªncia visual (nÃ£o usar como botÃ£o).
   static const String refConjuntoIconesFitness1 =
       'assets/images/referencias/conjunto_icones_fitness_1.jpeg';
   static const String refGradeIcones1 =
@@ -196,7 +196,7 @@ class AppAssets {
   static const String refGradeIcones3 =
       'assets/images/referencias/grade_icones_funcionalidades_3.jpeg';
 
-  // ===== Mascote Lili — poses reais (15) =====
+  // ===== Mascote Lili â€” poses reais (15) =====
   static const String mascotePerfil = 'assets/images/mascote/avatar_perfil.png';
   static const String mascotePadrao = 'assets/images/mascote/avatar_padrao.png';
   static const String mascoteBoasVindas = 'assets/images/mascote/avatar_boas_vindas.png';
@@ -213,7 +213,7 @@ class AppAssets {
   static const String mascoteCelebrando = 'assets/images/mascote/avatar_celebrando.png';
   static const String mascoteRainha = 'assets/images/mascote/avatar_rainha.png';
 
-  // ===== Ícone do App (6) =====
+  // ===== Ãcone do App (6) =====
   static const String appIconAndroidAdaptiveBackground = 'assets/app_icon/android_adaptive_background.svg';
   static const String appIconAndroidAdaptiveForeground = 'assets/app_icon/android_adaptive_foreground.svg';
   static const String appIconAppIcon = 'assets/app_icon/app_icon.svg';
@@ -222,7 +222,7 @@ class AppAssets {
   static const String appIconNotificationIcon = 'assets/app_icon/notification_icon.svg';
 
   // ===== Avatares =====
-  // PNG real da Lily (joinha) — NÃO usar SVG placeholder aqui: no Web um
+  // PNG real da Lily (joinha) â€” NÃƒO usar SVG placeholder aqui: no Web um
   // SvgPicture sem errorBuilder derrubava a tela ao falhar o asset.
   static const String avatarLiliPlaceholder =
       'assets/images/lily_fit/01_lili_fit_joinha.png';
@@ -287,4 +287,22 @@ class AppAssets {
   static const String amandaMostrandoApp = 'assets/amanda/promo/amanda_mostrando_app.png';
   static const String amandaAlongamentoAlt = 'assets/amanda/promo/amanda_alongamento_alt.png';
 
+
+  // ===== Amanda fotos reais (academia / WebP otimizado) =====
+  static const String amandaProfilePhoto = 'assets/amanda/optimized/amanda-profile.webp';
+  static const String amandaWelcomePhoto = 'assets/amanda/optimized/amanda-welcome.webp';
+  static const String amandaHomePhoto = 'assets/amanda/optimized/amanda-home.webp';
+  static const String amandaAbout01Photo = 'assets/amanda/optimized/amanda-about-01.webp';
+  static const String amandaAbout02Photo = 'assets/amanda/optimized/amanda-about-02.webp';
+  static const String amandaWorkout01Photo = 'assets/amanda/optimized/amanda-workout-01.webp';
+  static const String amandaWorkout02Photo = 'assets/amanda/optimized/amanda-workout-02.webp';
+  static const String amandaWorkout03Photo = 'assets/amanda/optimized/amanda-workout-03.webp';
+  static const String amandaMotivation01Photo = 'assets/amanda/optimized/amanda-motivation-01.webp';
+  static const String amandaMotivation02Photo = 'assets/amanda/optimized/amanda-motivation-02.webp';
+  static const String amandaProgramPhoto = 'assets/amanda/optimized/amanda-program.webp';
+  static const String amandaChallengePhoto = 'assets/amanda/optimized/amanda-challenge.webp';
+  static const String amandaAudioPhoto = 'assets/amanda/optimized/amanda-audio.webp';
+  static const String amandaBanner01Photo = 'assets/amanda/optimized/amanda-banner-01.webp';
+  static const String amandaBanner02Photo = 'assets/amanda/optimized/amanda-banner-02.webp';
 }
+
