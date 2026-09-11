@@ -17,7 +17,7 @@ class AppIcons {
   static const String _actions = 'assets/icons/actions/';
   static const String _mood = 'assets/icons/mood/';
   static const String _ach = 'assets/icons/achievements/';
-  static const String _prem = 'assets/icons/premium/';
+  // Premium pack folder: assets/icons/premium/ (icons referenced via AppIcons.* paths)
   static const String _treino = 'assets/icons/neon/treinos/';
   /// Pacote neon 3D gloss (finalizacao) — PNG em assets/icons/app/.
   static const String _app = 'assets/icons/app/';
