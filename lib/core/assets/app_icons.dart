@@ -51,13 +51,14 @@ class AppIcons {
   static const String hydration = water;
   static const String hydrationGoal = '${_health}hydration_alt.jpg';
 
-  /// Pacote dedicado da tela Meta de água (alta resolução / proporção limpa).
-  static const String _hydrationDir = 'assets/icons/hydration/';
+  /// Pacote dedicado da tela Meta de água (neon 3D gloss).
+  static const String _hydrationDir = 'assets/icons/app/extras_hidratacao/';
   static const String hydrationProgress =
-      '${_hydrationDir}hydration_progress.png';
-  static const String hydrationCheck = '${_hydrationDir}hydration_check.png';
-  static const String hydrationBottle = '${_hydrationDir}hydration_bottle.png';
-  static const String hydrationGlass = '${_hydrationDir}hydration_glass.png';
+      '${_hydrationDir}hidratacao_rastreamento.png';
+  static const String hydrationCheck = '${_hydrationDir}hidratacao_check.png';
+  static const String hydrationBottle = '${_hydrationDir}hidratacao_garrafa.png';
+  static const String hydrationGlass = '${_hydrationDir}hidratacao_extra_1.png';
+  static const String hydrationExtra = hydrationGlass;
   static const String sleep = '${_app}sono.png';
   static const String steps = '${_health}steps.jpg';
   static const String walk = steps;
