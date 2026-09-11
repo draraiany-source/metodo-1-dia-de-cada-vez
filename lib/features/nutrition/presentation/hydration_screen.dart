@@ -29,7 +29,7 @@ class HydrationScreen extends ConsumerStatefulWidget {
 
 class _HydrationScreenState extends ConsumerState<HydrationScreen>
     with WidgetsBindingObserver {
-  static const _quickMl = [150, 200, 250, 300, 500];
+  static const _quickMl = [200, 300, 500];
   static const _goalPresets = [1500, 2000, 2500, 3000];
 
   String? _toast;
@@ -548,8 +548,8 @@ class _HistoryTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
           child: AppIconImage(
-            AppIcons.hydrationGlass,
-            size: 20,
+            AppIcons.hydrationCheck,
+            size: 22,
             fit: BoxFit.contain,
             fallbackIcon: Icons.water_drop_rounded,
           ),
@@ -602,10 +602,14 @@ class _EmptyHistory extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.border),
       ),
-      child: const Column(
+      child: Column(
         children: [
-          Icon(Icons.water_drop_outlined,
-              color: AppColors.textTertiary, size: 28),
+          AppIconImage(
+            AppIcons.hydrationBottle,
+            size: 48,
+            fit: BoxFit.contain,
+            fallbackIcon: Icons.water_drop_outlined,
+          ),
           SizedBox(height: 10),
           Text(
             'Ainda não há registros de água hoje.',
@@ -617,7 +621,7 @@ class _EmptyHistory extends StatelessWidget {
           ),
           SizedBox(height: 4),
           Text(
-            'Adicione seu primeiro copo para começar.',
+            'Use os atalhos 200, 300 ou 500 ml para começar.',
             textAlign: TextAlign.center,
             style: TextStyle(color: AppColors.textTertiary, fontSize: 13),
           ),
