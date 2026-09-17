@@ -483,7 +483,7 @@ class WeeklyChallengeProgress {
   int get completedCount => days.where((d) => d.completed).length;
 
   Set<String> get completedKeys =>
-      {for (final d in days.where((e) => e.completed)) e.dateKey};
+      {for (final d in days.where((e) => e.completed)) d.dateKey};
 
   bool isDayDone(DateTime date) => completedKeys.contains(dateKeyOf(date));
 

@@ -62,20 +62,21 @@ class WeeklyChallengeRepository {
   }
 
   Future<List<WeeklyChallenge>> fetchPublishedForUser(String userId) async {
-    final all = isAvailable
-        ? await () async {
-            try {
-              final snap = await _challenges
-                  .where('status', whereIn: ['published', 'archived']).get();
-              return snap.docs
-                  .map((d) => WeeklyChallenge.fromMap(d.id, d.data()))
-                  .toList();
-            } catch (e) {
-              debugPrint('weekly_challenges published fetch: $e');
-              return await _localChallenges();
-            }
-          }()
-        : await _localChallenges();
+    List<WeeklyChallenge> all;
+    if (isAvailable) {
+      try {
+        final snap = await _challenges
+            .where('status', whereIn: ['published', 'archived']).get();
+        all = snap.docs
+            .map((d) => WeeklyChallenge.fromMap(d.id, d.data()))
+            .toList();
+      } catch (e) {
+        debugPrint('weekly_challenges published fetch: $e');
+        all = await _localChallenges();
+      }
+    } else {
+      all = await _localChallenges();
+    }
 
     final visible = all.where((c) => c.visibleTo(userId)).toList();
     if (visible.isEmpty) return [WeeklyChallenge.seedCurrent()];
