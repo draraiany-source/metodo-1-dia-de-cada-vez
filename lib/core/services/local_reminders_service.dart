@@ -103,6 +103,70 @@ class LocalRemindersService {
     } catch (_) {/* ignora se já não existir */}
   }
 
+  /// Notificação imediata (ex.: progresso do desafio, treino em segundo plano).
+  static Future<void> showNow({
+    required int id,
+    required String title,
+    required String body,
+  }) async {
+    if (!_initialized) await init();
+    if (!_initialized) return;
+    try {
+      await _plugin.show(
+        id,
+        title,
+        body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            AppConfig.androidNotificationChannelId,
+            AppConfig.androidNotificationChannelName,
+            importance: Importance.high,
+            priority: Priority.high,
+          ),
+          iOS: const DarwinNotificationDetails(),
+        ),
+      );
+    } catch (e) {
+      _log('❌ Falha ao exibir notificação "$title": $e');
+    }
+  }
+
+  /// Agenda uma notificação única. Datas no passado são ignoradas.
+  static Future<void> scheduleOnce({
+    required int id,
+    required String title,
+    required String body,
+    required DateTime when,
+  }) async {
+    if (!_initialized) await init();
+    if (!_initialized) return;
+    if (when.isBefore(DateTime.now().subtract(const Duration(minutes: 1)))) {
+      return;
+    }
+    try {
+      await _plugin.zonedSchedule(
+        id,
+        title,
+        body,
+        tz.TZDateTime.from(when, tz.local),
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            AppConfig.androidNotificationChannelId,
+            AppConfig.androidNotificationChannelName,
+            importance: Importance.high,
+            priority: Priority.high,
+          ),
+          iOS: const DarwinNotificationDetails(),
+        ),
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+      );
+    } catch (e) {
+      _log('❌ Falha ao agendar notificação única "$title": $e');
+    }
+  }
+
   static tz.TZDateTime _nextInstanceOf(int hour, int minute) {
     final now = tz.TZDateTime.now(tz.local);
     var scheduled =

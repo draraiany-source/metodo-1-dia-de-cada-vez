@@ -73,6 +73,15 @@ class ProfileScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 6),
               QuickAccessTile(
+                icon: Icons.emoji_events_outlined,
+                iconAsset: AppIcons.achievement,
+                title: 'Meus Desafios',
+                subtitle: 'Em andamento e histórico',
+                showChevron: true,
+                onTap: () => context.push(Routes.myChallenges),
+              ),
+              const SizedBox(height: 6),
+              QuickAccessTile(
                 icon: Icons.bookmark_border_rounded,
                 iconAsset: AppIcons.favorites,
                 title: 'Favoritos',

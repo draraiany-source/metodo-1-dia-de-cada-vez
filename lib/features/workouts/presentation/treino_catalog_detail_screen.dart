@@ -11,8 +11,9 @@ import '../../../core/widgets/app_page.dart';
 import '../../gamification/providers/gamification_providers.dart';
 import '../../missions/providers/missions_providers.dart';
 import '../../rewards/providers/rewards_providers.dart';
+import '../../workout_timer/domain/timer_blueprints.dart';
+import '../../workout_timer/presentation/workout_timer_screen.dart';
 import '../domain/treino_catalog_models.dart';
-import '../../../core/lily/lily_treino_assets.dart';
 import '../../../core/lily/lily_treino_image.dart';
 import 'treino_catalog_visual.dart';
 
@@ -102,10 +103,7 @@ class TreinoCatalogDetailScreen extends ConsumerWidget {
             ),
             Center(
               child: LilyTreinoImage(
-                asset: LilyTreinoAssets.resolve(
-                  '${treino.nome} ${treino.grupoMuscular ?? ''} ${treino.categoria ?? ''}',
-                  genericSeed: treino.nome.hashCode,
-                ),
+                asset: lilyTreinoAssetFor(treino),
                 maxHeight: 280,
                 maxWidth: 420,
                 semanticLabel: treino.nome,
@@ -124,6 +122,27 @@ class TreinoCatalogDetailScreen extends ConsumerWidget {
               label: const Text('Assistir vídeo'),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppTheme.radiusSm),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => WorkoutTimerScreen(
+                      blueprint: blueprintFromCatalog(treino),
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.timer_outlined),
+              label: const Text('INICIAR CRONÔMETRO'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                backgroundColor: AppColors.secondary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppTheme.radiusSm),
                 ),

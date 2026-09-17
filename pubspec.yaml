@@ -71,6 +71,9 @@ dependencies:
   # ---- Compartilhamento nativo ----
   share_plus: ^10.0.2
 
+  # ---- Tela ligada durante o treino ----
+  wakelock_plus: ^1.2.8
+
   # ---- Streaming de vÃƒÂ­deo ----
   video_player: ^2.9.2
   chewie: ^1.8.5

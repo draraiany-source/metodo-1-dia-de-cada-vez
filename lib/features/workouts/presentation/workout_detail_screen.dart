@@ -19,6 +19,8 @@ import '../../../models/domain_models.dart';
 import '../../gamification/providers/gamification_providers.dart';
 import '../../missions/providers/missions_providers.dart';
 import '../../rewards/providers/rewards_providers.dart';
+import '../../workout_timer/domain/workout_timer_models.dart';
+import '../../workout_timer/presentation/workout_timer_screen.dart';
 import '../../../core/lily/lily_treino_image.dart';
 
 const _kDescansoPadraoSegundos = 45;
@@ -406,6 +408,32 @@ class _WorkoutDetailScreenState extends ConsumerState<WorkoutDetailScreen> {
       ),
       const SizedBox(height: 20),
       if (!_emAndamento) ...[
+        PrimaryButton(
+          label: 'INICIAR CRONÔMETRO',
+          icon: Icons.timer_outlined,
+          onPressed: () {
+            final blueprint = WorkoutTimerBlueprint(
+              workoutId: widget.workout.id,
+              title: widget.workout.title,
+              exercises: [
+                for (var i = 0; i < _exercises.length; i++)
+                  parseCatalogExercise(
+                    id: '${widget.workout.id}_$i',
+                    name: _exercises[i].name,
+                    prescricao: _exercises[i].effort,
+                    intervalo: _exercises[i].rest,
+                    categoria: widget.workout.tags.join(' '),
+                  ),
+              ],
+            );
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => WorkoutTimerScreen(blueprint: blueprint),
+              ),
+            );
+          },
+        ),
+        const SizedBox(height: 10),
         PrimaryButton(
           label: 'Iniciar treino',
           icon: Icons.play_arrow_rounded,

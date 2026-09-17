@@ -42,6 +42,8 @@ class AppConstants {
   static const String cProgress = 'progress';
   static const String cBadges = 'badges';
   static const String cChallenges = 'challenges';
+  static const String cWeeklyChallenges = 'weekly_challenges';
+  static const String cWeeklyChallengeProgress = 'weekly_challenge_progress';
   static const String cCommunityPosts = 'community_posts';
   static const String cComments = 'comments';
   static const String cSubscriptions = 'subscriptions';
@@ -53,6 +55,7 @@ class AppConstants {
   static const int xpPerWorkout = 50;
   static const int xpPerRun = 70;
   static const int xpPerHabit = 10;
+  static const int xpPerWeeklyChallenge = 120;
   static const int xpPerLevel = 1000;
 
   // Moedas da Loja de Recompensas (ganhas ao concluir ações).

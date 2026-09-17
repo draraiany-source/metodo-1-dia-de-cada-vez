@@ -112,6 +112,15 @@ service firebase.storage {
       allow delete: if isAdmin() || isPersonalTrainer();
     }
 
+    match /weekly_challenges/{allPaths=**} {
+      allow read: if signedIn();
+      allow write: if signedIn()
+        && underSize(8)
+        && isImage()
+        && (isAdmin() || isPersonalTrainer());
+      allow delete: if isAdmin() || isPersonalTrainer();
+    }
+
     match /{allPaths=**} {
       allow read, write: if false;
     }

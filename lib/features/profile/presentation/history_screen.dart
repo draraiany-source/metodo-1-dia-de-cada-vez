@@ -10,6 +10,7 @@ import '../../evolution/providers/measurement_history_providers.dart';
 import '../../evolution/providers/weight_history_providers.dart';
 import '../../gamification/providers/gamification_providers.dart';
 import '../../missions/providers/missions_providers.dart';
+import '../../workout_timer/data/workout_session_repository.dart';
 
 enum _Period { hoje, dias7, dias30, tudo }
 
@@ -59,6 +60,8 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
     final weights = ref.watch(weightHistoryProvider);
     final measurements = ref.watch(measurementHistoryProvider);
     final gam = ref.watch(gamificationProvider);
+    final sessions =
+        ref.watch(myWorkoutSessionsProvider).valueOrNull ?? const [];
 
     final cutoff =
         _period.days == null ? null : DateTime.now().subtract(Duration(days: _period.days!));
@@ -77,6 +80,15 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
         if (inPeriod(m.date))
           _HistoryItem(
               m.date, Icons.straighten, 'Medidas registradas', AppColors.secondary),
+      for (final s in sessions)
+        if (inPeriod(s.completedAt))
+          _HistoryItem(
+            s.completedAt,
+            Icons.timer_outlined,
+            '${s.title} · ${s.totalDuration.inMinutes}min ${s.totalDuration.inSeconds.remainder(60)}s'
+            ' · ${s.seriesDone} séries (${(s.percent * 100).round()}%)',
+            AppColors.hotPink,
+          ),
     ]..sort((a, b) => b.date.compareTo(a.date));
 
     return Scaffold(

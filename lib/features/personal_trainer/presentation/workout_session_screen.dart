@@ -14,6 +14,8 @@ import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
 import '../../missions/providers/missions_providers.dart';
+import '../../workout_timer/domain/timer_blueprints.dart';
+import '../../workout_timer/presentation/workout_timer_screen.dart';
 import '../domain/pt_models.dart';
 import '../providers/pt_providers.dart';
 
@@ -410,6 +412,27 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
                   style: const TextStyle(color: AppColors.textSecondary)),
             ],
             const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              height: 52,
+              child: FilledButton.icon(
+                style: FilledButton.styleFrom(
+                  backgroundColor: AppColors.secondary,
+                ),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => WorkoutTimerScreen(
+                        blueprint: blueprintFromPlan(widget.plan),
+                      ),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.timer_outlined),
+                label: const Text('INICIAR CRONÔMETRO'),
+              ),
+            ),
+            const SizedBox(height: 12),
             if (_descansoRestante > 0)
               Container(
                 width: double.infinity,

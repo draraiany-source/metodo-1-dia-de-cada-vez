@@ -17,6 +17,8 @@ import '../../../core/widgets/lili_widgets.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../weekly_challenge/domain/weekly_challenge_models.dart';
+import '../../weekly_challenge/providers/weekly_challenge_providers.dart';
 import '../domain/league_models.dart';
 import '../providers/gamification_providers.dart';
 import '../providers/league_providers.dart';
@@ -240,6 +242,12 @@ class GamificationScreen extends ConsumerWidget {
                 .toList(),
           ),
           const SizedBox(height: 8),
+          const SectionHeader(title: 'Desafio da Semana'),
+          const _WeeklyChallengeConquistasCard(),
+          const SizedBox(height: 16),
+          const SectionHeader(title: 'Selos de desafio'),
+          const _ChallengeBadges(),
+          const SizedBox(height: 8),
 
           const SectionHeader(title: 'Desafios ativos'),
           ...SeedData.challenges.map((c) => Container(
@@ -349,5 +357,107 @@ class GamificationScreen extends ConsumerWidget {
     ];
     lista.sort((a, b) => b.$2.compareTo(a.$2));
     return lista;
+  }
+}
+
+class _WeeklyChallengeConquistasCard extends ConsumerWidget {
+  const _WeeklyChallengeConquistasCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final featured = ref.watch(featuredWeeklyChallengeProvider);
+    final progress = featured == null
+        ? null
+        : ref.watch(challengeProgressProvider(featured.id)).valueOrNull;
+    if (featured == null) {
+      return const SizedBox.shrink();
+    }
+    final done = progress?.completedCount ?? 0;
+    return InkWell(
+      onTap: () => context.push('${Routes.weeklyChallenge}/${featured.id}'),
+      borderRadius: BorderRadius.circular(16),
+      child: Ink(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(featured.title,
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w800)),
+            const SizedBox(height: 4),
+            Text(featured.shortDescription,
+                style: const TextStyle(
+                    color: AppColors.textSecondary, fontSize: 12)),
+            const SizedBox(height: 10),
+            LinearPercentIndicator(
+              percent: (done / featured.requiredDays).clamp(0.0, 1.0),
+              lineHeight: 8,
+              barRadius: const Radius.circular(4),
+              backgroundColor: AppColors.background,
+              progressColor: AppColors.hotPink,
+              padding: EdgeInsets.zero,
+            ),
+            const SizedBox(height: 6),
+            Text('$done / ${featured.requiredDays} dias',
+                style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ChallengeBadges extends ConsumerWidget {
+  const _ChallengeBadges();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final unlocked =
+        ref.watch(myChallengeAchievementsProvider).valueOrNull ?? const [];
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        for (final a in ChallengeAchievementDef.all)
+          Container(
+            width: 108,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+                color: unlocked.contains(a.id)
+                    ? AppColors.hotPink
+                    : AppColors.border,
+              ),
+            ),
+            child: Column(
+              children: [
+                Opacity(
+                  opacity: unlocked.contains(a.id) ? 1 : 0.35,
+                  child: Text(a.emoji, style: const TextStyle(fontSize: 26)),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  a.title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: unlocked.contains(a.id)
+                        ? Colors.white
+                        : AppColors.textTertiary,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
   }
 }

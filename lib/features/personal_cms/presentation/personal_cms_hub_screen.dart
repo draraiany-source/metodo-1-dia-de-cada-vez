@@ -163,6 +163,13 @@ class PersonalCmsHubScreen extends ConsumerWidget {
             onTap: () => context.push(Routes.personalCmsMeditations),
           ),
           _CmsCard(
+            icon: Icons.emoji_events_outlined,
+            title: 'Desafio da Semana',
+            subtitle: 'Criar, publicar e acompanhar participantes',
+            accent: AppColors.secondary,
+            onTap: () => context.push(Routes.personalCmsChallenges),
+          ),
+          _CmsCard(
             icon: Icons.face_retouching_natural,
             title: 'Imagens Lily',
             subtitle: liliCounts ?? 'Poses e animações',

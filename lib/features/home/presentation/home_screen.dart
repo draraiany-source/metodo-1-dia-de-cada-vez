@@ -25,6 +25,9 @@ import '../../missions/providers/missions_providers.dart';
 import '../../nutrition/providers/food_log_providers.dart';
 import '../../nutrition/providers/water_log_providers.dart';
 import '../../personal_amanda/presentation/amanda_photo_banner.dart';
+import '../../weekly_challenge/presentation/weekly_challenge_home_card.dart';
+import '../../workout_timer/presentation/workout_timer_screen.dart';
+import '../../workout_timer/providers/workout_timer_controller.dart';
 import '../../workouts/presentation/workout_category_visual.dart';
 import 'widgets/continue_journey_card.dart';
 
@@ -121,6 +124,13 @@ class HomeScreen extends ConsumerWidget {
                   onSeeAll: () => AppNavigation.open(context, Routes.workouts),
                 ),
               ),
+              const SizedBox(height: 10),
+              FadeInUp(
+                delayMs: 95,
+                child: const WeeklyChallengeHomeCard(),
+              ),
+              const SizedBox(height: 10),
+              const _ActiveTimerBanner(),
               const SizedBox(height: 10),
               FadeInUp(
                 delayMs: 100,
@@ -874,6 +884,14 @@ class _QuickGrid extends StatelessWidget {
         onTap: () => AppNavigation.open(context, Routes.habits),
       ),
       (
+        title: 'Desafio da Semana',
+        subtitle: 'Participe e acumule selos',
+        icon: AppIcons.achievement,
+        fallback: Icons.emoji_events_rounded,
+        accent: AppColors.hotPink,
+        onTap: () => AppNavigation.open(context, Routes.myChallenges),
+      ),
+      (
         title: 'Check-in',
         subtitle: 'Marque o dia de hoje',
         icon: AppIcons.checkin,
@@ -1194,6 +1212,58 @@ class _MomentoAction extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ActiveTimerBanner extends ConsumerWidget {
+  const _ActiveTimerBanner();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final timer = ref.watch(workoutTimerControllerProvider);
+    final s = timer.state;
+    if (s == null || s.finished || !timer.isActive) {
+      return const SizedBox.shrink();
+    }
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => WorkoutTimerScreen(blueprint: s.blueprint),
+            ),
+          ),
+          borderRadius: BorderRadius.circular(16),
+          child: Ink(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(16),
+              border:
+                  Border.all(color: AppColors.hotPink.withValues(alpha: 0.5)),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.timer_outlined, color: AppColors.hotPink),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'Treino em andamento · ${formatTimer(s.totalElapsed)}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                const Icon(Icons.chevron_right, color: Colors.white),
+              ],
+            ),
           ),
         ),
       ),

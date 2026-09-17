@@ -36,6 +36,7 @@ class _NotificationPreferencesScreenState
     'sequencia_diaria': 'Sequência diária',
     'novas_receitas': 'Novas receitas',
     'novos_treinos': 'Novos treinos',
+    'desafio_semana': 'Desafio da Semana',
   };
 
   static const _defaults = {
@@ -47,6 +48,7 @@ class _NotificationPreferencesScreenState
     'sequencia_diaria': true,
     'novas_receitas': false,
     'novos_treinos': false,
+    'desafio_semana': true,
   };
 
   Map<String, bool> _topics = Map.of(_defaults);

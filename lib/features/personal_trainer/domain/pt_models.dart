@@ -182,6 +182,11 @@ class WorkoutExerciseConfig {
     this.observacoes = '',
     this.order = 0,
     this.intensidade = '',
+    this.effortMode = '',
+    this.timerProtocol = '',
+    this.rounds = 0,
+    this.autoStartTimer = false,
+    this.autoAdvanceNext = true,
   });
 
   final String exerciseId;
@@ -195,6 +200,13 @@ class WorkoutExerciseConfig {
   final String observacoes;
   final int order;
   final String intensidade; // leve | moderada | intensa
+  /// `reps` ou `time`. Vazio = inferir pelo tempoSegundos.
+  final String effortMode;
+  /// free | countdown | rest | hiit | circuit | emom | amrap
+  final String timerProtocol;
+  final int rounds;
+  final bool autoStartTimer;
+  final bool autoAdvanceNext;
 
   Map<String, dynamic> toMap() => {
         'exerciseId': exerciseId,
@@ -208,21 +220,34 @@ class WorkoutExerciseConfig {
         'observacoes': observacoes,
         'order': order,
         'intensidade': intensidade,
+        'effortMode': effortMode,
+        'timerProtocol': timerProtocol,
+        'rounds': rounds,
+        'autoStartTimer': autoStartTimer,
+        'autoAdvanceNext': autoAdvanceNext,
       };
 
   factory WorkoutExerciseConfig.fromMap(Map<String, dynamic> m) =>
       WorkoutExerciseConfig(
         exerciseId: (m['exerciseId'] ?? '') as String,
         exerciseName: (m['exerciseName'] ?? '') as String,
-        series: (m['series'] ?? 3) as int,
+        series: (m['series'] is num) ? (m['series'] as num).round() : 3,
         repeticoes: (m['repeticoes'] ?? '12') as String,
-        tempoSegundos: (m['tempoSegundos'] ?? 0) as int,
-        intervaloSegundos: (m['intervaloSegundos'] ?? 60) as int,
+        tempoSegundos:
+            (m['tempoSegundos'] is num) ? (m['tempoSegundos'] as num).round() : 0,
+        intervaloSegundos: (m['intervaloSegundos'] is num)
+            ? (m['intervaloSegundos'] as num).round()
+            : 60,
         carga: (m['carga'] ?? '') as String,
         metodo: (m['metodo'] ?? '') as String,
         observacoes: (m['observacoes'] ?? '') as String,
-        order: (m['order'] ?? 0) as int,
+        order: (m['order'] is num) ? (m['order'] as num).round() : 0,
         intensidade: (m['intensidade'] ?? '') as String,
+        effortMode: (m['effortMode'] ?? '') as String,
+        timerProtocol: (m['timerProtocol'] ?? '') as String,
+        rounds: (m['rounds'] is num) ? (m['rounds'] as num).round() : 0,
+        autoStartTimer: (m['autoStartTimer'] ?? false) as bool,
+        autoAdvanceNext: (m['autoAdvanceNext'] ?? true) as bool,
       );
 }
 

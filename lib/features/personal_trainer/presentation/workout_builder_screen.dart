@@ -62,6 +62,11 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
     final cargaController = TextEditingController(text: 'peso corporal');
     final metodoController = TextEditingController();
     final obsController = TextEditingController();
+    final roundsController = TextEditingController(text: '8');
+    var effortMode = 'reps';
+    var timerProtocol = 'countdown';
+    var autoStart = false;
+    var autoAdvance = true;
 
     final ok = await showModalBottomSheet<bool>(
       context: context,
@@ -70,7 +75,8 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
-      builder: (ctx) => Padding(
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setSheet) => Padding(
         padding: EdgeInsets.fromLTRB(
             24, 24, 24, 24 + MediaQuery.of(ctx).viewInsets.bottom),
         child: SingleChildScrollView(
@@ -122,6 +128,49 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
                   controller: intervaloController,
                   keyboardType: TextInputType.number),
               const SizedBox(height: 12),
+              const Text('Rodadas (HIIT / EMOM / AMRAP)',
+                  style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+              TextField(
+                  controller: roundsController,
+                  keyboardType: TextInputType.number),
+              const SizedBox(height: 12),
+              DropdownButtonFormField<String>(
+                value: effortMode,
+                decoration: const InputDecoration(labelText: 'Execução'),
+                items: const [
+                  DropdownMenuItem(value: 'reps', child: Text('Por repetições')),
+                  DropdownMenuItem(value: 'time', child: Text('Por tempo')),
+                ],
+                onChanged: (v) => setSheet(() => effortMode = v ?? effortMode),
+              ),
+              const SizedBox(height: 12),
+              DropdownButtonFormField<String>(
+                value: timerProtocol,
+                decoration: const InputDecoration(labelText: 'Modo do cronômetro'),
+                items: const [
+                  DropdownMenuItem(value: 'free', child: Text('Cronômetro livre')),
+                  DropdownMenuItem(value: 'countdown', child: Text('Temporizador')),
+                  DropdownMenuItem(value: 'hiit', child: Text('HIIT')),
+                  DropdownMenuItem(value: 'circuit', child: Text('Circuito')),
+                  DropdownMenuItem(value: 'emom', child: Text('EMOM')),
+                  DropdownMenuItem(value: 'amrap', child: Text('AMRAP')),
+                ],
+                onChanged: (v) =>
+                    setSheet(() => timerProtocol = v ?? timerProtocol),
+              ),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Iniciar cronômetro automaticamente'),
+                value: autoStart,
+                onChanged: (v) => setSheet(() => autoStart = v),
+              ),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Abrir próximo exercício automaticamente'),
+                value: autoAdvance,
+                onChanged: (v) => setSheet(() => autoAdvance = v),
+              ),
+              const SizedBox(height: 12),
               const Text('Carga sugerida (ex.: 8 kg, peso corporal)',
                   style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
               TextField(controller: cargaController),
@@ -144,6 +193,7 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
             ],
           ),
         ),
+        ),
       ),
     );
 
@@ -160,6 +210,11 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
           metodo: metodoController.text.trim(),
           observacoes: obsController.text.trim(),
           order: _exercicios.length,
+          effortMode: effortMode,
+          timerProtocol: timerProtocol,
+          rounds: int.tryParse(roundsController.text) ?? 0,
+          autoStartTimer: autoStart,
+          autoAdvanceNext: autoAdvance,
         ));
       });
     }
@@ -171,6 +226,7 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
       cargaController,
       metodoController,
       obsController,
+      roundsController,
     ]) {
       c.dispose();
     }
@@ -206,6 +262,11 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
             metodo: _exercicios[i].metodo,
             observacoes: _exercicios[i].observacoes,
             order: i,
+            effortMode: _exercicios[i].effortMode,
+            timerProtocol: _exercicios[i].timerProtocol,
+            rounds: _exercicios[i].rounds,
+            autoStartTimer: _exercicios[i].autoStartTimer,
+            autoAdvanceNext: _exercicios[i].autoAdvanceNext,
           ),
       ],
       createdAt: existing?.createdAt ?? DateTime.now(),

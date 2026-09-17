@@ -70,6 +70,11 @@ import '../../features/personal_cms/presentation/personal_cms_hub_screen.dart';
 import '../../features/personal_cms/presentation/treinos_cms_screen.dart';
 import '../../features/personal_cms/presentation/recipes_cms_screen.dart';
 import '../../features/personal_cms/presentation/meditations_cms_screen.dart';
+import '../../features/weekly_challenge/presentation/weekly_challenge_cms_list_screen.dart';
+import '../../features/weekly_challenge/presentation/weekly_challenge_editor_screen.dart';
+import '../../features/weekly_challenge/presentation/weekly_challenge_participants_screen.dart';
+import '../../features/weekly_challenge/presentation/weekly_challenge_detail_screen.dart';
+import '../../features/weekly_challenge/presentation/my_challenges_screen.dart';
 import '../../features/nutrition/presentation/food_database_screen.dart';
 import '../../features/nutrition/presentation/shopping_list_screen.dart';
 import '../../features/nutrition/presentation/nutrition_dashboard_screen.dart';
@@ -167,6 +172,12 @@ class Routes {
   static const personalCmsTreinos = '/painel-personal/treinos';
   static const personalCmsRecipes = '/painel-personal/receitas';
   static const personalCmsMeditations = '/painel-personal/meditacoes';
+  static const personalCmsChallenges = '/painel-personal/desafios';
+  static const personalCmsChallengeEdit = '/painel-personal/desafios/editar';
+  static const personalCmsChallengeParticipants =
+      '/painel-personal/desafios/participantes';
+  static const weeklyChallenge = '/desafio-semana';
+  static const myChallenges = '/meus-desafios';
 }
 
 /// Provider que indica se o onboarding já foi concluído.
@@ -395,6 +406,42 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.personalCmsMeditations,
         pageBuilder: (_, s) => _fadeSlide(s, const MeditationsCmsScreen()),
+      ),
+      GoRoute(
+        path: Routes.personalCmsChallenges,
+        pageBuilder: (_, s) =>
+            _fadeSlide(s, const WeeklyChallengeCmsListScreen()),
+      ),
+      GoRoute(
+        path: Routes.personalCmsChallengeEdit,
+        pageBuilder: (_, s) => _fadeSlide(
+          s,
+          WeeklyChallengeEditorScreen(
+            challengeId: s.uri.queryParameters['id'],
+          ),
+        ),
+      ),
+      GoRoute(
+        path: '${Routes.personalCmsChallengeParticipants}/:id',
+        pageBuilder: (_, s) => _fadeSlide(
+          s,
+          WeeklyChallengeParticipantsScreen(
+            challengeId: s.pathParameters['id'] ?? '',
+          ),
+        ),
+      ),
+      GoRoute(
+        path: '${Routes.weeklyChallenge}/:id',
+        pageBuilder: (_, s) => _fadeSlide(
+          s,
+          WeeklyChallengeDetailScreen(
+            challengeId: s.pathParameters['id'] ?? '',
+          ),
+        ),
+      ),
+      GoRoute(
+        path: Routes.myChallenges,
+        pageBuilder: (_, s) => _fadeSlide(s, const MyChallengesScreen()),
       ),
       GoRoute(
         path: Routes.foodDatabase,

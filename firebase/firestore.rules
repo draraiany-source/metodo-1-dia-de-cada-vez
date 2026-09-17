@@ -312,7 +312,18 @@ service cloud.firestore {
 
     match /challenges/{document=**} {
       allow read: if signedIn();
-      allow write: if isAdmin();
+      allow write: if isAdmin() || isPersonalTrainer();
+    }
+
+    match /weekly_challenges/{document=**} {
+      allow read: if signedIn();
+      allow write: if isStaff();
+    }
+
+    match /weekly_challenge_progress/{docId} {
+      allow read: if ownsExisting() || isStaff();
+      allow create: if ownsIncoming();
+      allow update, delete: if ownsExisting() || isStaff();
     }
 
     // Cursos em áudio (Módulo 3 do prompt master) — capítulos são subcoleção
