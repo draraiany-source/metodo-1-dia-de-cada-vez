@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/assets/app_icons.dart';
-import '../../../core/router/app_navigation.dart';
-import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/widgets/premium_ui.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
+import '../../accompaniment/presentation/accompaniment_feature_grids.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../gamification/providers/gamification_providers.dart';
@@ -154,26 +153,19 @@ class StudentHomeScreen extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 8),
+                StudentAccompanimentSection(
+                  onEvolution: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => EvolutionPtScreen(student: student),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
                 TextButton.icon(
                   onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => StudentAnamnesisScreen(student: student))),
                   icon: const Icon(Icons.assignment_outlined, size: 18),
-                  label: const Text('Minha anamnese'),
-                ),
-                TextButton.icon(
-                  onPressed: () => AppNavigation.open(context, Routes.faleComAmanda),
-                  icon: const Icon(Icons.chat_bubble_outline, size: 18),
-                  label: const Text('Fale com Amanda'),
-                ),
-                TextButton.icon(
-                  onPressed: () => AppNavigation.open(context, Routes.consultoria),
-                  icon: const Icon(Icons.event_available_outlined, size: 18),
-                  label: const Text('Consultoria'),
-                ),
-                TextButton.icon(
-                  onPressed: () => AppNavigation.open(context, Routes.minhaAnamnese),
-                  icon: const Icon(Icons.health_and_safety_outlined, size: 18),
-                  label: const Text('Anamnese completa'),
+                  label: const Text('Ficha de treino (anamnese)'),
                 ),
                 const SizedBox(height: 4),
                 TextButton.icon(

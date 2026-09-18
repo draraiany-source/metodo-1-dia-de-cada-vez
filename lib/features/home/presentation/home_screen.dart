@@ -14,7 +14,9 @@ import '../../../core/widgets/app_page.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
 import '../../../core/widgets/premium_ui.dart';
+import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/widgets/quick_access_tile.dart';
+import '../../accompaniment/presentation/accompaniment_feature_grids.dart';
 import '../../../models/app_user.dart';
 import '../../../models/domain_models.dart';
 import '../../auth/providers/auth_providers.dart';
@@ -160,6 +162,11 @@ class HomeScreen extends ConsumerWidget {
               FadeInUp(
                 delayMs: 118,
                 child: const _MomentoParaVoceCard(),
+              ),
+              const SizedBox(height: 12),
+              FadeInUp(
+                delayMs: 119,
+                child: const StudentAccompanimentSection(),
               ),
               const SizedBox(height: 12),
               FadeInUp(
@@ -982,7 +989,7 @@ class _QuickGrid extends StatelessWidget {
       (
         title: 'Fale com Amanda',
         subtitle: 'Dúvidas e acompanhamento',
-        icon: AppIcons.personal,
+        icon: PersonalAiIcons.chatAmanda,
         fallback: Icons.chat_bubble_outline,
         accent: AppColors.secondary,
         onTap: () => AppNavigation.open(context, Routes.faleComAmanda),
@@ -990,7 +997,7 @@ class _QuickGrid extends StatelessWidget {
       (
         title: 'Consultoria',
         subtitle: 'Agende com a Amanda',
-        icon: AppIcons.calendar,
+        icon: PersonalAiIcons.agendaConsultoria,
         fallback: Icons.event_available,
         accent: AppColors.primary,
         onTap: () => AppNavigation.open(context, Routes.consultoria),

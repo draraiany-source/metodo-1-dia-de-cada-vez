@@ -1,3 +1,5 @@
+import 'personal_ai_icons.dart';
+
 /// ============================================================================
 /// CATÁLOGO CENTRALIZADO DE ÍCONES — Método 1 Dia de Cada Vez.
 ///
@@ -6,6 +8,8 @@
 ///
 /// Exercícios específicos de treino continuam em `assets/icons/neon/treinos/`
 /// (não há equivalentes no pacote Cursor).
+///
+/// Personal / Consultoria / IA: [PersonalAiIcons] em `assets/icons/personal-ai/`.
 ///
 /// Use sempre `AppIcons.x` + `AppIconImage` — nunca caminhos soltos.
 /// ============================================================================
@@ -173,6 +177,18 @@ class AppIcons {
   static const String community = '${_app}comunidade.png';
   static const String messages = '${_app}suporte.png';
   static const String personal = profile;
+
+  /// Pacote visual Personal / Consultoria / IA (não substitui [personal]).
+  static const String chatAmanda = PersonalAiIcons.chatAmanda;
+  static const String agendaConsultoria = PersonalAiIcons.agendaConsultoria;
+  static const String areaPersonal = PersonalAiIcons.areaPersonal;
+  static const String anamnese = PersonalAiIcons.anamnese;
+  static const String analisarIA = PersonalAiIcons.analisarIA;
+  static const String assistenteIA = PersonalAiIcons.assistenteIA;
+  static const String insightsIA = PersonalAiIcons.insightsIA;
+  static const String sugestaoResposta = PersonalAiIcons.sugestaoResposta;
+  static const String resumoConversa = PersonalAiIcons.resumoConversa;
+  static const String pontosAtencao = PersonalAiIcons.pontosAtencao;
   static const String support = '${_app}suporte.png';
   static const String help = '${_app}ajuda.png';
   static const String ajuda = help;

@@ -3,15 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/premium_ui.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../personal_trainer/domain/pt_models.dart';
 import '../../personal_trainer/presentation/student_detail_screen.dart';
 import '../../personal_trainer/providers/pt_providers.dart';
-import '../domain/accompaniment_models.dart';
 import '../providers/accompaniment_providers.dart';
 import 'chat_thread_screen.dart';
 
@@ -56,6 +57,29 @@ class _TrainerInboxScreenState extends ConsumerState<TrainerInboxScreen> {
           }).toList();
           return Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+                child: Row(
+                  children: [
+                    AppIconImage(
+                      PersonalAiIcons.chatAmanda,
+                      size: 40,
+                      fallbackIcon: Icons.chat_bubble_outline,
+                      semanticLabel: 'Mensagens',
+                    ),
+                    const SizedBox(width: 10),
+                    const Expanded(
+                      child: Text(
+                        'Conversas com as alunas',
+                        style: TextStyle(
+                          color: AppColors.textSecondary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                 child: TextField(

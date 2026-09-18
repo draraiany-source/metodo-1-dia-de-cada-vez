@@ -141,6 +141,7 @@ flutter:
     - assets/mascot/png/
     - assets/mascot/extras/
     - assets/icons/
+    - assets/icons/personal-ai/
     - assets/icons/app/
     - assets/icons/app/extras_hidratacao/
     - assets/icons/navigation/

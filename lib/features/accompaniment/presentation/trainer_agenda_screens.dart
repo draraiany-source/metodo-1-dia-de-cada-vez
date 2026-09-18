@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/app_page.dart';
 import '../../../core/widgets/premium_ui.dart';
 import '../../../models/app_user.dart';
@@ -49,6 +51,15 @@ class TrainerAgendaScreen extends ConsumerWidget {
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
+              const Center(
+                child: AppIconImage(
+                  PersonalAiIcons.agendaConsultoria,
+                  size: 72,
+                  fallbackIcon: Icons.event_available,
+                  semanticLabel: 'Agenda',
+                ),
+              ),
+              const SizedBox(height: 12),
               AppCard(
                 child: Text(
                   cal?.connected == true

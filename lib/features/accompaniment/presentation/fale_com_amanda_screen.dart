@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/app_page.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
@@ -56,7 +58,7 @@ class FaleComAmandaScreen extends ConsumerWidget {
                       child: Row(
                         children: [
                           const AmandaImage(
-                            category: AmandaAssetCategory.perfil,
+                            category: AmandaAssetCategory.principal,
                             height: 72,
                             width: 72,
                             fit: BoxFit.cover,
@@ -82,6 +84,12 @@ class FaleComAmandaScreen extends ConsumerWidget {
                                         fontSize: 13)),
                               ],
                             ),
+                          ),
+                          AppIconImage(
+                            PersonalAiIcons.chatAmanda,
+                            size: 48,
+                            fallbackIcon: Icons.chat_bubble_outline,
+                            semanticLabel: 'Fale com Amanda',
                           ),
                         ],
                       ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/app_page.dart';
 import '../domain/pt_models.dart';
 import '../providers/pt_providers.dart';
@@ -154,6 +156,15 @@ class _StudentAnamnesisScreenState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const Center(
+                child: AppIconImage(
+                  PersonalAiIcons.anamnese,
+                  size: 72,
+                  fallbackIcon: Icons.assignment_outlined,
+                  semanticLabel: 'Anamnese',
+                ),
+              ),
+              const SizedBox(height: 12),
               Text(
                 'Ficha de ${widget.student.name}',
                 style: const TextStyle(

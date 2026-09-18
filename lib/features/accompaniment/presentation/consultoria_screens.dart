@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/app_page.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
@@ -41,6 +43,15 @@ class ConsultoriaHomeScreen extends ConsumerWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Center(
+                  child: AppIconImage(
+                    PersonalAiIcons.agendaConsultoria,
+                    size: 80,
+                    fallbackIcon: Icons.event_available,
+                    semanticLabel: 'Consultoria',
+                  ),
+                ),
+                const SizedBox(height: 12),
                 const Text('Agende sua consultoria',
                     style: TextStyle(
                         color: Colors.white,

@@ -4,9 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/assets/app_icons.dart';
+import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/app_icon_image.dart';
+import '../../accompaniment/presentation/anamnesis_screens.dart';
 import '../../accompaniment/presentation/chat_thread_screen.dart';
 import '../../accompaniment/providers/accompaniment_providers.dart';
 import '../../evolution/domain/training_volume.dart';
@@ -349,7 +351,12 @@ class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
           ),
           IconButton(
             tooltip: 'Anamnese',
-            icon: const Icon(Icons.assignment_outlined),
+            icon: AppIconImage(
+              PersonalAiIcons.anamnese,
+              size: 24,
+              fallbackIcon: Icons.assignment_outlined,
+              semanticLabel: 'Anamnese',
+            ),
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => StudentAnamnesisScreen(student: _student),
             )),
@@ -385,12 +392,24 @@ class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
                 await _abrirChat();
               } else if (v == 'agenda') {
                 if (mounted) context.push(Routes.trainerAgenda);
+              } else if (v == 'anamnese_ia') {
+                if (mounted) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => AnamnesisFormScreen(
+                      asTrainer: true,
+                      student: _student,
+                    ),
+                  ));
+                }
               }
             },
             itemBuilder: (_) => const [
               PopupMenuItem(value: 'chat', child: Text('Chat com aluna')),
               PopupMenuItem(
                   value: 'agenda', child: Text('Agenda / consultoria')),
+              PopupMenuItem(
+                  value: 'anamnese_ia',
+                  child: Text('Anamnese completa / analisar com IA')),
             ],
           ),
         ],

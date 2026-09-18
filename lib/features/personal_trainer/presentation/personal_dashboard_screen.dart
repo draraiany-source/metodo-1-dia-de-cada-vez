@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/assets/app_icons.dart';
+import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/auth/user_role.dart';
 import '../../../core/router/app_navigation.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/app_icon_image.dart';
+import '../../../core/widgets/feature_icon_card.dart';
 import '../../../models/app_user.dart';
+import '../../accompaniment/presentation/accompaniment_feature_grids.dart';
+import '../../accompaniment/presentation/anamnesis_screens.dart';
+import '../../accompaniment/providers/accompaniment_providers.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../personal_amanda/domain/amanda_asset_models.dart';
 import '../../personal_amanda/presentation/amanda_image.dart';
@@ -152,7 +157,7 @@ class _PersonalDashboardScreenState
           actions: [
             IconButton(
               icon: AppIconImage(
-                AppIcons.personal,
+                PersonalAiIcons.areaPersonal,
                 size: 24,
                 fallbackIcon: Icons.edit_outlined,
               ),
@@ -243,12 +248,12 @@ class _PersonalDashboardScreenState
             destinations: [
               NavigationRailDestination(
                 icon: AppIconImage(
-                  AppIcons.personal,
+                  PersonalAiIcons.areaPersonal,
                   size: 24,
                   fallbackIcon: Icons.dashboard_outlined,
                 ),
                 selectedIcon: AppIconImage(
-                  AppIcons.personal,
+                  PersonalAiIcons.areaPersonal,
                   size: 24,
                   fallbackIcon: Icons.dashboard_rounded,
                 ),
@@ -297,6 +302,21 @@ class _PersonalDashboardScreenState
       ),
     );
   }
+}
+
+void _openFirstAnamnesis(BuildContext context, List<Student> students) {
+  if (students.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Cadastre uma aluna para abrir a anamnese.'),
+    ));
+    return;
+  }
+  Navigator.of(context).push(MaterialPageRoute(
+    builder: (_) => AnamnesisFormScreen(
+      asTrainer: true,
+      student: students.first,
+    ),
+  ));
 }
 
 class _PersonalBody extends ConsumerWidget {
@@ -386,6 +406,39 @@ class _PersonalBody extends ConsumerWidget {
                 children: items,
               );
             }),
+            const SizedBox(height: 18),
+            PersonalQuickAccessSection(
+              onStudents: () {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Suas alunas estão listadas abaixo.'),
+                ));
+              },
+              onAnamnesis: () => _openFirstAnamnesis(context, students),
+            ),
+            const SizedBox(height: 18),
+            _AiInsightsCard(
+              trainerId: trainer.id,
+              inactiveStudents: stats?.inactiveStudents,
+              onAgenda: () =>
+                  AppNavigation.open(context, Routes.trainerAgenda),
+              onInbox: () =>
+                  AppNavigation.open(context, Routes.trainerInbox),
+              onAnamnesis: () => _openFirstAnamnesis(context, students),
+              onStudents: () {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Suas alunas estão listadas abaixo.'),
+                ));
+              },
+            ),
+            const SizedBox(height: 18),
+            PersonalAiToolsSection(
+              onAnalyze: () => _openFirstAnamnesis(context, students),
+              onReplySuggestion: () =>
+                  AppNavigation.open(context, Routes.trainerInbox),
+              onSummarize: () =>
+                  AppNavigation.open(context, Routes.trainerInbox),
+              onAttention: () => _openFirstAnamnesis(context, students),
+            ),
             const SizedBox(height: 16),
             const Text('Atalhos',
                 style: TextStyle(
@@ -598,7 +651,7 @@ class _PersonalBody extends ConsumerWidget {
             Row(
               children: [
                 const AppIconImage(
-                  AppIcons.community,
+                  PersonalAiIcons.areaPersonal,
                   size: 22,
                   fallbackIcon: Icons.people_alt_rounded,
                 ),
@@ -789,7 +842,7 @@ class _AmandaProfessionalHeader extends StatelessWidget {
             ),
           ),
           const AppIconImage(
-            AppIcons.personal,
+            PersonalAiIcons.areaPersonal,
             size: 28,
             fallbackIcon: Icons.sports_gymnastics_rounded,
           ),
@@ -968,6 +1021,109 @@ class _ShortcutChip extends StatelessWidget {
       backgroundColor: AppColors.surface2,
       side: const BorderSide(color: AppColors.border),
       labelStyle: const TextStyle(color: Colors.white, fontSize: 12.5),
+    );
+  }
+}
+
+class _AiInsightsCard extends ConsumerWidget {
+  const _AiInsightsCard({
+    required this.trainerId,
+    required this.inactiveStudents,
+    required this.onAgenda,
+    required this.onInbox,
+    required this.onAnamnesis,
+    required this.onStudents,
+  });
+
+  final String trainerId;
+  final int? inactiveStudents;
+  final VoidCallback onAgenda;
+  final VoidCallback onInbox;
+  final VoidCallback onAnamnesis;
+  final VoidCallback onStudents;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final inbox = ref.watch(trainerInboxProvider(trainerId)).valueOrNull ?? [];
+    final unread = inbox.fold<int>(0, (sum, c) => sum + c.unreadForTrainer);
+    final appts =
+        ref.watch(trainerAppointmentsProvider(trainerId)).valueOrNull ?? [];
+    final now = DateTime.now();
+    final todayCount = appts.where((a) {
+      final d = a.start.toLocal();
+      return d.year == now.year && d.month == now.month && d.day == now.day;
+    }).length;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        FeatureIconCard(
+          icon: PersonalAiIcons.insightsIA,
+          title: 'Insights da IA',
+          subtitle: 'Evolução inteligente e resumo do painel',
+          variant: FeatureIconCardVariant.list,
+          iconSize: 56,
+          accent: AppColors.primary,
+          fallbackIcon: Icons.insights_outlined,
+          onPress: onStudents,
+        ),
+        const SizedBox(height: 8),
+        FeatureIconCard(
+          icon: PersonalAiIcons.pontosAtencao,
+          title: 'Alunas com reavaliação pendente',
+          subtitle: 'Abrir anamnese da primeira aluna da lista',
+          variant: FeatureIconCardVariant.list,
+          accent: AppColors.warning,
+          fallbackIcon: Icons.assignment_late_outlined,
+          onPress: onAnamnesis,
+        ),
+        const SizedBox(height: 8),
+        FeatureIconCard(
+          icon: PersonalAiIcons.insightsIA,
+          title: 'Alunas sem treino recente',
+          subtitle: inactiveStudents == null
+              ? 'Carregando…'
+              : '$inactiveStudents aluna(s) sem treino há 5 dias ou mais',
+          variant: FeatureIconCardVariant.list,
+          accent: AppColors.hotPink,
+          fallbackIcon: Icons.fitness_center_outlined,
+          onPress: onStudents,
+        ),
+        const SizedBox(height: 8),
+        FeatureIconCard(
+          icon: PersonalAiIcons.anamnese,
+          title: 'Novas anamneses',
+          subtitle: 'Revisar questionário das alunas',
+          variant: FeatureIconCardVariant.list,
+          accent: AppColors.secondary,
+          fallbackIcon: Icons.assignment_outlined,
+          onPress: onAnamnesis,
+        ),
+        const SizedBox(height: 8),
+        FeatureIconCard(
+          icon: PersonalAiIcons.agendaConsultoria,
+          title: 'Consultorias de hoje',
+          subtitle: '$todayCount consulta(s) na agenda de hoje',
+          variant: FeatureIconCardVariant.list,
+          badge: todayCount > 0 ? '$todayCount' : null,
+          accent: AppColors.primary,
+          fallbackIcon: Icons.event_available_outlined,
+          onPress: onAgenda,
+        ),
+        const SizedBox(height: 8),
+        FeatureIconCard(
+          icon: PersonalAiIcons.chatAmanda,
+          title: 'Mensagens não respondidas',
+          subtitle: unread == 0
+              ? 'Nenhuma mensagem pendente'
+              : '$unread mensagem(ns) não lidas',
+          variant: FeatureIconCardVariant.list,
+          badge: unread > 0 ? '$unread' : null,
+          accent: AppColors.secondary,
+          fallbackIcon: Icons.mark_chat_unread_outlined,
+          onPress: onInbox,
+        ),
+      ],
     );
   }
 }

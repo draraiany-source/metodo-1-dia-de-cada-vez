@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/widgets/app_page.dart';
+import '../../../core/widgets/feature_icon_card.dart';
 import '../../../core/widgets/premium_ui.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
@@ -66,6 +68,17 @@ class _MethodAssistantScreenState extends ConsumerState<MethodAssistantScreen> {
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
+                FeatureIconCard(
+                  icon: PersonalAiIcons.assistenteIA,
+                  title: 'Assistente IA',
+                  subtitle:
+                      'Seu assistente inteligente para ajudar na organização da sua rotina e no uso do Método.',
+                  variant: FeatureIconCardVariant.list,
+                  iconSize: 64,
+                  accent: AppColors.accent,
+                  fallbackIcon: Icons.auto_awesome,
+                ),
+                const SizedBox(height: 12),
                 for (final m in _log)
                   Align(
                     alignment:

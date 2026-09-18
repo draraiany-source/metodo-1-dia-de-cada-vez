@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/premium_app_bar.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/premium_ui.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
-import '../data/accompaniment_ai_repository.dart';
 import '../domain/accompaniment_models.dart';
 import '../providers/accompaniment_providers.dart';
 
@@ -148,12 +149,43 @@ class _ChatThreadScreenState extends ConsumerState<ChatThreadScreen> {
             IconButton(
               tooltip: 'Resumir conversa',
               onPressed: _summarize,
-              icon: const Icon(Icons.summarize_outlined),
+              icon: AppIconImage(
+                PersonalAiIcons.resumoConversa,
+                size: 28,
+                fallbackIcon: Icons.summarize_outlined,
+                semanticLabel: 'Resumir conversa',
+              ),
             ),
         ],
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: Row(
+              children: [
+                AppIconImage(
+                  PersonalAiIcons.chatAmanda,
+                  size: 40,
+                  fallbackIcon: Icons.chat_bubble_outline,
+                  semanticLabel: 'Chat com Amanda',
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    widget.isTrainer
+                        ? 'Mensagens com ${conv.studentName}'
+                        : 'Fale com Amanda',
+                    style: const TextStyle(
+                      color: AppColors.textSecondary,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: msgs.when(
               loading: () => const Center(child: CircularProgressIndicator()),
@@ -321,10 +353,30 @@ class _ChatThreadScreenState extends ConsumerState<ChatThreadScreen> {
                   if (widget.isTrainer)
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: TextButton.icon(
-                        onPressed: _suggest,
-                        icon: const Icon(Icons.auto_awesome, size: 16),
-                        label: const Text('Gerar sugestão'),
+                      child: Wrap(
+                        spacing: 4,
+                        children: [
+                          TextButton.icon(
+                            onPressed: _suggest,
+                            icon: AppIconImage(
+                              PersonalAiIcons.sugestaoResposta,
+                              size: 28,
+                              fallbackIcon: Icons.auto_awesome,
+                              semanticLabel: 'Sugestão de resposta com IA',
+                            ),
+                            label: const Text('Sugestão de resposta com IA'),
+                          ),
+                          TextButton.icon(
+                            onPressed: _summarize,
+                            icon: AppIconImage(
+                              PersonalAiIcons.resumoConversa,
+                              size: 28,
+                              fallbackIcon: Icons.summarize_outlined,
+                              semanticLabel: 'Resumir conversa',
+                            ),
+                            label: const Text('Resumir conversa'),
+                          ),
+                        ],
                       ),
                     ),
                   if (_aiDraft != null && widget.isTrainer)

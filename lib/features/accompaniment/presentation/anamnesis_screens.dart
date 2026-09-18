@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
+import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/app_page.dart';
+import '../../../core/widgets/feature_icon_card.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
 import '../../../core/widgets/premium_ui.dart';
@@ -41,6 +44,15 @@ class _AnamnesisConsentScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Center(
+              child: AppIconImage(
+                PersonalAiIcons.anamnese,
+                size: 80,
+                fallbackIcon: Icons.assignment_outlined,
+                semanticLabel: 'Anamnese',
+              ),
+            ),
+            const SizedBox(height: 12),
             const Text('Consentimento para tratamento dos dados',
                 style: TextStyle(
                     color: Colors.white,
@@ -282,6 +294,15 @@ class _AnamnesisFormScreenState extends ConsumerState<AnamnesisFormScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const Center(
+                      child: AppIconImage(
+                        PersonalAiIcons.anamnese,
+                        size: 80,
+                        fallbackIcon: Icons.assignment_outlined,
+                        semanticLabel: 'Anamnese',
+                      ),
+                    ),
+                    const SizedBox(height: 8),
                     _chips('Objetivo principal', _objOpts, _objectives),
                     _field('Qual é sua principal meta?', _goal),
                     _field('Profissão', _profession),
@@ -341,38 +362,69 @@ class _AnamnesisFormScreenState extends ConsumerState<AnamnesisFormScreen> {
                       value: _restrict,
                       onChanged: (v) => setState(() => _restrict = v),
                     ),
-                    if (needsNotice)
-                      AppCard(
-                        child: Text(AnamnesisAttention.professionalNotice,
-                            style: const TextStyle(color: AppColors.warning)),
+                    if (needsNotice ||
+                        (widget.asTrainer && a.attentionReasons.isNotEmpty)) ...[
+                      const SizedBox(height: 8),
+                      FeatureIconCard(
+                        icon: PersonalAiIcons.pontosAtencao,
+                        title: 'Pontos de atenção',
+                        subtitle: widget.asTrainer &&
+                                a.attentionReasons.isNotEmpty
+                            ? a.attentionReasons.join(' · ')
+                            : AnamnesisAttention.professionalNotice,
+                        variant: FeatureIconCardVariant.list,
+                        accent: AppColors.warning,
+                        fallbackIcon: Icons.warning_amber_outlined,
+                        onPress: () {
+                          showDialog<void>(
+                            context: context,
+                            builder: (d) => AlertDialog(
+                              backgroundColor: AppColors.surface,
+                              title: const Text('Pontos de atenção'),
+                              content: Text(
+                                widget.asTrainer &&
+                                        a.attentionReasons.isNotEmpty
+                                    ? a.attentionReasons.join('\n')
+                                    : AnamnesisAttention.professionalNotice,
+                              ),
+                            ),
+                          );
+                        },
                       ),
+                    ],
                     const SizedBox(height: 16),
                     PrimaryButton(
                       label: _saving ? 'Salvando…' : 'Enviar anamnese',
                       onPressed: _saving ? null : () => _save(student),
                     ),
-                    if (widget.asTrainer) ...[
-                      const SizedBox(height: 12),
-                      OutlinedButton.icon(
-                        onPressed: () async {
-                          final text = await ref.read(accompanimentAiProvider).run(
-                            action: 'anamnesis_summary',
-                            payload: a.questionnaire,
-                          );
-                          if (!context.mounted) return;
-                          await showDialog<void>(
-                            context: context,
-                            builder: (d) => AlertDialog(
-                              backgroundColor: AppColors.surface,
-                              title: const Text('Resumo para Amanda'),
-                              content: SingleChildScrollView(child: Text(text)),
-                            ),
-                          );
-                        },
-                        icon: const Icon(Icons.auto_awesome),
-                        label: const Text('Analisar anamnese com IA'),
-                      ),
-                    ],
+                    const SizedBox(height: 12),
+                    FeatureIconCard(
+                      icon: PersonalAiIcons.analisarIA,
+                      title: 'Analisar anamnese com IA',
+                      subtitle: widget.asTrainer
+                          ? 'Preparar consulta com IA'
+                          : 'A Amanda usa este resumo para a consulta',
+                      variant: FeatureIconCardVariant.list,
+                      accent: AppColors.primary,
+                      fallbackIcon: Icons.auto_awesome,
+                      onPress: () async {
+                        final text =
+                            await ref.read(accompanimentAiProvider).run(
+                          action: 'anamnesis_summary',
+                          payload: a.questionnaire,
+                        );
+                        if (!context.mounted) return;
+                        await showDialog<void>(
+                          context: context,
+                          builder: (d) => AlertDialog(
+                            backgroundColor: AppColors.surface,
+                            title: const Text('Análise com IA'),
+                            content:
+                                SingleChildScrollView(child: Text(text)),
+                          ),
+                        );
+                      },
+                    ),
                     const SizedBox(height: 24),
                   ],
                 ),
