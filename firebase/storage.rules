@@ -63,6 +63,18 @@ service firebase.storage {
       allow write: if isAdmin() && underSize(10);
     }
 
+    // Capas da biblioteca de vídeos — a Personal precisa poder enviar/trocar
+    // sem depender do Admin Técnico. A regra ampla de /public só libera admin,
+    // então esta precisa existir à parte.
+    match /public/video_covers/{videoId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if signedIn()
+        && underSize(10)
+        && isImage()
+        && (isAdmin() || isPersonalTrainer());
+      allow delete: if signedIn() && (isAdmin() || isPersonalTrainer());
+    }
+
     // Fotos públicas Quem Sou Eu / Amanda.
     match /public/amanda_assets/{allPaths=**} {
       allow read: if true;

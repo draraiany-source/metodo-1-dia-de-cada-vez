@@ -13,6 +13,8 @@ import '../../../core/utils/youtube_launch.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
+import '../../evolution/domain/training_volume.dart';
+import '../../evolution/presentation/personal_records_screen.dart';
 import '../../missions/providers/missions_providers.dart';
 import '../../workout_timer/domain/timer_blueprints.dart';
 import '../../workout_timer/presentation/workout_timer_screen.dart';
@@ -46,6 +48,7 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
   Timer? _timer;
   int _descansoRestante = 0;
   String _falaLili = _falasLili.first;
+  double _volumeSessao = 0;
 
   WorkoutExerciseConfig get _exercicio => widget.plan.exercises[_atual];
 
@@ -75,31 +78,82 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
   }
 
   Future<void> _adicionarCarga() async {
-    final controller = TextEditingController();
-    final peso = await showDialog<double>(
+    final kgCtrl = TextEditingController(
+      text: TrainingVolume.parseWeight(_exercicio.carga)?.toString() ?? '',
+    );
+    final seriesCtrl = TextEditingController(
+      text: _exercicio.series > 0 ? '${_exercicio.series}' : '',
+    );
+    final repsCtrl = TextEditingController(
+      text: '${TrainingVolume.parseReps(_exercicio.repeticoes) ?? ''}',
+    );
+
+    final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.surface,
         title: const Text('Carga utilizada'),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: const InputDecoration(suffixText: 'kg'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: kgCtrl,
+              autofocus: true,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              decoration: const InputDecoration(labelText: 'Carga', suffixText: 'kg'),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: seriesCtrl,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(labelText: 'Séries'),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: TextField(
+                    controller: repsCtrl,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(labelText: 'Reps'),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('Cancelar')),
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancelar'),
+          ),
           ElevatedButton(
-            onPressed: () => Navigator.pop(
-                ctx, double.tryParse(controller.text.replaceAll(',', '.'))),
+            onPressed: () => Navigator.pop(ctx, true),
             child: const Text('Salvar'),
           ),
         ],
       ),
     );
-    if (peso == null) return;
+
+    final peso = TrainingVolume.parseWeight(kgCtrl.text);
+    final series = int.tryParse(seriesCtrl.text.trim());
+    final reps = int.tryParse(repsCtrl.text.trim());
+    kgCtrl.dispose();
+    seriesCtrl.dispose();
+    repsCtrl.dispose();
+    if (ok != true || peso == null) return;
+
+    final anteriores = (ref.read(ptLoadsProvider(widget.student.id)).valueOrNull ??
+            const <LoadEntry>[])
+        .where((e) => e.exerciseId == _exercicio.exerciseId)
+        .toList();
+    final recorde = ExerciseLoadStats.isNewWeightRecord(
+      historicoAnterior: anteriores,
+      novaCarga: peso,
+    );
+
     await ref.read(ptRepositoryProvider).logLoad(LoadEntry(
           id: '',
           studentId: widget.student.id,
@@ -110,10 +164,37 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
           exerciseName: _exercicio.exerciseName,
           date: DateTime.now(),
           weightKg: peso,
+          series: (series != null && series > 0) ? series : null,
+          repeticoes: (reps != null && reps > 0) ? reps : null,
+          userId: widget.student.userId,
         ));
-    if (mounted) {
+
+    final volume = TrainingVolume.of(
+      weightKg: peso,
+      reps: reps ?? 0,
+      series: series ?? 0,
+    );
+    if (volume != null) {
+      setState(() => _volumeSessao += volume);
+    }
+
+    ref.invalidate(ptLoadsProvider(widget.student.id));
+
+    if (!mounted) return;
+    if (recorde) {
+      await FeedbackService.play(FeedbackEvent.conquista);
+      if (!mounted) return;
+      await celebrarRecordeDeCarga(
+        context,
+        exercicio: _exercicio.exerciseName,
+        cargaLabel: TrainingVolume.formatKg(peso, decimals: 1),
+      );
+    } else if (mounted) {
+      final extra = volume == null
+          ? ''
+          : ' · volume ${TrainingVolume.formatVolume(volume)}';
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Carga registrada: ${peso}kg')),
+        SnackBar(content: Text('Carga registrada: ${TrainingVolume.formatKg(peso, decimals: 1)}$extra')),
       );
     }
   }
@@ -157,6 +238,14 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
                         color: Colors.white,
                         fontWeight: FontWeight.w800,
                         fontSize: 18)),
+                if (_volumeSessao > 0) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    'Volume: ${TrainingVolume.formatVolume(_volumeSessao)}',
+                    style: const TextStyle(
+                        color: AppColors.accent, fontWeight: FontWeight.w700),
+                  ),
+                ],
                 const SizedBox(height: 12),
                 Wrap(
                   spacing: 8,
@@ -251,6 +340,7 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
           feltPain: feltPain,
           tiredness: tiredness,
           feedbackNotes: notesCtrl.text.trim(),
+          totalVolumeKg: _volumeSessao > 0 ? _volumeSessao : null,
         ));
     notesCtrl.dispose();
     ref.invalidate(ptSessionsProvider(widget.student.id));
@@ -262,7 +352,11 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
     if (mounted) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Treino concluído! Parabéns!')),
+        SnackBar(
+          content: Text(_volumeSessao > 0
+              ? 'Treino concluído! Volume ${TrainingVolume.formatVolume(_volumeSessao)}'
+              : 'Treino concluído! Parabéns!'),
+        ),
       );
     }
   }

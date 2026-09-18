@@ -27,11 +27,19 @@ class SharedAudioPlaybackEngine implements AudioPlaybackEngine {
   @override
   Future<void> load(String url, {required String title, String? artUrl}) async {
     await _player.stop();
-    if (url.startsWith('asset:///')) {
-      final assetPath = url.replaceFirst('asset:///', '');
-      await _player.setAsset(assetPath);
-    } else {
-      await _player.setUrl(url);
+    try {
+      if (url.startsWith('asset:///')) {
+        final assetPath = url.replaceFirst('asset:///', '');
+        await _player.setAsset(assetPath);
+      } else if (url.startsWith('assets/')) {
+        await _player.setAsset(url);
+      } else {
+        await _player.setUrl(url);
+      }
+    } catch (e) {
+      throw StateError(
+        'Falha ao carregar áudio ($title). Fonte: $url. Detalhe: $e',
+      );
     }
   }
 

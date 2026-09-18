@@ -245,7 +245,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> {
                                         fontWeight: FontWeight.bold)),
                                 const SizedBox(height: 4),
                                 Text(
-                                    '${_current.teacher} · ${_current.level.label}',
+                                    '${_current.teacher} · ${_current.category.label}',
                                     style: const TextStyle(
                                         color: AppColors.textSecondary)),
                                 const SizedBox(height: 12),

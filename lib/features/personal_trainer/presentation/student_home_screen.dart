@@ -12,6 +12,8 @@ import '../../auth/providers/auth_providers.dart';
 import '../../gamification/providers/gamification_providers.dart';
 import '../domain/pt_models.dart';
 import '../providers/pt_providers.dart';
+import '../../evolution/presentation/load_history_screen.dart';
+import '../../evolution/presentation/personal_records_screen.dart';
 import 'evolution_pt_screen.dart';
 import 'student_anamnesis_screen.dart';
 import 'workout_session_screen.dart';
@@ -155,6 +157,20 @@ class StudentHomeScreen extends ConsumerWidget {
                       builder: (_) => StudentAnamnesisScreen(student: student))),
                   icon: const Icon(Icons.assignment_outlined, size: 18),
                   label: const Text('Minha anamnese'),
+                ),
+                const SizedBox(height: 4),
+                TextButton.icon(
+                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) =>
+                          LoadHistoryScreen(studentId: student.id))),
+                  icon: const Icon(Icons.fitness_center_outlined, size: 18),
+                  label: const Text('Histórico de cargas'),
+                ),
+                TextButton.icon(
+                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const PersonalRecordsScreen())),
+                  icon: const Icon(Icons.emoji_events_outlined, size: 18),
+                  label: const Text('Meus recordes'),
                 ),
                 const SizedBox(height: 8),
                 plansAsync.when(

@@ -44,8 +44,8 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'REPLACE_ME',
-    appId: 'REPLACE_ME',
+    apiKey: 'AIzaSyDhIwHcQc34jmYJanLXDe9O9vP2mf7X6L8',
+    appId: '1:990266923824:web:6b70fdb655198c7cd886f5',
     messagingSenderId: '990266923824',
     projectId: 'metodo1dia-app',
     authDomain: 'metodo1dia-app.firebaseapp.com',

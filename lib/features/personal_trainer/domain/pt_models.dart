@@ -544,6 +544,10 @@ class EvolutionPhoto {
 }
 
 /// Registro de carga usada num exercício — histórico completo de progressão.
+///
+/// [series] e [repeticoes] são opcionais de propósito: documentos gravados
+/// antes de 2026-09 só têm `weightKg`. Volume só é calculado quando os dois
+/// campos existem. Não apague nem reescreva registros antigos.
 class LoadEntry {
   const LoadEntry({
     required this.id,
@@ -553,6 +557,9 @@ class LoadEntry {
     required this.exerciseName,
     required this.date,
     required this.weightKg,
+    this.series,
+    this.repeticoes,
+    this.userId = '',
   });
 
   final String id;
@@ -563,6 +570,47 @@ class LoadEntry {
   final DateTime date;
   final double weightKg;
 
+  /// Quantas séries essa carga representa. Null = registro legado.
+  final int? series;
+
+  /// Repetições por série. Null = registro legado.
+  final int? repeticoes;
+
+  /// UID da aluna no Auth, quando conhecido. Permite a tela de Evolução
+  /// encontrar o histórico sem passar pelo `studentId` do PT.
+  final String userId;
+
+  /// carga × reps × séries, ou null se o registro não tem os três.
+  double? get volumeKg {
+    final s = series;
+    final r = repeticoes;
+    if (s == null || r == null || s <= 0 || r <= 0 || weightKg <= 0) {
+      return null;
+    }
+    return weightKg * r * s;
+  }
+
+  LoadEntry copyWith({
+    String? id,
+    double? weightKg,
+    int? series,
+    int? repeticoes,
+    String? userId,
+  }) {
+    return LoadEntry(
+      id: id ?? this.id,
+      studentId: studentId,
+      trainerId: trainerId,
+      exerciseId: exerciseId,
+      exerciseName: exerciseName,
+      date: date,
+      weightKg: weightKg ?? this.weightKg,
+      series: series ?? this.series,
+      repeticoes: repeticoes ?? this.repeticoes,
+      userId: userId ?? this.userId,
+    );
+  }
+
   Map<String, dynamic> toMap() => {
         'studentId': studentId,
         'trainerId': trainerId,
@@ -570,6 +618,9 @@ class LoadEntry {
         'exerciseName': exerciseName,
         'date': date.toIso8601String(),
         'weightKg': weightKg,
+        if (series != null) 'series': series,
+        if (repeticoes != null) 'repeticoes': repeticoes,
+        if (userId.isNotEmpty) 'userId': userId,
       };
 
   factory LoadEntry.fromMap(String id, Map<String, dynamic> m) => LoadEntry(
@@ -580,6 +631,9 @@ class LoadEntry {
         exerciseName: (m['exerciseName'] ?? '') as String,
         date: DateTime.tryParse(m['date'] as String? ?? '') ?? DateTime.now(),
         weightKg: (m['weightKg'] as num? ?? 0).toDouble(),
+        series: (m['series'] as num?)?.toInt(),
+        repeticoes: (m['repeticoes'] as num?)?.toInt(),
+        userId: (m['userId'] ?? '') as String,
       );
 }
 
@@ -598,6 +652,7 @@ class WorkoutSessionLog {
     this.tiredness = '',
     this.feedbackNotes = '',
     this.durationMinutes,
+    this.totalVolumeKg,
   });
 
   final String id;
@@ -617,6 +672,10 @@ class WorkoutSessionLog {
   final String feedbackNotes;
   final int? durationMinutes;
 
+  /// Soma do volume (carga × reps × séries) registrado nesta sessão.
+  /// Null quando nenhuma carga da sessão tinha séries/reps.
+  final double? totalVolumeKg;
+
   Map<String, dynamic> toMap() => {
         'studentId': studentId,
         'trainerId': trainerId,
@@ -629,6 +688,7 @@ class WorkoutSessionLog {
         'tiredness': tiredness,
         'feedbackNotes': feedbackNotes,
         'durationMinutes': durationMinutes,
+        if (totalVolumeKg != null) 'totalVolumeKg': totalVolumeKg,
       };
 
   factory WorkoutSessionLog.fromMap(String id, Map<String, dynamic> m) =>
@@ -646,6 +706,7 @@ class WorkoutSessionLog {
         tiredness: (m['tiredness'] ?? '') as String,
         feedbackNotes: (m['feedbackNotes'] ?? '') as String,
         durationMinutes: (m['durationMinutes'] as num?)?.toInt(),
+        totalVolumeKg: (m['totalVolumeKg'] as num?)?.toDouble(),
       );
 }
 

@@ -58,8 +58,8 @@ class PersonalCmsHubScreen extends ConsumerWidget {
     String? videoCounts;
     videosAsync.whenData((list) {
       final published = list.where((v) => v.active).length;
-      final disabled = list.length - published;
-      videoCounts = '$published ativos · $disabled desativados';
+      final drafts = list.length - published;
+      videoCounts = '$published publicados · $drafts rascunhos';
     });
 
     String? audioCounts;
@@ -141,7 +141,7 @@ class PersonalCmsHubScreen extends ConsumerWidget {
           _CmsCard(
             icon: Icons.video_library_outlined,
             title: 'Vídeos',
-            subtitle: videoCounts ?? 'Gerenciar streaming',
+            subtitle: videoCounts ?? 'Biblioteca de conteúdos',
             onTap: () => context.push(Routes.videosAdmin),
           ),
           _CmsCard(

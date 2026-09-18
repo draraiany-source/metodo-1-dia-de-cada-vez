@@ -37,6 +37,8 @@ import '../../features/plan/presentation/my_plan_screen.dart';
 import '../../features/recipes/presentation/recipes_screen.dart';
 import '../../features/evolution/presentation/measurements_screen.dart';
 import '../../features/evolution/presentation/progress_photos_screen.dart';
+import '../../features/evolution/presentation/load_history_screen.dart';
+import '../../features/evolution/presentation/personal_records_screen.dart';
 import '../../features/profile/presentation/edit_profile_screen.dart';
 import '../../features/profile/presentation/favorites_screen.dart';
 import '../../features/profile/presentation/history_screen.dart';
@@ -138,6 +140,8 @@ class Routes {
   static const pdfRecipes = '/pdf-recipes';
   static const recipes = '/recipes';
   static const measurements = '/measurements';
+  static const loadHistory = '/evolution/cargas';
+  static const personalRecords = '/evolution/recordes';
   static const progressPhotos = '/progress-photos';
   static const editProfile = '/profile/edit';
   static const favorites = '/favorites';
@@ -544,6 +548,14 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.measurements,
         pageBuilder: (_, s) => _fadeSlide(s, const MeasurementsScreen()),
+      ),
+      GoRoute(
+        path: Routes.loadHistory,
+        pageBuilder: (_, s) => _fadeSlide(s, const LoadHistoryScreen()),
+      ),
+      GoRoute(
+        path: Routes.personalRecords,
+        pageBuilder: (_, s) => _fadeSlide(s, const PersonalRecordsScreen()),
       ),
       GoRoute(
         path: Routes.progressPhotos,

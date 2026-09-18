@@ -869,7 +869,7 @@ class _QuickGrid extends StatelessWidget {
       ),
       (
         title: 'Vídeos',
-        subtitle: 'Treinos em vídeo',
+        subtitle: 'Biblioteca da Amanda',
         icon: AppIcons.videos,
         fallback: Icons.play_circle_rounded,
         accent: AppColors.hotPink,

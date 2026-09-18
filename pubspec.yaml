@@ -183,6 +183,10 @@ flutter:
     - assets/audio_programs/
     - assets/lily/
     - assets/lily_treinos/
+    # Capas 1:1 dos 117 exercicios do catalogo oficial (treino_001..treino_117).
+    # A subpasta _incoming/ NAO e declarada de proposito: sao candidatas de arte
+    # ainda nao aprovadas e nao devem entrar no bundle.
+    - assets/lily_exercicios/
     - assets/amanda/
     - assets/amanda/promo/
     - assets/amanda/optimized/

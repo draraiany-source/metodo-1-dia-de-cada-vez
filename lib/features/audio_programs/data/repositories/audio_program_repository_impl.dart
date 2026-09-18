@@ -91,19 +91,21 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
           .where((a) => a.active)
           .toList();
       if (list.isEmpty) return _demoAudios(programId);
-      return list;
+      return _canonicalizePrograma7Audios(programId, list);
     });
   }
 
   @override
   Future<String> resolvePlaybackUrl(
       String programId, ProgramAudio audio) async {
-    // Offline-first: os 7 áudios do Programa 7 Dias estão em assets.
-    // Evita CORS/Storage lento/URL remota quebrada e funciona sem login.
-    if (!audio.premium) {
-      final local = _localAssetFor(audio.id);
-      if (local != null) return local;
-    }
+    // Offline-first: os 7 áudios do Programa 7 Dias estão SEMPRE em assets.
+    // Não depender de Storage/CF/CORS — e ignora flag premium errada no doc.
+    final local = _localAssetFor(
+      audio.id,
+      day: audio.day > 0 ? audio.day : audio.order,
+      title: audio.title,
+    );
+    if (local != null) return local;
 
     if (!audio.premium && audio.audioUrl.isNotEmpty) {
       return audio.audioUrl;
@@ -173,19 +175,60 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
         'Áudio não disponível no momento. Tente de novo em instantes.');
   }
 
-  String? _localAssetFor(String audioId) {
-    const ids = {
-      '01_como_vencer_a_procrastinacao',
-      '02_como_criar_disciplina',
-      '03_como_vencer_a_preguica',
-      '04_como_manter_a_constancia',
-      '05_como_voltar_depois_de_errar',
-      '06_como_criar_habitos_saudaveis',
-      '07_como_acreditar_em_voce',
+  /// Slugs canônicos dos 7 MP3 em `assets/audio_programs/`.
+  static const List<String> kPrograma7Slugs = [
+    '01_como_vencer_a_procrastinacao',
+    '02_como_criar_disciplina',
+    '03_como_vencer_a_preguica',
+    '04_como_manter_a_constancia',
+    '05_como_voltar_depois_de_errar',
+    '06_como_criar_habitos_saudaveis',
+    '07_como_acreditar_em_voce',
+  ];
+
+  /// URL `asset:///` para just_audio, ou null se não for um dos 7.
+  static String? localAssetUrlFor(String audioId, {int? day, String? title}) {
+    final id = audioId.trim();
+    if (kPrograma7Slugs.contains(id)) {
+      return 'asset:///assets/audio_programs/$id.mp3';
+    }
+    // Firestore às vezes usa IDs diferentes — casa por dia 1..7.
+    if (day != null && day >= 1 && day <= 7) {
+      final slug = kPrograma7Slugs[day - 1];
+      return 'asset:///assets/audio_programs/$slug.mp3';
+    }
+    // Casa por palavras do título.
+    final key = (title ?? id)
+        .toLowerCase()
+        .replaceAll('á', 'a')
+        .replaceAll('ã', 'a')
+        .replaceAll('é', 'e')
+        .replaceAll('ê', 'e')
+        .replaceAll('í', 'i')
+        .replaceAll('ó', 'o')
+        .replaceAll('õ', 'o')
+        .replaceAll('ú', 'u')
+        .replaceAll('ç', 'c');
+    const titleHints = <String, String>{
+      'procrastina': '01_como_vencer_a_procrastinacao',
+      'disciplina': '02_como_criar_disciplina',
+      'preguica': '03_como_vencer_a_preguica',
+      'constancia': '04_como_manter_a_constancia',
+      'voltar': '05_como_voltar_depois_de_errar',
+      'errar': '05_como_voltar_depois_de_errar',
+      'habito': '06_como_criar_habitos_saudaveis',
+      'acreditar': '07_como_acreditar_em_voce',
     };
-    if (!ids.contains(audioId)) return null;
-    return 'asset:///assets/audio_programs/$audioId.mp3';
+    for (final e in titleHints.entries) {
+      if (key.contains(e.key)) {
+        return 'asset:///assets/audio_programs/${e.value}.mp3';
+      }
+    }
+    return null;
   }
+
+  String? _localAssetFor(String audioId, {int? day, String? title}) =>
+      localAssetUrlFor(audioId, day: day, title: title);
 
   DocumentReference<Map<String, dynamic>> _progressDoc(String programId) {
     final uid = _uid;
@@ -250,6 +293,64 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
           : FieldValue.arrayRemove([audioId]),
       'updatedAt': FieldValue.serverTimestamp(),
     }, SetOptions(merge: true));
+  }
+
+
+  /// Garante que os 7 audios usem os IDs/slugs dos MP3 em assets.
+  List<ProgramAudio> _canonicalizePrograma7Audios(
+      String programId, List<ProgramAudio> list) {
+    if (programId != kPrograma7DiasId) return list;
+    final demo = _demoAudios(programId);
+    if (list.every((a) => localAssetUrlFor(a.id) != null)) {
+      return list
+          .map((a) => ProgramAudio(
+                id: a.id,
+                day: a.day,
+                order: a.order,
+                title: a.title,
+                description: a.description,
+                audioUrl: a.audioUrl,
+                storagePath: a.storagePath,
+                coverUrl: a.coverUrl,
+                durationSeconds: a.durationSeconds > 0
+                    ? a.durationSeconds
+                    : demo
+                        .firstWhere((d) => d.id == a.id,
+                            orElse: () => demo.first)
+                        .durationSeconds,
+                active: a.active,
+                premium: false,
+              ))
+          .toList();
+    }
+    final byDay = <int, ProgramAudio>{};
+    for (final a in list) {
+      final day = a.day > 0 ? a.day : a.order;
+      if (day >= 1 && day <= 7) byDay[day] = a;
+    }
+    return List.generate(7, (i) {
+      final day = i + 1;
+      final canonical = demo[i];
+      final src = byDay[day];
+      if (src == null) return canonical;
+      return ProgramAudio(
+        id: canonical.id,
+        day: day,
+        order: src.order > 0 ? src.order : day,
+        title: src.title.isNotEmpty ? src.title : canonical.title,
+        description: src.description.isNotEmpty
+            ? src.description
+            : canonical.description,
+        audioUrl: '',
+        storagePath: canonical.storagePath,
+        coverUrl: src.coverUrl,
+        durationSeconds: src.durationSeconds > 0
+            ? src.durationSeconds
+            : canonical.durationSeconds,
+        active: src.active,
+        premium: false,
+      );
+    });
   }
 
   List<AudioProgram> _demoPrograms() => [

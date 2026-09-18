@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "atualizadoEm": "2026-09-17",
+  "observacao": "Conteúdo inicial da biblioteca de vídeos da Amanda. Este arquivo é usado APENAS quando a coleção 'videos' do Firestore está vazia — assim a área nunca aparece em branco na primeira instalação. A partir do momento em que a Amanda publica o primeiro vídeo pelo Painel da Personal, o Firestore passa a ser a única fonte e este arquivo deixa de ser lido. Ao editar um vídeo semeado no painel, ele é gravado no Firestore com o mesmo id, sem duplicar.",
+  "videos": [
+    {
+      "id": "boas_vindas_metodo_1_dia",
+      "category": "boasVindas",
+      "subcategory": "",
+      "name": "Boas-vindas ao Método 1 Dia de Cada Vez",
+      "description": "Um recado da Amanda pra você que está começando agora. Aqui ela explica o que é o Método 1 Dia de Cada Vez, como o aplicativo vai te acompanhar na rotina e por que a única meta que importa é a de hoje. Comece por este vídeo.",
+      "teacher": "Amanda Lopes",
+      "thumbnailUrl": "",
+      "youtubeUrl": "",
+      "durationSeconds": 0,
+      "level": "iniciante",
+      "isPremium": false,
+      "order": 0,
+      "active": true
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import '../data/services/audio_playback_engine.dart';
 import '../data/services/shared_audio_playback_engine.dart';
 import '../domain/entities/audio_program.dart';
 import '../domain/entities/program_progress.dart';
+import '../data/repositories/audio_program_repository_impl.dart';
 import 'audio_program_providers.dart';
 
 class ProgramPlayerState {
@@ -149,8 +150,9 @@ class ProgramPlayerController extends StateNotifier<ProgramPlayerState> {
       try {
         await repo.setCurrentAudio(programId, audio.id);
       } catch (_) {}
-      await _engine.play();
-      state = state.copyWith(isLoading: false);
+      // NÃO autoplay: no Web o gesto do usuário se perde após awaits e o
+      // Chrome bloqueia play(). O áudio só começa no botão PLAY.
+      state = state.copyWith(isLoading: false, isPlaying: false);
     } on TimeoutException {
       state = state.copyWith(
         isLoading: false,
@@ -168,17 +170,7 @@ class ProgramPlayerController extends StateNotifier<ProgramPlayerState> {
   }
 
   String? _localAssetFallback(String audioId) {
-    const ids = {
-      '01_como_vencer_a_procrastinacao',
-      '02_como_criar_disciplina',
-      '03_como_vencer_a_preguica',
-      '04_como_manter_a_constancia',
-      '05_como_voltar_depois_de_errar',
-      '06_como_criar_habitos_saudaveis',
-      '07_como_acreditar_em_voce',
-    };
-    if (!ids.contains(audioId)) return null;
-    return 'asset:///assets/audio_programs/$audioId.mp3';
+    return AudioProgramRepositoryImpl.localAssetUrlFor(audioId);
   }
 
   Future<void> togglePlayPause() async {

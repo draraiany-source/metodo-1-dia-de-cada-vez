@@ -942,9 +942,9 @@
       "id": "treino_053",
       "id_original": "treino 89",
       "nome": "Afundo com Recuo e Rosca Direta",
-      "categoria": "Emagrecimento / Funcional",
-      "grupo_muscular": "Membros inferiores / bíceps",
-      "equipamento": null,
+      "categoria": "Full Body / Funcional",
+      "grupo_muscular": "Corpo todo",
+      "equipamento": "Halteres",
       "nivel": [
         "Intermediário"
       ],
@@ -952,8 +952,8 @@
       "intervalo": null,
       "objetivo": "Emagrecimento / condicionamento",
       "link_youtube": "https://youtube.com/shorts/zNP0o_9o-6E?si=2NVXvlOscZah13Rl",
-      "status": "pronto",
-      "observacao": null
+      "status": "incompleto_arquivado_duplicata_treino_113",
+      "observacao": "Auditoria 2026-09-17: movido de Bíceps para Full Body / Funcional (grupo muscular era 'Membros inferiores / bíceps'). Duplicata do treino_113 (mesmo vídeo-base). Decisão da responsável: treino_113 é o registro principal; este ficou ARQUIVADO (status 'incompleto_arquivado_*' o remove da lista da aluna sem apagar o histórico). Para reativar, basta voltar o status para 'pronto'."
     },
     {
       "id": "treino_054",
@@ -2013,7 +2013,7 @@
       "intervalo": "1 min",
       "objetivo": "Hipertrofia, resistência e emagrecimento",
       "link_youtube": "https://youtube.com/shorts/zNP0o_9o-6E?si=eI9H28gUlKtnuSt5",
-      "observacao": "Mesmo vídeo-base do treino_053 já existente; provável duplicata/versão mais completa.",
+      "observacao": "Mesmo vídeo-base do treino_053. Auditoria 2026-09-17: confirmado como REGISTRO PRINCIPAL do 'Afundo com Recuo e Rosca Direta' por decisão da responsável; o treino_053 foi arquivado. Mantido em 'revisar' apenas para conferência do link (o sufixo ?si= difere do 053).",
       "status": "revisar"
     },
     {

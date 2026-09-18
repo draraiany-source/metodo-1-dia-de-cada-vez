@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import '../../../core/assets/app_icons.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/app_icon_image.dart';
+import '../../evolution/domain/training_volume.dart';
+import '../../evolution/presentation/load_history_screen.dart';
 import '../domain/pt_models.dart';
 import '../providers/pt_providers.dart';
 import 'evolution_pt_screen.dart';
@@ -332,6 +334,13 @@ class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
             icon: const Icon(Icons.show_chart),
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => EvolutionPtScreen(student: _student),
+            )),
+          ),
+          IconButton(
+            tooltip: 'Cargas',
+            icon: const Icon(Icons.fitness_center_outlined),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => LoadHistoryScreen(studentId: _student.id),
             )),
           ),
           IconButton(
@@ -666,6 +675,7 @@ class _SessionsHistoryTab extends ConsumerWidget {
                   '${s.date.day.toString().padLeft(2, '0')}/'
                   '${s.date.month.toString().padLeft(2, '0')}/'
                   '${s.date.year} · ${s.completedExerciseIds.length} exercícios'
+                  '${s.totalVolumeKg != null ? ' · ${TrainingVolume.formatVolume(s.totalVolumeKg!)}' : ''}'
                   '${s.difficulty.isNotEmpty ? ' · ${_diffLabel(s.difficulty)}' : ''}'
                   '${s.feltPain == true ? ' · sentiu dor' : ''}'
                   '${s.feedbackNotes.isNotEmpty ? '\n${s.feedbackNotes}' : ''}',

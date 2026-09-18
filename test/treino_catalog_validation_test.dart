@@ -131,11 +131,16 @@ void main() {
       expect(_matchesQuery(prancha, 'prancha'), isTrue);
     });
 
-    test('aluno vê 117 treinos; pendência 31 não importada', () {
+    // Auditoria de imagens 2026-09-17: treino_053 foi ARQUIVADO (duplicata do
+    // treino_113, mesmo vídeo-base). O registro continua no catálogo (117 ids),
+    // mas com status 'incompleto_arquivado_*' ele sai da lista da aluna.
+    test('aluno vê 116 treinos (053 arquivado); pendência 31 não importada', () {
       final pendencias = raw['pendencias_nao_importar'] as List;
       expect(pendencias, isNotEmpty);
       final student = all.where((t) => t.isReadyForStudent).toList();
-      expect(student.length, 117);
+      expect(student.length, 116);
+      expect(student.any((t) => t.id == 'treino_053'), isFalse);
+      expect(student.any((t) => t.id == 'treino_113'), isTrue);
       expect(all.any((t) => t.id == '31'), isFalse);
       expect(all.any((t) => t.id == 'treino_031'), isTrue);
     });
@@ -210,7 +215,8 @@ void main() {
       repo.clearCache();
       final snap = await repo.load(forceReload: true);
       expect(snap.treinos.length, 117);
-      expect(snap.forStudent.length, 117);
+      // 116 e não 117: treino_053 arquivado na auditoria de imagens (2026-09-17).
+      expect(snap.forStudent.length, 116);
     });
 
     testWidgets('lista abre detalhe e volta com provider mockado', (tester) async {

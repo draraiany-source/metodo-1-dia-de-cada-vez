@@ -81,10 +81,16 @@ class LilyTreinoAssets {
 
   static String _normalize(String raw) {
     var s = raw.toLowerCase().trim();
-    const from = 'Ã¡Ã Ã¢Ã£Ã¤Ã©Ã¨ÃªÃ«Ã­Ã¬Ã®Ã¯Ã³Ã²Ã´ÃµÃ¶ÃºÃ¹Ã»Ã¼Ã§Ã±';
-    const to = 'aaaaaeeeeiiiiooooouuuucn';
-    for (var i = 0; i < from.length; i++) {
-      s = s.replaceAll(from[i], to[i]);
+    const pairs = <List<String>>[
+      ['á', 'a'], ['à', 'a'], ['â', 'a'], ['ã', 'a'], ['ä', 'a'],
+      ['é', 'e'], ['è', 'e'], ['ê', 'e'], ['ë', 'e'],
+      ['í', 'i'], ['ì', 'i'], ['î', 'i'], ['ï', 'i'],
+      ['ó', 'o'], ['ò', 'o'], ['ô', 'o'], ['õ', 'o'], ['ö', 'o'],
+      ['ú', 'u'], ['ù', 'u'], ['û', 'u'], ['ü', 'u'],
+      ['ç', 'c'], ['ñ', 'n'],
+    ];
+    for (final p in pairs) {
+      s = s.replaceAll(p[0], p[1]);
     }
     s = s.replaceAll(RegExp(r'[^a-z0-9]+'), '_');
     while (s.contains('__')) {

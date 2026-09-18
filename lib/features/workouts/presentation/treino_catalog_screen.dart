@@ -77,6 +77,8 @@ import 'treino_catalog_detail_screen.dart';
 
 
 import 'treino_catalog_visual.dart';
+import '../../../core/lily/lily_treino_image.dart';
+import '../../../core/lily/lily_treino_assets.dart';
 
 
 
@@ -2052,7 +2054,11 @@ class _RecommendedCard extends StatelessWidget {
 
 
 
-    return Container(
+    return Align(
+      alignment: Alignment.center,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 560),
+        child: Container(
 
 
 
@@ -2087,7 +2093,7 @@ class _RecommendedCard extends StatelessWidget {
           TreinoSectionIcon(
             section: treino.visualSection,
             treino: treino,
-            size: 56,
+            size: 72,
           ),
 
 
@@ -2228,20 +2234,11 @@ class _RecommendedCard extends StatelessWidget {
 
 
 
+    ),
+      ),
     );
-
-
-
   }
-
-
-
 }
-
-
-
-
-
 
 
 class _TreinoCard extends StatelessWidget {

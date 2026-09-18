@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/app_constants.dart';
@@ -27,12 +28,45 @@ class VideosFetchException implements Exception {
   String toString() => userMessage;
 }
 
-/// Busca metadados de vídeo (público) e resolve URL via Cloud Function.
+/// Busca metadados de vídeo (público) e resolve URL de streaming.
+///
+/// Fonte de verdade é a coleção `videos` do Firestore, gerenciada pela Amanda no
+/// Painel da Personal. Enquanto essa coleção estiver **vazia**, cai no conteúdo
+/// semeado em `assets/content/videos_biblioteca.json`, para a área de Vídeos
+/// nunca aparecer em branco numa instalação nova. Assim que existir 1 documento
+/// no Firestore, o seed deixa de ser usado.
 class VideosRepository {
+  static const String seedAssetPath = 'assets/content/videos_biblioteca.json';
+
   bool get isAvailable => FirebaseService.isReady;
 
+  List<VideoContent>? _seedCache;
+
+  /// Conteúdo inicial embutido no app. Nunca lança: se o asset faltar ou estiver
+  /// inválido, a biblioteca simplesmente fica vazia em vez de quebrar a tela.
+  Future<List<VideoContent>> loadSeed() async {
+    if (_seedCache != null) return _seedCache!;
+    try {
+      final raw = await rootBundle.loadString(seedAssetPath);
+      final decoded = jsonDecode(raw) as Map<String, dynamic>;
+      final list = (decoded['videos'] as List?) ?? const [];
+      final out = <VideoContent>[];
+      for (final item in list) {
+        final map = Map<String, dynamic>.from(item as Map);
+        final id = '${map['id'] ?? ''}';
+        if (id.isEmpty) continue;
+        out.add(VideoContent.fromMap(id, map));
+      }
+      out.sort((a, b) => a.order.compareTo(b.order));
+      return _seedCache = out;
+    } catch (e) {
+      debugPrint('Seed de vídeos indisponível ($e).');
+      return _seedCache = const [];
+    }
+  }
+
   Future<List<VideoContent>> fetchAll() async {
-    if (!isAvailable) return [];
+    if (!isAvailable) return loadSeed();
 
     try {
       QuerySnapshot<Map<String, dynamic>> snap;
@@ -45,13 +79,16 @@ class VideosRepository {
       } catch (e) {
         // Web: FirebaseException pode chegar como TypeError/JS interop —
         // nunca use só `on FirebaseException` sem fallback genérico.
-        debugPrint(
-            'videos query composta falhou ($e); tentando fallback.');
+        debugPrint('videos query composta falhou ($e); tentando fallback.');
         snap = await FirebaseFirestore.instance
             .collection('videos')
             .where('active', isEqualTo: true)
             .get();
       }
+
+      // Coleção sem NENHUM doc ativo: pode ser instalação nova (seed) ou a
+      // Amanda despublicou tudo. Distinguimos olhando a coleção inteira.
+      if (snap.docs.isEmpty) return _seedSeColecaoVazia();
 
       final out = <VideoContent>[];
       for (final d in snap.docs) {
@@ -78,7 +115,12 @@ class VideosRepository {
         }
         out.sort((a, b) => a.order.compareTo(b.order));
         if (out.isNotEmpty) return out;
-      } catch (_) {/* segue para throw amigável */}
+      } catch (_) {/* segue para o seed / throw amigável */}
+
+      // Offline numa instalação nova: melhor mostrar o conteúdo embutido do que
+      // uma tela de erro.
+      final seed = await loadSeed();
+      if (seed.isNotEmpty) return seed;
 
       if (e is VideosFetchException) rethrow;
       throw VideosFetchException(
@@ -92,12 +134,27 @@ class VideosRepository {
     }
   }
 
+  Future<List<VideoContent>> _seedSeColecaoVazia() async {
+    try {
+      final todos = await FirebaseFirestore.instance
+          .collection('videos')
+          .limit(1)
+          .get();
+      // Já existe conteúdo gerenciado pela Amanda (só está despublicado):
+      // respeitar a decisão dela e mostrar a lista vazia.
+      if (todos.docs.isNotEmpty) return const [];
+    } catch (_) {/* na dúvida, mostra o seed */}
+    return loadSeed();
+  }
+
   /// Lista completa (ativos + desativados) para o CMS / admin.
   Future<List<VideoContent>> fetchAllForAdmin() async {
-    if (!isAvailable) return [];
+    if (!isAvailable) return loadSeed();
     try {
       final snap =
           await FirebaseFirestore.instance.collection('videos').get();
+      if (snap.docs.isEmpty) return loadSeed();
+
       final out = <VideoContent>[];
       for (final d in snap.docs) {
         try {
@@ -109,6 +166,8 @@ class VideosRepository {
       out.sort((a, b) => a.order.compareTo(b.order));
       return out;
     } catch (e) {
+      final seed = await loadSeed();
+      if (seed.isNotEmpty) return seed;
       throw VideosFetchException(
         FirebaseErrorMapper.toUserMessage(
           e,
@@ -121,6 +180,8 @@ class VideosRepository {
 
   String get _functionUrl => AppConstants.getVideoUrlFunctionUrl;
 
+  /// Só para vídeos legados auto-hospedados. Vídeos do YouTube não passam por
+  /// aqui — abrem direto pelo player embutido.
   Future<VideoUrlResult> resolveStreamUrl(String videoId) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {

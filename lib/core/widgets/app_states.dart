@@ -113,8 +113,7 @@ class AppErrorState extends StatelessWidget {
   const AppErrorState({
     super.key,
     this.title = 'Algo não saiu como esperado',
-    this.message = 'Não conseguimos carregar agora. Verifique sua conexão e '
-        'tente de novo.',
+    this.message = 'Não foi possível carregar agora. Confira a conexão; se o conteúdo ainda não foi cadastrado, a lista pode aparecer vazia.',
     this.onRetry,
     this.retryLabel = 'Tentar novamente',
   });

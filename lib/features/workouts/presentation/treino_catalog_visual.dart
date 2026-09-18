@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/assets/app_icons.dart';
-import '../../../core/widgets/app_icon_image.dart';
+import '../../../core/lily/lily_exercicio_assets.dart';
 import '../../../core/lily/lily_treino_assets.dart';
+import '../../../core/lily/lily_treino_image.dart';
 import '../domain/treino_catalog_models.dart';
 
 /// Identidade visual profissional de um treino do catálogo.
 ///
 /// Prioridade: modalidade específica (corrida/bike/…) → grupo muscular →
-/// categoria → placeholder neutro. Coração (`AppIcons.cardio`) **somente**
+/// categoria → placeholder neutro. Coração (`LilyTreinoAssets.corrida`) **somente**
 /// para cardio genérico.
 @immutable
 class TreinoVisualLook {
@@ -41,7 +41,7 @@ enum TreinoVisualSource {
 /// Resolve o visual a partir dos campos já existentes (sem alterar JSON).
 ///
 /// Prioridade: exercício específico → modalidade → grupo muscular →
-/// categoria → [AppIcons.workoutPlaceholder]. Coração/cardio **somente**
+/// categoria → [LilyTreinoAssets.generico1]. Coração/cardio **somente**
 /// para cardio puro.
 TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
   final cat = _norm(treino.categoria);
@@ -55,7 +55,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Burpee',
       icon: Icons.sports_gymnastics_rounded,
       accent: Color(0xFFF97316),
-      asset: AppIcons.exBurpee,
+      asset: LilyTreinoAssets.halteres,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -64,7 +64,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Polichinelo',
       icon: Icons.accessibility_new_rounded,
       accent: Color(0xFFFBBF24),
-      asset: AppIcons.exJumpingJack,
+      asset: LilyTreinoAssets.alongamento,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -73,7 +73,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Kettlebell',
       icon: Icons.fitness_center_rounded,
       accent: Color(0xFFF97316),
-      asset: AppIcons.exKettlebell,
+      asset: LilyTreinoAssets.kettlebell,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -82,7 +82,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Hip thrust',
       icon: Icons.accessibility_new_rounded,
       accent: Color(0xFFE879F9),
-      asset: AppIcons.exHipThrust,
+      asset: LilyTreinoAssets.hipThrust,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -91,7 +91,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Leg press',
       icon: Icons.airline_seat_legroom_extra_rounded,
       accent: Color(0xFF818CF8),
-      asset: AppIcons.exLegPress,
+      asset: LilyTreinoAssets.agachamento,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -100,7 +100,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Mesa flexora',
       icon: Icons.directions_run_rounded,
       accent: Color(0xFFC084FC),
-      asset: AppIcons.exLegCurl,
+      asset: LilyTreinoAssets.agachamento,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -109,7 +109,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Extensora',
       icon: Icons.airline_seat_legroom_extra_rounded,
       accent: Color(0xFF818CF8),
-      asset: AppIcons.exLegExtension,
+      asset: LilyTreinoAssets.agachamento,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -118,7 +118,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Agachamento sumo',
       icon: Icons.airline_seat_legroom_extra_rounded,
       accent: Color(0xFFA78BFA),
-      asset: AppIcons.exSquatSumo,
+      asset: LilyTreinoAssets.agachamento,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -127,7 +127,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Agachamento',
       icon: Icons.airline_seat_legroom_extra_rounded,
       accent: Color(0xFF818CF8),
-      asset: AppIcons.exSquatBar,
+      asset: LilyTreinoAssets.agachamento,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -136,7 +136,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Agachamento',
       icon: Icons.airline_seat_legroom_extra_rounded,
       accent: Color(0xFF818CF8),
-      asset: AppIcons.exSquat,
+      asset: LilyTreinoAssets.agachamento,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -145,7 +145,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Afundo',
       icon: Icons.directions_walk_rounded,
       accent: Color(0xFFA78BFA),
-      asset: AppIcons.exLunge,
+      asset: LilyTreinoAssets.agachamento,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -154,7 +154,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Panturrilha',
       icon: Icons.directions_walk_rounded,
       accent: Color(0xFF94A3B8),
-      asset: AppIcons.exCalf,
+      asset: LilyTreinoAssets.panturrilha,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -163,7 +163,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Elevação de pernas',
       icon: Icons.accessibility_new_rounded,
       accent: Color(0xFFFB7185),
-      asset: AppIcons.exLegRaise,
+      asset: LilyTreinoAssets.prancha,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -172,7 +172,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Rosca',
       icon: Icons.sports_handball_rounded,
       accent: Color(0xFFFB923C),
-      asset: AppIcons.exCurl,
+      asset: LilyTreinoAssets.biceps,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -181,7 +181,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Tríceps polia',
       icon: Icons.back_hand_rounded,
       accent: Color(0xFFF87171),
-      asset: AppIcons.exTriceps,
+      asset: LilyTreinoAssets.triceps,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -190,7 +190,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Tríceps',
       icon: Icons.back_hand_rounded,
       accent: Color(0xFFF87171),
-      asset: AppIcons.exTricepsExt,
+      asset: LilyTreinoAssets.triceps,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -199,7 +199,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Kickback',
       icon: Icons.accessibility_new_rounded,
       accent: Color(0xFFE879F9),
-      asset: AppIcons.exKickback,
+      asset: LilyTreinoAssets.coiceGluteo,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -208,7 +208,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Elevação lateral',
       icon: Icons.sports_gymnastics_rounded,
       accent: Color(0xFFFBBF24),
-      asset: AppIcons.exLateralRaise,
+      asset: LilyTreinoAssets.elevacaoLateral,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -217,7 +217,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Supino',
       icon: Icons.fitness_center_rounded,
       accent: Color(0xFFF472B6),
-      asset: AppIcons.exBenchDb,
+      asset: LilyTreinoAssets.supino,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -226,7 +226,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Peito',
       icon: Icons.fitness_center_rounded,
       accent: Color(0xFFF472B6),
-      asset: AppIcons.exBench,
+      asset: LilyTreinoAssets.supino,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -235,7 +235,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Remada baixa',
       icon: Icons.sports_martial_arts_rounded,
       accent: Color(0xFF60A5FA),
-      asset: AppIcons.exRowLow,
+      asset: LilyTreinoAssets.remada,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -244,7 +244,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Remada',
       icon: Icons.sports_martial_arts_rounded,
       accent: Color(0xFF60A5FA),
-      asset: AppIcons.exRow,
+      asset: LilyTreinoAssets.remada,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -253,7 +253,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Puxada',
       icon: Icons.sports_martial_arts_rounded,
       accent: Color(0xFF60A5FA),
-      asset: AppIcons.exPulldown,
+      asset: LilyTreinoAssets.remada,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -262,7 +262,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Flexão',
       icon: Icons.fitness_center_rounded,
       accent: Color(0xFFF472B6),
-      asset: AppIcons.exPushup,
+      asset: LilyTreinoAssets.prancha,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -271,7 +271,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Prancha',
       icon: Icons.accessibility_new_rounded,
       accent: Color(0xFFFB7185),
-      asset: AppIcons.exPlank,
+      asset: LilyTreinoAssets.prancha,
       source: TreinoVisualSource.exercise,
     );
   }
@@ -282,7 +282,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Esteira',
       icon: Icons.directions_run_rounded,
       accent: Color(0xFF22D3EE),
-      asset: AppIcons.treadmill,
+      asset: LilyTreinoAssets.esteira,
       source: TreinoVisualSource.category,
     );
   }
@@ -291,7 +291,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Bike',
       icon: Icons.pedal_bike_rounded,
       accent: Color(0xFF38BDF8),
-      asset: AppIcons.bike,
+      asset: LilyTreinoAssets.bicicleta,
       source: TreinoVisualSource.category,
     );
   }
@@ -300,7 +300,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Escada',
       icon: Icons.stairs_rounded,
       accent: Color(0xFF22D3EE),
-      asset: AppIcons.stairs,
+      asset: LilyTreinoAssets.caminhada,
       source: TreinoVisualSource.category,
     );
   }
@@ -309,7 +309,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Caminhada',
       icon: Icons.directions_walk_rounded,
       accent: Color(0xFF34D399),
-      asset: AppIcons.walk,
+      asset: LilyTreinoAssets.caminhada,
       source: TreinoVisualSource.category,
     );
   }
@@ -319,7 +319,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Corrida',
       icon: Icons.directions_run_rounded,
       accent: Color(0xFF2DD4BF),
-      asset: AppIcons.running,
+      asset: LilyTreinoAssets.corrida,
       source: TreinoVisualSource.category,
     );
   }
@@ -328,7 +328,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'HIIT',
       icon: Icons.timer_rounded,
       accent: Color(0xFFF97316),
-      asset: AppIcons.stopwatch,
+      asset: LilyTreinoAssets.generico2,
       source: TreinoVisualSource.category,
     );
   }
@@ -337,7 +337,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Alongamento',
       icon: Icons.self_improvement_rounded,
       accent: Color(0xFFA78BFA),
-      asset: AppIcons.exStretch,
+      asset: LilyTreinoAssets.alongamento,
       source: TreinoVisualSource.category,
     );
   }
@@ -346,7 +346,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Aquecimento',
       icon: Icons.local_fire_department_rounded,
       accent: Color(0xFFFBBF24),
-      asset: AppIcons.exFunctional,
+      asset: LilyTreinoAssets.halteres,
       source: TreinoVisualSource.category,
     );
   }
@@ -355,7 +355,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Mobilidade',
       icon: Icons.accessibility_new_rounded,
       accent: Color(0xFFC084FC),
-      asset: AppIcons.exStretchAlt,
+      asset: LilyTreinoAssets.alongamento,
       source: TreinoVisualSource.category,
     );
   }
@@ -366,7 +366,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Abdômen',
       icon: Icons.accessibility_new_rounded,
       accent: Color(0xFFFB7185),
-      asset: AppIcons.abs,
+      asset: LilyTreinoAssets.prancha,
       source: TreinoVisualSource.category,
     );
   }
@@ -375,7 +375,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Peito',
       icon: Icons.fitness_center_rounded,
       accent: Color(0xFFF472B6),
-      asset: AppIcons.exTorso,
+      asset: LilyTreinoAssets.prancha,
       source: TreinoVisualSource.category,
     );
   }
@@ -384,7 +384,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Costas',
       icon: Icons.sports_martial_arts_rounded,
       accent: Color(0xFF60A5FA),
-      asset: AppIcons.exBack,
+      asset: LilyTreinoAssets.remada,
       source: TreinoVisualSource.category,
     );
   }
@@ -393,7 +393,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Ombro',
       icon: Icons.sports_gymnastics_rounded,
       accent: Color(0xFFFBBF24),
-      asset: AppIcons.exLateralRaise,
+      asset: LilyTreinoAssets.elevacaoLateral,
       source: TreinoVisualSource.category,
     );
   }
@@ -402,7 +402,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Bíceps',
       icon: Icons.sports_handball_rounded,
       accent: Color(0xFFFB923C),
-      asset: AppIcons.exArm,
+      asset: LilyTreinoAssets.biceps,
       source: TreinoVisualSource.category,
     );
   }
@@ -421,7 +421,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Inferiores',
       icon: Icons.airline_seat_legroom_extra_rounded,
       accent: Color(0xFFA78BFA),
-      asset: AppIcons.glutes,
+      asset: LilyTreinoAssets.hipThrust,
       source: TreinoVisualSource.category,
     );
   }
@@ -430,7 +430,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Quadríceps',
       icon: Icons.airline_seat_legroom_extra_rounded,
       accent: Color(0xFF818CF8),
-      asset: AppIcons.exLegExtension,
+      asset: LilyTreinoAssets.agachamento,
       source: TreinoVisualSource.category,
     );
   }
@@ -439,7 +439,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Posterior',
       icon: Icons.directions_run_rounded,
       accent: Color(0xFFC084FC),
-      asset: AppIcons.exLegCurl,
+      asset: LilyTreinoAssets.agachamento,
       source: TreinoVisualSource.category,
     );
   }
@@ -448,7 +448,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Glúteo',
       icon: Icons.accessibility_new_rounded,
       accent: Color(0xFFE879F9),
-      asset: AppIcons.glutes,
+      asset: LilyTreinoAssets.hipThrust,
       source: TreinoVisualSource.category,
     );
   }
@@ -457,7 +457,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Inferiores',
       icon: Icons.accessibility_rounded,
       accent: Color(0xFFA78BFA),
-      asset: AppIcons.exLunge,
+      asset: LilyTreinoAssets.agachamento,
       source: TreinoVisualSource.category,
     );
   }
@@ -468,7 +468,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Funcional',
       icon: Icons.bolt_rounded,
       accent: Color(0xFFA855F7),
-      asset: AppIcons.exFunctional,
+      asset: LilyTreinoAssets.halteres,
       source: TreinoVisualSource.category,
     );
   }
@@ -479,7 +479,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Cardio',
       icon: Icons.directions_run_rounded,
       accent: Color(0xFFF43F5E),
-      asset: AppIcons.cardio,
+      asset: LilyTreinoAssets.corrida,
       source: TreinoVisualSource.category,
     );
   }
@@ -488,7 +488,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Musculação',
       icon: Icons.fitness_center_rounded,
       accent: Color(0xFFA855F7),
-      asset: AppIcons.workout,
+      asset: LilyTreinoAssets.halteres,
       source: TreinoVisualSource.category,
     );
   }
@@ -498,7 +498,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
       label: 'Musculação',
       icon: Icons.fitness_center_rounded,
       accent: Color(0xFFA855F7),
-      asset: AppIcons.workout,
+      asset: LilyTreinoAssets.halteres,
       source: TreinoVisualSource.category,
     );
   }
@@ -508,7 +508,7 @@ TreinoVisualLook treinoVisualLookOf(TreinoCatalogEntry treino) {
     label: 'Treino',
     icon: Icons.sports_rounded,
     accent: Color(0xFF94A3B8),
-    asset: AppIcons.workoutPlaceholder,
+    asset: LilyTreinoAssets.generico1,
     source: TreinoVisualSource.placeholder,
   );
 }
@@ -528,6 +528,24 @@ String _norm(String? v) => (v ?? '')
     .replaceAll('ç', 'c')
     .replaceAll('–', '-')
     .replaceAll('—', '-');
+
+
+/// Asset Lily Fit por seção do filtro (tabs/categorias).
+String lilyAssetForSection(TreinoVisualSection section) {
+  return switch (section) {
+    TreinoVisualSection.cardio => LilyTreinoAssets.corrida,
+    TreinoVisualSection.core => LilyTreinoAssets.prancha,
+    TreinoVisualSection.mobilidade => LilyTreinoAssets.alongamento,
+    TreinoVisualSection.inferioresGluteos => LilyTreinoAssets.agachamento,
+    TreinoVisualSection.peitoral => LilyTreinoAssets.supino,
+    TreinoVisualSection.costas => LilyTreinoAssets.remada,
+    TreinoVisualSection.biceps => LilyTreinoAssets.biceps,
+    TreinoVisualSection.triceps => LilyTreinoAssets.triceps,
+    TreinoVisualSection.ombros => LilyTreinoAssets.desenvolvimentoOmbros,
+    TreinoVisualSection.fullBody => LilyTreinoAssets.halteres,
+    TreinoVisualSection.panturrilhas => LilyTreinoAssets.panturrilha,
+  };
+}
 
 /// Ícone padronizado dos cards (tamanho/proporção/estilo únicos).
 class TreinoSectionIcon extends StatelessWidget {
@@ -549,19 +567,21 @@ class TreinoSectionIcon extends StatelessWidget {
         ? treinoVisualLookOf(treino!)
         : _lookFromSection(section);
 
-    final inner = size * 0.58;
+    final inner = size * 0.82;
     final radius = size * 0.28;
 
-    final glyph = look.asset != null
-        ? AppIconImage(
-            look.asset!,
-            size: inner,
-            fit: BoxFit.contain,
-            filterQuality: FilterQuality.high,
-            fallbackIcon: look.icon,
-            semanticLabel: look.label,
-          )
-        : Icon(look.icon, size: inner * 0.9, color: look.accent);
+    // Sempre Lily Fit nos cards/listas/categorias de treino (contain, sem corte).
+    final lilyAsset = treino != null
+        ? lilyTreinoAssetFor(treino!)
+        : lilyAssetForSection(section);
+
+    final glyph = LilyTreinoImage(
+      asset: lilyAsset,
+      height: inner,
+      width: inner,
+      padding: EdgeInsets.zero,
+      semanticLabel: look.label,
+    );
 
     return Container(
       width: size,
@@ -598,67 +618,67 @@ class TreinoSectionIcon extends StatelessWidget {
           label: 'Cardio',
           icon: Icons.directions_run_rounded,
           accent: Color(0xFFF43F5E),
-          asset: AppIcons.cardio,
+          asset: LilyTreinoAssets.corrida,
         ),
       TreinoVisualSection.core => const TreinoVisualLook(
           label: 'Abdômen',
           icon: Icons.accessibility_new_rounded,
           accent: Color(0xFFFB7185),
-          asset: AppIcons.abs,
+          asset: LilyTreinoAssets.prancha,
         ),
       TreinoVisualSection.mobilidade => const TreinoVisualLook(
           label: 'Mobilidade',
           icon: Icons.self_improvement_rounded,
           accent: Color(0xFFC084FC),
-          asset: AppIcons.yoga,
+          asset: LilyTreinoAssets.alongamento,
         ),
       TreinoVisualSection.inferioresGluteos => const TreinoVisualLook(
           label: 'Inferiores',
           icon: Icons.airline_seat_legroom_extra_rounded,
           accent: Color(0xFFA78BFA),
-          asset: AppIcons.glutes,
+          asset: LilyTreinoAssets.hipThrust,
         ),
       TreinoVisualSection.peitoral => const TreinoVisualLook(
           label: 'Peito',
           icon: Icons.fitness_center_rounded,
           accent: Color(0xFFF472B6),
-          asset: AppIcons.workout,
+          asset: LilyTreinoAssets.halteres,
         ),
       TreinoVisualSection.costas => const TreinoVisualLook(
           label: 'Costas',
           icon: Icons.sports_martial_arts_rounded,
           accent: Color(0xFF60A5FA),
-          asset: AppIcons.personal,
+          asset: LilyTreinoAssets.remada,
         ),
       TreinoVisualSection.biceps => const TreinoVisualLook(
           label: 'Bíceps',
           icon: Icons.sports_handball_rounded,
           accent: Color(0xFFFB923C),
-          asset: AppIcons.workoutGoal,
+          asset: LilyTreinoAssets.halteres,
         ),
       TreinoVisualSection.triceps => const TreinoVisualLook(
           label: 'Tríceps',
           icon: Icons.back_hand_rounded,
           accent: Color(0xFFF87171),
-          asset: AppIcons.achievement,
+          asset: LilyTreinoAssets.triceps,
         ),
       TreinoVisualSection.ombros => const TreinoVisualLook(
           label: 'Ombro',
           icon: Icons.sports_gymnastics_rounded,
           accent: Color(0xFFFBBF24),
-          asset: AppIcons.trophy,
+          asset: LilyTreinoAssets.desenvolvimentoOmbros,
         ),
       TreinoVisualSection.fullBody => const TreinoVisualLook(
           label: 'Funcional',
           icon: Icons.bolt_rounded,
           accent: Color(0xFFA855F7),
-          asset: AppIcons.workoutGoal,
+          asset: LilyTreinoAssets.halteres,
         ),
       TreinoVisualSection.panturrilhas => const TreinoVisualLook(
           label: 'Panturrilha',
           icon: Icons.directions_walk_rounded,
           accent: Color(0xFF94A3B8),
-          asset: AppIcons.running,
+          asset: LilyTreinoAssets.corrida,
         ),
     };
   }
@@ -695,8 +715,11 @@ String treinoMetaLine(TreinoCatalogEntry t) {
 }
 
 
-/// Asset Lily Fit (treino) para o exercício/treino do catálogo.
+/// Asset Lily Fit (treino) para o exercicio/treino do catalogo.
+/// Prioridade: mapa por id (117 JPGs em lily_exercicios) -> resolve por nome (pack 24).
 String lilyTreinoAssetFor(TreinoCatalogEntry treino) {
+  final byId = LilyExercicioAssets.pathForId(treino.id);
+  if (byId != null) return byId;
   return LilyTreinoAssets.resolve(
     '${treino.nome} ${treino.grupoMuscular ?? ''} ${treino.categoria ?? ''}',
     genericSeed: treino.nome.hashCode,

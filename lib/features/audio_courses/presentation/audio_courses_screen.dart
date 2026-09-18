@@ -9,6 +9,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/firebase_error_mapper.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/app_states.dart';
+import '../../../core/widgets/lili_widgets.dart';
 import '../../../core/widgets/common_widgets.dart';
 import '../data/audio_courses_repository.dart';
 import '../domain/audio_course_models.dart';
@@ -99,13 +100,17 @@ class _AudioCoursesScreenState extends ConsumerState<AudioCoursesScreen> {
                         ),
                         const SizedBox(height: 20),
                         if (courses.isEmpty)
-                          const Padding(
-                            padding: EdgeInsets.only(top: 40),
-                            child: ComingSoonView(
-                              emoji: '🎧',
-                              title: 'Nenhum curso disponível ainda',
-                              description:
-                                  'Assim que os cursos forem cadastrados, eles aparecem aqui automaticamente.',
+                          Padding(
+                            padding: const EdgeInsets.only(top: 24),
+                            child: AppEmptyState(
+                              title: widget.onlyCategories != null
+                                  ? 'Nenhuma meditação por aqui ainda'
+                                  : 'Nenhum áudio disponível ainda',
+                              message: widget.onlyCategories != null
+                                  ? 'Quando a Personal cadastrar meditações e áudios de calma no CMS, eles aparecem aqui automaticamente.'
+                                  : 'Quando os cursos forem cadastrados no painel da Personal, eles aparecem aqui automaticamente.',
+                              pose: MascotePose.padrao,
+                              mascotHeight: 140,
                             ),
                           )
                         else if (filtrados.isEmpty)
