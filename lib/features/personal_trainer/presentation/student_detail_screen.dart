@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/assets/app_icons.dart';
+import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/app_icon_image.dart';
+import '../../accompaniment/presentation/chat_thread_screen.dart';
+import '../../accompaniment/providers/accompaniment_providers.dart';
 import '../../evolution/domain/training_volume.dart';
 import '../../evolution/presentation/load_history_screen.dart';
 import '../domain/pt_models.dart';
@@ -311,6 +315,27 @@ class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
     controller.dispose();
   }
 
+  Future<void> _abrirChat() async {
+    try {
+      final conv = await ref
+          .read(accompanimentRepositoryProvider)
+          .ensureConversation(student: _student);
+      if (!mounted) return;
+      context.push(
+        '${Routes.trainerInbox}/chat/${conv.id}',
+        extra: ChatThreadRouteArgs(
+          conversation: conv,
+          isTrainer: true,
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Não foi possível abrir o chat. $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -352,6 +377,21 @@ class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
             tooltip: 'Arquivar',
             icon: const Icon(Icons.archive_outlined),
             onPressed: _arquivarAluno,
+          ),
+          PopupMenuButton<String>(
+            tooltip: 'Acompanhamento',
+            onSelected: (v) async {
+              if (v == 'chat') {
+                await _abrirChat();
+              } else if (v == 'agenda') {
+                if (mounted) context.push(Routes.trainerAgenda);
+              }
+            },
+            itemBuilder: (_) => const [
+              PopupMenuItem(value: 'chat', child: Text('Chat com aluna')),
+              PopupMenuItem(
+                  value: 'agenda', child: Text('Agenda / consultoria')),
+            ],
           ),
         ],
         bottom: TabBar(

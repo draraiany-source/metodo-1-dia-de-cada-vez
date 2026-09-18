@@ -980,6 +980,22 @@ class _QuickGrid extends StatelessWidget {
         onTap: () => AppNavigation.open(context, Routes.personalTrainer),
       ),
       (
+        title: 'Fale com Amanda',
+        subtitle: 'Dúvidas e acompanhamento',
+        icon: AppIcons.personal,
+        fallback: Icons.chat_bubble_outline,
+        accent: AppColors.secondary,
+        onTap: () => AppNavigation.open(context, Routes.faleComAmanda),
+      ),
+      (
+        title: 'Consultoria',
+        subtitle: 'Agende com a Amanda',
+        icon: AppIcons.calendar,
+        fallback: Icons.event_available,
+        accent: AppColors.primary,
+        onTap: () => AppNavigation.open(context, Routes.consultoria),
+      ),
+      (
         title: 'Personal',
         subtitle: 'Quem Sou Eu',
         icon: AppIcons.personal,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/assets/app_icons.dart';
+import '../../../core/router/app_navigation.dart';
+import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/widgets/premium_ui.dart';
 import '../../../core/widgets/app_icon_image.dart';
@@ -157,6 +159,21 @@ class StudentHomeScreen extends ConsumerWidget {
                       builder: (_) => StudentAnamnesisScreen(student: student))),
                   icon: const Icon(Icons.assignment_outlined, size: 18),
                   label: const Text('Minha anamnese'),
+                ),
+                TextButton.icon(
+                  onPressed: () => AppNavigation.open(context, Routes.faleComAmanda),
+                  icon: const Icon(Icons.chat_bubble_outline, size: 18),
+                  label: const Text('Fale com Amanda'),
+                ),
+                TextButton.icon(
+                  onPressed: () => AppNavigation.open(context, Routes.consultoria),
+                  icon: const Icon(Icons.event_available_outlined, size: 18),
+                  label: const Text('Consultoria'),
+                ),
+                TextButton.icon(
+                  onPressed: () => AppNavigation.open(context, Routes.minhaAnamnese),
+                  icon: const Icon(Icons.health_and_safety_outlined, size: 18),
+                  label: const Text('Anamnese completa'),
                 ),
                 const SizedBox(height: 4),
                 TextButton.icon(

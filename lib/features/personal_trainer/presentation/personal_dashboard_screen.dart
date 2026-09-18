@@ -437,10 +437,25 @@ class _PersonalBody extends ConsumerWidget {
                       AppNavigation.open(context, Routes.recipes),
                 ),
                 _ShortcutChip(
-                  label: 'Painel de conteúdo',
-                  icon: Icons.dashboard_customize_outlined,
+                  label: 'Mensagens',
+                  icon: Icons.chat_bubble_outline,
+                  onTap: () => AppNavigation.open(context, Routes.trainerInbox),
+                ),
+                _ShortcutChip(
+                  label: 'Agenda',
+                  icon: Icons.event_available,
+                  onTap: () => AppNavigation.open(context, Routes.trainerAgenda),
+                ),
+                _ShortcutChip(
+                  label: 'Google Calendar',
+                  icon: Icons.sync,
                   onTap: () =>
-                      AppNavigation.open(context, Routes.painelPersonal),
+                      AppNavigation.open(context, Routes.googleCalendarSettings),
+                ),
+                _ShortcutChip(
+                  label: 'IA da Personal',
+                  icon: Icons.auto_awesome,
+                  onTap: () => AppNavigation.open(context, Routes.aiSettings),
                 ),
                 _ShortcutChip(
                   label: 'Áudios',

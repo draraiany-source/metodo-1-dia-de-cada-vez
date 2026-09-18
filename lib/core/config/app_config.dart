@@ -75,6 +75,9 @@ class AppConfig {
     'desafios',
     'lembrete_agua',
     'lembrete_treino',
+    'mensagem_amanda',
+    'consultoria',
+    'anamnese',
   ];
 
   /// Canal de notificação Android (deve bater com o criado no nativo).

@@ -96,6 +96,16 @@ class AppConstants {
   static const String getContentUrlFunctionUrl =
       'https://us-central1-metodo1dia-app.cloudfunctions.net/getContentUrl';
 
+  static const String accompanimentAiFunctionUrl =
+      'https://us-central1-metodo1dia-app.cloudfunctions.net/accompanimentAi';
+
+  static const String googleCalendarFunctionUrl =
+      'https://us-central1-metodo1dia-app.cloudfunctions.net/googleCalendar';
+
+  /// Gestão de contas (criar / bloquear) — só Admin Técnico.
+  static const String adminManageUserFunctionUrl =
+      'https://us-central1-metodo1dia-app.cloudfunctions.net/adminManageUser';
+
   /// Frase de segurança da Amanda (nunca substitui profissionais).
   static const String amandaDisclaimer =
       'A Amanda é sua motivadora virtual e não substitui médico, '

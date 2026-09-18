@@ -136,6 +136,55 @@
         {"fieldPath": "challengeId", "order": "ASCENDING"},
         {"fieldPath": "status", "order": "ASCENDING"}
       ]
+    },
+    {
+      "collectionGroup": "pt_conversations",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "trainerId", "order": "ASCENDING"},
+        {"fieldPath": "lastAt", "order": "DESCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_conversations",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "trainerId", "order": "ASCENDING"},
+        {"fieldPath": "studentId", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_messages",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "conversationId", "order": "ASCENDING"},
+        {"fieldPath": "createdAt", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_appointments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "trainerId", "order": "ASCENDING"},
+        {"fieldPath": "start", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_appointments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "trainerId", "order": "ASCENDING"},
+        {"fieldPath": "studentId", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "pt_consents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "userId", "order": "ASCENDING"},
+        {"fieldPath": "studentId", "order": "ASCENDING"},
+        {"fieldPath": "version", "order": "ASCENDING"}
+      ]
     }
   ],
   "fieldOverrides": []

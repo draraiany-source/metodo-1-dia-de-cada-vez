@@ -80,6 +80,9 @@ class RolePermissions {
   bool get canManageUserRoles => role == UserRole.admin;
   bool get canAccessCriticalConfig => role == UserRole.admin;
   bool get canManageCoupons => role == UserRole.admin;
+  bool get canBlockUsers => role == UserRole.admin;
+  bool get canCreateUsers => role == UserRole.admin;
+  bool get canLinkStudentToPersonal => role == UserRole.admin;
 
   bool get canOpenPersonalCentral =>
       role == UserRole.personal || role == UserRole.admin;

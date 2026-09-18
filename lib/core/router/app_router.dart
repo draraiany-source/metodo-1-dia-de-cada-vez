@@ -68,6 +68,14 @@ import '../../features/personal_amanda/presentation/amanda_assets_admin_screen.d
 import '../../features/personal_amanda/presentation/amanda_profile_edit_screen.dart';
 import '../../features/mascot_lili/presentation/lili_assets_admin_screen.dart';
 import '../../features/personal_trainer/presentation/pt_hub_screen.dart';
+import '../../features/accompaniment/domain/accompaniment_models.dart';
+import '../../features/accompaniment/presentation/anamnesis_screens.dart';
+import '../../features/accompaniment/presentation/assistant_and_ai_screens.dart';
+import '../../features/accompaniment/presentation/chat_thread_screen.dart';
+import '../../features/accompaniment/presentation/consultoria_screens.dart';
+import '../../features/accompaniment/presentation/fale_com_amanda_screen.dart';
+import '../../features/accompaniment/presentation/trainer_agenda_screens.dart';
+import '../../features/accompaniment/presentation/trainer_inbox_screen.dart';
 import '../../features/personal_cms/presentation/personal_cms_hub_screen.dart';
 import '../../features/personal_cms/presentation/treinos_cms_screen.dart';
 import '../../features/personal_cms/presentation/recipes_cms_screen.dart';
@@ -180,6 +188,19 @@ class Routes {
   static const personalCmsChallengeEdit = '/painel-personal/desafios/editar';
   static const personalCmsChallengeParticipants =
       '/painel-personal/desafios/participantes';
+  static const faleComAmanda = '/fale-com-amanda';
+  static const consultoria = '/consultoria';
+  static const consultoriaAgendar = '/consultoria/agendar';
+  static const consultoriaConfirmar = '/consultoria/confirmar';
+  static const minhasConsultas = '/consultoria/minhas';
+  static const minhaAnamnese = '/minha-anamnese';
+  static const minhaAnamneseForm = '/minha-anamnese/formulario';
+  static const methodAssistant = '/assistente-metodo';
+  static const trainerInbox = '/personal-trainer/mensagens';
+  static const trainerAgenda = '/personal-trainer/agenda';
+  static const trainerAvailability = '/personal-trainer/disponibilidade';
+  static const googleCalendarSettings = '/personal-trainer/google-calendar';
+  static const aiSettings = '/personal-trainer/ia';
   static const weeklyChallenge = '/desafio-semana';
   static const myChallenges = '/meus-desafios';
 }
@@ -341,10 +362,14 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         return Routes.home;
       }
 
-      // 7) Área PT: aluno ok; guest bloqueado do hub de gestão profunda
-      //    (PtHub decide Personal vs Aluno na UI).
+      // 7) Área PT: aluno ok no hub; sub-rotas de gestão são só Personal/Admin.
       if (path == Routes.personalTrainer && (user == null || isGuest)) {
         return Routes.login;
+      }
+      if (path.startsWith('${Routes.personalTrainer}/')) {
+        if (user == null || isGuest) return Routes.login;
+        if (user.isAdmin || user.isPersonalTrainer) return null;
+        return Routes.home;
       }
 
       return null;
@@ -393,6 +418,101 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.personalTrainer,
         pageBuilder: (_, s) => _fadeSlide(s, const PtHubScreen()),
+      ),
+      GoRoute(
+        path: Routes.faleComAmanda,
+        pageBuilder: (_, s) => _fadeSlide(s, const FaleComAmandaScreen()),
+      ),
+      GoRoute(
+        path: '${Routes.faleComAmanda}/chat/:id',
+        pageBuilder: (_, s) {
+          final extra = s.extra;
+          if (extra is AccompanimentConversation) {
+            return _fadeSlide(s, ChatThreadScreen(conversation: extra));
+          }
+          if (extra is ChatThreadRouteArgs) {
+            return _fadeSlide(
+              s,
+              ChatThreadScreen(
+                conversation: extra.conversation,
+                isTrainer: extra.isTrainer,
+              ),
+            );
+          }
+          return _fadeSlide(s, const FaleComAmandaScreen());
+        },
+      ),
+      GoRoute(
+        path: Routes.consultoria,
+        pageBuilder: (_, s) => _fadeSlide(s, const ConsultoriaHomeScreen()),
+      ),
+      GoRoute(
+        path: Routes.consultoriaAgendar,
+        pageBuilder: (_, s) => _fadeSlide(s, const ConsultoriaBookScreen()),
+      ),
+      GoRoute(
+        path: Routes.consultoriaConfirmar,
+        pageBuilder: (_, s) {
+          final draft = s.extra;
+          if (draft is ConsultancyAppointment) {
+            return _fadeSlide(s, ConsultoriaConfirmScreen(draft: draft));
+          }
+          return _fadeSlide(s, const ConsultoriaHomeScreen());
+        },
+      ),
+      GoRoute(
+        path: Routes.minhasConsultas,
+        pageBuilder: (_, s) => _fadeSlide(s, const MyAppointmentsScreen()),
+      ),
+      GoRoute(
+        path: Routes.minhaAnamnese,
+        pageBuilder: (_, s) => _fadeSlide(s, const AnamnesisConsentScreen()),
+      ),
+      GoRoute(
+        path: Routes.minhaAnamneseForm,
+        pageBuilder: (_, s) => _fadeSlide(s, const AnamnesisFormScreen()),
+      ),
+      GoRoute(
+        path: Routes.methodAssistant,
+        pageBuilder: (_, s) => _fadeSlide(s, const MethodAssistantScreen()),
+      ),
+      GoRoute(
+        path: Routes.trainerInbox,
+        pageBuilder: (_, s) => _fadeSlide(s, const TrainerInboxScreen()),
+      ),
+      GoRoute(
+        path: '${Routes.trainerInbox}/chat/:id',
+        pageBuilder: (_, s) {
+          final extra = s.extra;
+          if (extra is ChatThreadRouteArgs) {
+            return _fadeSlide(
+              s,
+              ChatThreadScreen(
+                conversation: extra.conversation,
+                isTrainer: extra.isTrainer,
+              ),
+            );
+          }
+          return _fadeSlide(s, const TrainerInboxScreen());
+        },
+      ),
+      GoRoute(
+        path: Routes.trainerAgenda,
+        pageBuilder: (_, s) => _fadeSlide(s, const TrainerAgendaScreen()),
+      ),
+      GoRoute(
+        path: Routes.trainerAvailability,
+        pageBuilder: (_, s) =>
+            _fadeSlide(s, const TrainerAvailabilityScreen()),
+      ),
+      GoRoute(
+        path: Routes.googleCalendarSettings,
+        pageBuilder: (_, s) =>
+            _fadeSlide(s, const GoogleCalendarSettingsScreen()),
+      ),
+      GoRoute(
+        path: Routes.aiSettings,
+        pageBuilder: (_, s) => _fadeSlide(s, const AiSettingsScreen()),
       ),
       GoRoute(
         path: Routes.painelPersonal,

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../core/auth/user_role.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/services/firebase_service.dart';
 import '../../../models/app_user.dart';
@@ -63,7 +64,18 @@ class AuthRepository {
       if (u == null) {
         yield null;
       } else {
-        yield await _loadProfile(u.uid, u.email ?? '', u.displayName ?? '');
+        try {
+          final profile =
+              await _loadProfile(u.uid, u.email ?? '', u.displayName ?? '');
+          if (profile.disabled) {
+            await _auth.signOut();
+            yield null;
+          } else {
+            yield profile;
+          }
+        } on AuthFailure {
+          yield null;
+        }
       }
     }
   }
@@ -75,7 +87,7 @@ class AuthRepository {
     if (doc.exists) {
       user = AppUser.fromMap(uid, doc.data()!);
     } else {
-      // Cria perfil inicial — inclui o código de indicação próprio da usuária.
+      // Cadastro público sempre nasce ALUNO. Personal/Admin só via Admin Técnico.
       final myCode = uid.substring(0, 6).toUpperCase();
       user = AppUser(
         id: uid,
@@ -83,8 +95,18 @@ class AuthRepository {
         email: email,
         memberSince: DateTime.now(),
         referralCode: myCode,
+        role: UserRole.aluno.firestoreValue,
+        isAdmin: false,
+        isPersonalTrainer: false,
+        isPremium: false,
+        disabled: false,
       );
       final data = user.toMap();
+      data['role'] = UserRole.aluno.firestoreValue;
+      data['isAdmin'] = false;
+      data['isPersonalTrainer'] = false;
+      data['isPremium'] = false;
+      data['disabled'] = false;
       // Campo só lido pela Cloud Function `onUserCreated` (concede a
       // recompensa a quem indicou); não é reutilizado depois.
       if (referredByCode != null && referredByCode.trim().isNotEmpty) {
@@ -95,20 +117,47 @@ class AuthRepository {
       await _db.collection('referral_codes').doc(myCode).set({'ownerUid': uid});
     }
 
+    if (user.disabled) {
+      await _auth.signOut();
+      throw const AuthFailure('Esta conta foi desativada.');
+    }
+
     // Fonte de verdade do Admin Técnico: coleção `admins/{uid}` (não e-mail).
     try {
       final adminDoc = await _db.collection('admins').doc(uid).get();
       if (adminDoc.exists) {
-        user = user.copyWith(isAdmin: true, isPersonalTrainer: true);
+        user = user.copyWith(
+          isAdmin: true,
+          isPersonalTrainer: true,
+          role: UserRole.admin.firestoreValue,
+        );
       } else if (user.isAdmin) {
         // Flag órfã no doc users sem membership em admins → não eleva no app.
-        user = user.copyWith(isAdmin: false);
+        user = user.copyWith(
+          isAdmin: false,
+          role: user.isPersonalTrainer
+              ? UserRole.personal.firestoreValue
+              : UserRole.aluno.firestoreValue,
+        );
       }
     } catch (_) {
       // Sem permissão de leitura em admins = não é técnico.
       if (user.isAdmin) {
-        user = user.copyWith(isAdmin: false);
+        user = user.copyWith(
+          isAdmin: false,
+          role: user.isPersonalTrainer
+              ? UserRole.personal.firestoreValue
+              : UserRole.aluno.firestoreValue,
+        );
       }
+    }
+
+    final resolved = resolveUserRole(
+      isPersonalTrainer: user.isPersonalTrainer,
+      isAdmin: user.isAdmin,
+    );
+    if (user.role != resolved.firestoreValue) {
+      user = user.copyWith(role: resolved.firestoreValue);
     }
     return user;
   }

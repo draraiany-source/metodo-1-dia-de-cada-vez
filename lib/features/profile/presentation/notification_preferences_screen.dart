@@ -37,6 +37,9 @@ class _NotificationPreferencesScreenState
     'novas_receitas': 'Novas receitas',
     'novos_treinos': 'Novos treinos',
     'desafio_semana': 'Desafio da Semana',
+    'mensagem_amanda': 'Mensagens da Amanda',
+    'consultoria': 'Consultoria e lembretes',
+    'anamnese': 'Anamnese e reavaliação',
   };
 
   static const _defaults = {
@@ -49,6 +52,9 @@ class _NotificationPreferencesScreenState
     'novas_receitas': false,
     'novos_treinos': false,
     'desafio_semana': true,
+    'mensagem_amanda': true,
+    'consultoria': true,
+    'anamnese': true,
   };
 
   Map<String, bool> _topics = Map.of(_defaults);

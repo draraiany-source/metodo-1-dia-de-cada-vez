@@ -115,6 +115,20 @@ service firebase.storage {
       );
     }
 
+    // Chat e documentos da consultoria — privados (trainer/aluno vinculado).
+    match /pt_chat/{studentId}/{allPaths=**} {
+      allow read: if canAccessPtStudent(studentId);
+      allow write: if canAccessPtStudent(studentId)
+        && underSize(12)
+        && (
+          isImage()
+          || request.resource.contentType.matches('application/pdf')
+          || request.resource.contentType.matches('audio/.*')
+          || request.resource.contentType.matches('application/octet-stream')
+        );
+      allow delete: if canAccessPtStudent(studentId);
+    }
+
     match /pt_videos/{exerciseId}/{allPaths=**} {
       allow read: if signedIn();
       allow write: if signedIn()

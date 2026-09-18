@@ -34,6 +34,14 @@ class AppUser {
   final bool isAdmin;
   final bool isPersonalTrainer;
 
+  /// Papel canônico persistido (`student` | `trainer` | `technical_admin`).
+  /// A autorização real continua em `admins/{uid}` + `isPersonalTrainer`.
+  final String role;
+
+  /// Conta bloqueada pelo Admin. O cliente recusa login; o Auth disable
+  /// é aplicado via Cloud Function.
+  final bool disabled;
+
   const AppUser({
     required this.id,
     required this.name,
@@ -56,6 +64,8 @@ class AppUser {
     this.isPremium = false,
     this.isAdmin = false,
     this.isPersonalTrainer = false,
+    this.role = 'student',
+    this.disabled = false,
   });
 
   /// IMC calculado (ou null se faltar dado).
@@ -116,6 +126,8 @@ class AppUser {
       isPremium: (m['isPremium'] ?? false) as bool,
       isAdmin: (m['isAdmin'] ?? false) as bool,
       isPersonalTrainer: (m['isPersonalTrainer'] ?? false) as bool,
+      role: _roleFromMap(m['role']),
+      disabled: (m['disabled'] ?? false) as bool,
     );
   }
 
@@ -140,6 +152,8 @@ class AppUser {
         'isPremium': isPremium,
         'isAdmin': isAdmin,
         'isPersonalTrainer': isPersonalTrainer,
+        'role': role.isEmpty ? 'student' : role,
+        'disabled': disabled,
       };
 
   AppUser copyWith({
@@ -159,6 +173,8 @@ class AppUser {
     bool? isPremium,
     bool? isAdmin,
     bool? isPersonalTrainer,
+    String? role,
+    bool? disabled,
   }) {
     return AppUser(
       id: id,
@@ -182,6 +198,8 @@ class AppUser {
       isPremium: isPremium ?? this.isPremium,
       isAdmin: isAdmin ?? this.isAdmin,
       isPersonalTrainer: isPersonalTrainer ?? this.isPersonalTrainer,
+      role: role ?? this.role,
+      disabled: disabled ?? this.disabled,
     );
   }
 
@@ -220,6 +238,11 @@ class AppUser {
   /// Fallback de UI: demo só em modo local; visitante sem “Ana Silva” com Firebase.
   static AppUser uiFallback() =>
       FirebaseService.isReady ? guest() : demo();
+
+  static String _roleFromMap(dynamic v) {
+    final raw = (v ?? '').toString().trim();
+    return raw.isEmpty ? 'student' : raw;
+  }
 
   static double? _toDouble(dynamic v) =>
       v == null ? null : (v as num).toDouble();

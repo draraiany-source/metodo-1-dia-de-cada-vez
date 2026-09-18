@@ -51,7 +51,7 @@ service cloud.firestore {
     function noPrivilegedFields() {
       return !request.resource.data.diff(resource.data).affectedKeys()
         .hasAny(['xp', 'level', 'streak', 'isPremium', 'isAdmin',
-                 'isPersonalTrainer',
+                 'isPersonalTrainer', 'role', 'disabled',
                  'coins', 'totalWorkouts', 'totalKm', 'referralCount',
                  'referralCode']);
     }
@@ -60,11 +60,15 @@ service cloud.firestore {
     match /users/{userId} {
       allow read: if isOwner(userId) || isAdmin();
       allow create: if isOwner(userId)
-        // não pode nascer admin/premium por conta própria
+        // Cadastro público sempre nasce ALUNO. Personal/Admin só via Admin Técnico.
         && !request.resource.data.get('isAdmin', false)
-        && !request.resource.data.get('isPremium', false);
-      // O dono edita seu perfil, mas NÃO campos privilegiados.
-      allow update: if (isOwner(userId) && noPrivilegedFields()) || isAdmin();
+        && !request.resource.data.get('isPremium', false)
+        && !request.resource.data.get('isPersonalTrainer', false)
+        && request.resource.data.get('role', 'student') in ['student', ''];
+      // O dono edita seu perfil, mas NÃO campos privilegiados nem conta bloqueada.
+      allow update: if (isOwner(userId)
+        && noPrivilegedFields()
+        && resource.data.get('disabled', false) != true) || isAdmin();
       allow delete: if isOwner(userId) || isAdmin();
 
       // Subcoleções do perfil (nutrição, favoritos, receitas próprias, etc.).
@@ -213,6 +217,75 @@ service cloud.firestore {
           (get(/databases/$(database)/documents/pt_students/$(studentId)).data.trainerId == request.auth.uid ||
            get(/databases/$(database)/documents/pt_students/$(studentId)).data.userId == request.auth.uid))
       ));
+    }
+
+    // Acompanhamento Personal ↔ aluna (chat, agenda, notas, consentimento, IA).
+    match /pt_conversations/{id} {
+      allow read, update, delete: if isPtRelatedExisting();
+      allow create: if isPtRelatedIncoming();
+    }
+    match /pt_messages/{id} {
+      allow read: if isPtRelatedExisting() || (signedIn() &&
+        resource.data.keys().hasAny(['conversationId']) &&
+        exists(/databases/$(database)/documents/pt_conversations/$(resource.data.conversationId)) &&
+        (
+          get(/databases/$(database)/documents/pt_conversations/$(resource.data.conversationId)).data.trainerId == request.auth.uid ||
+          get(/databases/$(database)/documents/pt_conversations/$(resource.data.conversationId)).data.studentUserId == request.auth.uid
+        )
+      );
+      allow create: if signedIn() &&
+        request.resource.data.senderId == request.auth.uid &&
+        exists(/databases/$(database)/documents/pt_conversations/$(request.resource.data.conversationId)) &&
+        (
+          get(/databases/$(database)/documents/pt_conversations/$(request.resource.data.conversationId)).data.trainerId == request.auth.uid ||
+          get(/databases/$(database)/documents/pt_conversations/$(request.resource.data.conversationId)).data.studentUserId == request.auth.uid
+        );
+      allow update: if signedIn() && resource.data.senderId == request.auth.uid;
+      allow delete: if isAdmin();
+    }
+    match /pt_appointment_services/{id} {
+      allow read: if signedIn();
+      allow create, update: if isStaff() &&
+        request.resource.data.trainerId == request.auth.uid;
+      allow delete: if isStaff();
+    }
+    match /pt_availability/{trainerId} {
+      allow read: if signedIn();
+      allow write: if isAdmin() || request.auth.uid == trainerId;
+    }
+    match /pt_appointments/{id} {
+      allow read, update, delete: if isPtRelatedExisting();
+      allow create: if isPtRelatedIncoming();
+    }
+    match /pt_trainer_notes/{id} {
+      allow read: if isAdmin() || (signedIn() && (
+        resource.data.trainerId == request.auth.uid ||
+        (resource.data.visibility == 'shared' &&
+          exists(/databases/$(database)/documents/pt_students/$(resource.data.studentId)) &&
+          get(/databases/$(database)/documents/pt_students/$(resource.data.studentId)).data.userId == request.auth.uid)
+      ));
+      allow create, update, delete: if isAdmin() || (signedIn() &&
+        request.resource.data.trainerId == request.auth.uid);
+    }
+    match /pt_consents/{id} {
+      allow read: if ownsExisting() || isStaff();
+      allow create: if ownsIncoming();
+      allow update, delete: if isAdmin();
+    }
+    match /pt_ai_settings/{trainerId} {
+      allow read, write: if isAdmin() || request.auth.uid == trainerId;
+    }
+    match /pt_ai_logs/{id} {
+      allow read: if isAdmin() || (signedIn() && resource.data.trainerId == request.auth.uid);
+      allow create: if isStaff();
+      allow update, delete: if isAdmin();
+    }
+    match /pt_calendar_connections/{trainerId} {
+      allow read: if isAdmin() || request.auth.uid == trainerId;
+      allow write: if false; // só Cloud Functions (Admin SDK)
+    }
+    match /pt_calendar_secrets/{trainerId} {
+      allow read, write: if false; // tokens OAuth nunca saem do servidor
     }
 
     // Admin Técnico: membership em admins/{uid}.

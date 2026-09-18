@@ -728,6 +728,9 @@ class StudentAnamnesis {
     this.trainingLocation = '',
     this.equipment = '',
     this.notes = '',
+    this.questionnaire = const {},
+    this.attentionLevel = '',
+    this.attentionReasons = const [],
     this.updatedAt,
   });
 
@@ -746,6 +749,12 @@ class StudentAnamnesis {
   final String trainingLocation;
   final String equipment;
   final String notes;
+
+  /// Questionário completo (Fase 3). Chaves novas; o formulário antigo
+  /// continua preenchendo os campos de texto acima.
+  final Map<String, dynamic> questionnaire;
+  final String attentionLevel;
+  final List<String> attentionReasons;
   final DateTime? updatedAt;
 
   Map<String, dynamic> toMap() => {
@@ -764,6 +773,9 @@ class StudentAnamnesis {
         'trainingLocation': trainingLocation,
         'equipment': equipment,
         'notes': notes,
+        'questionnaire': questionnaire,
+        'attentionLevel': attentionLevel,
+        'attentionReasons': attentionReasons,
         'updatedAt': DateTime.now().toIso8601String(),
       };
 
@@ -787,6 +799,14 @@ class StudentAnamnesis {
       trainingLocation: (m['trainingLocation'] ?? '') as String,
       equipment: (m['equipment'] ?? '') as String,
       notes: (m['notes'] ?? '') as String,
+      questionnaire: (m['questionnaire'] as Map?)?.map(
+            (k, v) => MapEntry('$k', v),
+          ) ??
+          const {},
+      attentionLevel: (m['attentionLevel'] ?? '') as String,
+      attentionReasons:
+          (m['attentionReasons'] as List?)?.map((e) => '$e').toList() ??
+              const [],
       updatedAt: DateTime.tryParse(m['updatedAt'] as String? ?? ''),
     );
   }
