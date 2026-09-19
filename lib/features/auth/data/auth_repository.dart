@@ -47,19 +47,25 @@ String _traduzErroAuth(FirebaseAuthException e) {
 
 /// Repositório de autenticação.
 ///
-/// Quando o Firebase não está configurado, opera em "modo local":
-/// aceita qualquer credencial e devolve a usuária demo, para que o app
-/// seja totalmente navegável durante o desenvolvimento.
+/// Produção usa só Firebase Auth. O modo local (usuária demo) existe
+/// apenas em debug com Firebase ainda sem chave — nunca em release.
 class AuthRepository {
   FirebaseAuth get _auth => FirebaseAuth.instance;
   FirebaseFirestore get _db => FirebaseFirestore.instance;
 
-  bool get _local => !FirebaseService.isReady;
+  bool get _local => FirebaseService.allowLocalDevAuth;
+
+  void _requireRemoteAuth() {
+    if (FirebaseService.isReady) return;
+    throw const AuthFailure(
+      'Login indisponível no momento. Verifique a conexão e tente de novo.',
+    );
+  }
 
   /// Stream do usuário atual (null = deslogado).
   Stream<AppUser?> authState() async* {
-    if (_local) {
-      yield null; // começa deslogado no modo local
+    if (_local || !FirebaseService.isReady) {
+      yield null;
       return;
     }
     await for (final u in _auth.authStateChanges()) {
@@ -176,6 +182,7 @@ class AuthRepository {
 
   Future<AppUser> signIn(String email, String password) async {
     if (_local) return AppUser.demo();
+    _requireRemoteAuth();
     try {
       final cred = await _auth.signInWithEmailAndPassword(
         email: email.trim(),
@@ -196,6 +203,7 @@ class AuthRepository {
   Future<AppUser> register(String name, String email, String password,
       {String? referredByCode}) async {
     if (_local) return AppUser.demo().copyWith(name: name);
+    _requireRemoteAuth();
     try {
       final cred = await _auth.createUserWithEmailAndPassword(
         email: email.trim(),
@@ -215,12 +223,13 @@ class AuthRepository {
   }
 
   Future<void> signOut() async {
-    if (_local) return;
+    if (!FirebaseService.isReady) return;
     await _auth.signOut();
   }
 
   Future<void> resetPassword(String email) async {
     if (_local) return;
+    _requireRemoteAuth();
     try {
       await _auth.sendPasswordResetEmail(email: email.trim());
     } on FirebaseAuthException catch (e) {
@@ -237,7 +246,7 @@ class AuthRepository {
   /// propaga um [AuthFailure] com mensagem clara para a usuária tentar
   /// entrar novamente antes de excluir.
   Future<void> deleteAccount() async {
-    if (_local) return;
+    if (!FirebaseService.isReady) return;
     final user = _auth.currentUser;
     if (user == null) return;
     try {

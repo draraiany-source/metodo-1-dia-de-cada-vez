@@ -60,11 +60,20 @@ class GuestSessionNotifier extends StateNotifier<bool> {
 
   Future<void> _hydrate() async {
     final prefs = await SharedPreferences.getInstance();
+    if (!AppConstants.enableGuestMode) {
+      state = false;
+      await prefs.setBool(AppConstants.kGuestMode, false);
+      return;
+    }
     state = prefs.getBool(AppConstants.kGuestMode) ?? false;
   }
 
   /// Entra em modo visitante e persiste a escolha.
   Future<void> enter() async {
+    if (!AppConstants.enableGuestMode) {
+      state = false;
+      return;
+    }
     state = true;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(AppConstants.kGuestMode, true);

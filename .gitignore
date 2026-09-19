@@ -48,6 +48,8 @@ RECUPERACAO_PROJETO_COMPLETO/SOMENTE_LOCAL_SEGREDOS_NAO_COPIADOS.txt
 backup_visual_*/
 backup_nav_*/
 .gradle-home/
+.gradle-homolog/
+.firebase/
 android/.gradle/
 android/.kotlin/
 **/.kotlin/

@@ -16,6 +16,21 @@ class FirebaseService {
   static bool _initialized = false;
   static bool get isReady => _initialized;
 
+  /// True quando as options da plataforma não são placeholder.
+  /// iOS ainda pode estar `REPLACE_ME` até o `flutterfire configure`.
+  static bool get hasRealOptions {
+    try {
+      return DefaultFirebaseOptions.currentPlatform.apiKey != 'REPLACE_ME';
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Login demo ("qualquer senha") só em debug com Firebase ainda sem chave.
+  /// Release e init falho nunca autenticam localmente.
+  static bool get allowLocalDevAuth =>
+      kDebugMode && !_initialized && !hasRealOptions;
+
   static Future<void> init() async {
     // Detecta placeholders para evitar crash no primeiro run.
     final opts = DefaultFirebaseOptions.currentPlatform;

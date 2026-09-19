@@ -11,6 +11,7 @@ import '../../features/onboarding/presentation/onboarding_screen.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/auth/presentation/register_screen.dart';
 import '../../features/auth/providers/auth_providers.dart';
+import '../../features/subscriptions/providers/subscription_providers.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/workouts/presentation/workouts_screen.dart';
 import '../../features/running/presentation/running_screen.dart';
@@ -279,6 +280,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
   );
   ref.listen(localSessionProvider, (_, __) => refreshStream.ping());
   ref.listen(guestSessionProvider, (_, __) => refreshStream.ping());
+  ref.watch(revenueCatIdentityBinder);
   ref.onDispose(refreshStream.dispose);
 
   return GoRouter(
@@ -311,7 +313,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       final prefs = await SharedPreferences.getInstance();
       final onboardingDone =
           prefs.getBool(AppConstants.kOnboardingDone) ?? false;
-      final isGuest = prefs.getBool(AppConstants.kGuestMode) ?? false;
+      final isGuest = AppConstants.enableGuestMode &&
+          (prefs.getBool(AppConstants.kGuestMode) ?? false);
       final user = ref.read(currentUserProvider);
       final authenticated = user != null || isGuest;
 
