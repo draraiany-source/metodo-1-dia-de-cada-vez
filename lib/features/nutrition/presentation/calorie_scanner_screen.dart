@@ -9,6 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/assets/app_icons.dart';
+import '../../../core/router/premium_app_bar.dart';
+import '../../../core/utils/firebase_error_mapper.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/services/firebase_service.dart';
 import '../../../core/theme/app_colors.dart';
@@ -51,8 +53,10 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
   bool _saving = false;
   List<FoodAnalysisItem> _foods = [];
   String? _error;
+  String? _notes;
   late MealType _mealType;
   bool _privacyAccepted = false;
+  int _analyzeGen = 0;
 
   @override
   void initState() {
@@ -122,6 +126,11 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
       if (bytes.isEmpty) {
         setState(() => _error =
             'Foto inválida. Tente outra imagem com os alimentos visíveis.');
+        return;
+      }
+      if (bytes.length > kMaxMealPhotoBytes) {
+        setState(() => _error =
+            'A foto está grande demais. Tire outra com menos zoom ou escolha uma imagem menor.');
         return;
       }
 
@@ -215,32 +224,47 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
     if (_loading || _saving || _photoBytes == null) return;
     if (!await _ensurePrivacy()) return;
 
+    final gen = ++_analyzeGen;
     setState(() {
       _loading = true;
       _error = null;
+      _notes = null;
     });
 
     try {
       final repo = ref.read(calorieVisionRepositoryProvider);
       final analysis = await repo.analyzeMeal(_photoBytes!);
-      if (!mounted) return;
+      if (!mounted || gen != _analyzeGen) return;
 
-      if (analysis.isEmpty) {
+      if (analysis.isEmpty || analysis.looksLikePlaceholder) {
         setState(() {
           _foods = [];
-          _error =
-              'Não identificamos alimentos nesta imagem. '
-              'Tente tirar outra foto com os alimentos mais visíveis.';
+          _error = analysis.notes?.trim().isNotEmpty == true
+              ? analysis.notes!
+              : analysis.looksLikePlaceholder
+                  ? 'A análise de calorias por foto ainda não está disponível. '
+                      'A Cloud Function calorieVision precisa da chave OpenAI no servidor.'
+                  : 'Não identificamos alimentos nesta imagem. '
+                      'Tente tirar outra foto com os alimentos mais visíveis.';
         });
         return;
       }
 
       setState(() {
         _foods = List.of(analysis.foods);
+        _notes = analysis.notes;
+      });
+    } on CalorieVisionPending catch (e) {
+      if (!mounted || gen != _analyzeGen) return;
+      setState(() {
+        _foods = [];
+        _error = e.toString();
       });
     } on CalorieVisionUnavailable catch (e) {
+      if (!mounted || gen != _analyzeGen) return;
       setState(() => _error = e.toString());
     } on Exception catch (e) {
+      if (!mounted || gen != _analyzeGen) return;
       final msg = e.toString();
       if (msg.contains('Timeout') || msg.contains('timeout')) {
         setState(() => _error =
@@ -250,19 +274,28 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
           msg.contains('Failed host')) {
         setState(() => _error =
             'Sem conexão com a internet. Conecte-se e toque em Tentar novamente.');
-      } else if (msg.contains('autenticado')) {
-        setState(() => _error = msg);
-      } else {
+      } else if (msg.contains('autenticado') ||
+          msg.contains('Faça login') ||
+          msg.contains('sessão')) {
         setState(() => _error =
-            'Não conseguimos analisar essa imagem. '
-            'Tente tirar outra foto com os alimentos mais visíveis.');
+            'Faça login para analisar a refeição e tente novamente.');
+      } else {
+        final cleaned =
+            msg.startsWith('Exception: ') ? msg.substring(11) : msg;
+        final looksTechnical = cleaned.contains('Exception') ||
+            cleaned.contains('#0 ') ||
+            cleaned.length > 180;
+        setState(() => _error = looksTechnical
+            ? FirebaseErrorMapper.toUserMessage(e)
+            : cleaned);
       }
     } catch (_) {
+      if (!mounted || gen != _analyzeGen) return;
       setState(() => _error =
           'Não conseguimos analisar essa imagem. '
           'Tente tirar outra foto com os alimentos mais visíveis.');
     } finally {
-      if (mounted) setState(() => _loading = false);
+      if (mounted && gen == _analyzeGen) setState(() => _loading = false);
     }
   }
 
@@ -424,7 +457,7 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
     final totals = _totals;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Analisar minha refeição')),
+      appBar: const PremiumAppBar(title: 'Analisar minha refeição'),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
@@ -515,17 +548,30 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
                       Container(
                         color: Colors.black54,
                         alignment: Alignment.center,
-                        child: const Column(
+                        child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            CircularProgressIndicator(
+                            const CircularProgressIndicator(
                                 color: AppColors.secondary),
-                            SizedBox(height: 12),
-                            Text(
-                              'Analisando sua refeição…',
+                            const SizedBox(height: 12),
+                            const Text(
+                              'Analisando sua refeição...',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                _analyzeGen++;
+                                setState(() {
+                                  _loading = false;
+                                  _error = 'Análise cancelada.';
+                                });
+                              },
+                              child: const Text(
+                                'Cancelar',
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
                           ],
                         ),
@@ -655,6 +701,14 @@ class _CalorieScannerScreenState extends ConsumerState<CalorieScannerScreen> {
                 style: const TextStyle(
                     color: AppColors.textTertiary, fontSize: 11, height: 1.35),
               ),
+              if (_notes != null && _notes!.trim().isNotEmpty) ...[
+                const SizedBox(height: 8),
+                Text(
+                  _notes!,
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 12, height: 1.35),
+                ),
+              ],
               const SizedBox(height: 20),
               const Text(
                 'Alimentos identificados',

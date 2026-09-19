@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/services/auth_http_headers.dart';
+import '../../../core/services/cloud_function_http.dart';
 import '../../../core/services/firebase_service.dart';
 
 /// Proxy autenticado para a Cloud Function `accompanimentAi`.
@@ -20,8 +21,26 @@ class AccompanimentAiRepository {
     required String action,
     required Map<String, dynamic> payload,
   }) async {
+    final result = await runDetailed(action: action, payload: payload);
+    return result.text;
+  }
+
+  Future<AccompanimentAiResult> runDetailed({
+    required String action,
+    required Map<String, dynamic> payload,
+  }) async {
     if (!FirebaseService.isReady) {
-      return _offline(action, payload);
+      if (action == 'student_assistant') {
+        return AccompanimentAiResult(
+          text: _offline(action, payload),
+          usedOfflineFallback: true,
+        );
+      }
+      return const AccompanimentAiResult(
+        text:
+            'Sem conexão com o servidor. A IA na nuvem não gerou esta resposta.',
+        usedOfflineFallback: true,
+      );
     }
     try {
       final headers = await AuthHttpHeaders.forCloudFunction();
@@ -34,14 +53,65 @@ class AccompanimentAiRepository {
           .timeout(const Duration(seconds: 40));
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body) as Map<String, dynamic>;
-        return (data['result'] ?? data['reply'] ?? '') as String;
+        final text = ((data['result'] ?? data['reply'] ?? '') as String).trim();
+        if (text.isNotEmpty) {
+          return AccompanimentAiResult(text: text);
+        }
       }
-    } catch (_) {}
-    return _offline(action, payload);
+      final apiError = functionErrorMessage(res.body);
+      if (res.statusCode == 403) {
+        return AccompanimentAiResult(
+          text: apiError ??
+              'Você não tem permissão para esta função da IA da Personal.',
+          usedOfflineFallback: true,
+        );
+      }
+      if (res.statusCode == 401) {
+        return const AccompanimentAiResult(
+          text: 'Sua sessão expirou. Entre novamente para usar a IA.',
+          usedOfflineFallback: true,
+        );
+      }
+      if (res.statusCode == 429 ||
+          res.statusCode == 502 ||
+          res.statusCode == 503 ||
+          res.statusCode == 504) {
+        return AccompanimentAiResult(
+          text: apiError ??
+              'A IA na nuvem não respondeu agora. Tente novamente em instantes.',
+          usedOfflineFallback: true,
+        );
+      }
+    } catch (_) {
+      if (action == 'student_assistant') {
+        return AccompanimentAiResult(
+          text: _offline(action, payload),
+          usedOfflineFallback: true,
+        );
+      }
+      return const AccompanimentAiResult(
+        text:
+            'Sem conexão com a internet. A IA na nuvem não gerou esta resposta.',
+        usedOfflineFallback: true,
+      );
+    }
+    if (action == 'student_assistant') {
+      return AccompanimentAiResult(
+        text: _offline(action, payload),
+        usedOfflineFallback: true,
+      );
+    }
+    return const AccompanimentAiResult(
+      text: 'A IA na nuvem não gerou esta resposta. Tente novamente.',
+      usedOfflineFallback: true,
+    );
   }
 
-  Future<String> studentAssistant(String message) {
-    return run(action: 'student_assistant', payload: {'message': message});
+  Future<AccompanimentAiResult> studentAssistant(String message) {
+    return runDetailed(
+      action: 'student_assistant',
+      payload: {'message': message},
+    );
   }
 
   String _offline(String action, Map<String, dynamic> payload) {
@@ -73,6 +143,16 @@ class AccompanimentAiRepository {
             'A IA só usa dados existentes no sistema.';
     }
   }
+}
+
+class AccompanimentAiResult {
+  const AccompanimentAiResult({
+    required this.text,
+    this.usedOfflineFallback = false,
+  });
+
+  final String text;
+  final bool usedOfflineFallback;
 }
 
 class GoogleCalendarRepository {

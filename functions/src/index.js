@@ -5,12 +5,28 @@ const {
   handleOptions,
   requireAuth,
   requireAdmin,
+  requirePersonalOrAdmin,
   verifyAppCheck,
   hasPremiumAccess,
 } = require('./auth_helpers');
+const {
+  MAX_IMAGE_BASE64_CHARS,
+  MAX_AMANDA_MESSAGE_CHARS,
+  MAX_ASSISTANT_MESSAGE_CHARS,
+  getOpenAiKey,
+  requirePost,
+  stripDataUrl,
+  consumeAiQuota,
+  openaiChat,
+} = require('./ai_helpers');
 
 admin.initializeApp();
 const db = admin.firestore();
+
+/** Gen-1 defaults explícitos: 60s / 256MB / us-central1. */
+const httpsAi = functions
+  .runWith({ timeoutSeconds: 60, memory: '256MB' })
+  .https.onRequest;
 
 exports.onWorkoutCompleted = functions.firestore
   .document('workout_history/{historyId}')
@@ -138,9 +154,10 @@ function buildUserContent(message, userName, profile, context) {
 }
 
 
-exports.amandaChat = functions.https.onRequest(async (req, res) => {
+exports.amandaChat = httpsAi(async (req, res) => {
   setCors(res);
   if (handleOptions(req, res)) return;
+  if (!requirePost(req, res)) return;
 
   const uid = await requireAuth(req, res);
   if (!uid) return;
@@ -148,51 +165,68 @@ exports.amandaChat = functions.https.onRequest(async (req, res) => {
 
   try {
     const { message, userName, profile, context } = req.body || {};
-    if (!message) return res.status(400).json({ error: 'message ausente' });
-
-    const apiKey =
-      (functions.config().openai && functions.config().openai.key) ||
-      process.env.OPENAI_API_KEY;
-
-    if (!apiKey) {
-      // Sem chave configurada: devolve fallback para não quebrar o app.
-      return res.status(200).json({
-        reply:
-          'Estou aqui com você 💜 (Amanda em modo básico — configure a chave da OpenAI na Cloud Function para respostas completas.)',
+    const text = typeof message === 'string' ? message.trim() : '';
+    if (!text) {
+      return res.status(400).json({ error: 'Mensagem vazia.', code: 'empty_message' });
+    }
+    if (text.length > MAX_AMANDA_MESSAGE_CHARS) {
+      return res.status(400).json({
+        error: 'Mensagem longa demais. Envie um texto mais curto.',
+        code: 'message_too_long',
       });
     }
 
-    const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: [
-          { role: 'system', content: AMANDA_SYSTEM_PROMPT },
-          {
-            role: 'user',
-            content: buildUserContent(message, userName, profile, context),
-          },
-        ],
-        max_tokens: 300,
-        temperature: 0.8,
-      }),
+    if (!(await consumeAiQuota(db, uid, 'amandaChat'))) {
+      return res.status(429).json({
+        error: 'Muitas perguntas neste momento. Aguarde alguns minutos e tente de novo.',
+        code: 'rate_limited',
+      });
+    }
+
+    const apiKey = getOpenAiKey();
+    if (!apiKey) {
+      console.warn('amandaChat: OPENAI_API_KEY ausente');
+      return res.status(503).json({
+        error: 'A Amanda IA na nuvem ainda não está configurada no servidor.',
+        code: 'openai_not_configured',
+      });
+    }
+
+    const { ok, status, data } = await openaiChat(apiKey, {
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: AMANDA_SYSTEM_PROMPT },
+        {
+          role: 'user',
+          content: buildUserContent(text, userName, profile, context),
+        },
+      ],
+      max_tokens: 300,
+      temperature: 0.8,
     });
 
-    const data = await openaiRes.json();
     const reply =
       data.choices && data.choices[0] && data.choices[0].message
         ? data.choices[0].message.content
-        : 'Vamos com calma, um dia de cada vez. 💜';
+        : '';
 
-    return res.status(200).json({ reply });
+    if (!ok || !reply.trim()) {
+      console.error('amandaChat openai', status, data && data.error);
+      return res.status(502).json({
+        error: 'A IA não conseguiu responder agora. Tente novamente em instantes.',
+        code: 'openai_error',
+      });
+    }
+
+    return res.status(200).json({ reply: reply.trim() });
   } catch (e) {
-    console.error('amandaChat error', e);
-    return res.status(200).json({
-      reply: 'Tive um probleminha agora, mas continuo com você. 💜',
+    console.error('amandaChat error', e && e.name, e && e.message);
+    const timedOut = e && (e.name === 'TimeoutError' || e.name === 'AbortError');
+    return res.status(timedOut ? 504 : 500).json({
+      error: timedOut
+        ? 'A resposta demorou demais. Tente novamente.'
+        : 'Erro temporário ao preparar a resposta. Tente novamente.',
+      code: timedOut ? 'timeout' : 'internal',
     });
   }
 });
@@ -327,93 +361,101 @@ function normalizeCalorieVisionResponse(parsed) {
   };
 }
 
-exports.calorieVision = functions.https.onRequest(async (req, res) => {
+exports.calorieVision = httpsAi(async (req, res) => {
   setCors(res);
   if (handleOptions(req, res)) return;
+  if (!requirePost(req, res)) return;
 
   const uid = await requireAuth(req, res);
   if (!uid) return;
   if (!(await verifyAppCheck(req, res))) return;
 
   try {
-    const { imageBase64 } = req.body || {};
+    const imageBase64 = stripDataUrl((req.body || {}).imageBase64);
     if (!imageBase64) {
-      return res.status(400).json({ error: 'imageBase64 ausente' });
+      return res.status(400).json({ error: 'Imagem ausente.', code: 'image_missing' });
+    }
+    if (imageBase64.length > MAX_IMAGE_BASE64_CHARS) {
+      return res.status(413).json({
+        error: 'A foto está grande demais. Tire outra com menos zoom ou escolha uma imagem menor.',
+        code: 'image_too_large',
+      });
     }
 
-    const apiKey =
-      (functions.config().openai && functions.config().openai.key) ||
-      process.env.OPENAI_API_KEY;
+    if (!(await consumeAiQuota(db, uid, 'calorieVision'))) {
+      return res.status(429).json({
+        error: 'Muitas análises neste momento. Aguarde alguns minutos e tente de novo.',
+        code: 'rate_limited',
+      });
+    }
 
+    const apiKey = getOpenAiKey();
     if (!apiKey) {
-      return res.status(200).json(
-        normalizeCalorieVisionResponse({
-          name: 'Refeição',
-          kcal: 0,
-          protein: 0,
-          carbs: 0,
-          fat: 0,
-          confidence: 'baixa',
-          detalhe:
-            'Chave da OpenAI não configurada na Cloud Function — registre manualmente.',
-        }),
-      );
+      console.warn('calorieVision: OPENAI_API_KEY ausente');
+      return res.status(503).json({
+        error: 'A análise de calorias por foto ainda não está configurada no servidor.',
+        code: 'openai_not_configured',
+      });
     }
 
-    const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: [
-          { role: 'system', content: CALORIE_VISION_PROMPT },
-          {
-            role: 'user',
-            content: [
-              {
-                type: 'text',
-                text:
-                  'Identifique os alimentos desta refeição e estime gramas, calorias e macros.',
-              },
-              {
-                type: 'image_url',
-                image_url: { url: `data:image/jpeg;base64,${imageBase64}` },
-              },
-            ],
-          },
-        ],
-        max_tokens: 900,
-        temperature: 0.3,
-      }),
-    });
+    const { ok, status, data } = await openaiChat(apiKey, {
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: CALORIE_VISION_PROMPT },
+        {
+          role: 'user',
+          content: [
+            {
+              type: 'text',
+              text:
+                'Identifique os alimentos desta refeição e estime gramas, calorias e macros.',
+            },
+            {
+              type: 'image_url',
+              image_url: { url: `data:image/jpeg;base64,${imageBase64}` },
+            },
+          ],
+        },
+      ],
+      max_tokens: 900,
+      temperature: 0.3,
+    }, 40000);
 
-    const data = await openaiRes.json();
+    if (!ok) {
+      console.error('calorieVision openai', status, data && data.error);
+      return res.status(502).json({
+        error: 'A análise da imagem falhou. Tente outra foto em instantes.',
+        code: 'openai_error',
+      });
+    }
+
     const raw =
       data.choices && data.choices[0] && data.choices[0].message
         ? data.choices[0].message.content
-        : '{}';
+        : '';
 
     let parsed;
     try {
-      const cleaned = raw.replace(/```json|```/g, '').trim();
+      const cleaned = String(raw || '').replace(/```json|```/g, '').trim();
       parsed = JSON.parse(cleaned);
     } catch (_) {
-      parsed = { foods: [], detalhe: 'Resposta inválida da IA.' };
+      console.error('calorieVision parse');
+      return res.status(502).json({
+        error: 'Não foi possível interpretar a análise. Tente outra foto.',
+        code: 'parse_error',
+      });
     }
 
     return res.status(200).json(normalizeCalorieVisionResponse(parsed));
   } catch (e) {
-    console.error('calorieVision error', e);
-    return res.status(200).json(
-      normalizeCalorieVisionResponse({
-        foods: [],
-        detalhe:
-          'Não conseguimos analisar essa imagem. Tente tirar outra foto com os alimentos mais visíveis.',
-      }),
-    );
+    console.error('calorieVision error', e && e.name, e && e.message);
+    const timedOut = e && (e.name === 'TimeoutError' || e.name === 'AbortError');
+    return res.status(timedOut ? 504 : 500).json({
+      error: timedOut
+        ? 'A análise demorou demais. Verifique a internet e tente novamente.'
+        : 'Não conseguimos analisar essa imagem. Tente outra foto com os alimentos visíveis.',
+      code: timedOut ? 'timeout' : 'internal',
+    });
   }
 });
 
@@ -638,66 +680,120 @@ Regras obrigatórias:
 Responda em português do Brasil, objetiva e acolhedora.
 `;
 
+const PERSONAL_ONLY_AI_ACTIONS = new Set([
+  'reply_suggestion',
+  'summarize_chat',
+]);
+const ANY_AUTH_AI_ACTIONS = new Set([
+  'student_assistant',
+  'anamnesis_summary',
+]);
+
 async function callOpenAi(system, userContent, maxTokens = 700) {
-  const apiKey =
-    (functions.config().openai && functions.config().openai.key) ||
-    process.env.OPENAI_API_KEY;
-  if (!apiKey) return null;
-  const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: system },
-        { role: 'user', content: userContent },
-      ],
-      max_tokens: maxTokens,
-      temperature: 0.4,
-    }),
+  const apiKey = getOpenAiKey();
+  if (!apiKey) return { configured: false, text: null };
+  const { ok, status, data } = await openaiChat(apiKey, {
+    model: 'gpt-4o-mini',
+    messages: [
+      { role: 'system', content: system },
+      { role: 'user', content: userContent },
+    ],
+    max_tokens: maxTokens,
+    temperature: 0.4,
   });
-  const data = await openaiRes.json();
-  return data.choices && data.choices[0] && data.choices[0].message
-    ? data.choices[0].message.content
-    : null;
+  if (!ok) {
+    console.error('accompaniment openai', status, data && data.error);
+    return { configured: true, text: null, status };
+  }
+  const text =
+    data.choices && data.choices[0] && data.choices[0].message
+      ? data.choices[0].message.content
+      : null;
+  return { configured: true, text };
 }
 
-exports.accompanimentAi = functions.https.onRequest(async (req, res) => {
+exports.accompanimentAi = httpsAi(async (req, res) => {
   setCors(res);
   if (handleOptions(req, res)) return;
+  if (!requirePost(req, res)) return;
   const uid = await requireAuth(req, res);
   if (!uid) return;
   if (!(await verifyAppCheck(req, res))) return;
 
   try {
     const body = req.body || {};
-    const action = body.action || '';
+    const action = String(body.action || '').trim();
+    if (!action) {
+      return res.status(400).json({ error: 'Ação ausente.', code: 'action_missing' });
+    }
+    if (PERSONAL_ONLY_AI_ACTIONS.has(action)) {
+      if (!(await requirePersonalOrAdmin(uid, res))) return;
+    } else if (!ANY_AUTH_AI_ACTIONS.has(action)) {
+      return res.status(400).json({ error: 'Ação inválida.', code: 'invalid_action' });
+    }
+
     const payload = { ...body };
     delete payload.action;
+    if (action === 'student_assistant') {
+      const message = typeof payload.message === 'string' ? payload.message.trim() : '';
+      if (!message) {
+        return res.status(400).json({ error: 'Mensagem vazia.', code: 'empty_message' });
+      }
+      if (message.length > MAX_ASSISTANT_MESSAGE_CHARS) {
+        return res.status(400).json({
+          error: 'Mensagem longa demais. Envie um texto mais curto.',
+          code: 'message_too_long',
+        });
+      }
+      payload.message = message;
+    }
+
+    if (!(await consumeAiQuota(db, uid, 'accompanimentAi'))) {
+      return res.status(429).json({
+        error: 'Muitas solicitações neste momento. Aguarde alguns minutos.',
+        code: 'rate_limited',
+      });
+    }
+
     const result = await callOpenAi(
       ACCOMPANIMENT_AI_PROMPT,
       `Ação: ${action}\nDados (use só o que existir):\n${JSON.stringify(payload)}`,
     );
-    await db.collection('pt_ai_logs').add({
-      trainerId: uid,
-      type: action,
-      prompt: action,
-      result: result || '',
-      createdAt: new Date().toISOString(),
-      approved: false,
-    });
-    return res.status(200).json({
-      result:
-        result ||
-        'Não há informação cadastrada o suficiente para este resumo.',
-    });
+
+    if (!result.configured) {
+      console.warn('accompanimentAi: OPENAI_API_KEY ausente');
+      return res.status(503).json({
+        error: 'A IA na nuvem ainda não está configurada no servidor.',
+        code: 'openai_not_configured',
+      });
+    }
+    if (!result.text || !String(result.text).trim()) {
+      return res.status(502).json({
+        error: 'A IA não conseguiu responder agora. Tente novamente em instantes.',
+        code: 'openai_error',
+      });
+    }
+
+    if (action !== 'student_assistant') {
+      await db.collection('pt_ai_logs').add({
+        trainerId: uid,
+        type: action,
+        prompt: action,
+        result: String(result.text).slice(0, 4000),
+        createdAt: new Date().toISOString(),
+        approved: false,
+      });
+    }
+
+    return res.status(200).json({ result: String(result.text).trim() });
   } catch (e) {
-    console.error('accompanimentAi', e);
-    return res.status(200).json({
-      result: 'Não foi possível gerar o resumo agora. Tente novamente.',
+    console.error('accompanimentAi', e && e.name, e && e.message);
+    const timedOut = e && (e.name === 'TimeoutError' || e.name === 'AbortError');
+    return res.status(timedOut ? 504 : 500).json({
+      error: timedOut
+        ? 'A resposta demorou demais. Tente novamente.'
+        : 'Não foi possível gerar a resposta agora. Tente novamente.',
+      code: timedOut ? 'timeout' : 'internal',
     });
   }
 });

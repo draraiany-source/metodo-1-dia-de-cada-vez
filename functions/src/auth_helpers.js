@@ -60,6 +60,24 @@ async function requireAdmin(uid, res) {
 }
 
 /**
+ * Personal (users.isPersonalTrainer) ou Admin Técnico.
+ * Não altera rules do cliente — só o proxy da Function.
+ */
+async function requirePersonalOrAdmin(uid, res) {
+  const adminSnap = await admin.firestore().collection('admins').doc(uid).get();
+  if (adminSnap.exists) return true;
+  const userSnap = await admin.firestore().collection('users').doc(uid).get();
+  if (userSnap.exists && userSnap.data().isPersonalTrainer === true) {
+    return true;
+  }
+  res.status(403).json({
+    error: 'Acesso restrito à Personal ou ao Admin.',
+    code: 'forbidden_role',
+  });
+  return false;
+}
+
+/**
  * Verifica App Check. Em produção (ENFORCE_APP_CHECK=true) é obrigatório.
  */
 async function verifyAppCheck(req, res) {
@@ -134,6 +152,7 @@ module.exports = {
   handleOptions,
   requireAuth,
   requireAdmin,
+  requirePersonalOrAdmin,
   verifyAppCheck,
   isPremiumActive,
   hasPremiumAccess,

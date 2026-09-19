@@ -4,8 +4,18 @@ import 'package:http/http.dart' as http;
 
 import '../../../core/config/app_config.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../../core/services/auth_http_headers.dart';
+import '../../../core/services/cloud_function_http.dart';
 import '../../../core/services/firebase_service.dart';
 import '../domain/trainer_engine.dart';
+
+/// Resposta do chat: nuvem quando possível; local só como fallback explícito.
+class TrainerAskResult {
+  const TrainerAskResult({required this.reply, this.usedOfflineFallback = false});
+
+  final String reply;
+  final bool usedOfflineFallback;
+}
 
 /// Contexto de gamificação que a IA usa para respostas contextuais.
 class TrainerContext {
@@ -74,19 +84,31 @@ class AiTrainerRepository {
       ? AppConfig.amandaFunctionUrl
       : AppConstants.amandaFunctionUrl;
 
-  Future<String> ask(
+  Future<TrainerAskResult> ask(
     String message, {
     required TrainerProfile profile,
     required TrainerContext context,
   }) async {
     if (isRemoteAvailable) {
       try {
-        return await _callFunction(message, profile, context);
+        final reply = await _callFunction(message, profile, context);
+        return TrainerAskResult(reply: reply);
+      } on _SessionExpired {
+        return const TrainerAskResult(
+          reply:
+              'Sua sessão expirou. Entre novamente para usar a Amanda IA na nuvem.',
+          usedOfflineFallback: true,
+        );
       } catch (_) {
-        // cai para o modo local em caso de erro de rede
+        return TrainerAskResult(
+          reply: localReply(message, profile: profile, context: context),
+          usedOfflineFallback: true,
+        );
       }
     }
-    return localReply(message, profile: profile, context: context);
+    return TrainerAskResult(
+      reply: localReply(message, profile: profile, context: context),
+    );
   }
 
   Future<String> _callFunction(
@@ -94,9 +116,10 @@ class AiTrainerRepository {
     TrainerProfile profile,
     TrainerContext context,
   ) async {
+    final headers = await AuthHttpHeaders.forCloudFunction();
     final res = await http.post(
       Uri.parse(_functionUrl),
-      headers: {'Content-Type': 'application/json'},
+      headers: headers,
       body: jsonEncode({
         'message': message,
         'userName': context.userName,
@@ -113,13 +136,22 @@ class AiTrainerRepository {
           'caloriasHoje': context.caloriasHoje,
         },
       }),
-    ).timeout(const Duration(seconds: 20));
+    ).timeout(const Duration(seconds: 35));
     if (res.statusCode == 200) {
       final data = jsonDecode(res.body) as Map<String, dynamic>;
       final reply = data['reply'] as String?;
-      if (reply != null && reply.trim().isNotEmpty) return reply;
+      if (reply != null &&
+          reply.trim().isNotEmpty &&
+          !looksLikeAmandaPlaceholder(reply)) {
+        return reply.trim();
+      }
     }
-    throw Exception('AI trainer error: ${res.statusCode}');
+    if (res.statusCode == 401 || res.statusCode == 403) {
+      throw const _SessionExpired();
+    }
+    throw Exception(
+      functionErrorMessage(res.body) ?? 'AI trainer error: ${res.statusCode}',
+    );
   }
 
   // ---------------------------------------------------------------------------
@@ -308,4 +340,8 @@ class AiTrainerRepository {
             'Ou simplesmente me conte como está se sentindo.';
     }
   }
+}
+
+class _SessionExpired implements Exception {
+  const _SessionExpired();
 }

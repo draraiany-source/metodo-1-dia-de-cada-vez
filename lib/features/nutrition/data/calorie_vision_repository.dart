@@ -5,7 +5,11 @@ import 'package:http/http.dart' as http;
 import '../../../core/config/app_config.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/services/auth_http_headers.dart';
+import '../../../core/services/cloud_function_http.dart';
 import '../domain/food_analysis_models.dart';
+
+/// Limite no cliente antes do encode (a Function recusa ~1,8M chars de base64).
+const int kMaxMealPhotoBytes = 1200 * 1024;
 
 /// Resultado legado (prato agregado) — mantido para compatibilidade.
 class CalorieEstimate {
@@ -68,6 +72,16 @@ class CalorieVisionUnavailable implements Exception {
       '(falta o endpoint da Cloud Function calorieVision).';
 }
 
+class CalorieVisionPending implements Exception {
+  const CalorieVisionPending([this.message]);
+  final String? message;
+  @override
+  String toString() =>
+      message ??
+      'A análise de calorias por foto ainda não está disponível no servidor. '
+          'A Cloud Function calorieVision precisa da chave OpenAI.';
+}
+
 /// Proxy seguro para a Cloud Function `calorieVision` (chave OpenAI só no servidor).
 class CalorieVisionRepository {
   bool get isAvailable {
@@ -82,6 +96,16 @@ class CalorieVisionRepository {
   /// Análise multi-alimento estruturada.
   Future<NutritionAnalysisResult> analyzeMeal(List<int> imageBytes) async {
     if (!isAvailable) throw const CalorieVisionUnavailable();
+    if (imageBytes.isEmpty) {
+      throw const CalorieVisionPending(
+        'Foto inválida. Tente outra imagem com os alimentos visíveis.',
+      );
+    }
+    if (imageBytes.length > kMaxMealPhotoBytes) {
+      throw const CalorieVisionPending(
+        'A foto está grande demais. Tire outra com menos zoom ou escolha uma imagem menor.',
+      );
+    }
 
     final base64Image = base64Encode(imageBytes);
     final headers = await AuthHttpHeaders.forCloudFunction();
@@ -95,12 +119,46 @@ class CalorieVisionRepository {
 
     if (res.statusCode == 200) {
       final data = jsonDecode(res.body) as Map<String, dynamic>;
-      return NutritionAnalysisResult.fromApiMap(data);
+      final result = NutritionAnalysisResult.fromApiMap(data);
+      if (result.looksLikePlaceholder) {
+        throw CalorieVisionPending(
+          result.notes?.trim().isNotEmpty == true
+              ? result.notes
+              : null,
+        );
+      }
+      return result;
     }
+
+    final apiError = functionErrorMessage(res.body);
     if (res.statusCode == 401 || res.statusCode == 403) {
-      throw Exception('Usuário não autenticado. Faça login e tente novamente.');
+      throw Exception('Faça login para analisar a refeição e tente novamente.');
     }
-    throw Exception('Falha ao estimar calorias (${res.statusCode})');
+    if (res.statusCode == 413) {
+      throw CalorieVisionPending(
+        apiError ??
+            'A foto está grande demais. Tire outra com menos zoom ou escolha uma imagem menor.',
+      );
+    }
+    if (res.statusCode == 429) {
+      throw Exception(
+        apiError ??
+            'Muitas análises neste momento. Aguarde alguns minutos e tente de novo.',
+      );
+    }
+    if (res.statusCode == 503) {
+      throw CalorieVisionPending(apiError);
+    }
+    if (res.statusCode == 502 || res.statusCode == 504) {
+      throw Exception(
+        apiError ??
+            'A análise da imagem falhou. Tente outra foto em instantes.',
+      );
+    }
+    throw Exception(
+      apiError ??
+          'Não conseguimos analisar essa imagem. Tente novamente.',
+    );
   }
 
   /// Compatibilidade com chamadores antigos.

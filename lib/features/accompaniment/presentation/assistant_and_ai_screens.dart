@@ -25,6 +25,8 @@ class _MethodAssistantScreenState extends ConsumerState<MethodAssistantScreen> {
   final _text = TextEditingController();
   final _log = <({bool mine, String text})>[];
   bool _busy = false;
+  bool _lastOffline = false;
+  int _sendGen = 0;
 
   @override
   void dispose() {
@@ -34,18 +36,26 @@ class _MethodAssistantScreenState extends ConsumerState<MethodAssistantScreen> {
 
   Future<void> _send() async {
     final q = _text.text.trim();
-    if (q.isEmpty) return;
+    if (q.isEmpty || _busy) return;
     _text.clear();
+    final gen = ++_sendGen;
     setState(() {
       _log.add((mine: true, text: q));
       _busy = true;
     });
-    final reply = await ref.read(accompanimentAiProvider).studentAssistant(q);
-    if (!mounted) return;
+    final result =
+        await ref.read(accompanimentAiProvider).studentAssistant(q);
+    if (!mounted || gen != _sendGen) return;
     setState(() {
-      _log.add((mine: false, text: reply));
+      _log.add((mine: false, text: result.text));
       _busy = false;
+      _lastOffline = result.usedOfflineFallback;
     });
+  }
+
+  void _cancel() {
+    _sendGen++;
+    setState(() => _busy = false);
   }
 
   @override
@@ -64,6 +74,34 @@ class _MethodAssistantScreenState extends ConsumerState<MethodAssistantScreen> {
                   color: AppColors.warning, fontWeight: FontWeight.w700),
             ),
           ),
+          if (_lastOffline)
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: Text(
+                'A IA na nuvem não respondeu. Esta mensagem veio do modo local.',
+                style: TextStyle(
+                    color: AppColors.textSecondary, fontSize: 12, height: 1.35),
+              ),
+            ),
+          if (_busy)
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 12, 16, 0),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 14,
+                    height: 14,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    'Preparando resposta...',
+                    style: TextStyle(
+                        color: AppColors.textSecondary, fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(16),
@@ -122,10 +160,17 @@ class _MethodAssistantScreenState extends ConsumerState<MethodAssistantScreen> {
                           ),
                         ),
                       ),
-                      IconButton(
-                        onPressed: _busy ? null : _send,
-                        icon: const Icon(Icons.send_rounded),
-                      ),
+                      if (_busy)
+                        IconButton(
+                          onPressed: _cancel,
+                          icon: const Icon(Icons.close_rounded),
+                          tooltip: 'Cancelar',
+                        )
+                      else
+                        IconButton(
+                          onPressed: _send,
+                          icon: const Icon(Icons.send_rounded),
+                        ),
                     ],
                   ),
                 ],

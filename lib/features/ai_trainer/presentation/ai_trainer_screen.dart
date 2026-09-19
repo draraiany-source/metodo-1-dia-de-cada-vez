@@ -65,6 +65,13 @@ class _AiTrainerScreenState extends ConsumerState<AiTrainerScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          tooltip: 'Voltar',
+          onPressed: () => context.canPop()
+              ? context.pop()
+              : context.go(Routes.home),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
+        ),
         title: GestureDetector(
           onTap: () => context.push(Routes.amandaProfile),
           child: Row(
@@ -102,6 +109,21 @@ class _AiTrainerScreenState extends ConsumerState<AiTrainerScreen> {
       body: SafeArea(
         child: Column(
           children: [
+            if (chat.lastReplyOffline)
+              Material(
+                color: AppColors.warning.withValues(alpha: 0.16),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Text(
+                    'A IA na nuvem não respondeu. Esta mensagem veio do modo local — não é uma resposta da Amanda IA online.',
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 12,
+                      height: 1.35,
+                    ),
+                  ),
+                ),
+              ),
             Expanded(
               child: chat.loading
                   ? const Center(child: CircularProgressIndicator())
@@ -149,7 +171,12 @@ class _AiTrainerScreenState extends ConsumerState<AiTrainerScreen> {
 
             // Campo de entrada
             Padding(
-              padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
+              padding: EdgeInsets.fromLTRB(
+                12,
+                8,
+                12,
+                12 + MediaQuery.viewInsetsOf(context).bottom,
+              ),
               child: Row(
                 children: [
                   Expanded(
@@ -301,7 +328,7 @@ class _TypingIndicator extends StatelessWidget {
                   strokeWidth: 2, color: AppColors.primary),
             ),
             SizedBox(width: 10),
-            Text('Amanda está pensando...',
+            Text('Preparando resposta...',
                 style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
           ],
         ),
