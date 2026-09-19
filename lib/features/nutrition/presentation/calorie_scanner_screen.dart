@@ -33,7 +33,8 @@ final calorieVisionRepositoryProvider =
 const _privacyPrefKey = 'nutrition_ai_privacy_accepted_v1';
 const _estimateDisclaimer =
     'Os valores são estimativas geradas por inteligência artificial e podem '
-    'variar conforme a quantidade e o preparo dos alimentos.';
+    'variar conforme a quantidade e o preparo dos alimentos. Não substituem '
+    'avaliação nutricional ou médica individualizada.';
 
 /// Analisar minha refeição — foto → IA → edição → diário.
 class CalorieScannerScreen extends ConsumerStatefulWidget {

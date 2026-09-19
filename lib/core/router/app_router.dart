@@ -43,6 +43,7 @@ import '../../features/profile/presentation/edit_profile_screen.dart';
 import '../../features/profile/presentation/favorites_screen.dart';
 import '../../features/profile/presentation/history_screen.dart';
 import '../../features/profile/presentation/settings_screen.dart';
+import '../../features/profile/presentation/legal_document_screen.dart';
 import '../../features/profile/presentation/notification_preferences_screen.dart';
 import '../../features/missions/presentation/missions_history_screen.dart';
 import '../../features/ai_trainer/presentation/ai_trainer_screen.dart';
@@ -155,6 +156,8 @@ class Routes {
   static const favorites = '/favorites';
   static const history = '/history';
   static const settings = '/settings';
+  static const privacy = '/privacidade';
+  static const terms = '/termos';
   static const notificationPreferences = '/notifications/preferences';
   static const hydration = '/hydration';
   static const dashboard = '/dashboard';
@@ -305,18 +308,19 @@ final goRouterProvider = Provider<GoRouter>((ref) {
 
       final isOnboarding = path == Routes.onboarding;
       final isAuthRoute = path == Routes.login || path == Routes.register;
+      final isLegalRoute = path == Routes.privacy || path == Routes.terms;
 
       // 1) Onboarding ainda não visto na primeira vez → sempre onboarding.
+      //    Documentos legais ficam públicos (revisão das lojas).
       if (!onboardingDone) {
+        if (isLegalRoute) return null;
         return isOnboarding ? null : Routes.onboarding;
       }
 
-      // 2) Sem sessão (nem visitante) → só libera telas de autenticação.
-      //    IMPORTANTE: nunca força "/register" especificamente — se a rota
-      //    pedida não for de auth, manda para "/login" (que tem os botões
-      //    Entrar, Criar conta e Entrar como visitante).
+      // 2) Sem sessão (nem visitante) → só libera telas de autenticação
+      //    e documentos legais (Play / App Store exigem política acessível).
       if (!authenticated) {
-        return isAuthRoute ? null : Routes.login;
+        return isAuthRoute || isLegalRoute ? null : Routes.login;
       }
 
       // 3) Já autenticada (ou visitante) → não deixamos "voltar sozinha"
@@ -629,9 +633,24 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         pageBuilder: (_, s) =>
             _fadeSlide(s, const AdminUsersRolesScreen()),
       ),
+      if (kDebugMode)
+        GoRoute(
+          path: Routes.showcase,
+          pageBuilder: (_, s) => _fadeSlide(s, const AssetShowcaseScreen()),
+        ),
       GoRoute(
-        path: Routes.showcase,
-        pageBuilder: (_, s) => _fadeSlide(s, const AssetShowcaseScreen()),
+        path: Routes.privacy,
+        pageBuilder: (_, s) => _fadeSlide(
+          s,
+          const LegalDocumentScreen(kind: LegalDocumentKind.privacy),
+        ),
+      ),
+      GoRoute(
+        path: Routes.terms,
+        pageBuilder: (_, s) => _fadeSlide(
+          s,
+          const LegalDocumentScreen(kind: LegalDocumentKind.terms),
+        ),
       ),
       GoRoute(
         path: Routes.diary,

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/assets/app_icons.dart';
+import '../../../core/config/app_legal.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/router/app_navigation.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -61,9 +65,12 @@ class SettingsScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                  'Essa ação pode ser permanente: seus dados de perfil, '
-                  'progresso e histórico serão apagados. Digite EXCLUIR '
-                  'para confirmar.',
+                  'Tem certeza de que deseja excluir sua conta?\n\n'
+                  'Essa ação é permanente: perfil, progresso e dados '
+                  'vinculados à conta serão excluídos. Informações que a lei '
+                  'obrigar manter (por exemplo, registros fiscais de compra) '
+                  'podem ser retidas pelo prazo legal. Digite EXCLUIR para '
+                  'confirmar.',
                   style: TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
               TextField(
@@ -99,10 +106,23 @@ class SettingsScreen extends ConsumerWidget {
       if (context.mounted) context.go(Routes.login);
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('$e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_mensagemAmigavel(e))),
+        );
       }
     }
+  }
+
+  String _mensagemAmigavel(Object e) {
+    final raw = e.toString().trim();
+    if (raw.isEmpty ||
+        raw.contains('Exception') ||
+        raw.contains('firebase') ||
+        raw.contains('Firebase') ||
+        raw.contains('Stack')) {
+      return 'Não foi possível concluir. Tente novamente.';
+    }
+    return raw;
   }
 
   void _infoDialog(BuildContext context, String title, String body) {
@@ -266,7 +286,11 @@ class SettingsScreen extends ConsumerWidget {
                         }
                       } catch (e) {
                         if (context.mounted) {
-                          _infoDialog(context, 'Alterar senha', '$e');
+                          _infoDialog(
+                            context,
+                            'Alterar senha',
+                            _mensagemAmigavel(e),
+                          );
                         }
                       }
                     },
@@ -286,28 +310,51 @@ class SettingsScreen extends ConsumerWidget {
                   _Row(
                     icon: Icons.description_outlined,
                     title: 'Termos de uso',
-                    onTap: () => _infoDialog(context, 'Termos de uso',
-                        'O conteúdo completo dos Termos de Uso ainda não foi cadastrado. Assim que você fornecer o texto oficial, ele passa a ser exibido aqui.'),
+                    onTap: () => AppNavigation.open(context, Routes.terms),
                   ),
                   _Row(
                     icon: Icons.privacy_tip_outlined,
                     iconAsset: AppIcons.privacy,
                     title: 'Política de privacidade',
-                    onTap: () => _infoDialog(context, 'Política de privacidade',
-                        'O conteúdo completo da Política de Privacidade ainda não foi cadastrado. Assim que você fornecer o texto oficial, ele passa a ser exibido aqui.'),
+                    onTap: () => AppNavigation.open(context, Routes.privacy),
                   ),
                   _Row(
                     icon: Icons.support_agent_outlined,
                     iconAsset: AppIcons.support,
                     title: 'Suporte',
-                    onTap: () => _infoDialog(context, 'Suporte',
-                        'Precisa de ajuda? Fale com a gente pelo e-mail de suporte cadastrado no app (a ser configurado).'),
+                    onTap: () async {
+                      if (AppLegal.hasSupportEmail) {
+                        await launchUrl(
+                          Uri(
+                            scheme: 'mailto',
+                            path: AppLegal.supportEmail,
+                          ),
+                          mode: LaunchMode.externalApplication,
+                        );
+                        return;
+                      }
+                      _infoDialog(
+                        context,
+                        'Suporte',
+                        'O e-mail de suporte ainda não foi configurado '
+                            '(SUPPORT_EMAIL). Use Configurações quando a '
+                            'proprietária informar o endereço oficial.',
+                      );
+                    },
                   ),
                   _Row(
                     icon: Icons.info_outline,
                     title: 'Sobre o aplicativo',
-                    onTap: () => _infoDialog(context, AppConstants.appName,
-                        'Versão 1.0.0\n\n${AppConstants.appName} — 1 dia de cada vez.'),
+                    onTap: () async {
+                      final info = await PackageInfo.fromPlatform();
+                      if (!context.mounted) return;
+                      _infoDialog(
+                        context,
+                        AppConstants.appName,
+                        'Versão ${info.version} (${info.buildNumber})\n\n'
+                        '${AppConstants.appName} — 1 dia de cada vez.',
+                      );
+                    },
                   ),
                   const SizedBox(height: 24),
                   OutlinedButton.icon(

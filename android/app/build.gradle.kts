@@ -20,7 +20,7 @@ val hasGoogleServices = file("google-services.json").exists()
 
 android {
     namespace = "com.metodo1dia.app"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = maxOf(36, flutter.compileSdkVersion)
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -34,7 +34,8 @@ android {
         // Force minimo 23 (geolocator/notifications). gradle.properties tambem
         // define flutter.minSdkVersion=23 para o plugin Flutter.
         minSdk = maxOf(23, flutter.minSdkVersion)
-        targetSdk = flutter.targetSdkVersion
+        // Play (2026): alvo API 36 ou superior.
+        targetSdk = maxOf(36, flutter.targetSdkVersion)
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true

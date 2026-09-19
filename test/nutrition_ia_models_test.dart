@@ -12,6 +12,14 @@ import 'package:metodo_1_dia/features/nutrition/services/nutrition_calculation_s
 import 'package:metodo_1_dia/features/nutrition/domain/food_database_models.dart';
 
 void main() {
+  test('BmiCalculator recusa vazio, zero e valores impossíveis', () {
+    expect(BmiCalculator.calculate(weightKg: null, heightM: 1.65), isNull);
+    expect(BmiCalculator.calculate(weightKg: 60, heightM: 0), isNull);
+    expect(BmiCalculator.calculate(weightKg: -10, heightM: 1.65), isNull);
+    expect(BmiCalculator.calculate(weightKg: 60, heightM: 3.5), isNull);
+    expect(BmiCalculator.calculate(weightKg: 62, heightM: 1.65), isNotNull);
+  });
+
   test('MealItem confirmByUser altera source para userConfirmed', () {
     const item = MealItem(
       id: '1',

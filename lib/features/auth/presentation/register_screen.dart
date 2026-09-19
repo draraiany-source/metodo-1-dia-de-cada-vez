@@ -22,6 +22,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _password = TextEditingController();
   final _referralCode = TextEditingController();
   bool _loading = false;
+  bool _acceptedLegal = false;
 
   @override
   void dispose() {
@@ -33,12 +34,21 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   Future<void> _register() async {
-    if (_name.text.trim().isEmpty ||
-        _email.text.trim().isEmpty ||
-        _password.text.length < 6) {
+    final email = _email.text.trim();
+    final emailOk = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(email);
+    if (_name.text.trim().isEmpty || !emailOk || _password.text.length < 6) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Text('Preencha os dados. Senha com no mínimo 6 caracteres.')),
+            content: Text(
+                'Preencha nome, e-mail válido e senha com no mínimo 6 caracteres.')),
+      );
+      return;
+    }
+    if (!_acceptedLegal) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text(
+                'Para criar a conta, confirme que leu os Termos e a Política de privacidade.')),
       );
       return;
     }
@@ -127,7 +137,42 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         prefixIcon: Icon(Icons.card_giftcard_outlined),
                       ),
                     ),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 16),
+                    CheckboxListTile(
+                      value: _acceptedLegal,
+                      onChanged: (v) =>
+                          setState(() => _acceptedLegal = v ?? false),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      title: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          const Text('Li e concordo com os ',
+                              style: TextStyle(
+                                  color: AppColors.textSecondary, fontSize: 13)),
+                          GestureDetector(
+                            onTap: () => context.push(Routes.terms),
+                            child: const Text('Termos de uso',
+                                style: TextStyle(
+                                    color: AppColors.secondary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 13)),
+                          ),
+                          const Text(' e a ',
+                              style: TextStyle(
+                                  color: AppColors.textSecondary, fontSize: 13)),
+                          GestureDetector(
+                            onTap: () => context.push(Routes.privacy),
+                            child: const Text('Política de privacidade',
+                                style: TextStyle(
+                                    color: AppColors.secondary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 13)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: _loading ? null : _register,
                       child: _loading

@@ -78,7 +78,7 @@ class TrainingVolume {
   }
 
   static String formatPercent(double p) {
-    final sinal = p > 0 ? '+' : '';
+    final sinal = p > 0 ? '+' : (p < 0 ? '-' : '');
     final abs = p.abs();
     final texto = abs >= 10 ? abs.round().toString() : abs.toStringAsFixed(1);
     return '$sinal${texto.replaceAll('.', ',')}%';

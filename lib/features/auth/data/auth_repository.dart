@@ -1,5 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../../core/auth/user_role.dart';
 import '../../../core/constants/app_constants.dart';
@@ -229,7 +230,7 @@ class AuthRepository {
     final user = _auth.currentUser;
     if (user == null) return;
     try {
-      await _db.collection('users').doc(user.uid).delete();
+      await _purgeOwnedPersonalData(user.uid);
       await user.delete();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'requires-recent-login') {
@@ -237,6 +238,68 @@ class AuthRepository {
             'Por segurança, entre novamente antes de excluir sua conta.');
       }
       throw AuthFailure(_traduzErroAuth(e));
+    }
+  }
+
+  /// Remove dados pessoais que as rules já permitem ao dono apagar.
+  /// Não cria função nova: completa a exclusão já exposta em Configurações.
+  /// Dados que só o Admin SDK alcança (ex.: tokens de calendário) permanecem
+  /// inacessíveis ao cliente (`allow read, write: if false`).
+  Future<void> _purgeOwnedPersonalData(String uid) async {
+    const ownedCollections = [
+      AppConstants.cProgress,
+      AppConstants.cRunningSessions,
+      AppConstants.cWorkoutHistory,
+      AppConstants.cHabits,
+      AppConstants.cAmandaMessages,
+      AppConstants.cNotifications,
+      AppConstants.cWeeklyChallengeProgress,
+    ];
+    for (final col in ownedCollections) {
+      try {
+        final snap =
+            await _db.collection(col).where('userId', isEqualTo: uid).get();
+        for (final doc in snap.docs) {
+          await doc.reference.delete();
+        }
+      } catch (_) {}
+    }
+
+    const userSubs = [
+      'nutritionDiary',
+      'nutritionGoals',
+      'dailyLogs',
+      'favoriteMeals',
+      'recipes',
+      'waterLogs',
+      'mealPhotos',
+    ];
+    final userRef = _db.collection(AppConstants.cUsers).doc(uid);
+    for (final sub in userSubs) {
+      try {
+        final snap = await userRef.collection(sub).get();
+        for (final doc in snap.docs) {
+          await doc.reference.delete();
+        }
+      } catch (_) {}
+    }
+
+    try {
+      await userRef.delete();
+    } catch (_) {}
+
+    try {
+      await _deleteStoragePrefix('users/$uid');
+    } catch (_) {}
+  }
+
+  Future<void> _deleteStoragePrefix(String path) async {
+    final listed = await FirebaseStorage.instance.ref(path).listAll();
+    for (final item in listed.items) {
+      await item.delete();
+    }
+    for (final prefix in listed.prefixes) {
+      await _deleteStoragePrefix(prefix.fullPath);
     }
   }
 

@@ -128,7 +128,13 @@ class BmiCalculator {
   BmiCalculator._();
 
   static double? calculate({required double? weightKg, required double? heightM}) {
-    if (weightKg == null || heightM == null || heightM <= 0) return null;
+    if (weightKg == null || heightM == null || weightKg <= 0 || heightM <= 0) {
+      return null;
+    }
+    // Faixa humana plausível — evita divisão por valores absurdos.
+    if (weightKg < 20 || weightKg > 400 || heightM < 0.5 || heightM > 2.7) {
+      return null;
+    }
     return weightKg / (heightM * heightM);
   }
 

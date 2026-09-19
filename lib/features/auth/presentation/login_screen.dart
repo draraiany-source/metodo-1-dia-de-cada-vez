@@ -185,10 +185,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     const SizedBox(height: 12),
 
-                    // ---- Opção 3: Entrar como visitante ----
-                    // Abre a Home direto, sem exigir cadastro. Continua
-                    // disponível mesmo fora do modo de desenvolvimento —
-                    // funções Premium seguem bloqueadas para a visitante.
                     if (AppConstants.enableGuestMode) ...[
                       AuthGhostButton(
                         label: 'Entrar como visitante',
@@ -205,6 +201,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                       ),
                     ],
+                    const SizedBox(height: 16),
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      children: [
+                        TextButton(
+                          onPressed: () => context.push(Routes.privacy),
+                          child: const Text('Privacidade'),
+                        ),
+                        TextButton(
+                          onPressed: () => context.push(Routes.terms),
+                          child: const Text('Termos'),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),

@@ -70,7 +70,16 @@ class AppUser {
 
   /// IMC calculado (ou null se faltar dado).
   double? get bmi {
-    if (currentWeight == null || height == null || height == 0) return null;
+    if (currentWeight == null ||
+        height == null ||
+        currentWeight! <= 0 ||
+        height! <= 0 ||
+        currentWeight! < 20 ||
+        currentWeight! > 400 ||
+        height! < 0.5 ||
+        height! > 2.7) {
+      return null;
+    }
     return currentWeight! / (height! * height!);
   }
 
