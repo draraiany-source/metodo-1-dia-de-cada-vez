@@ -189,6 +189,13 @@ class PersonalCmsHubScreen extends ConsumerWidget {
             accent: AppColors.secondary,
             onTap: () => context.push(Routes.amandaAssetsAdmin),
           ),
+          _CmsCard(
+            icon: Icons.badge_outlined,
+            title: 'Quem sou eu',
+            subtitle: 'Textos e apresentação da Amanda',
+            accent: AppColors.secondary,
+            onTap: () => context.push(Routes.amandaProfileEdit),
+          ),
         ],
       ),
     );

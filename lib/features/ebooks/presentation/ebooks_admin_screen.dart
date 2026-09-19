@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/auth/user_role.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../auth/providers/auth_providers.dart';
 import '../data/ebooks_admin_repository.dart';
 import '../domain/ebook_models.dart';
 import '../providers/ebook_providers.dart';
@@ -125,52 +127,79 @@ class EbooksAdminScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ebooksAsync = ref.watch(ebooksProvider);
+    final user = ref.watch(currentUserProvider);
+    final canWriteEbooks = user != null &&
+        resolveUserRole(
+          isPersonalTrainer: user.isPersonalTrainer,
+          isAdmin: user.isAdmin,
+        ) ==
+        UserRole.admin;
 
     return Scaffold(
       appBar: AppBar(title: const Text('E-books (admin) 📚')),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primary,
-        onPressed: () => _novoEbook(context, ref),
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: canWriteEbooks
+          ? FloatingActionButton(
+              backgroundColor: AppColors.primary,
+              onPressed: () => _novoEbook(context, ref),
+              child: const Icon(Icons.add),
+            )
+          : null,
       body: SafeArea(
         child: ebooksAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (_, __) => const Center(
               child: Text('Não consegui carregar.',
                   style: TextStyle(color: AppColors.textSecondary))),
-          data: (ebooks) => ebooks.isEmpty
-              ? const Center(
-                  child: Text('Nenhum e-book cadastrado ainda.',
-                      style: TextStyle(color: AppColors.textSecondary)))
-              : ListView.builder(
-                  padding: const EdgeInsets.all(20),
-                  itemCount: ebooks.length,
-                  itemBuilder: (_, i) {
-                    final e = ebooks[i];
-                    return Card(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      child: ListTile(
-                        title: Text(e.title,
-                            style: const TextStyle(color: Colors.white)),
-                        subtitle: Text(
-                            '${e.author} · ${e.category.label}${e.isPremium ? ' · Premium' : ''}',
-                            style: const TextStyle(
-                                color: AppColors.textSecondary, fontSize: 12)),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete_outline,
-                              color: AppColors.danger),
-                          onPressed: () async {
-                            await ref
-                                .read(ebooksAdminRepositoryProvider)
-                                .delete(e.id);
-                            ref.invalidate(ebooksProvider);
-                          },
+          data: (ebooks) {
+            final list = ebooks.isEmpty
+                ? const Center(
+                    child: Text('Nenhum e-book cadastrado ainda.',
+                        style: TextStyle(color: AppColors.textSecondary)))
+                : ListView.builder(
+                    padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
+                    itemCount: ebooks.length,
+                    itemBuilder: (_, i) {
+                      final e = ebooks[i];
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: ListTile(
+                          title: Text(e.title,
+                              style: const TextStyle(color: Colors.white)),
+                          subtitle: Text(
+                              '${e.author} · ${e.category.label}${e.isPremium ? ' · Premium' : ''}',
+                              style: const TextStyle(
+                                  color: AppColors.textSecondary, fontSize: 12)),
+                          trailing: canWriteEbooks
+                              ? IconButton(
+                                  icon: const Icon(Icons.delete_outline,
+                                      color: AppColors.danger),
+                                  onPressed: () async {
+                                    await ref
+                                        .read(ebooksAdminRepositoryProvider)
+                                        .delete(e.id);
+                                    ref.invalidate(ebooksProvider);
+                                  },
+                                )
+                              : null,
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  );
+            if (canWriteEbooks) return list;
+            return Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(20, 12, 20, 4),
+                  child: Text(
+                    'Publicar ou remover apostilas é exclusivo do Admin Técnico. '
+                    'A Personal pode consultar a lista.',
+                    style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
+                  ),
                 ),
+                Expanded(child: list),
+              ],
+            );
+          },
         ),
       ),
     );

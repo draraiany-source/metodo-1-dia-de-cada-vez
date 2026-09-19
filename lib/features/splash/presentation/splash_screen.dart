@@ -42,7 +42,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
     final prefs = await SharedPreferences.getInstance();
     final onboardingDone = prefs.getBool(AppConstants.kOnboardingDone) ?? false;
-    final isGuest = prefs.getBool(AppConstants.kGuestMode) ?? false;
+    // Pref residual de visitante NÃO autentica se o modo estiver desligado.
+    final isGuest = AppConstants.enableGuestMode &&
+        (prefs.getBool(AppConstants.kGuestMode) ?? false);
     final user = ref.read(currentUserProvider);
 
     if (!mounted) return;

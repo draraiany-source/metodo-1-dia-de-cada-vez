@@ -48,6 +48,7 @@ dependencies:
   percent_indicator: ^4.2.3
   lottie: ^3.1.2
   # rive: ^0.13.20   # descomente para ativar animaÃƒÂ§ÃƒÂµes Rive (.riv)
+  package_info_plus: ^9.0.0
   url_launcher: ^6.3.0
   http: ^1.2.1
 
@@ -94,10 +95,8 @@ dev_dependencies:
   flutter_native_splash: ^2.4.1
 
 # -----------------------------------------------------------------------------
-# ÃƒÂcone do app Ã¢â‚¬â€ gera pra Android/iOS a partir de 1 PNG 1024x1024 com fundo.
-# PENDÃƒÅ NCIA: exporte assets/app_icon/app_icon.svg como PNG 1024x1024
-# (o SVG jÃƒÂ¡ existe; falta rasterizar Ã¢â‚¬â€ Figma/Illustrator/qualquer conversor).
-# Depois rode: flutter pub run flutter_launcher_icons
+# Ícone do app — PNG 1024 gerado dos SVGs oficiais em assets/app_icon/.
+# Gerar: dart run flutter_launcher_icons
 # -----------------------------------------------------------------------------
 flutter_launcher_icons:
   android: true
@@ -105,11 +104,12 @@ flutter_launcher_icons:
   image_path: "assets/app_icon/app_icon.png"
   adaptive_icon_background: "#111111"
   adaptive_icon_foreground: "assets/app_icon/android_adaptive_foreground.png"
+  min_sdk_android: 23
   remove_alpha_ios: true
 
 # -----------------------------------------------------------------------------
-# Splash screen nativa Ã¢â‚¬â€ mesma pendÃƒÂªncia: exportar o SVG como PNG antes.
-# Depois rode: flutter pub run flutter_native_splash:create
+# Splash nativa — fundo #111111 + logo oficial. Sem redesign.
+# Gerar: dart run flutter_native_splash:create
 # -----------------------------------------------------------------------------
 flutter_native_splash:
   color: "#111111"
