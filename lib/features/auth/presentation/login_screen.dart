@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/auth/user_role.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/services/feedback_service.dart';
@@ -41,7 +42,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           .signIn(_email.text, _password.text);
       ref.read(localSessionProvider.notifier).setUser(user);
       if (!mounted) return;
-      if (context.mounted) context.go(Routes.home);
+      if (context.mounted) {
+        context.go(homePathForUser(
+          isPersonalTrainer: user.isPersonalTrainer,
+          isAdmin: user.isAdmin,
+        ));
+      }
     } catch (e) {
       FeedbackService.play(FeedbackEvent.erro);
       if (mounted && context.mounted) {
@@ -71,7 +77,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -222,6 +230,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           ],
         ),
       ),
+    ),
     );
   }
 }

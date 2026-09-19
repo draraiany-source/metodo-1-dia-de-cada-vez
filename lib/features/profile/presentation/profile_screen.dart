@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/assets/app_icons.dart';
+import '../../../core/auth/session_sign_out.dart';
+import '../../../core/auth/user_role.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/mascot/mascot_widget.dart';
 import '../../../core/theme/app_colors.dart';
@@ -27,6 +29,10 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
+    final role = resolveUserRole(
+      isPersonalTrainer: user.isPersonalTrainer,
+      isAdmin: user.isAdmin,
+    );
     final gam = ref.watch(gamificationProvider);
     final trainerProfile = ref.watch(trainerProfileProvider);
 
@@ -147,7 +153,7 @@ class ProfileScreen extends ConsumerWidget {
                 showChevron: true,
                 onTap: () => context.push(Routes.settings),
               ),
-              if (user.isAdmin) ...[
+              if (role == UserRole.admin) ...[
                 const SizedBox(height: 6),
                 QuickAccessTile(
                   icon: Icons.admin_panel_settings_outlined,
@@ -165,7 +171,7 @@ class ProfileScreen extends ConsumerWidget {
                   onTap: () => context.push(Routes.painelPersonal),
                 ),
               ],
-              if (user.isPersonalTrainer && !user.isAdmin) ...[
+              if (role == UserRole.personal) ...[
                 const SizedBox(height: 6),
                 QuickAccessTile(
                   icon: Icons.fitness_center_outlined,
@@ -190,12 +196,7 @@ class ProfileScreen extends ConsumerWidget {
                   side: BorderSide(color: AppColors.danger.withOpacity(0.5)),
                   minimumSize: const Size.fromHeight(48),
                 ),
-                onPressed: () async {
-                  await ref.read(authRepositoryProvider).signOut();
-                  ref.read(localSessionProvider.notifier).clear();
-                  await ref.read(guestSessionProvider.notifier).exit();
-                  if (context.mounted) context.go(Routes.login);
-                },
+                onPressed: () => signOutAndGoToLogin(context, ref),
                 icon: AppIconImage(
                   AppIcons.logout,
                   size: 20,

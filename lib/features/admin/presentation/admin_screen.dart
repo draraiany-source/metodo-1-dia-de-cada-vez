@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/auth/session_sign_out.dart';
 import '../../../core/config/app_config.dart';
 import '../../../core/mascot/mascot_config.dart';
 import '../../../core/theme/app_colors.dart';
@@ -24,7 +25,16 @@ class AdminScreen extends ConsumerWidget {
     final user = ref.watch(currentUserProvider);
     if (user == null || !user.isAdmin) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Painel Técnico')),
+        appBar: AppBar(
+          title: const Text('Painel Técnico'),
+          actions: [
+            IconButton(
+              tooltip: 'Sair da conta',
+              icon: const Icon(Icons.logout),
+              onPressed: () => signOutAndGoToLogin(context, ref),
+            ),
+          ],
+        ),
         body: const Center(
           child: Padding(
             padding: EdgeInsets.all(24),
@@ -48,6 +58,18 @@ class AdminScreen extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Painel Técnico'),
+          actions: [
+            IconButton(
+              tooltip: 'Configurações',
+              icon: const Icon(Icons.settings_outlined),
+              onPressed: () => context.push(Routes.settings),
+            ),
+            IconButton(
+              tooltip: 'Sair da conta',
+              icon: const Icon(Icons.logout),
+              onPressed: () => signOutAndGoToLogin(context, ref),
+            ),
+          ],
           bottom: const TabBar(
             isScrollable: true,
             indicatorColor: AppColors.primary,

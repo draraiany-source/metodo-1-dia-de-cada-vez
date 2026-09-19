@@ -5,6 +5,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/assets/app_icons.dart';
+import '../../../core/auth/session_sign_out.dart';
 import '../../../core/config/app_legal.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/router/app_router.dart';
@@ -45,11 +46,7 @@ class SettingsScreen extends ConsumerWidget {
       ),
     );
     if (confirmar != true) return;
-
-    await ref.read(authRepositoryProvider).signOut();
-    ref.read(localSessionProvider.notifier).clear();
-    await ref.read(guestSessionProvider.notifier).exit();
-    if (context.mounted) context.go(Routes.login);
+    await signOutAndGoToLogin(context, ref);
   }
 
   Future<void> _excluirConta(BuildContext context, WidgetRef ref) async {

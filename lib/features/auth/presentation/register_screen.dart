@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/auth/user_role.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/auth_hero_header.dart';
@@ -63,7 +64,12 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 : _referralCode.text.trim(),
           );
       ref.read(localSessionProvider.notifier).setUser(user);
-      if (mounted) context.go(Routes.home);
+      if (mounted) {
+        context.go(homePathForUser(
+          isPersonalTrainer: user.isPersonalTrainer,
+          isAdmin: user.isAdmin,
+        ));
+      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

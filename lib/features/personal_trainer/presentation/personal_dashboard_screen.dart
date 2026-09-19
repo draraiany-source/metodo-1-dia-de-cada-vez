@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/assets/app_icons.dart';
 import '../../../core/assets/personal_ai_icons.dart';
+import '../../../core/auth/session_sign_out.dart';
 import '../../../core/auth/user_role.dart';
 import '../../../core/router/app_navigation.dart';
 import '../../../core/router/app_router.dart';
@@ -185,6 +186,15 @@ class _PersonalDashboardScreenState
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (_) => const ExerciseLibraryScreen(isAdmin: true))),
             ),
+            IconButton(
+              icon: AppIconImage(
+                AppIcons.logout,
+                size: 22,
+                fallbackIcon: Icons.logout,
+              ),
+              tooltip: 'Sair da conta',
+              onPressed: () => signOutAndGoToLogin(context, ref),
+            ),
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
@@ -219,31 +229,41 @@ class _PersonalDashboardScreenState
             },
             labelType: NavigationRailLabelType.none,
             minExtendedWidth: 220,
-            leading: const Padding(
-              padding: EdgeInsets.fromLTRB(16, 20, 16, 24),
+            leading: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('PAINEL',
+                  const Text('CONTA LOGADA',
                       style: TextStyle(
                           color: AppColors.textSecondary,
                           fontSize: 11,
                           letterSpacing: 1.2,
                           fontWeight: FontWeight.w700)),
-                  SizedBox(height: 4),
-                  Text('Amanda Lopes',
-                      style: TextStyle(
+                  const SizedBox(height: 4),
+                  Text(
+                      trainer.name.trim().isEmpty ? 'Personal' : trainer.name,
+                      style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w800,
                           fontSize: 18)),
-                  SizedBox(height: 2),
-                  Text('Personal Trainer',
-                      style: TextStyle(
+                  const SizedBox(height: 2),
+                  Text(
+                      resolveUserRole(
+                        isPersonalTrainer: trainer.isPersonalTrainer,
+                        isAdmin: trainer.isAdmin,
+                      ).labelPt,
+                      style: const TextStyle(
                           color: AppColors.secondary,
                           fontSize: 12,
                           fontWeight: FontWeight.w600)),
                 ],
               ),
+            ),
+            trailing: IconButton(
+              tooltip: 'Sair da conta',
+              onPressed: () => signOutAndGoToLogin(context, ref),
+              icon: const Icon(Icons.logout, color: AppColors.danger),
             ),
             destinations: [
               NavigationRailDestination(
@@ -360,8 +380,10 @@ class _PersonalBody extends ConsumerWidget {
           children: [
             _AmandaProfessionalHeader(
               trainerFirstName: trainer.name.split(' ').first,
+              trainerName: trainer.name,
               isAdmin: role == UserRole.admin,
               onOpenLibrary: onOpenLibrary,
+              onSignOut: () => signOutAndGoToLogin(context, ref),
             ),
             const SizedBox(height: 18),
             LayoutBuilder(builder: (context, c) {
@@ -537,6 +559,11 @@ class _PersonalBody extends ConsumerWidget {
                   icon: Icons.settings_outlined,
                   onTap: () =>
                       AppNavigation.open(context, Routes.settings),
+                ),
+                _ShortcutChip(
+                  label: 'Sair',
+                  icon: Icons.logout,
+                  onTap: () => signOutAndGoToLogin(context, ref),
                 ),
               ],
             ),
@@ -742,13 +769,17 @@ class _PersonalBody extends ConsumerWidget {
 class _AmandaProfessionalHeader extends StatelessWidget {
   const _AmandaProfessionalHeader({
     required this.trainerFirstName,
+    required this.trainerName,
     required this.isAdmin,
     required this.onOpenLibrary,
+    required this.onSignOut,
   });
 
   final String trainerFirstName;
+  final String trainerName;
   final bool isAdmin;
   final VoidCallback onOpenLibrary;
+  final VoidCallback onSignOut;
 
   @override
   Widget build(BuildContext context) {
@@ -795,30 +826,28 @@ class _AmandaProfessionalHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Olá, $trainerFirstName',
+                  'Olá, ${trainerName.trim().isEmpty ? trainerFirstName : trainerName}',
                   style: const TextStyle(
-                    color: AppColors.textSecondary,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                const Text(
-                  'Amanda Lopes',
-                  style: TextStyle(
-                    color: AppColors.secondary,
+                    color: Colors.white,
                     fontWeight: FontWeight.w700,
-                    fontSize: 14,
+                    fontSize: 15,
                   ),
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  isAdmin
-                      ? 'Treinadora Pessoal · Administração'
-                      : 'Treinadora Pessoal On-line · Emagrecimento & hipertrofia',
+                  isAdmin ? 'Admin Técnico logado' : 'Personal logada',
                   style: const TextStyle(
+                    color: AppColors.secondary,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 13,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                const Text(
+                  'Marca institucional: Método 1 Dia · Amanda Lopes',
+                  style: TextStyle(
                     color: AppColors.textSecondary,
-                    fontSize: 12.5,
+                    fontSize: 12,
                     height: 1.3,
                   ),
                 ),
@@ -835,6 +864,11 @@ class _AmandaProfessionalHeader extends StatelessWidget {
                         fallbackIcon: Icons.library_books_outlined,
                       ),
                       label: const Text('Biblioteca'),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: onSignOut,
+                      icon: const Icon(Icons.logout, size: 16),
+                      label: const Text('Sair da conta'),
                     ),
                   ],
                 ),

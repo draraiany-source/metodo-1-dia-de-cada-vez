@@ -64,4 +64,30 @@ void main() {
       expect(isPersonalAllowedAdminPath('/admin/coupons'), isFalse);
     });
   });
+
+  group('homePathForRole', () {
+    test('aluno vai para /home', () {
+      expect(homePathForRole(UserRole.aluno), '/home');
+      expect(
+        homePathForUser(isPersonalTrainer: false, isAdmin: false),
+        '/home',
+      );
+    });
+
+    test('personal vai para Central da Personal', () {
+      expect(homePathForRole(UserRole.personal), '/personal-trainer');
+      expect(
+        homePathForUser(isPersonalTrainer: true, isAdmin: false),
+        '/personal-trainer',
+      );
+    });
+
+    test('admin técnico vai para /admin e prevalece sobre personal', () {
+      expect(homePathForRole(UserRole.admin), '/admin');
+      expect(
+        homePathForUser(isPersonalTrainer: true, isAdmin: true),
+        '/admin',
+      );
+    });
+  });
 }

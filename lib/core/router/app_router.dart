@@ -229,6 +229,8 @@ class _GoRouterRefreshStream extends ChangeNotifier {
 
   late final StreamSubscription<dynamic> _sub;
 
+  void ping() => notifyListeners();
+
   @override
   void dispose() {
     _sub.cancel();
@@ -270,6 +272,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
   final refreshStream = _GoRouterRefreshStream(
     ref.watch(authStateProvider.stream),
   );
+  ref.listen(localSessionProvider, (_, __) => refreshStream.ping());
+  ref.listen(guestSessionProvider, (_, __) => refreshStream.ping());
   ref.onDispose(refreshStream.dispose);
 
   return GoRouter(
@@ -327,32 +331,44 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       //    para onboarding/login/cadastro.
       if (isOnboarding || isAuthRoute) {
         if (user != null && !isGuest) {
-          if (user.isAdmin) return Routes.admin; // Painel Técnico
-          if (user.isPersonalTrainer) return Routes.personalTrainer;
+          return homePathForUser(
+            isPersonalTrainer: user.isPersonalTrainer,
+            isAdmin: user.isAdmin,
+          );
         }
         return Routes.home;
       }
 
-      // 4) Staff na Home do aluno → painel adequado.
+      // 4) Staff na Home do aluno → painel do papel resolvido.
       if (user != null && !isGuest && path == Routes.home) {
-        if (user.isAdmin) return Routes.admin;
-        if (user.isPersonalTrainer) return Routes.personalTrainer;
+        final dest = homePathForUser(
+          isPersonalTrainer: user.isPersonalTrainer,
+          isAdmin: user.isAdmin,
+        );
+        if (dest != Routes.home) return dest;
       }
+
+      final role = user == null
+          ? null
+          : resolveUserRole(
+              isPersonalTrainer: user.isPersonalTrainer,
+              isAdmin: user.isAdmin,
+            );
 
       // 5) Rotas /admin* — Admin Técnico: tudo.
       //    Personal: só ferramentas profissionais (whitelist).
       //    Aluno: bloqueado.
       if (path.startsWith('/admin')) {
-        if (user == null || isGuest) {
+        if (user == null || isGuest || role == null) {
           return Routes.login;
         }
-        if (user.isAdmin) {
+        if (role == UserRole.admin) {
           return null;
         }
-        if (user.isPersonalTrainer && isPersonalAllowedAdminPath(path)) {
+        if (role == UserRole.personal && isPersonalAllowedAdminPath(path)) {
           return null;
         }
-        if (user.isPersonalTrainer) {
+        if (role == UserRole.personal) {
           return Routes.personalTrainer;
         }
         return Routes.home;
@@ -362,7 +378,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       if (path == Routes.painelPersonal ||
           path.startsWith('${Routes.painelPersonal}/')) {
         if (user == null || isGuest) return Routes.login;
-        if (user.isAdmin || user.isPersonalTrainer) return null;
+        if (role == UserRole.admin || role == UserRole.personal) return null;
         return Routes.home;
       }
 
@@ -372,7 +388,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       }
       if (path.startsWith('${Routes.personalTrainer}/')) {
         if (user == null || isGuest) return Routes.login;
-        if (user.isAdmin || user.isPersonalTrainer) return null;
+        if (role == UserRole.admin || role == UserRole.personal) return null;
         return Routes.home;
       }
 

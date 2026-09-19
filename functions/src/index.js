@@ -4,6 +4,7 @@ const {
   setCors,
   handleOptions,
   requireAuth,
+  requireAdmin,
   verifyAppCheck,
   isPremiumActive,
 } = require('./auth_helpers');
@@ -619,3 +620,394 @@ exports.getContentUrl = functions.https.onRequest(async (req, res) => {
     return res.status(500).json({ error: 'Erro ao resolver o conteúdo.' });
   }
 });
+
+// ---------------------------------------------------------------------------
+// IA assistente da Personal — NÃO substitui a Amanda, NÃO diagnostica.
+// ---------------------------------------------------------------------------
+const ACCOMPANIMENT_AI_PROMPT = `
+Você é um assistente da Personal Amanda no app Método 1 Dia de Cada Vez.
+Regras obrigatórias:
+- Nunca diagnostique doenças nem prescreva medicamentos.
+- Nunca afirme que uma condição médica está confirmada.
+- Nunca invente peso, medida, treino, lesão, medicamento ou frequência.
+- Se faltar dado, diga: "Não há informação cadastrada."
+- Use apenas os dados enviados no JSON.
+- Frases de atenção: "Esse relato merece atenção antes da progressão do treino."
+- Você organiza, resume e sugere. A decisão final é da Amanda.
+- Não envie mensagem nem publique treino.
+Responda em português do Brasil, objetiva e acolhedora.
+`;
+
+async function callOpenAi(system, userContent, maxTokens = 700) {
+  const apiKey =
+    (functions.config().openai && functions.config().openai.key) ||
+    process.env.OPENAI_API_KEY;
+  if (!apiKey) return null;
+  const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: system },
+        { role: 'user', content: userContent },
+      ],
+      max_tokens: maxTokens,
+      temperature: 0.4,
+    }),
+  });
+  const data = await openaiRes.json();
+  return data.choices && data.choices[0] && data.choices[0].message
+    ? data.choices[0].message.content
+    : null;
+}
+
+exports.accompanimentAi = functions.https.onRequest(async (req, res) => {
+  setCors(res);
+  if (handleOptions(req, res)) return;
+  const uid = await requireAuth(req, res);
+  if (!uid) return;
+  if (!(await verifyAppCheck(req, res))) return;
+
+  try {
+    const body = req.body || {};
+    const action = body.action || '';
+    const payload = { ...body };
+    delete payload.action;
+    const result = await callOpenAi(
+      ACCOMPANIMENT_AI_PROMPT,
+      `Ação: ${action}\nDados (use só o que existir):\n${JSON.stringify(payload)}`,
+    );
+    await db.collection('pt_ai_logs').add({
+      trainerId: uid,
+      type: action,
+      prompt: action,
+      result: result || '',
+      createdAt: new Date().toISOString(),
+      approved: false,
+    });
+    return res.status(200).json({
+      result:
+        result ||
+        'Não há informação cadastrada o suficiente para este resumo.',
+    });
+  } catch (e) {
+    console.error('accompanimentAi', e);
+    return res.status(200).json({
+      result: 'Não foi possível gerar o resumo agora. Tente novamente.',
+    });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Google Calendar — OAuth + freebusy + eventos. Tokens só no servidor.
+// ---------------------------------------------------------------------------
+function googleCreds() {
+  const cfg = functions.config().googlecalendar || {};
+  return {
+    clientId: cfg.client_id || process.env.GOOGLE_CALENDAR_CLIENT_ID || '',
+    clientSecret:
+      cfg.client_secret || process.env.GOOGLE_CALENDAR_CLIENT_SECRET || '',
+    redirectUri:
+      cfg.redirect_uri ||
+      process.env.GOOGLE_CALENDAR_REDIRECT_URI ||
+      '',
+  };
+}
+
+async function refreshGoogleToken(trainerId, secrets) {
+  const { clientId, clientSecret } = googleCreds();
+  const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id: clientId,
+      client_secret: clientSecret,
+      refresh_token: secrets.refreshToken,
+      grant_type: 'refresh_token',
+    }),
+  });
+  const json = await tokenRes.json();
+  if (!json.access_token) throw new Error('refresh_failed');
+  await db.collection('pt_calendar_secrets').doc(trainerId).set(
+    {
+      accessToken: json.access_token,
+      expiry: Date.now() + (json.expires_in || 3500) * 1000,
+    },
+    { merge: true },
+  );
+  return json.access_token;
+}
+
+exports.googleCalendar = functions.https.onRequest(async (req, res) => {
+  setCors(res);
+  if (handleOptions(req, res)) return;
+  const uid = await requireAuth(req, res);
+  if (!uid) return;
+  if (!(await verifyAppCheck(req, res))) return;
+
+  const action = (req.body && req.body.action) || '';
+  const { clientId, clientSecret, redirectUri } = googleCreds();
+
+  try {
+    if (action === 'oauth_start') {
+      if (!clientId || !redirectUri) {
+        return res.status(200).json({
+          ok: false,
+          error:
+            'Google Calendar não configurado. Defina GOOGLE_CALENDAR_CLIENT_ID e REDIRECT_URI nas Cloud Functions.',
+        });
+      }
+      const scope = encodeURIComponent(
+        'https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.freebusy https://www.googleapis.com/auth/calendar.readonly',
+      );
+      const authUrl =
+        'https://accounts.google.com/o/oauth2/v2/auth' +
+        `?client_id=${encodeURIComponent(clientId)}` +
+        `&redirect_uri=${encodeURIComponent(redirectUri)}` +
+        '&response_type=code&access_type=offline&prompt=consent' +
+        `&scope=${scope}&state=${encodeURIComponent(uid)}`;
+      return res.status(200).json({ ok: true, authUrl });
+    }
+
+    if (action === 'oauth_callback') {
+      const code = req.body.code;
+      if (!code) return res.status(400).json({ error: 'code ausente' });
+      const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          code,
+          client_id: clientId,
+          client_secret: clientSecret,
+          redirect_uri: redirectUri,
+          grant_type: 'authorization_code',
+        }),
+      });
+      const tokens = await tokenRes.json();
+      if (!tokens.refresh_token && !tokens.access_token) {
+        return res.status(400).json({ error: 'Falha no OAuth Google' });
+      }
+      await db.collection('pt_calendar_secrets').doc(uid).set({
+        refreshToken: tokens.refresh_token || null,
+        accessToken: tokens.access_token,
+        expiry: Date.now() + (tokens.expires_in || 3500) * 1000,
+      });
+      await db.collection('pt_calendar_connections').doc(uid).set({
+        connected: true,
+        calendarId: 'primary',
+        state: 'synced',
+        lastSync: new Date().toISOString(),
+        error: '',
+      });
+      return res.status(200).json({ ok: true });
+    }
+
+    if (action === 'disconnect') {
+      await db.collection('pt_calendar_secrets').doc(uid).delete();
+      await db.collection('pt_calendar_connections').doc(uid).set({
+        connected: false,
+        state: 'disconnected',
+        error: '',
+      });
+      return res.status(200).json({ ok: true });
+    }
+
+    const secretSnap = await db.collection('pt_calendar_secrets').doc(uid).get();
+    if (!secretSnap.exists) {
+      return res.status(200).json({
+        ok: false,
+        pending: true,
+        error: 'Google Calendar não conectado',
+      });
+    }
+    let access = secretSnap.data().accessToken;
+    if (!access || (secretSnap.data().expiry || 0) < Date.now()) {
+      access = await refreshGoogleToken(uid, secretSnap.data());
+    }
+
+    const conn = await db.collection('pt_calendar_connections').doc(uid).get();
+    const calendarId = (conn.data() && conn.data().calendarId) || 'primary';
+
+    if (action === 'busy') {
+      const timeMin = req.body.timeMin;
+      const timeMax = req.body.timeMax;
+      const busyRes = await fetch(
+        'https://www.googleapis.com/calendar/v3/freeBusy',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${access}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            timeMin,
+            timeMax,
+            timeZone: 'America/Sao_Paulo',
+            items: [{ id: calendarId }],
+          }),
+        },
+      );
+      const busyJson = await busyRes.json();
+      const busy =
+        (busyJson.calendars &&
+          busyJson.calendars[calendarId] &&
+          busyJson.calendars[calendarId].busy) ||
+        [];
+      return res.status(200).json({ ok: true, busy });
+    }
+
+    if (action === 'sync_appointment' || action === 'sync_now') {
+      await db.collection('pt_calendar_connections').doc(uid).set(
+        {
+          lastSync: new Date().toISOString(),
+          state: 'synced',
+          error: '',
+        },
+        { merge: true },
+      );
+      return res.status(200).json({ ok: true });
+    }
+
+    return res.status(400).json({ error: 'Ação desconhecida' });
+  } catch (e) {
+    console.error('googleCalendar', e);
+    await db.collection('pt_calendar_connections').doc(uid).set(
+      { state: 'error', error: String(e.message || e) },
+      { merge: true },
+    );
+    return res.status(200).json({
+      ok: false,
+      pending: true,
+      error: 'Sincronização pendente',
+    });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Admin Técnico — criar conta e bloquear no Firebase Auth.
+// O cliente NUNCA cria Admin/Personal no cadastro público.
+// ---------------------------------------------------------------------------
+function canonicalRole(raw) {
+  const v = String(raw || 'student').trim().toLowerCase();
+  if (v === 'technical_admin' || v === 'admin' || v === 'role_admin') {
+    return 'technical_admin';
+  }
+  if (v === 'trainer' || v === 'personal' || v === 'role_personal') {
+    return 'trainer';
+  }
+  return 'student';
+}
+
+exports.adminManageUser = functions.https.onRequest(async (req, res) => {
+  setCors(res);
+  if (handleOptions(req, res)) return;
+
+  const uid = await requireAuth(req, res);
+  if (!uid) return;
+  if (!(await verifyAppCheck(req, res))) return;
+  if (!(await requireAdmin(uid, res))) return;
+
+  const body = req.body || {};
+  const action = body.action;
+
+  try {
+    if (action === 'setDisabled') {
+      const targetUid = String(body.targetUid || '').trim();
+      const disabled = body.disabled === true;
+      if (!targetUid) {
+        return res.status(400).json({ success: false, message: 'targetUid ausente.' });
+      }
+      if (targetUid === uid) {
+        return res.status(400).json({
+          success: false,
+          message: 'Você não pode bloquear a própria conta.',
+        });
+      }
+      await admin.auth().updateUser(targetUid, { disabled });
+      if (disabled) {
+        await admin.auth().revokeRefreshTokens(targetUid);
+      }
+      await db.collection('users').doc(targetUid).set(
+        { disabled },
+        { merge: true },
+      );
+      return res.status(200).json({
+        success: true,
+        message: disabled ? 'Conta bloqueada no Auth.' : 'Conta reativada no Auth.',
+        uid: targetUid,
+      });
+    }
+
+    if (action === 'createUser') {
+      const name = String(body.name || '').trim();
+      const email = String(body.email || '').trim().toLowerCase();
+      const password = String(body.password || '');
+      const role = canonicalRole(body.role);
+      if (!name || !email || password.length < 6) {
+        return res.status(400).json({
+          success: false,
+          message: 'Nome, e-mail e senha (mín. 6) são obrigatórios.',
+        });
+      }
+
+      const created = await admin.auth().createUser({
+        email,
+        password,
+        displayName: name,
+        disabled: false,
+      });
+
+      const isAdminRole = role === 'technical_admin';
+      const isPersonal = isAdminRole || role === 'trainer';
+      await db.collection('users').doc(created.uid).set({
+        name,
+        email,
+        role,
+        isAdmin: isAdminRole,
+        isPersonalTrainer: isPersonal,
+        isPremium: false,
+        disabled: false,
+        memberSince: new Date().toISOString(),
+        xp: 0,
+        level: 1,
+        streak: 0,
+        totalWorkouts: 0,
+        totalKm: 0,
+        referralCount: 0,
+        referralCode: created.uid.substring(0, 6).toUpperCase(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        createdBy: uid,
+      }, { merge: true });
+
+      if (isAdminRole) {
+        await db.collection('admins').doc(created.uid).set({
+          uid: created.uid,
+          role,
+          updatedAt: new Date().toISOString(),
+          updatedBy: uid,
+        }, { merge: true });
+      }
+
+      await db.collection('referral_codes').doc(
+        created.uid.substring(0, 6).toUpperCase(),
+      ).set({ ownerUid: created.uid }, { merge: true });
+
+      return res.status(200).json({
+        success: true,
+        message: `Conta criada como ${role}.`,
+        uid: created.uid,
+      });
+    }
+
+    return res.status(400).json({ success: false, message: 'Ação desconhecida.' });
+  } catch (e) {
+    console.error('adminManageUser', e);
+    const msg = e && e.message ? String(e.message) : 'Falha ao gerenciar usuário.';
+    return res.status(200).json({ success: false, message: msg });
+  }
+});
+

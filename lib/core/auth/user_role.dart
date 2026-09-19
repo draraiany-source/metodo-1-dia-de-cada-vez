@@ -116,3 +116,21 @@ bool isPersonalAllowedAdminPath(String path) {
   }
   return false;
 }
+
+/// Destino pós-login / splash a partir do papel resolvido (não de flags isoladas).
+String homePathForRole(UserRole role) => switch (role) {
+      UserRole.admin => '/admin',
+      UserRole.personal => '/personal-trainer',
+      UserRole.aluno => '/home',
+    };
+
+String homePathForUser({
+  required bool isPersonalTrainer,
+  required bool isAdmin,
+}) =>
+    homePathForRole(
+      resolveUserRole(
+        isPersonalTrainer: isPersonalTrainer,
+        isAdmin: isAdmin,
+      ),
+    );

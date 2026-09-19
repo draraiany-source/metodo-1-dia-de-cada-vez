@@ -48,6 +48,18 @@ async function requireAuth(req, res) {
 }
 
 /**
+ * Exige membership em `admins/{uid}` (Admin Técnico).
+ */
+async function requireAdmin(uid, res) {
+  const snap = await admin.firestore().collection('admins').doc(uid).get();
+  if (!snap.exists) {
+    res.status(403).json({ success: false, message: 'Acesso restrito ao Admin Técnico.' });
+    return false;
+  }
+  return true;
+}
+
+/**
  * Verifica App Check. Em produção (ENFORCE_APP_CHECK=true) é obrigatório.
  */
 async function verifyAppCheck(req, res) {
@@ -98,6 +110,7 @@ module.exports = {
   setCors,
   handleOptions,
   requireAuth,
+  requireAdmin,
   verifyAppCheck,
   isPremiumActive,
 };

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/auth/session_sign_out.dart';
 import '../../../core/auth/user_role.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
@@ -99,6 +100,11 @@ class PersonalCmsHubScreen extends ConsumerWidget {
               icon: const Icon(Icons.admin_panel_settings_outlined),
               onPressed: () => context.push(Routes.admin),
             ),
+          IconButton(
+            tooltip: 'Sair da conta',
+            icon: const Icon(Icons.logout),
+            onPressed: () => signOutAndGoToLogin(context, ref),
+          ),
         ],
       ),
       body: ListView(
