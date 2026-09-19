@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../core/router/app_router.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/youtube_launch.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
+import '../../subscriptions/presentation/premium_gate_sheet.dart';
+import '../../subscriptions/providers/subscription_providers.dart';
 import '../domain/video_models.dart';
 import '../providers/video_providers.dart';
 import 'video_player_screen.dart';
@@ -25,8 +24,9 @@ Future<void> abrirVideo(
 }) async {
   final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
 
-  if (video.isPremium && !user.isPremium) {
-    await _mostrarBloqueioPremium(context, video);
+  final access = ref.read(effectiveAccessProvider);
+  if (video.isPremium && !access.hasPremium && !user.isPremium) {
+    await showPremiumGate(context, contentName: video.name);
     return;
   }
 
@@ -69,78 +69,4 @@ Future<void> abrirVideo(
     DateTime.now().difference(inicio),
     durationSeconds: video.durationSeconds,
   );
-}
-
-Future<void> _mostrarBloqueioPremium(
-  BuildContext context,
-  VideoContent video,
-) async {
-  await showModalBottomSheet<void>(
-    context: context,
-    backgroundColor: Colors.transparent,
-    builder: (ctx) => _PremiumSheet(video: video),
-  );
-}
-
-class _PremiumSheet extends StatelessWidget {
-  const _PremiumSheet({required this.video});
-  final VideoContent video;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      padding: const EdgeInsets.fromLTRB(24, 20, 24, 28),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 44,
-            height: 4,
-            decoration: BoxDecoration(
-              color: Colors.white24,
-              borderRadius: BorderRadius.circular(4),
-            ),
-          ),
-          const SizedBox(height: 20),
-          const Icon(Icons.workspace_premium,
-              size: 48, color: AppColors.warning),
-          const SizedBox(height: 14),
-          const Text(
-            'Conteúdo exclusivo Premium',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            '“${video.name}” é liberado para assinantes.',
-            textAlign: TextAlign.center,
-            style: const TextStyle(color: AppColors.textSecondary, height: 1.35),
-          ),
-          const SizedBox(height: 22),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              onPressed: () {
-                Navigator.pop(context);
-                context.push(Routes.premium);
-              },
-              child: const Text('Ver planos Premium'),
-            ),
-          ),
-          const SizedBox(height: 8),
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Agora não'),
-          ),
-        ],
-      ),
-    );
-  }
 }

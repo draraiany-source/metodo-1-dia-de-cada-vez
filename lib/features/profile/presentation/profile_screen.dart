@@ -131,11 +131,11 @@ class ProfileScreen extends ConsumerWidget {
               QuickAccessTile(
                 icon: Icons.workspace_premium_outlined,
                 iconAsset: AppIcons.premium,
-                title: 'Assinatura',
+                title: 'Minha Assinatura',
                 subtitle: user.isPremium ? 'Premium ativo' : 'Plano gratuito',
                 accent: AppColors.secondary,
                 showChevron: true,
-                onTap: () => context.push(Routes.premium),
+                onTap: () => context.push(Routes.mySubscription),
               ),
               const SizedBox(height: 6),
               QuickAccessTile(

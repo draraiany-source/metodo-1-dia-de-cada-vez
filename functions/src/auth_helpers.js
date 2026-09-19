@@ -90,6 +90,15 @@ async function verifyAppCheck(req, res) {
   }
 }
 
+function toDate(raw) {
+  if (!raw) return null;
+  if (typeof raw.toDate === 'function') return raw.toDate();
+  if (raw instanceof Date) return raw;
+  if (typeof raw === 'string') return new Date(raw);
+  if (raw._seconds) return new Date(raw._seconds * 1000);
+  return null;
+}
+
 /**
  * Premium ativo: isPremium == true e premiumExpiresAt no futuro (se existir).
  */
@@ -97,13 +106,27 @@ function isPremiumActive(userData) {
   if (!userData || userData.isPremium !== true) return false;
   const raw = userData.premiumExpiresAt;
   if (!raw) return true;
-  let exp;
-  if (typeof raw.toDate === 'function') exp = raw.toDate();
-  else if (raw instanceof Date) exp = raw;
-  else if (typeof raw === 'string') exp = new Date(raw);
-  else if (raw._seconds) exp = new Date(raw._seconds * 1000);
-  else return true;
+  const exp = toDate(raw);
+  if (!exp) return true;
   return exp.getTime() > Date.now();
+}
+
+/**
+ * Premium efetivo: flag do usuário OU assinatura/teste válido em subscriptions/{uid}.
+ */
+async function hasPremiumAccess(uid, userData) {
+  if (isPremiumActive(userData)) return true;
+  if (!uid) return false;
+  const snap = await admin.firestore().collection('subscriptions').doc(uid).get();
+  if (!snap.exists) return false;
+  const d = snap.data() || {};
+  const status = String(d.status || '').toLowerCase();
+  if (status === 'active') return true;
+  if (status === 'trial' || status === 'trialing') {
+    const end = toDate(d.trialEndsAt);
+    return !!(end && end.getTime() > Date.now());
+  }
+  return false;
 }
 
 module.exports = {
@@ -113,4 +136,5 @@ module.exports = {
   requireAdmin,
   verifyAppCheck,
   isPremiumActive,
+  hasPremiumAccess,
 };

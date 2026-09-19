@@ -91,6 +91,33 @@ DateTime? _parseExpiry(dynamic rawExp) {
   }
 }
 
+Future<PremiumStatus> subscriptionStatusForUid(String uid) async {
+  if (!FirebaseService.isReady || uid.isEmpty) return PremiumStatus.free;
+  try {
+    final doc = await FirebaseFirestore.instance
+        .collection(AppConstants.cSubscriptions)
+        .doc(uid)
+        .get();
+    final data = doc.data();
+    if (data == null) return PremiumStatus.free;
+    final status = (data['status'] as String? ?? '').toLowerCase();
+    if (status == 'active') {
+      return PremiumStatus(
+        isPremium: true,
+        plan: data['plan'] as String?,
+        expiresAt: _parseExpiry(data['nextBillingAt'] ?? data['expiresAt']),
+      );
+    }
+    if (status == 'trial' || status == 'trialing') {
+      final end = _parseExpiry(data['trialEndsAt']);
+      if (end != null && end.isAfter(DateTime.now())) {
+        return PremiumStatus(isPremium: true, plan: 'trial', expiresAt: end);
+      }
+    }
+  } catch (_) {}
+  return PremiumStatus.free;
+}
+
 PremiumStatus _statusFromFirestoreMap(Map<String, dynamic>? data) {
   if (data == null) return PremiumStatus.free;
   final active = data['isPremium'] == true;
@@ -168,7 +195,10 @@ class FirestorePremiumService implements PremiumService {
           .collection(AppConstants.cUsers)
           .doc(uid)
           .get();
-      return _statusFromFirestoreMap(doc.data());
+      final fromUser = _statusFromFirestoreMap(doc.data());
+      final fromSub = await subscriptionStatusForUid(uid);
+      if (fromUser.isPremium) return fromUser;
+      return fromSub;
     } catch (_) {
       return PremiumStatus.free;
     }
@@ -177,8 +207,8 @@ class FirestorePremiumService implements PremiumService {
   @override
   Future<PremiumStatus> subscribe(String planId) async {
     throw const BillingNotConfiguredException(
-      'Billing via loja não está ativo neste modo. Use RevenueCat '
-      '(REVENUECAT_ANDROID_KEY / REVENUECAT_IOS_KEY).',
+      'Cobrança real desativada nesta fase. Nenhuma compra foi processada. '
+      'Use o teste grátis de 7 dias ou aguarde App Store / Google Play.',
     );
   }
 
@@ -235,6 +265,9 @@ class RevenueCatPremiumService implements PremiumService {
     String? plan;
     if (productId.contains('anual') || productId.contains('yearly')) {
       plan = 'yearly';
+    } else if (productId.contains('trimestral') ||
+        productId.contains('quarterly')) {
+      plan = 'quarterly';
     } else if (productId.contains('mensal') || productId.contains('monthly')) {
       plan = 'monthly';
     } else {
@@ -279,20 +312,39 @@ class RevenueCatPremiumService implements PremiumService {
     }
   }
 
+  String _productIdFor(String planId) {
+    return switch (planId) {
+      'yearly' || 'anual' => AppConfig.productYearly,
+      'quarterly' || 'trimestral' => AppConfig.productQuarterly,
+      _ => AppConfig.productMonthly,
+    };
+  }
+
   @override
   Future<PremiumStatus> subscribe(String planId) async {
+    if (!AppConfig.paymentsEnabled) {
+      throw const BillingNotConfiguredException(
+        'Cobrança real desativada (PAYMENTS_ENABLED=false). '
+        'Nenhuma compra foi processada.',
+      );
+    }
+    if (planId == 'yearly' || planId == 'anual') {
+      throw const BillingNotConfiguredException(
+        'Plano anual — em breve. O valor ainda não foi definido.',
+      );
+    }
     await _ensureConfigured();
-    final productId = planId == 'yearly'
-        ? AppConfig.productYearly
-        : AppConfig.productMonthly;
+    final productId = _productIdFor(planId);
 
     try {
       final products = await Purchases.getProducts([productId]);
       if (products.isEmpty) {
         final offerings = await Purchases.getOfferings();
-        final pkg = planId == 'yearly'
-            ? offerings.current?.annual
-            : offerings.current?.monthly;
+        final pkg = switch (planId) {
+          'yearly' || 'anual' => offerings.current?.annual,
+          'quarterly' || 'trimestral' => offerings.current?.threeMonth,
+          _ => offerings.current?.monthly,
+        };
         if (pkg == null) {
           throw BillingNotConfiguredException(
             'Produto/oferta "$productId" não encontrado no RevenueCat. '
@@ -364,6 +416,17 @@ class PremiumNotifier extends StateNotifier<PremiumStatus> {
   }
 
   Future<PremiumStatus> subscribe(String planId) async {
+    if (planId == 'yearly' || planId == 'anual') {
+      throw const BillingNotConfiguredException(
+        'Plano anual — em breve. O valor ainda não foi definido.',
+      );
+    }
+    if (!AppConfig.paymentsEnabled) {
+      throw const BillingNotConfiguredException(
+        'Cobrança real desativada (PAYMENTS_ENABLED=false). '
+        'Nenhuma compra foi processada.',
+      );
+    }
     final status = await _service.subscribe(planId);
     state = status;
     return state;

@@ -111,9 +111,15 @@ class AppConstants {
       'A Amanda é sua motivadora virtual e não substitui médico, '
       'nutricionista ou psicólogo. Procure um profissional quando precisar. 💜';
 
-  // ---- Premium ----
-  static const String premiumMonthlyId = 'metodo1dia_monthly';
-  static const String premiumYearlyId = 'metodo1dia_yearly';
-  static const double premiumMonthlyPrice = 29.90;
-  static const double premiumYearlyPrice = 197.00;
+  // ---- Premium (IDs canônicos em AppConfig; preços de catálogo) ----
+  /// Legado — preferir [AppConfig.productMonthly].
+  static const String premiumMonthlyId = 'metodo1dia_premium_mensal';
+  static const String premiumQuarterlyId = 'metodo1dia_premium_trimestral';
+  static const String premiumYearlyId = 'metodo1dia_premium_anual';
+  static const double premiumMonthlyPrice = 79.90;
+  static const double premiumQuarterlyPrice = 199.90;
+
+  /// Endpoint que inicia o teste grátis de 7 dias (Admin SDK).
+  static const String startFreeTrialFunctionUrl =
+      'https://us-central1-metodo1dia-app.cloudfunctions.net/startFreeTrial';
 }

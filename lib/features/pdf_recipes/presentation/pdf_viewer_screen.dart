@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
+import '../../subscriptions/providers/subscription_providers.dart';
 import '../domain/pdf_recipe_models.dart';
 import '../providers/pdf_recipe_providers.dart';
 
@@ -83,7 +84,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
     final favoritos = ref.watch(pdfRecipeFavoritesProvider);
     final isFavorite = favoritos.contains(widget.recipe.id);
     final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
-    final bloqueado = widget.recipe.isPremium && !user.isPremium;
+    final bloqueado = isContentLocked(ref, widget.recipe.isPremium);
     final r = widget.recipe;
 
     if (bloqueado) {

@@ -6,7 +6,7 @@ const {
   requireAuth,
   requireAdmin,
   verifyAppCheck,
-  isPremiumActive,
+  hasPremiumAccess,
 } = require('./auth_helpers');
 
 admin.initializeApp();
@@ -533,7 +533,7 @@ exports.getVideoUrl = functions.https.onRequest(async (req, res) => {
 
     if (video.isPremium) {
       const userSnap = await db.collection('users').doc(uid).get();
-      if (!isPremiumActive(userSnap.exists ? userSnap.data() : null)) {
+      if (!(await hasPremiumAccess(uid, userSnap.exists ? userSnap.data() : null))) {
         console.warn('acesso Premium negado', { uid, collection: 'videos', docId: videoId });
         return res.status(403).json({ error: 'Conteúdo exclusivo para assinantes Premium.' });
       }
@@ -594,7 +594,7 @@ exports.getContentUrl = functions.https.onRequest(async (req, res) => {
 
     if (content.isPremium || content.premium === true) {
       const userSnap = await db.collection('users').doc(uid).get();
-      if (!isPremiumActive(userSnap.exists ? userSnap.data() : null)) {
+      if (!(await hasPremiumAccess(uid, userSnap.exists ? userSnap.data() : null))) {
         console.warn('acesso Premium negado', { uid, collection, docId });
         return res.status(403).json({ error: 'Conteúdo exclusivo para assinantes Premium.' });
       }
@@ -1008,6 +1008,68 @@ exports.adminManageUser = functions.https.onRequest(async (req, res) => {
     console.error('adminManageUser', e);
     const msg = e && e.message ? String(e.message) : 'Falha ao gerenciar usuário.';
     return res.status(200).json({ success: false, message: msg });
+  }
+});
+
+// Teste grátis de 7 dias. Uma vez por conta. Admin pode resetar em homologação
+// com auditoria — não altera assinatura paga.
+exports.startFreeTrial = functions.https.onRequest(async (req, res) => {
+  setCors(res);
+  if (handleOptions(req, res)) return;
+
+  try {
+    const uid = await requireAuth(req, res);
+    if (!uid) return;
+    if (!(await verifyAppCheck(req, res))) return;
+
+    let target = uid;
+    const requested = req.body && req.body.targetUid;
+    if (requested && requested !== uid) {
+      if (!(await requireAdmin(uid, res))) return;
+      target = requested;
+    }
+
+    const ref = db.collection('subscriptions').doc(target);
+    const existing = await ref.get();
+    const reset = req.body && req.body.reset === true;
+    if (reset) {
+      if (!(await requireAdmin(uid, res))) return;
+    } else if (existing.exists && existing.data().trialUsed === true) {
+      return res.status(409).json({ error: 'Teste grátis já utilizado.' });
+    }
+    if (existing.exists) {
+      const st = String((existing.data() || {}).status || '');
+      if ((st === 'active' || st === 'cancelled') && !reset) {
+        return res.status(409).json({ error: 'Conta já possui assinatura registrada.' });
+      }
+    }
+
+    const now = new Date();
+    const end = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const payload = {
+      userId: target,
+      plan: 'trial',
+      status: 'trial',
+      trialUsed: true,
+      startedAt: now.toISOString(),
+      trialStartedAt: now.toISOString(),
+      trialEndsAt: end.toISOString(),
+      platform: 'none',
+      source: reset || (requested && requested !== uid) ? 'admin_test' : 'trial',
+      productId: '',
+    };
+    await ref.set(payload);
+    await db.collection('subscription_audit').add({
+      actorUid: uid,
+      targetUid: target,
+      action: reset ? 'reset_free_trial' : 'start_free_trial',
+      note: payload.source,
+      at: now.toISOString(),
+    });
+    return res.status(200).json({ success: true, subscription: payload });
+  } catch (e) {
+    console.error('startFreeTrial', e);
+    return res.status(500).json({ error: 'Falha ao iniciar o teste.' });
   }
 });
 

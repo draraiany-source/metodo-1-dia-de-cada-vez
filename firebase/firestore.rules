@@ -53,7 +53,8 @@ service cloud.firestore {
         .hasAny(['xp', 'level', 'streak', 'isPremium', 'isAdmin',
                  'isPersonalTrainer', 'role', 'disabled',
                  'coins', 'totalWorkouts', 'totalKm', 'referralCount',
-                 'referralCode']);
+                 'referralCode', 'premiumPlan', 'premiumExpiresAt',
+                 'trialUsed', 'trialEndsAt']);
     }
 
     // ---------- usuários ----------
@@ -367,9 +368,34 @@ service cloud.firestore {
     }
 
     match /subscriptions/{docId} {
-      // Estado de assinatura é escrito pelo webhook (Admin SDK), nunca pelo app.
-      allow read: if ownsExisting() || isAdmin();
-      allow write: if false;
+      // Dono e Admin leem o registro completo.
+      // Personal lê só para saber se o aluno é gratuito/teste/Premium
+      // (a UI não mostra preço, cobrança nem plataforma).
+      allow read: if signedIn() && (
+        docId == request.auth.uid ||
+        resource.data.userId == request.auth.uid ||
+        isAdmin() ||
+        isPersonalTrainer()
+      );
+      // Cliente só cria o PRÓPRIO teste grátis, uma vez. Plano pago
+      // continua exclusivo de webhook / Admin SDK.
+      allow create: if signedIn()
+        && docId == request.auth.uid
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.plan == 'trial'
+        && request.resource.data.status == 'trial'
+        && request.resource.data.trialUsed == true
+        && request.resource.data.keys().hasAll([
+          'userId', 'plan', 'status', 'trialUsed', 'startedAt', 'trialEndsAt'
+        ]);
+      allow update, delete: if false;
+    }
+
+    // Auditoria de alterações críticas (Admin / Functions). Imutável.
+    match /subscription_audit/{docId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin();
+      allow update, delete: if false;
     }
 
     // ---------- conteúdo do catálogo (leitura para logados) ----------

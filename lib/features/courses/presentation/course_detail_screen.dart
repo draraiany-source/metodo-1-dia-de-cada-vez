@@ -9,6 +9,8 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
+import '../../subscriptions/presentation/premium_gate_sheet.dart';
+import '../../subscriptions/providers/subscription_providers.dart';
 import '../domain/course_models.dart';
 import '../providers/course_providers.dart';
 
@@ -26,7 +28,7 @@ class CourseDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
-    final bloqueado = course.isPremium && !user.isPremium;
+    final bloqueado = isContentLocked(ref, course.isPremium);
     final favoritos = ref.watch(courseFavoritesProvider);
     final isFavorite = favoritos.contains(course.id);
     final progressoNotifier = ref.watch(courseProgressProvider.notifier);
@@ -50,7 +52,7 @@ class CourseDetailScreen extends ConsumerWidget {
         ],
       ),
       body: bloqueado
-          ? _PremiumLock(course: course)
+          ? PremiumLockBody(contentName: course.title)
           : SafeArea(
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
@@ -126,42 +128,6 @@ class CourseDetailScreen extends ConsumerWidget {
                 ],
               ),
             ),
-    );
-  }
-}
-
-class _PremiumLock extends StatelessWidget {
-  const _PremiumLock({required this.course});
-  final Course course;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.workspace_premium,
-                size: 56, color: AppColors.warning),
-            const SizedBox(height: 16),
-            const Text('Curso exclusivo Premium',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            Text('"${course.title}" é exclusivo para assinantes.',
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: AppColors.textSecondary)),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => context.push(Routes.premium),
-              child: const Text('Ver planos Premium'),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

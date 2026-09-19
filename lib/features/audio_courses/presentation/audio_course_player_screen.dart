@@ -15,6 +15,7 @@ import '../../../core/router/app_router.dart';
 import '../../../core/widgets/lily_character_widget.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
+import '../../subscriptions/providers/subscription_providers.dart';
 import '../domain/audio_course_models.dart';
 import '../providers/audio_course_providers.dart';
 
@@ -50,7 +51,7 @@ class _AudioCoursePlayerScreenState
   void initState() {
     super.initState();
     final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
-    if (widget.course.isPremium && !user.isPremium) return; // gate: ver build()
+    if (isContentLocked(ref, widget.course.isPremium)) return; // gate: ver build()
     if (widget.course.chapters.isNotEmpty) {
       final historico = ref.read(audioHistoryProvider)[widget.course.id];
       final retomar = historico != null
@@ -197,7 +198,7 @@ class _AudioCoursePlayerScreenState
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
-    final bloqueado = widget.course.isPremium && !user.isPremium;
+    final bloqueado = isContentLocked(ref, widget.course.isPremium);
 
     if (bloqueado) {
       return Scaffold(

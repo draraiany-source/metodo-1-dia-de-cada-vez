@@ -11,6 +11,7 @@ import '../../../core/widgets/app_states.dart';
 import '../../../core/widgets/common_widgets.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
+import '../../subscriptions/providers/subscription_providers.dart';
 import '../data/videos_repository.dart';
 import '../domain/video_models.dart';
 import '../domain/video_watch_state.dart';
@@ -348,7 +349,7 @@ class _VideoCard extends ConsumerWidget {
     final estado =
         ref.watch(videoWatchStateProvider)[video.id] ?? const VideoWatchState();
 
-    final bloqueado = video.isPremium && !user.isPremium;
+    final bloqueado = isContentLocked(ref, video.isPremium);
     final assistido = estado.completed;
     final emAndamento = estado.iniciado && !assistido;
     final progresso = estado.progresso(video.durationSeconds);

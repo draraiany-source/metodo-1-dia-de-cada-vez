@@ -9,6 +9,7 @@ import '../../../core/widgets/app_states.dart';
 import '../../../core/widgets/common_widgets.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
+import '../../subscriptions/providers/subscription_providers.dart';
 import '../domain/ebook_models.dart';
 import '../providers/ebook_providers.dart';
 import 'ebook_reader_screen.dart';
@@ -108,7 +109,7 @@ class _EbooksScreenState extends ConsumerState<EbooksScreen> {
                         (context, i) => _EbookCard(
                           ebook: filtrados[i],
                           isFavorite: favoritos.contains(filtrados[i].id),
-                          locked: filtrados[i].isPremium && !user.isPremium,
+                          locked: isContentLocked(ref, filtrados[i].isPremium),
                         ),
                         childCount: filtrados.length,
                       ),

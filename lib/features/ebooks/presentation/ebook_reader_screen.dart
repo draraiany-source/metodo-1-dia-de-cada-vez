@@ -12,6 +12,8 @@ import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
+import '../../subscriptions/presentation/premium_gate_sheet.dart';
+import '../../subscriptions/providers/subscription_providers.dart';
 import '../domain/ebook_models.dart';
 import '../providers/ebook_providers.dart';
 
@@ -118,7 +120,7 @@ class _EbookReaderScreenState extends ConsumerState<EbookReaderScreen> {
     final favoritos = ref.watch(ebookFavoritesProvider);
     final isFavorite = favoritos.contains(widget.ebook.id);
     final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
-    final bloqueado = widget.ebook.isPremium && !user.isPremium;
+    final bloqueado = isContentLocked(ref, widget.ebook.isPremium);
 
     return Scaffold(
       appBar: AppBar(
@@ -152,7 +154,7 @@ class _EbookReaderScreenState extends ConsumerState<EbookReaderScreen> {
       ),
       body: SafeArea(
         child: bloqueado
-            ? _PremiumLock(ebook: widget.ebook)
+            ? PremiumLockBody(contentName: widget.ebook.title)
             : _loading
                 ? const Center(child: CircularProgressIndicator())
                 : _erro != null
@@ -171,38 +173,3 @@ class _EbookReaderScreenState extends ConsumerState<EbookReaderScreen> {
   }
 }
 
-class _PremiumLock extends StatelessWidget {
-  const _PremiumLock({required this.ebook});
-  final Ebook ebook;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.workspace_premium,
-                size: 56, color: AppColors.warning),
-            const SizedBox(height: 16),
-            const Text('E-book exclusivo Premium',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            Text('"${ebook.title}" é exclusivo para assinantes.',
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: AppColors.textSecondary)),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => context.push(Routes.premium),
-              child: const Text('Ver planos Premium'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

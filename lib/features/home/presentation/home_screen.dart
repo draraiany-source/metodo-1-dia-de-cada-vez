@@ -867,8 +867,8 @@ class _QuickGrid extends StatelessWidget {
         onTap: () => AppNavigation.open(context, Routes.running),
       ),
       (
-        title: 'Premium',
-        subtitle: 'Desbloqueie o método completo',
+        title: 'Conheça o Premium',
+        subtitle: 'Planos e assinaturas',
         icon: AppIcons.premium,
         fallback: Icons.workspace_premium_rounded,
         accent: AppColors.warning,

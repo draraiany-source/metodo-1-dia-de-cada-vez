@@ -105,6 +105,21 @@ class AdminScreen extends ConsumerWidget {
         Card(
           margin: const EdgeInsets.only(bottom: 8),
           child: ListTile(
+            leading: const Icon(Icons.workspace_premium_outlined,
+                color: AppColors.secondary),
+            title: const Text('Assinaturas',
+                style: TextStyle(color: Colors.white)),
+            subtitle: const Text(
+                'Testes, planos e status — sem editar cobrança paga',
+                style: TextStyle(color: AppColors.textTertiary, fontSize: 11)),
+            trailing: const Icon(Icons.chevron_right,
+                color: AppColors.textTertiary),
+            onTap: () => context.push(Routes.adminSubscriptions),
+          ),
+        ),
+        Card(
+          margin: const EdgeInsets.only(bottom: 8),
+          child: ListTile(
             leading: const Icon(Icons.manage_accounts_outlined,
                 color: AppColors.secondary),
             title: const Text('Usuários e papéis',

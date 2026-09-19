@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 /// Configuração central de credenciais externas.
 ///
 /// **Nenhuma chave secreta fica aqui.** Os valores são injetados em tempo de
@@ -30,11 +32,21 @@ class AppConfig {
 
   /// IDs dos produtos criados na Play Console e no App Store Connect.
   /// Devem ser idênticos nos dois lados e no RevenueCat.
+  /// Padrão já existente no projeto — não trocar sem alinhar as lojas.
   static const String productMonthly = 'metodo1dia_premium_mensal';
+  static const String productQuarterly = 'metodo1dia_premium_trimestral';
   static const String productYearly = 'metodo1dia_premium_anual';
+
+  /// Cobrança real. `false` até App Store / Play + RevenueCat estarem prontos.
+  /// Ativar só com `--dart-define=PAYMENTS_ENABLED=true`.
+  static const bool paymentsEnabled =
+      bool.fromEnvironment('PAYMENTS_ENABLED', defaultValue: false);
 
   static bool get billingConfigured =>
       revenueCatAndroidKey.isNotEmpty || revenueCatIosKey.isNotEmpty;
+
+  static bool get storePurchasesEnabled =>
+      paymentsEnabled && billingConfigured && !kIsWeb;
 
   // ---------------------------------------------------------------------------
   // IA (Cloud Function que faz proxy da OpenAI)
@@ -90,6 +102,7 @@ class AppConfig {
 
   static Map<String, bool> get status => {
         'Billing (RevenueCat)': billingConfigured,
+        'Cobrança real (PAYMENTS_ENABLED)': paymentsEnabled,
         'IA (Cloud Function)': aiConfigured,
         'Calorias por foto (Cloud Function)': calorieVisionConfigured,
         'Google Maps': mapsConfigured,

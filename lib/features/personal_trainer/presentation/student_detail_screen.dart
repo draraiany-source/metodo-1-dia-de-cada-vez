@@ -8,6 +8,7 @@ import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/app_icon_image.dart';
+import '../../subscriptions/providers/subscription_providers.dart';
 import '../../accompaniment/presentation/anamnesis_screens.dart';
 import '../../accompaniment/presentation/chat_thread_screen.dart';
 import '../../accompaniment/providers/accompaniment_providers.dart';
@@ -342,7 +343,14 @@ class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_student.name),
+        toolbarHeight: 72,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(_student.name),
+            _StudentAccessLabel(userId: _student.userId, active: _student.active),
+          ],
+        ),
         actions: [
           IconButton(
             tooltip: 'Editar dados',
@@ -943,6 +951,36 @@ class _WorkoutsTab extends ConsumerWidget {
                   );
                 },
               ),
+      ),
+    );
+  }
+}
+
+/// Personal vê só acesso (ativo / Premium / gratuito). Sem preço ou loja.
+class _StudentAccessLabel extends ConsumerWidget {
+  const _StudentAccessLabel({required this.userId, required this.active});
+  final String userId;
+  final bool active;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asyncSub = ref.watch(studentAccessProvider(userId));
+    final access = asyncSub.maybeWhen(
+      data: (sub) {
+        if (sub == null) return active ? 'Aluno ativo · Gratuito' : 'Aluno inativo · Gratuito';
+        if (sub.hasPremiumAccess) {
+          return sub.trialActive ? 'Aluno ativo · Teste Premium' : 'Aluno ativo · Premium';
+        }
+        return active ? 'Aluno ativo · Gratuito' : 'Aluno inativo · Gratuito';
+      },
+      orElse: () => active ? 'Aluno ativo' : 'Aluno inativo',
+    );
+    return Text(
+      access,
+      style: const TextStyle(
+        color: AppColors.textSecondary,
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
       ),
     );
   }

@@ -12,6 +12,7 @@ import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
+import '../../subscriptions/providers/subscription_providers.dart';
 import '../data/video_download_service.dart';
 import '../domain/video_models.dart';
 import '../providers/video_providers.dart';
@@ -52,7 +53,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> {
     });
 
     final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
-    if (_current.isPremium && !user.isPremium) {
+    if (isContentLocked(ref, _current.isPremium)) {
       setState(() {
         _loading = false;
         _erro = 'PREMIUM_LOCK';
@@ -202,7 +203,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> {
                   '"${_current.name}" com ${_current.teacher} — '
                   'disponível no Método 1 Dia de Cada Vez 💜'),
             ),
-            if (user.isPremium)
+            if (ref.watch(effectiveAccessProvider).hasPremium)
               IconButton(
                 icon: _baixando
                     ? SizedBox(

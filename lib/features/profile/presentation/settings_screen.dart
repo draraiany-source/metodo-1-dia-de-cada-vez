@@ -203,6 +203,13 @@ class SettingsScreen extends ConsumerWidget {
                 children: [
                   const _SectionLabel('Geral'),
                   _Row(
+                    icon: Icons.workspace_premium_outlined,
+                    iconAsset: AppIcons.premium,
+                    title: 'Planos e Assinaturas',
+                    subtitle: 'Teste grátis, mensal e trimestral',
+                    onTap: () => AppNavigation.open(context, Routes.premium),
+                  ),
+                  _Row(
                     icon: Icons.dark_mode_outlined,
                     title: 'Tema do aplicativo',
                     subtitle: 'Escuro premium (padrão do app)',

@@ -22,6 +22,8 @@ import '../../features/gamification/presentation/leagues_screen.dart';
 import '../../features/community/presentation/community_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/premium/presentation/premium_screen.dart';
+import '../../features/subscriptions/presentation/my_subscription_screen.dart';
+import '../../features/subscriptions/presentation/admin_subscriptions_screen.dart';
 import '../../features/amanda/presentation/amanda_screen.dart';
 import '../../features/admin/presentation/admin_screen.dart';
 import '../../features/admin/presentation/admin_users_roles_screen.dart';
@@ -121,6 +123,9 @@ class Routes {
   static const community = '/community';
   static const profile = '/profile';
   static const premium = '/premium';
+  static const plans = '/premium';
+  static const mySubscription = '/minha-assinatura';
+  static const adminSubscriptions = '/admin/assinaturas';
   static const amanda = '/amanda';
   static const admin = '/admin';
   static const adminUsers = '/admin/users';
@@ -627,6 +632,15 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.premium,
         pageBuilder: (_, s) => _fadeSlide(s, const PremiumScreen()),
+      ),
+      GoRoute(
+        path: Routes.mySubscription,
+        pageBuilder: (_, s) => _fadeSlide(s, const MySubscriptionScreen()),
+      ),
+      GoRoute(
+        path: Routes.adminSubscriptions,
+        pageBuilder: (_, s) =>
+            _fadeSlide(s, const AdminSubscriptionsScreen()),
       ),
       GoRoute(
         path: Routes.gamification,

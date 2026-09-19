@@ -9,6 +9,7 @@ import '../../../core/widgets/app_states.dart';
 import '../../../core/widgets/common_widgets.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
+import '../../subscriptions/providers/subscription_providers.dart';
 import '../domain/course_models.dart';
 import '../providers/course_providers.dart';
 import 'course_detail_screen.dart';
@@ -101,7 +102,7 @@ class _CoursesScreenState extends ConsumerState<CoursesScreen> {
                       (context, i) => _CourseCard(
                         course: filtrados[i],
                         isFavorite: favoritos.contains(filtrados[i].id),
-                        locked: filtrados[i].isPremium && !user.isPremium,
+                        locked: isContentLocked(ref, filtrados[i].isPremium),
                         progresso: progresso.progressFor(filtrados[i]),
                       ),
                       childCount: filtrados.length,
