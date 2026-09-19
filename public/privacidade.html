@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade - Método 1 Dia de Cada Vez</title>
+<meta name="description" content="Política de Privacidade do aplicativo Método 1 Dia de Cada Vez.">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #0f0f12; color: #f5f5f5; font-family: Arial, Helvetica, sans-serif; line-height: 1.7; }
+.topo { background: linear-gradient(135deg, #ff4fa3, #8b2cff); padding: 32px 20px; text-align: center; }
+.topo h1 { margin: 0; color: white; font-size: 32px; }
+.topo p { margin-top: 10px; color: white; font-size: 16px; }
+.container { max-width: 900px; margin: auto; padding: 40px 20px 60px; }
+h2 { color: #ff4fa3; margin-top: 34px; margin-bottom: 10px; }
+p, li { color: #e7e7e7; font-size: 16px; }
+ul { padding-left: 24px; }
+a { color: #d59cff; word-break: break-word; }
+.alerta { margin-top: 20px; padding: 18px; border-left: 4px solid #ff4fa3; background: #19191f; border-radius: 8px; }
+.contato { margin-top: 32px; padding: 22px; background: #19191f; border: 1px solid #31313a; border-radius: 12px; }
+.rodape { text-align: center; border-top: 1px solid #292931; margin-top: 40px; padding-top: 24px; color: #aaa; font-size: 14px; }
+</style>
+</head>
+<body>
+<header class="topo">
+<h1>Política de Privacidade</h1>
+<p>Método 1 Dia de Cada Vez</p>
+</header>
+<main class="container">
+
+<p>
+Esta Política de Privacidade explica como o aplicativo
+<strong>Método 1 Dia de Cada Vez</strong> trata informações quando você
+cria uma conta e usa os recursos do app.
+</p>
+<p>
+A descrição abaixo reflete o que o projeto implementa hoje.
+Não afirmamos coleta por um serviço que não esteja no aplicativo.
+</p>
+
+<h2>1. Quem é o controlador</h2>
+<p>
+O responsável pelo tratamento é o operador do aplicativo
+Método 1 Dia de Cada Vez. O canal oficial de privacidade e suporte é
+<a href="mailto:1diadecadavezsuporte@gmail.com">1diadecadavezsuporte@gmail.com</a>.
+</p>
+<div class="alerta">
+<strong>Pendência documental:</strong>
+razão social, CNPJ, endereço e, se houver, encarregado (DPO) ainda
+não foram informados para constar nesta página. Sem esses dados a
+publicação nas lojas pode ser recusada. Não inventamos esses dados.
+</div>
+
+<h2>2. Dados tratados no app (quando você usa o recurso)</h2>
+<ul>
+<li>Conta: e-mail, senha (Firebase Authentication) e nome.</li>
+<li>Foto de perfil, quando você envia.</li>
+<li>Treinos, cronômetro, histórico de treinos e corridas.</li>
+<li>Hidratação (copos/meta).</li>
+<li>Evolução: peso, altura, IMC, medidas e fotos de progresso, se você registrar.</li>
+<li>Alimentação: diário, receitas próprias e foto de refeição para estimativa, se usar.</li>
+<li>Anamnese e acompanhamento com a Personal, se você preencher ou conversar.</li>
+<li>Agenda de consultoria, quando usar.</li>
+<li>Mensagens com a Personal.</li>
+<li>Token de notificação, se você autorizar push.</li>
+<li>Assinatura/teste no Firestore e, quando a cobrança estiver ativa, dados de compra via loja/RevenueCat.</li>
+<li>Localização apenas durante corrida com GPS, se você autorizar.</li>
+</ul>
+<p>
+O app <strong>não</strong> lê HealthKit nem Health Connect na versão atual
+(os registros de saúde vêm do que você informa no próprio app).
+O app <strong>não</strong> usa identificador de publicidade para anúncios.
+Login com Google não está ativo no código do app.
+</p>
+
+<h2>3. Finalidades</h2>
+<ul>
+<li>Criar e autenticar a conta.</li>
+<li>Operar treinos, hidratação, evolução, alimentação e conteúdos.</li>
+<li>Permitir acompanhamento pela Personal ou Admin quando você estiver vinculada.</li>
+<li>Enviar notificações que você autorizar.</li>
+<li>Estimativas de refeição e respostas de IA, quando o servidor estiver configurado.</li>
+<li>Estabilidade (Crashlytics) e métricas de uso (Analytics), sem Advertising ID.</li>
+<li>Prevenir abuso e cumprir obrigação legal.</li>
+</ul>
+
+<h2>4. Saúde, treino, alimentação e IA</h2>
+<div class="alerta">
+Os recursos são de organização, educação e bem-estar.
+Não substituem médico, nutricionista ou psicólogo.
+Estimativas de calorias e respostas de IA são aproximadas e podem falhar.
+O app não promete resultado físico.
+</div>
+
+<h2>5. Fotos, câmera e galeria</h2>
+<p>
+Câmera e fotos só são pedidas para o recurso que você abriu
+(perfil, progresso, refeição ou anexo no chat).
+A análise de refeição envia a imagem ao servidor (Cloud Function)
+para a estimativa; o salvamento no Storage ocorre se você confirmar o registro.
+</p>
+
+<h2>6. Localização</h2>
+<p>
+Usada somente em primeiro plano na corrida com GPS, se você autorizar.
+Não rastreamos localização em segundo plano.
+</p>
+
+<h2>7. Notificações</h2>
+<p>
+O app pode pedir permissão para lembretes e avisos.
+Você pode desligar nas configurações do aparelho.
+</p>
+
+<h2>8. Serviços de terceiros verificados no projeto</h2>
+<ul>
+<li><strong>Firebase / Google:</strong> Authentication, Cloud Firestore, Cloud Storage, Cloud Messaging, Analytics, Crashlytics, App Check e Cloud Functions.</li>
+<li><strong>RevenueCat:</strong> infraestrutura de assinatura (cobrança real desligada no app até autorização).</li>
+<li><strong>OpenAI:</strong> apenas via Cloud Functions, quando a chave estiver no servidor. A chave não fica no aplicativo.</li>
+<li><strong>Google Play / App Store:</strong> se houver compra, o processamento financeiro é da loja.</li>
+</ul>
+
+<h2>9. Compartilhamento</h2>
+<p>
+Não vendemos dados pessoais.
+Dados podem ser processados pelos prestadores acima e pela Personal/Admin
+para alunas vinculadas, conforme as regras do aplicativo.
+Também podemos compartilhar se a lei ou ordem judicial exigir.
+</p>
+
+<h2>10. Exclusão da conta e dos dados</h2>
+<p>
+Em <strong>Configurações → Excluir minha conta</strong> você confirma com a
+palavra EXCLUIR. Se o Firebase pedir login recente, entre de novo e tente outra vez.
+</p>
+<p>O fluxo do app tenta apagar, quando as regras permitem:</p>
+<ul>
+<li>a conta no Firebase Authentication;</li>
+<li>o perfil em <code>users/{uid}</code> e subcoleções (diário, água, receitas próprias);</li>
+<li>histórico de treino, corrida, hábitos, progresso e notificações do dono;</li>
+<li>fotos no Storage em <code>users/{uid}</code>;</li>
+<li>anamnese, conversas, agenda e registros de acompanhamento que o próprio usuário tem permissão de apagar.</li>
+</ul>
+<p>Não apagamos em silêncio o que o cliente não pode apagar. Permanecem, até limpeza administrativa ou prazo legal:</p>
+<ul>
+<li>assinatura/teste em <code>subscriptions</code> (o cliente não pode excluir esse documento);</li>
+<li>recibos e assinaturas nas lojas — cancele na Google Play ou App Store;</li>
+<li>mensagens de chat (<code>pt_messages</code> — exclusão só Admin);</li>
+<li>vínculo em <code>pt_students</code> (aluno não apaga o cadastro da Personal);</li>
+<li>logs de servidor/IA (<code>ai_usage</code>, <code>pt_ai_logs</code>);</li>
+<li>cupons resgatados e códigos de indicação;</li>
+<li>eventos já enviados ao Analytics/Crashlytics;</li>
+<li>tokens de calendário da Personal, se existirem (só servidor).</li>
+</ul>
+<p>
+Para pedir exclusão de um dado específico (por exemplo, só fotos),
+use Configurações → Solicitar exclusão de dados ou o e-mail de suporte.
+Não oferecemos exportação automática completa ainda.
+</p>
+
+<h2>11. Direitos</h2>
+<p>
+Você pode pedir confirmação, acesso, correção, exclusão e informações
+sobre o tratamento, pelo app ou por
+<a href="mailto:1diadecadavezsuporte@gmail.com">1diadecadavezsuporte@gmail.com</a>.
+</p>
+
+<h2>12. Retenção</h2>
+<p>
+Dados da conta ativa ficam enquanto a conta existir.
+Após exclusão, só o que a lei, a prevenção de fraude ou o funcionamento
+técnico das lojas exigirem deve permanecer.
+</p>
+
+<h2>13. Crianças e adolescentes</h2>
+<p>
+O uso deve respeitar a classificação etária das lojas e o consentimento
+aplicável. A classificação oficial ainda será definida no cadastro das lojas.
+</p>
+
+<h2>14. Alterações</h2>
+<p>
+Esta página será atualizada se o tratamento de dados mudar.
+A versão vigente é a publicada neste endereço.
+</p>
+
+<h2>15. Contato</h2>
+<div class="contato">
+<p>Suporte e privacidade:</p>
+<p>
+<a href="mailto:1diadecadavezsuporte@gmail.com">1diadecadavezsuporte@gmail.com</a>
+</p>
+<p>
+<a href="https://metodo1dia-app.web.app/termos.html">Termos de Uso</a>
+</p>
+</div>
+
+<div class="rodape">
+<p>Última atualização: 19 de setembro de 2026.</p>
+<p>Método 1 Dia de Cada Vez</p>
+</div>
+</main>
+</body>
+</html>

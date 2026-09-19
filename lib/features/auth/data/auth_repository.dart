@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/auth/user_role.dart';
 import '../../../core/constants/app_constants.dart';
@@ -87,6 +88,16 @@ class AuthRepository {
     AppUser user;
     if (doc.exists) {
       user = AppUser.fromMap(uid, doc.data()!);
+      final authName = name.trim();
+      if (user.name.trim().isEmpty && authName.isNotEmpty) {
+        user = user.copyWith(name: authName);
+        try {
+          await _db.collection(AppConstants.cUsers).doc(uid).set(
+            {'name': authName},
+            SetOptions(merge: true),
+          );
+        } catch (_) {/* leitura do perfil não pode falhar por isso */}
+      }
     } else {
       // Cadastro público sempre nasce ALUNO. Personal/Admin só via Admin Técnico.
       final myCode = uid.substring(0, 6).toUpperCase();
@@ -288,8 +299,62 @@ class AuthRepository {
       await userRef.delete();
     } catch (_) {}
 
+    await _purgeOwnedAccompaniment(uid);
+
     try {
       await _deleteStoragePrefix('users/$uid');
+    } catch (_) {}
+
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('trainer_chat_history');
+      await prefs.remove('trainer_profile');
+      await prefs.remove('nutrition_ai_privacy_accepted_v1');
+    } catch (_) {}
+  }
+
+  /// Apaga o que as rules já deixam o dono/aluno apagar.
+  /// Não altera RBAC. Não tenta apagar o que só Admin/servidor alcança.
+  Future<void> _purgeOwnedAccompaniment(String uid) async {
+    final studentIds = <String>{};
+    try {
+      final mine =
+          await _db.collection('pt_students').where('userId', isEqualTo: uid).get();
+      for (final doc in mine.docs) {
+        studentIds.add(doc.id);
+      }
+    } catch (_) {}
+
+    for (final sid in studentIds) {
+      try {
+        await _db.collection('pt_anamnesis').doc(sid).delete();
+      } catch (_) {}
+      for (final col in [
+        'pt_assessments',
+        'pt_photos',
+        'pt_loads',
+        'pt_sessions',
+        'pt_conversations',
+        'pt_appointments',
+      ]) {
+        try {
+          final snap =
+              await _db.collection(col).where('studentId', isEqualTo: sid).get();
+          for (final doc in snap.docs) {
+            await doc.reference.delete();
+          }
+        } catch (_) {}
+      }
+    }
+
+    try {
+      final convs = await _db
+          .collection('pt_conversations')
+          .where('studentUserId', isEqualTo: uid)
+          .get();
+      for (final doc in convs.docs) {
+        await doc.reference.delete();
+      }
     } catch (_) {}
   }
 

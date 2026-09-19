@@ -61,14 +61,11 @@ class SettingsScreen extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                   'Tem certeza de que deseja excluir sua conta?\n\n'
-                  'Essa ação é permanente: perfil, progresso e dados '
-                  'vinculados à conta serão excluídos. Informações que a lei '
-                  'obrigar manter (por exemplo, registros fiscais de compra) '
-                  'podem ser retidas pelo prazo legal. Digite EXCLUIR para '
-                  'confirmar.',
-                  style: TextStyle(color: AppColors.textSecondary)),
+                  '${AppLegal.accountDeletionSummary}\n\n'
+                  'Digite EXCLUIR para confirmar.',
+                  style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
               TextField(
                 controller: controller,
@@ -302,14 +299,58 @@ class SettingsScreen extends ConsumerWidget {
                   _Row(
                     icon: Icons.folder_shared_outlined,
                     title: 'Gerenciar dados pessoais',
-                    onTap: () => _infoDialog(context, 'Dados pessoais',
-                        'Seus dados de perfil, progresso e preferências ficam salvos na sua conta e neste dispositivo. Para alterações específicas, use Editar perfil.'),
+                    onTap: () => _infoDialog(
+                      context,
+                      'Dados pessoais',
+                      'O que você registra fica na sua conta: nome, e-mail, '
+                      'foto, treinos, hidratação, peso/medidas, alimentação, '
+                      'anamnese e mensagens com a Personal.\n\n'
+                      'Para corrigir perfil, use Editar perfil. '
+                      'Para apagar a conta, use Excluir minha conta. '
+                      'Para um item específico, use Solicitar exclusão de dados.',
+                    ),
+                  ),
+                  _Row(
+                    icon: Icons.delete_sweep_outlined,
+                    title: 'Solicitar exclusão de dados',
+                    subtitle: 'Pedido pontual por e-mail',
+                    onTap: () async {
+                      if (!AppLegal.hasSupportEmail) {
+                        _infoDialog(context, 'Exclusão de dados',
+                            'O e-mail de suporte ainda não está configurado.');
+                        return;
+                      }
+                      await launchUrl(
+                        Uri(
+                          scheme: 'mailto',
+                          path: AppLegal.supportEmail,
+                          queryParameters: {
+                            'subject': 'Solicitação de exclusão de dados',
+                            'body':
+                                'Quero solicitar a exclusão de dados específicos '
+                                'da minha conta no Método 1 Dia de Cada Vez.\n\n'
+                                'Descreva o que deve ser apagado:\n',
+                          },
+                        ),
+                        mode: LaunchMode.externalApplication,
+                      );
+                    },
                   ),
                   _Row(
                     icon: Icons.download_outlined,
                     title: 'Baixar meus dados',
-                    onTap: () => _infoDialog(context, 'Baixar meus dados',
-                        'A exportação completa dos seus dados ainda não está disponível — em breve você poderá solicitar uma cópia por aqui.'),
+                    onTap: () => _infoDialog(
+                      context,
+                      'Baixar meus dados',
+                      'A exportação automática ainda não existe. '
+                      'Peça uma cópia em 1diadecadavezsuporte@gmail.com.',
+                    ),
+                  ),
+                  _Row(
+                    icon: Icons.manage_accounts_outlined,
+                    title: 'Gerenciar assinatura',
+                    subtitle: 'Google Play ou App Store',
+                    onTap: () => AppNavigation.open(context, Routes.mySubscription),
                   ),
                   _Row(
                     icon: Icons.description_outlined,
