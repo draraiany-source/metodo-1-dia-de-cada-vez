@@ -122,8 +122,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/images/icons_3d/
-    - assets/images/icons_3d_pack2/
+    # icons_3d/ e icons_3d_pack2/ ficam no disco (debug showcase) mas NAO
+    # entram no APK/AAB de release: zero uso em telas Aluno/Personal/Admin.
     - assets/images/mascote/
     - assets/images/home/
     - assets/images/treinos/
@@ -151,14 +151,11 @@ flutter:
     - assets/icons/mood/
     - assets/icons/achievements/
     - assets/icons/premium/
-    - assets/icons/neon/
-    - assets/icons/neon/navegacao/
-    - assets/icons/neon/saude/
-    - assets/icons/neon/nutricao/
-    - assets/icons/neon/corrida/
+    # neon/{navegacao,saude,nutricao,conquistas,perfil} nao tem referencia
+    # em lib/. Arquivos permanecem no disco e nao entram no bundle.
+    # A pasta neon/ so tem subpastas — declarar a raiz quebra o build.
+    - assets/icons/neon/corrida/icone_neon_de_corrida_e_saude_cardiaca.png
     - assets/icons/neon/treinos/
-    - assets/icons/neon/conquistas/
-    - assets/icons/neon/perfil/
     - assets/content/
     - assets/content/treinos_catalogo_oficial.json
     - assets/animations/

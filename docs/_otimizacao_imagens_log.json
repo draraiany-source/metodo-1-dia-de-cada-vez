@@ -1,0 +1,6609 @@
+{
+  "files_seen": 674,
+  "files_logged": 660,
+  "files_rewritten": 495,
+  "saved_bytes": 304716280,
+  "saved_mb": 290.6,
+  "rows": [
+    {
+      "path": "assets/images/recipes/neon/40_icone_neon_de_torrada_com_abacate.png",
+      "before": 2112750,
+      "after": 202925,
+      "saved": 1909825,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/38_icone_neon_de_suco_detox_verde.png",
+      "before": 2127065,
+      "after": 220179,
+      "saved": 1906886,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/19_sanduiche_neon_de_frango_grelhado.png",
+      "before": 2091748,
+      "after": 197489,
+      "saved": 1894259,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/28_icone_neon_de_frango_grelhado_e_legumes.png",
+      "before": 2073787,
+      "after": 197684,
+      "saved": 1876103,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/32_icone_neon_de_salada_caesar.png",
+      "before": 2057131,
+      "after": 182833,
+      "saved": 1874298,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/06_file_de_peixe_grelhado_neon_com_legumes.png",
+      "before": 2040725,
+      "after": 179035,
+      "saved": 1861690,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/07_frango_grelhado_neon_com_legumes.png",
+      "before": 2050278,
+      "after": 191674,
+      "saved": 1858604,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/27_icone_neon_de_bowl_de_quinoa_colorido.png",
+      "before": 2030678,
+      "after": 176141,
+      "saved": 1854537,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/21_suco_verde_detox_neon.png",
+      "before": 2042697,
+      "after": 190343,
+      "saved": 1852354,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/14_parfait_de_iogurte_com_neon_vibrante.png",
+      "before": 2025907,
+      "after": 175658,
+      "saved": 1850249,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/18_sanduiche_integral_neon_gourmet.png",
+      "before": 2025994,
+      "after": 181121,
+      "saved": 1844873,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/39_icone_neon_de_tapioca_recheada.png",
+      "before": 2027358,
+      "after": 190119,
+      "saved": 1837239,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/02_bowl_de_salada_neon_com_frango_grelhado.png",
+      "before": 2005631,
+      "after": 175186,
+      "saved": 1830445,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/31_icone_neon_de_panquecas_com_frutas.png",
+      "before": 2029399,
+      "after": 199519,
+      "saved": 1829880,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/11_omelete_neon_de_espinafre_e_cogumelos.png",
+      "before": 2017827,
+      "after": 188943,
+      "saved": 1828884,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/34_icone_neon_de_salmao_grelhado.png",
+      "before": 2009979,
+      "after": 181775,
+      "saved": 1828204,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/16_parfait_neon_de_frutas_vermelhas.png",
+      "before": 2005949,
+      "after": 181226,
+      "saved": 1824723,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/04_crepioca_de_frango_neon.png",
+      "before": 2008034,
+      "after": 187094,
+      "saved": 1820940,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/receitas.png",
+      "before": 2029768,
+      "after": 209382,
+      "saved": 1820386,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/29_icone_neon_de_mix_de_castanhas.png",
+      "before": 2012007,
+      "after": 192755,
+      "saved": 1819252,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/17_pote_neon_de_aveia_com_frutas.png",
+      "before": 1994789,
+      "after": 181551,
+      "saved": 1813238,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/03_bowl_de_salmao_neon_com_quinoa.png",
+      "before": 1978679,
+      "after": 172598,
+      "saved": 1806081,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/26_icone_neon_de_bowl_de_acai.png",
+      "before": 1998936,
+      "after": 193191,
+      "saved": 1805745,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/36_icone_neon_de_sopa_de_abobora_cremosa.png",
+      "before": 1987284,
+      "after": 186639,
+      "saved": 1800645,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/24_wrap_neon_de_frango_e_vegetais.png",
+      "before": 1963247,
+      "after": 163185,
+      "saved": 1800062,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/23_tigela_neon_de_iogurte_com_frutas.png",
+      "before": 1958153,
+      "after": 172036,
+      "saved": 1786117,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/12_ovos_mexidos_neon_com_acompanhamentos_frescos.png",
+      "before": 1977670,
+      "after": 191649,
+      "saved": 1786021,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/25_icone_neon_de_aveia_com_frutas.png",
+      "before": 1953570,
+      "after": 168659,
+      "saved": 1784911,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/22_tigela_neon_de_frango_grelhado.png",
+      "before": 1955583,
+      "after": 181264,
+      "saved": 1774319,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/05_cuscuz_com_ovo_fit_neon.png",
+      "before": 1943920,
+      "after": 178265,
+      "saved": 1765655,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/08_massa_integral_neon_com_frango_grelhado.png",
+      "before": 1946212,
+      "after": 182048,
+      "saved": 1764164,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/15_parfait_neon_de_frutas_e_granola.png",
+      "before": 1933202,
+      "after": 171523,
+      "saved": 1761679,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/09_muffin_de_chocolate_neon_futurista.png",
+      "before": 1952067,
+      "after": 206922,
+      "saved": 1745145,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/30_icone_neon_de_omelete_gourmet.png",
+      "before": 1918265,
+      "after": 177682,
+      "saved": 1740583,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/01_batatas_assadas_com_brilho_neon.png",
+      "before": 1931216,
+      "after": 191744,
+      "saved": 1739472,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/10_omelete_de_espinafre_neon_com_tomates.png",
+      "before": 1912069,
+      "after": 173990,
+      "saved": 1738079,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/35_icone_neon_de_sopa_caseira.png",
+      "before": 1886699,
+      "after": 157721,
+      "saved": 1728978,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/13_panquecas_neon_com_frutas_e_mel.png",
+      "before": 1893705,
+      "after": 175314,
+      "saved": 1718391,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/20_smoothie_de_frutas_neon.png",
+      "before": 1848435,
+      "after": 171505,
+      "saved": 1676930,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/37_icone_neon_de_sopa_de_legumes.png",
+      "before": 1823144,
+      "after": 147910,
+      "saved": 1675234,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_com_abdomen_definido.png",
+      "before": 1814193,
+      "after": 157279,
+      "saved": 1656914,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_hip_thrust_dramatico.png",
+      "before": 1842159,
+      "after": 215180,
+      "saved": 1626979,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/nutricao/tigela_de_salada_neon_vibrante.png",
+      "before": 1748891,
+      "after": 164759,
+      "saved": 1584132,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/diario.png",
+      "before": 1767232,
+      "after": 189514,
+      "saved": 1577718,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/nutricao/icone_neon_de_salada_saudavel.png",
+      "before": 1738846,
+      "after": 165265,
+      "saved": 1573581,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/recipes/neon/33_icone_neon_de_salada_saudavel.png",
+      "before": 1738846,
+      "after": 165265,
+      "saved": 1573581,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/nutricao/icone_neon_de_bowl_saudavel.png",
+      "before": 1734874,
+      "after": 165945,
+      "saved": 1568929,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_torso_atletico.png",
+      "before": 1703444,
+      "after": 158729,
+      "saved": 1544715,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/comunidade.png",
+      "before": 1740189,
+      "after": 196682,
+      "saved": 1543507,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_de_leg_press.png",
+      "before": 1713117,
+      "after": 195550,
+      "saved": 1517567,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/meditacoes.png",
+      "before": 1691703,
+      "after": 187090,
+      "saved": 1504613,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_elevacao_de_pernas.png",
+      "before": 1698026,
+      "after": 208486,
+      "saved": 1489540,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_mesa_flexora.png",
+      "before": 1680804,
+      "after": 202485,
+      "saved": 1478319,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/corrida/corredora_neon_com_coracao_pulsante.png",
+      "before": 1636547,
+      "after": 162351,
+      "saved": 1474196,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_com_halter_futurista.png",
+      "before": 1630325,
+      "after": 174179,
+      "saved": 1456146,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/conquistas/coroa_dourada_neon_em_vidro_luminoso.png",
+      "before": 1602506,
+      "after": 156108,
+      "saved": 1446398,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/corrida/icone_neon_de_corrida_e_batimentos.png",
+      "before": 1620722,
+      "after": 175443,
+      "saved": 1445279,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_com_rosca_direta.png",
+      "before": 1634789,
+      "after": 195987,
+      "saved": 1438802,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_haltere_futurista.png",
+      "before": 1599016,
+      "after": 163478,
+      "saved": 1435538,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_alongamento_fitness.png",
+      "before": 1593520,
+      "after": 158337,
+      "saved": 1435183,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/treinos.png",
+      "before": 1621749,
+      "after": 189715,
+      "saved": 1432034,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/analisar_refeicao_ia.png",
+      "before": 1579563,
+      "after": 158034,
+      "saved": 1421529,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/nutricao/icone_neon_de_camera_com_salada.png",
+      "before": 1567574,
+      "after": 146185,
+      "saved": 1421389,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_com_abdomen_esculpido.png",
+      "before": 1580470,
+      "after": 164325,
+      "saved": 1416145,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_com_halteres.png",
+      "before": 1579912,
+      "after": 163935,
+      "saved": 1415977,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/extensao_de_triceps_neon_na_academia.png",
+      "before": 1616746,
+      "after": 208734,
+      "saved": 1408012,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/conquistas/icone_neon_de_coroa_dourada.png",
+      "before": 1549228,
+      "after": 148623,
+      "saved": 1400605,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_puxada_na_maquina.png",
+      "before": 1573272,
+      "after": 181884,
+      "saved": 1391388,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_cronometro_em_vidro.png",
+      "before": 1528788,
+      "after": 145783,
+      "saved": 1383005,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_alongamento_feminino.png",
+      "before": 1550039,
+      "after": 169442,
+      "saved": 1380597,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_em_vidro_3d.png",
+      "before": 1525858,
+      "after": 151843,
+      "saved": 1374015,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/inicio.png",
+      "before": 1535390,
+      "after": 165588,
+      "saved": 1369802,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_em_agachamento.png",
+      "before": 1524534,
+      "after": 155752,
+      "saved": 1368782,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/corrida/icone_neon_de_corrida_e_saude_cardiaca.png",
+      "before": 1512149,
+      "after": 147013,
+      "saved": 1365136,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/personal-ai/01_chat_com_amanda.png",
+      "before": 1606725,
+      "after": 247434,
+      "saved": 1359291,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/saude/icone_neon_de_busca_cardiaca.png",
+      "before": 1511371,
+      "after": 152105,
+      "saved": 1359266,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/navegacao/icone_neon_de_calendario_com_checkmark.png",
+      "before": 1502044,
+      "after": 145568,
+      "saved": 1356476,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/saude/icone_neon_de_pulso_vital.png",
+      "before": 1510447,
+      "after": 155592,
+      "saved": 1354855,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/perfil/icone_neon_de_avatar_feminino.png",
+      "before": 1500551,
+      "after": 145802,
+      "saved": 1354749,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/corrida/icone_neon_de_rota_gps.png",
+      "before": 1495759,
+      "after": 142941,
+      "saved": 1352818,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/saude/icone_neon_de_corrida_e_pulso.png",
+      "before": 1555034,
+      "after": 204493,
+      "saved": 1350541,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/saude/icone_neon_de_meditacao_com_fones.png",
+      "before": 1492277,
+      "after": 145480,
+      "saved": 1346797,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_alongamento.png",
+      "before": 1486590,
+      "after": 139921,
+      "saved": 1346669,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_remada_baixa_fitness.png",
+      "before": 1560342,
+      "after": 215562,
+      "saved": 1344780,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/saude/icone_neon_de_busca_e_batimentos.png",
+      "before": 1488347,
+      "after": 145393,
+      "saved": 1342954,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_halteres_fitness.png",
+      "before": 1496156,
+      "after": 153666,
+      "saved": 1342490,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/corrida_gps.png",
+      "before": 1496508,
+      "after": 159452,
+      "saved": 1337056,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/metas.png",
+      "before": 1467700,
+      "after": 132525,
+      "saved": 1335175,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/evolucao.png",
+      "before": 1492850,
+      "after": 161035,
+      "saved": 1331815,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/personal-ai/03_area_da_personal.png",
+      "before": 1566037,
+      "after": 236162,
+      "saved": 1329875,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_extensao_de_pernas.png",
+      "before": 1514211,
+      "after": 185221,
+      "saved": 1328990,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/conquistas/coroa_neon_em_icone_premium.png",
+      "before": 1467494,
+      "after": 139193,
+      "saved": 1328301,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/conquistas/icone_neon_de_trofeu_glorioso.png",
+      "before": 1468576,
+      "after": 140854,
+      "saved": 1327722,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_com_agachamento_sumo.png",
+      "before": 1519749,
+      "after": 200269,
+      "saved": 1319480,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/navegacao/icone_de_casa_neon_em_vidro.png",
+      "before": 1460425,
+      "after": 141095,
+      "saved": 1319330,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/corrida/icone_neon_de_treino_na_escada.png",
+      "before": 1509488,
+      "after": 194113,
+      "saved": 1315375,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/ajuda.png",
+      "before": 1460753,
+      "after": 146419,
+      "saved": 1314334,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/suporte.png",
+      "before": 1450966,
+      "after": 138453,
+      "saved": 1312513,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/desafios.png",
+      "before": 1448445,
+      "after": 143565,
+      "saved": 1304880,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/conquistas/icone_neon_de_crescimento_progressivo.png",
+      "before": 1483261,
+      "after": 179226,
+      "saved": 1304035,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/personal-ai/06_assistente_ia.png",
+      "before": 1540943,
+      "after": 238852,
+      "saved": 1302091,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/personal-ai/05_analisar_com_ia.png",
+      "before": 1527331,
+      "after": 225974,
+      "saved": 1301357,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/conquistas/icone_neon_de_grafico_ascendente.png",
+      "before": 1428768,
+      "after": 138426,
+      "saved": 1290342,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/hidratacao.png",
+      "before": 1505490,
+      "after": 219384,
+      "saved": 1286106,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/personal-ai/07_insights_ia.png",
+      "before": 1524083,
+      "after": 238144,
+      "saved": 1285939,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_em_alongamento.png",
+      "before": 1482429,
+      "after": 199754,
+      "saved": 1282675,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/notificacoes.png",
+      "before": 1423141,
+      "after": 141143,
+      "saved": 1281998,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/navegacao/icone_neon_de_checklist_em_vidro.png",
+      "before": 1409941,
+      "after": 133894,
+      "saved": 1276047,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/saude/garrafa_neon_com_gota_luminosa.png",
+      "before": 1397884,
+      "after": 133723,
+      "saved": 1264161,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/sair.png",
+      "before": 1400689,
+      "after": 138606,
+      "saved": 1262083,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_swing_com_kettlebell.png",
+      "before": 1464649,
+      "after": 202817,
+      "saved": 1261832,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/navegacao/icone_de_casa_neon_em_vidro_3d.png",
+      "before": 1394524,
+      "after": 135067,
+      "saved": 1259457,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/conquistas/icone_fitness_coroa_neon.png",
+      "before": 1394559,
+      "after": 135227,
+      "saved": 1259332,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_em_movimento.png",
+      "before": 1456981,
+      "after": 201254,
+      "saved": 1255727,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/personal-ai/08_sugestao_de_resposta.png",
+      "before": 1483656,
+      "after": 233916,
+      "saved": 1249740,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_polichinelo_fitness.png",
+      "before": 1456596,
+      "after": 208049,
+      "saved": 1248547,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_abdominais_futuristas.png",
+      "before": 1422610,
+      "after": 174909,
+      "saved": 1247701,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_remada_com_halter.png",
+      "before": 1431637,
+      "after": 184253,
+      "saved": 1247384,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/corrida/ciclista_neon_em_bicicleta_spinning.png",
+      "before": 1434035,
+      "after": 190313,
+      "saved": 1243722,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/bem_estar.png",
+      "before": 1367600,
+      "after": 125063,
+      "saved": 1242537,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/navegacao/icone_neon_de_player_de_video.png",
+      "before": 1369898,
+      "after": 128257,
+      "saved": 1241641,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/personal-ai/10_pontos_de_atencao.png",
+      "before": 1451792,
+      "after": 212948,
+      "saved": 1238844,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/personal-ai/04_anamnese.png",
+      "before": 1464703,
+      "after": 227976,
+      "saved": 1236727,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/personal-ai/02_agenda_consultoria.png",
+      "before": 1469251,
+      "after": 233621,
+      "saved": 1235630,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/saude/icone_neon_de_busca_e_pulso_cardiaco.png",
+      "before": 1426179,
+      "after": 193256,
+      "saved": 1232923,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/configuracoes.png",
+      "before": 1373338,
+      "after": 140909,
+      "saved": 1232429,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_triceps_na_polia.png",
+      "before": 1420656,
+      "after": 191130,
+      "saved": 1229526,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/personal-ai/09_resumo_da_conversa.png",
+      "before": 1461143,
+      "after": 231976,
+      "saved": 1229167,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/sono.png",
+      "before": 1341838,
+      "after": 119631,
+      "saved": 1222207,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/corrida/icone_fitness_neon_na_esteira.png",
+      "before": 1409383,
+      "after": 187177,
+      "saved": 1222206,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/corrida/icone_neon_de_corredor_cardiaco.png",
+      "before": 1414529,
+      "after": 192623,
+      "saved": 1221906,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_elevacao_de_panturrilha.png",
+      "before": 1412394,
+      "after": 194607,
+      "saved": 1217787,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_abdominais_futurista.png",
+      "before": 1389003,
+      "after": 171912,
+      "saved": 1217091,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_elevacao_lateral.png",
+      "before": 1409232,
+      "after": 197619,
+      "saved": 1211613,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/checkin.png",
+      "before": 1438567,
+      "after": 227134,
+      "saved": 1211433,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/habitos.png",
+      "before": 1438567,
+      "after": 227134,
+      "saved": 1211433,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_kickback_na_polia.png",
+      "before": 1402921,
+      "after": 197662,
+      "saved": 1205259,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_hip_thrust_com_barra.png",
+      "before": 1393928,
+      "after": 193098,
+      "saved": 1200830,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/corrida/icone_neon_de_corrida_em_movimento.png",
+      "before": 1396187,
+      "after": 197505,
+      "saved": 1198682,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/corrida/icone_neon_de_atleta_caminhando.png",
+      "before": 1386473,
+      "after": 191366,
+      "saved": 1195107,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_agachamento_com_barra.png",
+      "before": 1380796,
+      "after": 185980,
+      "saved": 1194816,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_lunge_com_halteres.png",
+      "before": 1387635,
+      "after": 193618,
+      "saved": 1194017,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/premium.png",
+      "before": 1323737,
+      "after": 136965,
+      "saved": 1186772,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/burpee_em_prancha_neon.png",
+      "before": 1373360,
+      "after": 187883,
+      "saved": 1185477,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_com_braco_musculoso.png",
+      "before": 1357571,
+      "after": 173569,
+      "saved": 1184002,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/perfil.png",
+      "before": 1318691,
+      "after": 154601,
+      "saved": 1164090,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_supino_fitness.png",
+      "before": 1352962,
+      "after": 190501,
+      "saved": 1162461,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_fitness_neon_de_supino_com_halteres.png",
+      "before": 1350873,
+      "after": 191547,
+      "saved": 1159326,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_treino_de_costas.png",
+      "before": 1344112,
+      "after": 185116,
+      "saved": 1158996,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/videos.png",
+      "before": 1302325,
+      "after": 155972,
+      "saved": 1146353,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_flexao_atletica.png",
+      "before": 1331729,
+      "after": 187438,
+      "saved": 1144291,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/extras_hidratacao/hidratacao_extra_1.png",
+      "before": 1347700,
+      "after": 211903,
+      "saved": 1135797,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/treinos/icone_neon_de_prancha_fitness.png",
+      "before": 1317056,
+      "after": 195266,
+      "saved": 1121790,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/extras_hidratacao/hidratacao_check.png",
+      "before": 1222915,
+      "after": 203145,
+      "saved": 1019770,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/extras_hidratacao/hidratacao_rastreamento.png",
+      "before": 1152151,
+      "after": 152739,
+      "saved": 999412,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/app/extras_hidratacao/hidratacao_garrafa.png",
+      "before": 1129576,
+      "after": 240778,
+      "saved": 888798,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_agachamento.png",
+      "before": 2170720,
+      "after": 1341519,
+      "saved": 829201,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_corda_naval.png",
+      "before": 2175445,
+      "after": 1359066,
+      "saved": 816379,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_kettlebell.png",
+      "before": 2144278,
+      "after": 1335669,
+      "saved": 808609,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_treino_generico_1.png",
+      "before": 2097077,
+      "after": 1298513,
+      "saved": 798564,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_prancha.png",
+      "before": 2077969,
+      "after": 1291949,
+      "saved": 786020,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_treino_generico_4.png",
+      "before": 2041573,
+      "after": 1271830,
+      "saved": 769743,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_treino_generico_2.png",
+      "before": 2035443,
+      "after": 1270156,
+      "saved": 765287,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_nutricao_prato.png",
+      "before": 1750281,
+      "after": 1042020,
+      "saved": 708261,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_prato_saudavel.png",
+      "before": 1750281,
+      "after": 1042020,
+      "saved": 708261,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_trofeu.png",
+      "before": 1772615,
+      "after": 1075929,
+      "saved": 696686,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_comemorando_trofeu.png",
+      "before": 1772615,
+      "after": 1075929,
+      "saved": 696686,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_lembrete_hidratacao.png",
+      "before": 1744179,
+      "after": 1047711,
+      "saved": 696468,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_lembrete_hidratacao.png",
+      "before": 1744179,
+      "after": 1047711,
+      "saved": 696468,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_meta_concluida.png",
+      "before": 1753979,
+      "after": 1062020,
+      "saved": 691959,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_meta_concluida.png",
+      "before": 1753979,
+      "after": 1062020,
+      "saved": 691959,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_mostrando_app.png",
+      "before": 1718500,
+      "after": 1027890,
+      "saved": 690610,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_mostrando_app.png",
+      "before": 1718500,
+      "after": 1027890,
+      "saved": 690610,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_hidratacao.png",
+      "before": 1707544,
+      "after": 1018583,
+      "saved": 688961,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_tomando_agua.png",
+      "before": 1707544,
+      "after": 1018583,
+      "saved": 688961,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_meditacao.png",
+      "before": 1719248,
+      "after": 1031849,
+      "saved": 687399,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_meditacao.png",
+      "before": 1719248,
+      "after": 1031849,
+      "saved": 687399,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_apresentando.png",
+      "before": 1706659,
+      "after": 1020341,
+      "saved": 686318,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_apresentando_aberta.png",
+      "before": 1706659,
+      "after": 1020341,
+      "saved": 686318,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_apontando_esquerda.png",
+      "before": 1696639,
+      "after": 1018673,
+      "saved": 677966,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_apontando_esquerda.png",
+      "before": 1696639,
+      "after": 1018673,
+      "saved": 677966,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_apontando_cima.png",
+      "before": 1692397,
+      "after": 1014653,
+      "saved": 677744,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_apontando_cima.png",
+      "before": 1692397,
+      "after": 1014653,
+      "saved": 677744,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_ciclo_metodo.png",
+      "before": 1688619,
+      "after": 1012710,
+      "saved": 675909,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_tentar_novamente.png",
+      "before": 1688619,
+      "after": 1012710,
+      "saved": 675909,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_apontando_direita.png",
+      "before": 1691044,
+      "after": 1017409,
+      "saved": 673635,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_apontando_direita.png",
+      "before": 1691044,
+      "after": 1017409,
+      "saved": 673635,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_apontando_baixo.png",
+      "before": 1665628,
+      "after": 997954,
+      "saved": 667674,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_apontando_baixo.png",
+      "before": 1665628,
+      "after": 997954,
+      "saved": 667674,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_joinha.png",
+      "before": 1668861,
+      "after": 1002076,
+      "saved": 666785,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_joinha.png",
+      "before": 1668861,
+      "after": 1002076,
+      "saved": 666785,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_acenando.png",
+      "before": 1642488,
+      "after": 981184,
+      "saved": 661304,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_boas_vindas_acenando.png",
+      "before": 1642488,
+      "after": 981184,
+      "saved": 661304,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_calendario_check.png",
+      "before": 1644694,
+      "after": 986329,
+      "saved": 658365,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_calendario_check.png",
+      "before": 1644694,
+      "after": 986329,
+      "saved": 658365,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_forca.png",
+      "before": 1591910,
+      "after": 955693,
+      "saved": 636217,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_forca.png",
+      "before": 1591910,
+      "after": 955693,
+      "saved": 636217,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_orientando.png",
+      "before": 1576068,
+      "after": 941689,
+      "saved": 634379,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_apresentando_esquerda.png",
+      "before": 1576068,
+      "after": 941689,
+      "saved": 634379,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_alongamento.png",
+      "before": 1579702,
+      "after": 946801,
+      "saved": 632901,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_alongamento.png",
+      "before": 1579702,
+      "after": 946801,
+      "saved": 632901,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_vitoria.png",
+      "before": 1573355,
+      "after": 940649,
+      "saved": 632706,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_vitoria.png",
+      "before": 1573355,
+      "after": 940649,
+      "saved": 632706,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_alongamento_alt.png",
+      "before": 1584494,
+      "after": 953975,
+      "saved": 630519,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_pos_treino.png",
+      "before": 1584494,
+      "after": 953975,
+      "saved": 630519,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_corrida.png",
+      "before": 1586843,
+      "after": 956935,
+      "saved": 629908,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_treino_halteres.png",
+      "before": 1554991,
+      "after": 928544,
+      "saved": 626447,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_treino_halteres.png",
+      "before": 1554991,
+      "after": 928544,
+      "saved": 626447,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_rosca_biceps.png",
+      "before": 1554991,
+      "after": 928544,
+      "saved": 626447,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/promo/amanda_corrida.png",
+      "before": 1575184,
+      "after": 953751,
+      "saved": 621433,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily/lily_corrida.png",
+      "before": 1575184,
+      "after": 953751,
+      "saved": 621433,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_back.png",
+      "before": 740339,
+      "after": 203562,
+      "saved": 536777,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily_treinos/lily_coice_gluteo.png",
+      "before": 1882754,
+      "after": 1375924,
+      "saved": 506830,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_hip_thrust.png",
+      "before": 1921579,
+      "after": 1416789,
+      "saved": 504790,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_next.png",
+      "before": 710927,
+      "after": 215341,
+      "saved": 495586,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/referencias/grade_icones_funcionalidades_2.jpeg",
+      "before": 686172,
+      "after": 196959,
+      "saved": 489213,
+      "resized": true,
+      "skipped": null,
+      "wh": "1536x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_supino.png",
+      "before": 1903770,
+      "after": 1417671,
+      "saved": 486099,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/mascot/png_official_black/01_lili_fit_joinha.png",
+      "before": 1211312,
+      "after": 725845,
+      "saved": 485467,
+      "resized": true,
+      "skipped": null,
+      "wh": "1122x1402",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_alongamento.png",
+      "before": 1865839,
+      "after": 1387967,
+      "saved": 477872,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_abducao_com_faixa.png",
+      "before": 1715592,
+      "after": 1248478,
+      "saved": 467114,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_remada.png",
+      "before": 1745485,
+      "after": 1292661,
+      "saved": 452824,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_pause.png",
+      "before": 641986,
+      "after": 197339,
+      "saved": 444647,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily_treinos/lily_treino_halteres.png",
+      "before": 1658477,
+      "after": 1216439,
+      "saved": 442038,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_desenvolvimento_ombros.png",
+      "before": 1636697,
+      "after": 1198774,
+      "saved": 437923,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_treino_generico_3.png",
+      "before": 1733834,
+      "after": 1297843,
+      "saved": 435991,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_elevacao_lateral.png",
+      "before": 1651765,
+      "after": 1216126,
+      "saved": 435639,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_triceps.png",
+      "before": 1603392,
+      "after": 1173413,
+      "saved": 429979,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_panturrilha.png",
+      "before": 1581241,
+      "after": 1153674,
+      "saved": 427567,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_bicicleta.png",
+      "before": 1637202,
+      "after": 1211325,
+      "saved": 425877,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_esteira.png",
+      "before": 1627056,
+      "after": 1209666,
+      "saved": 417390,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/receitas/receitas_fit.jpeg",
+      "before": 579882,
+      "after": 164481,
+      "saved": 415401,
+      "resized": true,
+      "skipped": null,
+      "wh": "1536x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_treinos/lily_caminhada.png",
+      "before": 1562328,
+      "after": 1148736,
+      "saved": 413592,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/receitas/receitas_nutricao_dark.jpeg",
+      "before": 632952,
+      "after": 226382,
+      "saved": 406570,
+      "resized": true,
+      "skipped": null,
+      "wh": "1300x1209",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/bem_estar/bem_estar.jpeg",
+      "before": 554721,
+      "after": 158460,
+      "saved": 396261,
+      "resized": true,
+      "skipped": null,
+      "wh": "1536x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/alimentacao/alimentacao.jpeg",
+      "before": 552660,
+      "after": 182248,
+      "saved": 370412,
+      "resized": true,
+      "skipped": null,
+      "wh": "1349x1166",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/referencias/grade_icones_funcionalidades_1.jpeg",
+      "before": 523325,
+      "after": 153132,
+      "saved": 370193,
+      "resized": true,
+      "skipped": null,
+      "wh": "1536x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/lily_fit/01_lili_fit_joinha.png",
+      "before": 779192,
+      "after": 415233,
+      "saved": 363959,
+      "resized": true,
+      "skipped": null,
+      "wh": "753x1562",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_boas_vindas.png",
+      "before": 779192,
+      "after": 415233,
+      "saved": 363959,
+      "resized": true,
+      "skipped": null,
+      "wh": "753x1562",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_joinha.png",
+      "before": 779192,
+      "after": 415233,
+      "saved": 363959,
+      "resized": true,
+      "skipped": null,
+      "wh": "753x1562",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily/lily_motivation.png",
+      "before": 779192,
+      "after": 415233,
+      "saved": 363959,
+      "resized": true,
+      "skipped": null,
+      "wh": "753x1562",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_thumbs_up.png",
+      "before": 779192,
+      "after": 415233,
+      "saved": 363959,
+      "resized": true,
+      "skipped": null,
+      "wh": "753x1562",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_welcome.png",
+      "before": 779192,
+      "after": 415233,
+      "saved": 363959,
+      "resized": true,
+      "skipped": null,
+      "wh": "753x1562",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/referencias/grade_icones_funcionalidades_3.jpeg",
+      "before": 518100,
+      "after": 154371,
+      "saved": 363729,
+      "resized": true,
+      "skipped": null,
+      "wh": "1536x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/treinos/kit_treino.jpeg",
+      "before": 550523,
+      "after": 187630,
+      "saved": 362893,
+      "resized": true,
+      "skipped": null,
+      "wh": "1312x1199",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/corrida/corrida_gps_app.jpeg",
+      "before": 529730,
+      "after": 188011,
+      "saved": 341719,
+      "resized": true,
+      "skipped": null,
+      "wh": "1346x1168",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/referencias/conjunto_icones_fitness_1.jpeg",
+      "before": 462912,
+      "after": 132461,
+      "saved": 330451,
+      "resized": true,
+      "skipped": null,
+      "wh": "1536x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/hidratacao/controle_agua.jpeg",
+      "before": 478916,
+      "after": 163918,
+      "saved": 314998,
+      "resized": true,
+      "skipped": null,
+      "wh": "1374x1145",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/progresso/evolucao_resultados.jpeg",
+      "before": 473804,
+      "after": 160981,
+      "saved": 312823,
+      "resized": true,
+      "skipped": null,
+      "wh": "1377x1142",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/progresso/meu_progresso.jpeg",
+      "before": 484368,
+      "after": 171699,
+      "saved": 312669,
+      "resized": true,
+      "skipped": null,
+      "wh": "1312x1199",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/treinos/meu_plano_semanal.jpeg",
+      "before": 474090,
+      "after": 162569,
+      "saved": 311521,
+      "resized": true,
+      "skipped": null,
+      "wh": "1374x1145",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/corrida/corrida.jpeg",
+      "before": 429816,
+      "after": 118860,
+      "saved": 310956,
+      "resized": true,
+      "skipped": null,
+      "wh": "1536x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/corrida/corrida_gps_dark.jpeg",
+      "before": 498791,
+      "after": 189405,
+      "saved": 309386,
+      "resized": true,
+      "skipped": null,
+      "wh": "1278x1230",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/treinos/plano_treino_personal.jpeg",
+      "before": 456230,
+      "after": 161438,
+      "saved": 294792,
+      "resized": true,
+      "skipped": null,
+      "wh": "1334x1179",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/progresso/balanca_medidas.jpeg",
+      "before": 461355,
+      "after": 175061,
+      "saved": 286294,
+      "resized": true,
+      "skipped": null,
+      "wh": "1242x1266",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/receitas/receitas_livro.jpeg",
+      "before": 462791,
+      "after": 179618,
+      "saved": 283173,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/hidratacao/hidratacao_app.jpeg",
+      "before": 457986,
+      "after": 177578,
+      "saved": 280408,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/progresso/evolucao_medidas_dark.jpeg",
+      "before": 429403,
+      "after": 158634,
+      "saved": 270769,
+      "resized": true,
+      "skipped": null,
+      "wh": "1302x1208",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/hidratacao/hidratacao_dark.jpeg",
+      "before": 403713,
+      "after": 136580,
+      "saved": 267133,
+      "resized": true,
+      "skipped": null,
+      "wh": "1383x1137",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/treinos/treino_checklist_dark.jpeg",
+      "before": 408818,
+      "after": 147950,
+      "saved": 260868,
+      "resized": true,
+      "skipped": null,
+      "wh": "1312x1199",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/rotina/rotina_tempo_meta.jpeg",
+      "before": 358405,
+      "after": 100518,
+      "saved": 257887,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1536",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/rotina/rotina_habitos_dark.jpeg",
+      "before": 385702,
+      "after": 145056,
+      "saved": 240646,
+      "resized": true,
+      "skipped": null,
+      "wh": "1295x1214",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/bem_estar/monitoramento_atividade.jpeg",
+      "before": 333935,
+      "after": 96657,
+      "saved": 237278,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1536",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/hidratacao/hidratacao.jpeg",
+      "before": 326143,
+      "after": 95451,
+      "saved": 230692,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1536",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_035.jpg",
+      "before": 428954,
+      "after": 199175,
+      "saved": 229779,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_041.jpg",
+      "before": 411808,
+      "after": 187581,
+      "saved": 224227,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/rotina/checklist_diario.jpeg",
+      "before": 334444,
+      "after": 115436,
+      "saved": 219008,
+      "resized": true,
+      "skipped": null,
+      "wh": "1145x1374",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/treinos/calendario_treinos.jpeg",
+      "before": 346879,
+      "after": 130396,
+      "saved": 216483,
+      "resized": true,
+      "skipped": null,
+      "wh": "1224x1285",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_005.jpg",
+      "before": 378799,
+      "after": 163495,
+      "saved": 215304,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_033.jpg",
+      "before": 383611,
+      "after": 170374,
+      "saved": 213237,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_032.jpg",
+      "before": 386457,
+      "after": 175239,
+      "saved": 211218,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_002.jpg",
+      "before": 376470,
+      "after": 165356,
+      "saved": 211114,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/home/home_principal.jpeg",
+      "before": 342239,
+      "after": 131780,
+      "saved": 210459,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_013.jpg",
+      "before": 378423,
+      "after": 169128,
+      "saved": 209295,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_039.jpg",
+      "before": 377261,
+      "after": 168019,
+      "saved": 209242,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_036.jpg",
+      "before": 382121,
+      "after": 172970,
+      "saved": 209151,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_034.jpg",
+      "before": 382229,
+      "after": 173080,
+      "saved": 209149,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_043.jpg",
+      "before": 378334,
+      "after": 169699,
+      "saved": 208635,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_069.jpg",
+      "before": 377144,
+      "after": 168579,
+      "saved": 208565,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_093.jpg",
+      "before": 360318,
+      "after": 159305,
+      "saved": 201013,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_117.jpg",
+      "before": 360318,
+      "after": 159305,
+      "saved": 201013,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_028.jpg",
+      "before": 357040,
+      "after": 156159,
+      "saved": 200881,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/home/home_branca.jpeg",
+      "before": 316952,
+      "after": 116375,
+      "saved": 200577,
+      "resized": true,
+      "skipped": null,
+      "wh": "1312x1199",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_061.jpg",
+      "before": 357374,
+      "after": 157443,
+      "saved": 199931,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_038.jpg",
+      "before": 362802,
+      "after": 163643,
+      "saved": 199159,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_023.jpg",
+      "before": 341051,
+      "after": 143263,
+      "saved": 197788,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_009.jpg",
+      "before": 344994,
+      "after": 148486,
+      "saved": 196508,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_067.jpg",
+      "before": 348162,
+      "after": 152415,
+      "saved": 195747,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_073.jpg",
+      "before": 348878,
+      "after": 153331,
+      "saved": 195547,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_010.jpg",
+      "before": 344063,
+      "after": 148614,
+      "saved": 195449,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_083.jpg",
+      "before": 339023,
+      "after": 143731,
+      "saved": 195292,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_014.jpg",
+      "before": 344695,
+      "after": 149955,
+      "saved": 194740,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_022.jpg",
+      "before": 343424,
+      "after": 149520,
+      "saved": 193904,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/navegacao/02_configuracoes.png",
+      "before": 289112,
+      "after": 95666,
+      "saved": 193446,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_082.jpg",
+      "before": 346406,
+      "after": 153184,
+      "saved": 193222,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_085.jpg",
+      "before": 339875,
+      "after": 147324,
+      "saved": 192551,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_026.jpg",
+      "before": 345116,
+      "after": 153185,
+      "saved": 191931,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_078.jpg",
+      "before": 346152,
+      "after": 154842,
+      "saved": 191310,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_114.jpg",
+      "before": 338253,
+      "after": 148019,
+      "saved": 190234,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_094.jpg",
+      "before": 342599,
+      "after": 152689,
+      "saved": 189910,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/saude/06_imc.png",
+      "before": 281376,
+      "after": 93019,
+      "saved": 188357,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_048.jpg",
+      "before": 331891,
+      "after": 144487,
+      "saved": 187404,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_051.jpg",
+      "before": 331891,
+      "after": 144487,
+      "saved": 187404,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_071.jpg",
+      "before": 330515,
+      "after": 143494,
+      "saved": 187021,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_044.jpg",
+      "before": 325273,
+      "after": 139255,
+      "saved": 186018,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_079.jpg",
+      "before": 330587,
+      "after": 146113,
+      "saved": 184474,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_088.jpg",
+      "before": 325335,
+      "after": 141414,
+      "saved": 183921,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_060.jpg",
+      "before": 318771,
+      "after": 135671,
+      "saved": 183100,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_046.jpg",
+      "before": 325616,
+      "after": 142538,
+      "saved": 183078,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_050.jpg",
+      "before": 325616,
+      "after": 142538,
+      "saved": 183078,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_027.jpg",
+      "before": 325732,
+      "after": 143601,
+      "saved": 182131,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_030.jpg",
+      "before": 321808,
+      "after": 140290,
+      "saved": 181518,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_077.jpg",
+      "before": 326674,
+      "after": 145383,
+      "saved": 181291,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/saude/07_calorias.png",
+      "before": 275952,
+      "after": 95585,
+      "saved": 180367,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/navegacao/03_favoritos.png",
+      "before": 264764,
+      "after": 84911,
+      "saved": 179853,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_075.jpg",
+      "before": 318537,
+      "after": 140276,
+      "saved": 178261,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_017.jpg",
+      "before": 313500,
+      "after": 136125,
+      "saved": 177375,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_116.jpg",
+      "before": 313500,
+      "after": 136125,
+      "saved": 177375,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_080.jpg",
+      "before": 322295,
+      "after": 145050,
+      "saved": 177245,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_081.jpg",
+      "before": 316844,
+      "after": 139671,
+      "saved": 177173,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_108.jpg",
+      "before": 315420,
+      "after": 138506,
+      "saved": 176914,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_055.jpg",
+      "before": 316501,
+      "after": 139759,
+      "saved": 176742,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_021.jpg",
+      "before": 308137,
+      "after": 131685,
+      "saved": 176452,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_063.jpg",
+      "before": 315011,
+      "after": 138697,
+      "saved": 176314,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_062.jpg",
+      "before": 315706,
+      "after": 139624,
+      "saved": 176082,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_096.jpg",
+      "before": 306627,
+      "after": 134937,
+      "saved": 171690,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_098.jpg",
+      "before": 306627,
+      "after": 134937,
+      "saved": 171690,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/perfil/04_comunidade.png",
+      "before": 256604,
+      "after": 85201,
+      "saved": 171403,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_049.jpg",
+      "before": 305216,
+      "after": 134983,
+      "saved": 170233,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/perfil/10_lembretes.png",
+      "before": 247665,
+      "after": 77729,
+      "saved": 169936,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_064.jpg",
+      "before": 297310,
+      "after": 132066,
+      "saved": 165244,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_076.jpg",
+      "before": 286476,
+      "after": 124213,
+      "saved": 162263,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_074.jpg",
+      "before": 291368,
+      "after": 130796,
+      "saved": 160572,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_056.jpg",
+      "before": 284147,
+      "after": 123914,
+      "saved": 160233,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/saude/09_peso_balanca.png",
+      "before": 238312,
+      "after": 81025,
+      "saved": 157287,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_086.jpg",
+      "before": 278892,
+      "after": 123182,
+      "saved": 155710,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_004.jpg",
+      "before": 271386,
+      "after": 117272,
+      "saved": 154114,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_016.jpg",
+      "before": 268683,
+      "after": 116416,
+      "saved": 152267,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_003.jpg",
+      "before": 261494,
+      "after": 110117,
+      "saved": 151377,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_066.jpg",
+      "before": 263865,
+      "after": 113183,
+      "saved": 150682,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_059.jpg",
+      "before": 269402,
+      "after": 119370,
+      "saved": 150032,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/treinos/halter.jpeg",
+      "before": 230266,
+      "after": 80963,
+      "saved": 149303,
+      "resized": true,
+      "skipped": null,
+      "wh": "1312x1199",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_072.jpg",
+      "before": 257997,
+      "after": 110225,
+      "saved": 147772,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_100.jpg",
+      "before": 259569,
+      "after": 112232,
+      "saved": 147337,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_001.jpg",
+      "before": 256087,
+      "after": 109930,
+      "saved": 146157,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_058.jpg",
+      "before": 255562,
+      "after": 110647,
+      "saved": 144915,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_107.jpg",
+      "before": 259746,
+      "after": 114838,
+      "saved": 144908,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_110.jpg",
+      "before": 259746,
+      "after": 114838,
+      "saved": 144908,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_111.jpg",
+      "before": 259746,
+      "after": 114838,
+      "saved": 144908,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_112.jpg",
+      "before": 259746,
+      "after": 114838,
+      "saved": 144908,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_087.jpg",
+      "before": 257815,
+      "after": 113621,
+      "saved": 144194,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_053.jpg",
+      "before": 255450,
+      "after": 111439,
+      "saved": 144011,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_089.jpg",
+      "before": 255450,
+      "after": 111439,
+      "saved": 144011,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_090.jpg",
+      "before": 255450,
+      "after": 111439,
+      "saved": 144011,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_092.jpg",
+      "before": 255450,
+      "after": 111439,
+      "saved": 144011,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_006.jpg",
+      "before": 253130,
+      "after": 109496,
+      "saved": 143634,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_007.jpg",
+      "before": 255790,
+      "after": 112400,
+      "saved": 143390,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_025.jpg",
+      "before": 247172,
+      "after": 106423,
+      "saved": 140749,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_031.jpg",
+      "before": 243588,
+      "after": 103684,
+      "saved": 139904,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_091.jpg",
+      "before": 246038,
+      "after": 108307,
+      "saved": 137731,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_012.jpg",
+      "before": 239126,
+      "after": 101484,
+      "saved": 137642,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_008.jpg",
+      "before": 240995,
+      "after": 103883,
+      "saved": 137112,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_011.jpg",
+      "before": 235857,
+      "after": 101616,
+      "saved": 134241,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_068.jpg",
+      "before": 232406,
+      "after": 99276,
+      "saved": 133130,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_047.jpg",
+      "before": 232012,
+      "after": 99964,
+      "saved": 132048,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_065.jpg",
+      "before": 232012,
+      "after": 99964,
+      "saved": 132048,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_024.jpg",
+      "before": 233696,
+      "after": 101816,
+      "saved": 131880,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_042.jpg",
+      "before": 229349,
+      "after": 98037,
+      "saved": 131312,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_040.jpg",
+      "before": 223457,
+      "after": 94651,
+      "saved": 128806,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_054.jpg",
+      "before": 223183,
+      "after": 94424,
+      "saved": 128759,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_020.jpg",
+      "before": 227181,
+      "after": 98489,
+      "saved": 128692,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_019.jpg",
+      "before": 220002,
+      "after": 92687,
+      "saved": 127315,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_052.jpg",
+      "before": 223362,
+      "after": 96108,
+      "saved": 127254,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_029.jpg",
+      "before": 222349,
+      "after": 95606,
+      "saved": 126743,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/alimentacao/shaker.jpeg",
+      "before": 202566,
+      "after": 77335,
+      "saved": 125231,
+      "resized": true,
+      "skipped": null,
+      "wh": "1263x1245",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_113.jpg",
+      "before": 214884,
+      "after": 90818,
+      "saved": 124066,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_057.jpg",
+      "before": 216040,
+      "after": 92039,
+      "saved": 124001,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_115.jpg",
+      "before": 217719,
+      "after": 93732,
+      "saved": 123987,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_037.jpg",
+      "before": 204527,
+      "after": 87070,
+      "saved": 117457,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_101.jpg",
+      "before": 204131,
+      "after": 87758,
+      "saved": 116373,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_015.jpg",
+      "before": 194192,
+      "after": 82458,
+      "saved": 111734,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_095.jpg",
+      "before": 194192,
+      "after": 82458,
+      "saved": 111734,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_106.jpg",
+      "before": 191238,
+      "after": 80993,
+      "saved": 110245,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_084.jpg",
+      "before": 192407,
+      "after": 82324,
+      "saved": 110083,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_018.jpg",
+      "before": 187436,
+      "after": 78560,
+      "saved": 108876,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_070.jpg",
+      "before": 187463,
+      "after": 78874,
+      "saved": 108589,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_097.jpg",
+      "before": 187463,
+      "after": 78874,
+      "saved": 108589,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_045.jpg",
+      "before": 188362,
+      "after": 79941,
+      "saved": 108421,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_102.jpg",
+      "before": 187235,
+      "after": 79027,
+      "saved": 108208,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_099.jpg",
+      "before": 182845,
+      "after": 77680,
+      "saved": 105165,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_103.jpg",
+      "before": 182845,
+      "after": 77680,
+      "saved": 105165,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_104.jpg",
+      "before": 182845,
+      "after": 77680,
+      "saved": 105165,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_105.jpg",
+      "before": 182845,
+      "after": 77680,
+      "saved": 105165,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/lily_exercicios/treino_109.jpg",
+      "before": 172179,
+      "after": 71946,
+      "saved": 100233,
+      "resized": true,
+      "skipped": null,
+      "wh": "1254x1254",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-motivation-02.webp",
+      "before": 170366,
+      "after": 88340,
+      "saved": 82026,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-program.webp",
+      "before": 164340,
+      "after": 85414,
+      "saved": 78926,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/lily_fit/05_lili_fit_correndo.png",
+      "before": 492541,
+      "after": 438502,
+      "saved": 54039,
+      "resized": true,
+      "skipped": null,
+      "wh": "1017x1196",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_correndo.png",
+      "before": 492541,
+      "after": 438502,
+      "saved": 54039,
+      "resized": true,
+      "skipped": null,
+      "wh": "1017x1196",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_running.png",
+      "before": 492541,
+      "after": 438502,
+      "saved": 54039,
+      "resized": true,
+      "skipped": null,
+      "wh": "1017x1196",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-about-02.webp",
+      "before": 89734,
+      "after": 43594,
+      "saved": 46140,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/images/lily_fit/09_lili_fit_halter.png",
+      "before": 521161,
+      "after": 475905,
+      "saved": 45256,
+      "resized": true,
+      "skipped": null,
+      "wh": "1015x1177",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_forte.png",
+      "before": 521161,
+      "after": 475905,
+      "saved": 45256,
+      "resized": true,
+      "skipped": null,
+      "wh": "1015x1177",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_halteres.png",
+      "before": 521161,
+      "after": 475905,
+      "saved": 45256,
+      "resized": true,
+      "skipped": null,
+      "wh": "1015x1177",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily/lily_workout.png",
+      "before": 521161,
+      "after": 475905,
+      "saved": 45256,
+      "resized": true,
+      "skipped": null,
+      "wh": "1015x1177",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_dumbbell.png",
+      "before": 521161,
+      "after": 475905,
+      "saved": 45256,
+      "resized": true,
+      "skipped": null,
+      "wh": "1015x1177",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_strong.png",
+      "before": 521161,
+      "after": 475905,
+      "saved": 45256,
+      "resized": true,
+      "skipped": null,
+      "wh": "1015x1177",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-home.webp",
+      "before": 87838,
+      "after": 43974,
+      "saved": 43864,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-workout-03.webp",
+      "before": 87424,
+      "after": 44420,
+      "saved": 43004,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-motivation-01.webp",
+      "before": 86430,
+      "after": 43526,
+      "saved": 42904,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-workout-01.webp",
+      "before": 82592,
+      "after": 42000,
+      "saved": 40592,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/perfil/05_chat_ia.png",
+      "before": 250352,
+      "after": 214043,
+      "saved": 36309,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-workout-02.webp",
+      "before": 69834,
+      "after": 35406,
+      "saved": 34428,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-audio.webp",
+      "before": 63426,
+      "after": 32098,
+      "saved": 31328,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/app_icon/app_icon.png",
+      "before": 71479,
+      "after": 40844,
+      "saved": 30635,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-banner-01.webp",
+      "before": 61548,
+      "after": 31134,
+      "saved": 30414,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-about-01.webp",
+      "before": 60154,
+      "after": 30360,
+      "saved": 29794,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-challenge.webp",
+      "before": 60656,
+      "after": 31252,
+      "saved": 29404,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-banner-02.webp",
+      "before": 56596,
+      "after": 29212,
+      "saved": 27384,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-welcome.webp",
+      "before": 55198,
+      "after": 28020,
+      "saved": 27178,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/optimized/amanda-profile.webp",
+      "before": 54984,
+      "after": 27910,
+      "saved": 27074,
+      "resized": true,
+      "skipped": null,
+      "wh": "1600x1066",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/navegacao/01_notificacoes.png",
+      "before": 214119,
+      "after": 187812,
+      "saved": 26307,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/workouts_100.jpg",
+      "before": 81029,
+      "after": 56955,
+      "saved": 24074,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/run_10km.jpg",
+      "before": 80584,
+      "after": 56561,
+      "saved": 24023,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/streak_100_days.jpg",
+      "before": 80111,
+      "after": 56107,
+      "saved": 24004,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/run_5km.jpg",
+      "before": 80473,
+      "after": 56500,
+      "saved": 23973,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/first_run.jpg",
+      "before": 78817,
+      "after": 55284,
+      "saved": 23533,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/hydration_achievement.jpg",
+      "before": 70936,
+      "after": 47635,
+      "saved": 23301,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/weight_loss_10kg.jpg",
+      "before": 68445,
+      "after": 47978,
+      "saved": 20467,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/streak_60_days.jpg",
+      "before": 68406,
+      "after": 48025,
+      "saved": 20381,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/weight_goal.jpg",
+      "before": 67441,
+      "after": 47223,
+      "saved": 20218,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/workouts_25.jpg",
+      "before": 67551,
+      "after": 47403,
+      "saved": 20148,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/workouts_50.jpg",
+      "before": 67629,
+      "after": 47632,
+      "saved": 19997,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/weekly_workout_goal.jpg",
+      "before": 63730,
+      "after": 43951,
+      "saved": 19779,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/streak_30_days.jpg",
+      "before": 61821,
+      "after": 42061,
+      "saved": 19760,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/weight_loss_5kg.jpg",
+      "before": 62742,
+      "after": 43538,
+      "saved": 19204,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/thirty_day_goal.jpg",
+      "before": 56935,
+      "after": 39163,
+      "saved": 17772,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/habits_goal.jpg",
+      "before": 60685,
+      "after": 44905,
+      "saved": 15780,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/perfect_week.jpg",
+      "before": 51551,
+      "after": 35847,
+      "saved": 15704,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/daily_water_goal.jpg",
+      "before": 60302,
+      "after": 44895,
+      "saved": 15407,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/streak_7_days.jpg",
+      "before": 58292,
+      "after": 43165,
+      "saved": 15127,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/first_workout.jpg",
+      "before": 56439,
+      "after": 42503,
+      "saved": 13936,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/achievements/weight_progress.jpg",
+      "before": 53831,
+      "after": 40321,
+      "saved": 13510,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/neon/saude/08_sono.png",
+      "before": 181630,
+      "after": 168129,
+      "saved": 13501,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/mascot/extras/mascot_thinking.png",
+      "before": 305486,
+      "after": 292402,
+      "saved": 13084,
+      "resized": true,
+      "skipped": null,
+      "wh": "523x1167",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/icons/achievements/seven_day_goal.jpg",
+      "before": 40964,
+      "after": 29144,
+      "saved": 11820,
+      "resized": false,
+      "skipped": null,
+      "wh": "512x512",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/mascot/extras/mascot_promo.png",
+      "before": 309606,
+      "after": 298838,
+      "saved": 10768,
+      "resized": true,
+      "skipped": null,
+      "wh": "658x1167",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/icons/health/hydration_alt.jpg",
+      "before": 21689,
+      "after": 15045,
+      "saved": 6644,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/app_icon/android_adaptive_foreground.png",
+      "before": 29543,
+      "after": 23476,
+      "saved": 6067,
+      "resized": true,
+      "skipped": null,
+      "wh": "1024x1024",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/icons/health/goals.jpg",
+      "before": 19010,
+      "after": 13432,
+      "saved": 5578,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/food_ai.jpg",
+      "before": 18629,
+      "after": 13836,
+      "saved": 4793,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/health_fitness.jpg",
+      "before": 14756,
+      "after": 10393,
+      "saved": 4363,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/running_gps.jpg",
+      "before": 15702,
+      "after": 11343,
+      "saved": 4359,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/actions/target.jpg",
+      "before": 15602,
+      "after": 11397,
+      "saved": 4205,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/recipes.jpg",
+      "before": 15595,
+      "after": 11552,
+      "saved": 4043,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/checkin.jpg",
+      "before": 14811,
+      "after": 10816,
+      "saved": 3995,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/weight_bmi.jpg",
+      "before": 16472,
+      "after": 12479,
+      "saved": 3993,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/audio.jpg",
+      "before": 14684,
+      "after": 10705,
+      "saved": 3979,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/history.jpg",
+      "before": 14566,
+      "after": 10599,
+      "saved": 3967,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/premium/achievement_trophy.jpg",
+      "before": 14597,
+      "after": 10637,
+      "saved": 3960,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/premium.jpg",
+      "before": 14800,
+      "after": 10888,
+      "saved": 3912,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/premium/premium_crown.jpg",
+      "before": 14800,
+      "after": 10888,
+      "saved": 3912,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/mood/very_happy.jpg",
+      "before": 15102,
+      "after": 11200,
+      "saved": 3902,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/mood/determined.jpg",
+      "before": 14905,
+      "after": 11044,
+      "saved": 3861,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/photos.jpg",
+      "before": 14780,
+      "after": 10933,
+      "saved": 3847,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/mood/surprised.jpg",
+      "before": 14664,
+      "after": 10858,
+      "saved": 3806,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/calendar.jpg",
+      "before": 14308,
+      "after": 10515,
+      "saved": 3793,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/mood/sad.jpg",
+      "before": 14512,
+      "after": 10732,
+      "saved": 3780,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/actions/location_map.jpg",
+      "before": 14895,
+      "after": 11145,
+      "saved": 3750,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/diary.jpg",
+      "before": 14454,
+      "after": 10718,
+      "saved": 3736,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/actions/upload.jpg",
+      "before": 14295,
+      "after": 10585,
+      "saved": 3710,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/mood/sleepy.jpg",
+      "before": 14512,
+      "after": 10806,
+      "saved": 3706,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/settings.jpg",
+      "before": 14135,
+      "after": 10437,
+      "saved": 3698,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/mood/wink.jpg",
+      "before": 14445,
+      "after": 10751,
+      "saved": 3694,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/mood/calm.jpg",
+      "before": 14378,
+      "after": 10757,
+      "saved": 3621,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/camera.jpg",
+      "before": 14188,
+      "after": 10606,
+      "saved": 3582,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/mood/happy.jpg",
+      "before": 14171,
+      "after": 10596,
+      "saved": 3575,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/measurements.jpg",
+      "before": 13882,
+      "after": 10319,
+      "saved": 3563,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/mood/neutral.jpg",
+      "before": 14224,
+      "after": 10669,
+      "saved": 3555,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/evolution.jpg",
+      "before": 13501,
+      "after": 10008,
+      "saved": 3493,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/subscription.jpg",
+      "before": 13459,
+      "after": 9984,
+      "saved": 3475,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/actions/logout.jpg",
+      "before": 13207,
+      "after": 9750,
+      "saved": 3457,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/notifications.jpg",
+      "before": 12974,
+      "after": 9600,
+      "saved": 3374,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/water.jpg",
+      "before": 13014,
+      "after": 9647,
+      "saved": 3367,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/home.jpg",
+      "before": 12977,
+      "after": 9610,
+      "saved": 3367,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/actions/delete.jpg",
+      "before": 12773,
+      "after": 9455,
+      "saved": 3318,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/calories.jpg",
+      "before": 13368,
+      "after": 10060,
+      "saved": 3308,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/workouts.jpg",
+      "before": 12884,
+      "after": 9605,
+      "saved": 3279,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/favorite.jpg",
+      "before": 13184,
+      "after": 9927,
+      "saved": 3257,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/stretching.jpg",
+      "before": 13139,
+      "after": 9883,
+      "saved": 3256,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/actions/retry_refresh.jpg",
+      "before": 12981,
+      "after": 9820,
+      "saved": 3161,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/search.jpg",
+      "before": 12828,
+      "after": 9672,
+      "saved": 3156,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/actions/share.jpg",
+      "before": 12749,
+      "after": 9657,
+      "saved": 3092,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/steps.jpg",
+      "before": 12771,
+      "after": 9733,
+      "saved": 3038,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/navigation/profile.jpg",
+      "before": 12035,
+      "after": 9034,
+      "saved": 3001,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/sleep.jpg",
+      "before": 12671,
+      "after": 9676,
+      "saved": 2995,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/health/meditation.jpg",
+      "before": 12543,
+      "after": 9600,
+      "saved": 2943,
+      "resized": false,
+      "skipped": null,
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/thumbs/amanda-about-02.webp",
+      "before": 12096,
+      "after": 12096,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "480x320",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/thumbs/amanda-home.webp",
+      "before": 13342,
+      "after": 13342,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "480x320",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/thumbs/amanda-motivation-01.webp",
+      "before": 12118,
+      "after": 12118,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "480x320",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/thumbs/amanda-motivation-02.webp",
+      "before": 25554,
+      "after": 25554,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "480x320",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/thumbs/amanda-program.webp",
+      "before": 24570,
+      "after": 24570,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "480x320",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/amanda/thumbs/amanda-workout-03.webp",
+      "before": 12856,
+      "after": 12856,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "480x320",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/hydration/hydration_bottle.png",
+      "before": 57838,
+      "after": 57838,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/hydration/hydration_check.png",
+      "before": 80777,
+      "after": 80777,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/hydration/hydration_glass.png",
+      "before": 80777,
+      "after": 80777,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/hydration/hydration_progress.png",
+      "before": 57838,
+      "after": 57838,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "256x256",
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/icons/icon_audio.png",
+      "before": 571450,
+      "after": 571450,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_bmi_measure.png",
+      "before": 593082,
+      "after": 593082,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_calendar.png",
+      "before": 914086,
+      "after": 914086,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_calories.png",
+      "before": 483815,
+      "after": 483815,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_camera_food.png",
+      "before": 1389976,
+      "after": 1389976,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_checklist.png",
+      "before": 772936,
+      "after": 772936,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_community.png",
+      "before": 691913,
+      "after": 691913,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_courses.png",
+      "before": 674858,
+      "after": 674858,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_edit.png",
+      "before": 523906,
+      "after": 523906,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_favorite.png",
+      "before": 794471,
+      "after": 794471,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_goal.png",
+      "before": 1126523,
+      "after": 1126523,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_gps_running.png",
+      "before": 897796,
+      "after": 897796,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_health_heart.png",
+      "before": 637502,
+      "after": 637502,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_home.png",
+      "before": 725935,
+      "after": 725935,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_hydration.png",
+      "before": 542146,
+      "after": 542146,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_login.png",
+      "before": 630703,
+      "after": 630703,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_logout.png",
+      "before": 744760,
+      "after": 744760,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_medal_ranking.png",
+      "before": 1220243,
+      "after": 1220243,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_meditation.png",
+      "before": 837929,
+      "after": 837929,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_messages.png",
+      "before": 731935,
+      "after": 731935,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_notifications.png",
+      "before": 900002,
+      "after": 900002,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_nutrition.png",
+      "before": 663314,
+      "after": 663314,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_premium.png",
+      "before": 947088,
+      "after": 947088,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_privacy.png",
+      "before": 730768,
+      "after": 730768,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_profile.png",
+      "before": 1152220,
+      "after": 1152220,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_progress.png",
+      "before": 710656,
+      "after": 710656,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_recipes.png",
+      "before": 1275400,
+      "after": 1275400,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_running.png",
+      "before": 477998,
+      "after": 477998,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_scanner.png",
+      "before": 683457,
+      "after": 683457,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_search.png",
+      "before": 668504,
+      "after": 668504,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_settings.png",
+      "before": 1055377,
+      "after": 1055377,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_share.png",
+      "before": 914074,
+      "after": 914074,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_shopping_list.png",
+      "before": 1268471,
+      "after": 1268471,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_sleep.png",
+      "before": 511234,
+      "after": 511234,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_statistics.png",
+      "before": 722552,
+      "after": 722552,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_stopwatch.png",
+      "before": 930439,
+      "after": 930439,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_streak.png",
+      "before": 678881,
+      "after": 678881,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_support.png",
+      "before": 1025848,
+      "after": 1025848,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_trophy.png",
+      "before": 771717,
+      "after": 771717,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_video.png",
+      "before": 595329,
+      "after": 595329,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_weight.png",
+      "before": 882862,
+      "after": 882862,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/icon_workout_dumbbell.png",
+      "before": 544127,
+      "after": 544127,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/neon/conquistas/icone_neon_de_coroa_real.png",
+      "before": 1773261,
+      "after": 1773261,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/neon/conquistas/icone_neon_de_plano_fitness_7_dias.png",
+      "before": 1609810,
+      "after": 1609810,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/neon/conquistas/icone_neon_de_progresso_fitness.png",
+      "before": 1409158,
+      "after": 1409158,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/neon/corrida/icone_neon_de_corrida_e_rota.png",
+      "before": 1444885,
+      "after": 1444885,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/neon/navegacao/icone_neon_de_casa_fitness.png",
+      "before": 1373836,
+      "after": 1373836,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/neon/nutricao/icone_neon_de_alimentacao_saudavel.png",
+      "before": 1649127,
+      "after": 1649127,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/neon/nutricao/tigela_saudavel_neon_futurista.png",
+      "before": 1916589,
+      "after": 1916589,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/neon/saude/icone_neon_de_busca_e_pulso.png",
+      "before": 1639060,
+      "after": 1639060,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/icons/neon/saude/icone_neon_de_hidratacao_fitness.png",
+      "before": 1463960,
+      "after": 1463960,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_abs_3d.png",
+      "before": 1126523,
+      "after": 1126523,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_calendar_3d.png",
+      "before": 914086,
+      "after": 914086,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_calories_3d.png",
+      "before": 483815,
+      "after": 483815,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_cardio_3d.png",
+      "before": 637502,
+      "after": 637502,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_glutes_3d.png",
+      "before": 544127,
+      "after": 544127,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_home_3d.png",
+      "before": 725935,
+      "after": 725935,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_profile_3d.png",
+      "before": 1152220,
+      "after": 1152220,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_progress_3d.png",
+      "before": 710656,
+      "after": 710656,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_recipes_3d.png",
+      "before": 1275400,
+      "after": 1275400,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_running_3d.png",
+      "before": 477998,
+      "after": 477998,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_stopwatch_3d.png",
+      "before": 930439,
+      "after": 930439,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_trophy_3d.png",
+      "before": 771717,
+      "after": 771717,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_water_3d.png",
+      "before": 542146,
+      "after": 542146,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_workout_3d.png",
+      "before": 544127,
+      "after": 544127,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d/icon_yoga_3d.png",
+      "before": 837929,
+      "after": 837929,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_achievement.png",
+      "before": 1400908,
+      "after": 1400908,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_audio.png",
+      "before": 935673,
+      "after": 935673,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_before_after.png",
+      "before": 1323158,
+      "after": 1323158,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_bmi.png",
+      "before": 945818,
+      "after": 945818,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_calendar.png",
+      "before": 1004250,
+      "after": 1004250,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_calories.png",
+      "before": 1012352,
+      "after": 1012352,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_camera.png",
+      "before": 1358990,
+      "after": 1358990,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_checkin.png",
+      "before": 1033435,
+      "after": 1033435,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_community.png",
+      "before": 937979,
+      "after": 937979,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_complete.png",
+      "before": 970946,
+      "after": 970946,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_diary.png",
+      "before": 1621698,
+      "after": 1621698,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_evolution.png",
+      "before": 955215,
+      "after": 955215,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_favorites.png",
+      "before": 1056516,
+      "after": 1056516,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_filter.png",
+      "before": 792896,
+      "after": 792896,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_gallery.png",
+      "before": 1004612,
+      "after": 1004612,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_goal.png",
+      "before": 904879,
+      "after": 904879,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_gps.png",
+      "before": 1055576,
+      "after": 1055576,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_habits.png",
+      "before": 1021503,
+      "after": 1021503,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_home.png",
+      "before": 935619,
+      "after": 935619,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_hydration_goal.png",
+      "before": 979046,
+      "after": 979046,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_notifications.png",
+      "before": 817982,
+      "after": 817982,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_personal.png",
+      "before": 1307359,
+      "after": 1307359,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_play.png",
+      "before": 834231,
+      "after": 834231,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_premium.png",
+      "before": 1331334,
+      "after": 1331334,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_profile.png",
+      "before": 1307958,
+      "after": 1307958,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_progress.png",
+      "before": 973896,
+      "after": 973896,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_recipes.png",
+      "before": 1365132,
+      "after": 1365132,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_search.png",
+      "before": 831114,
+      "after": 831114,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_security.png",
+      "before": 835806,
+      "after": 835806,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_settings.png",
+      "before": 1045751,
+      "after": 1045751,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_streak.png",
+      "before": 1077581,
+      "after": 1077581,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_support.png",
+      "before": 960972,
+      "after": 960972,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_upload_photo.png",
+      "before": 1192235,
+      "after": 1192235,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_videos.png",
+      "before": 1043317,
+      "after": 1043317,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_water.png",
+      "before": 912389,
+      "after": 912389,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_weight.png",
+      "before": 1167263,
+      "after": 1167263,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/icons_3d_pack2/icon_workout_goal.png",
+      "before": 990634,
+      "after": 990634,
+      "saved": 0,
+      "resized": false,
+      "skipped": "erro: Fast Octree (method == 2) and libimagequant (method == 3) are the only valid methods for quantizing RGBA images",
+      "wh": "",
+      "mode": ""
+    },
+    {
+      "path": "assets/images/lily_fit/02_lili_fit_paz.png",
+      "before": 180388,
+      "after": 180388,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "485x1005",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/lily_fit/03_lili_fit_bracos_cruzados.png",
+      "before": 129606,
+      "after": 129606,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "322x403",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/lily_fit/04_lili_fit_apontando.png",
+      "before": 121839,
+      "after": 121839,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "322x397",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/lily_fit/06_lili_fit_agachada.png",
+      "before": 107113,
+      "after": 107113,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "299x326",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/lily_fit/07_lili_fit_shaker.png",
+      "before": 86604,
+      "after": 86604,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "266x271",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/lily_fit/08_lili_fit_notebook.png",
+      "before": 60885,
+      "after": 60885,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "249x212",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/lily_fit/10_lili_fit_comemorando.png",
+      "before": 129426,
+      "after": 129426,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "316x399",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_agachamento.png",
+      "before": 107113,
+      "after": 107113,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "299x326",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_apontando.png",
+      "before": 121839,
+      "after": 121839,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "322x397",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_celebrando.png",
+      "before": 129426,
+      "after": 129426,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "316x399",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_checklist.png",
+      "before": 104628,
+      "after": 104628,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "301x315",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_coracao.png",
+      "before": 51052,
+      "after": 51052,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "284x176",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_halteres_sentada.png",
+      "before": 52080,
+      "after": 52080,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "266x174",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_hidratacao.png",
+      "before": 86604,
+      "after": 86604,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "266x271",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_meditacao.png",
+      "before": 107246,
+      "after": 107246,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "307x331",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_padrao.png",
+      "before": 129606,
+      "after": 129606,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "322x403",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_perfil.png",
+      "before": 129606,
+      "after": 129606,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "322x403",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_rainha.png",
+      "before": 129426,
+      "after": 129426,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "316x399",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_triste.png",
+      "before": 81631,
+      "after": 81631,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "306x242",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/images/mascote/avatar_trofeu.png",
+      "before": 129426,
+      "after": 129426,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "316x399",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily/lily_achievement.png",
+      "before": 266674,
+      "after": 266674,
+      "saved": 0,
+      "resized": true,
+      "skipped": "sem ganho",
+      "wh": "1219x1041",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily/lily_attention.png",
+      "before": 121839,
+      "after": 121839,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "322x397",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily/lily_meditation.png",
+      "before": 107246,
+      "after": 107246,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "307x331",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily/lily_nutrition.png",
+      "before": 263897,
+      "after": 263897,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "610x912",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily/lily_rest.png",
+      "before": 60885,
+      "after": 60885,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "249x212",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily/lily_success.png",
+      "before": 266674,
+      "after": 266674,
+      "saved": 0,
+      "resized": true,
+      "skipped": "sem ganho",
+      "wh": "1219x1041",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily/lily_water.png",
+      "before": 86604,
+      "after": 86604,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "266x271",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/lily/lily_welcome.png",
+      "before": 180388,
+      "after": 180388,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "485x1005",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/extras/lily_arms_crossed_official.png",
+      "before": 101710,
+      "after": 101710,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "452x846",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/extras/lily_celebrating_ring_official.png",
+      "before": 266674,
+      "after": 266674,
+      "saved": 0,
+      "resized": true,
+      "skipped": "sem ganho",
+      "wh": "1219x1041",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/extras/lily_peace_official.png",
+      "before": 180388,
+      "after": 180388,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "485x1005",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/extras/lily_running_official.png",
+      "before": 126336,
+      "after": 126336,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "568x819",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/extras/lily_thumbs_up_official.png",
+      "before": 202429,
+      "after": 202429,
+      "saved": 0,
+      "resized": true,
+      "skipped": "sem ganho",
+      "wh": "564x1172",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/extras/mascot_calendar.png",
+      "before": 319154,
+      "after": 319154,
+      "saved": 0,
+      "resized": true,
+      "skipped": "sem ganho",
+      "wh": "602x1122",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/extras/mascot_healthy_food.png",
+      "before": 263897,
+      "after": 263897,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "610x912",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/extras/mascot_meal_prep.png",
+      "before": 302571,
+      "after": 302571,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "613x891",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/extras/mascot_medal.png",
+      "before": 335295,
+      "after": 335295,
+      "saved": 0,
+      "resized": true,
+      "skipped": "sem ganho",
+      "wh": "550x1144",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/extras/mascot_notebook.png",
+      "before": 60885,
+      "after": 60885,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "249x212",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/extras/mascot_progress.png",
+      "before": 245170,
+      "after": 245170,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "552x903",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_celebrating.png",
+      "before": 129426,
+      "after": 129426,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "316x399",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_checklist.png",
+      "before": 104628,
+      "after": 104628,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "301x315",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_default.png",
+      "before": 180388,
+      "after": 180388,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "485x1005",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_dumbbell_seated.png",
+      "before": 52080,
+      "after": 52080,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "266x174",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_heart.png",
+      "before": 51052,
+      "after": 51052,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "284x176",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_hydration.png",
+      "before": 86604,
+      "after": 86604,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "266x271",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_meditation.png",
+      "before": 107246,
+      "after": 107246,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "307x331",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_pointing.png",
+      "before": 121839,
+      "after": 121839,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "322x397",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_profile.png",
+      "before": 129606,
+      "after": 129606,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "322x403",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_queen.png",
+      "before": 129426,
+      "after": 129426,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "316x399",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_sad.png",
+      "before": 81631,
+      "after": 81631,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "306x242",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_squat.png",
+      "before": 107113,
+      "after": 107113,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "299x326",
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/mascot/png/mascot_trophy.png",
+      "before": 129426,
+      "after": 129426,
+      "saved": 0,
+      "resized": false,
+      "skipped": "sem ganho",
+      "wh": "316x399",
+      "mode": "RGBA"
+    }
+  ]
+}
