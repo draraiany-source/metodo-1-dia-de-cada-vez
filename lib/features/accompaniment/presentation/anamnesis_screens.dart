@@ -6,7 +6,9 @@ import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/widgets/app_icon_image.dart';
+import '../../../core/utils/firebase_error_mapper.dart';
 import '../../../core/widgets/app_page.dart';
+import '../../../core/widgets/app_states.dart';
 import '../../../core/widgets/feature_icon_card.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/widgets/lili_widgets.dart';
@@ -172,15 +174,13 @@ class _AnamnesisFormScreenState extends ConsumerState<AnamnesisFormScreen> {
     super.dispose();
   }
 
-  Future<Student?> _resolveStudent() async {
-    if (widget.student != null) return widget.student;
-    final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
-    return ref.read(
-      ptMyStudentProfileProvider((userId: user.id, email: user.email)).future,
-    );
-  }
-
   Future<void> _save(Student student) async {
+    if (_objectives.isEmpty && _goal.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Informe o objetivo principal.')),
+      );
+      return;
+    }
     setState(() => _saving = true);
     final q = AnamnesisQuestionnaire(
       profession: _profession.text,
@@ -202,64 +202,109 @@ class _AnamnesisFormScreenState extends ConsumerState<AnamnesisFormScreen> {
       exerciseRestriction: _restrict,
     );
     final score = ref.read(accompanimentRepositoryProvider).scoreQuestionnaire(q);
-    final existing =
-        await ref.read(ptRepositoryProvider).fetchAnamnesis(student.id);
-    await ref.read(ptRepositoryProvider).saveAnamnesis(StudentAnamnesis(
-          studentId: student.id,
-          trainerId: student.trainerId,
-          mainObjective: _objectives.join(', '),
-          trainingExperience: existing.trainingExperience,
-          diseases: _conditions.join(', '),
-          injuries: existing.injuries,
-          surgeries: existing.surgeries,
-          limitations: existing.limitations,
-          medications: _meds.text,
-          pains: _pains.join(', '),
-          availability: existing.availability,
-          weekDays: existing.weekDays,
-          trainingLocation: existing.trainingLocation,
-          equipment: existing.equipment,
-          notes: existing.notes,
-          questionnaire: q.toMap(),
-          attentionLevel: score.level.name,
-          attentionReasons: score.flags.map((f) => f.reason).toList(),
-        ));
-    if (!mounted) return;
-    setState(() => _saving = false);
-    await showDialog<void>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        backgroundColor: AppColors.surface,
-        content: const Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AnimatedLiliMascot(
-              pose: MascotePose.checklist,
-              mood: LiliMood.viva,
-              height: 88,
-            ),
-            SizedBox(height: 12),
-            Text('Tudo certo! 💜 Sua anamnese foi enviada para Amanda.',
-                textAlign: TextAlign.center),
-          ],
+    try {
+      final existing =
+          await ref.read(ptRepositoryProvider).fetchAnamnesis(student.id);
+      await ref.read(ptRepositoryProvider).saveAnamnesis(StudentAnamnesis(
+            studentId: student.id,
+            trainerId: student.trainerId,
+            mainObjective: _objectives.join(', '),
+            trainingExperience: existing.trainingExperience,
+            diseases: _conditions.join(', '),
+            injuries: existing.injuries,
+            surgeries: existing.surgeries,
+            limitations: existing.limitations,
+            medications: _meds.text,
+            pains: _pains.join(', '),
+            availability: existing.availability,
+            weekDays: existing.weekDays,
+            trainingLocation: existing.trainingLocation,
+            equipment: existing.equipment,
+            notes: existing.notes,
+            questionnaire: q.toMap(),
+            attentionLevel: score.level.name,
+            attentionReasons: score.flags.map((f) => f.reason).toList(),
+          ));
+      ref.invalidate(ptAnamnesisProvider(student.id));
+      if (!mounted) return;
+      await showDialog<void>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          backgroundColor: AppColors.surface,
+          content: const Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedLiliMascot(
+                pose: MascotePose.checklist,
+                mood: LiliMood.viva,
+                height: 88,
+              ),
+              SizedBox(height: 12),
+              Text('Tudo certo! 💜 Sua anamnese foi enviada para Amanda.',
+                  textAlign: TextAlign.center),
+            ],
+          ),
         ),
-      ),
-    );
-    if (mounted) Navigator.of(context).maybePop();
+      );
+      if (mounted) Navigator.of(context).maybePop();
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Não foi possível salvar. ${FirebaseErrorMapper.toUserMessage(e)}',
+          ),
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Student?>(
-      future: _resolveStudent(),
-      builder: (ctx, snap) {
-        final student = snap.data;
+    if (widget.student != null) {
+      return _scaffoldFor(widget.student!);
+    }
+    final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
+    final studentAsync = ref.watch(
+      ptMyStudentProfileProvider((userId: user.id, email: user.email)),
+    );
+    return studentAsync.when(
+      loading: () => const Scaffold(
+        appBar: PremiumAppBar(title: 'Minha anamnese'),
+        body: AppLoading(message: 'Abrindo a anamnese…'),
+      ),
+      error: (e, _) => Scaffold(
+        appBar: const PremiumAppBar(title: 'Minha anamnese'),
+        body: AppErrorState(
+          title: 'Não foi possível abrir a anamnese',
+          message: FirebaseErrorMapper.toUserMessage(e),
+        ),
+      ),
+      data: (student) {
         if (student == null) {
           return const Scaffold(
             appBar: PremiumAppBar(title: 'Minha anamnese'),
-            body: Center(child: CircularProgressIndicator()),
+            body: Center(
+              child: Padding(
+                padding: EdgeInsets.all(24),
+                child: Text(
+                  'Você ainda não está vinculada a uma Personal. '
+                  'Peça para a Amanda cadastrar o mesmo e-mail desta conta.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.textSecondary, height: 1.4),
+                ),
+              ),
+            ),
           );
         }
+        return _scaffoldFor(student);
+      },
+    );
+  }
+
+  Widget _scaffoldFor(Student student) {
         final anam = ref.watch(ptAnamnesisProvider(student.id));
         return Scaffold(
           appBar: const PremiumAppBar(title: 'Minha anamnese'),
@@ -432,8 +477,6 @@ class _AnamnesisFormScreenState extends ConsumerState<AnamnesisFormScreen> {
             },
           ),
         );
-      },
-    );
   }
 
   Widget _field(String label, TextEditingController c) => Padding(

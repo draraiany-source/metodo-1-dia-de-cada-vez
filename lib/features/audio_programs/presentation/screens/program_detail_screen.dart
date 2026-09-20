@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/design_system/app_spacing.dart';
+import '../../../../core/router/premium_app_bar.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/app_states.dart';
 import '../../providers/audio_program_providers.dart';
 import '../widgets/program_day_card.dart';
 
@@ -21,16 +23,31 @@ class ProgramDetailScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Programa 7 Dias'),
-        backgroundColor: AppColors.surfaceDeep,
-      ),
+      appBar: const PremiumAppBar(title: 'Programa 7 Dias'),
       body: audiosAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(
-          child: Text(
-            'Erro ao carregar programa: $e',
-            style: const TextStyle(color: AppColors.textSecondary),
+        loading: () => const AppLoading(message: 'Carregando o programa…'),
+        error: (_, __) => Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Erro ao carregar programa. Verifique a internet e tente novamente.',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: AppColors.textSecondary),
+                ),
+                const SizedBox(height: 12),
+                FilledButton(
+                  onPressed: () {
+                    ref.invalidate(programAudiosProvider(programId));
+                    ref.invalidate(programByIdProvider(programId));
+                    ref.invalidate(programProgressProvider(programId));
+                  },
+                  child: const Text('Tentar novamente'),
+                ),
+              ],
+            ),
           ),
         ),
         data: (audios) {

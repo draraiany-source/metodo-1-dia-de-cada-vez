@@ -126,7 +126,18 @@ class MeasurementHistoryNotifier extends StateNotifier<List<MeasurementEntry>> {
 
   Future<void> add(MeasurementEntry entry) async {
     if (entry.isEmpty) return;
-    state = [...state, entry];
+    state = [...state, entry]..sort((a, b) => a.date.compareTo(b.date));
+    await _persist();
+  }
+
+  Future<void> removeAt(int index) async {
+    if (index < 0 || index >= state.length) return;
+    final next = [...state]..removeAt(index);
+    state = next;
+    await _persist();
+  }
+
+  Future<void> _persist() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(
         _key, state.map((e) => jsonEncode(e.toMap())).toList());

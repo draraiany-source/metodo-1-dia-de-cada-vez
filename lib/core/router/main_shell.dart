@@ -30,7 +30,7 @@ class MainShell extends ConsumerWidget {
         extendBody: true,
         body: child,
         bottomNavigationBar: PremiumBottomNav(
-          currentIndex: current < 0 ? 0 : current,
+          currentIndex: current,
           onTap: (i) => AppNavigation.switchTab(context, kMainTabs[i].route),
         ),
       );
@@ -41,7 +41,7 @@ class MainShell extends ConsumerWidget {
       body: Row(
         children: [
           DesktopSidebar(
-            currentIndex: current < 0 ? 0 : current,
+            currentIndex: current,
             onTap: (i) => AppNavigation.switchTab(context, kMainTabs[i].route),
             extended: context.isDesktopLayout,
             userName: (user?.name.isNotEmpty ?? false) ? user!.name : 'Aluna',

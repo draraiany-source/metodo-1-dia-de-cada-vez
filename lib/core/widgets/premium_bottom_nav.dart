@@ -26,6 +26,8 @@ const kMainTabs = <NavTabItem>[
 ];
 
 int indexForLocation(String location) {
+  if (location.startsWith('/nutrition')) return 2;
+  if (location.startsWith('/habits')) return 0;
   final i = kMainTabs.indexWhere((t) => location.startsWith(t.route));
   return i < 0 ? -1 : i;
 }

@@ -490,6 +490,13 @@ class WeeklyChallengeProgress {
   double ratio(int goal) =>
       goal == 0 ? 0 : (completedCount / goal).clamp(0.0, 1.0);
 
+  static bool isSelectableDay(DateTime day, [DateTime? now]) {
+    final n = now ?? DateTime.now();
+    final d = DateTime(day.year, day.month, day.day);
+    final t = DateTime(n.year, n.month, n.day);
+    return !d.isAfter(t);
+  }
+
   WeeklyChallengeProgress copyWith({
     ParticipationStatus? status,
     List<ChallengeDayEntry>? days,
@@ -499,6 +506,7 @@ class WeeklyChallengeProgress {
     String? achievementTitle,
     DateTime? lastActivityAt,
     String? displayName,
+    bool clearCompletedAt = false,
   }) =>
       WeeklyChallengeProgress(
         id: id,
@@ -507,7 +515,7 @@ class WeeklyChallengeProgress {
         status: status ?? this.status,
         days: days ?? this.days,
         startedAt: startedAt ?? this.startedAt,
-        completedAt: completedAt ?? this.completedAt,
+        completedAt: clearCompletedAt ? null : (completedAt ?? this.completedAt),
         achievementId: achievementId ?? this.achievementId,
         achievementTitle: achievementTitle ?? this.achievementTitle,
         lastActivityAt: lastActivityAt ?? this.lastActivityAt,

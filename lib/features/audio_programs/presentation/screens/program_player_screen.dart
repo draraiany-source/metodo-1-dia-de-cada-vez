@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/design_system/app_spacing.dart';
+import '../../../../core/router/premium_app_bar.dart';
 import '../../../../core/mascot/lily_catalog.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/lily_character_widget.dart';
@@ -30,6 +31,7 @@ class ProgramPlayerScreen extends ConsumerStatefulWidget {
 class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
   String? _openedFor;
   bool _celebrationSheetOpen = false;
+  bool _lookupFailed = false;
 
   @override
   void didChangeDependencies() {
@@ -52,8 +54,13 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
         audio = null;
       }
     }
-    if (audio == null || !mounted) return;
+    if (!mounted) return;
+    if (audio == null) {
+      setState(() => _lookupFailed = true);
+      return;
+    }
 
+    _lookupFailed = false;
     _openedFor = key;
     final progressAsync = ref.read(programProgressProvider(widget.programId));
     final isFavorite = progressAsync.value?.isFavorite(audio.id) ?? false;
@@ -164,9 +171,8 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: Text(audio != null ? 'Dia ${audio.day}' : 'Player'),
-        backgroundColor: AppColors.surfaceDeep,
+      appBar: PremiumAppBar(
+        title: audio != null ? 'Dia ${audio.day}' : 'Player',
       ),
       body: Padding(
         padding: const EdgeInsets.all(AppSpacing.xxl),
@@ -199,7 +205,10 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
               ),
             ),
             Text(
-              audio?.title ?? 'Preparando seu áudio…',
+              audio?.title ??
+                  (_lookupFailed
+                      ? 'Áudio não encontrado'
+                      : 'Preparando seu áudio…'),
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 20,
@@ -221,17 +230,21 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
               ),
             ],
             const SizedBox(height: AppSpacing.xxl),
-            if (state.error != null) ...[
+            if (state.error != null || _lookupFailed) ...[
               Padding(
                 padding: const EdgeInsets.only(bottom: AppSpacing.md),
                 child: Text(
-                  state.error!,
+                  state.error ??
+                      'Não foi possível abrir este áudio. Verifique a internet e tente novamente.',
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: AppColors.danger),
                 ),
               ),
               ElevatedButton(
-                onPressed: _retryOpen,
+                onPressed: () {
+                  setState(() => _lookupFailed = false);
+                  _retryOpen();
+                },
                 child: const Text('Tentar novamente'),
               ),
               const SizedBox(height: AppSpacing.lg),

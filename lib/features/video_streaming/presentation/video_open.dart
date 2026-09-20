@@ -49,6 +49,7 @@ Future<void> abrirVideo(
     await YoutubeLaunch.open(
       context,
       video.youtubeUrl,
+      title: video.name,
       unavailableMessage: 'O link deste vídeo está inválido. '
           'Avise a Amanda pra corrigir no painel.',
     );

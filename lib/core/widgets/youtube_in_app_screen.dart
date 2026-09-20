@@ -234,7 +234,7 @@ class _YoutubeInAppScreenState extends State<YoutubeInAppScreen> {
                     TextButton(
                       onPressed: () => Navigator.of(context).maybePop(),
                       child: const Text(
-                        'Voltar ao treino',
+                        'Voltar',
                         style: TextStyle(color: Colors.white70),
                       ),
                     ),

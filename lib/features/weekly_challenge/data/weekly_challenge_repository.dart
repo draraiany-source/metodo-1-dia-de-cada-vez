@@ -329,6 +329,10 @@ class WeeklyChallengeRepository {
           startedAt: DateTime.now(),
           displayName: displayName,
         );
+    if (!WeeklyChallengeProgress.isSelectableDay(day)) {
+      return (progress, false);
+    }
+
     if (progress.status == ParticipationStatus.notStarted) {
       progress = progress.copyWith(
         status: ParticipationStatus.inProgress,
@@ -355,6 +359,11 @@ class WeeklyChallengeRepository {
       next = next.copyWith(
         status: ParticipationStatus.completed,
         completedAt: DateTime.now(),
+      );
+    } else if (wasCompleted && next.completedCount < challenge.requiredDays) {
+      next = next.copyWith(
+        status: ParticipationStatus.inProgress,
+        clearCompletedAt: true,
       );
     } else if (challenge.hasEnded &&
         next.completedCount < challenge.requiredDays &&

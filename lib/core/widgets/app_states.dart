@@ -178,6 +178,37 @@ class AppErrorState extends StatelessWidget {
   }
 }
 
+/// Loading padronizado — spinner da marca + texto opcional. Evita tela
+/// branca e o indicador cinza solto.
+class AppLoading extends StatelessWidget {
+  const AppLoading({super.key, this.message});
+
+  final String? message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.xl),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const CircularProgressIndicator(color: AppColors.secondary),
+            if (message != null) ...[
+              const SizedBox(height: AppSpacing.md),
+              Text(
+                message!,
+                textAlign: TextAlign.center,
+                style: AppTypography.bodySecondary,
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 /// Skeleton de LISTA — n cartões em shimmer enquanto os dados chegam.
 /// Reaproveita o [SkeletonBox] já existente para manter a estética.
 class AppListSkeleton extends StatelessWidget {

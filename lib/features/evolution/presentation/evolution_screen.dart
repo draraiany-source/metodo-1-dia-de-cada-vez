@@ -660,6 +660,80 @@ class _WeightCard extends StatelessWidget {
                   style: TextStyle(color: AppColors.textTertiary, fontSize: 11),
                 ),
               ),
+            if (history.isNotEmpty) ...[
+              const SizedBox(height: 10),
+              const Text(
+                'Histórico — deslize para excluir',
+                style: TextStyle(color: AppColors.textTertiary, fontSize: 11),
+              ),
+              const SizedBox(height: 6),
+              for (var i = history.length - 1; i >= 0; i--)
+                _WeightHistoryTile(entry: history[i], index: i),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _WeightHistoryTile extends ConsumerWidget {
+  const _WeightHistoryTile({required this.entry, required this.index});
+  final WeightEntry entry;
+  final int index;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Dismissible(
+      key: ValueKey('w_${entry.date.toIso8601String()}_$index'),
+      direction: DismissDirection.endToStart,
+      confirmDismiss: (_) async {
+        return await showDialog<bool>(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                backgroundColor: AppColors.surface,
+                title: const Text('Excluir pesagem?'),
+                content: Text(
+                  '${entry.weight.toStringAsFixed(1)} kg em ${DateFormatBr.data(entry.date)}',
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(ctx, false),
+                    child: const Text('Cancelar'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.pop(ctx, true),
+                    child: const Text('Excluir'),
+                  ),
+                ],
+              ),
+            ) ??
+            false;
+      },
+      background: Container(
+        alignment: Alignment.centerRight,
+        padding: const EdgeInsets.only(right: 12),
+        color: AppColors.danger.withValues(alpha: 0.35),
+        child: const Icon(Icons.delete_outline, color: Colors.white),
+      ),
+      onDismissed: (_) =>
+          ref.read(weightHistoryProvider.notifier).removeEntry(entry),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 6),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                DateFormatBr.data(entry.date),
+                style: const TextStyle(
+                    color: AppColors.textSecondary, fontSize: 12),
+              ),
+            ),
+            Text(
+              '${entry.weight.toStringAsFixed(1)} kg',
+              style: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w600, fontSize: 13),
+            ),
           ],
         ),
       ),
@@ -884,7 +958,7 @@ class _ResumoTile extends StatelessWidget {
 // ============================================================================
 // MINHAS METAS
 // ============================================================================
-class _MetasSection extends StatelessWidget {
+class _MetasSection extends ConsumerWidget {
   const _MetasSection({
     required this.user,
     required this.trainerProfile,
@@ -902,7 +976,7 @@ class _MetasSection extends StatelessWidget {
   final double taxaHabitos;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final now = DateTime.now();
     final segunda = DateTime(now.year, now.month, now.day)
         .subtract(Duration(days: now.weekday - 1));
@@ -911,7 +985,8 @@ class _MetasSection extends StatelessWidget {
         .length;
     final metaTreinos = trainerProfile.diasPorSemana;
 
-    final metaAgua = WaterCalculator.goalGlassesFor(user.currentWeight);
+    final metaAgua =
+        ref.watch(waterDayProvider).effectiveGoalGlasses(user.currentWeight);
 
     final passos = healthSnap?.get(HealthMetric.passos);
 
@@ -1060,7 +1135,7 @@ class _MetaUnavailable extends StatelessWidget {
 // ============================================================================
 // CONQUISTAS RECENTES
 // ============================================================================
-class _ConquistasSection extends StatelessWidget {
+class _ConquistasSection extends ConsumerWidget {
   const _ConquistasSection({
     required this.user,
     required this.gam,
@@ -1071,8 +1146,9 @@ class _ConquistasSection extends StatelessWidget {
   final int glasses;
 
   @override
-  Widget build(BuildContext context) {
-    final metaAgua = WaterCalculator.goalGlassesFor(user.currentWeight);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final metaAgua =
+        ref.watch(waterDayProvider).effectiveGoalGlasses(user.currentWeight);
     final conquistas = <String>[
       if (user.totalWorkouts >= 1) 'Primeiro treino concluído',
       if (gam.streak >= 7) '7 dias de sequência',

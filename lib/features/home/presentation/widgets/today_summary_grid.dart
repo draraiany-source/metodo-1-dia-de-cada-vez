@@ -38,7 +38,8 @@ class TodaySummaryGrid extends ConsumerWidget {
 
     final glasses = ref.watch(waterLogProvider);
     final user = ref.watch(currentUserProvider);
-    final goalGlasses = WaterCalculator.goalGlassesFor(user?.currentWeight);
+    final goalGlasses =
+        ref.watch(waterDayProvider).effectiveGoalGlasses(user?.currentWeight);
     final litrosAtual = (glasses * WaterCalculator.mlPerGlass / 1000);
     final litrosMeta = (goalGlasses * WaterCalculator.mlPerGlass / 1000);
 

@@ -342,6 +342,7 @@ class _WeekCalendar extends ConsumerWidget {
           _DayTile(
             day: day,
             done: progress?.isDayDone(day) ?? false,
+            locked: !WeeklyChallengeProgress.isSelectableDay(day),
             onToggle: () async {
               final repo = ref.read(weeklyChallengeRepositoryProvider);
               var p = progress;
@@ -377,10 +378,12 @@ class _DayTile extends StatelessWidget {
     required this.day,
     required this.done,
     required this.onToggle,
+    this.locked = false,
   });
   final DateTime day;
   final bool done;
   final VoidCallback onToggle;
+  final bool locked;
 
   @override
   Widget build(BuildContext context) {
@@ -392,7 +395,7 @@ class _DayTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: InkWell(
-        onTap: onToggle,
+        onTap: locked ? null : onToggle,
         borderRadius: BorderRadius.circular(14),
         child: Ink(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -427,7 +430,11 @@ class _DayTile extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                done ? 'concluído' : (isToday ? 'hoje' : 'pendente'),
+                done
+                    ? 'concluído'
+                    : locked
+                        ? 'em breve'
+                        : (isToday ? 'hoje' : 'pendente'),
                 style: TextStyle(
                   color: done
                       ? AppColors.success

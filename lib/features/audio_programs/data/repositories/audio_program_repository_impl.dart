@@ -92,7 +92,12 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
           .toList();
       if (list.isEmpty) return _demoAudios(programId);
       return _canonicalizePrograma7Audios(programId, list);
-    });
+    }).timeout(
+      const Duration(seconds: 12),
+      onTimeout: (sink) {
+        sink.add(_demoAudios(programId));
+      },
+    );
   }
 
   @override

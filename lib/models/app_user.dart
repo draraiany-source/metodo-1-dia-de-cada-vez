@@ -112,10 +112,36 @@ class AppUser {
   /// Progresso de XP dentro do nível atual (0..1).
   double get levelProgress => (xp % 1000) / 1000.0;
 
+  /// Primeiro nome para saudação. Vazio quando o cadastro não tem nome.
+  String get firstName {
+    final parts = name.trim().split(RegExp(r'\s+'));
+    if (parts.isEmpty || parts.first.isEmpty) return '';
+    return parts.first;
+  }
+
+  /// Nunca devolve "Olá, !" — se não houver nome, fica só "Olá!".
+  String get homeGreeting {
+    final first = firstName;
+    return first.isEmpty ? 'Olá!' : 'Olá, $first!';
+  }
+
+  /// Nome na ficha de perfil. Não inventa nome próprio; usa o papel.
+  String get profileDisplayName {
+    final n = name.trim();
+    return n.isEmpty ? 'Aluno' : n;
+  }
+
+  String get avatarInitial {
+    if (firstName.isNotEmpty) return firstName[0].toUpperCase();
+    final mail = email.trim();
+    if (mail.isNotEmpty) return mail[0].toUpperCase();
+    return '?';
+  }
+
   factory AppUser.fromMap(String id, Map<String, dynamic> m) {
     return AppUser(
       id: id,
-      name: (m['name'] ?? '') as String,
+      name: _nameFromMap(m),
       email: (m['email'] ?? '') as String,
       photoUrl: m['photoUrl'] as String?,
       city: m['city'] as String?,
@@ -251,6 +277,18 @@ class AppUser {
   static String _roleFromMap(dynamic v) {
     final raw = (v ?? '').toString().trim();
     return raw.isEmpty ? 'student' : raw;
+  }
+
+  /// Aceita `name`, `displayName`, `fullName` ou `nome` — o Firestore já
+  /// teve documentos gravados com chaves diferentes.
+  static String _nameFromMap(Map<String, dynamic> m) {
+    for (final key in ['name', 'displayName', 'fullName', 'nome']) {
+      final v = m[key];
+      if (v == null) continue;
+      final s = '$v'.trim();
+      if (s.isNotEmpty) return s;
+    }
+    return '';
   }
 
   static double? _toDouble(dynamic v) =>

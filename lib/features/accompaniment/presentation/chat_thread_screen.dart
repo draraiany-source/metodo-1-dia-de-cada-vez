@@ -347,7 +347,12 @@ class _ChatThreadScreenState extends ConsumerState<ChatThreadScreen> {
             ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
+              padding: EdgeInsets.fromLTRB(
+                12,
+                8,
+                12,
+                12 + MediaQuery.viewInsetsOf(context).bottom,
+              ),
               child: Column(
                 children: [
                   if (widget.isTrainer)

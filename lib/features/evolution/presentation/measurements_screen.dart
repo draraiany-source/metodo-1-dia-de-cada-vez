@@ -61,6 +61,7 @@ class _MeasurementsScreenState extends ConsumerState<MeasurementsScreen> {
   Future<void> _registrar() async {
     final controllers = {for (final f in _fields) f.label: TextEditingController()};
     final obsController = TextEditingController();
+    var dataEscolhida = DateTime.now();
 
     final ok = await showModalBottomSheet<bool>(
       context: context,
@@ -76,14 +77,33 @@ class _MeasurementsScreenState extends ConsumerState<MeasurementsScreen> {
           top: 20,
           bottom: MediaQuery.of(ctx).viewInsets.bottom + 24,
         ),
-        child: SingleChildScrollView(
+        child: StatefulBuilder(
+          builder: (ctx, setModal) => SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Registrar medidas',
                   style: Theme.of(ctx).textTheme.titleLarge),
-              const SizedBox(height: 16),
+              const SizedBox(height: 8),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Data'),
+                subtitle: Text(DateFormatBr.data(dataEscolhida)),
+                trailing: const Icon(Icons.calendar_today_outlined, size: 18),
+                onTap: () async {
+                  final picked = await showDatePicker(
+                    context: ctx,
+                    initialDate: dataEscolhida,
+                    firstDate: DateTime(2018),
+                    lastDate: DateTime.now(),
+                  );
+                  if (picked != null) {
+                    setModal(() => dataEscolhida = picked);
+                  }
+                },
+              ),
+              const SizedBox(height: 8),
               for (final f in _fields)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
@@ -126,6 +146,7 @@ class _MeasurementsScreenState extends ConsumerState<MeasurementsScreen> {
             ],
           ),
         ),
+        ),
       ),
     );
 
@@ -141,7 +162,7 @@ class _MeasurementsScreenState extends ConsumerState<MeasurementsScreen> {
         double.tryParse(s.trim().replaceAll(',', '.'));
 
     final entry = MeasurementEntry(
-      date: DateTime.now(),
+      date: dataEscolhida,
       cintura: parse(controllers['Cintura']!.text),
       abdomen: parse(controllers['Abdômen']!.text),
       quadril: parse(controllers['Quadril']!.text),
@@ -267,9 +288,47 @@ class _MeasurementsScreenState extends ConsumerState<MeasurementsScreen> {
                     ),
                     const SizedBox(height: 28),
                     Text('Histórico', style: Theme.of(context).textTheme.titleMedium),
+                    const SizedBox(height: 4),
+                    const Text(
+                      'Deslize para excluir um registro',
+                      style: TextStyle(color: AppColors.textTertiary, fontSize: 11),
+                    ),
                     const SizedBox(height: 10),
-                    for (final e in history.reversed)
-                      Container(
+                    for (var i = history.length - 1; i >= 0; i--)
+                      Dismissible(
+                        key: ValueKey('m_${history[i].date.toIso8601String()}_$i'),
+                        direction: DismissDirection.endToStart,
+                        confirmDismiss: (_) async {
+                          return await showDialog<bool>(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  backgroundColor: AppColors.surface,
+                                  title: const Text('Excluir medidas?'),
+                                  content: Text(DateFormatBr.data(history[i].date)),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(ctx, false),
+                                      child: const Text('Cancelar'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(ctx, true),
+                                      child: const Text('Excluir'),
+                                    ),
+                                  ],
+                                ),
+                              ) ??
+                              false;
+                        },
+                        background: Container(
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.only(right: 12),
+                          color: AppColors.danger.withValues(alpha: 0.35),
+                          child: const Icon(Icons.delete_outline, color: Colors.white),
+                        ),
+                        onDismissed: (_) => ref
+                            .read(measurementHistoryProvider.notifier)
+                            .removeAt(i),
+                        child: Container(
                         margin: const EdgeInsets.only(bottom: 10),
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
@@ -279,7 +338,7 @@ class _MeasurementsScreenState extends ConsumerState<MeasurementsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(DateFormatBr.data(e.date),
+                            Text(DateFormatBr.data(history[i].date),
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600)),
@@ -289,17 +348,17 @@ class _MeasurementsScreenState extends ConsumerState<MeasurementsScreen> {
                               runSpacing: 4,
                               children: [
                                 for (final f in _fields)
-                                  if (f.getter(e) != null)
+                                  if (f.getter(history[i]) != null)
                                     Text(
-                                        '${f.label}: ${f.getter(e)!.toStringAsFixed(1)}${f.unit}',
+                                        '${f.label}: ${f.getter(history[i])!.toStringAsFixed(1)}${f.unit}',
                                         style: const TextStyle(
                                             color: AppColors.textSecondary,
                                             fontSize: 12)),
                               ],
                             ),
-                            if (e.observacao != null) ...[
+                            if (history[i].observacao != null) ...[
                               const SizedBox(height: 6),
-                              Text('"${e.observacao}"',
+                              Text('"${history[i].observacao}"',
                                   style: const TextStyle(
                                       color: AppColors.textTertiary,
                                       fontSize: 11,
@@ -307,6 +366,7 @@ class _MeasurementsScreenState extends ConsumerState<MeasurementsScreen> {
                             ],
                           ],
                         ),
+                      ),
                       ),
                   ],
                 ],

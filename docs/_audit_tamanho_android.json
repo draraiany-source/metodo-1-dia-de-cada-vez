@@ -1,0 +1,2290 @@
+{
+  "aab": {
+    "exists": true,
+    "path": "C:\\Users\\Lenovo\\Desktop\\metodo 1 dia perfil premium 2\\build\\app\\outputs\\bundle\\release\\app-release.aab",
+    "archive_bytes": 626693231,
+    "archive_mb": 597.66,
+    "uncompressed_top": {
+      "base": {
+        "bytes": 641388453,
+        "mb": 611.68
+      },
+      "BUNDLE-METADATA": {
+        "bytes": 137853248,
+        "mb": 131.47
+      },
+      "META-INF": {
+        "bytes": 393678,
+        "mb": 0.38
+      },
+      "BundleConfig.pb": {
+        "bytes": 628,
+        "mb": 0.0
+      }
+    },
+    "by_ext": {
+      ".png": {
+        "bytes": 494384244,
+        "mb": 471.48
+      },
+      ".sym": {
+        "bytes": 97696524,
+        "mb": 93.17
+      },
+      ".so": {
+        "bytes": 76380440,
+        "mb": 72.84
+      },
+      ".map": {
+        "bytes": 40128556,
+        "mb": 38.27
+      },
+      ".jpg": {
+        "bytes": 35695303,
+        "mb": 34.04
+      },
+      ".jpeg": {
+        "bytes": 14688589,
+        "mb": 14.01
+      },
+      ".dex": {
+        "bytes": 13603168,
+        "mb": 12.97
+      },
+      ".mp3": {
+        "bytes": 3615825,
+        "mb": 3.45
+      },
+      ".webp": {
+        "bytes": 1437930,
+        "mb": 1.37
+      },
+      ".proto": {
+        "bytes": 417629,
+        "mb": 0.4
+      },
+      ".pb": {
+        "bytes": 361380,
+        "mb": 0.34
+      },
+      ".xml": {
+        "bytes": 255566,
+        "mb": 0.24
+      },
+      ".sf": {
+        "bytes": 196151,
+        "mb": 0.19
+      },
+      ".mf": {
+        "bytes": 196102,
+        "mb": 0.19
+      },
+      ".z": {
+        "bytes": 125912,
+        "mb": 0.12
+      },
+      ".json": {
+        "bytes": 125524,
+        "mb": 0.12
+      },
+      ".bin": {
+        "bytes": 81170,
+        "mb": 0.08
+      },
+      ".svg": {
+        "bytes": 77409,
+        "mb": 0.07
+      },
+      ".kotlin_builtins": {
+        "bytes": 53396,
+        "mb": 0.05
+      },
+      ".frag": {
+        "bytes": 39480,
+        "mb": 0.04
+      },
+      ".otf": {
+        "bytes": 37368,
+        "mb": 0.04
+      },
+      ".js": {
+        "bytes": 13669,
+        "mb": 0.01
+      },
+      ".txt": {
+        "bytes": 10175,
+        "mb": 0.01
+      },
+      ".prof": {
+        "bytes": 4089,
+        "mb": 0.0
+      },
+      ".md": {
+        "bytes": 3321,
+        "mb": 0.0
+      }
+    },
+    "flutter_assets_top": {
+      "assets": {
+        "bytes": 549457879,
+        "mb": 524.0
+      },
+      "NOTICES.Z": {
+        "bytes": 125912,
+        "mb": 0.12
+      },
+      "AssetManifest.bin": {
+        "bytes": 79442,
+        "mb": 0.08
+      },
+      "shaders": {
+        "bytes": 39480,
+        "mb": 0.04
+      },
+      "fonts": {
+        "bytes": 37368,
+        "mb": 0.04
+      },
+      "packages": {
+        "bytes": 17925,
+        "mb": 0.02
+      },
+      "FontManifest.json": {
+        "bytes": 208,
+        "mb": 0.0
+      },
+      "NativeAssetsManifest.json": {
+        "bytes": 45,
+        "mb": 0.0
+      }
+    },
+    "native_abi": {
+      "x86_64": {
+        "bytes": 27072128,
+        "mb": 25.82
+      },
+      "arm64-v8a": {
+        "bytes": 25548336,
+        "mb": 24.36
+      },
+      "armeabi-v7a": {
+        "bytes": 23759976,
+        "mb": 22.66
+      }
+    },
+    "largest_20": [
+      {
+        "path": "BUNDLE-METADATA/com.android.tools.build.obfuscation/proguard.map",
+        "bytes": 40128556,
+        "mb": 38.27
+      },
+      {
+        "path": "BUNDLE-METADATA/com.android.tools.build.debugsymbols/arm64-v8a/libflutter.so.sym",
+        "bytes": 18513584,
+        "mb": 17.66
+      },
+      {
+        "path": "BUNDLE-METADATA/com.android.tools.build.debugsymbols/x86_64/libflutter.so.sym",
+        "bytes": 17595376,
+        "mb": 16.78
+      },
+      {
+        "path": "BUNDLE-METADATA/com.android.tools.build.debugsymbols/armeabi-v7a/libapp.so.sym",
+        "bytes": 16525900,
+        "mb": 15.76
+      },
+      {
+        "path": "BUNDLE-METADATA/com.android.tools.build.debugsymbols/x86_64/libapp.so.sym",
+        "bytes": 15644952,
+        "mb": 14.92
+      },
+      {
+        "path": "BUNDLE-METADATA/com.android.tools.build.debugsymbols/arm64-v8a/libapp.so.sym",
+        "bytes": 15383080,
+        "mb": 14.67
+      },
+      {
+        "path": "base/lib/armeabi-v7a/libapp.so",
+        "bytes": 15221324,
+        "mb": 14.52
+      },
+      {
+        "path": "base/lib/x86_64/libapp.so",
+        "bytes": 14091152,
+        "mb": 13.44
+      },
+      {
+        "path": "base/lib/arm64-v8a/libapp.so",
+        "bytes": 13829008,
+        "mb": 13.19
+      },
+      {
+        "path": "BUNDLE-METADATA/com.android.tools.build.debugsymbols/armeabi-v7a/libflutter.so.sym",
+        "bytes": 13630212,
+        "mb": 13.0
+      },
+      {
+        "path": "base/lib/x86_64/libflutter.so",
+        "bytes": 12857960,
+        "mb": 12.26
+      },
+      {
+        "path": "base/lib/arm64-v8a/libflutter.so",
+        "bytes": 11580816,
+        "mb": 11.04
+      },
+      {
+        "path": "base/lib/armeabi-v7a/libflutter.so",
+        "bytes": 8452636,
+        "mb": 8.06
+      },
+      {
+        "path": "base/dex/classes.dex",
+        "bytes": 7653976,
+        "mb": 7.3
+      },
+      {
+        "path": "base/dex/classes3.dex",
+        "bytes": 5745468,
+        "mb": 5.48
+      },
+      {
+        "path": "base/assets/flutter_assets/assets/lily_treinos/lily_corda_naval.png",
+        "bytes": 2175445,
+        "mb": 2.07
+      },
+      {
+        "path": "base/assets/flutter_assets/assets/lily_treinos/lily_agachamento.png",
+        "bytes": 2170720,
+        "mb": 2.07
+      },
+      {
+        "path": "base/assets/flutter_assets/assets/lily_treinos/lily_kettlebell.png",
+        "bytes": 2144278,
+        "mb": 2.04
+      },
+      {
+        "path": "base/assets/flutter_assets/assets/images/recipes/neon/38_icone_neon_de_suco_detox_verde.png",
+        "bytes": 2127065,
+        "mb": 2.03
+      },
+      {
+        "path": "base/assets/flutter_assets/assets/images/recipes/neon/40_icone_neon_de_torrada_com_abacate.png",
+        "bytes": 2112750,
+        "mb": 2.01
+      }
+    ]
+  },
+  "apk": {
+    "exists": true,
+    "path": "C:\\Users\\Lenovo\\Desktop\\metodo 1 dia perfil premium 2\\build\\app\\outputs\\flutter-apk\\app-release.apk",
+    "archive_bytes": 632583442,
+    "archive_mb": 603.28,
+    "uncompressed_top": {
+      "assets": {
+        "bytes": 549762832,
+        "mb": 524.29
+      },
+      "lib": {
+        "bytes": 76380440,
+        "mb": 72.84
+      },
+      "classes.dex": {
+        "bytes": 7653976,
+        "mb": 7.3
+      },
+      "classes3.dex": {
+        "bytes": 5745468,
+        "mb": 5.48
+      },
+      "res": {
+        "bytes": 692425,
+        "mb": 0.66
+      },
+      "google": {
+        "bytes": 411383,
+        "mb": 0.39
+      },
+      "resources.arsc": {
+        "bytes": 285508,
+        "mb": 0.27
+      },
+      "classes2.dex": {
+        "bytes": 203724,
+        "mb": 0.19
+      },
+      "kotlin": {
+        "bytes": 53396,
+        "mb": 0.05
+      },
+      "AndroidManifest.xml": {
+        "bytes": 33940,
+        "mb": 0.03
+      },
+      "META-INF": {
+        "bytes": 10796,
+        "mb": 0.01
+      },
+      "client_analytics.proto": {
+        "bytes": 2982,
+        "mb": 0.0
+      },
+      "messaging_event.proto": {
+        "bytes": 2381,
+        "mb": 0.0
+      },
+      "DebugProbesKt.bin": {
+        "bytes": 1728,
+        "mb": 0.0
+      },
+      "messaging_event_extension.proto": {
+        "bytes": 883,
+        "mb": 0.0
+      },
+      "kotlin-tooling-metadata.json": {
+        "bytes": 626,
+        "mb": 0.0
+      },
+      "play-services-measurement-sdk-api.properties": {
+        "bytes": 104,
+        "mb": 0.0
+      },
+      "firebase-measurement-connector.properties": {
+        "bytes": 98,
+        "mb": 0.0
+      },
+      "play-services-measurement-base.properties": {
+        "bytes": 98,
+        "mb": 0.0
+      },
+      "play-services-measurement-impl.properties": {
+        "bytes": 98,
+        "mb": 0.0
+      },
+      "play-services-auth-blockstore.properties": {
+        "bytes": 96,
+        "mb": 0.0
+      },
+      "play-services-cloud-messaging.properties": {
+        "bytes": 96,
+        "mb": 0.0
+      },
+      "play-services-measurement-api.properties": {
+        "bytes": 96,
+        "mb": 0.0
+      },
+      "play-services-measurement-sdk.properties": {
+        "bytes": 96,
+        "mb": 0.0
+      },
+      "firebase-database-collection.properties": {
+        "bytes": 94,
+        "mb": 0.0
+      },
+      "play-services-ads-identifier.properties": {
+        "bytes": 94,
+        "mb": 0.0
+      },
+      "play-services-auth-api-phone.properties": {
+        "bytes": 94,
+        "mb": 0.0
+      },
+      "play-services-measurement.properties": {
+        "bytes": 88,
+        "mb": 0.0
+      },
+      "play-services-auth-base.properties": {
+        "bytes": 86,
+        "mb": 0.0
+      },
+      "firebase-encoders-proto.properties": {
+        "bytes": 84,
+        "mb": 0.0
+      },
+      "play-services-safetynet.properties": {
+        "bytes": 84,
+        "mb": 0.0
+      },
+      "play-services-basement.properties": {
+        "bytes": 82,
+        "mb": 0.0
+      },
+      "play-services-location.properties": {
+        "bytes": 82,
+        "mb": 0.0
+      },
+      "firebase-auth-interop.properties": {
+        "bytes": 80,
+        "mb": 0.0
+      },
+      "firebase-annotations.properties": {
+        "bytes": 78,
+        "mb": 0.0
+      },
+      "firebase-iid-interop.properties": {
+        "bytes": 78,
+        "mb": 0.0
+      },
+      "play-services-stats.properties": {
+        "bytes": 76,
+        "mb": 0.0
+      },
+      "play-services-tasks.properties": {
+        "bytes": 76,
+        "mb": 0.0
+      },
+      "firebase-analytics.properties": {
+        "bytes": 74,
+        "mb": 0.0
+      },
+      "play-services-auth.properties": {
+        "bytes": 74,
+        "mb": 0.0
+      },
+      "play-services-base.properties": {
+        "bytes": 74,
+        "mb": 0.0
+      },
+      "play-services-fido.properties": {
+        "bytes": 74,
+        "mb": 0.0
+      },
+      "firebase-encoders.properties": {
+        "bytes": 72,
+        "mb": 0.0
+      },
+      "firebase-auth.properties": {
+        "bytes": 64,
+        "mb": 0.0
+      },
+      "core-common.properties": {
+        "bytes": 58,
+        "mb": 0.0
+      },
+      "recaptcha.properties": {
+        "bytes": 56,
+        "mb": 0.0
+      },
+      "integrity.properties": {
+        "bytes": 54,
+        "mb": 0.0
+      },
+      "googleid.properties": {
+        "bytes": 52,
+        "mb": 0.0
+      },
+      "billing.properties": {
+        "bytes": 50,
+        "mb": 0.0
+      }
+    },
+    "by_ext": {
+      ".png": {
+        "bytes": 494384244,
+        "mb": 471.48
+      },
+      ".so": {
+        "bytes": 76380440,
+        "mb": 72.84
+      },
+      ".jpg": {
+        "bytes": 35695303,
+        "mb": 34.04
+      },
+      ".jpeg": {
+        "bytes": 14688589,
+        "mb": 14.01
+      },
+      ".dex": {
+        "bytes": 13603168,
+        "mb": 12.97
+      },
+      ".mp3": {
+        "bytes": 3615825,
+        "mb": 3.45
+      },
+      ".webp": {
+        "bytes": 1437930,
+        "mb": 1.37
+      },
+      ".proto": {
+        "bytes": 417629,
+        "mb": 0.4
+      },
+      ".arsc": {
+        "bytes": 285508,
+        "mb": 0.27
+      },
+      ".xml": {
+        "bytes": 161014,
+        "mb": 0.15
+      },
+      ".z": {
+        "bytes": 125912,
+        "mb": 0.12
+      },
+      ".json": {
+        "bytes": 123903,
+        "mb": 0.12
+      },
+      ".bin": {
+        "bytes": 81170,
+        "mb": 0.08
+      },
+      ".svg": {
+        "bytes": 77409,
+        "mb": 0.07
+      },
+      ".kotlin_builtins": {
+        "bytes": 53396,
+        "mb": 0.05
+      },
+      ".frag": {
+        "bytes": 39480,
+        "mb": 0.04
+      },
+      ".otf": {
+        "bytes": 37368,
+        "mb": 0.04
+      },
+      ".js": {
+        "bytes": 13669,
+        "mb": 0.01
+      },
+      ".txt": {
+        "bytes": 10175,
+        "mb": 0.01
+      },
+      ".prof": {
+        "bytes": 4089,
+        "mb": 0.0
+      },
+      ".md": {
+        "bytes": 3321,
+        "mb": 0.0
+      },
+      ".properties": {
+        "bytes": 2716,
+        "mb": 0.0
+      },
+      ".ttf": {
+        "bytes": 1832,
+        "mb": 0.0
+      },
+      ".profm": {
+        "bytes": 484,
+        "mb": 0.0
+      },
+      ".version": {
+        "bytes": 477,
+        "mb": 0.0
+      }
+    },
+    "flutter_assets_top": {
+      "assets": {
+        "bytes": 549457879,
+        "mb": 524.0
+      },
+      "NOTICES.Z": {
+        "bytes": 125912,
+        "mb": 0.12
+      },
+      "AssetManifest.bin": {
+        "bytes": 79442,
+        "mb": 0.08
+      },
+      "shaders": {
+        "bytes": 39480,
+        "mb": 0.04
+      },
+      "fonts": {
+        "bytes": 37368,
+        "mb": 0.04
+      },
+      "packages": {
+        "bytes": 17925,
+        "mb": 0.02
+      },
+      "FontManifest.json": {
+        "bytes": 208,
+        "mb": 0.0
+      },
+      "NativeAssetsManifest.json": {
+        "bytes": 45,
+        "mb": 0.0
+      }
+    },
+    "native_abi": {
+      "x86_64": {
+        "bytes": 27072128,
+        "mb": 25.82
+      },
+      "arm64-v8a": {
+        "bytes": 25548336,
+        "mb": 24.36
+      },
+      "armeabi-v7a": {
+        "bytes": 23759976,
+        "mb": 22.66
+      }
+    },
+    "largest_20": [
+      {
+        "path": "lib/armeabi-v7a/libapp.so",
+        "bytes": 15221324,
+        "mb": 14.52
+      },
+      {
+        "path": "lib/x86_64/libapp.so",
+        "bytes": 14091152,
+        "mb": 13.44
+      },
+      {
+        "path": "lib/arm64-v8a/libapp.so",
+        "bytes": 13829008,
+        "mb": 13.19
+      },
+      {
+        "path": "lib/x86_64/libflutter.so",
+        "bytes": 12857960,
+        "mb": 12.26
+      },
+      {
+        "path": "lib/arm64-v8a/libflutter.so",
+        "bytes": 11580816,
+        "mb": 11.04
+      },
+      {
+        "path": "lib/armeabi-v7a/libflutter.so",
+        "bytes": 8452636,
+        "mb": 8.06
+      },
+      {
+        "path": "classes.dex",
+        "bytes": 7653976,
+        "mb": 7.3
+      },
+      {
+        "path": "classes3.dex",
+        "bytes": 5745468,
+        "mb": 5.48
+      },
+      {
+        "path": "assets/flutter_assets/assets/lily_treinos/lily_corda_naval.png",
+        "bytes": 2175445,
+        "mb": 2.07
+      },
+      {
+        "path": "assets/flutter_assets/assets/lily_treinos/lily_agachamento.png",
+        "bytes": 2170720,
+        "mb": 2.07
+      },
+      {
+        "path": "assets/flutter_assets/assets/lily_treinos/lily_kettlebell.png",
+        "bytes": 2144278,
+        "mb": 2.04
+      },
+      {
+        "path": "assets/flutter_assets/assets/images/recipes/neon/38_icone_neon_de_suco_detox_verde.png",
+        "bytes": 2127065,
+        "mb": 2.03
+      },
+      {
+        "path": "assets/flutter_assets/assets/images/recipes/neon/40_icone_neon_de_torrada_com_abacate.png",
+        "bytes": 2112750,
+        "mb": 2.01
+      },
+      {
+        "path": "assets/flutter_assets/assets/lily_treinos/lily_treino_generico_1.png",
+        "bytes": 2097077,
+        "mb": 2.0
+      },
+      {
+        "path": "assets/flutter_assets/assets/images/recipes/neon/19_sanduiche_neon_de_frango_grelhado.png",
+        "bytes": 2091748,
+        "mb": 1.99
+      },
+      {
+        "path": "assets/flutter_assets/assets/lily_treinos/lily_prancha.png",
+        "bytes": 2077969,
+        "mb": 1.98
+      },
+      {
+        "path": "assets/flutter_assets/assets/images/recipes/neon/28_icone_neon_de_frango_grelhado_e_legumes.png",
+        "bytes": 2073787,
+        "mb": 1.98
+      },
+      {
+        "path": "assets/flutter_assets/assets/images/recipes/neon/32_icone_neon_de_salada_caesar.png",
+        "bytes": 2057131,
+        "mb": 1.96
+      },
+      {
+        "path": "assets/flutter_assets/assets/images/recipes/neon/07_frango_grelhado_neon_com_legumes.png",
+        "bytes": 2050278,
+        "mb": 1.96
+      },
+      {
+        "path": "assets/flutter_assets/assets/images/recipes/neon/21_suco_verde_detox_neon.png",
+        "bytes": 2042697,
+        "mb": 1.95
+      }
+    ]
+  },
+  "declared_dirs": [
+    {
+      "path": "assets/icons",
+      "bytes": 226181131,
+      "mb": 215.7,
+      "files": 283,
+      "exists": true
+    },
+    {
+      "path": "assets/images",
+      "bytes": 154060026,
+      "mb": 146.92,
+      "files": 161,
+      "exists": true
+    },
+    {
+      "path": "assets/amanda",
+      "bytes": 150268450,
+      "mb": 143.31,
+      "files": 68,
+      "exists": true
+    },
+    {
+      "path": "assets/icons/neon",
+      "bytes": 134103533,
+      "mb": 127.89,
+      "files": 97,
+      "exists": true
+    },
+    {
+      "path": "assets/lily",
+      "bytes": 82779998,
+      "mb": 78.95,
+      "files": 179,
+      "exists": true
+    },
+    {
+      "path": "assets/images/recipes",
+      "bytes": 79290635,
+      "mb": 75.62,
+      "files": 40,
+      "exists": true
+    },
+    {
+      "path": "assets/images/recipes/neon",
+      "bytes": 79290635,
+      "mb": 75.62,
+      "files": 40,
+      "exists": true
+    },
+    {
+      "path": "assets/lily_treinos",
+      "bytes": 43611350,
+      "mb": 41.59,
+      "files": 24,
+      "exists": true
+    },
+    {
+      "path": "assets/images/icons_3d_pack2",
+      "bytes": 41341573,
+      "mb": 39.43,
+      "files": 41,
+      "exists": true
+    },
+    {
+      "path": "assets/icons/app",
+      "bytes": 40869141,
+      "mb": 38.98,
+      "files": 28,
+      "exists": true
+    },
+    {
+      "path": "assets/lily_exercicios",
+      "bytes": 38676116,
+      "mb": 36.88,
+      "files": 134,
+      "exists": true
+    },
+    {
+      "path": "assets/amanda/promo",
+      "bytes": 38299079,
+      "mb": 36.52,
+      "files": 23,
+      "exists": true
+    },
+    {
+      "path": "assets/icons/personal-ai",
+      "bytes": 15095664,
+      "mb": 14.4,
+      "files": 10,
+      "exists": true
+    },
+    {
+      "path": "assets/images/icons_3d",
+      "bytes": 11674620,
+      "mb": 11.13,
+      "files": 15,
+      "exists": true
+    },
+    {
+      "path": "assets/icons/app/extras_hidratacao",
+      "bytes": 4852342,
+      "mb": 4.63,
+      "files": 4,
+      "exists": true
+    },
+    {
+      "path": "assets/mascot/png",
+      "bytes": 4503712,
+      "mb": 4.3,
+      "files": 18,
+      "exists": true
+    },
+    {
+      "path": "assets/images/mascote",
+      "bytes": 4452930,
+      "mb": 4.25,
+      "files": 18,
+      "exists": true
+    },
+    {
+      "path": "assets/audio_programs",
+      "bytes": 3615825,
+      "mb": 3.45,
+      "files": 7,
+      "exists": true
+    },
+    {
+      "path": "assets/mascot/extras",
+      "bytes": 3019601,
+      "mb": 2.88,
+      "files": 13,
+      "exists": true
+    },
+    {
+      "path": "assets/images/lily_fit",
+      "bytes": 2608755,
+      "mb": 2.49,
+      "files": 10,
+      "exists": true
+    },
+    {
+      "path": "assets/images/treinos",
+      "bytes": 2466806,
+      "mb": 2.35,
+      "files": 6,
+      "exists": true
+    },
+    {
+      "path": "assets/images/referencias",
+      "bytes": 2190752,
+      "mb": 2.09,
+      "files": 5,
+      "exists": true
+    },
+    {
+      "path": "assets/images/progresso",
+      "bytes": 1848930,
+      "mb": 1.76,
+      "files": 4,
+      "exists": true
+    },
+    {
+      "path": "assets/images/receitas",
+      "bytes": 1675625,
+      "mb": 1.6,
+      "files": 3,
+      "exists": true
+    },
+    {
+      "path": "assets/images/hidratacao",
+      "bytes": 1666758,
+      "mb": 1.59,
+      "files": 4,
+      "exists": true
+    },
+    {
+      "path": "assets/images/corrida",
+      "bytes": 1458337,
+      "mb": 1.39,
+      "files": 3,
+      "exists": true
+    },
+    {
+      "path": "assets/icons/achievements",
+      "bytes": 1438714,
+      "mb": 1.37,
+      "files": 22,
+      "exists": true
+    },
+    {
+      "path": "assets/amanda/optimized",
+      "bytes": 1251120,
+      "mb": 1.19,
+      "files": 15,
+      "exists": true
+    },
+    {
+      "path": "assets/images/rotina",
+      "bytes": 1078551,
+      "mb": 1.03,
+      "files": 3,
+      "exists": true
+    },
+    {
+      "path": "assets/images/bem_estar",
+      "bytes": 888656,
+      "mb": 0.85,
+      "files": 2,
+      "exists": true
+    },
+    {
+      "path": "assets/images/alimentacao",
+      "bytes": 755226,
+      "mb": 0.72,
+      "files": 2,
+      "exists": true
+    },
+    {
+      "path": "assets/images/home",
+      "bytes": 659191,
+      "mb": 0.63,
+      "files": 2,
+      "exists": true
+    },
+    {
+      "path": "assets/icons/hydration",
+      "bytes": 277230,
+      "mb": 0.26,
+      "files": 4,
+      "exists": true
+    },
+    {
+      "path": "assets/icons/health",
+      "bytes": 252956,
+      "mb": 0.24,
+      "files": 17,
+      "exists": true
+    },
+    {
+      "path": "assets/icons/navigation",
+      "bytes": 194853,
+      "mb": 0.19,
+      "files": 14,
+      "exists": true
+    },
+    {
+      "path": "assets/amanda/thumbs",
+      "bytes": 186810,
+      "mb": 0.18,
+      "files": 15,
+      "exists": true
+    },
+    {
+      "path": "assets/icons/actions",
+      "bytes": 150296,
+      "mb": 0.14,
+      "files": 12,
+      "exists": true
+    },
+    {
+      "path": "assets/icons/mood",
+      "bytes": 130913,
+      "mb": 0.12,
+      "files": 9,
+      "exists": true
+    },
+    {
+      "path": "assets/app_icon",
+      "bytes": 104237,
+      "mb": 0.1,
+      "files": 8,
+      "exists": true
+    },
+    {
+      "path": "assets/content",
+      "bytes": 76152,
+      "mb": 0.07,
+      "files": 7,
+      "exists": true
+    },
+    {
+      "path": "assets/animations",
+      "bytes": 32444,
+      "mb": 0.03,
+      "files": 11,
+      "exists": true
+    },
+    {
+      "path": "assets/icons/premium",
+      "bytes": 29397,
+      "mb": 0.03,
+      "files": 2,
+      "exists": true
+    },
+    {
+      "path": "assets/badges",
+      "bytes": 24590,
+      "mb": 0.02,
+      "files": 23,
+      "exists": true
+    },
+    {
+      "path": "assets/illustrations/banners",
+      "bytes": 11448,
+      "mb": 0.01,
+      "files": 7,
+      "exists": true
+    },
+    {
+      "path": "assets/onboarding",
+      "bytes": 10785,
+      "mb": 0.01,
+      "files": 12,
+      "exists": true
+    },
+    {
+      "path": "assets/empty",
+      "bytes": 6354,
+      "mb": 0.01,
+      "files": 7,
+      "exists": true
+    },
+    {
+      "path": "assets/backgrounds",
+      "bytes": 4239,
+      "mb": 0.0,
+      "files": 8,
+      "exists": true
+    },
+    {
+      "path": "assets/error",
+      "bytes": 2706,
+      "mb": 0.0,
+      "files": 3,
+      "exists": true
+    },
+    {
+      "path": "assets/avatars",
+      "bytes": 1855,
+      "mb": 0.0,
+      "files": 1,
+      "exists": true
+    },
+    {
+      "path": "assets/success",
+      "bytes": 912,
+      "mb": 0.0,
+      "files": 1,
+      "exists": true
+    },
+    {
+      "path": "assets/loading",
+      "bytes": 901,
+      "mb": 0.0,
+      "files": 2,
+      "exists": true
+    },
+    {
+      "path": "assets/rive",
+      "bytes": 789,
+      "mb": 0.0,
+      "files": 2,
+      "exists": true
+    },
+    {
+      "path": "assets/stickers",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "exists": true
+    },
+    {
+      "path": "assets/premium",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "exists": true
+    },
+    {
+      "path": "assets/exercises",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "exists": true
+    },
+    {
+      "path": "assets/recipes",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "exists": true
+    },
+    {
+      "path": "assets/habits",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "exists": true
+    },
+    {
+      "path": "assets/challenges",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "exists": true
+    }
+  ],
+  "assets_top_level": [
+    {
+      "path": "assets/icons",
+      "bytes": 226181131,
+      "mb": 215.7,
+      "files": 283,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/images",
+      "bytes": 154060026,
+      "mb": 146.92,
+      "files": 161,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/amanda",
+      "bytes": 150268450,
+      "mb": 143.31,
+      "files": 68,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/lily",
+      "bytes": 82779998,
+      "mb": 78.95,
+      "files": 179,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/lily_treinos",
+      "bytes": 43611350,
+      "mb": 41.59,
+      "files": 24,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/lily_exercicios",
+      "bytes": 38676116,
+      "mb": 36.88,
+      "files": 134,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/_lily_backup_before_frame_fix",
+      "bytes": 16030434,
+      "mb": 15.29,
+      "files": 59,
+      "in_pubspec": false
+    },
+    {
+      "path": "assets/mascot",
+      "bytes": 8735510,
+      "mb": 8.33,
+      "files": 33,
+      "in_pubspec": false
+    },
+    {
+      "path": "assets/_validation",
+      "bytes": 5114643,
+      "mb": 4.88,
+      "files": 34,
+      "in_pubspec": false
+    },
+    {
+      "path": "assets/audio_programs",
+      "bytes": 3615825,
+      "mb": 3.45,
+      "files": 7,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/_incoming_lily",
+      "bytes": 2769780,
+      "mb": 2.64,
+      "files": 14,
+      "in_pubspec": false
+    },
+    {
+      "path": "assets/_lily_backup_before_pack_20260911_002213",
+      "bytes": 2654560,
+      "mb": 2.53,
+      "files": 10,
+      "in_pubspec": false
+    },
+    {
+      "path": "assets/_lily_trim_preview",
+      "bytes": 224154,
+      "mb": 0.21,
+      "files": 4,
+      "in_pubspec": false
+    },
+    {
+      "path": "assets/app_icon",
+      "bytes": 104237,
+      "mb": 0.1,
+      "files": 8,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/content",
+      "bytes": 76152,
+      "mb": 0.07,
+      "files": 7,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/animations",
+      "bytes": 32444,
+      "mb": 0.03,
+      "files": 11,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/badges",
+      "bytes": 24590,
+      "mb": 0.02,
+      "files": 23,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/illustrations",
+      "bytes": 11448,
+      "mb": 0.01,
+      "files": 7,
+      "in_pubspec": false
+    },
+    {
+      "path": "assets/onboarding",
+      "bytes": 10785,
+      "mb": 0.01,
+      "files": 12,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/empty",
+      "bytes": 6354,
+      "mb": 0.01,
+      "files": 7,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/backgrounds",
+      "bytes": 4239,
+      "mb": 0.0,
+      "files": 8,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/error",
+      "bytes": 2706,
+      "mb": 0.0,
+      "files": 3,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/avatars",
+      "bytes": 1855,
+      "mb": 0.0,
+      "files": 1,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/COMO_ENVIAR_ASSETS.md",
+      "bytes": 1247,
+      "mb": 0.0,
+      "files": 1,
+      "in_pubspec": false
+    },
+    {
+      "path": "assets/success",
+      "bytes": 912,
+      "mb": 0.0,
+      "files": 1,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/loading",
+      "bytes": 901,
+      "mb": 0.0,
+      "files": 2,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/rive",
+      "bytes": 789,
+      "mb": 0.0,
+      "files": 2,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/challenges",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/exercises",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/habits",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/premium",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/recipes",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "in_pubspec": true
+    },
+    {
+      "path": "assets/stickers",
+      "bytes": 0,
+      "mb": 0.0,
+      "files": 1,
+      "in_pubspec": true
+    }
+  ],
+  "assets_by_ext": {
+    ".png": {
+      "bytes": 521821352,
+      "mb": 497.65,
+      "files": 539
+    },
+    ".jpg": {
+      "bytes": 193231045,
+      "mb": 184.28,
+      "files": 371
+    },
+    ".jpeg": {
+      "bytes": 14688589,
+      "mb": 14.01,
+      "files": 33
+    },
+    ".mp3": {
+      "bytes": 3615825,
+      "mb": 3.45,
+      "files": 7
+    },
+    ".webp": {
+      "bytes": 1437930,
+      "mb": 1.37,
+      "files": 30
+    },
+    ".json": {
+      "bytes": 123024,
+      "mb": 0.12,
+      "files": 19
+    },
+    ".svg": {
+      "bytes": 77409,
+      "mb": 0.07,
+      "files": 97
+    },
+    ".md": {
+      "bytes": 5453,
+      "mb": 0.01,
+      "files": 5
+    },
+    "(sem extensao)": {
+      "bytes": 9,
+      "mb": 0.0,
+      "files": 8
+    }
+  },
+  "largest_assets": [
+    {
+      "path": "assets/amanda/originals/amanda-motivation-02.jpg",
+      "bytes": 8649818,
+      "mb": 8.25
+    },
+    {
+      "path": "assets/amanda/originals/amanda-program.jpg",
+      "bytes": 8465313,
+      "mb": 8.07
+    },
+    {
+      "path": "assets/amanda/originals/amanda-challenge.jpg",
+      "bytes": 8079121,
+      "mb": 7.7
+    },
+    {
+      "path": "assets/amanda/originals/amanda-banner-01.jpg",
+      "bytes": 7974968,
+      "mb": 7.61
+    },
+    {
+      "path": "assets/amanda/originals/amanda-banner-02.jpg",
+      "bytes": 7913056,
+      "mb": 7.55
+    },
+    {
+      "path": "assets/amanda/originals/amanda-workout-01.jpg",
+      "bytes": 7816629,
+      "mb": 7.45
+    },
+    {
+      "path": "assets/amanda/originals/amanda-audio.jpg",
+      "bytes": 7545692,
+      "mb": 7.2
+    },
+    {
+      "path": "assets/amanda/originals/amanda-motivation-01.jpg",
+      "bytes": 7459115,
+      "mb": 7.11
+    },
+    {
+      "path": "assets/amanda/originals/amanda-workout-02.jpg",
+      "bytes": 7203735,
+      "mb": 6.87
+    },
+    {
+      "path": "assets/amanda/originals/amanda-workout-03.jpg",
+      "bytes": 6993471,
+      "mb": 6.67
+    },
+    {
+      "path": "assets/amanda/originals/amanda-home.jpg",
+      "bytes": 6965263,
+      "mb": 6.64
+    },
+    {
+      "path": "assets/amanda/originals/amanda-profile.jpg",
+      "bytes": 6504457,
+      "mb": 6.2
+    },
+    {
+      "path": "assets/amanda/originals/amanda-about-02.jpg",
+      "bytes": 6420148,
+      "mb": 6.12
+    },
+    {
+      "path": "assets/amanda/originals/amanda-about-01.jpg",
+      "bytes": 6360397,
+      "mb": 6.07
+    },
+    {
+      "path": "assets/amanda/originals/amanda-welcome.jpg",
+      "bytes": 6180258,
+      "mb": 5.89
+    },
+    {
+      "path": "assets/lily_treinos/lily_corda_naval.png",
+      "bytes": 2175445,
+      "mb": 2.07
+    },
+    {
+      "path": "assets/lily_treinos/lily_agachamento.png",
+      "bytes": 2170720,
+      "mb": 2.07
+    },
+    {
+      "path": "assets/lily_treinos/lily_kettlebell.png",
+      "bytes": 2144278,
+      "mb": 2.04
+    },
+    {
+      "path": "assets/images/recipes/neon/38_icone_neon_de_suco_detox_verde.png",
+      "bytes": 2127065,
+      "mb": 2.03
+    },
+    {
+      "path": "assets/images/recipes/neon/40_icone_neon_de_torrada_com_abacate.png",
+      "bytes": 2112750,
+      "mb": 2.01
+    },
+    {
+      "path": "assets/lily_treinos/lily_treino_generico_1.png",
+      "bytes": 2097077,
+      "mb": 2.0
+    },
+    {
+      "path": "assets/images/recipes/neon/19_sanduiche_neon_de_frango_grelhado.png",
+      "bytes": 2091748,
+      "mb": 1.99
+    },
+    {
+      "path": "assets/lily_treinos/lily_prancha.png",
+      "bytes": 2077969,
+      "mb": 1.98
+    },
+    {
+      "path": "assets/images/recipes/neon/28_icone_neon_de_frango_grelhado_e_legumes.png",
+      "bytes": 2073787,
+      "mb": 1.98
+    },
+    {
+      "path": "assets/images/recipes/neon/32_icone_neon_de_salada_caesar.png",
+      "bytes": 2057131,
+      "mb": 1.96
+    },
+    {
+      "path": "assets/images/recipes/neon/07_frango_grelhado_neon_com_legumes.png",
+      "bytes": 2050278,
+      "mb": 1.96
+    },
+    {
+      "path": "assets/images/recipes/neon/21_suco_verde_detox_neon.png",
+      "bytes": 2042697,
+      "mb": 1.95
+    },
+    {
+      "path": "assets/lily_treinos/lily_treino_generico_4.png",
+      "bytes": 2041573,
+      "mb": 1.95
+    },
+    {
+      "path": "assets/images/recipes/neon/06_file_de_peixe_grelhado_neon_com_legumes.png",
+      "bytes": 2040725,
+      "mb": 1.95
+    },
+    {
+      "path": "assets/lily_treinos/lily_treino_generico_2.png",
+      "bytes": 2035443,
+      "mb": 1.94
+    },
+    {
+      "path": "assets/images/recipes/neon/27_icone_neon_de_bowl_de_quinoa_colorido.png",
+      "bytes": 2030678,
+      "mb": 1.94
+    },
+    {
+      "path": "assets/icons/app/receitas.png",
+      "bytes": 2029768,
+      "mb": 1.94
+    },
+    {
+      "path": "assets/images/recipes/neon/31_icone_neon_de_panquecas_com_frutas.png",
+      "bytes": 2029399,
+      "mb": 1.94
+    },
+    {
+      "path": "assets/images/recipes/neon/39_icone_neon_de_tapioca_recheada.png",
+      "bytes": 2027358,
+      "mb": 1.93
+    },
+    {
+      "path": "assets/images/recipes/neon/18_sanduiche_integral_neon_gourmet.png",
+      "bytes": 2025994,
+      "mb": 1.93
+    },
+    {
+      "path": "assets/images/recipes/neon/14_parfait_de_iogurte_com_neon_vibrante.png",
+      "bytes": 2025907,
+      "mb": 1.93
+    },
+    {
+      "path": "assets/images/recipes/neon/11_omelete_neon_de_espinafre_e_cogumelos.png",
+      "bytes": 2017827,
+      "mb": 1.92
+    },
+    {
+      "path": "assets/images/recipes/neon/29_icone_neon_de_mix_de_castanhas.png",
+      "bytes": 2012007,
+      "mb": 1.92
+    },
+    {
+      "path": "assets/images/recipes/neon/34_icone_neon_de_salmao_grelhado.png",
+      "bytes": 2009979,
+      "mb": 1.92
+    },
+    {
+      "path": "assets/images/recipes/neon/04_crepioca_de_frango_neon.png",
+      "bytes": 2008034,
+      "mb": 1.92
+    },
+    {
+      "path": "assets/images/recipes/neon/16_parfait_neon_de_frutas_vermelhas.png",
+      "bytes": 2005949,
+      "mb": 1.91
+    },
+    {
+      "path": "assets/images/recipes/neon/02_bowl_de_salada_neon_com_frango_grelhado.png",
+      "bytes": 2005631,
+      "mb": 1.91
+    },
+    {
+      "path": "assets/images/recipes/neon/26_icone_neon_de_bowl_de_acai.png",
+      "bytes": 1998936,
+      "mb": 1.91
+    },
+    {
+      "path": "assets/images/recipes/neon/17_pote_neon_de_aveia_com_frutas.png",
+      "bytes": 1994789,
+      "mb": 1.9
+    },
+    {
+      "path": "assets/images/recipes/neon/36_icone_neon_de_sopa_de_abobora_cremosa.png",
+      "bytes": 1987284,
+      "mb": 1.9
+    },
+    {
+      "path": "assets/images/recipes/neon/03_bowl_de_salmao_neon_com_quinoa.png",
+      "bytes": 1978679,
+      "mb": 1.89
+    },
+    {
+      "path": "assets/images/recipes/neon/12_ovos_mexidos_neon_com_acompanhamentos_frescos.png",
+      "bytes": 1977670,
+      "mb": 1.89
+    },
+    {
+      "path": "assets/images/recipes/neon/24_wrap_neon_de_frango_e_vegetais.png",
+      "bytes": 1963247,
+      "mb": 1.87
+    },
+    {
+      "path": "assets/images/recipes/neon/23_tigela_neon_de_iogurte_com_frutas.png",
+      "bytes": 1958153,
+      "mb": 1.87
+    },
+    {
+      "path": "assets/images/recipes/neon/22_tigela_neon_de_frango_grelhado.png",
+      "bytes": 1955583,
+      "mb": 1.86
+    }
+  ],
+  "duplicates_assets": [
+    {
+      "md5": "21ab2d2ba4efb272d01504ac1033b369",
+      "bytes_each": 1211312,
+      "mb_each": 1.16,
+      "copies": 6,
+      "waste_bytes": 6056560,
+      "waste_mb": 5.78,
+      "paths": [
+        "assets/_lily_backup_before_frame_fix/assets__images__lily_fit__01_lili_fit_joinha.png",
+        "assets/_lily_backup_before_frame_fix/assets__images__mascote__avatar_boas_vindas.png",
+        "assets/_lily_backup_before_frame_fix/assets__images__mascote__avatar_joinha.png",
+        "assets/_lily_backup_before_frame_fix/assets__mascot__png__mascot_thumbs_up.png",
+        "assets/_lily_backup_before_frame_fix/assets__mascot__png__mascot_welcome.png",
+        "assets/mascot/png_official_black/01_lili_fit_joinha.png"
+      ]
+    },
+    {
+      "md5": "aeca43755a10b55a32dae87938701cc8",
+      "bytes_each": 779192,
+      "mb_each": 0.74,
+      "copies": 7,
+      "waste_bytes": 4675152,
+      "waste_mb": 4.46,
+      "paths": [
+        "assets/lily/lily_motivation.png",
+        "assets/_lily_backup_before_pack_20260911_002213/lily_motivation.png",
+        "assets/images/lily_fit/01_lili_fit_joinha.png",
+        "assets/images/mascote/avatar_boas_vindas.png",
+        "assets/images/mascote/avatar_joinha.png",
+        "assets/mascot/png/mascot_thumbs_up.png",
+        "assets/mascot/png/mascot_welcome.png"
+      ]
+    },
+    {
+      "md5": "60336bf8da973713f08cd16f234df9f3",
+      "bytes_each": 521161,
+      "mb_each": 0.5,
+      "copies": 7,
+      "waste_bytes": 3126966,
+      "waste_mb": 2.98,
+      "paths": [
+        "assets/lily/lily_workout.png",
+        "assets/_lily_backup_before_pack_20260911_002213/lily_workout.png",
+        "assets/images/lily_fit/09_lili_fit_halter.png",
+        "assets/images/mascote/avatar_forte.png",
+        "assets/images/mascote/avatar_halteres.png",
+        "assets/mascot/png/mascot_dumbbell.png",
+        "assets/mascot/png/mascot_strong.png"
+      ]
+    },
+    {
+      "md5": "861b1d4a79ea4197c9e9bc21f9549549",
+      "bytes_each": 1554991,
+      "mb_each": 1.48,
+      "copies": 3,
+      "waste_bytes": 3109982,
+      "waste_mb": 2.97,
+      "paths": [
+        "assets/lily/lily_treino_halteres.png",
+        "assets/lily_treinos/lily_rosca_biceps.png",
+        "assets/amanda/promo/amanda_treino_halteres.png"
+      ]
+    },
+    {
+      "md5": "b8f751c6d3f4c3bd3b4e0658925b9ffb",
+      "bytes_each": 1772615,
+      "mb_each": 1.69,
+      "copies": 2,
+      "waste_bytes": 1772615,
+      "waste_mb": 1.69,
+      "paths": [
+        "assets/lily/lily_comemorando_trofeu.png",
+        "assets/amanda/promo/amanda_trofeu.png"
+      ]
+    },
+    {
+      "md5": "690be4bdbdc1eb70234ecc7e5e068aad",
+      "bytes_each": 1753979,
+      "mb_each": 1.67,
+      "copies": 2,
+      "waste_bytes": 1753979,
+      "waste_mb": 1.67,
+      "paths": [
+        "assets/lily/lily_meta_concluida.png",
+        "assets/amanda/promo/amanda_meta_concluida.png"
+      ]
+    },
+    {
+      "md5": "d1efb4d607acec63f4e5fd95465c51a3",
+      "bytes_each": 1750281,
+      "mb_each": 1.67,
+      "copies": 2,
+      "waste_bytes": 1750281,
+      "waste_mb": 1.67,
+      "paths": [
+        "assets/lily/lily_prato_saudavel.png",
+        "assets/amanda/promo/amanda_nutricao_prato.png"
+      ]
+    },
+    {
+      "md5": "c5cfea4c216f8d86ba6ed436571b1475",
+      "bytes_each": 1744179,
+      "mb_each": 1.66,
+      "copies": 2,
+      "waste_bytes": 1744179,
+      "waste_mb": 1.66,
+      "paths": [
+        "assets/lily/lily_lembrete_hidratacao.png",
+        "assets/amanda/promo/amanda_lembrete_hidratacao.png"
+      ]
+    },
+    {
+      "md5": "fc6382e0f81566f073c147a0da569ed0",
+      "bytes_each": 1738846,
+      "mb_each": 1.66,
+      "copies": 2,
+      "waste_bytes": 1738846,
+      "waste_mb": 1.66,
+      "paths": [
+        "assets/icons/neon/nutricao/icone_neon_de_salada_saudavel.png",
+        "assets/images/recipes/neon/33_icone_neon_de_salada_saudavel.png"
+      ]
+    },
+    {
+      "md5": "37ebc9dc999eb1aa2e452edd6cdc7dc0",
+      "bytes_each": 1719248,
+      "mb_each": 1.64,
+      "copies": 2,
+      "waste_bytes": 1719248,
+      "waste_mb": 1.64,
+      "paths": [
+        "assets/lily/lily_meditacao.png",
+        "assets/amanda/promo/amanda_meditacao.png"
+      ]
+    },
+    {
+      "md5": "d2a053ea1794727a8743f12974e387b6",
+      "bytes_each": 1718500,
+      "mb_each": 1.64,
+      "copies": 2,
+      "waste_bytes": 1718500,
+      "waste_mb": 1.64,
+      "paths": [
+        "assets/lily/lily_mostrando_app.png",
+        "assets/amanda/promo/amanda_mostrando_app.png"
+      ]
+    },
+    {
+      "md5": "24e0fd970cea3ef0f56ce8040a6bd41f",
+      "bytes_each": 1707544,
+      "mb_each": 1.63,
+      "copies": 2,
+      "waste_bytes": 1707544,
+      "waste_mb": 1.63,
+      "paths": [
+        "assets/lily/lily_tomando_agua.png",
+        "assets/amanda/promo/amanda_hidratacao.png"
+      ]
+    },
+    {
+      "md5": "8e9a3f1a6d6b977196c3930c43cd9648",
+      "bytes_each": 1706659,
+      "mb_each": 1.63,
+      "copies": 2,
+      "waste_bytes": 1706659,
+      "waste_mb": 1.63,
+      "paths": [
+        "assets/lily/lily_apresentando_aberta.png",
+        "assets/amanda/promo/amanda_apresentando.png"
+      ]
+    },
+    {
+      "md5": "5664b5228063fb96639ce7a67228bfd6",
+      "bytes_each": 1696639,
+      "mb_each": 1.62,
+      "copies": 2,
+      "waste_bytes": 1696639,
+      "waste_mb": 1.62,
+      "paths": [
+        "assets/lily/lily_apontando_esquerda.png",
+        "assets/amanda/promo/amanda_apontando_esquerda.png"
+      ]
+    },
+    {
+      "md5": "2dba82fd4261c557252337ff7784bc8e",
+      "bytes_each": 1692397,
+      "mb_each": 1.61,
+      "copies": 2,
+      "waste_bytes": 1692397,
+      "waste_mb": 1.61,
+      "paths": [
+        "assets/lily/lily_apontando_cima.png",
+        "assets/amanda/promo/amanda_apontando_cima.png"
+      ]
+    },
+    {
+      "md5": "48eccb29974248238b8948c4a83a7dbf",
+      "bytes_each": 1691044,
+      "mb_each": 1.61,
+      "copies": 2,
+      "waste_bytes": 1691044,
+      "waste_mb": 1.61,
+      "paths": [
+        "assets/lily/lily_apontando_direita.png",
+        "assets/amanda/promo/amanda_apontando_direita.png"
+      ]
+    },
+    {
+      "md5": "c6d22119024d6c7f2108dc4f32a4daa3",
+      "bytes_each": 1688619,
+      "mb_each": 1.61,
+      "copies": 2,
+      "waste_bytes": 1688619,
+      "waste_mb": 1.61,
+      "paths": [
+        "assets/lily/lily_tentar_novamente.png",
+        "assets/amanda/promo/amanda_ciclo_metodo.png"
+      ]
+    },
+    {
+      "md5": "8c1aebb0f239af46f86bcc41189995c6",
+      "bytes_each": 1668861,
+      "mb_each": 1.59,
+      "copies": 2,
+      "waste_bytes": 1668861,
+      "waste_mb": 1.59,
+      "paths": [
+        "assets/lily/lily_joinha.png",
+        "assets/amanda/promo/amanda_joinha.png"
+      ]
+    },
+    {
+      "md5": "2179412e2a119ab5fb50ebb7f12f2ea4",
+      "bytes_each": 1665628,
+      "mb_each": 1.59,
+      "copies": 2,
+      "waste_bytes": 1665628,
+      "waste_mb": 1.59,
+      "paths": [
+        "assets/lily/lily_apontando_baixo.png",
+        "assets/amanda/promo/amanda_apontando_baixo.png"
+      ]
+    },
+    {
+      "md5": "d35d4753651cf8a47354ef7bb4ec28bb",
+      "bytes_each": 1644694,
+      "mb_each": 1.57,
+      "copies": 2,
+      "waste_bytes": 1644694,
+      "waste_mb": 1.57,
+      "paths": [
+        "assets/lily/lily_calendario_check.png",
+        "assets/amanda/promo/amanda_calendario_check.png"
+      ]
+    },
+    {
+      "md5": "4409ba5d62ca639346a1b3e4ceb6de2f",
+      "bytes_each": 1642488,
+      "mb_each": 1.57,
+      "copies": 2,
+      "waste_bytes": 1642488,
+      "waste_mb": 1.57,
+      "paths": [
+        "assets/lily/lily_boas_vindas_acenando.png",
+        "assets/amanda/promo/amanda_acenando.png"
+      ]
+    },
+    {
+      "md5": "78534f48c7b8840b67c027ab95fba42a",
+      "bytes_each": 1591910,
+      "mb_each": 1.52,
+      "copies": 2,
+      "waste_bytes": 1591910,
+      "waste_mb": 1.52,
+      "paths": [
+        "assets/lily/lily_forca.png",
+        "assets/amanda/promo/amanda_forca.png"
+      ]
+    },
+    {
+      "md5": "92f9e9e184b3288078b64217e6a46776",
+      "bytes_each": 1584494,
+      "mb_each": 1.51,
+      "copies": 2,
+      "waste_bytes": 1584494,
+      "waste_mb": 1.51,
+      "paths": [
+        "assets/lily/lily_pos_treino.png",
+        "assets/amanda/promo/amanda_alongamento_alt.png"
+      ]
+    },
+    {
+      "md5": "6aa4a0a99017fd55153f2bc42c5f80f9",
+      "bytes_each": 1579702,
+      "mb_each": 1.51,
+      "copies": 2,
+      "waste_bytes": 1579702,
+      "waste_mb": 1.51,
+      "paths": [
+        "assets/lily/lily_alongamento.png",
+        "assets/amanda/promo/amanda_alongamento.png"
+      ]
+    },
+    {
+      "md5": "0b8ef08def7e4f3b2ac2cc171817559c",
+      "bytes_each": 1576068,
+      "mb_each": 1.5,
+      "copies": 2,
+      "waste_bytes": 1576068,
+      "waste_mb": 1.5,
+      "paths": [
+        "assets/lily/lily_apresentando_esquerda.png",
+        "assets/amanda/promo/amanda_orientando.png"
+      ]
+    },
+    {
+      "md5": "b9f1e490ce64a4e2ee63b3b865ee2070",
+      "bytes_each": 1575184,
+      "mb_each": 1.5,
+      "copies": 2,
+      "waste_bytes": 1575184,
+      "waste_mb": 1.5,
+      "paths": [
+        "assets/lily/lily_corrida.png",
+        "assets/amanda/promo/amanda_corrida.png"
+      ]
+    },
+    {
+      "md5": "1173d19ed10cec25d57f4485e48f75f5",
+      "bytes_each": 1573355,
+      "mb_each": 1.5,
+      "copies": 2,
+      "waste_bytes": 1573355,
+      "waste_mb": 1.5,
+      "paths": [
+        "assets/lily/lily_vitoria.png",
+        "assets/amanda/promo/amanda_vitoria.png"
+      ]
+    },
+    {
+      "md5": "c026ea806022e3a9672004efbb11c86f",
+      "bytes_each": 1438567,
+      "mb_each": 1.37,
+      "copies": 2,
+      "waste_bytes": 1438567,
+      "waste_mb": 1.37,
+      "paths": [
+        "assets/icons/app/checkin.png",
+        "assets/icons/app/habitos.png"
+      ]
+    },
+    {
+      "md5": "6df22adfd4fff6ccbf53ea1559548630",
+      "bytes_each": 1275400,
+      "mb_each": 1.22,
+      "copies": 2,
+      "waste_bytes": 1275400,
+      "waste_mb": 1.22,
+      "paths": [
+        "assets/icons/icon_recipes.png",
+        "assets/images/icons_3d/icon_recipes_3d.png"
+      ]
+    },
+    {
+      "md5": "c4bd672a2ade1c5358edbff06872a5b0",
+      "bytes_each": 1152220,
+      "mb_each": 1.1,
+      "copies": 2,
+      "waste_bytes": 1152220,
+      "waste_mb": 1.1,
+      "paths": [
+        "assets/icons/icon_profile.png",
+        "assets/images/icons_3d/icon_profile_3d.png"
+      ]
+    },
+    {
+      "md5": "507ea7876173be61bf753614caefa26f",
+      "bytes_each": 284219,
+      "mb_each": 0.27,
+      "copies": 5,
+      "waste_bytes": 1136876,
+      "waste_mb": 1.08,
+      "paths": [
+        "assets/_incoming_lily/lily_upload_01_clean.png",
+        "assets/_incoming_lily/lily_upload_02_clean.png",
+        "assets/_lily_backup_before_frame_fix/assets__images__lily_fit__02_lili_fit_paz.png",
+        "assets/_lily_backup_before_frame_fix/assets__mascot__extras__lily_peace_official.png",
+        "assets/_lily_backup_before_frame_fix/assets__mascot__png__mascot_default.png"
+      ]
+    },
+    {
+      "md5": "6dd13fe51d9261bc1a957b8ace918cdd",
+      "bytes_each": 1126523,
+      "mb_each": 1.07,
+      "copies": 2,
+      "waste_bytes": 1126523,
+      "waste_mb": 1.07,
+      "paths": [
+        "assets/icons/icon_goal.png",
+        "assets/images/icons_3d/icon_abs_3d.png"
+      ]
+    },
+    {
+      "md5": "6133964365bfbea7352dd740d40ce95a",
+      "bytes_each": 544127,
+      "mb_each": 0.52,
+      "copies": 3,
+      "waste_bytes": 1088254,
+      "waste_mb": 1.04,
+      "paths": [
+        "assets/icons/icon_workout_dumbbell.png",
+        "assets/images/icons_3d/icon_glutes_3d.png",
+        "assets/images/icons_3d/icon_workout_3d.png"
+      ]
+    },
+    {
+      "md5": "ff52e3643402e2239df8ec9974d0fb2c",
+      "bytes_each": 360318,
+      "mb_each": 0.34,
+      "copies": 4,
+      "waste_bytes": 1080954,
+      "waste_mb": 1.03,
+      "paths": [
+        "assets/lily_exercicios/treino_093.jpg",
+        "assets/lily_exercicios/treino_117.jpg",
+        "assets/lily/treinos lily fit/remada_articulada_sob_luz_neon_roxa.jpg",
+        "assets/lily_exercicios/_incoming/04_remada_articulada.jpg"
+      ]
+    },
+    {
+      "md5": "4f2f8c965ca935b068bc2e5720936323",
+      "bytes_each": 266674,
+      "mb_each": 0.25,
+      "copies": 5,
+      "waste_bytes": 1066696,
+      "waste_mb": 1.02,
+      "paths": [
+        "assets/lily/lily_achievement.png",
+        "assets/lily/lily_success.png",
+        "assets/_lily_backup_before_pack_20260911_002213/lily_achievement.png",
+        "assets/_lily_backup_before_pack_20260911_002213/lily_success.png",
+        "assets/mascot/extras/lily_celebrating_ring_official.png"
+      ]
+    },
+    {
+      "md5": "acdf813ecd3252f3a985e03dd7653a49",
+      "bytes_each": 259746,
+      "mb_each": 0.25,
+      "copies": 5,
+      "waste_bytes": 1038984,
+      "waste_mb": 0.99,
+      "paths": [
+        "assets/lily_exercicios/treino_107.jpg",
+        "assets/lily_exercicios/treino_110.jpg",
+        "assets/lily_exercicios/treino_111.jpg",
+        "assets/lily_exercicios/treino_112.jpg",
+        "assets/lily/treinos lily fit/treino_de_tríceps_com_iluminação_neon_roxa.jpg"
+      ]
+    },
+    {
+      "md5": "3b63ea702d78d898b671422bd4a564ce",
+      "bytes_each": 255450,
+      "mb_each": 0.24,
+      "copies": 5,
+      "waste_bytes": 1021800,
+      "waste_mb": 0.97,
+      "paths": [
+        "assets/lily_exercicios/treino_053.jpg",
+        "assets/lily_exercicios/treino_089.jpg",
+        "assets/lily_exercicios/treino_090.jpg",
+        "assets/lily_exercicios/treino_092.jpg",
+        "assets/lily/treinos lily fit/rosca_bíceps_no_estúdio_roxo.jpg"
+      ]
+    },
+    {
+      "md5": "f40424837b5299a0f5a10850d705ee48",
+      "bytes_each": 492541,
+      "mb_each": 0.47,
+      "copies": 3,
+      "waste_bytes": 985082,
+      "waste_mb": 0.94,
+      "paths": [
+        "assets/images/lily_fit/05_lili_fit_correndo.png",
+        "assets/images/mascote/avatar_correndo.png",
+        "assets/mascot/png/mascot_running.png"
+      ]
+    },
+    {
+      "md5": "309dce0589de3ed1b234b0334a221424",
+      "bytes_each": 930439,
+      "mb_each": 0.89,
+      "copies": 2,
+      "waste_bytes": 930439,
+      "waste_mb": 0.89,
+      "paths": [
+        "assets/icons/icon_stopwatch.png",
+        "assets/images/icons_3d/icon_stopwatch_3d.png"
+      ]
+    },
+    {
+      "md5": "35169fc534ceaa6d151db505881e223b",
+      "bytes_each": 914086,
+      "mb_each": 0.87,
+      "copies": 2,
+      "waste_bytes": 914086,
+      "waste_mb": 0.87,
+      "paths": [
+        "assets/icons/icon_calendar.png",
+        "assets/images/icons_3d/icon_calendar_3d.png"
+      ]
+    }
+  ],
+  "focus_dirs": [
+    {
+      "path": "assets/amanda",
+      "bytes": 150268450,
+      "mb": 143.31,
+      "files": 68,
+      "exists": true
+    },
+    {
+      "path": "assets/lily",
+      "bytes": 82779998,
+      "mb": 78.95,
+      "files": 179,
+      "exists": true
+    },
+    {
+      "path": "assets/lily_treinos",
+      "bytes": 43611350,
+      "mb": 41.59,
+      "files": 24,
+      "exists": true
+    },
+    {
+      "path": "assets/lily/treinos lily fit",
+      "bytes": 41826359,
+      "mb": 39.89,
+      "files": 146,
+      "exists": true
+    },
+    {
+      "path": "assets/lily_exercicios",
+      "bytes": 38676116,
+      "mb": 36.88,
+      "files": 134,
+      "exists": true
+    },
+    {
+      "path": "assets/amanda/promo",
+      "bytes": 38299079,
+      "mb": 36.52,
+      "files": 23,
+      "exists": true
+    },
+    {
+      "path": "assets/_lily_backup_before_frame_fix",
+      "bytes": 16030434,
+      "mb": 15.29,
+      "files": 59,
+      "exists": true
+    },
+    {
+      "path": "assets/audio_programs",
+      "bytes": 3615825,
+      "mb": 3.45,
+      "files": 7,
+      "exists": true
+    },
+    {
+      "path": "tools/audio_seed/assets_audio",
+      "bytes": 3615825,
+      "mb": 3.45,
+      "files": 7,
+      "exists": true
+    },
+    {
+      "path": "assets/_lily_backup_before_pack_20260911_002213",
+      "bytes": 2654560,
+      "mb": 2.53,
+      "files": 10,
+      "exists": true
+    },
+    {
+      "path": "assets/images/lily_fit",
+      "bytes": 2608755,
+      "mb": 2.49,
+      "files": 10,
+      "exists": true
+    },
+    {
+      "path": "assets/amanda/optimized",
+      "bytes": 1251120,
+      "mb": 1.19,
+      "files": 15,
+      "exists": true
+    },
+    {
+      "path": "assets/_lily_trim_preview",
+      "bytes": 224154,
+      "mb": 0.21,
+      "files": 4,
+      "exists": true
+    },
+    {
+      "path": "assets/amanda/thumbs",
+      "bytes": 186810,
+      "mb": 0.18,
+      "files": 15,
+      "exists": true
+    }
+  ],
+  "notes": {
+    "no_local_media_glob": "glob nao achou mp3/mp4/pdf em assets/"
+  }
+}

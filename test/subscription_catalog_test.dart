@@ -27,9 +27,12 @@ void main() {
       expect(AppConstants.premiumMonthlyId, AppConfig.productMonthly);
     });
 
-    test('cobrança real desligada por padrão', () {
+    test('cobrança real e sandbox desligados por padrão', () {
       expect(AppConfig.paymentsEnabled, isFalse);
-      expect(AppConfig.storePurchasesEnabled, isFalse);
+      expect(AppConfig.billingSandbox, isFalse);
+      expect(AppConfig.storePurchasesAllowed, isFalse);
+      expect(AppConfig.premiumEntitlement, 'premium');
+      expect(AppConfig.defaultOffering, 'default');
     });
   });
 

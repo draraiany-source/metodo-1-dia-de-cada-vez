@@ -116,17 +116,18 @@ class TreinoCatalogDetailScreen extends ConsumerWidget {
               const SizedBox(height: 12),
             ],
             const SizedBox(height: 8),
-            ElevatedButton.icon(
-              onPressed: () => _openYoutube(context),
-              icon: const Icon(Icons.play_circle_outline),
-              label: const Text('Assistir vídeo'),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppTheme.radiusSm),
+            if (treino.linkYoutube.trim().isNotEmpty)
+              ElevatedButton.icon(
+                onPressed: () => _openYoutube(context),
+                icon: const Icon(Icons.play_circle_outline),
+                label: const Text('Assistir vídeo'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppTheme.radiusSm),
+                  ),
                 ),
               ),
-            ),
             const SizedBox(height: 10),
             ElevatedButton.icon(
               onPressed: () {

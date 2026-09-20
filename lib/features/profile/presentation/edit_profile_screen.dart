@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -221,7 +222,12 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
             ),
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+                padding: EdgeInsets.fromLTRB(
+                  20,
+                  16,
+                  20,
+                  32 + MediaQuery.viewInsetsOf(context).bottom,
+                ),
                 children: [
                   Center(
                     child: PressableScale(
@@ -232,10 +238,11 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                             child: SizedBox(
                               width: 96,
                               height: 96,
-                              child: _fotoPath != null
-                                  ? Image.file(File(_fotoPath!), fit: BoxFit.cover)
-                                  : const LiliMascot(
-                                      pose: MascotePose.perfil, height: 96),
+                              child: _editProfilePhoto(
+                                _fotoPath,
+                                const LiliMascot(
+                                    pose: MascotePose.perfil, height: 96),
+                              ),
                             ),
                           ),
                           Positioned(
@@ -257,6 +264,29 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   ),
                   const SizedBox(height: 24),
                   _Field(label: 'Nome', controller: _nome),
+                  const SizedBox(height: 14),
+                  InputDecorator(
+                    decoration: const InputDecoration(
+                      labelText: 'E-mail',
+                    ),
+                    child: Text(
+                      (ref.watch(currentUserProvider)?.email ?? '').isEmpty
+                          ? 'Sem e-mail nesta conta'
+                          : ref.watch(currentUserProvider)!.email,
+                      style: const TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'O e-mail da conta não pode ser alterado aqui.',
+                    style: TextStyle(
+                      color: AppColors.textTertiary,
+                      fontSize: 11,
+                    ),
+                  ),
                   const SizedBox(height: 14),
                   InkWell(
                     onTap: _pickNascimento,
@@ -422,4 +452,22 @@ class _Field extends StatelessWidget {
       decoration: InputDecoration(labelText: label, hintText: hint),
     );
   }
+}
+
+Widget _editProfilePhoto(String? url, Widget fallback) {
+  if (url == null || url.isEmpty) return fallback;
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return CachedNetworkImage(
+      imageUrl: url,
+      fit: BoxFit.cover,
+      width: 96,
+      height: 96,
+      errorWidget: (_, __, ___) => fallback,
+    );
+  }
+  return Image.file(
+    File(url),
+    fit: BoxFit.cover,
+    errorBuilder: (_, __, ___) => fallback,
+  );
 }

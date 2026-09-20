@@ -80,7 +80,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-      body: SingleChildScrollView(
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.viewInsetsOf(context).bottom,
+        ),
         child: Column(
           children: [
             // Cabeçalho acolhedor — mascote maior, bem iluminada, dentro
@@ -229,6 +234,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ),
           ],
         ),
+      ),
       ),
     ),
     );

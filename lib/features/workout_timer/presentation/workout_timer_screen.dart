@@ -8,6 +8,7 @@ import '../../../core/router/premium_app_bar.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/app_states.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../gamification/providers/gamification_providers.dart';
@@ -48,7 +49,7 @@ class _WorkoutTimerScreenState extends ConsumerState<WorkoutTimerScreen> {
     if (s == null) {
       return const Scaffold(
         backgroundColor: AppColors.background,
-        body: Center(child: CircularProgressIndicator()),
+        body: AppLoading(message: 'Preparando o cronômetro…'),
       );
     }
     if (s.finished) {
@@ -308,91 +309,127 @@ class _BigButton extends StatelessWidget {
   }
 }
 
-class _FinishedView extends ConsumerWidget {
+class _FinishedView extends ConsumerStatefulWidget {
   const _FinishedView({required this.state, required this.onClose});
   final WorkoutTimerState state;
   final VoidCallback onClose;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final total = state.totalElapsed;
+  ConsumerState<_FinishedView> createState() => _FinishedViewState();
+}
+
+class _FinishedViewState extends ConsumerState<_FinishedView> {
+  bool _saved = false;
+  bool _saving = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _saveOnce());
+  }
+
+  Future<void> _saveOnce() async {
+    if (_saved || _saving) return;
+    setState(() => _saving = true);
+    try {
+      await _persistWorkout(ref, widget.state);
+      if (mounted) setState(() => _saved = true);
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final total = widget.state.totalElapsed;
     final mins = total.inMinutes;
     final secs = total.inSeconds.remainder(60);
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              const Spacer(),
-              const LilyImage(
-                asset: LilyAssets.posTreino,
-                height: 160,
-                semanticLabel: 'Lily pós-treino',
-              ),
-              Text('Treino concluído!', style: AppTextStyles.h1()),
-              const SizedBox(height: 8),
-              Text(
-                'Tempo total: ${mins}min ${secs}s',
-                style: const TextStyle(color: AppColors.textSecondary, fontSize: 16),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                '${state.exercisesDone} exercícios · ${state.seriesDone} séries',
-                style: const TextStyle(color: AppColors.accent),
-              ),
-              const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                height: 52,
-                child: FilledButton(
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.secondary,
-                  ),
-                  onPressed: () async {
-                    await _persist(ref, state);
-                    onClose();
-                  },
-                  child: const Text('Salvar e sair'),
+    return PopScope(
+      canPop: _saved,
+      onPopInvokedWithResult: (didPop, _) async {
+        if (didPop) return;
+        await _saveOnce();
+        if (mounted) widget.onClose();
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.background,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                const Spacer(),
+                const LilyImage(
+                  asset: LilyAssets.posTreino,
+                  height: 160,
+                  semanticLabel: 'Lily pós-treino',
                 ),
-              ),
-            ],
+                Text('Treino concluído!', style: AppTextStyles.h1()),
+                const SizedBox(height: 8),
+                Text(
+                  'Tempo total: ${mins}min ${secs}s',
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 16),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  '${widget.state.exercisesDone} exercícios · ${widget.state.seriesDone} séries',
+                  style: const TextStyle(color: AppColors.accent),
+                ),
+                const Spacer(),
+                SizedBox(
+                  width: double.infinity,
+                  height: 52,
+                  child: FilledButton(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: AppColors.secondary,
+                    ),
+                    onPressed: _saving
+                        ? null
+                        : () async {
+                            await _saveOnce();
+                            if (mounted) widget.onClose();
+                          },
+                    child: Text(_saved ? 'Voltar' : 'Salvando progresso…'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+}
 
-  Future<void> _persist(WidgetRef ref, WorkoutTimerState s) async {
-    final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
-    final record = WorkoutSessionRecord(
-      id: '${DateTime.now().millisecondsSinceEpoch}',
-      userId: user.id,
-      workoutId: s.blueprint.workoutId,
-      title: s.blueprint.title,
-      startedAt: s.startedAt ?? DateTime.now(),
-      completedAt: DateTime.now(),
-      totalDuration: s.totalElapsed,
-      activeDuration: s.activeElapsed,
-      restDuration: s.restElapsed,
-      exercisesDone: s.exercisesDone,
-      exercisesTotal: s.blueprint.exercises.length,
-      seriesDone: s.seriesDone,
-      percent: s.blueprint.exercises.isEmpty
-          ? 1
-          : (s.exercisesDone / s.blueprint.exercises.length).clamp(0.0, 1.0),
-    );
-    await ref.read(workoutSessionRepositoryProvider).save(record);
-    ref.read(gamificationProvider.notifier).addXp(AppConstants.xpPerWorkout);
-    ref.read(rewardsProvider.notifier).earn(AppConstants.coinsPerWorkout);
-    ref.read(missionsProvider.notifier).report(MissionEvent.treinoConcluido);
-    await ref.read(weeklyChallengeRepositoryProvider).recordWorkout(
-          userId: user.id.isEmpty ? 'guest' : user.id,
-          duration: s.totalElapsed,
-          displayName: user.name,
-        );
-    await FeedbackService.play(FeedbackEvent.sucesso);
-    ref.read(workoutTimerControllerProvider).clear();
-  }
+Future<void> _persistWorkout(WidgetRef ref, WorkoutTimerState s) async {
+  final user = ref.read(currentUserProvider) ?? AppUser.uiFallback();
+  final record = WorkoutSessionRecord(
+    id: '${DateTime.now().millisecondsSinceEpoch}',
+    userId: user.id,
+    workoutId: s.blueprint.workoutId,
+    title: s.blueprint.title,
+    startedAt: s.startedAt ?? DateTime.now(),
+    completedAt: DateTime.now(),
+    totalDuration: s.totalElapsed,
+    activeDuration: s.activeElapsed,
+    restDuration: s.restElapsed,
+    exercisesDone: s.exercisesDone,
+    exercisesTotal: s.blueprint.exercises.length,
+    seriesDone: s.seriesDone,
+    percent: s.blueprint.exercises.isEmpty
+        ? 1
+        : (s.exercisesDone / s.blueprint.exercises.length).clamp(0.0, 1.0),
+  );
+  await ref.read(workoutSessionRepositoryProvider).save(record);
+  ref.read(gamificationProvider.notifier).addXp(AppConstants.xpPerWorkout);
+  ref.read(rewardsProvider.notifier).earn(AppConstants.coinsPerWorkout);
+  ref.read(missionsProvider.notifier).report(MissionEvent.treinoConcluido);
+  await ref.read(weeklyChallengeRepositoryProvider).recordWorkout(
+        userId: user.id.isEmpty ? 'guest' : user.id,
+        duration: s.totalElapsed,
+        displayName: user.name,
+      );
+  await FeedbackService.play(FeedbackEvent.sucesso);
+  ref.read(workoutTimerControllerProvider).clear();
 }

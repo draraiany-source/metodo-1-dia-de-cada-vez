@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 import '../../../core/assets/app_icons.dart';
+import '../../../core/auth/session_sign_out.dart';
 import '../../../core/design_system/app_breakpoints.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/seed_data.dart';
@@ -28,6 +29,8 @@ import '../../nutrition/providers/food_log_providers.dart';
 import '../../nutrition/providers/water_log_providers.dart';
 import '../../personal_amanda/presentation/amanda_photo_banner.dart';
 import '../../weekly_challenge/presentation/weekly_challenge_home_card.dart';
+import '../../audio_programs/data/repositories/audio_program_repository_impl.dart';
+import '../../audio_programs/providers/audio_program_providers.dart';
 import '../../workout_timer/presentation/workout_timer_screen.dart';
 import '../../workout_timer/providers/workout_timer_controller.dart';
 import '../../workouts/presentation/workout_category_visual.dart';
@@ -43,7 +46,8 @@ class HomeScreen extends ConsumerWidget {
     final gamification = ref.watch(gamificationProvider);
     final streak = gamification.streak;
     final glasses = ref.watch(waterLogProvider);
-    const waterGoal = 8;
+    final waterDay = ref.watch(waterDayProvider);
+    final waterGoal = waterDay.effectiveGoalGlasses(user.currentWeight);
     final waterLiters = glasses * 0.25;
     final todayKcal = ref.watch(todayKcalProvider);
     final metaKcal = ref.watch(trainerProfileProvider).metaCalorica.round();
@@ -210,7 +214,6 @@ class _TopBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final first = user.name.split(' ').first;
     final unread = ref.watch(claimableMissionsProvider) > 0;
     return Row(
       children: [
@@ -218,7 +221,7 @@ class _TopBar extends ConsumerWidget {
           radius: 20,
           backgroundColor: AppColors.surface2,
           child: Text(
-            first.isNotEmpty ? first[0].toUpperCase() : 'A',
+            user.avatarInitial,
             style: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.w800),
           ),
@@ -228,7 +231,9 @@ class _TopBar extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Olá, $first!',
+              Text(user.homeGreeting,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.h3().copyWith(fontSize: 18)),
               const SizedBox(height: 2),
               Text(
@@ -249,6 +254,12 @@ class _TopBar extends ConsumerWidget {
           icon: Icons.calendar_today_outlined,
           iconAsset: AppIcons.calendar,
           onTap: () => AppNavigation.open(context, Routes.calendar),
+        ),
+        const SizedBox(width: 8),
+        _IconBtn(
+          icon: Icons.logout_rounded,
+          iconAsset: AppIcons.logout,
+          onTap: () => signOutAndGoToLogin(context, ref),
         ),
       ],
     );
@@ -683,10 +694,15 @@ class _TodayWorkoutCard extends StatelessWidget {
                             .copyWith(
                                 fontWeight: FontWeight.w800, letterSpacing: 0.6)),
                     const SizedBox(height: 2),
-                    Text(workout.title, style: AppTextStyles.title()),
+                    Text(workout.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.title()),
                     const SizedBox(height: 2),
                     Text(
                         '${workout.durationMin} min  ·  ${workout.level}  ·  ${workout.exercises} exercícios',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: AppTextStyles.caption()),
                   ],
                 ),
@@ -1047,13 +1063,15 @@ class _QuickGrid extends StatelessWidget {
   }
 }
 
-class _Programa7DiasHomeCard extends StatelessWidget {
+class _Programa7DiasHomeCard extends ConsumerWidget {
   final VoidCallback onOpen;
 
   const _Programa7DiasHomeCard({required this.onOpen});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final progressLabel =
+        ref.watch(programCompletionLabelProvider(kPrograma7DiasId));
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -1081,11 +1099,11 @@ class _Programa7DiasHomeCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 14),
-              const Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'PROGRAMA 7 DIAS',
                       style: TextStyle(
                         color: Colors.white,
@@ -1094,8 +1112,8 @@ class _Programa7DiasHomeCard extends StatelessWidget {
                         fontSize: 13,
                       ),
                     ),
-                    SizedBox(height: 2),
-                    Text(
+                    const SizedBox(height: 2),
+                    const Text(
                       'Um Dia de Cada Vez',
                       style: TextStyle(
                         color: Colors.white,
@@ -1103,10 +1121,12 @@ class _Programa7DiasHomeCard extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 2),
+                    const SizedBox(height: 2),
                     Text(
-                      'Amanda Lopes · Foco e disciplina',
-                      style: TextStyle(
+                      progressLabel.isEmpty
+                          ? 'Amanda Lopes · Foco e disciplina'
+                          : progressLabel,
+                      style: const TextStyle(
                         color: Color(0xE6FFFFFF),
                         fontSize: 12,
                       ),
@@ -1167,6 +1187,7 @@ class _MomentoParaVoceCard extends StatelessWidget {
               Expanded(
                 child: _MomentoAction(
                   icon: Icons.self_improvement_rounded,
+                  iconAsset: AppIcons.meditation,
                   label: 'Meditar agora',
                   onTap: () =>
                       AppNavigation.open(context, Routes.meditations),
@@ -1176,6 +1197,7 @@ class _MomentoParaVoceCard extends StatelessWidget {
               Expanded(
                 child: _MomentoAction(
                   icon: Icons.headphones_rounded,
+                  iconAsset: AppIcons.audio,
                   label: 'Ouvir um áudio',
                   onTap: () =>
                       AppNavigation.open(context, Routes.audiosMeditations),
@@ -1185,6 +1207,7 @@ class _MomentoParaVoceCard extends StatelessWidget {
               Expanded(
                 child: _MomentoAction(
                   icon: Icons.air_rounded,
+                  iconAsset: AppIcons.meditation,
                   label: 'Respirar',
                   onTap: () =>
                       AppNavigation.open(context, Routes.meditations),
@@ -1203,9 +1226,11 @@ class _MomentoAction extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onTap,
+    this.iconAsset,
   });
 
   final IconData icon;
+  final String? iconAsset;
   final String label;
   final VoidCallback onTap;
 
@@ -1221,12 +1246,17 @@ class _MomentoAction extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
           child: Column(
             children: [
-              Icon(icon, color: AppColors.secondary, size: 22),
+              AppIconImage(
+                iconAsset ?? '',
+                size: 22,
+                fallbackIcon: icon,
+              ),
               const SizedBox(height: 6),
               Text(
                 label,
                 textAlign: TextAlign.center,
                 maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 11.5,

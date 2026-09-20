@@ -57,6 +57,25 @@ class WeightHistoryNotifier extends StateNotifier<List<WeightEntry>> {
       ...state,
       WeightEntry(date: date ?? DateTime.now(), weight: weight, note: note),
     ]..sort((a, b) => a.date.compareTo(b.date));
+    await _persist();
+  }
+
+  Future<void> removeAt(int index) async {
+    if (index < 0 || index >= state.length) return;
+    final next = [...state]..removeAt(index);
+    state = next;
+    await _persist();
+  }
+
+  Future<void> removeEntry(WeightEntry entry) async {
+    final i = state.indexWhere((e) =>
+        e.date == entry.date &&
+        e.weight == entry.weight &&
+        e.note == entry.note);
+    if (i >= 0) await removeAt(i);
+  }
+
+  Future<void> _persist() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(
         _key, state.map((e) => jsonEncode(e.toMap())).toList());

@@ -109,13 +109,14 @@ class AppTheme {
         onSecondary: Colors.white,
         onSurface: AppColors.textPrimary,
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: AppColors.background,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
         foregroundColor: AppColors.textPrimary,
-        iconTheme: IconThemeData(color: AppColors.textPrimary),
+        iconTheme: const IconThemeData(color: AppColors.textPrimary, size: 22),
+        titleTextStyle: AppTextStyles.h3().copyWith(fontSize: 18),
       ),
       cardTheme: CardThemeData(
         color: AppColors.surface,
@@ -140,6 +141,7 @@ class AppTheme {
         style: FilledButton.styleFrom(
           backgroundColor: AppColors.secondary,
           foregroundColor: Colors.white,
+          minimumSize: const Size(48, 48),
           textStyle: AppTextStyles.button(),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radiusSm),
@@ -150,6 +152,7 @@ class AppTheme {
         filled: true,
         fillColor: AppColors.surface2,
         hintStyle: AppTextStyles.bodySecondary(color: AppColors.textTertiary),
+        labelStyle: AppTextStyles.bodySecondary(),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: OutlineInputBorder(
@@ -164,9 +167,18 @@ class AppTheme {
           borderRadius: BorderRadius.circular(radiusSm),
           borderSide: const BorderSide(color: AppColors.secondary, width: 1.4),
         ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radiusSm),
+          borderSide: const BorderSide(color: AppColors.danger),
+        ),
       ),
       dividerColor: AppColors.border,
-      iconTheme: const IconThemeData(color: AppColors.textSecondary),
+      iconTheme: const IconThemeData(color: AppColors.textSecondary, size: 22),
+      snackBarTheme: const SnackBarThemeData(
+        backgroundColor: AppColors.surfaceElevated,
+        contentTextStyle: TextStyle(color: AppColors.textPrimary, fontSize: 14),
+        behavior: SnackBarBehavior.floating,
+      ),
       chipTheme: base.chipTheme.copyWith(
         backgroundColor: AppColors.surface2,
         selectedColor: AppColors.secondary,

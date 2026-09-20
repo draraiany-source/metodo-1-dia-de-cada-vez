@@ -134,6 +134,18 @@ class NutritionAnalysisResult {
 
   bool get isEmpty => foods.isEmpty;
 
+  /// Resposta placeholder da Function sem OpenAI (ex.: "Refeição" / 0 kcal).
+  bool get looksLikePlaceholder {
+    if (foods.isEmpty) return true;
+    if (foods.length != 1) return false;
+    final name = foods.first.name.trim().toLowerCase();
+    final generic = name == 'refeição' ||
+        name == 'refeicao' ||
+        name == 'meal' ||
+        name == 'food';
+    return generic && totals.kcal <= 0;
+  }
+
   NutritionAnalysisResult copyWithFoods(List<FoodAnalysisItem> foods) =>
       NutritionAnalysisResult(foods: foods, notes: notes);
 

@@ -1,7 +1,7 @@
 {
-  "version": "1.0",
-  "atualizadoEm": "2026-09-17",
-  "observacao": "Conteúdo inicial da biblioteca de vídeos da Amanda. Este arquivo é usado APENAS quando a coleção 'videos' do Firestore está vazia — assim a área nunca aparece em branco na primeira instalação. A partir do momento em que a Amanda publica o primeiro vídeo pelo Painel da Personal, o Firestore passa a ser a única fonte e este arquivo deixa de ser lido. Ao editar um vídeo semeado no painel, ele é gravado no Firestore com o mesmo id, sem duplicar.",
+  "version": "1.1",
+  "atualizadoEm": "2026-09-18",
+  "observacao": "Catálogo inicial da biblioteca. O Firestore é a fonte de verdade quando o documento já existe. Itens do seed cujo id ainda não está no Firestore entram na lista sem apagar vídeos já publicados. Edição/despublicação no Painel da Personal grava o mesmo id e passa a valer sobre o seed.",
   "videos": [
     {
       "id": "boas_vindas_metodo_1_dia",
@@ -17,6 +17,60 @@
       "isPremium": false,
       "order": 0,
       "active": true
+    },
+    {
+      "id": "yt_34PHGKECMTY",
+      "category": "metodo1Dia",
+      "subcategory": "shorts",
+      "name": "12 de setembro de 2026 · Short 1",
+      "description": "Short da Amanda no canal Método 1 Dia de Cada Vez. Título original no YouTube: 12 de setembro de 2026.",
+      "teacher": "Amanda Lopes",
+      "thumbnailUrl": "https://i.ytimg.com/vi/34PHGKECMTY/hqdefault.jpg",
+      "youtubeUrl": "https://www.youtube.com/shorts/34PHGKECMTY",
+      "videoId": "34PHGKECMTY",
+      "durationSeconds": 44,
+      "level": "iniciante",
+      "isPremium": false,
+      "order": 10,
+      "active": true,
+      "publishedAt": "2026-09-12T00:00:00.000Z",
+      "createdAt": "2026-09-12T00:00:00.000Z"
+    },
+    {
+      "id": "yt_3T0HDPX4jkk",
+      "category": "metodo1Dia",
+      "subcategory": "shorts",
+      "name": "12 de setembro de 2026 · Short 2",
+      "description": "Short da Amanda no canal Método 1 Dia de Cada Vez. Título original no YouTube: 12 de setembro de 2026.",
+      "teacher": "Amanda Lopes",
+      "thumbnailUrl": "https://i.ytimg.com/vi/3T0HDPX4jkk/hqdefault.jpg",
+      "youtubeUrl": "https://www.youtube.com/shorts/3T0HDPX4jkk",
+      "videoId": "3T0HDPX4jkk",
+      "durationSeconds": 56,
+      "level": "iniciante",
+      "isPremium": false,
+      "order": 11,
+      "active": true,
+      "publishedAt": "2026-09-12T00:00:00.000Z",
+      "createdAt": "2026-09-12T00:00:00.000Z"
+    },
+    {
+      "id": "yt_zRSTnW3EMF8",
+      "category": "metodo1Dia",
+      "subcategory": "shorts",
+      "name": "12 de setembro de 2026 · Short 3",
+      "description": "Short da Amanda no canal Método 1 Dia de Cada Vez. Título original no YouTube: 12 de setembro de 2026.",
+      "teacher": "Amanda Lopes",
+      "thumbnailUrl": "https://i.ytimg.com/vi/zRSTnW3EMF8/hqdefault.jpg",
+      "youtubeUrl": "https://www.youtube.com/shorts/zRSTnW3EMF8",
+      "videoId": "zRSTnW3EMF8",
+      "durationSeconds": 49,
+      "level": "iniciante",
+      "isPremium": false,
+      "order": 12,
+      "active": true,
+      "publishedAt": "2026-09-12T00:00:00.000Z",
+      "createdAt": "2026-09-12T00:00:00.000Z"
     }
   ]
 }

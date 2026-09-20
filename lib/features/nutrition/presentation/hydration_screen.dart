@@ -212,6 +212,15 @@ class _HydrationScreenState extends ConsumerState<HydrationScreen>
                         await _customGoalInput(currentGoal);
                       },
                     ),
+                    ActionChip(
+                      label: const Text('Meta do peso'),
+                      onPressed: () async {
+                        await ref
+                            .read(waterDayProvider.notifier)
+                            .setCustomGoalMl(null);
+                        if (ctx.mounted) Navigator.pop(ctx);
+                      },
+                    ),
                   ],
                 ),
               ],
@@ -246,9 +255,17 @@ class _HydrationScreenState extends ConsumerState<HydrationScreen>
         ],
       ),
     );
-    if (v != null && v >= 500 && v <= 8000) {
-      await ref.read(waterDayProvider.notifier).setCustomGoalMl(v);
+    if (v == null) return;
+    if (v < 500 || v > 8000) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Informe uma meta entre 500 e 8000 ml.'),
+        ),
+      );
+      return;
     }
+    await ref.read(waterDayProvider.notifier).setCustomGoalMl(v);
   }
 
   String _fmtTime(DateTime t) {

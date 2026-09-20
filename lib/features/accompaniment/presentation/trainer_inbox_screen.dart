@@ -7,6 +7,7 @@ import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/widgets/app_icon_image.dart';
+import '../../../core/widgets/app_states.dart';
 import '../../../core/widgets/premium_ui.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
@@ -36,8 +37,12 @@ class _TrainerInboxScreenState extends ConsumerState<TrainerInboxScreen> {
     return Scaffold(
       appBar: const PremiumAppBar(title: 'Mensagens'),
       body: inbox.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => const Center(child: Text('Inbox indisponível')),
+        loading: () => const AppLoading(message: 'Carregando mensagens…'),
+        error: (_, __) => AppErrorState(
+          title: 'Mensagens indisponíveis',
+          message: 'Não foi possível carregar as conversas agora.',
+          onRetry: () => ref.invalidate(trainerInboxProvider(trainer.id)),
+        ),
         data: (convs) {
           var list = convs.where((c) {
             if (_query.isNotEmpty &&
@@ -114,9 +119,12 @@ class _TrainerInboxScreenState extends ConsumerState<TrainerInboxScreen> {
               ),
               Expanded(
                 child: list.isEmpty
-                    ? const Center(
-                        child: Text('Nenhuma conversa ainda.',
-                            style: TextStyle(color: AppColors.textSecondary)))
+                    ? const AppEmptyState(
+                        title: 'Nenhuma conversa ainda',
+                        message:
+                            'Quando uma aluna escrever, a conversa aparece aqui.',
+                        mascotHeight: 120,
+                      )
                     : ListView.builder(
                         itemCount: list.length,
                         itemBuilder: (ctx, i) {

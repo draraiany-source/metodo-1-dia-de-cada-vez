@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/youtube_launch.dart';
 import '../../personal_cms/presentation/cms_confirm.dart';
 import '../domain/video_models.dart';
 import '../providers/video_providers.dart';
@@ -412,6 +413,19 @@ class _LinhaAdmin extends StatelessWidget {
             const SizedBox(height: 4),
             Row(
               children: [
+                Expanded(
+                  child: TextButton.icon(
+                    onPressed: semUrl
+                        ? null
+                        : () => YoutubeLaunch.open(
+                              context,
+                              video.youtubeUrl,
+                              title: video.name,
+                            ),
+                    icon: const Icon(Icons.play_circle_outline, size: 17),
+                    label: const Text('Visualizar'),
+                  ),
+                ),
                 Expanded(
                   child: TextButton.icon(
                     onPressed: onEditar,

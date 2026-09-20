@@ -8,6 +8,7 @@ import '../../../core/mascot/mascot_config.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../nutrition/presentation/food_database_screen.dart';
 import 'admin_treinos_catalog_tab.dart';
@@ -25,8 +26,9 @@ class AdminScreen extends ConsumerWidget {
     final user = ref.watch(currentUserProvider);
     if (user == null || !user.isAdmin) {
       return Scaffold(
-        appBar: AppBar(
-          title: const Text('Painel Técnico'),
+        backgroundColor: AppColors.background,
+        appBar: PremiumAppBar(
+          title: 'Painel Técnico',
           actions: [
             IconButton(
               tooltip: 'Sair da conta',
@@ -56,7 +58,9 @@ class AdminScreen extends ConsumerWidget {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
+        backgroundColor: AppColors.background,
         appBar: AppBar(
+          backgroundColor: AppColors.background,
           title: const Text('Painel Técnico'),
           actions: [
             IconButton(

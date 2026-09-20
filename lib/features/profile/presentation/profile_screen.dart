@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -338,20 +339,14 @@ class _ProfileCard extends StatelessWidget {
                       child: ClipOval(
                         child: ColoredBox(
                           color: Colors.black,
-                          child: (user.photoUrl != null &&
-                                  user.photoUrl!.isNotEmpty)
-                              ? Image.file(
-                                  File(user.photoUrl!),
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (_, __, ___) => LiliFitMascot(
-                                    pose: MascotePose.perfil,
-                                    height: avatar,
-                                  ),
-                                )
-                              : LiliFitMascot(
-                                  pose: MascotePose.perfil,
-                                  height: avatar,
-                                ),
+                          child: _profilePhoto(
+                            user.photoUrl,
+                            avatar,
+                            LiliFitMascot(
+                              pose: MascotePose.perfil,
+                              height: avatar,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -382,7 +377,7 @@ class _ProfileCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        user.name,
+                        user.profileDisplayName,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w900,
@@ -390,6 +385,18 @@ class _ProfileCard extends StatelessWidget {
                           height: 1.15,
                         ),
                       ),
+                      if (user.email.isNotEmpty) ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          user.email,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: AppColors.textTertiary,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
                       const SizedBox(height: 6),
                       Text(
                         'Objetivo: ${trainerProfile.objetivo.label}',
@@ -623,4 +630,22 @@ class _BodyDataCard extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _profilePhoto(String? url, double size, Widget fallback) {
+  if (url == null || url.isEmpty) return fallback;
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return CachedNetworkImage(
+      imageUrl: url,
+      fit: BoxFit.cover,
+      width: size,
+      height: size,
+      errorWidget: (_, __, ___) => fallback,
+    );
+  }
+  return Image.file(
+    File(url),
+    fit: BoxFit.cover,
+    errorBuilder: (_, __, ___) => fallback,
+  );
 }

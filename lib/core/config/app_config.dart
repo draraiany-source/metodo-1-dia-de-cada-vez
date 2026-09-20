@@ -37,16 +37,27 @@ class AppConfig {
   static const String productQuarterly = 'metodo1dia_premium_trimestral';
   static const String productYearly = 'metodo1dia_premium_anual';
 
-  /// Cobrança real. `false` até App Store / Play + RevenueCat estarem prontos.
-  /// Ativar só com `--dart-define=PAYMENTS_ENABLED=true`.
+  /// Offering padrão no painel do RevenueCat (current).
+  static const String defaultOffering = 'default';
+
+  /// Cobrança real de produção. Permanece `false` até autorização explícita.
   static const bool paymentsEnabled =
       bool.fromEnvironment('PAYMENTS_ENABLED', defaultValue: false);
+
+  /// Libera o sheet da loja só para sandbox (Play license testers / StoreKit).
+  /// Não é produção. Default `false`. Nunca enviar release de loja com isto
+  /// no lugar de [paymentsEnabled].
+  static const bool billingSandbox =
+      bool.fromEnvironment('BILLING_SANDBOX', defaultValue: false);
 
   static bool get billingConfigured =>
       revenueCatAndroidKey.isNotEmpty || revenueCatIosKey.isNotEmpty;
 
-  static bool get storePurchasesEnabled =>
-      paymentsEnabled && billingConfigured && !kIsWeb;
+  /// Pode abrir o fluxo da loja (sandbox ou produção autorizada).
+  static bool get storePurchasesAllowed =>
+      billingConfigured &&
+      !kIsWeb &&
+      (paymentsEnabled || billingSandbox);
 
   // ---------------------------------------------------------------------------
   // IA (Cloud Function que faz proxy da OpenAI)
@@ -103,6 +114,7 @@ class AppConfig {
   static Map<String, bool> get status => {
         'Billing (RevenueCat)': billingConfigured,
         'Cobrança real (PAYMENTS_ENABLED)': paymentsEnabled,
+        'Sandbox da loja (BILLING_SANDBOX)': billingSandbox,
         'IA (Cloud Function)': aiConfigured,
         'Calorias por foto (Cloud Function)': calorieVisionConfigured,
         'Google Maps': mapsConfigured,

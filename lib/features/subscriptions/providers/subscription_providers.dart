@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/services/premium_service.dart';
+import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../data/subscription_repository.dart';
 import '../domain/subscription_models.dart';
@@ -23,6 +24,19 @@ final studentAccessProvider =
 final adminSubscriptionsProvider =
     StreamProvider<List<SubscriptionRecord>>((ref) {
   return ref.watch(subscriptionRepositoryProvider).watchAllForAdmin();
+});
+
+/// Preços da offering atual. Vazio se não houver chave / loja.
+final storeCatalogProvider = FutureProvider<StoreCatalog>((ref) {
+  return ref.watch(premiumServiceProvider).loadStoreCatalog();
+});
+
+/// Liga o UID Firebase ao RevenueCat quando a sessão muda.
+final revenueCatIdentityBinder = Provider<void>((ref) {
+  ref.listen<AsyncValue<AppUser?>>(authStateProvider, (prev, next) {
+    final uid = next.value?.id;
+    RevenueCatPremiumService.syncAppUser(uid);
+  });
 });
 
 class EffectiveAccess {

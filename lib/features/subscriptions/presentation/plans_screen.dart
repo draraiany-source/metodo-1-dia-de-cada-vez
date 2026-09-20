@@ -4,11 +4,14 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/assets/app_icons.dart';
 import '../../../core/config/app_config.dart';
+import '../../../core/config/app_legal.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/services/analytics_service.dart';
+import '../../../core/services/billing_error_mapper.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/services/premium_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/app_icon_image.dart';
@@ -30,8 +33,12 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
   @override
   Widget build(BuildContext context) {
     final access = ref.watch(effectiveAccessProvider);
+    final catalogAsync = ref.watch(storeCatalogProvider);
+    final store = catalogAsync.valueOrNull ?? StoreCatalog.empty;
     final width = MediaQuery.sizeOf(context).width;
     final pad = width > 720 ? 32.0 : 20.0;
+    final useStoreTrial = AppConfig.billingConfigured;
+    final yearlyQuote = store.yearly;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -41,15 +48,22 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
         children: [
           _HeroCard(hasPremium: access.hasPremium, lifecycle: access.lifecycle),
           const SizedBox(height: 20),
-          _TrialCard(
-            loading: _loading,
-            alreadyUsed: access.subscription?.trialUsed == true,
-            active: access.lifecycle == SubscriptionLifecycle.trial,
-            onStart: _startTrial,
-          ),
+          if (useStoreTrial)
+            _StoreTrialInfo(hasTrial: store.monthly?.hasFreeTrial == true ||
+                store.quarterly?.hasFreeTrial == true ||
+                store.yearly?.hasFreeTrial == true)
+          else
+            _TrialCard(
+              loading: _loading,
+              alreadyUsed: access.subscription?.trialUsed == true,
+              active: access.lifecycle == SubscriptionLifecycle.trial,
+              onStart: _startTrial,
+            ),
           const SizedBox(height: 16),
           _PaidPlanCard(
             info: PlanCatalog.monthly,
+            storePrice: store.monthly?.priceString,
+            hasStoreTrial: store.monthly?.hasFreeTrial == true,
             loading: _loading,
             buttonLabel: 'ASSINAR MENSAL',
             onSubscribe: () => _subscribe(CatalogPlan.monthly),
@@ -57,31 +71,73 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
           const SizedBox(height: 16),
           _PaidPlanCard(
             info: PlanCatalog.quarterly,
+            storePrice: store.quarterly?.priceString,
+            hasStoreTrial: store.quarterly?.hasFreeTrial == true,
             loading: _loading,
             buttonLabel: 'ASSINAR TRIMESTRAL',
             onSubscribe: () => _subscribe(CatalogPlan.quarterly),
           ),
           const SizedBox(height: 16),
-          const _YearlyComingSoonCard(),
+          if (yearlyQuote != null)
+            _PaidPlanCard(
+              info: PlanCatalog.yearly,
+              storePrice: yearlyQuote.priceString,
+              hasStoreTrial: yearlyQuote.hasFreeTrial,
+              loading: _loading,
+              buttonLabel: 'ASSINAR ANUAL',
+              onSubscribe: () => _subscribe(CatalogPlan.yearly),
+            )
+          else
+            const _YearlyComingSoonCard(),
           const SizedBox(height: 20),
           if (access.hasPremium)
             OutlinedButton(
               onPressed: () => context.push(Routes.mySubscription),
               child: const Text('Ver minha assinatura'),
-            )
-          else
-            TextButton(
-              onPressed: _loading ? null : _restore,
-              child: const Text('Restaurar compras'),
             ),
+          TextButton(
+            onPressed: _loading ? null : _restore,
+            child: const Text('Restaurar compras'),
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 12,
+            children: [
+              TextButton(
+                onPressed: () => context.push(Routes.terms),
+                child: const Text('Termos'),
+              ),
+              TextButton(
+                onPressed: () => context.push(Routes.privacy),
+                child: const Text('Privacidade'),
+              ),
+              TextButton(
+                onPressed: () {
+                  if (Navigator.of(context).canPop()) {
+                    Navigator.of(context).pop();
+                  } else {
+                    context.pop();
+                  }
+                },
+                child: const Text('Cancelar / voltar'),
+              ),
+            ],
+          ),
           const SizedBox(height: 8),
           Text(
-            AppConfig.paymentsEnabled
-                ? 'Os preços da App Store e da Google Play têm prioridade quando a cobrança estiver ativa.'
-                : 'Cobrança real desativada (PAYMENTS_ENABLED=false). Nenhuma compra será processada nesta fase.',
+            _billingDisclaimer(),
             textAlign: TextAlign.center,
             style: const TextStyle(color: AppColors.textTertiary, fontSize: 11),
           ),
+          if (AppLegal.hasTermsUrl && AppLegal.hasPrivacyUrl)
+            TextButton(
+              onPressed: () => launchUrl(
+                Uri.parse(AppLegal.termsUrl),
+                mode: LaunchMode.externalApplication,
+              ),
+              child: const Text('Abrir termos no navegador'),
+            ),
         ],
       ),
     );
@@ -137,13 +193,15 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
       );
     } on PurchaseCancelledException {
       if (!mounted) return;
-    } on BillingNotConfiguredException catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message)));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(BillingErrorMapper.toUserMessage(
+          const PurchaseCancelledException(),
+        ))),
+      );
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Não foi possível assinar: $e')),
+        SnackBar(content: Text(BillingErrorMapper.toUserMessage(e))),
       );
     } finally {
       if (mounted) setState(() => _loading = false);
@@ -158,20 +216,74 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            status.isPremium
-                ? 'Assinatura restaurada.'
-                : 'Nenhuma compra encontrada nesta loja.',
+            BillingErrorMapper.restoreMessage(foundPremium: status.isPremium),
           ),
         ),
       );
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Não foi possível restaurar: $e')),
+        SnackBar(
+          content: Text(BillingErrorMapper.toUserMessage(
+            e,
+            fallback: 'Não foi possível restaurar as compras agora.',
+          )),
+        ),
       );
     } finally {
       if (mounted) setState(() => _loading = false);
     }
+  }
+
+  String _billingDisclaimer() {
+    if (AppConfig.paymentsEnabled) {
+      return 'Os preços da App Store e da Google Play têm prioridade. '
+          'A cobrança real de produção está autorizada neste build.';
+    }
+    if (AppConfig.billingSandbox) {
+      return 'Modo sandbox (BILLING_SANDBOX). Use testador autorizado da Play '
+          'ou Sandbox Apple. PAYMENTS_ENABLED continua false — sem produção.';
+    }
+    return 'Cobrança real desativada (PAYMENTS_ENABLED=false). '
+        'Nenhuma compra de produção será processada. '
+        'Preços da loja aparecem quando o RevenueCat estiver configurado.';
+  }
+}
+
+class _StoreTrialInfo extends StatelessWidget {
+  const _StoreTrialInfo({required this.hasTrial});
+  final bool hasTrial;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppTheme.radius),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Teste grátis de 7 dias',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            hasTrial
+                ? 'A loja oferece período de introdução. A elegibilidade é da Apple/Google — a mesma conta não reinicia o teste. A cobrança do plano começa ao fim dos 7 dias se você não cancelar em Gerenciar assinatura.'
+                : 'O teste de 7 dias será o introductory offer do produto na App Store / Play. Enquanto a offering não trouxer trial, o botão Assinar abre a loja sem inventar preço local.',
+            style: const TextStyle(color: AppColors.textSecondary, height: 1.4),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -298,11 +410,15 @@ class _PaidPlanCard extends StatelessWidget {
     required this.loading,
     required this.buttonLabel,
     required this.onSubscribe,
+    this.storePrice,
+    this.hasStoreTrial = false,
   });
   final CatalogPlanInfo info;
   final bool loading;
   final String buttonLabel;
   final VoidCallback onSubscribe;
+  final String? storePrice;
+  final bool hasStoreTrial;
 
   @override
   Widget build(BuildContext context) {
@@ -365,7 +481,9 @@ class _PaidPlanCard extends StatelessWidget {
             TextSpan(
               children: [
                 TextSpan(
-                  text: info.fallbackPriceLabel ?? '',
+                  text: storePrice ??
+                      info.fallbackPriceLabel ??
+                      'Preço da loja',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 26,
@@ -373,7 +491,7 @@ class _PaidPlanCard extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: ' ${info.periodLabel}',
+                  text: storePrice == null ? ' ${info.periodLabel}' : '',
                   style: const TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: 14,
@@ -383,6 +501,22 @@ class _PaidPlanCard extends StatelessWidget {
               ],
             ),
           ),
+          if (storePrice != null)
+            const Padding(
+              padding: EdgeInsets.only(top: 4),
+              child: Text(
+                'Preço da App Store / Google Play',
+                style: TextStyle(color: AppColors.textTertiary, fontSize: 11),
+              ),
+            ),
+          if (hasStoreTrial)
+            const Padding(
+              padding: EdgeInsets.only(top: 4),
+              child: Text(
+                'Inclui teste grátis da loja. A cobrança começa depois, se não cancelar.',
+                style: TextStyle(color: AppColors.secondary, fontSize: 12),
+              ),
+            ),
           if (info.equivalentMonthly != null) ...[
             const SizedBox(height: 6),
             Text(

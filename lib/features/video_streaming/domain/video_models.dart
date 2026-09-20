@@ -249,6 +249,9 @@ class VideoContent {
         'order': order,
         'active': active,
         'youtubeUrl': youtubeUrl,
+        'videoId': youtubeVideoId ?? '',
         'publishedAt': (publishedAt ?? DateTime.now()).toIso8601String(),
+        'createdAt': (publishedAt ?? DateTime.now()).toIso8601String(),
+        'updatedAt': DateTime.now().toIso8601String(),
       };
 }

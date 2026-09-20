@@ -22,6 +22,7 @@ class YoutubeLaunch {
   static Future<bool> open(
     BuildContext context,
     String rawUrl, {
+    String? title,
     String unavailableMessage = 'Link de vídeo indisponível.',
     String failureMessage =
         'Não foi possível abrir o vídeo. Se estiver privado ou indisponível, ajuste a privacidade no YouTube.',
@@ -38,10 +39,12 @@ class YoutubeLaunch {
     // Vídeos Privados no YouTube continuam sem reprodução — precisam
     // estar Público ou Não listado no canal.
     if (videoId != null && videoId.isNotEmpty && context.mounted) {
+      final titulo = (title ?? '').trim();
       await Navigator.of(context).push(
         MaterialPageRoute<void>(
           builder: (_) => YoutubeInAppScreen(
             videoId: videoId,
+            title: titulo.isEmpty ? 'Vídeo' : titulo,
             watchUrl: uri,
           ),
         ),

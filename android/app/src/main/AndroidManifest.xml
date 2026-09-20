@@ -2,6 +2,8 @@
     <!-- Rede -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- Play Billing — também é mesclada pelo purchases_flutter. -->
+    <uses-permission android:name="com.android.vending.BILLING"/>
 
     <!-- Corrida / GPS (primeiro plano) -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -16,17 +18,19 @@
     <!-- Notificações (lembretes usam AndroidScheduleMode.inexact — sem EXACT_ALARM) -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <!-- Sem anúncios: Analytics não coleta Advertising ID.
+         Evita declaração extra de AD_ID no Data Safety da Play. -->
     <uses-permission android:name="android.permission.VIBRATE"/>
     <!-- Mantém a tela ligada durante treino com cronômetro ativo -->
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
-
-    <!-- Firebase Analytics (Data Safety / Play Console) -->
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
     <application
         android:label="Método 1 Dia"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+            android:name="google_analytics_adid_collection_enabled"
+            android:value="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -63,6 +67,10 @@
         <intent>
             <action android:name="android.intent.action.VIEW"/>
             <data android:scheme="http"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SENDTO"/>
+            <data android:scheme="mailto"/>
         </intent>
     </queries>
 </manifest>

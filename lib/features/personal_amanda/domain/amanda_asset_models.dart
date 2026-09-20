@@ -59,6 +59,7 @@ class AmandaAsset {
     required this.url,
     required this.active,
     required this.order,
+    this.storagePath = '',
   });
 
   final String id;
@@ -66,12 +67,15 @@ class AmandaAsset {
   final String url;
   final bool active;
   final int order;
+  final String storagePath;
 
   Map<String, dynamic> toMap() => {
         'category': category.name,
         'url': url,
         'active': active,
         'order': order,
+        'storagePath': storagePath,
+        'updatedAt': DateTime.now().toIso8601String(),
       };
 
   factory AmandaAsset.fromMap(String id, Map<String, dynamic> m) =>
@@ -83,5 +87,6 @@ class AmandaAsset {
         url: (m['url'] ?? '') as String,
         active: (m['active'] ?? true) as bool,
         order: (m['order'] ?? 0) as int,
+        storagePath: (m['storagePath'] ?? '') as String,
       );
 }

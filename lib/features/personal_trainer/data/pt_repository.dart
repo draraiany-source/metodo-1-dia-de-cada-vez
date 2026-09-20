@@ -355,17 +355,28 @@ class PtRepository {
     try {
       final doc = await _db.collection('pt_anamnesis').doc(studentId).get();
       return StudentAnamnesis.fromMap(studentId, doc.data());
-    } catch (_) {
+    } on FirebaseException catch (e) {
+      // Permissão negada precisa chegar na UI; doc inexistente vira ficha vazia.
+      if (e.code == 'permission-denied') rethrow;
       return StudentAnamnesis(studentId: studentId, trainerId: '');
     }
   }
 
   Future<void> saveAnamnesis(StudentAnamnesis a) async {
-    if (!isReady || a.studentId.isEmpty) return;
-    await _db
-        .collection('pt_anamnesis')
-        .doc(a.studentId)
-        .set(a.toMap(), SetOptions(merge: true));
+    if (!isReady) {
+      throw StateError(
+          'Não foi possível salvar. Verifique a conexão e tente de novo.');
+    }
+    if (a.studentId.trim().isEmpty) {
+      throw StateError('Aluno inválido para gravar a anamnese.');
+    }
+    final ref = _db.collection('pt_anamnesis').doc(a.studentId);
+    final existing = await ref.get();
+    final data = a.toMap();
+    if (!existing.exists) {
+      data['createdAt'] = DateTime.now().toIso8601String();
+    }
+    await ref.set(data, SetOptions(merge: true));
   }
 
   // ---------------- Cargas ----------------

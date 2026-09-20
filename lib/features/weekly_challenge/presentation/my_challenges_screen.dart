@@ -6,6 +6,7 @@ import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/app_states.dart';
 import '../domain/weekly_challenge_models.dart';
 import '../providers/weekly_challenge_providers.dart';
 
@@ -101,9 +102,10 @@ class _List extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty) {
-      return Center(
-        child: Text(empty,
-            style: const TextStyle(color: AppColors.textSecondary)),
+      return AppEmptyState(
+        title: empty,
+        message: 'Quando você participar de um desafio, ele aparece aqui.',
+        mascotHeight: 130,
       );
     }
     return ListView.separated(

@@ -139,6 +139,58 @@ void main() {
       expect(uri?.host, 'www.youtube.com');
       expect(uri?.queryParameters['v'], 'dQw4w9WgXcQ');
     });
+
+    test('reconhece os 3 Shorts do Método 1 Dia com query si=', () {
+      const cases = {
+        'https://youtube.com/shorts/34PHGKECMTY?si=Hh9Z_l00kVvDS16n':
+            '34PHGKECMTY',
+        'https://youtube.com/shorts/3T0HDPX4jkk?si=TWZdqXR6V7c9q1xL':
+            '3T0HDPX4jkk',
+        'https://youtube.com/shorts/zRSTnW3EMF8?si=mf5LY0hnhld4M0rW':
+            'zRSTnW3EMF8',
+      };
+      cases.forEach((url, id) {
+        expect(YoutubeUrl.extractVideoId(url), id, reason: url);
+        final normalizado = YoutubeUrl.normalize(url);
+        expect(normalizado?.path, '/watch', reason: url);
+        expect(normalizado?.queryParameters['v'], id, reason: url);
+        expect(YoutubeUrl.thumbnailUrl(url),
+            'https://img.youtube.com/vi/$id/hqdefault.jpg');
+      });
+    });
+  });
+
+  group('Catálogo semeado dos 3 Shorts', () {
+    test('preserva youtubeUrl, videoId, capa e categoria no fromMap', () {
+      const urls = [
+        ('yt_34PHGKECMTY', '34PHGKECMTY',
+            'https://www.youtube.com/shorts/34PHGKECMTY'),
+        ('yt_3T0HDPX4jkk', '3T0HDPX4jkk',
+            'https://www.youtube.com/shorts/3T0HDPX4jkk'),
+        ('yt_zRSTnW3EMF8', 'zRSTnW3EMF8',
+            'https://www.youtube.com/shorts/zRSTnW3EMF8'),
+      ];
+      for (final item in urls) {
+        final v = VideoContent.fromMap(item.$1, {
+          'name': 'Short',
+          'description': 'Recado da Amanda',
+          'category': 'metodo1Dia',
+          'subcategory': 'shorts',
+          'youtubeUrl': item.$3,
+          'thumbnailUrl': 'https://i.ytimg.com/vi/${item.$2}/hqdefault.jpg',
+          'order': 10,
+          'active': true,
+          'publishedAt': '2026-09-12T00:00:00.000Z',
+        });
+        expect(v.youtubeVideoId, item.$2);
+        expect(v.isYoutube, isTrue);
+        expect(v.aguardandoUrl, isFalse);
+        expect(v.active, isTrue);
+        expect(v.category, VideoCategory.metodo1Dia);
+        expect(v.toMap()['videoId'], item.$2);
+        expect(v.toMap()['youtubeUrl'], item.$3);
+      }
+    });
   });
 
   group('VideoWatchState', () {

@@ -32,12 +32,13 @@ class AppPage extends StatelessWidget {
     final maxW = maxWidth == AppBreakpoints.contentMaxWidth
         ? context.contentMaxWidth
         : maxWidth;
+    final keyboard = MediaQuery.viewInsetsOf(context).bottom;
     final resolved = padding ??
         EdgeInsets.fromLTRB(
           h,
           8,
           h,
-          (context.useSideNav ? 24 : 110) + bottomExtra,
+          (context.useSideNav ? 24 : 110) + bottomExtra + keyboard,
         );
 
     final body = Align(

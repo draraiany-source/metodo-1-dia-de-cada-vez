@@ -4,8 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/firebase_error_mapper.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import '../../../core/widgets/app_page.dart';
+import '../../../core/widgets/app_states.dart';
 import '../domain/pt_models.dart';
 import '../providers/pt_providers.dart';
 
@@ -75,6 +77,12 @@ class _StudentAnamnesisScreenState
   }
 
   Future<void> _save() async {
+    if (_objective.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Preencha o objetivo principal.')),
+      );
+      return;
+    }
     setState(() => _saving = true);
     try {
       await ref.read(ptRepositoryProvider).saveAnamnesis(StudentAnamnesis(
@@ -102,7 +110,9 @@ class _StudentAnamnesisScreenState
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao salvar: $e')),
+        SnackBar(
+          content: Text(FirebaseErrorMapper.toUserMessage(e)),
+        ),
       );
     } finally {
       if (mounted) setState(() => _saving = false);
@@ -152,7 +162,15 @@ class _StudentAnamnesisScreenState
         ],
       ),
       body: SafeArea(
-        child: AppPage(
+        child: async.when(
+          loading: () => const AppLoading(message: 'Abrindo a anamnese…'),
+          error: (e, _) => AppErrorState(
+            title: 'Não foi possível abrir esta anamnese',
+            message: FirebaseErrorMapper.toUserMessage(e),
+            onRetry: () =>
+                ref.invalidate(ptAnamnesisProvider(widget.student.id)),
+          ),
+          data: (ficha) => AppPage(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -172,6 +190,14 @@ class _StudentAnamnesisScreenState
                     fontWeight: FontWeight.w800,
                     fontSize: 16),
               ),
+              if (ficha.updatedAt != null) ...[
+                const SizedBox(height: 4),
+                Text(
+                  'Última atualização: ${_fmt(ficha.updatedAt!)}',
+                  style: const TextStyle(
+                      color: AppColors.textSecondary, fontSize: 12),
+                ),
+              ],
               const SizedBox(height: 16),
               _field(_objective, 'Objetivo principal'),
               _field(_experience, 'Experiência com treino', maxLines: 2),
@@ -221,8 +247,18 @@ class _StudentAnamnesisScreenState
             ],
           ),
         ),
+        ),
       ),
     );
+  }
+
+  String _fmt(DateTime d) {
+    final local = d.toLocal();
+    final dd = local.day.toString().padLeft(2, '0');
+    final mm = local.month.toString().padLeft(2, '0');
+    final hh = local.hour.toString().padLeft(2, '0');
+    final min = local.minute.toString().padLeft(2, '0');
+    return '$dd/$mm/${local.year} $hh:$min';
   }
 
   Widget _field(TextEditingController c, String label, {int maxLines = 1}) {

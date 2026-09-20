@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../auth/providers/auth_providers.dart';
+import '../../evolution/providers/weight_history_providers.dart';
 import '../../gamification/providers/gamification_providers.dart';
 import '../../health_sync/domain/health_models.dart';
 import '../../health_sync/providers/health_providers.dart';
@@ -103,7 +104,10 @@ final trainerContextProvider = Provider<TrainerContext>((ref) {
     moedas: rewards.coins,
     nivel: gam.level,
     treinosNaSemana: treinosSemana,
-    historicoPeso: const [78.0, 76.5, 75.0, 74.2, 74.0, 73.9],
+    historicoPeso: ref
+        .watch(weightHistoryProvider)
+        .map((e) => e.weight)
+        .toList(),
     userName: (user?.name ?? 'você').split(' ').first,
     passosHoje: passos,
     caloriasHoje: kcal,
@@ -121,21 +125,25 @@ class TrainerChatState {
     this.messages = const [],
     this.thinking = false,
     this.loading = true,
+    this.lastReplyOffline = false,
   });
 
   final List<TrainerMessage> messages;
   final bool thinking;
   final bool loading;
+  final bool lastReplyOffline;
 
   TrainerChatState copyWith({
     List<TrainerMessage>? messages,
     bool? thinking,
     bool? loading,
+    bool? lastReplyOffline,
   }) =>
       TrainerChatState(
         messages: messages ?? this.messages,
         thinking: thinking ?? this.thinking,
         loading: loading ?? this.loading,
+        lastReplyOffline: lastReplyOffline ?? this.lastReplyOffline,
       );
 }
 
@@ -183,13 +191,16 @@ class TrainerChatNotifier extends StateNotifier<TrainerChatState> {
     final profile = _ref.read(trainerProfileProvider);
     final context = _ref.read(trainerContextProvider);
 
-    final reply =
+    final result =
         await repo.ask(text, profile: profile, context: context);
 
-    final botMsg =
-        TrainerMessage(text: reply, fromUser: false, date: DateTime.now());
+    final botMsg = TrainerMessage(
+        text: result.reply, fromUser: false, date: DateTime.now());
     state = state.copyWith(
-        messages: [...state.messages, botMsg], thinking: false);
+      messages: [...state.messages, botMsg],
+      thinking: false,
+      lastReplyOffline: result.usedOfflineFallback,
+    );
     await _persist();
   }
 

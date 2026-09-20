@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../core/config/app_config.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
+import '../../../core/services/billing_error_mapper.dart';
 import '../../../core/services/premium_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -51,39 +52,48 @@ class MySubscriptionScreen extends ConsumerWidget {
               _InfoCard(children: [
                 _kv('Plano atual', planLabel),
                 _kv('Status', life.labelPt),
-                _kv('Valor', sub?.amountLabel ?? _catalogValue(sub, store)),
+                _kv('Valor', sub?.amountLabel ?? '—'),
                 _kv(
-                  'Data de início',
-                  _fmt(df, sub?.startedAt ?? store.expiresAt),
+                  'Expiração / próxima renovação',
+                  _fmt(df, store.expiresAt ?? sub?.nextBillingAt ?? sub?.trialEndsAt),
                 ),
                 _kv(
-                  'Próxima cobrança',
-                  _fmt(df, sub?.nextBillingAt ?? store.expiresAt),
+                  'Renovação automática',
+                  store.source == 'revenuecat'
+                      ? (store.willRenew ? 'Sim' : 'Não')
+                      : '—',
+                ),
+                _kv(
+                  'Tipo de período',
+                  store.periodType ??
+                      (life == SubscriptionLifecycle.trial ? 'trial' : '—'),
                 ),
                 _kv(
                   'Período gratuito',
-                  sub?.trialUsed == true || life == SubscriptionLifecycle.trial
-                      ? '7 dias'
-                      : 'Não iniciado',
+                  store.periodType == 'trial' ||
+                          life == SubscriptionLifecycle.trial
+                      ? 'Teste da loja ou 7 dias'
+                      : (sub?.trialUsed == true ? 'Já utilizado' : '—'),
                 ),
                 _kv(
                   'Término do teste gratuito',
-                  _fmt(df, sub?.trialEndsAt),
+                  _fmt(df, sub?.trialEndsAt ??
+                      (store.periodType == 'trial' ? store.expiresAt : null)),
                 ),
-                _kv(
-                  'Forma de contratação',
-                  _sourceLabel(sub, store),
-                ),
+                _kv('Forma de contratação', _sourceLabel(sub, store)),
                 _kv(
                   'Plataforma utilizada',
-                  sub?.platformLabel ?? 'Ainda não contratado na loja',
+                  _storeLabel(store.store) ??
+                      sub?.platformLabel ??
+                      '—',
                 ),
+                _kv('Produto', store.productId ?? sub?.productId ?? '—'),
               ]),
               const SizedBox(height: 20),
               SizedBox(
                 height: 50,
                 child: FilledButton(
-                  onPressed: () => _manage(context),
+                  onPressed: () => _manage(context, store),
                   child: const Text('Gerenciar assinatura'),
                 ),
               ),
@@ -122,20 +132,15 @@ class MySubscriptionScreen extends ConsumerWidget {
     return 'Premium';
   }
 
-  String _catalogValue(SubscriptionRecord? sub, PremiumStatus store) {
-    if (sub?.plan == CatalogPlan.monthly) {
-      return PlanCatalog.monthly.fallbackPriceLabel ?? '—';
-    }
-    if (sub?.plan == CatalogPlan.quarterly) {
-      return PlanCatalog.quarterly.fallbackPriceLabel ?? '—';
-    }
-    if (store.plan == 'monthly') {
-      return PlanCatalog.monthly.fallbackPriceLabel ?? '—';
-    }
-    if (store.plan == 'quarterly') {
-      return PlanCatalog.quarterly.fallbackPriceLabel ?? '—';
-    }
-    return '—';
+  String? _storeLabel(String? store) {
+    return switch ((store ?? '').toLowerCase()) {
+      'playstore' || 'play_store' => 'Google Play',
+      'appstore' || 'app_store' => 'Apple App Store',
+      'amazon' => 'Amazon',
+      'rcbilling' || 'rc_billing' => 'RevenueCat',
+      '' => null,
+      _ => store,
+    };
   }
 
   String _sourceLabel(SubscriptionRecord? sub, PremiumStatus store) {
@@ -143,8 +148,9 @@ class MySubscriptionScreen extends ConsumerWidget {
       return 'Teste gratuito no aplicativo';
     }
     if (store.plan == 'coupon' || sub?.source == 'coupon') return 'Cupom';
-    if (AppConfig.billingConfigured) return 'Loja do aplicativo (RevenueCat)';
-    return 'Ainda não contratado';
+    if (store.source == 'revenuecat') return 'Loja (RevenueCat)';
+    if (AppConfig.billingConfigured) return 'Loja do aplicativo (pendente)';
+    return '—';
   }
 
   String _fmt(DateFormat df, DateTime? d) => d == null ? '—' : df.format(d.toLocal());
@@ -173,19 +179,22 @@ class MySubscriptionScreen extends ConsumerWidget {
     );
   }
 
-  Future<void> _manage(BuildContext context) async {
-    final uri = Theme.of(context).platform == TargetPlatform.iOS
-        ? Uri.parse('https://apps.apple.com/account/subscriptions')
-        : Uri.parse('https://play.google.com/store/account/subscriptions');
-    if (AppConfig.paymentsEnabled) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-      return;
-    }
-    if (!context.mounted) return;
+  Future<void> _manage(BuildContext context, PremiumStatus store) async {
+    final fromRc = store.managementUrl;
+    final fallback = Theme.of(context).platform == TargetPlatform.iOS
+        ? 'https://apps.apple.com/account/subscriptions'
+        : 'https://play.google.com/store/account/subscriptions';
+    final uri = Uri.tryParse(
+      (fromRc != null && fromRc.startsWith('http')) ? fromRc : fallback,
+    );
+    if (uri == null) return;
+    final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
+    if (opened || !context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text(
-          'A gestão na loja será liberada quando a cobrança real estiver ativa.',
+          'Abra as assinaturas na Google Play ou na App Store para cancelar. '
+          'O app não cancela pela própria interface.',
         ),
       ),
     );
@@ -198,16 +207,19 @@ class MySubscriptionScreen extends ConsumerWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            status.isPremium
-                ? 'Compras restauradas.'
-                : 'Nenhuma compra encontrada nesta loja.',
+            BillingErrorMapper.restoreMessage(foundPremium: status.isPremium),
           ),
         ),
       );
     } catch (e) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Não foi possível restaurar: $e')),
+        SnackBar(
+          content: Text(BillingErrorMapper.toUserMessage(
+            e,
+            fallback: 'Não foi possível restaurar as compras agora.',
+          )),
+        ),
       );
     }
   }

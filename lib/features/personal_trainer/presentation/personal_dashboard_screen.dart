@@ -10,6 +10,7 @@ import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/app_icon_image.dart';
+import '../../../core/widgets/app_states.dart';
 import '../../../core/widgets/feature_icon_card.dart';
 import '../../../models/app_user.dart';
 import '../../accompaniment/presentation/accompaniment_feature_grids.dart';
@@ -120,10 +121,12 @@ class _PersonalDashboardScreenState
     final wide = MediaQuery.sizeOf(context).width >= 900;
 
     final body = studentsAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, __) => const Center(
-          child: Text('Não consegui carregar os alunos.',
-              style: TextStyle(color: AppColors.textSecondary))),
+      loading: () => const AppLoading(message: 'Carregando alunas…'),
+      error: (_, __) => AppErrorState(
+        title: 'Não consegui carregar as alunas',
+        message: 'Verifique a internet e tente novamente.',
+        onRetry: () => ref.invalidate(ptStudentsProvider(trainer.id)),
+      ),
       data: (students) {
         final filtered = students.where((s) {
           if (_query.trim().isEmpty) return true;
@@ -152,7 +155,7 @@ class _PersonalDashboardScreenState
 
     if (!wide) {
       return Scaffold(
-        backgroundColor: const Color(0xFF0E0E14),
+        backgroundColor: AppColors.background,
         appBar: PremiumAppBar(
           title: 'Central da Personal',
           actions: [
@@ -212,8 +215,9 @@ class _PersonalDashboardScreenState
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0E0E14),
-      body: Row(
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: Row(
         children: [
           NavigationRail(
             extended: true,
@@ -310,6 +314,7 @@ class _PersonalDashboardScreenState
           Expanded(child: body),
         ],
       ),
+      ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: AppColors.primary,
         onPressed: () => _novoAluno(context, ref, trainer.id),
@@ -379,7 +384,7 @@ class _PersonalBody extends ConsumerWidget {
           padding: const EdgeInsets.fromLTRB(24, 20, 24, 100),
           children: [
             _AmandaProfessionalHeader(
-              trainerFirstName: trainer.name.split(' ').first,
+              trainerFirstName: trainer.firstName,
               trainerName: trainer.name,
               isAdmin: role == UserRole.admin,
               onOpenLibrary: onOpenLibrary,
@@ -826,7 +831,11 @@ class _AmandaProfessionalHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Olá, ${trainerName.trim().isEmpty ? trainerFirstName : trainerName}',
+                  trainerName.trim().isEmpty && trainerFirstName.trim().isEmpty
+                      ? 'Olá!'
+                      : 'Olá, ${trainerName.trim().isEmpty ? trainerFirstName : trainerName}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -991,6 +1000,8 @@ class _StudentRow extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(student.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w700)),

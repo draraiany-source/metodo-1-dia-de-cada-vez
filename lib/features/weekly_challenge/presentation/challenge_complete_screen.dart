@@ -66,6 +66,14 @@ class _ChallengeCompleteScreenState extends State<ChallengeCompleteScreen>
               padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
               child: Column(
                 children: [
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                      tooltip: 'Fechar',
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.close, color: Colors.white),
+                    ),
+                  ),
                   const Spacer(),
                   LilyImage(
                     asset: LilyAssets.trofeu,

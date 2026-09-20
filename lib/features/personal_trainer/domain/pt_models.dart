@@ -732,6 +732,7 @@ class StudentAnamnesis {
     this.attentionLevel = '',
     this.attentionReasons = const [],
     this.updatedAt,
+    this.createdAt,
   });
 
   final String studentId;
@@ -756,6 +757,7 @@ class StudentAnamnesis {
   final String attentionLevel;
   final List<String> attentionReasons;
   final DateTime? updatedAt;
+  final DateTime? createdAt;
 
   Map<String, dynamic> toMap() => {
         'studentId': studentId,
@@ -808,6 +810,7 @@ class StudentAnamnesis {
           (m['attentionReasons'] as List?)?.map((e) => '$e').toList() ??
               const [],
       updatedAt: DateTime.tryParse(m['updatedAt'] as String? ?? ''),
+      createdAt: DateTime.tryParse(m['createdAt'] as String? ?? ''),
     );
   }
 }

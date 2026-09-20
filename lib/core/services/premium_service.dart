@@ -17,20 +17,87 @@ class PremiumStatus {
     required this.isPremium,
     this.plan,
     this.expiresAt,
+    this.willRenew = false,
+    this.periodType,
+    this.store,
+    this.managementUrl,
+    this.productId,
+    this.source = 'none',
   });
 
   final bool isPremium;
-  final String? plan; // 'monthly' | 'yearly' | 'coupon' | ...
+  final String? plan; // 'monthly' | 'quarterly' | 'yearly' | 'trial' | 'coupon'
   final DateTime? expiresAt;
+  final bool willRenew;
+  final String? periodType;
+  final String? store;
+  final String? managementUrl;
+  final String? productId;
+  final String source;
 
   static const free = PremiumStatus(isPremium: false);
 
-  PremiumStatus copyWith({bool? isPremium, String? plan, DateTime? expiresAt}) =>
+  PremiumStatus copyWith({
+    bool? isPremium,
+    String? plan,
+    DateTime? expiresAt,
+    bool? willRenew,
+    String? periodType,
+    String? store,
+    String? managementUrl,
+    String? productId,
+    String? source,
+  }) =>
       PremiumStatus(
         isPremium: isPremium ?? this.isPremium,
         plan: plan ?? this.plan,
         expiresAt: expiresAt ?? this.expiresAt,
+        willRenew: willRenew ?? this.willRenew,
+        periodType: periodType ?? this.periodType,
+        store: store ?? this.store,
+        managementUrl: managementUrl ?? this.managementUrl,
+        productId: productId ?? this.productId,
+        source: source ?? this.source,
       );
+}
+
+/// Preço/pacote vindo da offering do RevenueCat (não hardcoded).
+class StorePackageQuote {
+  const StorePackageQuote({
+    required this.planId,
+    required this.productId,
+    required this.priceString,
+    this.hasFreeTrial = false,
+    this.introPriceString,
+  });
+
+  final String planId;
+  final String productId;
+  final String priceString;
+  final bool hasFreeTrial;
+  final String? introPriceString;
+}
+
+class StoreCatalog {
+  const StoreCatalog({
+    this.offeringId,
+    this.monthly,
+    this.quarterly,
+    this.yearly,
+  });
+
+  final String? offeringId;
+  final StorePackageQuote? monthly;
+  final StorePackageQuote? quarterly;
+  final StorePackageQuote? yearly;
+
+  static const empty = StoreCatalog();
+
+  StorePackageQuote? quoteFor(String planId) => switch (planId) {
+        'yearly' || 'anual' => yearly,
+        'quarterly' || 'trimestral' => quarterly,
+        _ => monthly,
+      };
 }
 
 /// Contrato de billing. Trocar a implementação por RevenueCat em produção
@@ -39,6 +106,7 @@ abstract class PremiumService {
   Future<PremiumStatus> current();
   Future<PremiumStatus> subscribe(String planId);
   Future<PremiumStatus> restore();
+  Future<StoreCatalog> loadStoreCatalog() async => StoreCatalog.empty;
 }
 
 /// Erro explícito quando a loja ainda não está ligada — a UI mostra a
@@ -165,6 +233,9 @@ class LocalPremiumService implements PremiumService {
 
   @override
   Future<PremiumStatus> restore() => current();
+
+  @override
+  Future<StoreCatalog> loadStoreCatalog() async => StoreCatalog.empty;
 }
 
 /// Lê `isPremium` + `premiumExpiresAt` do Firestore (cupons / sync server-side).
@@ -214,6 +285,9 @@ class FirestorePremiumService implements PremiumService {
 
   @override
   Future<PremiumStatus> restore() => current();
+
+  @override
+  Future<StoreCatalog> loadStoreCatalog() async => StoreCatalog.empty;
 }
 
 /// RevenueCat (Play Billing / StoreKit) + OR com status Firestore (cupons).
@@ -256,7 +330,13 @@ class RevenueCatPremiumService implements PremiumService {
 
   PremiumStatus _fromCustomerInfo(CustomerInfo info) {
     final ent = info.entitlements.all[AppConfig.premiumEntitlement];
-    if (ent == null || !ent.isActive) return PremiumStatus.free;
+    if (ent == null || !ent.isActive) {
+      return PremiumStatus(
+        isPremium: false,
+        managementUrl: info.managementURL,
+        source: 'revenuecat',
+      );
+    }
     DateTime? exp;
     if (ent.expirationDate != null) {
       exp = DateTime.tryParse(ent.expirationDate!);
@@ -270,10 +350,38 @@ class RevenueCatPremiumService implements PremiumService {
       plan = 'quarterly';
     } else if (productId.contains('mensal') || productId.contains('monthly')) {
       plan = 'monthly';
+    } else if (ent.periodType == PeriodType.trial) {
+      plan = 'trial';
     } else {
       plan = productId;
     }
-    return PremiumStatus(isPremium: true, plan: plan, expiresAt: exp);
+    return PremiumStatus(
+      isPremium: true,
+      plan: plan,
+      expiresAt: exp,
+      willRenew: ent.willRenew,
+      periodType: ent.periodType.name,
+      store: ent.store.name,
+      managementUrl: info.managementURL,
+      productId: productId,
+      source: 'revenuecat',
+    );
+  }
+
+  /// Liga o UID Firebase ao appUserID do RevenueCat (restore em outro aparelho).
+  static Future<void> syncAppUser(String? uid) async {
+    if (!AppConfig.billingConfigured || kIsWeb) return;
+    await ensureConfigured();
+    if (!_configured) return;
+    try {
+      if (uid == null || uid.isEmpty) {
+        await Purchases.logOut();
+      } else {
+        await Purchases.logIn(uid);
+      }
+    } catch (e) {
+      debugPrint('RevenueCat syncAppUser: $e');
+    }
   }
 
   Future<PremiumStatus> _firestoreStatus() async {
@@ -291,10 +399,17 @@ class RevenueCatPremiumService implements PremiumService {
     } else {
       exp = a.expiresAt ?? b.expiresAt;
     }
+    final rc = a.source == 'revenuecat' ? a : (b.source == 'revenuecat' ? b : a);
     return PremiumStatus(
       isPremium: true,
       plan: a.plan ?? b.plan,
       expiresAt: exp,
+      willRenew: rc.willRenew,
+      periodType: rc.periodType ?? a.periodType ?? b.periodType,
+      store: rc.store ?? a.store ?? b.store,
+      managementUrl: a.managementUrl ?? b.managementUrl,
+      productId: a.productId ?? b.productId,
+      source: rc.source,
     );
   }
 
@@ -320,41 +435,86 @@ class RevenueCatPremiumService implements PremiumService {
     };
   }
 
+  Package? _packageForPlan(Offerings offerings, String planId) {
+    final current = offerings.current ??
+        offerings.all[AppConfig.defaultOffering] ??
+        (offerings.all.isEmpty ? null : offerings.all.values.first);
+    if (current == null) return null;
+    final wanted = _productIdFor(planId);
+    Package? byType = switch (planId) {
+      'yearly' || 'anual' => current.annual,
+      'quarterly' || 'trimestral' => current.threeMonth,
+      _ => current.monthly,
+    };
+    if (byType != null) return byType;
+    for (final pkg in current.availablePackages) {
+      if (pkg.storeProduct.identifier == wanted) return pkg;
+    }
+    return null;
+  }
+
+  StorePackageQuote _quoteFrom(Package pkg, String planId) {
+    final product = pkg.storeProduct;
+    final intro = product.introductoryPrice;
+    final trial = intro != null && intro.price == 0;
+    return StorePackageQuote(
+      planId: planId,
+      productId: product.identifier,
+      priceString: product.priceString,
+      hasFreeTrial: trial,
+      introPriceString: intro?.priceString,
+    );
+  }
+
+  @override
+  Future<StoreCatalog> loadStoreCatalog() async {
+    if (!AppConfig.billingConfigured || kIsWeb) return StoreCatalog.empty;
+    try {
+      await _ensureConfigured();
+      final offerings = await Purchases.getOfferings();
+      final monthly = _packageForPlan(offerings, 'monthly');
+      final quarterly = _packageForPlan(offerings, 'quarterly');
+      final yearly = _packageForPlan(offerings, 'yearly');
+      return StoreCatalog(
+        offeringId: offerings.current?.identifier,
+        monthly: monthly == null ? null : _quoteFrom(monthly, 'monthly'),
+        quarterly:
+            quarterly == null ? null : _quoteFrom(quarterly, 'quarterly'),
+        yearly: yearly == null ? null : _quoteFrom(yearly, 'yearly'),
+      );
+    } catch (e) {
+      debugPrint('RevenueCat offerings: $e');
+      return StoreCatalog.empty;
+    }
+  }
+
   @override
   Future<PremiumStatus> subscribe(String planId) async {
-    if (!AppConfig.paymentsEnabled) {
+    if (!AppConfig.storePurchasesAllowed) {
       throw const BillingNotConfiguredException(
-        'Cobrança real desativada (PAYMENTS_ENABLED=false). '
-        'Nenhuma compra foi processada.',
-      );
-    }
-    if (planId == 'yearly' || planId == 'anual') {
-      throw const BillingNotConfiguredException(
-        'Plano anual — em breve. O valor ainda não foi definido.',
+        'Compras da loja desativadas neste build. '
+        'Use BILLING_SANDBOX=true só em teste, ou aguarde autorização de produção. '
+        'Nenhuma cobrança foi processada.',
       );
     }
     await _ensureConfigured();
     final productId = _productIdFor(planId);
 
     try {
-      final products = await Purchases.getProducts([productId]);
-      if (products.isEmpty) {
-        final offerings = await Purchases.getOfferings();
-        final pkg = switch (planId) {
-          'yearly' || 'anual' => offerings.current?.annual,
-          'quarterly' || 'trimestral' => offerings.current?.threeMonth,
-          _ => offerings.current?.monthly,
-        };
-        if (pkg == null) {
-          throw BillingNotConfiguredException(
-            'Produto/oferta "$productId" não encontrado no RevenueCat. '
-            'Confira IDs na Play Console / App Store Connect.',
-          );
-        }
+      final offerings = await Purchases.getOfferings();
+      final pkg = _packageForPlan(offerings, planId);
+      if (pkg != null) {
         final info = await Purchases.purchasePackage(pkg);
         return _merge(_fromCustomerInfo(info), await _firestoreStatus());
       }
 
+      final products = await Purchases.getProducts([productId]);
+      if (products.isEmpty) {
+        throw BillingNotConfiguredException(
+          'Produto/oferta "$productId" não encontrado no RevenueCat. '
+          'Confira a offering default com monthly, three_month e annual.',
+        );
+      }
       final info = await Purchases.purchaseStoreProduct(products.first);
       return _merge(_fromCustomerInfo(info), await _firestoreStatus());
     } on BillingNotConfiguredException {
@@ -416,21 +576,18 @@ class PremiumNotifier extends StateNotifier<PremiumStatus> {
   }
 
   Future<PremiumStatus> subscribe(String planId) async {
-    if (planId == 'yearly' || planId == 'anual') {
+    if (!AppConfig.storePurchasesAllowed) {
       throw const BillingNotConfiguredException(
-        'Plano anual — em breve. O valor ainda não foi definido.',
-      );
-    }
-    if (!AppConfig.paymentsEnabled) {
-      throw const BillingNotConfiguredException(
-        'Cobrança real desativada (PAYMENTS_ENABLED=false). '
-        'Nenhuma compra foi processada.',
+        'Compras da loja desativadas neste build. '
+        'Nenhuma cobrança foi processada.',
       );
     }
     final status = await _service.subscribe(planId);
     state = status;
     return state;
   }
+
+  Future<StoreCatalog> loadStoreCatalog() => _service.loadStoreCatalog();
 
   Future<PremiumStatus> restore() async {
     state = await _service.restore();

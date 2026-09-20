@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 /// Converte erros Firebase (e genéricos) em mensagens amigáveis em PT-BR.
 /// Nunca exponha [toString] cru de [FirebaseException] na UI.
@@ -41,6 +42,13 @@ class FirebaseErrorMapper {
       debugPrint('FirebaseErrorMapper (debug): $error');
     }
     return fallback;
+  }
+
+  static void showSnack(BuildContext context, Object error) {
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(toUserMessage(error))),
+    );
   }
 
   static String? _fromCode(String code, String? message) {

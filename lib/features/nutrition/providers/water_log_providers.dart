@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../domain/nutrition_models.dart';
+
 /// Um gole/registro individual de água no dia.
 @immutable
 class WaterSip {
@@ -46,6 +48,16 @@ class WaterDayState {
 
   /// Compatível com missões/Home (250 ml ≈ 1 copo).
   int get glassesApprox => (totalMl / 250).round().clamp(0, 99);
+
+  int effectiveGoalMl(double? weightKg) =>
+      customGoalMl ?? WaterCalculator.goalMlFor(weightKg);
+
+  int effectiveGoalGlasses(double? weightKg) {
+    final ml = effectiveGoalMl(weightKg);
+    return (ml / WaterCalculator.mlPerGlass)
+        .ceil()
+        .clamp(WaterCalculator.minGoalGlasses, WaterCalculator.maxGoalGlasses);
+  }
 
   List<WaterSip> get newestFirst {
     final list = [...entries]..sort((a, b) => b.at.compareTo(a.at));

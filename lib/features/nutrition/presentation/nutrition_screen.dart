@@ -218,7 +218,8 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
-    final waterGoalGlasses = WaterCalculator.goalGlassesFor(user.currentWeight);
+    final waterDay = ref.watch(waterDayProvider);
+    final waterGoalGlasses = waterDay.effectiveGoalGlasses(user.currentWeight);
     final goal = waterGoalGlasses;
     final glasses = ref.watch(waterLogProvider).clamp(0, goal);
 
@@ -325,8 +326,8 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Meta de ${WaterCalculator.goalMlFor(user.currentWeight)} ml/dia '
-                    '(~35ml por kg${user.currentWeight == null ? ' — cadastre seu peso na calculadora abaixo pra personalizar' : ''})',
+                    'Meta de ${waterDay.effectiveGoalMl(user.currentWeight)} ml/dia '
+                    '(${waterDay.customGoalMl != null ? 'personalizada' : '~35ml por kg'}${user.currentWeight == null && waterDay.customGoalMl == null ? ' — cadastre seu peso na calculadora abaixo pra personalizar' : ''})',
                     style: const TextStyle(
                         color: AppColors.textTertiary, fontSize: 11),
                   ),
@@ -337,7 +338,8 @@ class _NutritionScreenState extends ConsumerState<NutritionScreen> {
                       return Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            final novo = i + 1;
+                            final tapped = i + 1;
+                            final novo = tapped == glasses ? glasses - 1 : tapped;
                             final bateuMeta = glasses < goal && novo >= goal;
                             ref
                                 .read(waterDayProvider.notifier)

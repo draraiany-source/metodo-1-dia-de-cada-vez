@@ -169,6 +169,7 @@ class _AmandaProfileEditScreenState
   }
 
   Future<void> _save() async {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
     setState(() => _saving = true);
     try {
       final formations = _parseFormations();
@@ -335,7 +336,7 @@ class _AmandaProfileEditScreenState
                                 context, Routes.amandaProfile),
                             icon: const Icon(Icons.visibility_outlined,
                                 size: 18),
-                            label: const Text('Ver página'),
+                            label: const Text('Ver como aluna'),
                           ),
                         ],
                       ),
@@ -344,7 +345,7 @@ class _AmandaProfileEditScreenState
                 ),
                 const SizedBox(height: 12),
                 _exp('Identidade e hero', [
-                  _f('fullName', 'Nome'),
+                  _f('fullName', 'Nome', obrigatorio: true),
                   _f('title', 'Título profissional'),
                   _f('location', 'Localização'),
                   _f('quote', 'Frase de destaque'),
@@ -469,7 +470,8 @@ class _AmandaProfileEditScreenState
         ),
       );
 
-  Widget _f(String key, String label, {int maxLines = 1}) {
+  Widget _f(String key, String label,
+      {int maxLines = 1, bool obrigatorio = false}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: TextFormField(
@@ -477,6 +479,9 @@ class _AmandaProfileEditScreenState
         maxLines: maxLines,
         style: const TextStyle(color: Colors.white),
         decoration: _dec(label),
+        validator: obrigatorio
+            ? (v) => (v ?? '').trim().isEmpty ? 'Campo obrigatório.' : null
+            : null,
       ),
     );
   }

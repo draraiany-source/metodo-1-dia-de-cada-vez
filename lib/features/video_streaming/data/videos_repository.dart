@@ -31,10 +31,10 @@ class VideosFetchException implements Exception {
 /// Busca metadados de vídeo (público) e resolve URL de streaming.
 ///
 /// Fonte de verdade é a coleção `videos` do Firestore, gerenciada pela Amanda no
-/// Painel da Personal. Enquanto essa coleção estiver **vazia**, cai no conteúdo
-/// semeado em `assets/content/videos_biblioteca.json`, para a área de Vídeos
-/// nunca aparecer em branco numa instalação nova. Assim que existir 1 documento
-/// no Firestore, o seed deixa de ser usado.
+/// Painel da Personal. O seed em `assets/content/videos_biblioteca.json` entra
+/// só para ids que ainda não existem no Firestore, para a área não ficar sem
+/// os vídeos novos do catálogo. Documento existente (título, ordem, ativo)
+/// sempre ganha do seed.
 class VideosRepository {
   static const String seedAssetPath = 'assets/content/videos_biblioteca.json';
 
@@ -100,7 +100,7 @@ class VideosRepository {
         }
       }
       out.sort((a, b) => a.order.compareTo(b.order));
-      return out;
+      return _mesclarSeedAusente(out, soAtivos: true);
     } catch (e) {
       try {
         final all = await FirebaseFirestore.instance.collection('videos').get();
@@ -114,7 +114,9 @@ class VideosRepository {
           }
         }
         out.sort((a, b) => a.order.compareTo(b.order));
-        if (out.isNotEmpty) return out;
+        if (out.isNotEmpty) {
+          return _mesclarSeedAusente(out, soAtivos: true);
+        }
       } catch (_) {/* segue para o seed / throw amigável */}
 
       // Offline numa instalação nova: melhor mostrar o conteúdo embutido do que
@@ -136,15 +138,46 @@ class VideosRepository {
 
   Future<List<VideoContent>> _seedSeColecaoVazia() async {
     try {
-      final todos = await FirebaseFirestore.instance
-          .collection('videos')
-          .limit(1)
-          .get();
-      // Já existe conteúdo gerenciado pela Amanda (só está despublicado):
-      // respeitar a decisão dela e mostrar a lista vazia.
-      if (todos.docs.isNotEmpty) return const [];
+      final todos = await FirebaseFirestore.instance.collection('videos').get();
+      if (todos.docs.isNotEmpty) {
+        final atuais = <VideoContent>[];
+        for (final d in todos.docs) {
+          try {
+            atuais.add(VideoContent.fromMap(d.id, d.data()));
+          } catch (e) {
+            debugPrint('Video parse falhou ${d.id}: $e');
+          }
+        }
+        final mesclado = await _mesclarSeedAusente(atuais, soAtivos: true);
+        return mesclado.where((v) => v.active).toList();
+      }
     } catch (_) {/* na dúvida, mostra o seed */}
     return loadSeed();
+  }
+
+  /// Inclui no catálogo itens do seed cujo id ainda não existe no Firestore.
+  ///
+  /// Não sobrescreve documento existente (título, ordem, ativo/inativo e URL
+  /// editados pela Personal/Admin continuam valendo). Se a Amanda excluir um
+  /// item semeado, ele volta a aparecer até o id ser gravado de novo no CMS —
+  /// por isso a exclusão definitiva de um vídeo do seed deve ser feita
+  /// despublicando no painel (grava `active: false` no Firestore).
+  Future<List<VideoContent>> _mesclarSeedAusente(
+    List<VideoContent> atuais, {
+    required bool soAtivos,
+  }) async {
+    final seed = await loadSeed();
+    if (seed.isEmpty) return atuais;
+    final ids = atuais.map((v) => v.id).toSet();
+    final extra = seed.where((s) {
+      if (ids.contains(s.id)) return false;
+      if (soAtivos && !s.active) return false;
+      return true;
+    });
+    if (extra.isEmpty) return atuais;
+    final out = [...atuais, ...extra];
+    out.sort((a, b) => a.order.compareTo(b.order));
+    return out;
   }
 
   /// Lista completa (ativos + desativados) para o CMS / admin.
@@ -164,7 +197,7 @@ class VideosRepository {
         }
       }
       out.sort((a, b) => a.order.compareTo(b.order));
-      return out;
+      return _mesclarSeedAusente(out, soAtivos: false);
     } catch (e) {
       final seed = await loadSeed();
       if (seed.isNotEmpty) return seed;

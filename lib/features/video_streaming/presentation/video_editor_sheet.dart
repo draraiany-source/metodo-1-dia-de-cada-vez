@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/youtube_launch.dart';
 import '../../../core/utils/youtube_url.dart';
 import '../data/videos_admin_repository.dart';
 import '../domain/video_models.dart';
@@ -280,7 +281,7 @@ class _VideoEditorSheetState extends ConsumerState<_VideoEditorSheet> {
                   keyboardType: TextInputType.url,
                   autocorrect: false,
                   decoration: InputDecoration(
-                    hintText: 'https://www.youtube.com/watch?v=...',
+                    hintText: 'https://youtube.com/shorts/... ou watch?v=...',
                     suffixIcon: IconButton(
                       tooltip: 'Colar',
                       icon: const Icon(Icons.content_paste_rounded, size: 20),
@@ -297,9 +298,26 @@ class _VideoEditorSheetState extends ConsumerState<_VideoEditorSheet> {
                 ),
                 const SizedBox(height: 8),
                 const _Dica(
-                  'No YouTube, marque o vídeo como “Não listado”. Assim ele não '
-                  'aparece nas buscas, mas toca dentro do app. “Privado” não funciona.',
+                  'Aceita Shorts (youtube.com/shorts/ID), watch?v=, youtu.be e '
+                  'embed. No YouTube, use “Não listado” ou “Público”. “Privado” '
+                  'não toca no app.',
                 ),
+                if (YoutubeUrl.extractVideoId(_url.text) != null) ...[
+                  const SizedBox(height: 10),
+                  OutlinedButton.icon(
+                    onPressed: () {
+                      YoutubeLaunch.open(
+                        context,
+                        _url.text.trim(),
+                        title: _titulo.text.trim().isEmpty
+                            ? 'Prévia do vídeo'
+                            : _titulo.text.trim(),
+                      );
+                    },
+                    icon: const Icon(Icons.play_circle_outline, size: 18),
+                    label: const Text('Visualizar antes de publicar'),
+                  ),
+                ],
                 const SizedBox(height: 20),
 
                 _Rotulo('Capa'),
