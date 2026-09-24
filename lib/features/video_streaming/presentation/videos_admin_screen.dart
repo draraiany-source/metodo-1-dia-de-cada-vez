@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/youtube_launch.dart';
@@ -16,7 +17,17 @@ import 'video_editor_sheet.dart';
 /// título e descrição, escolher categoria, arrastar para reordenar, editar,
 /// publicar/despublicar e excluir.
 class VideosAdminScreen extends ConsumerStatefulWidget {
-  const VideosAdminScreen({super.key});
+  const VideosAdminScreen({
+    super.key,
+    this.onlyCategory,
+    this.title = 'Biblioteca de Vídeos',
+    this.fabLabel = 'Novo vídeo',
+  });
+
+  /// Quando preenchida, o painel gerencia só essa categoria (ex.: Meditação).
+  final VideoCategory? onlyCategory;
+  final String title;
+  final String fabLabel;
 
   @override
   ConsumerState<VideosAdminScreen> createState() => _VideosAdminScreenState();
@@ -38,6 +49,7 @@ class _VideosAdminScreenState extends ConsumerState<VideosAdminScreen> {
     final salvo = await mostrarEditorDeVideo(
       context,
       ordemSugerida: ordemSugerida,
+      categoriaFixa: widget.onlyCategory,
     );
     if (salvo != null) {
       _recarregar();
@@ -58,8 +70,10 @@ class _VideosAdminScreenState extends ConsumerState<VideosAdminScreen> {
       final ok = await confirmDeactivate(
         context,
         title: 'Despublicar “${video.name}”?',
-        message: 'O vídeo sai da área de Vídeos das alunas, mas continua aqui '
-            'no seu painel para você republicar quando quiser.',
+        message: widget.onlyCategory == VideoCategory.meditacao
+            ? 'A meditação some da área das alunas, mas continua aqui no painel.'
+            : 'O vídeo sai da área de Vídeos das alunas, mas continua aqui '
+                'no seu painel para você republicar quando quiser.',
         confirmLabel: 'Despublicar',
       );
       if (!ok) return;
@@ -120,6 +134,13 @@ class _VideosAdminScreenState extends ConsumerState<VideosAdminScreen> {
     }
   }
 
+  List<VideoContent> _filtrar(List<VideoContent> lista) {
+    if (widget.onlyCategory != null) {
+      return lista.where((v) => v.category == widget.onlyCategory).toList();
+    }
+    return lista.where((v) => v.category.isVideoLibrary).toList();
+  }
+
   void _aviso(String texto) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(texto)));
@@ -131,8 +152,9 @@ class _VideosAdminScreenState extends ConsumerState<VideosAdminScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Biblioteca de Vídeos'),
+      appBar: PremiumAppBar(
+        title: widget.title,
+        showStaffSignOut: true,
         actions: [
           if (_salvandoOrdem)
             const Padding(
@@ -150,9 +172,9 @@ class _VideosAdminScreenState extends ConsumerState<VideosAdminScreen> {
       floatingActionButton: videosAsync.maybeWhen(
         data: (lista) => FloatingActionButton.extended(
           backgroundColor: AppColors.primary,
-          onPressed: () => _novo(lista.length),
+          onPressed: () => _novo(_filtrar(lista).length),
           icon: const Icon(Icons.add),
-          label: const Text('Novo vídeo'),
+          label: Text(widget.fabLabel),
         ),
         orElse: () => null,
       ),
@@ -186,8 +208,10 @@ class _VideosAdminScreenState extends ConsumerState<VideosAdminScreen> {
             ),
           ),
           data: (lista) {
-            final videos = _ordemLocal ?? lista;
-            if (videos.isEmpty) return const _VazioAdmin();
+            final videos = _ordemLocal ?? _filtrar(lista);
+            if (videos.isEmpty) {
+              return _VazioAdmin(meditacao: widget.onlyCategory == VideoCategory.meditacao);
+            }
 
             return Column(
               children: [
@@ -255,13 +279,14 @@ class _CabecalhoAdmin extends StatelessWidget {
 }
 
 class _VazioAdmin extends StatelessWidget {
-  const _VazioAdmin();
+  const _VazioAdmin({this.meditacao = false});
+  final bool meditacao;
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Padding(
-        padding: EdgeInsets.all(32),
+        padding: const EdgeInsets.all(32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -269,7 +294,7 @@ class _VazioAdmin extends StatelessWidget {
                 size: 52, color: AppColors.textTertiary),
             SizedBox(height: 16),
             Text(
-              'Nenhum vídeo ainda',
+              meditacao ? 'Nenhuma meditação ainda' : 'Nenhum vídeo ainda',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
@@ -277,8 +302,10 @@ class _VazioAdmin extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              'Toque em “Novo vídeo”, cole o link do YouTube e escreva o título. '
-              'Só isso já publica na área de Vídeos.',
+              meditacao
+                  ? 'Toque em “Nova meditação”, cole o Short do YouTube e publique.'
+                  : 'Toque em “Novo vídeo”, cole o link do YouTube e escreva o título. '
+                      'Só isso já publica na área de Vídeos.',
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: AppColors.textSecondary, fontSize: 13, height: 1.4),

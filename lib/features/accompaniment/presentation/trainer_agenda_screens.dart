@@ -26,6 +26,7 @@ class TrainerAgendaScreen extends ConsumerWidget {
     return Scaffold(
       appBar: PremiumAppBar(
         title: 'Agenda da Personal',
+        showStaffSignOut: true,
         actions: [
           IconButton(
             tooltip: 'Disponibilidade',
@@ -182,7 +183,10 @@ class _TrainerAvailabilityScreenState
     final trainer = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final avail = ref.watch(trainerAvailabilityProvider(trainer.id));
     return Scaffold(
-      appBar: const PremiumAppBar(title: 'Disponibilidade'),
+      appBar: const PremiumAppBar(
+        title: 'Disponibilidade',
+        showStaffSignOut: true,
+      ),
       body: avail.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, __) => const Center(child: Text('Erro')),
@@ -261,7 +265,10 @@ class GoogleCalendarSettingsScreen extends ConsumerWidget {
     final trainer = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
     final status = ref.watch(calendarStatusProvider(trainer.id));
     return Scaffold(
-      appBar: const PremiumAppBar(title: 'Google Calendar'),
+      appBar: const PremiumAppBar(
+        title: 'Google Calendar',
+        showStaffSignOut: true,
+      ),
       body: AppPage(
         child: status.when(
           loading: () => const Center(child: CircularProgressIndicator()),

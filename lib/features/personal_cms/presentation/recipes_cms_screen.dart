@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../pdf_recipes/domain/pdf_recipe_models.dart';
 import '../../pdf_recipes/providers/pdf_recipe_providers.dart';
@@ -186,7 +187,10 @@ class RecipesCmsScreen extends ConsumerWidget {
     final async = ref.watch(pdfRecipesAdminStreamProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Receitas')),
+      appBar: const PremiumAppBar(
+        title: 'Receitas',
+        showStaffSignOut: true,
+      ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: AppColors.primary,
         onPressed: () => _adicionar(context, ref),

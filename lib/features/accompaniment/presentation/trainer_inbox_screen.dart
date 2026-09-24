@@ -35,7 +35,10 @@ class _TrainerInboxScreenState extends ConsumerState<TrainerInboxScreen> {
     final students = ref.watch(ptStudentsProvider(trainer.id)).valueOrNull ?? [];
 
     return Scaffold(
-      appBar: const PremiumAppBar(title: 'Mensagens'),
+      appBar: const PremiumAppBar(
+        title: 'Mensagens',
+        showStaffSignOut: true,
+      ),
       body: inbox.when(
         loading: () => const AppLoading(message: 'Carregando mensagens…'),
         error: (_, __) => AppErrorState(

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/assets/app_icons.dart';
 import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/auth/session_sign_out.dart';
+import '../../../core/auth/staff_sign_out_button.dart';
 import '../../../core/auth/user_role.dart';
 import '../../../core/router/app_navigation.dart';
 import '../../../core/router/app_router.dart';
@@ -154,51 +155,165 @@ class _PersonalDashboardScreenState
     );
 
     if (!wide) {
-      return Scaffold(
+      return PopScope(
+        // Raiz da Personal: gesto Voltar do Android NÃO abre Aluna/Admin.
+        canPop: false,
+        child: Scaffold(
+          backgroundColor: AppColors.background,
+          appBar: PremiumAppBar(
+            title: 'Central da Personal',
+            isRoleRoot: true,
+            showBack: false,
+            actions: [
+              IconButton(
+                icon: AppIconImage(
+                  PersonalAiIcons.areaPersonal,
+                  size: 24,
+                  fallbackIcon: Icons.edit_outlined,
+                ),
+                tooltip: 'Editar Quem Sou Eu',
+                onPressed: () =>
+                    AppNavigation.open(context, Routes.amandaProfileEdit),
+              ),
+              IconButton(
+                icon: AppIconImage(
+                  AppIcons.gallery,
+                  size: 24,
+                  fallbackIcon: Icons.photo_camera_outlined,
+                ),
+                tooltip: 'Fotos da Amanda',
+                onPressed: () =>
+                    AppNavigation.open(context, Routes.amandaAssetsAdmin),
+              ),
+              IconButton(
+                icon: AppIconImage(
+                  AppIcons.workout,
+                  size: 24,
+                  fallbackIcon: Icons.fitness_center,
+                ),
+                tooltip: 'Biblioteca de exercícios',
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) =>
+                        const ExerciseLibraryScreen(isAdmin: true))),
+              ),
+              const StaffSignOutButton(),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+            backgroundColor: AppColors.primary,
+            onPressed: () => _novoAluno(context, ref, trainer.id),
+            icon: const AppIconImage(
+              AppIcons.community,
+              size: 22,
+              fallbackIcon: Icons.person_add_alt,
+            ),
+            label: const Text('Novo aluno'),
+          ),
+          body: body,
+        ),
+      );
+    }
+
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
         backgroundColor: AppColors.background,
-        appBar: PremiumAppBar(
-          title: 'Central da Personal',
-          actions: [
-            IconButton(
-              icon: AppIconImage(
-                PersonalAiIcons.areaPersonal,
-                size: 24,
-                fallbackIcon: Icons.edit_outlined,
+        body: SafeArea(
+          child: Row(
+            children: [
+              NavigationRail(
+                extended: true,
+                backgroundColor: AppColors.surface,
+                selectedIndex: _railIndex,
+                onDestinationSelected: (i) {
+                  setState(() => _railIndex = i);
+                  if (i == 1) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) =>
+                            const ExerciseLibraryScreen(isAdmin: true)));
+                  }
+                },
+                labelType: NavigationRailLabelType.none,
+                minExtendedWidth: 220,
+                leading: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('CONTA LOGADA',
+                          style: TextStyle(
+                              color: AppColors.textSecondary,
+                              fontSize: 11,
+                              letterSpacing: 1.2,
+                              fontWeight: FontWeight.w700)),
+                      const SizedBox(height: 4),
+                      Text(
+                          trainer.name.trim().isEmpty
+                              ? 'Personal'
+                              : trainer.name,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 18)),
+                      const SizedBox(height: 2),
+                      Text(
+                          resolveUserRole(
+                            isPersonalTrainer: trainer.isPersonalTrainer,
+                            isAdmin: trainer.isAdmin,
+                          ).labelPt,
+                          style: const TextStyle(
+                              color: AppColors.secondary,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600)),
+                    ],
+                  ),
+                ),
+                trailing: const StaffSignOutButton(compact: true),
+                destinations: [
+                  NavigationRailDestination(
+                    icon: AppIconImage(
+                      PersonalAiIcons.areaPersonal,
+                      size: 24,
+                      fallbackIcon: Icons.dashboard_outlined,
+                    ),
+                    selectedIcon: AppIconImage(
+                      PersonalAiIcons.areaPersonal,
+                      size: 24,
+                      fallbackIcon: Icons.dashboard_rounded,
+                    ),
+                    label: const Text('Visão geral'),
+                  ),
+                  NavigationRailDestination(
+                    icon: AppIconImage(
+                      AppIcons.workout,
+                      size: 24,
+                      fallbackIcon: Icons.fitness_center_outlined,
+                    ),
+                    selectedIcon: AppIconImage(
+                      AppIcons.workout,
+                      size: 24,
+                      fallbackIcon: Icons.fitness_center,
+                    ),
+                    label: const Text('Exercícios'),
+                  ),
+                  NavigationRailDestination(
+                    icon: AppIconImage(
+                      AppIcons.community,
+                      size: 24,
+                      fallbackIcon: Icons.people_outline,
+                    ),
+                    selectedIcon: AppIconImage(
+                      AppIcons.community,
+                      size: 24,
+                      fallbackIcon: Icons.people,
+                    ),
+                    label: const Text('Alunos'),
+                  ),
+                ],
               ),
-              tooltip: 'Editar Quem Sou Eu',
-              onPressed: () =>
-                  AppNavigation.open(context, Routes.amandaProfileEdit),
-            ),
-            IconButton(
-              icon: AppIconImage(
-                AppIcons.gallery,
-                size: 24,
-                fallbackIcon: Icons.photo_camera_outlined,
-              ),
-              tooltip: 'Fotos da Amanda',
-              onPressed: () =>
-                  AppNavigation.open(context, Routes.amandaAssetsAdmin),
-            ),
-            IconButton(
-              icon: AppIconImage(
-                AppIcons.workout,
-                size: 24,
-                fallbackIcon: Icons.fitness_center,
-              ),
-              tooltip: 'Biblioteca de exercícios',
-              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => const ExerciseLibraryScreen(isAdmin: true))),
-            ),
-            IconButton(
-              icon: AppIconImage(
-                AppIcons.logout,
-                size: 22,
-                fallbackIcon: Icons.logout,
-              ),
-              tooltip: 'Sair da conta',
-              onPressed: () => signOutAndGoToLogin(context, ref),
-            ),
-          ],
+              Expanded(child: body),
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton.extended(
           backgroundColor: AppColors.primary,
@@ -210,120 +325,6 @@ class _PersonalDashboardScreenState
           ),
           label: const Text('Novo aluno'),
         ),
-        body: body,
-      );
-    }
-
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Row(
-        children: [
-          NavigationRail(
-            extended: true,
-            backgroundColor: AppColors.surface,
-            selectedIndex: _railIndex,
-            onDestinationSelected: (i) {
-              setState(() => _railIndex = i);
-              if (i == 1) {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) =>
-                        const ExerciseLibraryScreen(isAdmin: true)));
-              }
-            },
-            labelType: NavigationRailLabelType.none,
-            minExtendedWidth: 220,
-            leading: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('CONTA LOGADA',
-                      style: TextStyle(
-                          color: AppColors.textSecondary,
-                          fontSize: 11,
-                          letterSpacing: 1.2,
-                          fontWeight: FontWeight.w700)),
-                  const SizedBox(height: 4),
-                  Text(
-                      trainer.name.trim().isEmpty ? 'Personal' : trainer.name,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 18)),
-                  const SizedBox(height: 2),
-                  Text(
-                      resolveUserRole(
-                        isPersonalTrainer: trainer.isPersonalTrainer,
-                        isAdmin: trainer.isAdmin,
-                      ).labelPt,
-                      style: const TextStyle(
-                          color: AppColors.secondary,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600)),
-                ],
-              ),
-            ),
-            trailing: IconButton(
-              tooltip: 'Sair da conta',
-              onPressed: () => signOutAndGoToLogin(context, ref),
-              icon: const Icon(Icons.logout, color: AppColors.danger),
-            ),
-            destinations: [
-              NavigationRailDestination(
-                icon: AppIconImage(
-                  PersonalAiIcons.areaPersonal,
-                  size: 24,
-                  fallbackIcon: Icons.dashboard_outlined,
-                ),
-                selectedIcon: AppIconImage(
-                  PersonalAiIcons.areaPersonal,
-                  size: 24,
-                  fallbackIcon: Icons.dashboard_rounded,
-                ),
-                label: const Text('Visão geral'),
-              ),
-              NavigationRailDestination(
-                icon: AppIconImage(
-                  AppIcons.workout,
-                  size: 24,
-                  fallbackIcon: Icons.fitness_center_outlined,
-                ),
-                selectedIcon: AppIconImage(
-                  AppIcons.workout,
-                  size: 24,
-                  fallbackIcon: Icons.fitness_center,
-                ),
-                label: const Text('Exercícios'),
-              ),
-              NavigationRailDestination(
-                icon: AppIconImage(
-                  AppIcons.community,
-                  size: 24,
-                  fallbackIcon: Icons.people_outline,
-                ),
-                selectedIcon: AppIconImage(
-                  AppIcons.community,
-                  size: 24,
-                  fallbackIcon: Icons.people,
-                ),
-                label: const Text('Alunos'),
-              ),
-            ],
-          ),
-          Expanded(child: body),
-        ],
-      ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: AppColors.primary,
-        onPressed: () => _novoAluno(context, ref, trainer.id),
-        icon: const AppIconImage(
-          AppIcons.community,
-          size: 22,
-          fallbackIcon: Icons.person_add_alt,
-        ),
-        label: const Text('Novo aluno'),
       ),
     );
   }

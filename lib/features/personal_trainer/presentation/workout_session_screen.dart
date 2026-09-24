@@ -398,7 +398,10 @@ class _WorkoutSessionScreenState extends ConsumerState<WorkoutSessionScreen> {
       },
       child: Scaffold(
       backgroundColor: AppColors.background,
-      appBar: PremiumAppBar(title: widget.plan.name),
+      appBar: PremiumAppBar(
+        title: widget.plan.name,
+        showStaffSignOut: true,
+      ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),

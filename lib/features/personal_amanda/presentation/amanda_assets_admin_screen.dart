@@ -211,6 +211,7 @@ class AmandaAssetsAdminScreen extends ConsumerWidget {
       backgroundColor: AppColors.background,
       appBar: PremiumAppBar(
         title: 'Fotos da Amanda',
+        showStaffSignOut: true,
         actions: [
           IconButton(
             tooltip: 'Editar textos do perfil',

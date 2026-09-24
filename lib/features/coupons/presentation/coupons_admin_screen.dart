@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../domain/coupon_models.dart';
@@ -115,7 +116,10 @@ class CouponsAdminScreen extends ConsumerWidget {
     final couponsAsync = ref.watch(couponsListProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Cupons (admin) 🎟️')),
+      appBar: const PremiumAppBar(
+        title: 'Cupons (admin) 🎟️',
+        showStaffSignOut: true,
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () => _novoCupom(context, ref),

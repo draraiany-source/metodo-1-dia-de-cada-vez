@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../personal_cms/presentation/cms_confirm.dart';
 import '../data/audio_courses_admin_repository.dart';
@@ -173,7 +174,10 @@ class AudioCoursesAdminScreen extends ConsumerWidget {
     final coursesAsync = ref.watch(audioCoursesProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Cursos em áudio (admin) 🎧')),
+      appBar: const PremiumAppBar(
+        title: 'Cursos em áudio (admin) 🎧',
+        showStaffSignOut: true,
+      ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: AppColors.primary,
         onPressed: () => _novoCurso(context, ref),

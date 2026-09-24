@@ -1,7 +1,7 @@
 name: metodo_1_dia
 description: "MÃƒÂ©todo 1 Dia de Cada Vez Ã¢â‚¬â€ App fitness feminino premium."
 publish_to: "none"
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
@@ -121,9 +121,11 @@ flutter_native_splash:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/
-    # icons_3d/ e icons_3d_pack2/ ficam no disco (debug showcase) mas NAO
-    # entram no APK/AAB de release: zero uso em telas Aluno/Personal/Admin.
+    # NAO declarar assets/images/ (raiz): puxaria icons_3d + icons_3d_pack2
+    # (~50 MB, so showcase/debug). Subpastas usadas ficam explicitas abaixo.
+    - assets/images/logo.svg
+    - assets/images/logo_mark.svg
+    - assets/images/splash.svg
     - assets/images/mascote/
     - assets/images/home/
     - assets/images/treinos/
@@ -140,6 +142,9 @@ flutter:
     - assets/images/referencias/
     - assets/mascot/png/
     - assets/mascot/extras/
+    # assets/icons/ (raiz) inclui PNGs de UI na raiz da pasta.
+    # neon/{navegacao,saude,nutricao,conquistas,perfil} foram movidos para
+    # tools/_excluded_from_bundle/ para nao reentrar no AAB.
     - assets/icons/
     - assets/icons/personal-ai/
     - assets/icons/app/
@@ -151,10 +156,8 @@ flutter:
     - assets/icons/mood/
     - assets/icons/achievements/
     - assets/icons/premium/
-    # neon/{navegacao,saude,nutricao,conquistas,perfil} nao tem referencia
-    # em lib/. Arquivos permanecem no disco e nao entram no bundle.
-    # A pasta neon/ so tem subpastas — declarar a raiz quebra o build.
-    - assets/icons/neon/corrida/icone_neon_de_corrida_e_saude_cardiaca.png
+    # neon/ so tem subpastas — declarar a raiz quebra o build.
+    - assets/icons/neon/corrida/icone_neon_de_corrida_e_saude_cardiaca.jpg
     - assets/icons/neon/treinos/
     - assets/content/
     - assets/content/treinos_catalogo_oficial.json
@@ -164,9 +167,7 @@ flutter:
     - assets/stickers/
     - assets/badges/
     - assets/backgrounds/
-    # assets/illustrations/ (raiz) nÃƒÂ£o ÃƒÂ© declarada: nÃƒÂ£o contÃƒÂ©m arquivos
-    # diretamente, apenas a subpasta banners/ abaixo. Declarar uma pasta
-    # vazia gera "No file or variants found for asset" no build.
+    # assets/illustrations/ (raiz) nao e declarada: so banners/ abaixo.
     - assets/illustrations/banners/
     - assets/onboarding/
     - assets/loading/
@@ -178,14 +179,13 @@ flutter:
     - assets/recipes/
     - assets/habits/
     - assets/challenges/
-    - assets/audio_programs/
     - assets/lily/
     - assets/lily_treinos/
-    # Capas 1:1 dos 117 exercicios do catalogo oficial (treino_001..treino_117).
-    # A subpasta _incoming/ NAO e declarada de proposito: sao candidatas de arte
-    # ainda nao aprovadas e nao devem entrar no bundle.
+    # Capas 1:1 dos 117 exercicios (treino_001..treino_117).
+    # _backup_* e _incoming/ foram movidos para tools/_excluded_from_bundle/.
     - assets/lily_exercicios/
-    - assets/amanda/
+    # NAO declarar assets/amanda/ (raiz): evita originals/ (~105 MB).
+    # App usa so promo/ + optimized/ (+ thumbs/).
     - assets/amanda/promo/
     - assets/amanda/optimized/
     - assets/amanda/thumbs/

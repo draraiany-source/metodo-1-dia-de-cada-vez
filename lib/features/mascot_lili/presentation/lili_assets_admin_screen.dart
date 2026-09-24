@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../personal_cms/presentation/cms_confirm.dart';
 import '../data/lili_assets_admin_repository.dart';
@@ -151,7 +152,10 @@ class LiliAssetsAdminScreen extends ConsumerWidget {
     final assetsAsync = ref.watch(liliAssetsProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Assets da Lili (admin) 🎨')),
+      appBar: const PremiumAppBar(
+        title: 'Assets da Lili (admin) 🎨',
+        showStaffSignOut: true,
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () => _novoAsset(context, ref),

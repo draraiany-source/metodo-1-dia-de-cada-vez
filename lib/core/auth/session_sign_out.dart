@@ -9,11 +9,16 @@ import '../router/app_router.dart';
 ///
 /// Limpa Auth, sessão local, visitante e o cache do stream de perfil,
 /// depois vai para o login sem empilhar tela autenticada.
+/// O Login usa [PopScope] `canPop: false` e o `redirect` do GoRouter
+/// bloqueia rotas protegidas sem sessão — o Voltar do sistema não
+/// reabre Personal/Admin/Aluna após sair.
 Future<void> signOutAndGoToLogin(BuildContext context, WidgetRef ref) async {
   await ref.read(authRepositoryProvider).signOut();
   ref.read(localSessionProvider.notifier).clear();
   await ref.read(guestSessionProvider.notifier).exit();
   ref.invalidate(authStateProvider);
+  ref.invalidate(currentUserProvider);
   if (!context.mounted) return;
+  // Substitui a rota (não empilha). Histórico residual cai no redirect → login.
   context.go(Routes.login);
 }

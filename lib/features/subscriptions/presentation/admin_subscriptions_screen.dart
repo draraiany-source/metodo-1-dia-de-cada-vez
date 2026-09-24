@@ -33,7 +33,10 @@ class _AdminSubscriptionsScreenState
           );
     if (role != UserRole.admin) {
       return const Scaffold(
-        appBar: PremiumAppBar(title: 'Assinaturas'),
+        appBar: PremiumAppBar(
+          title: 'Assinaturas',
+          showStaffSignOut: true,
+        ),
         body: PremiumEmptyOrError(
           message: 'Acesso restrito ao Admin Técnico.',
         ),
@@ -43,7 +46,10 @@ class _AdminSubscriptionsScreenState
     final asyncList = ref.watch(adminSubscriptionsProvider);
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: const PremiumAppBar(title: 'Assinaturas'),
+      appBar: const PremiumAppBar(
+        title: 'Assinaturas',
+        showStaffSignOut: true,
+      ),
       body: asyncList.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => PremiumEmptyOrError(

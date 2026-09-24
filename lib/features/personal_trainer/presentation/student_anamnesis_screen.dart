@@ -153,6 +153,7 @@ class _StudentAnamnesisScreenState
       backgroundColor: AppColors.background,
       appBar: PremiumAppBar(
         title: 'Anamnese',
+        showStaffSignOut: true,
         actions: [
           TextButton(
             onPressed: _saving ? null : _save,

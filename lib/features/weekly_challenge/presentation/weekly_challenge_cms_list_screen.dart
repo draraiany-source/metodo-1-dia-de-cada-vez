@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../personal_cms/presentation/cms_confirm.dart';
 import '../domain/weekly_challenge_models.dart';
@@ -16,8 +17,9 @@ class WeeklyChallengeCmsListScreen extends ConsumerWidget {
     final async = ref.watch(staffWeeklyChallengesProvider);
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Gerenciar Desafios'),
+      appBar: PremiumAppBar(
+        title: 'Gerenciar Desafios',
+        showStaffSignOut: true,
         actions: [
           IconButton(
             tooltip: 'Novo desafio',

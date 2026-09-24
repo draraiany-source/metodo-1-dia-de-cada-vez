@@ -33,36 +33,22 @@
     }
   },
   "hosting": {
-    "public": "build/web",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
+    "redirects": [
       {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
-    "headers": [
-      {
-        "source": "/index.html",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
-          }
-        ]
+        "source": "/privacidade",
+        "destination": "/privacidade.html",
+        "type": 301
       },
       {
-        "source": "**/*.@(js|css|wasm|mp3|png|jpg|jpeg|webp|woff2)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=3600"
-          }
-        ]
+        "source": "/termos",
+        "destination": "/termos.html",
+        "type": 301
       }
     ]
   }

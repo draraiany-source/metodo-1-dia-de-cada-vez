@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../domain/food_database_models.dart';
 import '../providers/food_database_providers.dart';
@@ -159,8 +160,12 @@ class _FoodDatabaseScreenState extends ConsumerState<FoodDatabaseScreen> {
     final foodsAsync = ref.watch(foodDatabaseProvider);
 
     return Scaffold(
-      appBar: AppBar(
-          title: Text(widget.selectMode ? 'Escolher alimento' : 'Banco de alimentos 🍎')),
+      appBar: PremiumAppBar(
+        title: widget.selectMode
+            ? 'Escolher alimento'
+            : 'Banco de alimentos 🍎',
+        showStaffSignOut: widget.isAdmin,
+      ),
       floatingActionButton: widget.isAdmin
           ? FloatingActionButton(
               backgroundColor: AppColors.primary,

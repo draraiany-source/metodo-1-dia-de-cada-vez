@@ -24,6 +24,7 @@ class EvolutionPtScreen extends ConsumerWidget {
       backgroundColor: AppColors.background,
       appBar: PremiumAppBar(
         title: 'Evolução · ${student.name.split(' ').first}',
+        showStaffSignOut: true,
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 12),

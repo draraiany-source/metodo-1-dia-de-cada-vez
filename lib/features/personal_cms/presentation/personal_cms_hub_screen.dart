@@ -2,25 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/auth/session_sign_out.dart';
+import '../../../core/auth/staff_sign_out_button.dart';
 import '../../../core/auth/user_role.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../models/app_user.dart';
-import '../../audio_courses/domain/audio_course_models.dart';
 import '../../audio_courses/providers/audio_course_providers.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../mascot_lili/providers/lili_assets_providers.dart';
 import '../../video_streaming/providers/video_providers.dart';
 import '../../workouts/providers/treino_catalog_providers.dart';
 import 'recipes_cms_screen.dart';
-
-const _meditationCats = {
-  AudioCourseCategory.meditacao,
-  AudioCourseCategory.respiracao,
-  AudioCourseCategory.ansiedade,
-  AudioCourseCategory.sono,
-};
 
 /// Painel amigável da Personal para gerenciar conteúdos do app
 /// (sem precisar do Painel Técnico).
@@ -36,7 +29,10 @@ class PersonalCmsHubScreen extends ConsumerWidget {
     );
     if (!RolePermissions.of(role).canManageContent) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Painel da Personal')),
+        appBar: const PremiumAppBar(
+          title: 'Painel da Personal',
+          showStaffSignOut: true,
+        ),
         body: const Center(
           child: Padding(
             padding: EdgeInsets.all(24),
@@ -64,12 +60,14 @@ class PersonalCmsHubScreen extends ConsumerWidget {
     });
 
     String? audioCounts;
-    String? meditationCounts;
     audiosAsync.whenData((list) {
       audioCounts = '${list.length} cursos';
-      final meds =
-          list.where((c) => _meditationCats.contains(c.category)).length;
-      meditationCounts = '$meds meditações';
+    });
+    final meditationsAdminAsync = ref.watch(meditationsAdminProvider);
+    String? meditationCounts;
+    meditationsAdminAsync.whenData((list) {
+      final published = list.where((v) => v.active).length;
+      meditationCounts = '$published no YouTube';
     });
 
     String? recipeCounts;
@@ -91,8 +89,8 @@ class PersonalCmsHubScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: const Text('Painel da Personal'),
+      appBar: PremiumAppBar(
+        title: 'Painel da Personal',
         actions: [
           if (user.isAdmin)
             IconButton(
@@ -100,11 +98,7 @@ class PersonalCmsHubScreen extends ConsumerWidget {
               icon: const Icon(Icons.admin_panel_settings_outlined),
               onPressed: () => context.push(Routes.admin),
             ),
-          IconButton(
-            tooltip: 'Sair da conta',
-            icon: const Icon(Icons.logout),
-            onPressed: () => signOutAndGoToLogin(context, ref),
-          ),
+          const StaffSignOutButton(),
         ],
       ),
       body: ListView(
@@ -165,7 +159,7 @@ class PersonalCmsHubScreen extends ConsumerWidget {
           _CmsCard(
             icon: Icons.self_improvement_outlined,
             title: 'Meditações',
-            subtitle: meditationCounts ?? 'Calma e programas',
+            subtitle: meditationCounts ?? 'YouTube · Shorts',
             onTap: () => context.push(Routes.personalCmsMeditations),
           ),
           _CmsCard(

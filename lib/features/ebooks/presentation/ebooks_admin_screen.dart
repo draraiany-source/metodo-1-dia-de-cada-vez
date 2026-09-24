@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/auth/user_role.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../data/ebooks_admin_repository.dart';
@@ -136,7 +137,10 @@ class EbooksAdminScreen extends ConsumerWidget {
         UserRole.admin;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('E-books (admin) 📚')),
+      appBar: const PremiumAppBar(
+        title: 'E-books (admin) 📚',
+        showStaffSignOut: true,
+      ),
       floatingActionButton: canWriteEbooks
           ? FloatingActionButton(
               backgroundColor: AppColors.primary,

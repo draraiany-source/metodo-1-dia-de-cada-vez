@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/auth/user_role.dart';
+import '../../../core/config/app_config.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/services/feedback_service.dart';
@@ -228,6 +229,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                       ],
                     ),
+                    if (AppConfig.homologBuildId.isNotEmpty) ...[
+                      const SizedBox(height: 8),
+                      Center(
+                        child: Text(
+                          'v1.0.0+1 · ${AppConfig.homologBuildLabel}',
+                          style: const TextStyle(
+                            color: AppColors.textTertiary,
+                            fontSize: 11,
+                          ),
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),

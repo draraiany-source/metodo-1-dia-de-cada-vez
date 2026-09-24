@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/lily/lily_assets.dart';
 import '../../../core/lily/lily_image.dart';
 import '../../../core/theme/app_colors.dart';
@@ -248,8 +249,9 @@ class _WeeklyChallengeEditorScreenState
     }
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        title: Text(_existing == null ? 'Novo desafio' : 'Editar desafio'),
+      appBar: PremiumAppBar(
+        title: _existing == null ? 'Novo desafio' : 'Editar desafio',
+        showStaffSignOut: true,
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),

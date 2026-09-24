@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import '../../firebase_options.dart';
+
 /// Configuração central de credenciais externas.
 ///
 /// **Nenhuma chave secreta fica aqui.** Os valores são injetados em tempo de
@@ -107,6 +109,16 @@ class AppConfig {
   static const String androidNotificationChannelId = 'metodo1dia_default';
   static const String androidNotificationChannelName = 'Lembretes e motivação';
 
+  /// Carimbo de build de homologação (injetado via `--dart-define=HOMOLOG_BUILD_ID=`).
+  /// Vazio em builds sem o define. Serve para confirmar que o canal/APK não é antigo.
+  static const String homologBuildId =
+      String.fromEnvironment('HOMOLOG_BUILD_ID', defaultValue: '');
+
+  static String get homologBuildLabel {
+    if (homologBuildId.isEmpty) return 'build sem carimbo';
+    return 'homolog $homologBuildId';
+  }
+
   // ---------------------------------------------------------------------------
   // Diagnóstico — usado na tela de Admin/Debug para mostrar o que falta.
   // ---------------------------------------------------------------------------
@@ -118,5 +130,6 @@ class AppConfig {
         'IA (Cloud Function)': aiConfigured,
         'Calorias por foto (Cloud Function)': calorieVisionConfigured,
         'Google Maps': mapsConfigured,
+        'Firebase iOS (não REPLACE_ME)': DefaultFirebaseOptions.iosFirebaseReady,
       };
 }

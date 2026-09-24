@@ -306,6 +306,7 @@ class _WorkoutBuilderScreenState extends ConsumerState<WorkoutBuilderScreen> {
         title: _isEditing
             ? 'Editar treino'
             : 'Treino para ${widget.student.name.split(' ').first}',
+        showStaffSignOut: true,
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 12),

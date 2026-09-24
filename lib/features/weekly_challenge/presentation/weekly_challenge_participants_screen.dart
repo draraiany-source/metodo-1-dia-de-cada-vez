@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../domain/weekly_challenge_models.dart';
 import '../providers/weekly_challenge_providers.dart';
@@ -14,7 +15,10 @@ class WeeklyChallengeParticipantsScreen extends ConsumerWidget {
     final async = ref.watch(challengeParticipantsProvider(challengeId));
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(title: const Text('Participantes')),
+      appBar: const PremiumAppBar(
+        title: 'Participantes',
+        showStaffSignOut: true,
+      ),
       body: async.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(

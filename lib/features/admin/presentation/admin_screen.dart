@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/auth/session_sign_out.dart';
+import '../../../core/auth/staff_sign_out_button.dart';
 import '../../../core/config/app_config.dart';
 import '../../../core/mascot/mascot_config.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_theme.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/router/premium_app_bar.dart';
 import '../../auth/providers/auth_providers.dart';
@@ -25,29 +24,30 @@ class AdminScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(currentUserProvider);
     if (user == null || !user.isAdmin) {
-      return Scaffold(
-        backgroundColor: AppColors.background,
-        appBar: PremiumAppBar(
-          title: 'Painel Técnico',
-          actions: [
-            IconButton(
-              tooltip: 'Sair da conta',
-              icon: const Icon(Icons.logout),
-              onPressed: () => signOutAndGoToLogin(context, ref),
-            ),
-          ],
-        ),
-        body: const Center(
-          child: Padding(
-            padding: EdgeInsets.all(24),
-            child: Text(
-              'Acesso restrito ao Admin Técnico.\n'
-              'Personal e alunos não acessam esta área.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
+      return PopScope(
+        canPop: false,
+        child: Scaffold(
+          backgroundColor: AppColors.background,
+          appBar: PremiumAppBar(
+            title: 'Painel Técnico',
+            isRoleRoot: true,
+            showBack: false,
+            actions: [
+              StaffSignOutButton(),
+            ],
+          ),
+          body: const Center(
+            child: Padding(
+              padding: EdgeInsets.all(24),
+              child: Text(
+                'Acesso restrito ao Admin Técnico.\n'
+                'Personal e alunos não acessam esta área.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
@@ -55,48 +55,40 @@ class AdminScreen extends ConsumerWidget {
       );
     }
 
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        backgroundColor: AppColors.background,
-        appBar: AppBar(
+    return PopScope(
+      // Raiz do Admin: gesto Voltar do Android NÃO abre Aluna/Personal.
+      canPop: false,
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
           backgroundColor: AppColors.background,
-          title: const Text('Painel Técnico'),
-          actions: [
-            IconButton(
-              tooltip: 'Configurações',
-              icon: const Icon(Icons.settings_outlined),
-              onPressed: () => context.push(Routes.settings),
+          appBar: AppBar(
+            backgroundColor: AppColors.background,
+            automaticallyImplyLeading: false,
+            title: const Text('Painel Técnico'),
+            actions: [
+              IconButton(
+                tooltip: 'Configurações',
+                icon: const Icon(Icons.settings_outlined),
+                onPressed: () => context.push(Routes.settings),
+              ),
+              const StaffSignOutButton(),
+            ],
+            bottom: const TabBar(
+              isScrollable: true,
+              indicatorColor: AppColors.primary,
+              tabs: [
+                Tab(text: 'Dashboard'),
+                Tab(text: 'Treinos'),
+              ],
             ),
-            IconButton(
-              tooltip: 'Sair da conta',
-              icon: const Icon(Icons.logout),
-              onPressed: () => signOutAndGoToLogin(context, ref),
-            ),
-          ],
-          bottom: const TabBar(
-            isScrollable: true,
-            indicatorColor: AppColors.primary,
-            tabs: [
-              Tab(text: 'Dashboard'),
-              Tab(text: 'Treinos'),
-              Tab(text: 'Receitas'),
-              Tab(text: 'Desafios'),
+          ),
+          body: TabBarView(
+            children: [
+              _dashboard(context),
+              const AdminTreinosCatalogTab(),
             ],
           ),
-        ),
-        body: TabBarView(
-          children: [
-            _dashboard(context),
-            const AdminTreinosCatalogTab(),
-            _crudList(context,
-                const ['Salada mediterrânea', 'Smoothie verde', 'Frango grelhado'],
-                'receita'),
-            _crudList(
-                context,
-                const ['Desafio 7 dias', 'Hidratação total', '10k passos'],
-                'desafio'),
-          ],
         ),
       ),
     );
@@ -206,31 +198,46 @@ class AdminScreen extends ConsumerWidget {
             ],
           ),
         ),
-        GridView.count(
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          childAspectRatio: 1.4,
-          children: const [
-            _MetricCard('1.284', 'Usuárias', Icons.people, AppColors.primary),
-            _MetricCard('342', 'Premium', Icons.workspace_premium,
-                AppColors.warning),
-            _MetricCard('8.920', 'Treinos feitos', Icons.fitness_center,
-                AppColors.success),
-            _MetricCard('4.7k', 'Check-ins', Icons.check_circle,
-                AppColors.info),
-          ],
+        Container(
+          margin: const EdgeInsets.only(bottom: 16),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: const Text(
+            'Métricas agregadas reais ainda não estão ligadas a este painel. '
+            'Use Assinaturas e Usuários para dados ao vivo. '
+            'Receitas e desafios: edite no Painel da Personal (conteúdos).',
+            style: TextStyle(color: AppColors.textSecondary, fontSize: 12, height: 1.35),
+          ),
         ),
-        const SizedBox(height: 20),
-        const Text('Ações rápidas',
+        const Text('Conteúdos (rotas reais)',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
         const SizedBox(height: 12),
-        _actionTile(context, Icons.add, 'Novo treino'),
-        _actionTile(context, Icons.restaurant, 'Nova receita'),
-        _actionTile(context, Icons.emoji_events, 'Novo desafio'),
-        _actionTile(context, Icons.campaign, 'Enviar notificação push'),
+        Card(
+          margin: const EdgeInsets.only(bottom: 8),
+          child: ListTile(
+            leading: const Icon(Icons.restaurant_menu, color: AppColors.secondary),
+            title: const Text('Receitas (CMS)', style: TextStyle(color: Colors.white)),
+            subtitle: const Text('Cadastro real no Painel da Personal',
+                style: TextStyle(color: AppColors.textTertiary, fontSize: 11)),
+            trailing: const Icon(Icons.chevron_right, color: AppColors.textTertiary),
+            onTap: () => context.push(Routes.personalCmsRecipes),
+          ),
+        ),
+        Card(
+          margin: const EdgeInsets.only(bottom: 8),
+          child: ListTile(
+            leading: const Icon(Icons.emoji_events_outlined, color: AppColors.secondary),
+            title: const Text('Desafios (CMS)', style: TextStyle(color: Colors.white)),
+            subtitle: const Text('Cadastro real no Painel da Personal',
+                style: TextStyle(color: AppColors.textTertiary, fontSize: 11)),
+            trailing: const Icon(Icons.chevron_right, color: AppColors.textTertiary),
+            onTap: () => context.push(Routes.personalCmsChallenges),
+          ),
+        ),
+        const SizedBox(height: 8),
         Card(
           margin: const EdgeInsets.only(bottom: 8),
           child: ListTile(
@@ -363,94 +370,6 @@ class AdminScreen extends ConsumerWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _crudList(BuildContext context, List<String> items, String tipo) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primary,
-        onPressed: () => _notImplemented(context, 'Criar $tipo'),
-        child: const Icon(Icons.add),
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(20),
-        itemCount: items.length,
-        itemBuilder: (_, i) => Card(
-          margin: const EdgeInsets.only(bottom: 10),
-          child: ListTile(
-            title: Text(items[i],
-                style: const TextStyle(color: Colors.white)),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                    icon: const Icon(Icons.edit,
-                        size: 18, color: AppColors.secondary),
-                    onPressed: () => _notImplemented(context, 'Editar')),
-                IconButton(
-                    icon: const Icon(Icons.delete,
-                        size: 18, color: AppColors.danger),
-                    onPressed: () => _notImplemented(context, 'Excluir')),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _actionTile(BuildContext context, IconData icon, String label) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 8),
-      child: ListTile(
-        leading: Icon(icon, color: AppColors.secondary),
-        title: Text(label, style: const TextStyle(color: Colors.white)),
-        trailing:
-            const Icon(Icons.chevron_right, color: AppColors.textTertiary),
-        onTap: () => _notImplemented(context, label),
-      ),
-    );
-  }
-
-  void _notImplemented(BuildContext context, String action) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('$action — conecte ao Firestore para ativar.')),
-    );
-  }
-}
-
-class _MetricCard extends StatelessWidget {
-  const _MetricCard(this.value, this.label, this.icon, this.color);
-  final String value;
-  final String label;
-  final IconData icon;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppTheme.radius),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: color),
-          const Spacer(),
-          Text(value,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold)),
-          Text(label,
-              style: const TextStyle(
-                  color: AppColors.textSecondary, fontSize: 12)),
-        ],
-      ),
     );
   }
 }

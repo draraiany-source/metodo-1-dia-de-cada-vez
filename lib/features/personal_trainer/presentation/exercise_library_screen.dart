@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/assets/app_icons.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/youtube_launch.dart';
 import '../../../core/widgets/app_icon_image.dart';
@@ -243,10 +244,11 @@ class _ExerciseLibraryScreenState extends ConsumerState<ExerciseLibraryScreen> {
     final exercisesAsync = ref.watch(ptExercisesProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.selectMode
+      appBar: PremiumAppBar(
+        title: widget.selectMode
             ? 'Escolher exercício'
-            : 'Banco de exercícios'),
+            : 'Banco de exercícios',
+        showStaffSignOut: true,
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 12),

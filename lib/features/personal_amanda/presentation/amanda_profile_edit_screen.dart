@@ -280,6 +280,7 @@ class _AmandaProfileEditScreenState
       backgroundColor: AppColors.background,
       appBar: PremiumAppBar(
         title: 'Editar Quem Sou Eu',
+        showStaffSignOut: true,
         actions: [
           TextButton(
             onPressed: _saving ? null : _save,

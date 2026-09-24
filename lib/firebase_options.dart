@@ -1,9 +1,14 @@
-// Firebase options — Android configurado para o projeto metodo1dia-app.
+// Firebase options — projeto metodo1dia-app.
 //
-// iOS: projectId / messagingSenderId / storageBucket alinhados ao Android.
-// apiKey e appId continuam REPLACE_ME até rodar `flutterfire configure`
-// (ou colar GoogleService-Info.plist real). Sem isso o FirebaseService
-// faz graceful degradation no iOS e o app roda em modo local.
+// Android + Web: credenciais reais do Console (google-services.json / web app).
+// iOS: projectId / messagingSenderId / storageBucket já alinhados ao projeto.
+// apiKey e appId iOS permanecem REPLACE_ME de propósito — no repositório NÃO
+// existe GoogleService-Info.plist nem app iOS registrado com IDs reais.
+// NÃO copiar apiKey/appId do Android (Firebase rejeita appId de outra
+// plataforma). Preencher somente após:
+//   1) Firebase Console → Add app iOS (bundle com.metodo1dia.app)
+//   2) baixar GoogleService-Info.plist OU `flutterfire configure`
+// Até lá, FirebaseService faz graceful degradation no iOS (modo local).
 
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
@@ -42,6 +47,10 @@ class DefaultFirebaseOptions {
     storageBucket: 'metodo1dia-app.firebasestorage.app',
     iosBundleId: 'com.metodo1dia.app',
   );
+
+  /// `false` até Amanda registrar o app iOS e rodar `flutterfire configure`.
+  /// Não inventar apiKey/appId — Firebase rejeita IDs de outra plataforma.
+  static bool get iosFirebaseReady => ios.apiKey != 'REPLACE_ME';
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDhIwHcQc34jmYJanLXDe9O9vP2mf7X6L8',

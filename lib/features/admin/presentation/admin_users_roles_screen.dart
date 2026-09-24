@@ -208,7 +208,10 @@ class _AdminUsersRolesScreenState extends ConsumerState<AdminUsersRolesScreen> {
     if (me == null || !me.isAdmin) {
       return const Scaffold(
         backgroundColor: AppColors.background,
-        appBar: PremiumAppBar(title: 'Usuários e papéis'),
+        appBar: PremiumAppBar(
+          title: 'Usuários e papéis',
+          showStaffSignOut: true,
+        ),
         body: Center(
           child: Text('Acesso restrito ao Admin Técnico.',
               style: TextStyle(color: AppColors.textSecondary)),
@@ -220,6 +223,7 @@ class _AdminUsersRolesScreenState extends ConsumerState<AdminUsersRolesScreen> {
       backgroundColor: AppColors.background,
       appBar: PremiumAppBar(
         title: 'Usuários e papéis',
+        showStaffSignOut: true,
         actions: [
           IconButton(
             tooltip: 'Cadastrar usuário',

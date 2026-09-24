@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../core/assets/app_icons.dart';
 import '../../../core/assets/personal_ai_icons.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import '../../subscriptions/providers/subscription_providers.dart';
@@ -342,93 +343,98 @@ class _StudentDetailScreenState extends ConsumerState<StudentDetailScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 72,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight + 48),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text(_student.name),
-            _StudentAccessLabel(userId: _student.userId, active: _student.active),
-          ],
-        ),
-        actions: [
-          IconButton(
-            tooltip: 'Editar dados',
-            icon: const Icon(Icons.edit_outlined),
-            onPressed: _editarAluno,
-          ),
-          IconButton(
-            tooltip: 'Anamnese',
-            icon: AppIconImage(
-              PersonalAiIcons.anamnese,
-              size: 24,
-              fallbackIcon: Icons.assignment_outlined,
-              semanticLabel: 'Anamnese',
+            PremiumAppBar(
+              title: _student.name,
+              showStaffSignOut: true,
+              actions: [
+                IconButton(
+                  tooltip: 'Editar dados',
+                  icon: const Icon(Icons.edit_outlined),
+                  onPressed: _editarAluno,
+                ),
+                IconButton(
+                  tooltip: 'Anamnese',
+                  icon: AppIconImage(
+                    PersonalAiIcons.anamnese,
+                    size: 24,
+                    fallbackIcon: Icons.assignment_outlined,
+                    semanticLabel: 'Anamnese',
+                  ),
+                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => StudentAnamnesisScreen(student: _student),
+                  )),
+                ),
+                IconButton(
+                  tooltip: 'Evolução',
+                  icon: const Icon(Icons.show_chart),
+                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => EvolutionPtScreen(student: _student),
+                  )),
+                ),
+                IconButton(
+                  tooltip: 'Cargas',
+                  icon: const Icon(Icons.fitness_center_outlined),
+                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => LoadHistoryScreen(studentId: _student.id),
+                  )),
+                ),
+                IconButton(
+                  tooltip: 'Vincular conta',
+                  icon: const Icon(Icons.link),
+                  onPressed: _vincularConta,
+                ),
+                IconButton(
+                  tooltip: 'Arquivar',
+                  icon: const Icon(Icons.archive_outlined),
+                  onPressed: _arquivarAluno,
+                ),
+                PopupMenuButton<String>(
+                  tooltip: 'Acompanhamento',
+                  onSelected: (v) async {
+                    if (v == 'chat') {
+                      await _abrirChat();
+                    } else if (v == 'agenda') {
+                      if (mounted) context.push(Routes.trainerAgenda);
+                    } else if (v == 'anamnese_ia') {
+                      if (mounted) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => AnamnesisFormScreen(
+                            asTrainer: true,
+                            student: _student,
+                          ),
+                        ));
+                      }
+                    }
+                  },
+                  itemBuilder: (_) => const [
+                    PopupMenuItem(value: 'chat', child: Text('Chat com aluna')),
+                    PopupMenuItem(
+                        value: 'agenda', child: Text('Agenda / consultoria')),
+                    PopupMenuItem(
+                        value: 'anamnese_ia',
+                        child: Text('Anamnese completa / analisar com IA')),
+                  ],
+                ),
+              ],
             ),
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => StudentAnamnesisScreen(student: _student),
-            )),
-          ),
-          IconButton(
-            tooltip: 'Evolução',
-            icon: const Icon(Icons.show_chart),
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => EvolutionPtScreen(student: _student),
-            )),
-          ),
-          IconButton(
-            tooltip: 'Cargas',
-            icon: const Icon(Icons.fitness_center_outlined),
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => LoadHistoryScreen(studentId: _student.id),
-            )),
-          ),
-          IconButton(
-            tooltip: 'Vincular conta',
-            icon: const Icon(Icons.link),
-            onPressed: _vincularConta,
-          ),
-          IconButton(
-            tooltip: 'Arquivar',
-            icon: const Icon(Icons.archive_outlined),
-            onPressed: _arquivarAluno,
-          ),
-          PopupMenuButton<String>(
-            tooltip: 'Acompanhamento',
-            onSelected: (v) async {
-              if (v == 'chat') {
-                await _abrirChat();
-              } else if (v == 'agenda') {
-                if (mounted) context.push(Routes.trainerAgenda);
-              } else if (v == 'anamnese_ia') {
-                if (mounted) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => AnamnesisFormScreen(
-                      asTrainer: true,
-                      student: _student,
-                    ),
-                  ));
-                }
-              }
-            },
-            itemBuilder: (_) => const [
-              PopupMenuItem(value: 'chat', child: Text('Chat com aluna')),
-              PopupMenuItem(
-                  value: 'agenda', child: Text('Agenda / consultoria')),
-              PopupMenuItem(
-                  value: 'anamnese_ia',
-                  child: Text('Anamnese completa / analisar com IA')),
-            ],
-          ),
-        ],
-        bottom: TabBar(
-          controller: _tabs,
-          isScrollable: true,
-          tabs: const [
-            Tab(text: 'Avaliações'),
-            Tab(text: 'Fotos'),
-            Tab(text: 'Treinos'),
-            Tab(text: 'Histórico'),
+            Material(
+              color: AppColors.background,
+              child: TabBar(
+                controller: _tabs,
+                isScrollable: true,
+                tabs: const [
+                  Tab(text: 'Avaliações'),
+                  Tab(text: 'Fotos'),
+                  Tab(text: 'Treinos'),
+                  Tab(text: 'Histórico'),
+                ],
+              ),
+            ),
           ],
         ),
       ),
