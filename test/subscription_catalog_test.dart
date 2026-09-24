@@ -5,16 +5,31 @@ import 'package:metodo_1_dia/features/subscriptions/domain/subscription_models.d
 
 void main() {
   group('PlanCatalog', () {
-    test('preços de catálogo mensal e trimestral', () {
-      expect(PlanCatalog.monthly.fallbackPrice, 79.90);
-      expect(PlanCatalog.quarterly.fallbackPrice, 199.90);
-      expect(PlanCatalog.yearly.fallbackPrice, isNull);
-      expect(PlanCatalog.yearly.comingSoon, isTrue);
+    test('preços de catálogo mensal, trimestral e anual', () {
+      expect(PlanCatalog.monthly.fallbackPrice, 199.00);
+      expect(PlanCatalog.quarterly.fallbackPrice, 399.00);
+      expect(PlanCatalog.yearly.fallbackPrice, 1490.00);
+      expect(PlanCatalog.yearly.comingSoon, isFalse);
+      expect(PlanCatalog.monthly.periodLabel, 'por mês');
+      expect(PlanCatalog.quarterly.periodLabel, 'a cada 3 meses');
+      expect(PlanCatalog.yearly.periodLabel, 'por ano');
     });
 
-    test('economia trimestral vs 3 mensalidades', () {
-      expect(PlanCatalog.quarterly.savingsVsMonthly, closeTo(39.80, 0.01));
-      expect(PlanCatalog.quarterly.equivalentMonthly, closeTo(66.6333, 0.01));
+    test('equivalentes e economias calculados a partir dos preços oficiais', () {
+      expect(PlanCatalog.quarterly.equivalentMonthly, closeTo(133.00, 0.001));
+      expect(PlanCatalog.quarterly.savingsVsMonthly, closeTo(198.00, 0.01));
+      expect(PlanCatalog.yearly.equivalentMonthly, closeTo(124.17, 0.001));
+      expect(PlanCatalog.yearly.savingsVsMonthly, closeTo(898.00, 0.01));
+      expect(
+        PlanCatalog.yearly.billingClarity,
+        contains('Cobrança anual'),
+      );
+    });
+
+    test('rótulos BRL com milhar no anual', () {
+      expect(PlanCatalog.yearly.fallbackPriceLabel, 'R\$ 1.490,00');
+      expect(PlanCatalog.monthly.fallbackPriceLabel, 'R\$ 199,00');
+      expect(PlanCatalog.quarterly.fallbackPriceLabel, 'R\$ 399,00');
     });
 
     test('IDs seguem o padrão já existente no AppConfig', () {
@@ -105,7 +120,7 @@ void main() {
         userId: 'u1',
         plan: CatalogPlan.monthly,
         status: SubscriptionLifecycle.active,
-        amount: 79.90,
+        amount: 199.00,
         nextBillingAt: DateTime.now().add(const Duration(days: 20)),
       );
       expect(

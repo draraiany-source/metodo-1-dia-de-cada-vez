@@ -94,6 +94,8 @@ class CatalogPlanInfo {
     this.badge,
     this.equivalentMonthly,
     this.savingsVsMonthly,
+    this.savingsComparisonLabel,
+    this.billingClarity,
   });
 
   final CatalogPlan plan;
@@ -105,11 +107,29 @@ class CatalogPlanInfo {
   final String? badge;
   final double? equivalentMonthly;
   final double? savingsVsMonthly;
+  /// Ex.: "comparado a 3 mensalidades" / "comparado a 12 mensalidades".
+  final String? savingsComparisonLabel;
+  /// Texto curto lembrando a periodicidade da cobrança (ex. anual).
+  final String? billingClarity;
 
   String? get fallbackPriceLabel {
     final p = fallbackPrice;
     if (p == null) return null;
-    return 'R\$ ${p.toStringAsFixed(2).replaceAll('.', ',')}';
+    return 'R\$ ${_formatBrl(p)}';
+  }
+
+  static String _formatBrl(double value) {
+    final fixed = value.toStringAsFixed(2);
+    final parts = fixed.split('.');
+    final intPart = parts[0];
+    final dec = parts[1];
+    final buf = StringBuffer();
+    for (var i = 0; i < intPart.length; i++) {
+      final fromEnd = intPart.length - i;
+      if (i > 0 && fromEnd % 3 == 0) buf.write('.');
+      buf.write(intPart[i]);
+    }
+    return '${buf.toString()},$dec';
   }
 }
 
@@ -134,26 +154,32 @@ class PlanCatalog {
   static const monthly = CatalogPlanInfo(
     plan: CatalogPlan.monthly,
     fallbackPrice: AppConstants.premiumMonthlyPrice,
-    periodLabel: '/ mês',
+    periodLabel: 'por mês',
     benefits: benefits,
   );
 
   static const quarterly = CatalogPlanInfo(
     plan: CatalogPlan.quarterly,
     fallbackPrice: AppConstants.premiumQuarterlyPrice,
-    periodLabel: '/ 3 meses',
+    periodLabel: 'a cada 3 meses',
     highlight: true,
     badge: 'MAIS ESCOLHIDO',
-    equivalentMonthly: AppConstants.premiumQuarterlyPrice / 3,
-    savingsVsMonthly:
-        (AppConstants.premiumMonthlyPrice * 3) - AppConstants.premiumQuarterlyPrice,
+    equivalentMonthly: AppConstants.premiumQuarterlyEquivalentMonthly,
+    savingsVsMonthly: AppConstants.premiumQuarterlySavingsVsMonthly,
+    savingsComparisonLabel: 'comparado a 3 mensalidades',
+    billingClarity: 'Cobrança a cada 3 meses.',
     benefits: benefits,
   );
 
   static const yearly = CatalogPlanInfo(
     plan: CatalogPlan.yearly,
-    fallbackPrice: null,
-    comingSoon: true,
+    fallbackPrice: AppConstants.premiumYearlyPrice,
+    periodLabel: 'por ano',
+    equivalentMonthly: AppConstants.premiumYearlyEquivalentMonthly,
+    savingsVsMonthly: AppConstants.premiumYearlySavingsVsMonthly,
+    savingsComparisonLabel: 'comparado a 12 mensalidades',
+    billingClarity:
+        'Cobrança anual. O valor mensal abaixo é só equivalência.',
     benefits: benefits,
   );
 

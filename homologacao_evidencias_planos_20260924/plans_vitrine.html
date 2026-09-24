@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Planos — Método 1 Dia (vitrine)</title>
+  <style>
+    body { margin:0; font-family: Segoe UI, Arial, sans-serif; background:#121218; color:#fff; }
+    .wrap { max-width:420px; margin:0 auto; padding:16px 16px 40px; }
+    h1 { font-size:18px; margin:8px 0 16px; }
+    .card { background:#1c1c24; border:1px solid #333; border-radius:14px; padding:16px; margin-bottom:14px; }
+    .card.hi { border:2px solid #e85a9b; }
+    .badge { display:inline-block; background:linear-gradient(90deg,#a855f7,#e85a9b); font-size:10px; font-weight:800; padding:4px 8px; border-radius:8px; }
+    .price { font-size:26px; font-weight:900; margin:8px 0 4px; }
+    .period { color:#a8a8b3; font-size:14px; font-weight:600; }
+    .eq { color:#a8a8b3; font-size:13px; margin-top:6px; }
+    .save { color:#3dd68c; font-size:13px; font-weight:600; margin-top:4px; }
+    .note { color:#6e6e7a; font-size:12px; font-weight:600; margin-top:4px; }
+    .trial { color:#e85a9b; font-weight:700; }
+    .foot { color:#6e6e7a; font-size:11px; text-align:center; margin-top:18px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Planos e Assinaturas</h1>
+    <div class="card">
+      <div>Teste grátis</div>
+      <div class="trial">7 dias gratuitos</div>
+      <p style="color:#a8a8b3;font-size:13px">Regras do teste grátis preservadas — sem alteração.</p>
+    </div>
+    <div class="card">
+      <div>Plano Mensal</div>
+      <div class="price">R$ 199,00 <span class="period">por mês</span></div>
+    </div>
+    <div class="card hi">
+      <div>Plano Trimestral <span class="badge">MAIS ESCOLHIDO</span></div>
+      <div class="price">R$ 399,00 <span class="period">a cada 3 meses</span></div>
+      <div class="note">Cobrança a cada 3 meses.</div>
+      <div class="eq">Equivale a R$ 133,00 por mês</div>
+      <div class="save">Economize R$ 198,00 comparado a 3 mensalidades</div>
+    </div>
+    <div class="card">
+      <div>Plano Anual</div>
+      <div class="price">R$ 1.490,00 <span class="period">por ano</span></div>
+      <div class="note">Cobrança anual. O valor mensal abaixo é só equivalência.</div>
+      <div class="eq">Equivale a R$ 124,17 por mês</div>
+      <div class="save">Economize R$ 898,00 comparado a 12 mensalidades</div>
+    </div>
+    <p class="foot">Cobrança real desativada (PAYMENTS_ENABLED=false). Nenhuma compra de produção será processada. Evidência visual alinhada ao catálogo do app (24/09/2026).</p>
+  </div>
+</body>
+</html>

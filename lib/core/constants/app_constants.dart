@@ -111,13 +111,29 @@ class AppConstants {
       'A Amanda é sua motivadora virtual e não substitui médico, '
       'nutricionista ou psicólogo. Procure um profissional quando precisar. 💜';
 
-  // ---- Premium (IDs canônicos em AppConfig; preços de catálogo) ----
+  // ---- Premium (IDs canônicos em AppConfig; preços de catálogo / vitrine) ----
   /// Legado — preferir [AppConfig.productMonthly].
   static const String premiumMonthlyId = 'metodo1dia_premium_mensal';
   static const String premiumQuarterlyId = 'metodo1dia_premium_trimestral';
   static const String premiumYearlyId = 'metodo1dia_premium_anual';
-  static const double premiumMonthlyPrice = 79.90;
-  static const double premiumQuarterlyPrice = 199.90;
+
+  /// Preços de vitrine (BRL). A loja manda quando [PAYMENTS_ENABLED] estiver true.
+  static const double premiumMonthlyPrice = 199.00;
+  static const double premiumQuarterlyPrice = 399.00;
+  static const double premiumYearlyPrice = 1490.00;
+
+  /// Equivalente mensal do trimestral: 399 / 3 = 133,00
+  static const double premiumQuarterlyEquivalentMonthly =
+      premiumQuarterlyPrice / 3;
+
+  /// Equivalente mensal do anual: 1490 / 12 ≈ 124,166… → exibir R$ 124,17
+  static const double premiumYearlyEquivalentMonthly = 124.17;
+
+  /// Economia vs pagar mensal no mesmo período.
+  static const double premiumQuarterlySavingsVsMonthly =
+      (premiumMonthlyPrice * 3) - premiumQuarterlyPrice; // 198,00
+  static const double premiumYearlySavingsVsMonthly =
+      (premiumMonthlyPrice * 12) - premiumYearlyPrice; // 898,00
 
   /// Endpoint que inicia o teste grátis de 7 dias (Admin SDK).
   static const String startFreeTrialFunctionUrl =

@@ -203,7 +203,7 @@ class SettingsScreen extends ConsumerWidget {
                     icon: Icons.workspace_premium_outlined,
                     iconAsset: AppIcons.premium,
                     title: 'Planos e Assinaturas',
-                    subtitle: 'Teste grátis, mensal e trimestral',
+                    subtitle: 'Teste grátis, mensal, trimestral e anual',
                     onTap: () => AppNavigation.open(context, Routes.premium),
                   ),
                   _Row(

@@ -38,7 +38,6 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
     final width = MediaQuery.sizeOf(context).width;
     final pad = width > 720 ? 32.0 : 20.0;
     final useStoreTrial = AppConfig.billingConfigured;
-    final yearlyQuote = store.yearly;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -78,17 +77,14 @@ class _PlansScreenState extends ConsumerState<PlansScreen> {
             onSubscribe: () => _subscribe(CatalogPlan.quarterly),
           ),
           const SizedBox(height: 16),
-          if (yearlyQuote != null)
-            _PaidPlanCard(
-              info: PlanCatalog.yearly,
-              storePrice: yearlyQuote.priceString,
-              hasStoreTrial: yearlyQuote.hasFreeTrial,
-              loading: _loading,
-              buttonLabel: 'ASSINAR ANUAL',
-              onSubscribe: () => _subscribe(CatalogPlan.yearly),
-            )
-          else
-            const _YearlyComingSoonCard(),
+          _PaidPlanCard(
+            info: PlanCatalog.yearly,
+            storePrice: store.yearly?.priceString,
+            hasStoreTrial: store.yearly?.hasFreeTrial == true,
+            loading: _loading,
+            buttonLabel: 'ASSINAR ANUAL',
+            onSubscribe: () => _subscribe(CatalogPlan.yearly),
+          ),
           const SizedBox(height: 20),
           if (access.hasPremium)
             OutlinedButton(
@@ -404,6 +400,20 @@ class _TrialCard extends StatelessWidget {
   }
 }
 
+String _fmtMoney(double value) {
+  final fixed = value.toStringAsFixed(2);
+  final parts = fixed.split('.');
+  final intPart = parts[0];
+  final dec = parts[1];
+  final buf = StringBuffer();
+  for (var i = 0; i < intPart.length; i++) {
+    final fromEnd = intPart.length - i;
+    if (i > 0 && fromEnd % 3 == 0) buf.write('.');
+    buf.write(intPart[i]);
+  }
+  return '${buf.toString()},$dec';
+}
+
 class _PaidPlanCard extends StatelessWidget {
   const _PaidPlanCard({
     required this.info,
@@ -517,17 +527,29 @@ class _PaidPlanCard extends StatelessWidget {
                 style: TextStyle(color: AppColors.secondary, fontSize: 12),
               ),
             ),
+          if (info.billingClarity != null) ...[
+            const SizedBox(height: 4),
+            Text(
+              info.billingClarity!,
+              style: const TextStyle(
+                color: AppColors.textTertiary,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
           if (info.equivalentMonthly != null) ...[
             const SizedBox(height: 6),
             Text(
-              'Equivale a aproximadamente R\$ ${info.equivalentMonthly!.toStringAsFixed(2).replaceAll('.', ',')} por mês',
+              'Equivale a R\$ ${_fmtMoney(info.equivalentMonthly!)} por mês',
               style: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
             ),
           ],
           if (info.savingsVsMonthly != null && info.savingsVsMonthly! > 0) ...[
             const SizedBox(height: 4),
             Text(
-              'Economize R\$ ${info.savingsVsMonthly!.toStringAsFixed(2).replaceAll('.', ',')} comparado a 3 mensalidades',
+              'Economize R\$ ${_fmtMoney(info.savingsVsMonthly!)}'
+              '${info.savingsComparisonLabel != null ? ' ${info.savingsComparisonLabel}' : ''}',
               style: const TextStyle(
                 color: AppColors.success,
                 fontSize: 13,
@@ -572,53 +594,4 @@ class _PaidPlanCard extends StatelessWidget {
   }
 }
 
-class _YearlyComingSoonCard extends StatelessWidget {
-  const _YearlyComingSoonCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppTheme.radius),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Plano Anual',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Plano anual — em breve',
-            style: TextStyle(
-              color: AppColors.primary,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'O valor será definido quando o produto estiver cadastrado na App Store e na Google Play. Nenhum preço foi inventado.',
-            style: TextStyle(color: AppColors.textSecondary, height: 1.4),
-          ),
-          const SizedBox(height: 14),
-          SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: OutlinedButton(
-              onPressed: null,
-              child: const Text('INDISPONÍVEL'),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+// Cartão "anual em breve" removido — o plano anual agora tem preço de vitrine.
