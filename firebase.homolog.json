@@ -6,6 +6,18 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "redirects": [
+      {
+        "source": "/privacidade",
+        "destination": "/privacidade.html",
+        "type": 301
+      },
+      {
+        "source": "/termos",
+        "destination": "/termos.html",
+        "type": 301
+      }
+    ],
     "rewrites": [
       {
         "source": "**",

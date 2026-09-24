@@ -1,14 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../auth/user_role.dart';
 import 'app_router.dart';
 
-/// Navegação segura — evita pilha quebrada e telas sem voltar.
+/// Navegação segura — evita pilha quebrada e cruzamento de perfis no Voltar.
 class AppNavigation {
   AppNavigation._();
 
+  /// Hub (tela inicial do papel) para o [path] atual.
+  ///
+  /// Personal em rotas `/admin/*` da whitelist volta para a Central da Personal,
+  /// nunca para a Home da Aluna.
+  static String hubForPath(String path) {
+    if (path == Routes.admin ||
+        path == Routes.adminUsers ||
+        path == Routes.adminSubscriptions ||
+        path == Routes.couponsAdmin) {
+      return Routes.admin;
+    }
+    if (path.startsWith('/admin')) {
+      if (isPersonalAllowedAdminPath(path)) {
+        return Routes.personalTrainer;
+      }
+      return Routes.admin;
+    }
+    if (path == Routes.personalTrainer ||
+        path.startsWith('${Routes.personalTrainer}/') ||
+        path == Routes.painelPersonal ||
+        path.startsWith('${Routes.painelPersonal}/')) {
+      return Routes.personalTrainer;
+    }
+    return Routes.home;
+  }
+
+  /// `true` se [path] é a raiz do perfil (não deve “voltar” para outro papel).
+  static bool isRoleRootPath(String path) {
+    return path == Routes.home ||
+        path == Routes.personalTrainer ||
+        path == Routes.admin ||
+        path == Routes.login ||
+        path == Routes.splash ||
+        path == Routes.onboarding;
+  }
+
   /// Volta à tela anterior real (Navigator ou GoRouter).
-  /// Só cai na Home se realmente não houver pilha.
+  ///
+  /// Se não houver pilha: vai ao hub do perfil atual.
+  /// Se já estiver na raiz do perfil: **não faz nada** (não abre outro perfil).
   static void back(BuildContext context) {
     final nav = Navigator.maybeOf(context);
     if (nav != null && nav.canPop()) {
@@ -21,8 +60,22 @@ class AppNavigation {
         return;
       }
     } catch (_) {}
+
+    String path;
     try {
-      context.go(Routes.home);
+      path = GoRouterState.of(context).uri.path;
+    } catch (_) {
+      return;
+    }
+
+    if (isRoleRootPath(path)) {
+      return;
+    }
+
+    final hub = hubForPath(path);
+    if (path == hub) return;
+    try {
+      context.go(hub);
     } catch (_) {
       nav?.maybePop();
     }

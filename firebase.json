@@ -39,6 +39,7 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "cleanUrls": true,
     "redirects": [
       {
         "source": "/privacidade",

@@ -233,7 +233,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       const SizedBox(height: 8),
                       Center(
                         child: Text(
-                          'v1.0.0+1 · ${AppConfig.homologBuildLabel}',
+                          'v1.0.0+2 · ${AppConfig.homologBuildLabel}',
                           style: const TextStyle(
                             color: AppColors.textTertiary,
                             fontSize: 11,
