@@ -85,21 +85,33 @@ service firebase.storage {
       allow delete: if signedIn() && (isAdmin() || isPersonalTrainer());
     }
 
+    // Cursos em áudio do painel (Amanda/Personal + Admin).
+    match /audio_courses/{courseId}/{fileName} {
+      allow read: if signedIn();
+      allow write: if signedIn()
+        && (isAdmin() || isPersonalTrainer())
+        && request.resource.size < 80 * 1024 * 1024
+        && request.resource.contentType.matches('audio/.*');
+      allow delete: if signedIn() && (isAdmin() || isPersonalTrainer());
+    }
+
     match /audio_programs/{allPaths=**} {
       allow read: if signedIn();
-      allow write: if isAdmin()
+      allow write: if signedIn()
+        && (isAdmin() || isPersonalTrainer())
         && request.resource.size < 80 * 1024 * 1024
         && (request.resource.contentType.matches('audio/.*')
             || request.resource.contentType.matches('image/.*'));
-      allow delete: if isAdmin();
+      allow delete: if signedIn() && (isAdmin() || isPersonalTrainer());
     }
 
     match /programs/{programId}/audios/{fileName} {
       allow read: if signedIn();
-      allow write: if isAdmin()
+      allow write: if signedIn()
+        && (isAdmin() || isPersonalTrainer())
         && request.resource.size < 80 * 1024 * 1024
         && request.resource.contentType.matches('audio/.*');
-      allow delete: if isAdmin();
+      allow delete: if signedIn() && (isAdmin() || isPersonalTrainer());
     }
 
     // Fotos de evolução — PRIVADAS (trainer/aluno vinculado/admin).

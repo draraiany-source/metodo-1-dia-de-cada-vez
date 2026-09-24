@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/auth_http_headers.dart';
 import '../../../../core/services/firebase_service.dart';
+import '../../../../core/utils/youtube_url.dart';
 import '../../domain/entities/audio_program.dart';
 import '../../domain/entities/program_progress.dart';
 import '../../domain/repositories/audio_program_repository.dart';
@@ -45,7 +47,7 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
   @override
   Stream<List<AudioProgram>> watchPrograms() {
     if (!_isFirebaseAvailable) {
-      return Stream.value(_demoPrograms());
+      return Stream.value(kDebugMode ? _demoPrograms() : const []);
     }
     return _firestore
         .collection(kProgramsCollection)
@@ -60,16 +62,19 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
   @override
   Future<AudioProgram?> getProgram(String programId) async {
     if (!_isFirebaseAvailable) {
+      if (!kDebugMode) return null;
       return _demoPrograms().where((p) => p.id == programId).firstOrNull;
     }
     try {
       final doc =
           await _firestore.collection(kProgramsCollection).doc(programId).get();
       if (!doc.exists) {
+        if (!kDebugMode) return null;
         return _demoPrograms().where((p) => p.id == programId).firstOrNull;
       }
       return AudioProgram.fromMap(doc.id, doc.data()!);
     } catch (_) {
+      if (!kDebugMode) return null;
       return _demoPrograms().where((p) => p.id == programId).firstOrNull;
     }
   }
@@ -77,7 +82,7 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
   @override
   Stream<List<ProgramAudio>> watchProgramAudios(String programId) {
     if (!_isFirebaseAvailable) {
-      return Stream.value(_demoAudios(programId));
+      return Stream.value(kDebugMode ? _demoAudios(programId) : const []);
     }
     return _firestore
         .collection(kProgramsCollection)
@@ -90,12 +95,16 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
           .map((d) => ProgramAudio.fromMap(d.id, d.data()))
           .where((a) => a.active)
           .toList();
-      if (list.isEmpty) return _demoAudios(programId);
+      // Lista vazia = sem conteúdo publicado. Demo só em debug.
+      if (list.isEmpty) {
+        return kDebugMode ? _demoAudios(programId) : <ProgramAudio>[];
+      }
       return _canonicalizePrograma7Audios(programId, list);
     }).timeout(
       const Duration(seconds: 12),
       onTimeout: (sink) {
-        sink.add(_demoAudios(programId));
+        // Timeout não deve fingir catálogo publicado em release.
+        sink.add(kDebugMode ? _demoAudios(programId) : <ProgramAudio>[]);
       },
     );
   }
@@ -103,14 +112,17 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
   @override
   Future<String> resolvePlaybackUrl(
       String programId, ProgramAudio audio) async {
-    // Offline-first: os 7 áudios do Programa 7 Dias estão SEMPRE em assets.
-    // Não depender de Storage/CF/CORS — e ignora flag premium errada no doc.
-    final local = _localAssetFor(
+    // Os 7 áudios do Programa 7 Dias tocam no YouTube (mesmos Shorts da
+    // área de Meditação). Sem MP3 no APK.
+    final youtube = youtubeUrlFor(
       audio.id,
       day: audio.day > 0 ? audio.day : audio.order,
       title: audio.title,
     );
-    if (local != null) return local;
+    if (youtube != null) return youtube;
+    if (YoutubeUrl.extractVideoId(audio.audioUrl) != null) {
+      return audio.audioUrl;
+    }
 
     if (!audio.premium && audio.audioUrl.isNotEmpty) {
       return audio.audioUrl;
@@ -180,7 +192,7 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
         'Áudio não disponível no momento. Tente de novo em instantes.');
   }
 
-  /// Slugs canônicos dos 7 MP3 em `assets/audio_programs/`.
+  /// Slugs canônicos dos 7 dias (IDs de progresso / Firestore).
   static const List<String> kPrograma7Slugs = [
     '01_como_vencer_a_procrastinacao',
     '02_como_criar_disciplina',
@@ -191,18 +203,21 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
     '07_como_acreditar_em_voce',
   ];
 
-  /// URL `asset:///` para just_audio, ou null se não for um dos 7.
-  static String? localAssetUrlFor(String audioId, {int? day, String? title}) {
+  /// Mesmos IDs da área de Meditação (YouTube Shorts testados no Android).
+  static const Map<String, String> kPrograma7YoutubeIds = {
+    '01_como_vencer_a_procrastinacao': 'UH5zs7CtPvs',
+    '02_como_criar_disciplina': 'lLpZMeMNbcU',
+    '03_como_vencer_a_preguica': 'nZempKMRbe0',
+    '04_como_manter_a_constancia': '36WIOOoo-3I',
+    '05_como_voltar_depois_de_errar': 'JXnM5Kw5rtQ',
+    '06_como_criar_habitos_saudaveis': 'gTS3NisvXBg',
+    '07_como_acreditar_em_voce': 'p1fnlTzTLyE',
+  };
+
+  static String? canonicalSlugFor(String audioId, {int? day, String? title}) {
     final id = audioId.trim();
-    if (kPrograma7Slugs.contains(id)) {
-      return 'asset:///assets/audio_programs/$id.mp3';
-    }
-    // Firestore às vezes usa IDs diferentes — casa por dia 1..7.
-    if (day != null && day >= 1 && day <= 7) {
-      final slug = kPrograma7Slugs[day - 1];
-      return 'asset:///assets/audio_programs/$slug.mp3';
-    }
-    // Casa por palavras do título.
+    if (kPrograma7Slugs.contains(id)) return id;
+    if (day != null && day >= 1 && day <= 7) return kPrograma7Slugs[day - 1];
     final key = (title ?? id)
         .toLowerCase()
         .replaceAll('á', 'a')
@@ -225,15 +240,18 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
       'acreditar': '07_como_acreditar_em_voce',
     };
     for (final e in titleHints.entries) {
-      if (key.contains(e.key)) {
-        return 'asset:///assets/audio_programs/${e.value}.mp3';
-      }
+      if (key.contains(e.key)) return e.value;
     }
     return null;
   }
 
-  String? _localAssetFor(String audioId, {int? day, String? title}) =>
-      localAssetUrlFor(audioId, day: day, title: title);
+  static String? youtubeUrlFor(String audioId, {int? day, String? title}) {
+    final slug = canonicalSlugFor(audioId, day: day, title: title);
+    if (slug == null) return null;
+    final videoId = kPrograma7YoutubeIds[slug];
+    if (videoId == null) return null;
+    return 'https://www.youtube.com/shorts/$videoId';
+  }
 
   DocumentReference<Map<String, dynamic>> _progressDoc(String programId) {
     final uid = _uid;
@@ -301,12 +319,12 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
   }
 
 
-  /// Garante que os 7 audios usem os IDs/slugs dos MP3 em assets.
+  /// Garante que os 7 áudios usem os slugs canônicos + URL do YouTube.
   List<ProgramAudio> _canonicalizePrograma7Audios(
       String programId, List<ProgramAudio> list) {
     if (programId != kPrograma7DiasId) return list;
     final demo = _demoAudios(programId);
-    if (list.every((a) => localAssetUrlFor(a.id) != null)) {
+    if (list.every((a) => youtubeUrlFor(a.id) != null)) {
       return list
           .map((a) => ProgramAudio(
                 id: a.id,
@@ -314,9 +332,12 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
                 order: a.order,
                 title: a.title,
                 description: a.description,
-                audioUrl: a.audioUrl,
+                audioUrl: youtubeUrlFor(a.id) ?? a.audioUrl,
                 storagePath: a.storagePath,
-                coverUrl: a.coverUrl,
+                coverUrl: a.coverUrl.isNotEmpty
+                    ? a.coverUrl
+                    : (YoutubeUrl.thumbnailUrl(youtubeUrlFor(a.id) ?? '') ??
+                        ''),
                 durationSeconds: a.durationSeconds > 0
                     ? a.durationSeconds
                     : demo
@@ -346,9 +367,9 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
         description: src.description.isNotEmpty
             ? src.description
             : canonical.description,
-        audioUrl: '',
-        storagePath: canonical.storagePath,
-        coverUrl: src.coverUrl,
+        audioUrl: canonical.audioUrl,
+        storagePath: '',
+        coverUrl: src.coverUrl.isNotEmpty ? src.coverUrl : canonical.coverUrl,
         durationSeconds: src.durationSeconds > 0
             ? src.durationSeconds
             : canonical.durationSeconds,
@@ -431,9 +452,9 @@ class AudioProgramRepositoryImpl implements AudioProgramRepository {
         order: day,
         title: meta[i][0] as String,
         description: meta[i][1] as String,
-        audioUrl: '',
-        storagePath: 'programs/$programId/audios/$slug.mp3',
-        coverUrl: '',
+        audioUrl: youtubeUrlFor(slug) ?? '',
+        storagePath: '',
+        coverUrl: YoutubeUrl.thumbnailUrl(youtubeUrlFor(slug) ?? '') ?? '',
         durationSeconds: meta[i][2] as int,
         active: true,
         premium: false,

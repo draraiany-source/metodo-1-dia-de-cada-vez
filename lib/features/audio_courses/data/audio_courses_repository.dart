@@ -52,7 +52,15 @@ class AudioCoursesFetchException implements Exception {
 class AudioCoursesRepository {
   bool get isAvailable => FirebaseService.isReady;
 
-  Future<List<AudioCourse>> fetchAll() async {
+  /// Lista para alunas — só cursos com `active != false`.
+  Future<List<AudioCourse>> fetchAll() async =>
+      _fetch(includeInactive: false);
+
+  /// Lista para o painel da Amanda/Admin — inclui rascunhos e testes.
+  Future<List<AudioCourse>> fetchAllForAdmin() async =>
+      _fetch(includeInactive: true);
+
+  Future<List<AudioCourse>> _fetch({required bool includeInactive}) async {
     if (!isAvailable) return [];
     try {
       final db = FirebaseFirestore.instance;
@@ -80,7 +88,9 @@ class AudioCoursesRepository {
               .map((c) => AudioChapter.fromMap(c.id, c.data()))
               .toList()
             ..sort((a, b) => a.order.compareTo(b.order));
-          courses.add(AudioCourse.fromMap(doc.id, doc.data(), chapters));
+          final course = AudioCourse.fromMap(doc.id, doc.data(), chapters);
+          if (!includeInactive && !course.active) continue;
+          courses.add(course);
         } catch (e) {
           debugPrint('Audio course parse falhou ${doc.id}: $e');
         }

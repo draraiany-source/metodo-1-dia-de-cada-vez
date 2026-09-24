@@ -49,6 +49,7 @@ class AudioCourse {
     required this.chapters,
     this.isPremium = false,
     this.order = 0,
+    this.active = true,
   });
 
   final String id;
@@ -59,9 +60,29 @@ class AudioCourse {
   final List<AudioChapter> chapters;
   final bool isPremium;
   final int order;
+  /// Se `false`, não aparece para alunas (rascunho / teste).
+  final bool active;
 
   Duration get duracaoTotal =>
       chapters.fold(Duration.zero, (sum, c) => sum + c.duration);
+
+  AudioCourse copyWith({
+    List<AudioChapter>? chapters,
+    bool? active,
+    int? order,
+  }) {
+    return AudioCourse(
+      id: id,
+      title: title,
+      teacher: teacher,
+      category: category,
+      coverUrl: coverUrl,
+      chapters: chapters ?? this.chapters,
+      isPremium: isPremium,
+      order: order ?? this.order,
+      active: active ?? this.active,
+    );
+  }
 
   factory AudioCourse.fromMap(String id, Map<String, dynamic> m,
       List<AudioChapter> chapters) {
@@ -76,6 +97,8 @@ class AudioCourse {
       chapters: chapters,
       isPremium: (m['isPremium'] ?? false) as bool,
       order: (m['order'] ?? 0) as int,
+      // Documentos antigos sem o campo continuam visíveis (active=true).
+      active: (m['active'] ?? true) as bool,
     );
   }
 }
@@ -88,6 +111,7 @@ class AudioChapter {
     required this.audioUrl,
     required this.duration,
     required this.order,
+    this.storagePath = '',
   });
 
   final String id;
@@ -95,6 +119,25 @@ class AudioChapter {
   final String audioUrl;
   final Duration duration;
   final int order;
+  /// Caminho no Firebase Storage (para substituir/remover o arquivo).
+  final String storagePath;
+
+  AudioChapter copyWith({
+    String? title,
+    String? audioUrl,
+    Duration? duration,
+    int? order,
+    String? storagePath,
+  }) {
+    return AudioChapter(
+      id: id,
+      title: title ?? this.title,
+      audioUrl: audioUrl ?? this.audioUrl,
+      duration: duration ?? this.duration,
+      order: order ?? this.order,
+      storagePath: storagePath ?? this.storagePath,
+    );
+  }
 
   factory AudioChapter.fromMap(String id, Map<String, dynamic> m) {
     return AudioChapter(
@@ -103,6 +146,7 @@ class AudioChapter {
       audioUrl: (m['audioUrl'] ?? '') as String,
       duration: Duration(seconds: (m['durationSeconds'] ?? 0) as int),
       order: (m['order'] ?? 0) as int,
+      storagePath: (m['storagePath'] ?? '') as String,
     );
   }
 }

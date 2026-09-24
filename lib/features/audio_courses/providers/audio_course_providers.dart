@@ -11,9 +11,14 @@ final audioCoursesRepositoryProvider =
     Provider((ref) => AudioCoursesRepository());
 
 /// Lista de cursos — vazia (não erro) enquanto o Firebase não tiver conteúdo
-/// cadastrado ou não estiver configurado.
+/// cadastrado ou não estiver configurado. Só cursos ativos (alunas).
 final audioCoursesProvider = FutureProvider<List<AudioCourse>>((ref) {
   return ref.read(audioCoursesRepositoryProvider).fetchAll();
+});
+
+/// Lista completa para o painel (inclui `active: false` / testes).
+final audioCoursesAdminListProvider = FutureProvider<List<AudioCourse>>((ref) {
+  return ref.read(audioCoursesRepositoryProvider).fetchAllForAdmin();
 });
 
 /// Favoritos — persistidos localmente (mesmo padrão do resto do app).
