@@ -35,7 +35,7 @@ class _VideosScreenState extends ConsumerState<VideosScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final videosAsync = ref.watch(videosProvider);
+    final videosAsync = ref.watch(videoLibraryProvider);
 
     return Scaffold(
       backgroundColor: AppColors.background,

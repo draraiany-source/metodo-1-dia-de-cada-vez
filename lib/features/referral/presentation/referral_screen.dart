@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../models/app_user.dart';
@@ -16,7 +17,7 @@ class ReferralScreen extends ConsumerWidget {
     final code = user.referralCode ?? '——————';
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Indique amigas 🎁')),
+      appBar: const PremiumAppBar(title: 'Indique amigas 🎁'),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),

@@ -1,0 +1,84 @@
+{
+  "project": "metodo1dia-app",
+  "collection": "videos",
+  "filter": { "field": "category", "op": "EQUAL", "value": "meditacao" },
+  "queriedAt": "2026-09-23T23:28:00.000Z",
+  "auth": "ok",
+  "method": "firebase_mcp_firestore_query_collection",
+  "firestore": [],
+  "firestoreCount": 0,
+  "seed": [
+    {
+      "id": "meditation_yt_UH5zs7CtPvs",
+      "name": "Áudio 1 como vencer a procrastinação.",
+      "order": 100,
+      "youtubeUrl": "https://www.youtube.com/shorts/UH5zs7CtPvs",
+      "videoId": "UH5zs7CtPvs",
+      "active": true
+    },
+    {
+      "id": "meditation_yt_lLpZMeMNbcU",
+      "name": "Áudio 2 como criar disciplina.",
+      "order": 101,
+      "youtubeUrl": "https://www.youtube.com/shorts/lLpZMeMNbcU",
+      "videoId": "lLpZMeMNbcU",
+      "active": true
+    },
+    {
+      "id": "meditation_yt_nZempKMRbe0",
+      "name": "Áudio 3 como.vencer a preguiça.",
+      "order": 102,
+      "youtubeUrl": "https://www.youtube.com/shorts/nZempKMRbe0",
+      "videoId": "nZempKMRbe0",
+      "active": true
+    },
+    {
+      "id": "meditation_yt_36WIOOoo-3I",
+      "name": "Áudio 4 como manter a constância.",
+      "order": 103,
+      "youtubeUrl": "https://www.youtube.com/shorts/36WIOOoo-3I",
+      "videoId": "36WIOOoo-3I",
+      "active": true
+    },
+    {
+      "id": "meditation_yt_JXnM5Kw5rtQ",
+      "name": "Áudio 5 como voltar depois de errar",
+      "order": 104,
+      "youtubeUrl": "https://www.youtube.com/shorts/JXnM5Kw5rtQ",
+      "videoId": "JXnM5Kw5rtQ",
+      "active": true
+    },
+    {
+      "id": "meditation_yt_gTS3NisvXBg",
+      "name": "Áudio 6 Como criar hábitos saudável",
+      "order": 105,
+      "youtubeUrl": "https://www.youtube.com/shorts/gTS3NisvXBg",
+      "videoId": "gTS3NisvXBg",
+      "active": true
+    },
+    {
+      "id": "meditation_yt_p1fnlTzTLyE",
+      "name": "Áudio 7 como acreditar em você.",
+      "order": 106,
+      "youtubeUrl": "https://www.youtube.com/shorts/p1fnlTzTLyE",
+      "videoId": "p1fnlTzTLyE",
+      "active": true
+    }
+  ],
+  "seedCount": 7,
+  "seedSource": "assets/content/videos_biblioteca.json",
+  "comparison": {
+    "inFirestoreOnly": [],
+    "inSeedOnly": [
+      "meditation_yt_UH5zs7CtPvs",
+      "meditation_yt_lLpZMeMNbcU",
+      "meditation_yt_nZempKMRbe0",
+      "meditation_yt_36WIOOoo-3I",
+      "meditation_yt_JXnM5Kw5rtQ",
+      "meditation_yt_gTS3NisvXBg",
+      "meditation_yt_p1fnlTzTLyE"
+    ],
+    "inBoth": [],
+    "note": "Auth OK. Query category==meditacao returned 0 docs. Seed has 7 meditacao videos not present in Firestore under that filter."
+  }
+}

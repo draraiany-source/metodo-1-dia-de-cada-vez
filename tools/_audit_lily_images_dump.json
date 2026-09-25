@@ -1,0 +1,3443 @@
+{
+  "total_treinos": 117,
+  "total_jpgs": 117,
+  "hash_duplicates": {
+    "afc0aaa62514f69ffdf66aa7e40e9022": [
+      "treino_015.jpg",
+      "treino_095.jpg"
+    ],
+    "493553fa52cfcfcc9288e9583be400b6": [
+      "treino_017.jpg",
+      "treino_116.jpg"
+    ],
+    "3f1305d6e8dc2bd5b6ec49b8d15b570c": [
+      "treino_046.jpg",
+      "treino_050.jpg"
+    ],
+    "fb57db7d117609117c045a2ee65e8988": [
+      "treino_047.jpg",
+      "treino_065.jpg"
+    ],
+    "e49b8a3f1ca0f2e8110ab944f9ed471f": [
+      "treino_048.jpg",
+      "treino_051.jpg"
+    ],
+    "3b63ea702d78d898b671422bd4a564ce": [
+      "treino_053.jpg",
+      "treino_089.jpg",
+      "treino_090.jpg",
+      "treino_092.jpg"
+    ],
+    "c3425aee1b4be5c3364be032edfa0621": [
+      "treino_070.jpg",
+      "treino_097.jpg"
+    ],
+    "ff52e3643402e2239df8ec9974d0fb2c": [
+      "treino_093.jpg",
+      "treino_117.jpg"
+    ],
+    "55e45626ed4f041a71e4c28668181e96": [
+      "treino_096.jpg",
+      "treino_098.jpg"
+    ],
+    "a23ba3aea1186ed558f0d3d5b81af438": [
+      "treino_099.jpg",
+      "treino_103.jpg",
+      "treino_104.jpg",
+      "treino_105.jpg"
+    ],
+    "acdf813ecd3252f3a985e03dd7653a49": [
+      "treino_107.jpg",
+      "treino_110.jpg",
+      "treino_111.jpg",
+      "treino_112.jpg"
+    ]
+  },
+  "missing_files": [],
+  "extra_files_in_lily_exercicios": [
+    "assets\\lily_exercicios\\_incoming\\01_desenvolvimento_halteres.jpg",
+    "assets\\lily_exercicios\\_incoming\\02_supino_maquina_peitoral.jpg",
+    "assets\\lily_exercicios\\_incoming\\03_puxada_alta_barra.jpg",
+    "assets\\lily_exercicios\\_incoming\\04_remada_articulada.jpg",
+    "assets\\lily_exercicios\\_incoming\\05_remada_sentada_triangulo.jpg",
+    "assets\\lily_exercicios\\_incoming\\06_remada_curvada_barra.jpg",
+    "assets\\lily_exercicios\\_incoming\\07_remada_alta_barra.jpg",
+    "assets\\lily_exercicios\\_incoming\\08_prancha_alta.jpg",
+    "assets\\lily_exercicios\\_incoming\\09_prancha_antebraco_tapete.jpg",
+    "assets\\lily_exercicios\\_incoming\\10_prancha_antebraco_gym.jpg",
+    "assets\\lily_exercicios\\_incoming\\11_supino_maquina_variante.jpg",
+    "assets\\lily_exercicios\\_incoming\\12_elevacao_pelvica_banco.jpg",
+    "assets\\lily_exercicios\\_incoming\\13_triceps_corda_overhead.jpg",
+    "assets\\lily_exercicios\\_incoming\\14_supino_maquina_peito.jpg",
+    "assets\\lily_exercicios\\_incoming\\15_leg_press.jpg",
+    "assets\\lily_exercicios\\_incoming\\16_bike_horizontal.jpg",
+    "assets\\lily_exercicios\\_incoming\\17_bike_horizontal_academia.jpg"
+  ],
+  "pubspec_declared": {
+    "lily_exercicios": false,
+    "lily_treinos": true,
+    "lily": true,
+    "exercises": true
+  },
+  "rows": [
+    {
+      "id": "treino_001",
+      "num": "001",
+      "nome": "Bike – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo": null,
+      "equipamento": "Bike",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_001.jpg",
+      "caminho": "assets/lily_exercicios/treino_001.jpg",
+      "existe": true,
+      "size": 256087,
+      "md5": "afc1aa9dfc1ba34607bf5c5f50292c61",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_002",
+      "num": "002",
+      "nome": "Bike Horizontal – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo": null,
+      "equipamento": "Bike horizontal",
+      "status_cadastro": "revisar_link_duplicado_com_caminhada",
+      "observacao": null,
+      "arquivo": "treino_002.jpg",
+      "caminho": "assets/lily_exercicios/treino_002.jpg",
+      "existe": true,
+      "size": 376470,
+      "md5": "1fab2f285531939d938248df84c47582",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_003",
+      "num": "003",
+      "nome": "Caminhada – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo": null,
+      "equipamento": "Livre / esteira",
+      "status_cadastro": "revisar_link_duplicado_com_bike_horizontal",
+      "observacao": null,
+      "arquivo": "treino_003.jpg",
+      "caminho": "assets/lily_exercicios/treino_003.jpg",
+      "existe": true,
+      "size": 261494,
+      "md5": "f1a45ce5d11b62f598ab6f446ba7fcd1",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_004",
+      "num": "004",
+      "nome": "Esteira – Caminhada/Corrida – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo": null,
+      "equipamento": "Esteira",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_004.jpg",
+      "caminho": "assets/lily_exercicios/treino_004.jpg",
+      "existe": true,
+      "size": 271386,
+      "md5": "3f5899fa3653225e6293e0d16812d696",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_005",
+      "num": "005",
+      "nome": "Bike Spinning – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo": null,
+      "equipamento": "Bike spinning",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_005.jpg",
+      "caminho": "assets/lily_exercicios/treino_005.jpg",
+      "existe": true,
+      "size": 378799,
+      "md5": "4fc3595ffc342e0fd83becc6d982457f",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_006",
+      "num": "006",
+      "nome": "Simulador de Escada – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo": null,
+      "equipamento": "Simulador de escada",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_006.jpg",
+      "caminho": "assets/lily_exercicios/treino_006.jpg",
+      "existe": true,
+      "size": 253130,
+      "md5": "46e16a4fd5780f80eb0cf242426b21fb",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_007",
+      "num": "007",
+      "nome": "Elíptico – Queima Gordura",
+      "categoria": "Cardio",
+      "grupo": null,
+      "equipamento": "Elíptico",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_007.jpg",
+      "caminho": "assets/lily_exercicios/treino_007.jpg",
+      "existe": true,
+      "size": 255790,
+      "md5": "8d6d9647a7e2f487a7e4a3f4732fd364",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_008",
+      "num": "008",
+      "nome": "Abdominal Supra no Solo",
+      "categoria": "Hipertrofia / Core",
+      "grupo": "Abdômen",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_008.jpg",
+      "caminho": "assets/lily_exercicios/treino_008.jpg",
+      "existe": true,
+      "size": 240995,
+      "md5": "7479e317ff104b942423f29592786356",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_009",
+      "num": "009",
+      "nome": "Abdominal – Queima Gordura",
+      "categoria": "Hipertrofia / Core",
+      "grupo": "Abdômen",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_009.jpg",
+      "caminho": "assets/lily_exercicios/treino_009.jpg",
+      "existe": true,
+      "size": 344994,
+      "md5": "57487a37a89611fd3fc1996f42aa307c",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_010",
+      "num": "010",
+      "nome": "Abdominal Supra com Toque nos Joelhos – Unilateral",
+      "categoria": "Hipertrofia / Core",
+      "grupo": "Abdômen",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_010.jpg",
+      "caminho": "assets/lily_exercicios/treino_010.jpg",
+      "existe": true,
+      "size": 344063,
+      "md5": "b66997a8b79555a9d0532e5a779c0c74",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_011",
+      "num": "011",
+      "nome": "Abdominal Remador",
+      "categoria": "Hipertrofia / Core",
+      "grupo": "Abdômen",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_011.jpg",
+      "caminho": "assets/lily_exercicios/treino_011.jpg",
+      "existe": true,
+      "size": 235857,
+      "md5": "b541b26b0dc89043f887cb42f1bf6e5c",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_012",
+      "num": "012",
+      "nome": "Prancha Abdominal – Isometria",
+      "categoria": "Hipertrofia / Core",
+      "grupo": "Core / abdômen",
+      "equipamento": "Nenhum",
+      "status_cadastro": "confirmar_duracao_provavel_20_segundos",
+      "observacao": null,
+      "arquivo": "treino_012.jpg",
+      "caminho": "assets/lily_exercicios/treino_012.jpg",
+      "existe": true,
+      "size": 239126,
+      "md5": "9614e6bc1369e3ab55f2bb93931dd9bb",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_013",
+      "num": "013",
+      "nome": "Abdominal na Máquina",
+      "categoria": "Hipertrofia / Core",
+      "grupo": "Abdômen",
+      "equipamento": "Máquina abdominal",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_013.jpg",
+      "caminho": "assets/lily_exercicios/treino_013.jpg",
+      "existe": true,
+      "size": 378423,
+      "md5": "34e65a7c99a2a8de5376d606c26ace30",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_014",
+      "num": "014",
+      "nome": "Abdominal Infra na Paralela",
+      "categoria": "Hipertrofia / Core",
+      "grupo": "Abdômen inferior",
+      "equipamento": "Paralela",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_014.jpg",
+      "caminho": "assets/lily_exercicios/treino_014.jpg",
+      "existe": true,
+      "size": 344695,
+      "md5": "e681456fe514ba8c583ed3230801457b",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_015",
+      "num": "015",
+      "nome": "Mobilidade de Ombros",
+      "categoria": "Flexibilidade / Mobilidade",
+      "grupo": "Ombros",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_015.jpg",
+      "caminho": "assets/lily_exercicios/treino_015.jpg",
+      "existe": true,
+      "size": 194192,
+      "md5": "afc0aaa62514f69ffdf66aa7e40e9022",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_016",
+      "num": "016",
+      "nome": "Alongamento de Superiores no Espaldar",
+      "categoria": "Flexibilidade / Mobilidade",
+      "grupo": "Membros superiores",
+      "equipamento": "Espaldar",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_016.jpg",
+      "caminho": "assets/lily_exercicios/treino_016.jpg",
+      "existe": true,
+      "size": 268683,
+      "md5": "e3a0e9247e23f727009a71c5899a1377",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_017",
+      "num": "017",
+      "nome": "Aquecimento de Membros Inferiores com Agachamento e Afundo",
+      "categoria": "Aquecimento / Mobilidade",
+      "grupo": "Membros inferiores",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_017.jpg",
+      "caminho": "assets/lily_exercicios/treino_017.jpg",
+      "existe": true,
+      "size": 313500,
+      "md5": "493553fa52cfcfcc9288e9583be400b6",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_018",
+      "num": "018",
+      "nome": "Alongamento de Membros Inferiores no Espaldar",
+      "categoria": "Flexibilidade / Mobilidade",
+      "grupo": "Membros inferiores",
+      "equipamento": "Espaldar",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_018.jpg",
+      "caminho": "assets/lily_exercicios/treino_018.jpg",
+      "existe": true,
+      "size": 187436,
+      "md5": "8db5bb31969de1ea0e5d88009d6ba56a",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_019",
+      "num": "019",
+      "nome": "Simulação de Pular Corda",
+      "categoria": "Cardio",
+      "grupo": null,
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_019.jpg",
+      "caminho": "assets/lily_exercicios/treino_019.jpg",
+      "existe": true,
+      "size": 220002,
+      "md5": "f2dedd34cc62ae235ac93420b04da8b5",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_020",
+      "num": "020",
+      "nome": "Agachamento com Salto",
+      "categoria": "Hipertrofia / Cardio",
+      "grupo": "Membros inferiores",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_020.jpg",
+      "caminho": "assets/lily_exercicios/treino_020.jpg",
+      "existe": true,
+      "size": 227181,
+      "md5": "7a38468a22be52fa48f6ed446c694a5a",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_021",
+      "num": "021",
+      "nome": "Agachamento com Passada Lateral",
+      "categoria": "Hipertrofia / Cardio",
+      "grupo": "Membros inferiores",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_021.jpg",
+      "caminho": "assets/lily_exercicios/treino_021.jpg",
+      "existe": true,
+      "size": 308137,
+      "md5": "dc7d645c03e1168c32f2fd97a92ff6ec",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_022",
+      "num": "022",
+      "nome": "Agachamento com Salto Lateral no Step",
+      "categoria": "Cardio",
+      "grupo": "Membros inferiores",
+      "equipamento": "Step",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_022.jpg",
+      "caminho": "assets/lily_exercicios/treino_022.jpg",
+      "existe": true,
+      "size": 343424,
+      "md5": "258f2f22fa63d52673f3706a53a89cc4",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_023",
+      "num": "023",
+      "nome": "Polichinelo",
+      "categoria": "Cardio",
+      "grupo": null,
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_023.jpg",
+      "caminho": "assets/lily_exercicios/treino_023.jpg",
+      "existe": true,
+      "size": 341051,
+      "md5": "bb8aff78858162acda86b5e8c3531a4b",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_024",
+      "num": "024",
+      "nome": "Burpee",
+      "categoria": "Cardio",
+      "grupo": "Corpo inteiro",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_024.jpg",
+      "caminho": "assets/lily_exercicios/treino_024.jpg",
+      "existe": true,
+      "size": 233696,
+      "md5": "875d219f5882dc27d69f89db48fe4252",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_025",
+      "num": "025",
+      "nome": "Escalador",
+      "categoria": "Cardio",
+      "grupo": "Core / corpo inteiro",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_025.jpg",
+      "caminho": "assets/lily_exercicios/treino_025.jpg",
+      "existe": true,
+      "size": 247172,
+      "md5": "b79048553bfde330d6c4318dc448ddbe",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_026",
+      "num": "026",
+      "nome": "Aquecimento com Agachamento + Recuo + Avanço",
+      "categoria": "Cardio / Aquecimento",
+      "grupo": "Membros inferiores",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_026.jpg",
+      "caminho": "assets/lily_exercicios/treino_026.jpg",
+      "existe": true,
+      "size": 345116,
+      "md5": "6b42f3fba14440c00855b5d3d334bedd",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_027",
+      "num": "027",
+      "nome": "Agachamento no TRX",
+      "categoria": "Hipertrofia",
+      "grupo": "Membros inferiores",
+      "equipamento": "TRX",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_027.jpg",
+      "caminho": "assets/lily_exercicios/treino_027.jpg",
+      "existe": true,
+      "size": 325732,
+      "md5": "12ddf45708a289a004d290b9d85417db",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_028",
+      "num": "028",
+      "nome": "Afundo no TRX",
+      "categoria": "Hipertrofia",
+      "grupo": "Membros inferiores",
+      "equipamento": "TRX",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_028.jpg",
+      "caminho": "assets/lily_exercicios/treino_028.jpg",
+      "existe": true,
+      "size": 357040,
+      "md5": "fb134014bc5ec6961a86579e2809fb8d",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_029",
+      "num": "029",
+      "nome": "Afundo no Step sem Peso",
+      "categoria": "Hipertrofia",
+      "grupo": "Membros inferiores",
+      "equipamento": "Step",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_029.jpg",
+      "caminho": "assets/lily_exercicios/treino_029.jpg",
+      "existe": true,
+      "size": 222349,
+      "md5": "6df55712a96072fc7a99ca68ef86effb",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_030",
+      "num": "030",
+      "nome": "Agachamento no Banco/Cadeira/Caixote",
+      "categoria": "Cardio / Funcional",
+      "grupo": "Membros inferiores",
+      "equipamento": "Banco, cadeira ou caixote",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_030.jpg",
+      "caminho": "assets/lily_exercicios/treino_030.jpg",
+      "existe": true,
+      "size": 321808,
+      "md5": "76439d3599e6e796693cf32f58e91b43",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_031",
+      "num": "031",
+      "nome": "Afundo com Halteres",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Halteres",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_031.jpg",
+      "caminho": "assets/lily_exercicios/treino_031.jpg",
+      "existe": true,
+      "size": 243588,
+      "md5": "776eb120e305bb2fc137d2be27e08449",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_032",
+      "num": "032",
+      "nome": "Afundo com Halteres no Step",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Halteres e step",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_032.jpg",
+      "caminho": "assets/lily_exercicios/treino_032.jpg",
+      "existe": true,
+      "size": 386457,
+      "md5": "c3edac93624247b7766226e397a99dc8",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_033",
+      "num": "033",
+      "nome": "Agachamento Taça",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps / glúteos",
+      "equipamento": "Halter ou kettlebell",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_033.jpg",
+      "caminho": "assets/lily_exercicios/treino_033.jpg",
+      "existe": true,
+      "size": 383611,
+      "md5": "eb3d4c29afacb14d080cf4d936d0ec95",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_034",
+      "num": "034",
+      "nome": "Cadeira Extensora",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps",
+      "equipamento": "Cadeira extensora",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_034.jpg",
+      "caminho": "assets/lily_exercicios/treino_034.jpg",
+      "existe": true,
+      "size": 382229,
+      "md5": "5f2afa2ae4699a7f318bb9d1561fa570",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_035",
+      "num": "035",
+      "nome": "Leg Press 45°",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Leg press 45°",
+      "status_cadastro": "pronto_link_atualizado",
+      "observacao": null,
+      "arquivo": "treino_035.jpg",
+      "caminho": "assets/lily_exercicios/treino_035.jpg",
+      "existe": true,
+      "size": 428954,
+      "md5": "43ad156e918160dd1267c8d8b5bc5830",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_036",
+      "num": "036",
+      "nome": "Agachamento Hack Squat",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps / glúteos",
+      "equipamento": "Hack squat",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_036.jpg",
+      "caminho": "assets/lily_exercicios/treino_036.jpg",
+      "existe": true,
+      "size": 382121,
+      "md5": "b892d0577afe46dc458bdfdea5243408",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_037",
+      "num": "037",
+      "nome": "Agachamento Livre",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Livre",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_037.jpg",
+      "caminho": "assets/lily_exercicios/treino_037.jpg",
+      "existe": true,
+      "size": 204527,
+      "md5": "f047bb3db0e326cb3c268d5acf4a5ade",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_038",
+      "num": "038",
+      "nome": "Agachamento Smith",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Smith",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_038.jpg",
+      "caminho": "assets/lily_exercicios/treino_038.jpg",
+      "existe": true,
+      "size": 362802,
+      "md5": "589f72fa0263d81574097c250f980e03",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_039",
+      "num": "039",
+      "nome": "Agachamento Smith Profundo",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Smith",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_039.jpg",
+      "caminho": "assets/lily_exercicios/treino_039.jpg",
+      "existe": true,
+      "size": 377261,
+      "md5": "db5407f5589c9a06544f4066f903b2a3",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_040",
+      "num": "040",
+      "nome": "Afundo no Smith",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Smith",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_040.jpg",
+      "caminho": "assets/lily_exercicios/treino_040.jpg",
+      "existe": true,
+      "size": 223457,
+      "md5": "8163ac29980a3f3de3ed6ab550348f4e",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_041",
+      "num": "041",
+      "nome": "Leg Press Horizontal",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps / isquiotibiais",
+      "equipamento": "Leg press horizontal",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_041.jpg",
+      "caminho": "assets/lily_exercicios/treino_041.jpg",
+      "existe": true,
+      "size": 411808,
+      "md5": "8832689f471ed7dde475c0f85dbdd45d",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_042",
+      "num": "042",
+      "nome": "Agachamento Livre com Halteres",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps / glúteos / isquiotibiais",
+      "equipamento": "Halteres",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_042.jpg",
+      "caminho": "assets/lily_exercicios/treino_042.jpg",
+      "existe": true,
+      "size": 229349,
+      "md5": "2172944ca7c82a6854a6e8072fccc224",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_043",
+      "num": "043",
+      "nome": "Máquina Adutora",
+      "categoria": "Hipertrofia",
+      "grupo": "Adutores",
+      "equipamento": "Máquina adutora",
+      "status_cadastro": "pronto",
+      "observacao": "A carga define o nível do atleta.",
+      "arquivo": "treino_043.jpg",
+      "caminho": "assets/lily_exercicios/treino_043.jpg",
+      "existe": true,
+      "size": 378334,
+      "md5": "04bc3c801609bf9289696226d811f2ee",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_044",
+      "num": "044",
+      "nome": "Agachamento Pêndulo",
+      "categoria": "Hipertrofia",
+      "grupo": "Quadríceps",
+      "equipamento": "Pêndulo",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_044.jpg",
+      "caminho": "assets/lily_exercicios/treino_044.jpg",
+      "existe": true,
+      "size": 325273,
+      "md5": "0644c9c5fb531ded34bdb68b4847640f",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_045",
+      "num": "045",
+      "nome": "Elevação Pélvica no Solo com Peso Corporal",
+      "categoria": "Ativação / Hipertrofia",
+      "grupo": "Glúteos",
+      "equipamento": "Nenhum",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_045.jpg",
+      "caminho": "assets/lily_exercicios/treino_045.jpg",
+      "existe": true,
+      "size": 188362,
+      "md5": "a950ed37343af428032d87f5adc70c2e",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_046",
+      "num": "046",
+      "nome": "Cadeira Abdutora",
+      "categoria": "Hipertrofia",
+      "grupo": "Abdutores",
+      "equipamento": "Máquina abdutora",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_046.jpg",
+      "caminho": "assets/lily_exercicios/treino_046.jpg",
+      "existe": true,
+      "size": 325616,
+      "md5": "3f1305d6e8dc2bd5b6ec49b8d15b570c",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_047",
+      "num": "047",
+      "nome": "Stiff Unilateral",
+      "categoria": "Hipertrofia",
+      "grupo": "Glúteos / isquiotibiais",
+      "equipamento": "Peso do corpo",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_047.jpg",
+      "caminho": "assets/lily_exercicios/treino_047.jpg",
+      "existe": true,
+      "size": 232012,
+      "md5": "fb57db7d117609117c045a2ee65e8988",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_048",
+      "num": "048",
+      "nome": "Glúteo 4 Apoios com Perna Estendida e Caneleira",
+      "categoria": "Hipertrofia",
+      "grupo": "Glúteos / isquiotibiais",
+      "equipamento": "Caneleira",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_048.jpg",
+      "caminho": "assets/lily_exercicios/treino_048.jpg",
+      "existe": true,
+      "size": 331891,
+      "md5": "e49b8a3f1ca0f2e8110ab944f9ed471f",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_049",
+      "num": "049",
+      "nome": "Glúteo 4 Apoios com Caneleira",
+      "categoria": "Hipertrofia",
+      "grupo": "Glúteos / isquiotibiais",
+      "equipamento": "Caneleira",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_049.jpg",
+      "caminho": "assets/lily_exercicios/treino_049.jpg",
+      "existe": true,
+      "size": 305216,
+      "md5": "98bc81cb36e86a453135c44db5f0cf8e",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_050",
+      "num": "050",
+      "nome": "Abdução com Caneleira",
+      "categoria": "Hipertrofia",
+      "grupo": "Abdutores / glúteos",
+      "equipamento": "Caneleira",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_050.jpg",
+      "caminho": "assets/lily_exercicios/treino_050.jpg",
+      "existe": true,
+      "size": 325616,
+      "md5": "3f1305d6e8dc2bd5b6ec49b8d15b570c",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_051",
+      "num": "051",
+      "nome": "Glúteo em Pé – Coice",
+      "categoria": "Hipertrofia",
+      "grupo": "Glúteos / isquiotibiais",
+      "equipamento": "Máquina de glúteo em pé",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_051.jpg",
+      "caminho": "assets/lily_exercicios/treino_051.jpg",
+      "existe": true,
+      "size": 331891,
+      "md5": "e49b8a3f1ca0f2e8110ab944f9ed471f",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_052",
+      "num": "052",
+      "nome": "Agachamento Búlgaro com Halteres",
+      "categoria": "Hipertrofia",
+      "grupo": "Glúteos / isquiotibiais / quadríceps",
+      "equipamento": "Banco, caixote, step ou aparelho de búlgaro + halteres",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_052.jpg",
+      "caminho": "assets/lily_exercicios/treino_052.jpg",
+      "existe": true,
+      "size": 223362,
+      "md5": "a75599320dc94c9391a94c9980df8e7d",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_053",
+      "num": "053",
+      "nome": "Afundo com Recuo e Rosca Direta",
+      "categoria": "Emagrecimento / Funcional",
+      "grupo": "Membros inferiores / bíceps",
+      "equipamento": null,
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_053.jpg",
+      "caminho": "assets/lily_exercicios/treino_053.jpg",
+      "existe": true,
+      "size": 255450,
+      "md5": "3b63ea702d78d898b671422bd4a564ce",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_054",
+      "num": "054",
+      "nome": "Afundo com Recuo e Halteres",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Quadríceps / Glúteos / Isquiotibiais",
+      "equipamento": "Halteres",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_054.jpg",
+      "caminho": "assets/lily_exercicios/treino_054.jpg",
+      "existe": true,
+      "size": 223183,
+      "md5": "d38bc17264ee6e84722ead7619bdd2f6",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_055",
+      "num": "055",
+      "nome": "Glúteo Coice no Cabo – Polia Baixa",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Glúteos / Isquiotibiais",
+      "equipamento": "Crossover",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_055.jpg",
+      "caminho": "assets/lily_exercicios/treino_055.jpg",
+      "existe": true,
+      "size": 316501,
+      "md5": "6d6bb655f9897ce05601cf1f4f6a7c5a",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_056",
+      "num": "056",
+      "nome": "Glúteo na Polia com Cabo no Quadríceps",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Glúteos / Isquiotibiais",
+      "equipamento": "Crossover",
+      "status_cadastro": "revisar",
+      "observacao": "Nome preservado conforme informado; revisar nomenclatura técnica se desejado.",
+      "arquivo": "treino_056.jpg",
+      "caminho": "assets/lily_exercicios/treino_056.jpg",
+      "existe": true,
+      "size": 284147,
+      "md5": "25d7ade7be0398fbef7a7689dcd4830a",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_057",
+      "num": "057",
+      "nome": "Agachamento Sumô no Step",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Glúteos / Isquiotibiais",
+      "equipamento": "Halteres / Dumbbells / Step",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_057.jpg",
+      "caminho": "assets/lily_exercicios/treino_057.jpg",
+      "existe": true,
+      "size": 216040,
+      "md5": "1ad39d674f00da0d532b136fccc25972",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_058",
+      "num": "058",
+      "nome": "Levantamento Terra Sumô",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Isquiotibiais",
+      "equipamento": "Barra livre",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_058.jpg",
+      "caminho": "assets/lily_exercicios/treino_058.jpg",
+      "existe": true,
+      "size": 255562,
+      "md5": "31ddbd116abcca99f1a2948cdfbcfcb3",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_059",
+      "num": "059",
+      "nome": "Agachamento Sumô na Máquina",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Isquiotibiais",
+      "equipamento": "Máquina sumô",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_059.jpg",
+      "caminho": "assets/lily_exercicios/treino_059.jpg",
+      "existe": true,
+      "size": 269402,
+      "md5": "d1767e555ae35c548786c9d61fe9f677",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_060",
+      "num": "060",
+      "nome": "Búlgaro no Smith",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Glúteos / Isquiotibiais",
+      "equipamento": "Smith + aparelho de búlgaro, banco ou caixote",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_060.jpg",
+      "caminho": "assets/lily_exercicios/treino_060.jpg",
+      "existe": true,
+      "size": 318771,
+      "md5": "c2e11b35610b46fc5ac6cc3dfd34ef49",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_061",
+      "num": "061",
+      "nome": "Elevação Pélvica",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Glúteos / Isquiotibiais",
+      "equipamento": "Máquina de elevação pélvica",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_061.jpg",
+      "caminho": "assets/lily_exercicios/treino_061.jpg",
+      "existe": true,
+      "size": 357374,
+      "md5": "4b097e5bf6dbc8ae9e69ba00dbf8dd5b",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_062",
+      "num": "062",
+      "nome": "Máquina de Elevação Pélvica",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Glúteos / Isquiotibiais",
+      "equipamento": "Máquina de elevação pélvica",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_062.jpg",
+      "caminho": "assets/lily_exercicios/treino_062.jpg",
+      "existe": true,
+      "size": 315706,
+      "md5": "0ebe74b9f8ce11acbfadc703727c4e5d",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_063",
+      "num": "063",
+      "nome": "Cadeira Flexora",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Isquiotibiais",
+      "equipamento": "Cadeira flexora",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_063.jpg",
+      "caminho": "assets/lily_exercicios/treino_063.jpg",
+      "existe": true,
+      "size": 315011,
+      "md5": "9e7842e0525e109b25bed2cfe9342653",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_064",
+      "num": "064",
+      "nome": "Mesa Flexora",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Isquiotibiais",
+      "equipamento": "Mesa flexora",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_064.jpg",
+      "caminho": "assets/lily_exercicios/treino_064.jpg",
+      "existe": true,
+      "size": 297310,
+      "md5": "e6cddab392e3393282e23cdc279bcd56",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_065",
+      "num": "065",
+      "nome": "Stiff",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Isquiotibiais",
+      "equipamento": "Barra livre",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_065.jpg",
+      "caminho": "assets/lily_exercicios/treino_065.jpg",
+      "existe": true,
+      "size": 232012,
+      "md5": "fb57db7d117609117c045a2ee65e8988",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_066",
+      "num": "066",
+      "nome": "Panturrilha Sentada",
+      "categoria": "Hipertrofia – Panturrilhas",
+      "grupo": "Panturrilhas / Gêmeos",
+      "equipamento": "Máquina de panturrilha sentada",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_066.jpg",
+      "caminho": "assets/lily_exercicios/treino_066.jpg",
+      "existe": true,
+      "size": 263865,
+      "md5": "eccb301e12957d11d56ccdecf41f8d16",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_067",
+      "num": "067",
+      "nome": "Subida no Caixote Segurando no Espaldar",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Isquiotibiais / Quadríceps",
+      "equipamento": "Caixote e espaldar",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_067.jpg",
+      "caminho": "assets/lily_exercicios/treino_067.jpg",
+      "existe": true,
+      "size": 348162,
+      "md5": "41edfc6b3097693698c395ab18e1131c",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_068",
+      "num": "068",
+      "nome": "Full Body – Agachamento Sumô com Elevação Frontal",
+      "categoria": "Full Body / Funcional",
+      "grupo": "Membros inferiores / Ombros",
+      "equipamento": "Kettlebell",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_068.jpg",
+      "caminho": "assets/lily_exercicios/treino_068.jpg",
+      "existe": true,
+      "size": 232406,
+      "md5": "b01288fd0298b7f0d7407d787a2fe954",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_069",
+      "num": "069",
+      "nome": "Agachamento com Desenvolvimento",
+      "categoria": "Full Body / Funcional",
+      "grupo": "Quadríceps / Glúteos / Isquiotibiais / Ombros",
+      "equipamento": "Halteres",
+      "status_cadastro": "revisar",
+      "observacao": "Mesmo link informado no ID original 45; revisar se os dois exercícios usam o mesmo vídeo.",
+      "arquivo": "treino_069.jpg",
+      "caminho": "assets/lily_exercicios/treino_069.jpg",
+      "existe": true,
+      "size": 377144,
+      "md5": "df52686a735ea5b0309ebdce025360f9",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_070",
+      "num": "070",
+      "nome": "Full Body – Agachamento com Desenvolvimento Unilateral Alternado",
+      "categoria": "Full Body / Funcional",
+      "grupo": "Quadríceps / Isquiotibiais / Glúteos",
+      "equipamento": "Halteres",
+      "status_cadastro": "revisar",
+      "observacao": "Mesmo link informado no ID original 44; revisar se os dois exercícios usam o mesmo vídeo.",
+      "arquivo": "treino_070.jpg",
+      "caminho": "assets/lily_exercicios/treino_070.jpg",
+      "existe": true,
+      "size": 187463,
+      "md5": "c3425aee1b4be5c3364be032edfa0621",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_071",
+      "num": "071",
+      "nome": "Supino Reto Articulado – Pegada Neutra",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo": "Peitoral",
+      "equipamento": "Máquina de supino articulada",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_071.jpg",
+      "caminho": "assets/lily_exercicios/treino_071.jpg",
+      "existe": true,
+      "size": 330515,
+      "md5": "03ab25d19d5bee5d1ca9f2ffbe06f4c8",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_072",
+      "num": "072",
+      "nome": "Supino Reto – Pegada Supinada na Máquina Articulada",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo": "Peitoral",
+      "equipamento": "Supino reto articulado",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_072.jpg",
+      "caminho": "assets/lily_exercicios/treino_072.jpg",
+      "existe": true,
+      "size": 257997,
+      "md5": "d48df174e47360a722476f140bc09126",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_073",
+      "num": "073",
+      "nome": "Supino Inclinado – Pegada Neutra",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo": "Peitoral",
+      "equipamento": "Máquina de supino inclinado articulado",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_073.jpg",
+      "caminho": "assets/lily_exercicios/treino_073.jpg",
+      "existe": true,
+      "size": 348878,
+      "md5": "264cbfbbb87824133e3b739d9dc7cdeb",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_074",
+      "num": "074",
+      "nome": "Supino Inclinado – Pegada Supinada",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo": "Peitoral",
+      "equipamento": "Supino articulado inclinado",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_074.jpg",
+      "caminho": "assets/lily_exercicios/treino_074.jpg",
+      "existe": true,
+      "size": 291368,
+      "md5": "f5816bf0d533013fd00399df93d0f190",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_075",
+      "num": "075",
+      "nome": "Supino com Halteres no Banco Inclinado",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo": "Peitoral",
+      "equipamento": "Banco e halteres",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_075.jpg",
+      "caminho": "assets/lily_exercicios/treino_075.jpg",
+      "existe": true,
+      "size": 318537,
+      "md5": "e4cc854ab1518f0fdac2022e22a76a63",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_076",
+      "num": "076",
+      "nome": "Peitoral no Peck Fly",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo": "Peitoral",
+      "equipamento": "Peck Fly",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_076.jpg",
+      "caminho": "assets/lily_exercicios/treino_076.jpg",
+      "existe": true,
+      "size": 286476,
+      "md5": "ed3d0d0eb78c5400d8c8dd07b88132a8",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_077",
+      "num": "077",
+      "nome": "Puxada com Barra Longa",
+      "categoria": "Hipertrofia – Costas",
+      "grupo": "Dorsal",
+      "equipamento": "Máquina de puxada alta",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_077.jpg",
+      "caminho": "assets/lily_exercicios/treino_077.jpg",
+      "existe": true,
+      "size": 326674,
+      "md5": "27467ba9c2df73167f4133908493c3da",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_078",
+      "num": "078",
+      "nome": "Barra Fixa no Graviton",
+      "categoria": "Hipertrofia – Costas",
+      "grupo": "Grande dorsal",
+      "equipamento": "Graviton",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_078.jpg",
+      "caminho": "assets/lily_exercicios/treino_078.jpg",
+      "existe": true,
+      "size": 346152,
+      "md5": "5375918a32f4a76ac8ab42dab48614a1",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_079",
+      "num": "079",
+      "nome": "Puxada com Triângulo",
+      "categoria": "Hipertrofia – Costas",
+      "grupo": "Dorsal",
+      "equipamento": "Máquina de puxada",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_079.jpg",
+      "caminho": "assets/lily_exercicios/treino_079.jpg",
+      "existe": true,
+      "size": 330587,
+      "md5": "4782fadf793266fa1f6d623b39815f37",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_080",
+      "num": "080",
+      "nome": "Puxada com Barra W",
+      "categoria": "Hipertrofia – Costas",
+      "grupo": "Dorsal",
+      "equipamento": "Máquina de puxada",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_080.jpg",
+      "caminho": "assets/lily_exercicios/treino_080.jpg",
+      "existe": true,
+      "size": 322295,
+      "md5": "5728ffd678d32ebd2a522e3458a33de8",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_081",
+      "num": "081",
+      "nome": "Face Pull",
+      "categoria": "Hipertrofia – Costas",
+      "grupo": "Ombros / Dorsal",
+      "equipamento": "Crossover ou Crosmith",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_081.jpg",
+      "caminho": "assets/lily_exercicios/treino_081.jpg",
+      "existe": true,
+      "size": 316844,
+      "md5": "7e79b8795937a469828eb2dfbd744e0e",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_082",
+      "num": "082",
+      "nome": "Pulldown com Barra Reta",
+      "categoria": "Hipertrofia – Costas",
+      "grupo": "Ombros / Dorsal",
+      "equipamento": "Crossover ou Crosmith",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_082.jpg",
+      "caminho": "assets/lily_exercicios/treino_082.jpg",
+      "existe": true,
+      "size": 346406,
+      "md5": "d40ac8eb7da25d1f13c6a9066da6f95f",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_083",
+      "num": "083",
+      "nome": "Puxada Alta com Corda",
+      "categoria": "Hipertrofia – Costas",
+      "grupo": "Dorsal",
+      "equipamento": "Crossover ou Crosmith",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_083.jpg",
+      "caminho": "assets/lily_exercicios/treino_083.jpg",
+      "existe": true,
+      "size": 339023,
+      "md5": "fae8bf00ab245576baa1a3e1c1ba77fb",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_084",
+      "num": "084",
+      "nome": "Remada Sentada com Triângulo",
+      "categoria": "Hipertrofia – Costas",
+      "grupo": "Dorsal",
+      "equipamento": "Máquina de remada",
+      "status_cadastro": "revisar",
+      "observacao": "Intervalo veio sem número no texto original; confirmar.",
+      "arquivo": "treino_084.jpg",
+      "caminho": "assets/lily_exercicios/treino_084.jpg",
+      "existe": true,
+      "size": 192407,
+      "md5": "76bdb34d8bfa3d3c81ccea8e5f0542e9",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_085",
+      "num": "085",
+      "nome": "Remada Curvada com Barra",
+      "categoria": "Hipertrofia – Costas",
+      "grupo": "Dorsal",
+      "equipamento": "Barra longa",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_085.jpg",
+      "caminho": "assets/lily_exercicios/treino_085.jpg",
+      "existe": true,
+      "size": 339875,
+      "md5": "2956892d6ffdad009372f79a4281175e",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_086",
+      "num": "086",
+      "nome": "Rosca Direta na Polia Baixa com Barra Reta",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo": "Bíceps",
+      "equipamento": "Crossover ou Crosmith + barra reta",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_086.jpg",
+      "caminho": "assets/lily_exercicios/treino_086.jpg",
+      "existe": true,
+      "size": 278892,
+      "md5": "8f0ee161b2b268e9ee0f26a6e58e52fa",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_087",
+      "num": "087",
+      "nome": "Rosca Direta com Halteres",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo": "Bíceps",
+      "equipamento": "Halteres",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_087.jpg",
+      "caminho": "assets/lily_exercicios/treino_087.jpg",
+      "existe": true,
+      "size": 257815,
+      "md5": "63b3d9f6e240b92e355a58cabc86691b",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_088",
+      "num": "088",
+      "nome": "Bíceps Alternado / Unilateral",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo": "Bíceps",
+      "equipamento": "Máquina de bíceps",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_088.jpg",
+      "caminho": "assets/lily_exercicios/treino_088.jpg",
+      "existe": true,
+      "size": 325335,
+      "md5": "2250c31cf95438c17a9cc96da25e3e78",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_089",
+      "num": "089",
+      "nome": "Rosca Direta na Máquina",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo": "Bíceps",
+      "equipamento": "Máquina de bíceps",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_089.jpg",
+      "caminho": "assets/lily_exercicios/treino_089.jpg",
+      "existe": true,
+      "size": 255450,
+      "md5": "3b63ea702d78d898b671422bd4a564ce",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_090",
+      "num": "090",
+      "nome": "Rosca Direta Alternada com Rotação de Cotovelos",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo": "Bíceps",
+      "equipamento": "Halteres",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_090.jpg",
+      "caminho": "assets/lily_exercicios/treino_090.jpg",
+      "existe": true,
+      "size": 255450,
+      "md5": "3b63ea702d78d898b671422bd4a564ce",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_091",
+      "num": "091",
+      "nome": "Rosca Martelo com Corda",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo": "Bíceps",
+      "equipamento": "Crossover ou Crosmith + corda",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_091.jpg",
+      "caminho": "assets/lily_exercicios/treino_091.jpg",
+      "existe": true,
+      "size": 246038,
+      "md5": "9693d7dea9cedf1bd25110dc7e6330d1",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_092",
+      "num": "092",
+      "nome": "Rosca Unilateral na Polia Baixa",
+      "categoria": "Hipertrofia – Bíceps",
+      "grupo": "Bíceps",
+      "equipamento": "Crossover ou Crosmith + pegador",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_092.jpg",
+      "caminho": "assets/lily_exercicios/treino_092.jpg",
+      "existe": true,
+      "size": 255450,
+      "md5": "3b63ea702d78d898b671422bd4a564ce",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_093",
+      "num": "093",
+      "nome": "Remada Alta na Polia",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo": "Ombros / Trapézio",
+      "equipamento": "Crossover ou Crosmith + barra reta",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_093.jpg",
+      "caminho": "assets/lily_exercicios/treino_093.jpg",
+      "existe": true,
+      "size": 360318,
+      "md5": "ff52e3643402e2239df8ec9974d0fb2c",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_094",
+      "num": "094",
+      "nome": "Remada Alta com Barra",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo": "Ombros / Trapézio",
+      "equipamento": "Barra montada ou desmontada",
+      "status_cadastro": "revisar",
+      "observacao": "Instrução original: elevar a barra até a altura do peito, deixando os ombros alinhados.",
+      "arquivo": "treino_094.jpg",
+      "caminho": "assets/lily_exercicios/treino_094.jpg",
+      "existe": true,
+      "size": 342599,
+      "md5": "0d3a79f7df74b856a48418d9421dd4f4",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_095",
+      "num": "095",
+      "nome": "Remada Alta + Desenvolvimento com Barra",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo": "Ombros / Trapézio",
+      "equipamento": "Barra reta",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_095.jpg",
+      "caminho": "assets/lily_exercicios/treino_095.jpg",
+      "existe": true,
+      "size": 194192,
+      "md5": "afc0aaa62514f69ffdf66aa7e40e9022",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_096",
+      "num": "096",
+      "nome": "Desenvolvimento com Halteres",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo": "Ombros",
+      "equipamento": "Halteres e banco",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_096.jpg",
+      "caminho": "assets/lily_exercicios/treino_096.jpg",
+      "existe": true,
+      "size": 306627,
+      "md5": "55e45626ed4f041a71e4c28668181e96",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_097",
+      "num": "097",
+      "nome": "Desenvolvimento Arnold em Pé",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo": "Ombros",
+      "equipamento": "Halteres",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_097.jpg",
+      "caminho": "assets/lily_exercicios/treino_097.jpg",
+      "existe": true,
+      "size": 187463,
+      "md5": "c3425aee1b4be5c3364be032edfa0621",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_098",
+      "num": "098",
+      "nome": "Desenvolvimento na Máquina",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo": "Ombros",
+      "equipamento": "Máquina de desenvolvimento",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_098.jpg",
+      "caminho": "assets/lily_exercicios/treino_098.jpg",
+      "existe": true,
+      "size": 306627,
+      "md5": "55e45626ed4f041a71e4c28668181e96",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_099",
+      "num": "099",
+      "nome": "Elevação Frontal na Polia com Barra Reta",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo": "Ombros",
+      "equipamento": "Crossover ou Crosmith + barra reta",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_099.jpg",
+      "caminho": "assets/lily_exercicios/treino_099.jpg",
+      "existe": true,
+      "size": 182845,
+      "md5": "a23ba3aea1186ed558f0d3d5b81af438",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_100",
+      "num": "100",
+      "nome": "Elevação Frontal – Ombro e Peitoral",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo": "Ombros / Peitoral",
+      "equipamento": "Crossover ou Crosmith + barra reta",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_100.jpg",
+      "caminho": "assets/lily_exercicios/treino_100.jpg",
+      "existe": true,
+      "size": 259569,
+      "md5": "bfab9fa26b7c24abcd446a027a692a04",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_101",
+      "num": "101",
+      "nome": "Elevação Lateral + Desenvolvimento com Cotovelos à Frente",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo": "Ombros",
+      "equipamento": "Halteres",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_101.jpg",
+      "caminho": "assets/lily_exercicios/treino_101.jpg",
+      "existe": true,
+      "size": 204131,
+      "md5": "aec70b71ca4edd9d7af5f4ff641b1bf2",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_102",
+      "num": "102",
+      "nome": "Elevação Frontal com Halteres",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo": "Ombros / Peitoral",
+      "equipamento": "Halteres",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_102.jpg",
+      "caminho": "assets/lily_exercicios/treino_102.jpg",
+      "existe": true,
+      "size": 187235,
+      "md5": "03afb6e69c455c989ddda86cd9105f16",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_103",
+      "num": "103",
+      "nome": "Elevação Lateral na Polia",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo": "Ombros",
+      "equipamento": "Crossover ou Crosmith + pegador",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_103.jpg",
+      "caminho": "assets/lily_exercicios/treino_103.jpg",
+      "existe": true,
+      "size": 182845,
+      "md5": "a23ba3aea1186ed558f0d3d5b81af438",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_104",
+      "num": "104",
+      "nome": "Elevação Lateral no Banco",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo": "Ombros",
+      "equipamento": "Halteres e banco",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_104.jpg",
+      "caminho": "assets/lily_exercicios/treino_104.jpg",
+      "existe": true,
+      "size": 182845,
+      "md5": "a23ba3aea1186ed558f0d3d5b81af438",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_105",
+      "num": "105",
+      "nome": "Elevação Frontal com Anilha",
+      "categoria": "Hipertrofia – Peitoral",
+      "grupo": "Ombros / Peitoral",
+      "equipamento": "Anilhas",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_105.jpg",
+      "caminho": "assets/lily_exercicios/treino_105.jpg",
+      "existe": true,
+      "size": 182845,
+      "md5": "a23ba3aea1186ed558f0d3d5b81af438",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_106",
+      "num": "106",
+      "nome": "Elevação Lateral com Halteres",
+      "categoria": "Hipertrofia – Ombros",
+      "grupo": "Ombros",
+      "equipamento": "Halteres",
+      "status_cadastro": "revisar",
+      "observacao": "ID original 83 duplicado; diferenciado como 83A apenas para rastreio.",
+      "arquivo": "treino_106.jpg",
+      "caminho": "assets/lily_exercicios/treino_106.jpg",
+      "existe": true,
+      "size": 191238,
+      "md5": "90ee1b1672eb0a0e3e8e030d6c320829",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_107",
+      "num": "107",
+      "nome": "Tríceps com Corda",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo": "Tríceps",
+      "equipamento": "Crossover ou Crosmith + corda",
+      "status_cadastro": "revisar",
+      "observacao": "ID original 83 duplicado; diferenciado como 83B apenas para rastreio.",
+      "arquivo": "treino_107.jpg",
+      "caminho": "assets/lily_exercicios/treino_107.jpg",
+      "existe": true,
+      "size": 259746,
+      "md5": "acdf813ecd3252f3a985e03dd7653a49",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_108",
+      "num": "108",
+      "nome": "Tríceps Francês com Corda",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo": "Tríceps",
+      "equipamento": "Crossover ou Crosmith + corda",
+      "status_cadastro": "revisar",
+      "observacao": "Texto original veio como “Tríceps francês concorda”; padronizado para “com corda”. Mesmo vídeo-base informado também nos IDs 86 e 88.",
+      "arquivo": "treino_108.jpg",
+      "caminho": "assets/lily_exercicios/treino_108.jpg",
+      "existe": true,
+      "size": 315420,
+      "md5": "4bad6e5e6e9f805e8cdbd4001b62bc2f",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_109",
+      "num": "109",
+      "nome": "Tríceps Paralelo",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo": "Tríceps",
+      "equipamento": "Máquina de tríceps",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_109.jpg",
+      "caminho": "assets/lily_exercicios/treino_109.jpg",
+      "existe": true,
+      "size": 172179,
+      "md5": "752583d97dfaff2bde10ebe1d5fb65a9",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_110",
+      "num": "110",
+      "nome": "Tríceps Francês com Corda",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo": "Tríceps",
+      "equipamento": "Crossover ou Crosmith + corda",
+      "status_cadastro": "revisar",
+      "observacao": "Mesmo vídeo-base dos IDs originais 84 e 88; revisar se são duplicatas.",
+      "arquivo": "treino_110.jpg",
+      "caminho": "assets/lily_exercicios/treino_110.jpg",
+      "existe": true,
+      "size": 259746,
+      "md5": "acdf813ecd3252f3a985e03dd7653a49",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_111",
+      "num": "111",
+      "nome": "Tríceps Testa na Polia",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo": "Tríceps",
+      "equipamento": "Crossover ou Crosmith + barra reta",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_111.jpg",
+      "caminho": "assets/lily_exercicios/treino_111.jpg",
+      "existe": true,
+      "size": 259746,
+      "md5": "acdf813ecd3252f3a985e03dd7653a49",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_112",
+      "num": "112",
+      "nome": "Tríceps Francês com Corda",
+      "categoria": "Hipertrofia – Tríceps",
+      "grupo": "Tríceps",
+      "equipamento": "Crossover ou Crosmith + corda",
+      "status_cadastro": "revisar",
+      "observacao": "Mesmo vídeo-base dos IDs originais 84 e 86; revisar se são duplicatas.",
+      "arquivo": "treino_112.jpg",
+      "caminho": "assets/lily_exercicios/treino_112.jpg",
+      "existe": true,
+      "size": 259746,
+      "md5": "acdf813ecd3252f3a985e03dd7653a49",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_113",
+      "num": "113",
+      "nome": "Full Body – Afundo com Recuo e Rosca Direta",
+      "categoria": "Full Body / Funcional",
+      "grupo": "Corpo todo",
+      "equipamento": "Halteres",
+      "status_cadastro": "revisar",
+      "observacao": "Mesmo vídeo-base do treino_053 já existente; provável duplicata/versão mais completa.",
+      "arquivo": "treino_113.jpg",
+      "caminho": "assets/lily_exercicios/treino_113.jpg",
+      "existe": true,
+      "size": 214884,
+      "md5": "c5c545ef523335edc07e84e150c7ee35",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_114",
+      "num": "114",
+      "nome": "Full Body – Agachamento Sumô com Elevação Lateral",
+      "categoria": "Full Body / Funcional",
+      "grupo": "Corpo todo",
+      "equipamento": "Halteres",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_114.jpg",
+      "caminho": "assets/lily_exercicios/treino_114.jpg",
+      "existe": true,
+      "size": 338253,
+      "md5": "a00985095321f75efbe198789ea5f1f7",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_115",
+      "num": "115",
+      "nome": "Full Body – Afundo com Recuo e Remada Curvada",
+      "categoria": "Full Body / Funcional",
+      "grupo": "Corpo todo",
+      "equipamento": "Anilhas",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_115.jpg",
+      "caminho": "assets/lily_exercicios/treino_115.jpg",
+      "existe": true,
+      "size": 217719,
+      "md5": "bce63989e026d0bc6e295d57469cfc69",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_116",
+      "num": "116",
+      "nome": "Búlgaro sem Peso",
+      "categoria": "Hipertrofia – Membros Inferiores",
+      "grupo": "Glúteos / Isquiotibiais / Quadríceps",
+      "equipamento": "Aparelho de búlgaro, banco ou caixote",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_116.jpg",
+      "caminho": "assets/lily_exercicios/treino_116.jpg",
+      "existe": true,
+      "size": 313500,
+      "md5": "493553fa52cfcfcc9288e9583be400b6",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "id": "treino_117",
+      "num": "117",
+      "nome": "Remada Articulada",
+      "categoria": "Hipertrofia – Costas",
+      "grupo": "Dorsal",
+      "equipamento": "Remada articulada",
+      "status_cadastro": "pronto",
+      "observacao": null,
+      "arquivo": "treino_117.jpg",
+      "caminho": "assets/lily_exercicios/treino_117.jpg",
+      "existe": true,
+      "size": 360318,
+      "md5": "ff52e3643402e2239df8ec9974d0fb2c",
+      "width": 1254,
+      "height": 1254
+    }
+  ],
+  "pack24": [
+    {
+      "name": "lily_abducao_com_faixa.png",
+      "path": "assets/lily_treinos/lily_abducao_com_faixa.png",
+      "size": 1715592,
+      "md5": "1435422a2512f02c2a28bd8d5e025fd9",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_agachamento.png",
+      "path": "assets/lily_treinos/lily_agachamento.png",
+      "size": 2170720,
+      "md5": "ad74b7d8732d4c09ff160ddcccbfd4ca",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "name": "lily_alongamento.png",
+      "path": "assets/lily_treinos/lily_alongamento.png",
+      "size": 1865839,
+      "md5": "29c404aaed8e8f52eac92eddb9643884",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_bicicleta.png",
+      "path": "assets/lily_treinos/lily_bicicleta.png",
+      "size": 1637202,
+      "md5": "c566ef2067ba2c1195f22e88e82159dc",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_caminhada.png",
+      "path": "assets/lily_treinos/lily_caminhada.png",
+      "size": 1562328,
+      "md5": "b4d378dd1c1de40de73b03ce9e696335",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_coice_gluteo.png",
+      "path": "assets/lily_treinos/lily_coice_gluteo.png",
+      "size": 1882754,
+      "md5": "525b12975f400a74375bee1eab4edae0",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_corda_naval.png",
+      "path": "assets/lily_treinos/lily_corda_naval.png",
+      "size": 2175445,
+      "md5": "6362041c059fd59214032db9c6cb9360",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "name": "lily_corrida.png",
+      "path": "assets/lily_treinos/lily_corrida.png",
+      "size": 1586843,
+      "md5": "1fcf1e6d9af9cbeda039fdb9ff162784",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "name": "lily_desenvolvimento_ombros.png",
+      "path": "assets/lily_treinos/lily_desenvolvimento_ombros.png",
+      "size": 1636697,
+      "md5": "c6cc9032e62156d5ff0397bc82f1b17c",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_elevacao_lateral.png",
+      "path": "assets/lily_treinos/lily_elevacao_lateral.png",
+      "size": 1651765,
+      "md5": "219a6376674abb83f95e817b7a066c3c",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_esteira.png",
+      "path": "assets/lily_treinos/lily_esteira.png",
+      "size": 1627056,
+      "md5": "93f36b17392a552ea15f80fa14526bdb",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_hip_thrust.png",
+      "path": "assets/lily_treinos/lily_hip_thrust.png",
+      "size": 1921579,
+      "md5": "61d16f38138cf07d3a1ff58784c396ff",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_kettlebell.png",
+      "path": "assets/lily_treinos/lily_kettlebell.png",
+      "size": 2144278,
+      "md5": "25665e5b6ba37895600dd57b708c1c99",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "name": "lily_panturrilha.png",
+      "path": "assets/lily_treinos/lily_panturrilha.png",
+      "size": 1581241,
+      "md5": "7bb0cd401081a673224949bab3f91a07",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_prancha.png",
+      "path": "assets/lily_treinos/lily_prancha.png",
+      "size": 2077969,
+      "md5": "a3eaf6a7afc2aec727c8d9b767ac69de",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "name": "lily_remada.png",
+      "path": "assets/lily_treinos/lily_remada.png",
+      "size": 1745485,
+      "md5": "4d3dd63a412d4b914a9c60fa614af32e",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_rosca_biceps.png",
+      "path": "assets/lily_treinos/lily_rosca_biceps.png",
+      "size": 1554991,
+      "md5": "861b1d4a79ea4197c9e9bc21f9549549",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "name": "lily_supino.png",
+      "path": "assets/lily_treinos/lily_supino.png",
+      "size": 1903770,
+      "md5": "7443978bf619655e15ad3a8a95bde1f1",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_treino_generico_1.png",
+      "path": "assets/lily_treinos/lily_treino_generico_1.png",
+      "size": 2097077,
+      "md5": "98aaa3d63bceb1bf33a34657695b95ec",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "name": "lily_treino_generico_2.png",
+      "path": "assets/lily_treinos/lily_treino_generico_2.png",
+      "size": 2035443,
+      "md5": "17e8dd4e58292026da3c2098764517d0",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "name": "lily_treino_generico_3.png",
+      "path": "assets/lily_treinos/lily_treino_generico_3.png",
+      "size": 1733834,
+      "md5": "d399f1beeea225bca4ee1ef2e44c98e3",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_treino_generico_4.png",
+      "path": "assets/lily_treinos/lily_treino_generico_4.png",
+      "size": 2041573,
+      "md5": "e691f63fd5c8a5adf614542093158a3a",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "name": "lily_treino_halteres.png",
+      "path": "assets/lily_treinos/lily_treino_halteres.png",
+      "size": 1658477,
+      "md5": "f4db8dce37e16de528f3c427dfad2539",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "name": "lily_triceps.png",
+      "path": "assets/lily_treinos/lily_triceps.png",
+      "size": 1603392,
+      "md5": "96a864ad6ca44155b2a056ec73ae68e7",
+      "width": 1254,
+      "height": 1254
+    }
+  ],
+  "extra_assets": [
+    {
+      "path": "assets/lily/lily_achievement.png",
+      "size": 266674,
+      "md5": "4f2f8c965ca935b068bc2e5720936323"
+    },
+    {
+      "path": "assets/lily/lily_alongamento.png",
+      "size": 1579702,
+      "md5": "6aa4a0a99017fd55153f2bc42c5f80f9"
+    },
+    {
+      "path": "assets/lily/lily_apontando_baixo.png",
+      "size": 1665628,
+      "md5": "2179412e2a119ab5fb50ebb7f12f2ea4"
+    },
+    {
+      "path": "assets/lily/lily_apontando_cima.png",
+      "size": 1692397,
+      "md5": "2dba82fd4261c557252337ff7784bc8e"
+    },
+    {
+      "path": "assets/lily/lily_apontando_direita.png",
+      "size": 1691044,
+      "md5": "48eccb29974248238b8948c4a83a7dbf"
+    },
+    {
+      "path": "assets/lily/lily_apontando_esquerda.png",
+      "size": 1696639,
+      "md5": "5664b5228063fb96639ce7a67228bfd6"
+    },
+    {
+      "path": "assets/lily/lily_apresentando_aberta.png",
+      "size": 1706659,
+      "md5": "8e9a3f1a6d6b977196c3930c43cd9648"
+    },
+    {
+      "path": "assets/lily/lily_apresentando_esquerda.png",
+      "size": 1576068,
+      "md5": "0b8ef08def7e4f3b2ac2cc171817559c"
+    },
+    {
+      "path": "assets/lily/lily_attention.png",
+      "size": 121839,
+      "md5": "922771f98cd90ecdf6fcd564ef3ad776"
+    },
+    {
+      "path": "assets/lily/lily_boas_vindas_acenando.png",
+      "size": 1642488,
+      "md5": "4409ba5d62ca639346a1b3e4ceb6de2f"
+    },
+    {
+      "path": "assets/lily/lily_calendario_check.png",
+      "size": 1644694,
+      "md5": "d35d4753651cf8a47354ef7bb4ec28bb"
+    },
+    {
+      "path": "assets/lily/lily_comemorando_trofeu.png",
+      "size": 1772615,
+      "md5": "b8f751c6d3f4c3bd3b4e0658925b9ffb"
+    },
+    {
+      "path": "assets/lily/lily_corrida.png",
+      "size": 1575184,
+      "md5": "b9f1e490ce64a4e2ee63b3b865ee2070"
+    },
+    {
+      "path": "assets/lily/lily_forca.png",
+      "size": 1591910,
+      "md5": "78534f48c7b8840b67c027ab95fba42a"
+    },
+    {
+      "path": "assets/lily/lily_joinha.png",
+      "size": 1668861,
+      "md5": "8c1aebb0f239af46f86bcc41189995c6"
+    },
+    {
+      "path": "assets/lily/lily_lembrete_hidratacao.png",
+      "size": 1744179,
+      "md5": "c5cfea4c216f8d86ba6ed436571b1475"
+    },
+    {
+      "path": "assets/lily/lily_meditacao.png",
+      "size": 1719248,
+      "md5": "37ebc9dc999eb1aa2e452edd6cdc7dc0"
+    },
+    {
+      "path": "assets/lily/lily_meditation.png",
+      "size": 107246,
+      "md5": "99538d6a620a98f5c35924c870320d30"
+    },
+    {
+      "path": "assets/lily/lily_meta_concluida.png",
+      "size": 1753979,
+      "md5": "690be4bdbdc1eb70234ecc7e5e068aad"
+    },
+    {
+      "path": "assets/lily/lily_mostrando_app.png",
+      "size": 1718500,
+      "md5": "d2a053ea1794727a8743f12974e387b6"
+    },
+    {
+      "path": "assets/lily/lily_motivation.png",
+      "size": 779192,
+      "md5": "aeca43755a10b55a32dae87938701cc8"
+    },
+    {
+      "path": "assets/lily/lily_nutrition.png",
+      "size": 263897,
+      "md5": "7d64f658c7832849797f40646f04f200"
+    },
+    {
+      "path": "assets/lily/lily_pos_treino.png",
+      "size": 1584494,
+      "md5": "92f9e9e184b3288078b64217e6a46776"
+    },
+    {
+      "path": "assets/lily/lily_prato_saudavel.png",
+      "size": 1750281,
+      "md5": "d1efb4d607acec63f4e5fd95465c51a3"
+    },
+    {
+      "path": "assets/lily/lily_rest.png",
+      "size": 60885,
+      "md5": "f47a1d70a93905b5560a9ffec0ac6d3a"
+    },
+    {
+      "path": "assets/lily/lily_success.png",
+      "size": 266674,
+      "md5": "4f2f8c965ca935b068bc2e5720936323"
+    },
+    {
+      "path": "assets/lily/lily_tentar_novamente.png",
+      "size": 1688619,
+      "md5": "c6d22119024d6c7f2108dc4f32a4daa3"
+    },
+    {
+      "path": "assets/lily/lily_tomando_agua.png",
+      "size": 1707544,
+      "md5": "24e0fd970cea3ef0f56ce8040a6bd41f"
+    },
+    {
+      "path": "assets/lily/lily_treino_halteres.png",
+      "size": 1554991,
+      "md5": "861b1d4a79ea4197c9e9bc21f9549549"
+    },
+    {
+      "path": "assets/lily/lily_vitoria.png",
+      "size": 1573355,
+      "md5": "1173d19ed10cec25d57f4485e48f75f5"
+    },
+    {
+      "path": "assets/lily/lily_water.png",
+      "size": 86604,
+      "md5": "180e4a031c9465f3245407ffdf881317"
+    },
+    {
+      "path": "assets/lily/lily_welcome.png",
+      "size": 180388,
+      "md5": "55eeb6a8703fca2cd40f31d6488578b0"
+    },
+    {
+      "path": "assets/lily/lily_workout.png",
+      "size": 521161,
+      "md5": "60336bf8da973713f08cd16f234df9f3"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/16_simulador_de_escada_queima_gordura.jpg",
+      "size": 253130,
+      "md5": "46e16a4fd5780f80eb0cf242426b21fb"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/17_eliptico_queima_gordura.jpg",
+      "size": 255790,
+      "md5": "8d6d9647a7e2f487a7e4a3f4732fd364"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/24_visual_extra_pose_lily_fit.jpg",
+      "size": 312587,
+      "md5": "fb052b1b9e41bfd6e893295dea5fe65d"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/abdominal_com_brilho_roxo.jpg",
+      "size": 240995,
+      "md5": "7479e317ff104b942423f29592786356"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/afundo_búlgaro_com_halteres_em_academia_neon.jpg",
+      "size": 313500,
+      "md5": "493553fa52cfcfcc9288e9583be400b6"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/afundo_com_halteres_sob_luz_neon_roxa.jpg",
+      "size": 222349,
+      "md5": "6df55712a96072fc7a99ca68ef86effb"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/afundo_fitness_em_luz_roxa.jpg",
+      "size": 243588,
+      "md5": "776eb120e305bb2fc137d2be27e08449"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/afundo_no_smith_sob_luz_púrpura.jpg",
+      "size": 386457,
+      "md5": "c3edac93624247b7766226e397a99dc8"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_búlgaro_em_luz_neon.jpg",
+      "size": 227181,
+      "md5": "7a38468a22be52fa48f6ed446c694a5a"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_búlgaro_neon_lily_fit.jpg",
+      "size": 343424,
+      "md5": "258f2f22fa63d52673f3706a53a89cc4"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_búlgaro_sob_luz_neon_roxa.jpg",
+      "size": 345116,
+      "md5": "6b42f3fba14440c00855b5d3d334bedd"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_com_halteres_sob_luz_neon.jpg",
+      "size": 321808,
+      "md5": "76439d3599e6e796693cf32f58e91b43"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_com_halter_sob_luz_neon_roxa.jpg",
+      "size": 325732,
+      "md5": "12ddf45708a289a004d290b9d85417db"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_com_neon_roxo_no_ginásio.jpg",
+      "size": 383611,
+      "md5": "eb3d4c29afacb14d080cf4d936d0ec95"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_fitness_com_brilho_roxo.jpg",
+      "size": 204527,
+      "md5": "f047bb3db0e326cb3c268d5acf4a5ade"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_fitness_sob_luz_neon_roxa.jpg",
+      "size": 325273,
+      "md5": "0644c9c5fb531ded34bdb68b4847640f"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_lateral_no_estúdio_neon.jpg",
+      "size": 308137,
+      "md5": "dc7d645c03e1168c32f2fd97a92ff6ec"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_no_hack_sob_luz_violeta.jpg",
+      "size": 382121,
+      "md5": "b892d0577afe46dc458bdfdea5243408"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_no_smith_sob_luz_púrpura.jpg",
+      "size": 362802,
+      "md5": "589f72fa0263d81574097c250f980e03"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_no_smith_sob_luz_roxa.jpg",
+      "size": 377261,
+      "md5": "db5407f5589c9a06544f4066f903b2a3"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_pendular_sob_luz_neon_roxa.jpg",
+      "size": 377144,
+      "md5": "df52686a735ea5b0309ebdce025360f9"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_sumo_com_kettlebell_neon.jpg",
+      "size": 216040,
+      "md5": "1ad39d674f00da0d532b136fccc25972"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_sumô_com_halteres_neon.jpg",
+      "size": 229349,
+      "md5": "2172944ca7c82a6854a6e8072fccc224"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_sumô_com_halteres_neon_roxo.jpg",
+      "size": 223362,
+      "md5": "a75599320dc94c9391a94c9980df8e7d"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_sumô_sob_luz_neon_roxa.jpg",
+      "size": 269402,
+      "md5": "d1767e555ae35c548786c9d61fe9f677"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/agachamento_sumô_sob_luz_roxa.jpg",
+      "size": 232406,
+      "md5": "b01288fd0298b7f0d7407d787a2fe954"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/alongamento_fitness_com_luzes_roxas.jpg",
+      "size": 268683,
+      "md5": "e3a0e9247e23f727009a71c5899a1377"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/alongamento_fitness_sob_luz_púrpura.jpg",
+      "size": 187436,
+      "md5": "8db5bb31969de1ea0e5d88009d6ba56a"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/alongamento_no_estúdio_fitness_neon.jpg",
+      "size": 319373,
+      "md5": "17100bff9a7648b431d12bd9e10c7008"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/atleta_no_leg_press_sob_luz_roxa.jpg",
+      "size": 428954,
+      "md5": "43ad156e918160dd1267c8d8b5bc5830"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/a_clean_studio_fitness_promo_style_image_a_single.jpg",
+      "size": 256656,
+      "md5": "9faca02ab829414eedcde736633709b8"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/a_high_quality_studio_fitness_promotional_portrait.jpg",
+      "size": 214459,
+      "md5": "b86ff8887175ea1021076d51a40d9712"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/a_stylized_studio_fitness_gym_scene_with_a_single.jpg",
+      "size": 249588,
+      "md5": "6e2ca84d87b37ac65f2a6d850b352435"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/caminhada_fitness_neon_roxo.jpg",
+      "size": 261494,
+      "md5": "f1a45ce5d11b62f598ab6f446ba7fcd1"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/chute_de_glúteo_com_neon_roxo.jpg",
+      "size": 331891,
+      "md5": "e49b8a3f1ca0f2e8110ab944f9ed471f"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/ciclista_fitness_sob_luzes_neon.jpg",
+      "size": 357095,
+      "md5": "4dd9ace4707c8e6223d415f421beb854"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/corrida_fitness_neon_em_roxo_intens_o.jpg",
+      "size": 271386,
+      "md5": "3f5899fa3653225e6293e0d16812d696"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/crunch_abdominal_com_brilho_neon_roxo.jpg",
+      "size": 344994,
+      "md5": "57487a37a89611fd3fc1996f42aa307c"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/crunch_com_estilo_neon_roxo.jpg",
+      "size": 344695,
+      "md5": "e681456fe514ba8c583ed3230801457b"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/elevação_frontal_com_brilho_púrpura.jpg",
+      "size": 182845,
+      "md5": "a23ba3aea1186ed558f0d3d5b81af438"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/elevação_frontal_com_luz_roxa.jpg",
+      "size": 259569,
+      "md5": "bfab9fa26b7c24abcd446a027a692a04"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/elevação_frontal_com_peso_em_luz_roxa.jpg",
+      "size": 188362,
+      "md5": "a950ed37343af428032d87f5adc70c2e"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/elevação_frontal_sob_luzes_roxas.jpg",
+      "size": 187235,
+      "md5": "03afb6e69c455c989ddda86cd9105f16"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/encarada_fitness_com_halteres_e_neon_roxo.jpg",
+      "size": 191238,
+      "md5": "90ee1b1672eb0a0e3e8e030d6c320829"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/estrela_fitness_em_neon_roxo.jpg",
+      "size": 341051,
+      "md5": "bb8aff78858162acda86b5e8c3531a4b"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/glúteos_em_destaque_no_treino_neon.jpg",
+      "size": 316501,
+      "md5": "6d6bb655f9897ce05601cf1f4f6a7c5a"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/hip_thrust_com_iluminação_neon_roxa.jpg",
+      "size": 357374,
+      "md5": "4b097e5bf6dbc8ae9e69ba00dbf8dd5b"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/imagegen.jpg",
+      "size": 378150,
+      "md5": "8e7eb2022e9131f106e737ca6d45e17d"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/instrutora_em_caminhada_no_estúdio_neon.jpg",
+      "size": 351432,
+      "md5": "5cbe6e431441b78255bfbd55b90b86e0"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/kickback_no_estúdio_fitness_neon.jpg",
+      "size": 305216,
+      "md5": "98bc81cb36e86a453135c44db5f0cf8e"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/levantamento_terra_com_brilho_violeta.jpg",
+      "size": 232012,
+      "md5": "fb57db7d117609117c045a2ee65e8988"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/levantamento_terra_sumô_em_neon_roxo.jpg",
+      "size": 255562,
+      "md5": "31ddbd116abcca99f1a2948cdfbcfcb3"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/levantamento_unilateral_com_halteres_em_academia_n.jpg",
+      "size": 325335,
+      "md5": "2250c31cf95438c17a9cc96da25e3e78"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/lily_fit_em_ponte_glútea_neon_roxa.jpg",
+      "size": 286711,
+      "md5": "7c4a8901a7134df075b1671aa0ea0974"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/lunge_e_remada_com_estilo_roxo.jpg",
+      "size": 223183,
+      "md5": "d38bc17264ee6e84722ead7619bdd2f6"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/lunge_fitness_com_brilho_neon_roxo.jpg",
+      "size": 214884,
+      "md5": "c5c545ef523335edc07e84e150c7ee35"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/lunge_fitness_neon_roxo_gloss.jpg",
+      "size": 217719,
+      "md5": "bce63989e026d0bc6e295d57469cfc69"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/mulher_em_afundo_com_trx_sob_luz_neon_roxa.jpg",
+      "size": 357040,
+      "md5": "fb134014bc5ec6961a86579e2809fb8d"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/mulher_em_agachamento_com_luzes_roxas.jpg",
+      "size": 338253,
+      "md5": "a00985095321f75efbe198789ea5f1f7"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/mulher_em_elevação_de_joelhos_com_halo_roxo.jpg",
+      "size": 204131,
+      "md5": "aec70b71ca4edd9d7af5f4ff641b1bf2"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/mulher_fitness_pulando_corda_neon.jpg",
+      "size": 220002,
+      "md5": "f2dedd34cc62ae235ac93420b04da8b5"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/mulher_fitness_saltando_à_corda_neon.jpg",
+      "size": 339023,
+      "md5": "fae8bf00ab245576baa1a3e1c1ba77fb"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/mulher_pedalando_em_bike_neon_roxa.jpg",
+      "size": 256087,
+      "md5": "afc1aa9dfc1ba34607bf5c5f50292c61"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/mulher_sorridente_no_leg_press_neon_roxo.jpg",
+      "size": 411808,
+      "md5": "8832689f471ed7dde475c0f85dbdd45d"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/mulher_treinando_em_bicicleta_neon_roxa.jpg",
+      "size": 288670,
+      "md5": "6a9208d202cd9f46fe052be598d03e6f"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/mulher_treinando_em_bicicleta_reclinada_neon.jpg",
+      "size": 376470,
+      "md5": "1fab2f285531939d938248df84c47582"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/mulher_treinando_face_pull_em_academia_neon.jpg",
+      "size": 316844,
+      "md5": "7e79b8795937a469828eb2dfbd744e0e"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/mulher_treinando_no_supino_com_neon_roxo.jpg",
+      "size": 330515,
+      "md5": "03ab25d19d5bee5d1ca9f2ffbe06f4c8"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/ponte_de_glúteos_com_brilho_púrpura.jpg",
+      "size": 266349,
+      "md5": "013131bcbeb07ac60189071500c008e7"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/prancha_fitness_com_brilho_roxo.jpg",
+      "size": 239126,
+      "md5": "9614e6bc1369e3ab55f2bb93931dd9bb"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/prancha_fitness_sob_luz_roxa_neon.jpg",
+      "size": 218709,
+      "md5": "b11321b520cae289351c50a6e01042a2"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/prancha_fitness_sob_neon_roxo.jpg",
+      "size": 333140,
+      "md5": "2558ce13f461e28d49ba6190db77d0f2"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/prensa_de_peito_sob_luzes_roxas.jpg",
+      "size": 348878,
+      "md5": "264cbfbbb87824133e3b739d9dc7cdeb"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/pressão_de_ombros_com_halteres_em_neon.jpg",
+      "size": 194192,
+      "md5": "afc0aaa62514f69ffdf66aa7e40e9022"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/pressão_de_peito_com_halo_roxo.jpg",
+      "size": 291368,
+      "md5": "f5816bf0d533013fd00399df93d0f190"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/puxada_na_polia_com_iluminação_roxa.jpg",
+      "size": 326674,
+      "md5": "27467ba9c2df73167f4133908493c3da"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/remada_alta_com_brilho_neon_roxo.jpg",
+      "size": 192407,
+      "md5": "76bdb34d8bfa3d3c81ccea8e5f0542e9"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/remada_articulada_sob_luz_neon_roxa.jpg",
+      "size": 360318,
+      "md5": "ff52e3643402e2239df8ec9974d0fb2c"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/remada_baixa_no_aparelho_com_neon_roxo.jpg",
+      "size": 342599,
+      "md5": "0d3a79f7df74b856a48418d9421dd4f4"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/remada_com_barra_em_luz_neon_roxa.jpg",
+      "size": 339875,
+      "md5": "2956892d6ffdad009372f79a4281175e"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/retrato_fitness_com_barra_e_luz_roxa.jpg",
+      "size": 193217,
+      "md5": "af7bef958ae5d0f373c619f9c7573e95"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/retrato_fitness_com_brilho_roxo_neon.jpg",
+      "size": 195657,
+      "md5": "f6ada70ef532cd067dba33edc860bd81"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/retrato_fitness_com_halo_neon_roxo.jpg",
+      "size": 267912,
+      "md5": "b992dbc83cc676f3f89cbe52c63fe857"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/retrato_fitness_com_halo_roxo.jpg",
+      "size": 195342,
+      "md5": "215bfe8baba88cd4e04e99d5fb5ef435"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/retrato_fitness_com_halteres_e_luz_roxa.jpg",
+      "size": 233443,
+      "md5": "45148e8ed1e36e38b68c2359401251ec"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/retrato_fitness_com_luz_neon_roxa.jpg",
+      "size": 199353,
+      "md5": "30f0011a4b1b36356013517868d0a904"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/retrato_neon_na_bicicleta_de_spinning.jpg",
+      "size": 378799,
+      "md5": "4fc3595ffc342e0fd83becc6d982457f"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/rosca_bíceps_no_estúdio_roxo.jpg",
+      "size": 255450,
+      "md5": "3b63ea702d78d898b671422bd4a564ce"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/salto_fitness_com_brilho_roxo.jpg",
+      "size": 174411,
+      "md5": "b8d0ba74d437938005dc96246870727d"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/salto_fitness_em_neon_roxo.jpg",
+      "size": 334999,
+      "md5": "3d83ea67aaec7e0613aef88a7968682c"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/sorriso_e_força_no_calf_raise.jpg",
+      "size": 263865,
+      "md5": "eccb301e12957d11d56ccdecf41f8d16"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/studio_quality_high_contrast_fitness_portrait_sce.jpg",
+      "size": 229166,
+      "md5": "ec657b08fd0ceb51c4b9f7a6ff539af5"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/studio_style_fitness_promotional_portrait_a_clean.jpg",
+      "size": 216079,
+      "md5": "abad3e31d6dd98924a39171c04a8c492"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/supino_inclinado_com_halteres_sob_luz_neon_lilás.jpg",
+      "size": 257997,
+      "md5": "d48df174e47360a722476f140bc09126"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_abdominal_com_brilho_violeta.jpg",
+      "size": 344063,
+      "md5": "b66997a8b79555a9d0532e5a779c0c74"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_abdominal_com_estilo_neon_roxo.jpg",
+      "size": 378423,
+      "md5": "34e65a7c99a2a8de5376d606c26ace30"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_abdominal_remador_em_neon_roxo.jpg",
+      "size": 235857,
+      "md5": "b541b26b0dc89043f887cb42f1bf6e5c"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_adutor_em_academia_neon_roxa.jpg",
+      "size": 378334,
+      "md5": "04bc3c801609bf9289696226d811f2ee"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_com_corda_sob_luz_neon_roxa.jpg",
+      "size": 246038,
+      "md5": "9693d7dea9cedf1bd25110dc7e6330d1"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_com_halteres_sob_luz_violeta.jpg",
+      "size": 188239,
+      "md5": "04b8d428fa4d74cf0ef636134069bbdb"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_core_com_luzes_neon_roxas.jpg",
+      "size": 364390,
+      "md5": "c638907eb01ff12835955d0b8f3d6f91"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_abdução_com_neon_roxo.jpg",
+      "size": 325616,
+      "md5": "3f1305d6e8dc2bd5b6ec49b8d15b570c"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_abdômen_com_brilho_roxo.jpg",
+      "size": 284205,
+      "md5": "9f918651132a158c1784b8d83f9c5f12"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_abdômen_em_luz_neon_roxa.jpg",
+      "size": 229194,
+      "md5": "cc41df720988f10d939c8be91bc8f7a3"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_abdômen_em_neon_roxo.jpg",
+      "size": 384665,
+      "md5": "f51792c878ababd3eaa05571c85258e8"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_bíceps_sob_luzes_roxas.jpg",
+      "size": 257815,
+      "md5": "63b3d9f6e240b92e355a58cabc86691b"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_bíceps_sob_luz_neon_roxa.jpg",
+      "size": 278892,
+      "md5": "8f0ee161b2b268e9ee0f26a6e58e52fa"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_costas_com_brilho_neon_roxo.jpg",
+      "size": 330587,
+      "md5": "4782fadf793266fa1f6d623b39815f37"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_costas_com_brilho_roxo.jpg",
+      "size": 322295,
+      "md5": "5728ffd678d32ebd2a522e3458a33de8"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_costas_sob_luz_neon_roxa.jpg",
+      "size": 346406,
+      "md5": "d40ac8eb7da25d1f13c6a9066da6f95f"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_glúteos_com_luz_neon_roxa.jpg",
+      "size": 284147,
+      "md5": "25d7ade7be0398fbef7a7689dcd4830a"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_glúteos_com_neon_roxo.jpg",
+      "size": 279781,
+      "md5": "0be9672842a2612f51aca2d89c63b897"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_hip_thrust_com_neon_roxo.jpg",
+      "size": 315706,
+      "md5": "0ebe74b9f8ce11acbfadc703727c4e5d"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_peito_com_brilho_roxo.jpg",
+      "size": 318537,
+      "md5": "e4cc854ab1518f0fdac2022e22a76a63"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_peito_em_luz_roxa.jpg",
+      "size": 303795,
+      "md5": "025980f54932697eb0ead2e4220c132e"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_tríceps_com_iluminação_neon_roxa.jpg",
+      "size": 259746,
+      "md5": "acdf813ecd3252f3a985e03dd7653a49"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_tríceps_com_neon_roxo.jpg",
+      "size": 315420,
+      "md5": "4bad6e5e6e9f805e8cdbd4001b62bc2f"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_de_tríceps_sob_luz_violeta.jpg",
+      "size": 172179,
+      "md5": "752583d97dfaff2bde10ebe1d5fb65a9"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_dinâmico_sob_luzes_roxas.jpg",
+      "size": 233696,
+      "md5": "875d219f5882dc27d69f89db48fe4252"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_energético_sob_luz_roxa.jpg",
+      "size": 199291,
+      "md5": "d41a849d34218dee3f5930a9add2b1c9"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_fitness_em_neon_púrpura.jpg",
+      "size": 239147,
+      "md5": "636cd2c5d852750b48602725be232645"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_fitness_em_neon_roxo.jpg",
+      "size": 207900,
+      "md5": "67a69a982b3574cef17b370dcead8486"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_graviton_sob_luz_neon_roxa.jpg",
+      "size": 346152,
+      "md5": "5375918a32f4a76ac8ab42dab48614a1"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_intenso_na_cadeira_flexora_roxa.jpg",
+      "size": 315011,
+      "md5": "9e7842e0525e109b25bed2cfe9342653"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_intenso_sob_luz_neon_roxa.jpg",
+      "size": 310911,
+      "md5": "73ad285f3e66406d6dd0fd27e4fbc88b"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_lily_fit_com_neon_roxo.jpg",
+      "size": 314216,
+      "md5": "ebf03fe1ade26eedf6ad6c70473ecd97"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_mountain_climber_com_glow_roxo.jpg",
+      "size": 247172,
+      "md5": "b79048553bfde330d6c4318dc448ddbe"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_mountain_climber_em_neon_roxo.jpg",
+      "size": 336998,
+      "md5": "d40857e659d42a6b5cf3bad9352f9cf3"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_com_brilho_roxo.jpg",
+      "size": 261993,
+      "md5": "1c3b2719804c73a883d6ba3b2d90dce9"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_com_curls_e_afundo.jpg",
+      "size": 223457,
+      "md5": "8163ac29980a3f3de3ed6ab550348f4e"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_com_desenvolvimento_unilateral.jpg",
+      "size": 187463,
+      "md5": "c3425aee1b4be5c3364be032edfa0621"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_com_faixas_de_suspensão.jpg",
+      "size": 227447,
+      "md5": "183e847aa72e996ec268ab7964b79f81"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_com_halteres_roxos.jpg",
+      "size": 184412,
+      "md5": "64c3cc75dd396da5126939702c1a1940"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_com_salto_lateral.jpg",
+      "size": 404942,
+      "md5": "c1292c2a869622efdd0f5a9e4e1e68e3"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_em_lunge_fitness.jpg",
+      "size": 318771,
+      "md5": "c2e11b35610b46fc5ac6cc3dfd34ef49"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_na_academia_roxa.jpg",
+      "size": 362044,
+      "md5": "9f61c113226b025d52ff345ad8e71a68"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_na_bicicleta_indoor.jpg",
+      "size": 272042,
+      "md5": "a0bf637ddf67e87218ddd30cdea545dc"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_na_cadeira_romana.jpg",
+      "size": 365628,
+      "md5": "5064ee750b3c94ff39cdd34e26edeb7c"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_na_escada_fitness.jpg",
+      "size": 348162,
+      "md5": "41edfc6b3097693698c395ab18e1131c"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_no_elíptico.jpg",
+      "size": 372589,
+      "md5": "33a94d867195dfe3abc96ceaa18ea5b5"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_no_leg_curl.jpg",
+      "size": 297310,
+      "md5": "e6cddab392e3393282e23cdc279bcd56"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_no_peck_deck.jpg",
+      "size": 286476,
+      "md5": "ed3d0d0eb78c5400d8c8dd07b88132a8"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_no_press_de_ombros.jpg",
+      "size": 306627,
+      "md5": "55e45626ed4f041a71e4c28668181e96"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_neon_roxo_na_máquina_extensora.jpg",
+      "size": 382229,
+      "md5": "5f2afa2ae4699a7f318bb9d1561fa570"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_poderoso_sob_luz_roxa.jpg",
+      "size": 186159,
+      "md5": "90354fa60702ddb06d134f94a2470ac5"
+    },
+    {
+      "path": "assets/lily/treinos lily fit/treino_trx_com_luzes_neon_roxas.jpg",
+      "size": 321441,
+      "md5": "e39aadad132f0c52715d4c4b51b5036d"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/01_desenvolvimento_halteres.jpg",
+      "size": 194192,
+      "md5": "afc0aaa62514f69ffdf66aa7e40e9022"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/02_supino_maquina_peitoral.jpg",
+      "size": 291368,
+      "md5": "f5816bf0d533013fd00399df93d0f190"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/03_puxada_alta_barra.jpg",
+      "size": 326674,
+      "md5": "27467ba9c2df73167f4133908493c3da"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/04_remada_articulada.jpg",
+      "size": 360318,
+      "md5": "ff52e3643402e2239df8ec9974d0fb2c"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/05_remada_sentada_triangulo.jpg",
+      "size": 342599,
+      "md5": "0d3a79f7df74b856a48418d9421dd4f4"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/06_remada_curvada_barra.jpg",
+      "size": 339875,
+      "md5": "2956892d6ffdad009372f79a4281175e"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/07_remada_alta_barra.jpg",
+      "size": 192407,
+      "md5": "76bdb34d8bfa3d3c81ccea8e5f0542e9"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/08_prancha_alta.jpg",
+      "size": 239126,
+      "md5": "9614e6bc1369e3ab55f2bb93931dd9bb"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/09_prancha_antebraco_tapete.jpg",
+      "size": 218709,
+      "md5": "b11321b520cae289351c50a6e01042a2"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/10_prancha_antebraco_gym.jpg",
+      "size": 333140,
+      "md5": "2558ce13f461e28d49ba6190db77d0f2"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/11_supino_maquina_variante.jpg",
+      "size": 348878,
+      "md5": "264cbfbbb87824133e3b739d9dc7cdeb"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/12_elevacao_pelvica_banco.jpg",
+      "size": 266349,
+      "md5": "013131bcbeb07ac60189071500c008e7"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/13_triceps_corda_overhead.jpg",
+      "size": 316844,
+      "md5": "7e79b8795937a469828eb2dfbd744e0e"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/14_supino_maquina_peito.jpg",
+      "size": 330515,
+      "md5": "03ab25d19d5bee5d1ca9f2ffbe06f4c8"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/15_leg_press.jpg",
+      "size": 411808,
+      "md5": "8832689f471ed7dde475c0f85dbdd45d"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/16_bike_horizontal.jpg",
+      "size": 288670,
+      "md5": "6a9208d202cd9f46fe052be598d03e6f"
+    },
+    {
+      "path": "assets/lily_exercicios/_incoming/17_bike_horizontal_academia.jpg",
+      "size": 376470,
+      "md5": "1fab2f285531939d938248df84c47582"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_01.png",
+      "size": 91309,
+      "md5": "55dab5b11095851f50e7846937fb5847"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_01_clean.png",
+      "size": 284219,
+      "md5": "507ea7876173be61bf753614caefa26f"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_02.png",
+      "size": 91309,
+      "md5": "55dab5b11095851f50e7846937fb5847"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_02_clean.png",
+      "size": 284219,
+      "md5": "507ea7876173be61bf753614caefa26f"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_03.png",
+      "size": 91614,
+      "md5": "29b934a9ebcbc60a0d67ac8c2b0d9272"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_03_clean.png",
+      "size": 284002,
+      "md5": "f66ff4cc0cfb1efdfa6e8d5683ace50c"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_04.png",
+      "size": 100828,
+      "md5": "2516cdefd2dae092032fc1f988ac38a3"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_04_clean.png",
+      "size": 419136,
+      "md5": "d043d9919a5080304f46de2ebaa3ea9d"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_05.png",
+      "size": 91625,
+      "md5": "a46f008e1cc35d3977c519246c6ae04e"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_05_clean.png",
+      "size": 284099,
+      "md5": "883a8dc9f50f9a966a1782d46c0e34b9"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_06.png",
+      "size": 84829,
+      "md5": "67422af8cba3da9fd6f336f94307b1b3"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_06_clean.png",
+      "size": 231288,
+      "md5": "c117ef67553683f40c547c498421a727"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_07.png",
+      "size": 99103,
+      "md5": "2ceba2e6072dc49fe53c70343332248e"
+    },
+    {
+      "path": "assets/_incoming_lily/lily_upload_07_clean.png",
+      "size": 332200,
+      "md5": "5842d5da73a4f66d37c81ee83803e412"
+    }
+  ],
+  "code_refs_sample": [
+    "assets/lily/)",
+    "assets/lily/`.",
+    "assets/lily/lily_*.png`",
+    "assets/lily/treinos",
+    "assets/lily_exercicios/treino_001.jpg",
+    "assets/lily_exercicios/treino_002.jpg",
+    "assets/lily_exercicios/treino_003.jpg",
+    "assets/lily_exercicios/treino_004.jpg",
+    "assets/lily_exercicios/treino_005.jpg",
+    "assets/lily_exercicios/treino_006.jpg",
+    "assets/lily_exercicios/treino_007.jpg",
+    "assets/lily_exercicios/treino_008.jpg",
+    "assets/lily_exercicios/treino_009.jpg",
+    "assets/lily_exercicios/treino_010.jpg",
+    "assets/lily_exercicios/treino_011.jpg",
+    "assets/lily_exercicios/treino_012.jpg",
+    "assets/lily_exercicios/treino_013.jpg",
+    "assets/lily_exercicios/treino_014.jpg",
+    "assets/lily_exercicios/treino_015.jpg",
+    "assets/lily_exercicios/treino_016.jpg",
+    "assets/lily_exercicios/treino_017.jpg",
+    "assets/lily_exercicios/treino_018.jpg",
+    "assets/lily_exercicios/treino_019.jpg",
+    "assets/lily_exercicios/treino_020.jpg",
+    "assets/lily_exercicios/treino_021.jpg",
+    "assets/lily_exercicios/treino_022.jpg",
+    "assets/lily_exercicios/treino_023.jpg",
+    "assets/lily_exercicios/treino_024.jpg",
+    "assets/lily_exercicios/treino_025.jpg",
+    "assets/lily_exercicios/treino_026.jpg",
+    "assets/lily_exercicios/treino_027.jpg",
+    "assets/lily_exercicios/treino_028.jpg",
+    "assets/lily_exercicios/treino_029.jpg",
+    "assets/lily_exercicios/treino_030.jpg",
+    "assets/lily_exercicios/treino_031.jpg",
+    "assets/lily_exercicios/treino_032.jpg",
+    "assets/lily_exercicios/treino_033.jpg",
+    "assets/lily_exercicios/treino_034.jpg",
+    "assets/lily_exercicios/treino_035.jpg",
+    "assets/lily_exercicios/treino_036.jpg",
+    "assets/lily_exercicios/treino_037.jpg",
+    "assets/lily_exercicios/treino_038.jpg",
+    "assets/lily_exercicios/treino_039.jpg",
+    "assets/lily_exercicios/treino_040.jpg",
+    "assets/lily_exercicios/treino_041.jpg",
+    "assets/lily_exercicios/treino_042.jpg",
+    "assets/lily_exercicios/treino_043.jpg",
+    "assets/lily_exercicios/treino_044.jpg",
+    "assets/lily_exercicios/treino_045.jpg",
+    "assets/lily_exercicios/treino_046.jpg",
+    "assets/lily_exercicios/treino_047.jpg",
+    "assets/lily_exercicios/treino_048.jpg",
+    "assets/lily_exercicios/treino_049.jpg",
+    "assets/lily_exercicios/treino_050.jpg",
+    "assets/lily_exercicios/treino_051.jpg",
+    "assets/lily_exercicios/treino_052.jpg",
+    "assets/lily_exercicios/treino_053.jpg",
+    "assets/lily_exercicios/treino_054.jpg",
+    "assets/lily_exercicios/treino_055.jpg",
+    "assets/lily_exercicios/treino_056.jpg",
+    "assets/lily_exercicios/treino_057.jpg",
+    "assets/lily_exercicios/treino_058.jpg",
+    "assets/lily_exercicios/treino_059.jpg",
+    "assets/lily_exercicios/treino_060.jpg",
+    "assets/lily_exercicios/treino_061.jpg",
+    "assets/lily_exercicios/treino_062.jpg",
+    "assets/lily_exercicios/treino_063.jpg",
+    "assets/lily_exercicios/treino_064.jpg",
+    "assets/lily_exercicios/treino_065.jpg",
+    "assets/lily_exercicios/treino_066.jpg",
+    "assets/lily_exercicios/treino_067.jpg",
+    "assets/lily_exercicios/treino_068.jpg",
+    "assets/lily_exercicios/treino_069.jpg",
+    "assets/lily_exercicios/treino_070.jpg",
+    "assets/lily_exercicios/treino_071.jpg",
+    "assets/lily_exercicios/treino_072.jpg",
+    "assets/lily_exercicios/treino_073.jpg",
+    "assets/lily_exercicios/treino_074.jpg",
+    "assets/lily_exercicios/treino_075.jpg",
+    "assets/lily_exercicios/treino_076.jpg",
+    "assets/lily_exercicios/treino_077.jpg",
+    "assets/lily_exercicios/treino_078.jpg",
+    "assets/lily_exercicios/treino_079.jpg",
+    "assets/lily_exercicios/treino_080.jpg",
+    "assets/lily_exercicios/treino_081.jpg",
+    "assets/lily_exercicios/treino_082.jpg",
+    "assets/lily_exercicios/treino_083.jpg",
+    "assets/lily_exercicios/treino_084.jpg",
+    "assets/lily_exercicios/treino_085.jpg",
+    "assets/lily_exercicios/treino_086.jpg",
+    "assets/lily_exercicios/treino_087.jpg",
+    "assets/lily_exercicios/treino_088.jpg",
+    "assets/lily_exercicios/treino_089.jpg",
+    "assets/lily_exercicios/treino_090.jpg",
+    "assets/lily_exercicios/treino_091.jpg",
+    "assets/lily_exercicios/treino_092.jpg",
+    "assets/lily_exercicios/treino_093.jpg",
+    "assets/lily_exercicios/treino_094.jpg",
+    "assets/lily_exercicios/treino_095.jpg",
+    "assets/lily_exercicios/treino_096.jpg",
+    "assets/lily_exercicios/treino_097.jpg",
+    "assets/lily_exercicios/treino_098.jpg",
+    "assets/lily_exercicios/treino_099.jpg",
+    "assets/lily_exercicios/treino_100.jpg",
+    "assets/lily_exercicios/treino_101.jpg",
+    "assets/lily_exercicios/treino_102.jpg",
+    "assets/lily_exercicios/treino_103.jpg",
+    "assets/lily_exercicios/treino_104.jpg",
+    "assets/lily_exercicios/treino_105.jpg",
+    "assets/lily_exercicios/treino_106.jpg",
+    "assets/lily_exercicios/treino_107.jpg",
+    "assets/lily_exercicios/treino_108.jpg",
+    "assets/lily_exercicios/treino_109.jpg",
+    "assets/lily_exercicios/treino_110.jpg",
+    "assets/lily_exercicios/treino_111.jpg",
+    "assets/lily_exercicios/treino_112.jpg",
+    "assets/lily_exercicios/treino_113.jpg",
+    "assets/lily_exercicios/treino_114.jpg",
+    "assets/lily_exercicios/treino_115.jpg",
+    "assets/lily_exercicios/treino_116.jpg",
+    "assets/lily_exercicios/treino_117.jpg",
+    "assets/lily_treinos/`."
+  ]
+}

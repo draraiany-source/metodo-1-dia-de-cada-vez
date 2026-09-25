@@ -197,12 +197,12 @@ class AppAssets {
       'assets/images/referencias/grade_icones_funcionalidades_3.jpeg';
 
   // ===== Mascote Lili â€” poses reais (15) =====
-  static const String mascotePerfil = 'assets/images/mascote/avatar_perfil.png';
+  static const String mascotePerfil = 'assets/images/mascote/avatar_perfil.jpg';
   static const String mascotePadrao = 'assets/images/mascote/avatar_padrao.png';
   static const String mascoteBoasVindas = 'assets/images/mascote/avatar_boas_vindas.png';
   static const String mascoteApontando = 'assets/images/mascote/avatar_apontando.png';
   static const String mascoteJoinha = 'assets/images/mascote/avatar_joinha.png';
-  static const String mascoteHidratacao = 'assets/images/mascote/avatar_hidratacao.png';
+  static const String mascoteHidratacao = 'assets/images/mascote/avatar_hidratacao.jpg';
   static const String mascoteChecklist = 'assets/images/mascote/avatar_checklist.png';
   static const String mascoteHalteres = 'assets/images/mascote/avatar_halteres.png';
   static const String mascoteForte = 'assets/images/mascote/avatar_forte.png';
@@ -260,32 +260,32 @@ class AppAssets {
 
 
   // ===== Amanda promo (finalizacao) =====
-  static const String amandaNutricaoPrato = 'assets/amanda/promo/amanda_nutricao_prato.png';
-  static const String amandaCicloMetodo = 'assets/amanda/promo/amanda_ciclo_metodo.png';
-  static const String amandaHidratacao = 'assets/amanda/promo/amanda_hidratacao.png';
-  static const String amandaTreinoHalteres = 'assets/amanda/promo/amanda_treino_halteres.png';
-  static const String amandaVitoria = 'assets/amanda/promo/amanda_vitoria.png';
+  static const String amandaNutricaoPrato = 'assets/amanda/promo/amanda_nutricao_prato.jpg';
+  static const String amandaCicloMetodo = 'assets/amanda/promo/amanda_ciclo_metodo.jpg';
+  static const String amandaHidratacao = 'assets/amanda/promo/amanda_hidratacao.jpg';
+  static const String amandaTreinoHalteres = 'assets/amanda/promo/amanda_treino_halteres.jpg';
+  static const String amandaVitoria = 'assets/amanda/promo/amanda_vitoria.jpg';
 
-  static const String amandaAlongamento = 'assets/amanda/promo/amanda_alongamento.png';
-  static const String amandaApontandoBaixo = 'assets/amanda/promo/amanda_apontando_baixo.png';
-  static const String amandaApontandoCima = 'assets/amanda/promo/amanda_apontando_cima.png';
-  static const String amandaApontandoDireita = 'assets/amanda/promo/amanda_apontando_direita.png';
-  static const String amandaApontandoEsquerda = 'assets/amanda/promo/amanda_apontando_esquerda.png';
-  static const String amandaApresentando = 'assets/amanda/promo/amanda_apresentando.png';
+  static const String amandaAlongamento = 'assets/amanda/promo/amanda_alongamento.jpg';
+  static const String amandaApontandoBaixo = 'assets/amanda/promo/amanda_apontando_baixo.jpg';
+  static const String amandaApontandoCima = 'assets/amanda/promo/amanda_apontando_cima.jpg';
+  static const String amandaApontandoDireita = 'assets/amanda/promo/amanda_apontando_direita.jpg';
+  static const String amandaApontandoEsquerda = 'assets/amanda/promo/amanda_apontando_esquerda.jpg';
+  static const String amandaApresentando = 'assets/amanda/promo/amanda_apresentando.jpg';
 
-  static const String amandaOrientando = 'assets/amanda/promo/amanda_orientando.png';
-  static const String amandaAcenando = 'assets/amanda/promo/amanda_acenando.png';
-  static const String amandaCalendarioCheck = 'assets/amanda/promo/amanda_calendario_check.png';
-  static const String amandaTrofeu = 'assets/amanda/promo/amanda_trofeu.png';
-  static const String amandaCorrida = 'assets/amanda/promo/amanda_corrida.png';
-  static const String amandaForca = 'assets/amanda/promo/amanda_forca.png';
+  static const String amandaOrientando = 'assets/amanda/promo/amanda_orientando.jpg';
+  static const String amandaAcenando = 'assets/amanda/promo/amanda_acenando.jpg';
+  static const String amandaCalendarioCheck = 'assets/amanda/promo/amanda_calendario_check.jpg';
+  static const String amandaTrofeu = 'assets/amanda/promo/amanda_trofeu.jpg';
+  static const String amandaCorrida = 'assets/amanda/promo/amanda_corrida.jpg';
+  static const String amandaForca = 'assets/amanda/promo/amanda_forca.jpg';
 
-  static const String amandaJoinha = 'assets/amanda/promo/amanda_joinha.png';
-  static const String amandaLembreteHidratacao = 'assets/amanda/promo/amanda_lembrete_hidratacao.png';
-  static const String amandaMeditacao = 'assets/amanda/promo/amanda_meditacao.png';
-  static const String amandaMetaConcluida = 'assets/amanda/promo/amanda_meta_concluida.png';
-  static const String amandaMostrandoApp = 'assets/amanda/promo/amanda_mostrando_app.png';
-  static const String amandaAlongamentoAlt = 'assets/amanda/promo/amanda_alongamento_alt.png';
+  static const String amandaJoinha = 'assets/amanda/promo/amanda_joinha.jpg';
+  static const String amandaLembreteHidratacao = 'assets/amanda/promo/amanda_lembrete_hidratacao.jpg';
+  static const String amandaMeditacao = 'assets/amanda/promo/amanda_meditacao.jpg';
+  static const String amandaMetaConcluida = 'assets/amanda/promo/amanda_meta_concluida.jpg';
+  static const String amandaMostrandoApp = 'assets/amanda/promo/amanda_mostrando_app.jpg';
+  static const String amandaAlongamentoAlt = 'assets/amanda/promo/amanda_alongamento_alt.jpg';
 
 
   // ===== Amanda fotos reais (academia / WebP otimizado) =====

@@ -3,6 +3,7 @@ import '../../../core/widgets/app_icon_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/app_states.dart';
@@ -28,7 +29,7 @@ class _PdfRecipesScreenState extends ConsumerState<PdfRecipesScreen> {
     final favoritos = ref.watch(pdfRecipeFavoritesProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Receitas em PDF 📄')),
+      appBar: const PremiumAppBar(title: 'Receitas em PDF 📄'),
       body: SafeArea(
         child: recipesAsync.when(
           loading: () => const AppListSkeleton(),

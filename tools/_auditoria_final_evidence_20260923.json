@@ -1,0 +1,297 @@
+{
+  "audit_id": "auditoria_final_evidence_20260923",
+  "collected_at": "2026-09-23T23:52:00Z",
+  "workspace": "C:\\Users\\Lenovo\\Desktop\\metodo 1 dia perfil premium 2",
+  "mode": "READ_ONLY",
+  "constraints_honored": {
+    "no_production_edits": true,
+    "no_deploy": true,
+    "no_payments_enabled": true,
+    "no_test_accounts": true,
+    "no_firestore_writes": true,
+    "e2e_profiles_not_marked_passed": true,
+    "code_changes": "evidence JSON only"
+  },
+  "1_pubspec": {
+    "name": "metodo_1_dia",
+    "version": "1.0.0+1",
+    "environment": {
+      "sdk": ">=3.3.0 <4.0.0",
+      "flutter": ">=3.19.0"
+    },
+    "key_dependencies": {
+      "firebase_core": "^3.1.0",
+      "firebase_auth": "^5.1.0",
+      "cloud_firestore": "^5.0.1",
+      "firebase_storage": "^12.0.1",
+      "firebase_messaging": "^15.0.1",
+      "firebase_analytics": "^11.1.0",
+      "firebase_crashlytics": "^4.0.1",
+      "firebase_app_check": "^0.3.2+1",
+      "purchases_flutter": "^8.1.0",
+      "go_router": "^14.2.0",
+      "flutter_riverpod": "^2.5.1"
+    },
+    "resolved_at_test_time_notes": {
+      "flutter_riverpod": "2.6.1",
+      "go_router": "14.8.1",
+      "purchases_flutter": "8.11.0",
+      "firebase_core": "3.15.2"
+    }
+  },
+  "2_android_ios_ids": {
+    "android": {
+      "source": "android/app/build.gradle.kts",
+      "namespace": "com.metodo1dia.app",
+      "applicationId": "com.metodo1dia.app",
+      "minSdk": "maxOf(23, flutter.minSdkVersion)",
+      "minSdk_effective_floor": 23,
+      "targetSdk": "maxOf(36, flutter.targetSdkVersion)",
+      "targetSdk_effective_floor": 36,
+      "compileSdk": "maxOf(36, flutter.compileSdkVersion)",
+      "gradle_properties_note": "android/gradle.properties also documents flutter.minSdkVersion=23"
+    },
+    "ios": {
+      "present": true,
+      "PRODUCT_BUNDLE_IDENTIFIER": "com.metodo1dia.app",
+      "source": "ios/Runner.xcodeproj/project.pbxproj",
+      "firebase_options_iosBundleId": "com.metodo1dia.app"
+    }
+  },
+  "3_firebase": {
+    "firebaserc_default_project": "metodo1dia-app",
+    "firebase_options": {
+      "android": {
+        "projectId": "metodo1dia-app",
+        "appId": "1:990266923824:android:2febdfc7c2fc1e03d886f5",
+        "real_credentials": true
+      },
+      "web": {
+        "projectId": "metodo1dia-app",
+        "appId": "1:990266923824:web:6b70fdb655198c7cd886f5",
+        "authDomain": "metodo1dia-app.firebaseapp.com",
+        "real_credentials": true
+      },
+      "ios": {
+        "projectId": "metodo1dia-app",
+        "messagingSenderId": "990266923824",
+        "storageBucket": "metodo1dia-app.firebasestorage.app",
+        "iosBundleId": "com.metodo1dia.app",
+        "apiKey": "REPLACE_ME",
+        "appId": "REPLACE_ME",
+        "note": "iOS apiKey/appId intentionally REPLACE_ME until GoogleService-Info.plist / flutterfire configure after registering iOS app in Firebase Console"
+      }
+    }
+  },
+  "4_aab_apk": {
+    "found_under_build": true,
+    "artifacts": [
+      {
+        "path": "build/app/outputs/bundle/release/app-release.aab",
+        "bytes": 155639605,
+        "size_mb": 148.43
+      },
+      {
+        "path": "build/app/outputs/flutter-apk/app-release.apk",
+        "bytes": 163336054,
+        "size_mb": 155.77
+      },
+      {
+        "path": "build/app/outputs/flutter-apk/app-arm64-v8a-release.apk",
+        "bytes": 109691345,
+        "size_mb": 104.61
+      },
+      {
+        "path": "build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk",
+        "bytes": 107497061,
+        "size_mb": 102.52
+      },
+      {
+        "path": "build/app/outputs/flutter-apk/app-x86_64-release.apk",
+        "bytes": 111279773,
+        "size_mb": 106.13
+      }
+    ]
+  },
+  "5_git": {
+    "branch": "finalizacao-metodo-1-dia-de-cada-vez",
+    "status_short_line_count": 971,
+    "recent_tag": "backup-pre-homologacao-final-20260922",
+    "recent_tags": [
+      "backup-pre-homologacao-final-20260922",
+      "backup-pre-meditacoes-youtube-20260920",
+      "backup-pre-otimizacao-tamanho-20260920",
+      "backup-auditoria-publicacao-completa-20260919",
+      "backup-sec15-obrigatorio-20260919",
+      "backup-etapa-auditoria-final-20260919",
+      "backup-etapa-seguranca-20260919",
+      "backup-etapa-legal-lojas-20260919"
+    ],
+    "recent_commits_oneline": [
+      "293ffa9 chore: snapshot das imagens otimizadas antes das meditacoes YouTube",
+      "d45a67e chore: snapshot antes de otimizar tamanho do Android",
+      "a2f3100 fix: icone oficial, splash nativa e pendencias obrigatorias da secao 15",
+      "23b1c0a docs: auditoria final de publicacao sem marcar E2E como passou",
+      "ccd3a51 fix: bloquear login local falso e visitante residual em producao"
+    ]
+  },
+  "6_homolog_docs_urls": {
+    "sources_scanned": [
+      "PUBLICACAO_ANDROID_IOS.md",
+      "FINALIZACAO_TECNICA_20260922.md",
+      "LISTA_DEPENDENCIAS_PLAY_APPLE_MAC.md",
+      "LISTA_AMANDA_MANUAL_APP.md",
+      "CHECKLIST_PUBLICACAO_ANDROID_IOS.md"
+    ],
+    "urls": [
+      {
+        "url": "https://metodo1dia-app--homologacao-cw9j2u83.web.app",
+        "from": "PUBLICACAO_ANDROID_IOS.md",
+        "role": "homologacao_web"
+      },
+      {
+        "url": "https://metodo1dia-app.web.app/privacidade.html",
+        "from": [
+          "FINALIZACAO_TECNICA_20260922.md",
+          "CHECKLIST_PUBLICACAO_ANDROID_IOS.md"
+        ],
+        "role": "privacy_policy_dart_define"
+      },
+      {
+        "url": "https://metodo1dia-app.web.app/termos.html",
+        "from": [
+          "FINALIZACAO_TECNICA_20260922.md",
+          "CHECKLIST_PUBLICACAO_ANDROID_IOS.md"
+        ],
+        "role": "terms_dart_define"
+      },
+      {
+        "url": "https://youtube.com/shorts/akKcU1UVUYw",
+        "from": "LISTA_AMANDA_MANUAL_APP.md",
+        "role": "amanda_manual_youtube_short"
+      }
+    ],
+    "lista_dependencias_play_apple_mac_http_urls": []
+  },
+  "7_grep_evidence": {
+    "signOutAndGoToLogin": {
+      "definition": "lib/core/auth/session_sign_out.dart:15",
+      "call_sites": [
+        "lib/core/auth/staff_sign_out_button.dart:23,27",
+        "lib/features/home/presentation/home_screen.dart:262",
+        "lib/features/profile/presentation/profile_screen.dart:200",
+        "lib/features/profile/presentation/settings_screen.dart:49",
+        "lib/features/personal_trainer/presentation/personal_dashboard_screen.dart:392,572"
+      ]
+    },
+    "StaffSignOutButton": {
+      "definition": "lib/core/auth/staff_sign_out_button.dart:8-9",
+      "usages": [
+        "lib/features/admin/presentation/admin_screen.dart:37,76",
+        "lib/features/personal_trainer/presentation/personal_dashboard_screen.dart:199,271",
+        "lib/features/personal_cms/presentation/personal_cms_hub_screen.dart:98"
+      ]
+    },
+    "PopScope_on_admin_screen": {
+      "file": "lib/features/admin/presentation/admin_screen.dart",
+      "evidence": [
+        "line 28: return PopScope( canPop: false ) — non-admin gate",
+        "line 59: return PopScope( canPop: false ) — admin root; comment: gesto Voltar NÃO abre Aluna/Personal"
+      ]
+    },
+    "AppNavigation.hubForPath": {
+      "definition": "lib/core/router/app_navigation.dart:15",
+      "used_at": "lib/core/router/app_navigation.dart:75",
+      "behavior_summary": "admin técnico hubs → /admin; personal whitelist admin paths → personalTrainer; else home"
+    },
+    "PAYMENTS_ENABLED": {
+      "definition": "lib/core/config/app_config.dart:44-45",
+      "value": "bool.fromEnvironment('PAYMENTS_ENABLED', defaultValue: false)",
+      "default": false,
+      "also_mentioned_in": [
+        "lib/features/subscriptions/presentation/plans_screen.dart:245,247",
+        "lib/features/subscriptions/domain/subscription_models.dart:116"
+      ]
+    },
+    "enableGuestMode": {
+      "definition": "lib/core/constants/app_constants.dart:26",
+      "value": false,
+      "guarded_usages": [
+        "lib/features/splash/presentation/splash_screen.dart:46",
+        "lib/features/auth/presentation/login_screen.dart:201",
+        "lib/features/auth/providers/auth_providers.dart:63,73",
+        "lib/core/router/app_router.dart:316"
+      ]
+    },
+    "REPLACE_ME_in_firebase_options": {
+      "file": "lib/firebase_options.dart",
+      "hits": [
+        "comment line 5",
+        "ios.apiKey line 43: 'REPLACE_ME'",
+        "ios.appId line 44: 'REPLACE_ME'"
+      ],
+      "android_web_real": true
+    }
+  },
+  "8_flutter_tests": {
+    "command": "flutter test test/user_role_permissions_test.dart test/meditations_association_order_test.dart test/app_navigation_staff_back_test.dart",
+    "exit_code": 0,
+    "result": "PASS",
+    "summary": "All tests passed! (+16)",
+    "files": [
+      {
+        "path": "test/user_role_permissions_test.dart",
+        "result": "PASS",
+        "cases_approx": 11
+      },
+      {
+        "path": "test/meditations_association_order_test.dart",
+        "result": "PASS",
+        "cases_approx": 1
+      },
+      {
+        "path": "test/app_navigation_staff_back_test.dart",
+        "result": "PASS",
+        "cases_approx": 4
+      }
+    ],
+    "e2e_profiles_marked_passed": false,
+    "note": "Unit/widget tests only. Do NOT interpret as E2E Aluna/Personal/Admin profile pass."
+  },
+  "9_http_status": {
+    "method": "GET",
+    "checked_at": "2026-09-23T23:51:23Z",
+    "results": [
+      {
+        "url": "https://metodo1dia-app--homologacao-cw9j2u83.web.app",
+        "status": 200,
+        "content_length": 2751
+      },
+      {
+        "url": "https://metodo1dia-app.web.app/privacidade",
+        "status": 404,
+        "note": "path without .html returns 404"
+      },
+      {
+        "url": "https://metodo1dia-app.web.app/privacidade.html",
+        "status": 200,
+        "content_length": 8815
+      },
+      {
+        "url": "https://metodo1dia-app.web.app/termos",
+        "status": 404,
+        "note": "path without .html returns 404"
+      },
+      {
+        "url": "https://metodo1dia-app.web.app/termos.html",
+        "status": 200,
+        "content_length": 5149
+      }
+    ]
+  },
+  "10_notes": {
+    "no_test_accounts_created": true,
+    "no_firestore_writes": true,
+    "payments_remain_disabled_default": true
+  }
+}

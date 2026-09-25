@@ -15,11 +15,11 @@ class AppIconsPack2 {
   static const String home = '${_base}icon_home.png';
   static const String gps = '${_base}icon_gps.png';
   static const String water = '${_base}icon_water.png';
-  static const String checkin = '${_base}icon_checkin.png';
+  static const String checkin = '${_base}icon_checkin.jpg';
   static const String habits = '${_base}icon_habits.png';
   static const String streak = '${_base}icon_streak.png';
   static const String recipes = '${_base}icon_recipes.png';
-  static const String videos = '${_base}icon_videos.png';
+  static const String videos = '${_base}icon_videos.jpg';
   static const String audio = '${_base}icon_audio.png';
   static const String diary = '${_base}icon_diary.png';
   static const String progress = '${_base}icon_progress.png';
@@ -28,7 +28,7 @@ class AppIconsPack2 {
   static const String community = '${_base}icon_community.png';
   static const String profile = '${_base}icon_profile.png';
   static const String personal = '${_base}icon_personal.png';
-  static const String premium = '${_base}icon_premium.png';
+  static const String premium = '${_base}icon_premium.jpg';
   static const String calendar = '${_base}icon_calendar.png';
   static const String notifications = '${_base}icon_notifications.png';
   static const String favorites = '${_base}icon_favorites.png';

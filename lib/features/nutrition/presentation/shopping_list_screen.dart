@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../domain/food_database_models.dart';
@@ -76,8 +77,8 @@ class ShoppingListScreen extends ConsumerWidget {
     final items = ref.watch(shoppingListProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lista de compras 🛒'),
+      appBar: PremiumAppBar(
+        title: 'Lista de compras 🛒',
         actions: [
           if (items.any((i) => i.bought))
             IconButton(

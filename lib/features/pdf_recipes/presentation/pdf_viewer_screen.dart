@@ -7,6 +7,7 @@ import 'package:pdfx/pdfx.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
@@ -89,7 +90,7 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
 
     if (bloqueado) {
       return Scaffold(
-        appBar: AppBar(title: Text(r.title)),
+        appBar: PremiumAppBar(title: r.title),
         body: SafeArea(
           child: Center(
             child: Padding(
@@ -123,8 +124,8 @@ class _PdfViewerScreenState extends ConsumerState<PdfViewerScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(r.title, overflow: TextOverflow.ellipsis),
+      appBar: PremiumAppBar(
+        title: r.title,
         actions: [
           IconButton(
             icon: FavoriteAssetIcon(active: isFavorite, size: 22),

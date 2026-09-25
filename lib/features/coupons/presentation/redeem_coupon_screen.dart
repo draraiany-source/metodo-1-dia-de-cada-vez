@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -49,7 +50,7 @@ class _RedeemCouponScreenState extends ConsumerState<RedeemCouponScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Resgatar cupom 🎟️')),
+      appBar: const PremiumAppBar(title: 'Resgatar cupom 🎟️'),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/mascot/mascot_sizes.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -82,24 +83,35 @@ class _RewardsStoreScreenState extends ConsumerState<RewardsStoreScreen>
     final state = ref.watch(rewardsProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Loja de Recompensas'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.history),
-            tooltip: 'Histórico',
-            onPressed: () => context.push(Routes.rewardsHistory),
-          ),
-        ],
-        bottom: TabBar(
-          controller: _tab,
-          isScrollable: true,
-          labelColor: Colors.white,
-          unselectedLabelColor: AppColors.textSecondary,
-          indicatorColor: AppColors.primary,
-          tabs: [
-            for (final c in RewardCategory.values)
-              Tab(text: '${c.emoji} ${c.label}'),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight + 48),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PremiumAppBar(
+              title: 'Loja de Recompensas',
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.history),
+                  tooltip: 'Histórico',
+                  onPressed: () => context.push(Routes.rewardsHistory),
+                ),
+              ],
+            ),
+            Material(
+              color: AppColors.background,
+              child: TabBar(
+                controller: _tab,
+                isScrollable: true,
+                labelColor: Colors.white,
+                unselectedLabelColor: AppColors.textSecondary,
+                indicatorColor: AppColors.primary,
+                tabs: [
+                  for (final c in RewardCategory.values)
+                    Tab(text: '${c.emoji} ${c.label}'),
+                ],
+              ),
+            ),
           ],
         ),
       ),

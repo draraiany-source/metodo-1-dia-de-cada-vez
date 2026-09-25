@@ -9,6 +9,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
@@ -186,9 +187,8 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text(_current.name, overflow: TextOverflow.ellipsis),
+      appBar: PremiumAppBar(
+        title: _current.name,
         actions: [
           if (_erro == null && !_loading) ...[
             IconButton(

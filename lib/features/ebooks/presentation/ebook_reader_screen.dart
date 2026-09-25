@@ -9,6 +9,7 @@ import 'package:pdfx/pdfx.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
@@ -123,8 +124,8 @@ class _EbookReaderScreenState extends ConsumerState<EbookReaderScreen> {
     final bloqueado = isContentLocked(ref, widget.ebook.isPremium);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.ebook.title, overflow: TextOverflow.ellipsis),
+      appBar: PremiumAppBar(
+        title: widget.ebook.title,
         actions: [
           if (!bloqueado) ...[
             IconButton(

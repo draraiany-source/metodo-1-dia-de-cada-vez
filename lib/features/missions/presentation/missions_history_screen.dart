@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/animations.dart';
 import '../../../core/utils/date_format.dart';
@@ -20,7 +21,7 @@ class MissionsHistoryScreen extends ConsumerWidget {
     final totalCoins = history.fold<int>(0, (s, r) => s + r.coins);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Missões concluídas')),
+      appBar: const PremiumAppBar(title: 'Missões concluídas'),
       body: SafeArea(
         child: history.isEmpty
             ? Center(

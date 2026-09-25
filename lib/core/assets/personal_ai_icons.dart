@@ -9,16 +9,16 @@ class PersonalAiIcons {
 
   static const String _base = 'assets/icons/personal-ai/';
 
-  static const String chatAmanda = '${_base}01_chat_com_amanda.png';
-  static const String agendaConsultoria = '${_base}02_agenda_consultoria.png';
-  static const String areaPersonal = '${_base}03_area_da_personal.png';
-  static const String anamnese = '${_base}04_anamnese.png';
-  static const String analisarIA = '${_base}05_analisar_com_ia.png';
-  static const String assistenteIA = '${_base}06_assistente_ia.png';
-  static const String insightsIA = '${_base}07_insights_ia.png';
-  static const String sugestaoResposta = '${_base}08_sugestao_de_resposta.png';
-  static const String resumoConversa = '${_base}09_resumo_da_conversa.png';
-  static const String pontosAtencao = '${_base}10_pontos_de_atencao.png';
+  static const String chatAmanda = '${_base}01_chat_com_amanda.jpg';
+  static const String agendaConsultoria = '${_base}02_agenda_consultoria.jpg';
+  static const String areaPersonal = '${_base}03_area_da_personal.jpg';
+  static const String anamnese = '${_base}04_anamnese.jpg';
+  static const String analisarIA = '${_base}05_analisar_com_ia.jpg';
+  static const String assistenteIA = '${_base}06_assistente_ia.jpg';
+  static const String insightsIA = '${_base}07_insights_ia.jpg';
+  static const String sugestaoResposta = '${_base}08_sugestao_de_resposta.jpg';
+  static const String resumoConversa = '${_base}09_resumo_da_conversa.jpg';
+  static const String pontosAtencao = '${_base}10_pontos_de_atencao.jpg';
 
   static const Map<String, String> personalAiIcons = {
     'chatAmanda': chatAmanda,

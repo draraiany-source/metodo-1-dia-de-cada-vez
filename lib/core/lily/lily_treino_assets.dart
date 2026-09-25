@@ -5,31 +5,31 @@ class LilyTreinoAssets {
 
   static const String base = 'assets/lily_treinos/';
 
-  static const halteres = '${base}lily_treino_halteres.png';
-  static const agachamento = '${base}lily_agachamento.png';
-  static const prancha = '${base}lily_prancha.png';
-  static const cordaNaval = '${base}lily_corda_naval.png';
-  static const kettlebell = '${base}lily_kettlebell.png';
-  static const hipThrust = '${base}lily_hip_thrust.png';
-  static const coiceGluteo = '${base}lily_coice_gluteo.png';
-  static const abducaoFaixa = '${base}lily_abducao_com_faixa.png';
-  static const elevacaoLateral = '${base}lily_elevacao_lateral.png';
-  static const biceps = '${base}lily_rosca_biceps.png';
-  static const triceps = '${base}lily_triceps.png';
-  static const remada = '${base}lily_remada.png';
-  static const supino = '${base}lily_supino.png';
-  static const desenvolvimentoOmbros = '${base}lily_desenvolvimento_ombros.png';
-  static const panturrilha = '${base}lily_panturrilha.png';
-  static const bicicleta = '${base}lily_bicicleta.png';
-  static const esteira = '${base}lily_esteira.png';
-  static const caminhada = '${base}lily_caminhada.png';
-  static const corrida = '${base}lily_corrida.png';
-  static const alongamento = '${base}lily_alongamento.png';
+  static const halteres = '${base}lily_treino_halteres.jpg';
+  static const agachamento = '${base}lily_agachamento.jpg';
+  static const prancha = '${base}lily_prancha.jpg';
+  static const cordaNaval = '${base}lily_corda_naval.jpg';
+  static const kettlebell = '${base}lily_kettlebell.jpg';
+  static const hipThrust = '${base}lily_hip_thrust.jpg';
+  static const coiceGluteo = '${base}lily_coice_gluteo.jpg';
+  static const abducaoFaixa = '${base}lily_abducao_com_faixa.jpg';
+  static const elevacaoLateral = '${base}lily_elevacao_lateral.jpg';
+  static const biceps = '${base}lily_rosca_biceps.jpg';
+  static const triceps = '${base}lily_triceps.jpg';
+  static const remada = '${base}lily_remada.jpg';
+  static const supino = '${base}lily_supino.jpg';
+  static const desenvolvimentoOmbros = '${base}lily_desenvolvimento_ombros.jpg';
+  static const panturrilha = '${base}lily_panturrilha.jpg';
+  static const bicicleta = '${base}lily_bicicleta.jpg';
+  static const esteira = '${base}lily_esteira.jpg';
+  static const caminhada = '${base}lily_caminhada.jpg';
+  static const corrida = '${base}lily_corrida.jpg';
+  static const alongamento = '${base}lily_alongamento.jpg';
 
-  static const generico1 = '${base}lily_treino_generico_1.png';
-  static const generico2 = '${base}lily_treino_generico_2.png';
-  static const generico3 = '${base}lily_treino_generico_3.png';
-  static const generico4 = '${base}lily_treino_generico_4.png';
+  static const generico1 = '${base}lily_treino_generico_1.jpg';
+  static const generico2 = '${base}lily_treino_generico_2.jpg';
+  static const generico3 = '${base}lily_treino_generico_3.jpg';
+  static const generico4 = '${base}lily_treino_generico_4.jpg';
 
   /// Pacote completo (24).
   static const List<String> all = [

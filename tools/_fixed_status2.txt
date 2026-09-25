@@ -1,0 +1,41 @@
+﻿LOG_BYTES=20324 MTIME=09/22/2026 21:30:02
+T	2026-09-22T21:24:16.354-0300 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [61672859-1612-4f3d-8689-140faf17132d port:65462, addresses:[localhost/127.0.0.1]]
+T	2026-09-22T21:24:16.354-0300 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [61672859-1612-4f3d-8689-140faf17132d port:65462, addresses:[localhost/127.0.0.1]]
+T	2026-09-22T21:24:16.358-0300 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+T	2026-09-22T21:24:16.359-0300 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+T	2026-09-22T21:24:16.362-0300 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+T	2026-09-22T21:24:16.363-0300 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+T	2026-09-22T21:24:16.364-0300 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+T	2026-09-22T21:24:16.379-0300 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=0572ceb0-f0c2-43a6-a307-f1bff79df54e, currentDir=C:\Users\Lenovo\Desktop\metodo 1 dia perfil premium 2\android}. Dispatching build started information...
+T	2026-09-22T21:24:16.386-0300 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 32: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@252137cb
+T	2026-09-22T21:24:16.408-0300 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: [PATH, POWERSHELL_EXECUTABLE, SESSIONNAME, ALLUSERSPROFILE, GOCACHE, VSCODE_PID, PROGRAMFILES, MOZ_PLUGIN_PATH, PSMODULEPATH, DIRNAME, USERNAME, CMD_LINE_ARGS, VSCODE_NLS_CONFIG, EXIT_WITH_ERRORLEVEL, FPS_BROWSER_USER_PROFILE_STRING, PATHEXT, LOG, PNPM_STORE_PATH, SNAPSHOT_PATH, PUPPETEER_CACHE_DIR, HOMEPATH, PROCESSOR_IDENTIFIER, PIP_CACHE_DIR, PUBLIC, CACHE_DIR, BUN_INSTALL_CACHE_DIR, _SKIP, CURSOR_LAYOUT, FPS_BROWSER_APP_PROFILE_STRING, JAVA_HOME, CCACHE_DIR, FLUTTER_TOOLS_DIR, PROMPT, PROGRAMFILES(X86), TERM, =C:, APPDATA, GRADLE_USER_HOME, _ZO_DOCTOR, JAVA_EXE, DART, NPM_CONFIG_CACHE, VSCODE_CWD, COMPUTERNAME, VSCODE_ESM_ENTRYPOINT, AGENT_TRANSCRIPTS, CURSOR_RIPGREP_PATH, TURBO_CACHE_DIR, CURSOR_CONVERSATION_ID, NPM_CONFIG_DEVDIR, CP_HOME_DIR, APP_BASE_NAME, FLUTTER_ALREADY_LOCKED, HOMEDRIVE, NUMBER_OF_PROCESSORS, VSCODE_IPC_HOOK, USERDOMAIN_ROAMINGPROFILE, PROCESSOR_LEVEL, SYSTEMDRIVE, PROCESSOR_ARCHITECTURE, CURSOR_AGENT, DRIVERDATA, HOMEBREW_CACHE, PROGRAMDATA, CHROME_CRASHPAD_PIPE_NAME, ONEDRIVE, APP_HOME, MINGIT_PATH, VSCODE_CRASH_REPORTER_PROCESS_TYPE, YARN_CACHE_FOLDER, SHARED_BIN, NX_CACHE_DIRECTORY, VSCODE_CODE_CACHE_PATH, WINDIR, CARGO_TARGET_DIR, GOMODCACHE, BUNDLE_PATH, PSEXECUTIONPOLICYPREFERENCE, CONDA_PKGS_DIRS, LOCALAPPDATA, FORCE_COLOR, COMMONPROGRAMFILES(X86), USERDOMAIN, VSCODE_HANDLES_UNCAUGHT_ERRORS, DART_SDK_PATH, LOGONSERVER, FLUTTER_ROOT, COMPOSER_HOME, UV_CACHE_DIR, CYPRESS_CACHE_FOLDER, PROGRAMW6432, SYSTEMROOT, __CURSOR_SANDBOX_ENV_RESTORE, NO_COLOR, GEM_SPEC_CACHE, PLAYWRIGHT_BROWSERS_PATH, POETRY_CACHE_DIR, OS, COMMONPROGRAMW6432, COMMONPROGRAMFILES, COMSPEC, PROCESSOR_REVISION, CLASSPATH, VSCODE_PROCESS_TITLE, CURSOR_WORKSPACE_LABEL, TEMP, USERPROFILE, TMP, NUGET_PACKAGES]
+T	2026-09-22T21:24:16.425-0300 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+T	2026-09-22T21:24:16.426-0300 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 5516). The daemon log file: C:\Users\Lenovo\.gradle\daemon\9.1.0\daemon-5516.out.log
+T	2026-09-22T21:24:16.462-0300 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting build in new daemon [memory: 5 GiB]
+T	2026-09-22T21:24:16.498-0300 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+T	2026-09-22T21:24:16.499-0300 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=9d59ee2a-4b86-4c08-8838-44615b093ca1,javaHome=C:\Program Files\Android\Android Studio\jbr,javaVersion=21,javaVendor=JetBrains s.r.o.,daemonRegistryDir=C:\Users\Lenovo\.gradle\daemon,pid=5516,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=1024m,-XX:ReservedCodeCacheSize=512m,-Xmx5120m,-Dfile.encoding=UTF-8,-Duser.country=BR,-Duser.language=pt,-Duser.variant]----- End of the daemon log -----
+T	
+T	JVM crash log found: file:///C:/Users/Lenovo/Desktop/metodo%201%20dia%20perfil%20premium%202/android/hs_err_pid5516.log
+T	
+T	FAILURE: Build failed with an exception.
+T	
+T	* What went wrong:
+T	Gradle build daemon disappeared unexpectedly (it may have been killed or may have crashed)
+T	
+T	* Try:
+T	> Run with --stacktrace option to get the stack trace.
+T	> Run with --info or --debug option to get more log output.
+T	> Run with --scan to generate a Build Scan (Powered by Develocity).
+T	> Get more help at https://help.gradle.org.
+T	Running Gradle task 'bundleRelease'...                            374,4s
+T	Gradle task bundleRelease failed with exit code 1
+P	8760	cmd	0.078125
+P	13040	cmd	0.0625
+P	14424	java	1723.265625
+P	11404	powershell	0.15625
+P	12748	powershell	0.8125
+P	13272	powershell	0.609375
+P	16824	powershell	0.5
+P	17800	powershell	0.578125
+FREE_GB=48.97
+SANDBOX_CACHE=True

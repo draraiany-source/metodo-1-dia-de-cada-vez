@@ -1,0 +1,118 @@
+id,nome,categoria,grupo_muscular,equipamento,nivel,slug
+treino_001,Bike – Queima Gordura,Cardio,,Bike,"['Iniciante', 'Intermediário', 'Avançado']",bike_queima_gordura
+treino_002,Bike Horizontal – Queima Gordura,Cardio,,Bike horizontal,"['Iniciante', 'Intermediário', 'Avançado']",bike_horizontal_queima_gordura
+treino_003,Caminhada – Queima Gordura,Cardio,,Livre / esteira,['Iniciante'],caminhada_queima_gordura
+treino_004,Esteira – Caminhada/Corrida – Queima Gordura,Cardio,,Esteira,"['Iniciante', 'Intermediário', 'Avançado']",esteira_caminhada_corrida_queima_gordura
+treino_005,Bike Spinning – Queima Gordura,Cardio,,Bike spinning,"['Iniciante', 'Intermediário', 'Avançado']",bike_spinning_queima_gordura
+treino_006,Simulador de Escada – Queima Gordura,Cardio,,Simulador de escada,"['Intermediário', 'Avançado']",simulador_de_escada_queima_gordura
+treino_007,Elíptico – Queima Gordura,Cardio,,Elíptico,"['Iniciante', 'Intermediário', 'Avançado']",eliptico_queima_gordura
+treino_008,Abdominal Supra no Solo,Hipertrofia / Core,Abdômen,Nenhum,"['Iniciante', 'Intermediário']",abdominal_supra_no_solo
+treino_009,Abdominal – Queima Gordura,Hipertrofia / Core,Abdômen,Nenhum,"['Iniciante', 'Intermediário']",abdominal_queima_gordura
+treino_010,Abdominal Supra com Toque nos Joelhos – Unilateral,Hipertrofia / Core,Abdômen,Nenhum,"['Iniciante', 'Intermediário']",abdominal_supra_com_toque_nos_joelhos_unilateral
+treino_011,Abdominal Remador,Hipertrofia / Core,Abdômen,Nenhum,"['Intermediário', 'Avançado']",abdominal_remador
+treino_012,Prancha Abdominal – Isometria,Hipertrofia / Core,Core / abdômen,Nenhum,"['Iniciante', 'Intermediário', 'Avançado']",prancha_abdominal_isometria
+treino_013,Abdominal na Máquina,Hipertrofia / Core,Abdômen,Máquina abdominal,"['Iniciante', 'Intermediário', 'Avançado']",abdominal_na_maquina
+treino_014,Abdominal Infra na Paralela,Hipertrofia / Core,Abdômen inferior,Paralela,"['Iniciante', 'Intermediário', 'Avançado']",abdominal_infra_na_paralela
+treino_015,Mobilidade de Ombros,Flexibilidade / Mobilidade,Ombros,Nenhum,"['Iniciante', 'Intermediário', 'Avançado']",mobilidade_de_ombros
+treino_016,Alongamento de Superiores no Espaldar,Flexibilidade / Mobilidade,Membros superiores,Espaldar,"['Iniciante', 'Intermediário', 'Avançado']",alongamento_de_superiores_no_espaldar
+treino_017,Aquecimento de Membros Inferiores com Agachamento e Afundo,Aquecimento / Mobilidade,Membros inferiores,Nenhum,"['Iniciante', 'Intermediário', 'Avançado']",aquecimento_de_membros_inferiores_com_agachamento_e_afundo
+treino_018,Alongamento de Membros Inferiores no Espaldar,Flexibilidade / Mobilidade,Membros inferiores,Espaldar,"['Iniciante', 'Intermediário', 'Avançado']",alongamento_de_membros_inferiores_no_espaldar
+treino_019,Simulação de Pular Corda,Cardio,,Nenhum,"['Iniciante', 'Intermediário', 'Avançado']",simulacao_de_pular_corda
+treino_020,Agachamento com Salto,Hipertrofia / Cardio,Membros inferiores,Nenhum,"['Iniciante', 'Intermediário', 'Avançado']",agachamento_com_salto
+treino_021,Agachamento com Passada Lateral,Hipertrofia / Cardio,Membros inferiores,Nenhum,"['Iniciante', 'Intermediário', 'Avançado']",agachamento_com_passada_lateral
+treino_022,Agachamento com Salto Lateral no Step,Cardio,Membros inferiores,Step,"['Iniciante', 'Intermediário', 'Avançado']",agachamento_com_salto_lateral_no_step
+treino_023,Polichinelo,Cardio,,Nenhum,"['Iniciante', 'Intermediário', 'Avançado']",polichinelo
+treino_024,Burpee,Cardio,Corpo inteiro,Nenhum,"['Iniciante', 'Intermediário', 'Avançado']",burpee
+treino_025,Escalador,Cardio,Core / corpo inteiro,Nenhum,"['Iniciante', 'Intermediário', 'Avançado']",escalador
+treino_026,Aquecimento com Agachamento + Recuo + Avanço,Cardio / Aquecimento,Membros inferiores,Nenhum,"['Iniciante', 'Intermediário', 'Avançado']",aquecimento_com_agachamento_recuo_avanco
+treino_027,Agachamento no TRX,Hipertrofia,Membros inferiores,TRX,['Iniciante'],agachamento_no_trx
+treino_028,Afundo no TRX,Hipertrofia,Membros inferiores,TRX,['Iniciante'],afundo_no_trx
+treino_029,Afundo no Step sem Peso,Hipertrofia,Membros inferiores,Step,['Iniciante'],afundo_no_step_sem_peso
+treino_030,Agachamento no Banco/Cadeira/Caixote,Cardio / Funcional,Membros inferiores,"Banco, cadeira ou caixote",['Iniciante'],agachamento_no_banco_cadeira_caixote
+treino_031,Afundo com Halteres,Hipertrofia,Quadríceps / glúteos / isquiotibiais,Halteres,['Intermediário'],afundo_com_halteres
+treino_032,Afundo com Halteres no Step,Hipertrofia,Quadríceps / glúteos / isquiotibiais,Halteres e step,['Intermediário'],afundo_com_halteres_no_step
+treino_033,Agachamento Taça,Hipertrofia,Quadríceps / glúteos,Halter ou kettlebell,['Intermediário'],agachamento_taca
+treino_034,Cadeira Extensora,Hipertrofia,Quadríceps,Cadeira extensora,"['Intermediário', 'Avançado']",cadeira_extensora
+treino_035,Leg Press 45°,Hipertrofia,Quadríceps / glúteos / isquiotibiais,Leg press 45°,"['Intermediário', 'Avançado']",leg_press_45
+treino_036,Agachamento Hack Squat,Hipertrofia,Quadríceps / glúteos,Hack squat,['Iniciante'],agachamento_hack_squat
+treino_037,Agachamento Livre,Hipertrofia,Quadríceps / glúteos / isquiotibiais,Livre,['Avançado'],agachamento_livre
+treino_038,Agachamento Smith,Hipertrofia,Quadríceps / glúteos / isquiotibiais,Smith,['Avançado'],agachamento_smith
+treino_039,Agachamento Smith Profundo,Hipertrofia,Quadríceps / glúteos / isquiotibiais,Smith,['Avançado'],agachamento_smith_profundo
+treino_040,Afundo no Smith,Hipertrofia,Quadríceps / glúteos / isquiotibiais,Smith,['Avançado'],afundo_no_smith
+treino_041,Leg Press Horizontal,Hipertrofia,Quadríceps / isquiotibiais,Leg press horizontal,['Intermediário'],leg_press_horizontal
+treino_042,Agachamento Livre com Halteres,Hipertrofia,Quadríceps / glúteos / isquiotibiais,Halteres,['Iniciante'],agachamento_livre_com_halteres
+treino_043,Máquina Adutora,Hipertrofia,Adutores,Máquina adutora,"['Iniciante', 'Intermediário', 'Avançado']",maquina_adutora
+treino_044,Agachamento Pêndulo,Hipertrofia,Quadríceps,Pêndulo,['Avançado'],agachamento_pendulo
+treino_045,Elevação Pélvica no Solo com Peso Corporal,Ativação / Hipertrofia,Glúteos,Nenhum,['Iniciante'],elevacao_pelvica_no_solo_com_peso_corporal
+treino_046,Cadeira Abdutora,Hipertrofia,Abdutores,Máquina abdutora,"['Iniciante', 'Intermediário', 'Avançado']",cadeira_abdutora
+treino_047,Stiff Unilateral,Hipertrofia,Glúteos / isquiotibiais,Peso do corpo,['Intermediário'],stiff_unilateral
+treino_048,Glúteo 4 Apoios com Perna Estendida e Caneleira,Hipertrofia,Glúteos / isquiotibiais,Caneleira,['Intermediário'],gluteo_4_apoios_com_perna_estendida_e_caneleira
+treino_049,Glúteo 4 Apoios com Caneleira,Hipertrofia,Glúteos / isquiotibiais,Caneleira,['Intermediário'],gluteo_4_apoios_com_caneleira
+treino_050,Abdução com Caneleira,Hipertrofia,Abdutores / glúteos,Caneleira,['Intermediário'],abducao_com_caneleira
+treino_051,Glúteo em Pé – Coice,Hipertrofia,Glúteos / isquiotibiais,Máquina de glúteo em pé,['Intermediário'],gluteo_em_pe_coice
+treino_052,Agachamento Búlgaro com Halteres,Hipertrofia,Glúteos / isquiotibiais / quadríceps,"Banco, caixote, step ou aparelho de búlgaro + halteres",['Avançado'],agachamento_bulgaro_com_halteres
+treino_053,Afundo com Recuo e Rosca Direta,Emagrecimento / Funcional,Membros inferiores / bíceps,,['Intermediário'],afundo_com_recuo_e_rosca_direta
+treino_054,Afundo com Recuo e Halteres,Hipertrofia – Membros Inferiores,Quadríceps / Glúteos / Isquiotibiais,Halteres,['Iniciante'],afundo_com_recuo_e_halteres
+treino_055,Glúteo Coice no Cabo – Polia Baixa,Hipertrofia – Membros Inferiores,Glúteos / Isquiotibiais,Crossover,['Avançado'],gluteo_coice_no_cabo_polia_baixa
+treino_056,Glúteo na Polia com Cabo no Quadríceps,Hipertrofia – Membros Inferiores,Glúteos / Isquiotibiais,Crossover,['Intermediário'],gluteo_na_polia_com_cabo_no_quadriceps
+treino_057,Agachamento Sumô no Step,Hipertrofia – Membros Inferiores,Glúteos / Isquiotibiais,Halteres / Dumbbells / Step,['Avançado'],agachamento_sumo_no_step
+treino_058,Levantamento Terra Sumô,Hipertrofia – Membros Inferiores,Isquiotibiais,Barra livre,['Avançado'],levantamento_terra_sumo
+treino_059,Agachamento Sumô na Máquina,Hipertrofia – Membros Inferiores,Isquiotibiais,Máquina sumô,['Avançado'],agachamento_sumo_na_maquina
+treino_060,Búlgaro no Smith,Hipertrofia – Membros Inferiores,Glúteos / Isquiotibiais,"Smith + aparelho de búlgaro, banco ou caixote",['Avançado'],bulgaro_no_smith
+treino_061,Elevação Pélvica,Hipertrofia – Membros Inferiores,Glúteos / Isquiotibiais,Máquina de elevação pélvica,['Intermediário'],elevacao_pelvica
+treino_062,Máquina de Elevação Pélvica,Hipertrofia – Membros Inferiores,Glúteos / Isquiotibiais,Máquina de elevação pélvica,['Intermediário'],maquina_de_elevacao_pelvica
+treino_063,Cadeira Flexora,Hipertrofia – Membros Inferiores,Isquiotibiais,Cadeira flexora,['Avançado'],cadeira_flexora
+treino_064,Mesa Flexora,Hipertrofia – Membros Inferiores,Isquiotibiais,Mesa flexora,['Avançado'],mesa_flexora
+treino_065,Stiff,Hipertrofia – Membros Inferiores,Isquiotibiais,Barra livre,['Avançado'],stiff
+treino_066,Panturrilha Sentada,Hipertrofia – Panturrilhas,Panturrilhas / Gêmeos,Máquina de panturrilha sentada,['Intermediário'],panturrilha_sentada
+treino_067,Subida no Caixote Segurando no Espaldar,Hipertrofia – Membros Inferiores,Isquiotibiais / Quadríceps,Caixote e espaldar,['Iniciante'],subida_no_caixote_segurando_no_espaldar
+treino_068,Full Body – Agachamento Sumô com Elevação Frontal,Full Body / Funcional,Membros inferiores / Ombros,Kettlebell,['Intermediário'],full_body_agachamento_sumo_com_elevacao_frontal
+treino_069,Agachamento com Desenvolvimento,Full Body / Funcional,Quadríceps / Glúteos / Isquiotibiais / Ombros,Halteres,['Iniciante'],agachamento_com_desenvolvimento
+treino_070,Full Body – Agachamento com Desenvolvimento Unilateral Alternado,Full Body / Funcional,Quadríceps / Isquiotibiais / Glúteos,Halteres,['Iniciante'],full_body_agachamento_com_desenvolvimento_unilateral_alternado
+treino_071,Supino Reto Articulado – Pegada Neutra,Hipertrofia – Peitoral,Peitoral,Máquina de supino articulada,['Intermediário'],supino_reto_articulado_pegada_neutra
+treino_072,Supino Reto – Pegada Supinada na Máquina Articulada,Hipertrofia – Peitoral,Peitoral,Supino reto articulado,['Intermediário'],supino_reto_pegada_supinada_na_maquina_articulada
+treino_073,Supino Inclinado – Pegada Neutra,Hipertrofia – Peitoral,Peitoral,Máquina de supino inclinado articulado,"['Intermediário', 'Avançado']",supino_inclinado_pegada_neutra
+treino_074,Supino Inclinado – Pegada Supinada,Hipertrofia – Peitoral,Peitoral,Supino articulado inclinado,"['Intermediário', 'Avançado']",supino_inclinado_pegada_supinada
+treino_075,Supino com Halteres no Banco Inclinado,Hipertrofia – Peitoral,Peitoral,Banco e halteres,"['Intermediário', 'Avançado']",supino_com_halteres_no_banco_inclinado
+treino_076,Peitoral no Peck Fly,Hipertrofia – Peitoral,Peitoral,Peck Fly,"['Iniciante', 'Intermediário', 'Avançado']",peitoral_no_peck_fly
+treino_077,Puxada com Barra Longa,Hipertrofia – Costas,Dorsal,Máquina de puxada alta,"['Intermediário', 'Avançado']",puxada_com_barra_longa
+treino_078,Barra Fixa no Graviton,Hipertrofia – Costas,Grande dorsal,Graviton,"['Intermediário', 'Avançado']",barra_fixa_no_graviton
+treino_079,Puxada com Triângulo,Hipertrofia – Costas,Dorsal,Máquina de puxada,"['Intermediário', 'Avançado']",puxada_com_triangulo
+treino_080,Puxada com Barra W,Hipertrofia – Costas,Dorsal,Máquina de puxada,"['Intermediário', 'Avançado']",puxada_com_barra_w
+treino_081,Face Pull,Hipertrofia – Costas,Ombros / Dorsal,Crossover ou Crosmith,"['Intermediário', 'Avançado']",face_pull
+treino_082,Pulldown com Barra Reta,Hipertrofia – Costas,Ombros / Dorsal,Crossover ou Crosmith,"['Intermediário', 'Avançado']",pulldown_com_barra_reta
+treino_083,Puxada Alta com Corda,Hipertrofia – Costas,Dorsal,Crossover ou Crosmith,"['Intermediário', 'Avançado']",puxada_alta_com_corda
+treino_084,Remada Sentada com Triângulo,Hipertrofia – Costas,Dorsal,Máquina de remada,"['Intermediário', 'Avançado']",remada_sentada_com_triangulo
+treino_085,Remada Curvada com Barra,Hipertrofia – Costas,Dorsal,Barra longa,"['Intermediário', 'Avançado']",remada_curvada_com_barra
+treino_086,Rosca Direta na Polia Baixa com Barra Reta,Hipertrofia – Bíceps,Bíceps,Crossover ou Crosmith + barra reta,"['Iniciante', 'Intermediário', 'Avançado']",rosca_direta_na_polia_baixa_com_barra_reta
+treino_087,Rosca Direta com Halteres,Hipertrofia – Bíceps,Bíceps,Halteres,"['Iniciante', 'Intermediário', 'Avançado']",rosca_direta_com_halteres
+treino_088,Bíceps Alternado / Unilateral,Hipertrofia – Bíceps,Bíceps,Máquina de bíceps,"['Intermediário', 'Avançado']",biceps_alternado_unilateral
+treino_089,Rosca Direta na Máquina,Hipertrofia – Bíceps,Bíceps,Máquina de bíceps,"['Intermediário', 'Avançado']",rosca_direta_na_maquina
+treino_090,Rosca Direta Alternada com Rotação de Cotovelos,Hipertrofia – Bíceps,Bíceps,Halteres,"['Intermediário', 'Avançado']",rosca_direta_alternada_com_rotacao_de_cotovelos
+treino_091,Rosca Martelo com Corda,Hipertrofia – Bíceps,Bíceps,Crossover ou Crosmith + corda,"['Intermediário', 'Avançado']",rosca_martelo_com_corda
+treino_092,Rosca Unilateral na Polia Baixa,Hipertrofia – Bíceps,Bíceps,Crossover ou Crosmith + pegador,"['Intermediário', 'Avançado']",rosca_unilateral_na_polia_baixa
+treino_093,Remada Alta na Polia,Hipertrofia – Ombros,Ombros / Trapézio,Crossover ou Crosmith + barra reta,"['Iniciante', 'Intermediário', 'Avançado']",remada_alta_na_polia
+treino_094,Remada Alta com Barra,Hipertrofia – Ombros,Ombros / Trapézio,Barra montada ou desmontada,"['Intermediário', 'Avançado']",remada_alta_com_barra
+treino_095,Remada Alta + Desenvolvimento com Barra,Hipertrofia – Ombros,Ombros / Trapézio,Barra reta,"['Intermediário', 'Avançado']",remada_alta_desenvolvimento_com_barra
+treino_096,Desenvolvimento com Halteres,Hipertrofia – Ombros,Ombros,Halteres e banco,"['Intermediário', 'Avançado']",desenvolvimento_com_halteres
+treino_097,Desenvolvimento Arnold em Pé,Hipertrofia – Ombros,Ombros,Halteres,"['Intermediário', 'Avançado']",desenvolvimento_arnold_em_pe
+treino_098,Desenvolvimento na Máquina,Hipertrofia – Ombros,Ombros,Máquina de desenvolvimento,['Avançado'],desenvolvimento_na_maquina
+treino_099,Elevação Frontal na Polia com Barra Reta,Hipertrofia – Ombros,Ombros,Crossover ou Crosmith + barra reta,"['Intermediário', 'Avançado']",elevacao_frontal_na_polia_com_barra_reta
+treino_100,Elevação Frontal – Ombro e Peitoral,Hipertrofia – Peitoral,Ombros / Peitoral,Crossover ou Crosmith + barra reta,['Avançado'],elevacao_frontal_ombro_e_peitoral
+treino_101,Elevação Lateral + Desenvolvimento com Cotovelos à Frente,Hipertrofia – Ombros,Ombros,Halteres,"['Iniciante', 'Intermediário', 'Avançado']",elevacao_lateral_desenvolvimento_com_cotovelos_a_frente
+treino_102,Elevação Frontal com Halteres,Hipertrofia – Peitoral,Ombros / Peitoral,Halteres,['Avançado'],elevacao_frontal_com_halteres
+treino_103,Elevação Lateral na Polia,Hipertrofia – Ombros,Ombros,Crossover ou Crosmith + pegador,['Avançado'],elevacao_lateral_na_polia
+treino_104,Elevação Lateral no Banco,Hipertrofia – Ombros,Ombros,Halteres e banco,"['Intermediário', 'Avançado']",elevacao_lateral_no_banco
+treino_105,Elevação Frontal com Anilha,Hipertrofia – Peitoral,Ombros / Peitoral,Anilhas,"['Intermediário', 'Avançado']",elevacao_frontal_com_anilha
+treino_106,Elevação Lateral com Halteres,Hipertrofia – Ombros,Ombros,Halteres,['Avançado'],elevacao_lateral_com_halteres
+treino_107,Tríceps com Corda,Hipertrofia – Tríceps,Tríceps,Crossover ou Crosmith + corda,"['Iniciante', 'Intermediário', 'Avançado']",triceps_com_corda
+treino_108,Tríceps Francês com Corda,Hipertrofia – Tríceps,Tríceps,Crossover ou Crosmith + corda,['Avançado'],triceps_frances_com_corda
+treino_109,Tríceps Paralelo,Hipertrofia – Tríceps,Tríceps,Máquina de tríceps,"['Iniciante', 'Intermediário', 'Avançado']",triceps_paralelo
+treino_110,Tríceps Francês com Corda,Hipertrofia – Tríceps,Tríceps,Crossover ou Crosmith + corda,"['Iniciante', 'Intermediário', 'Avançado']",triceps_frances_com_corda
+treino_111,Tríceps Testa na Polia,Hipertrofia – Tríceps,Tríceps,Crossover ou Crosmith + barra reta,['Avançado'],triceps_testa_na_polia
+treino_112,Tríceps Francês com Corda,Hipertrofia – Tríceps,Tríceps,Crossover ou Crosmith + corda,['Avançado'],triceps_frances_com_corda
+treino_113,Full Body – Afundo com Recuo e Rosca Direta,Full Body / Funcional,Corpo todo,Halteres,"['Intermediário', 'Avançado']",full_body_afundo_com_recuo_e_rosca_direta
+treino_114,Full Body – Agachamento Sumô com Elevação Lateral,Full Body / Funcional,Corpo todo,Halteres,"['Intermediário', 'Avançado']",full_body_agachamento_sumo_com_elevacao_lateral
+treino_115,Full Body – Afundo com Recuo e Remada Curvada,Full Body / Funcional,Corpo todo,Anilhas,"['Intermediário', 'Avançado']",full_body_afundo_com_recuo_e_remada_curvada
+treino_116,Búlgaro sem Peso,Hipertrofia – Membros Inferiores,Glúteos / Isquiotibiais / Quadríceps,"Aparelho de búlgaro, banco ou caixote","['Iniciante', 'Intermediário', 'Avançado']",bulgaro_sem_peso
+treino_117,Remada Articulada,Hipertrofia – Costas,Dorsal,Remada articulada,"['Intermediário', 'Avançado']",remada_articulada

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/design_system/app_spacing.dart';
 import '../../../core/design_system/app_typography.dart';
 import '../../../core/theme/app_colors.dart';
@@ -58,7 +59,7 @@ class _LeaguesScreenState extends ConsumerState<LeaguesScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Ligas 🏆')),
+      appBar: const PremiumAppBar(title: 'Ligas 🏆'),
       body: SafeArea(
         child: league.loading
             ? const Center(child: SkeletonBox(width: 200, height: 200))

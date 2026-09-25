@@ -1,0 +1,3 @@
+﻿abdutora=True
+extensora=True
+count_lily_ex=119

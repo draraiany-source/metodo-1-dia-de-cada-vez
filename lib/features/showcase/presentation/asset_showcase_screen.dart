@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/assets/app_icons.dart';
 import '../../../core/assets/app_icons_pack2.dart';
 import '../../../core/constants/app_assets.dart';
@@ -16,7 +17,7 @@ class AssetShowcaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Design System · Lili Fit')),
+      appBar: const PremiumAppBar(title: 'Design System · Lili Fit'),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

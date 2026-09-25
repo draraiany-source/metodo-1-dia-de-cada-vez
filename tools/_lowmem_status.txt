@@ -1,0 +1,17 @@
+﻿LOG_BYTES=5147 MTIME=09/22/2026 21:50:18
+HIT	Got dependencies!
+HIT	Running Gradle task 'bundleRelease'...
+HIT	Running Gradle task 'bundleRelease'...                            934,4s
+HIT	√ Built build\app\outputs\bundle\release\app-release.aab (148.4MB)
+T	
+T	Please check the changelogs of these plugins and upgrade to a version that supports Built-in Kotlin.
+T	If no such version exists, report the issue to the plugin. If necessary, here is a guide on filing 
+T	an issue against a plugin: https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-app-developers#report-incompatible-kotlin-gradle-plugin-usage-to-plugin-authors
+T	
+T	If you are a plugin author, please migrate your plugin to Built-in Kotlin using this guide: https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-plugin-authors
+T	Running Gradle task 'bundleRelease'...                            934,4s
+T	√ Built build\app\outputs\bundle\release\app-release.aab (148.4MB)
+AAB_BYTES=155639605
+AAB_MTIME=09/22/2026 21:50:05
+AAB_MB=148.43
+FREE_GB=48.92

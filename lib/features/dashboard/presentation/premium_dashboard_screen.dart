@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../models/app_user.dart';
@@ -77,7 +78,7 @@ class _PremiumDashboardScreenState
         pesoHist.where((e) => e.date.isAfter(desde)).toList();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Dashboard Premium 👑')),
+      appBar: const PremiumAppBar(title: 'Dashboard Premium 👑'),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),

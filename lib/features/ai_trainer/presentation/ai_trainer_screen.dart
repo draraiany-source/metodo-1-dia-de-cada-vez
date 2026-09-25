@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/widgets/lili_guide.dart';
 import '../../../core/theme/app_colors.dart';
@@ -64,36 +65,16 @@ class _AiTrainerScreenState extends ConsumerState<AiTrainerScreen> {
     final remote = ref.watch(aiTrainerRepositoryProvider).isRemoteAvailable;
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          tooltip: 'Voltar',
-          onPressed: () => context.canPop()
-              ? context.pop()
-              : context.go(Routes.home),
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
-        ),
-        title: GestureDetector(
-          onTap: () => context.push(Routes.amandaProfile),
-          child: Row(
-            children: [
-              const ClipOval(
-                child: AmandaImage(size: 36),
-              ),
-              const SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text('Amanda IA', style: TextStyle(fontSize: 16)),
-                  Text(remote ? 'IA online' : 'Modo inteligente local',
-                      style: const TextStyle(
-                          fontSize: 11, color: AppColors.textSecondary)),
-                ],
-              ),
-            ],
-          ),
-        ),
+      appBar: PremiumAppBar(
+        title: remote ? 'Amanda IA' : 'Amanda IA · local',
         actions: [
+          IconButton(
+            tooltip: 'Perfil da Amanda',
+            onPressed: () => context.push(Routes.amandaProfile),
+            icon: const ClipOval(
+              child: AmandaImage(size: 32),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.tune),
             tooltip: 'Meu perfil físico',

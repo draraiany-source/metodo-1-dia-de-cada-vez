@@ -71,7 +71,7 @@ class AudiosMeditationsHubScreen extends ConsumerWidget {
           ),
           _LinkTile(
             title: 'Meditações',
-            subtitle: 'Sono, respiração e ansiedade',
+            subtitle: '7 áudios · YouTube Shorts (1 a 7)',
             icon: Icons.self_improvement_rounded,
             onTap: () => context.push('/meditations'),
           ),

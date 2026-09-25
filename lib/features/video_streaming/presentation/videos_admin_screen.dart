@@ -215,7 +215,10 @@ class _VideosAdminScreenState extends ConsumerState<VideosAdminScreen> {
 
             return Column(
               children: [
-                const _CabecalhoAdmin(),
+                _CabecalhoAdmin(
+                  total: videos.length,
+                  salvando: _salvandoOrdem,
+                ),
                 Expanded(
                   child: ReorderableListView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 4, 16, 100),
@@ -230,6 +233,13 @@ class _VideosAdminScreenState extends ConsumerState<VideosAdminScreen> {
                         key: ValueKey('video_${v.id}'),
                         video: v,
                         posicao: i + 1,
+                        total: videos.length,
+                        onSubir: i == 0
+                            ? null
+                            : () => _reordenar(videos, i, i - 1),
+                        onDescer: i >= videos.length - 1
+                            ? null
+                            : () => _reordenar(videos, i, i + 2),
                         onEditar: () => _editar(v),
                         onPublicar: () => _alternarPublicacao(v),
                         onExcluir: () => _excluir(v),
@@ -247,7 +257,10 @@ class _VideosAdminScreenState extends ConsumerState<VideosAdminScreen> {
 }
 
 class _CabecalhoAdmin extends StatelessWidget {
-  const _CabecalhoAdmin();
+  const _CabecalhoAdmin({required this.total, required this.salvando});
+
+  final int total;
+  final bool salvando;
 
   @override
   Widget build(BuildContext context) {
@@ -259,18 +272,49 @@ class _CabecalhoAdmin extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppTheme.radiusSm),
         border: Border.all(color: AppColors.borderSoft),
       ),
-      child: const Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.drag_indicator, color: AppColors.accent, size: 20),
-          SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              'Arraste pelo ícone à direita para mudar a ordem em que as alunas '
-              'veem os vídeos. A ordem salva sozinha.',
-              style: TextStyle(
-                  color: AppColors.textSecondary, fontSize: 12, height: 1.35),
-            ),
+          Row(
+            children: [
+              const Icon(Icons.format_list_numbered,
+                  color: AppColors.accent, size: 20),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'Ordem atual · $total ${total == 1 ? 'vídeo' : 'vídeos'}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              if (salvando)
+                const Text(
+                  'Salvando…',
+                  style: TextStyle(
+                      color: AppColors.accent,
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w700),
+                )
+              else
+                const Text(
+                  'Salva no app',
+                  style: TextStyle(
+                      color: AppColors.success,
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w700),
+                ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'O número à esquerda é a ordem que as alunas veem (web e Android). '
+            'Use ▲ ▼ ou arraste pela alça à direita — a mudança grava sozinha '
+            'no Firestore, sem editar código.',
+            style: TextStyle(
+                color: AppColors.textSecondary, fontSize: 12, height: 1.35),
           ),
         ],
       ),
@@ -322,16 +366,22 @@ class _LinhaAdmin extends StatelessWidget {
     super.key,
     required this.video,
     required this.posicao,
+    required this.total,
     required this.onEditar,
     required this.onPublicar,
     required this.onExcluir,
+    this.onSubir,
+    this.onDescer,
   });
 
   final VideoContent video;
   final int posicao;
+  final int total;
   final VoidCallback onEditar;
   final VoidCallback onPublicar;
   final VoidCallback onExcluir;
+  final VoidCallback? onSubir;
+  final VoidCallback? onDescer;
 
   @override
   Widget build(BuildContext context) {
@@ -355,6 +405,64 @@ class _LinhaAdmin extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Column(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withOpacity(0.18),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            color: AppColors.primary.withOpacity(0.45)),
+                      ),
+                      child: Text(
+                        '$posicao',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'de $total',
+                      style: const TextStyle(
+                          color: AppColors.textTertiary, fontSize: 10),
+                    ),
+                    IconButton(
+                      tooltip: 'Subir',
+                      visualDensity: VisualDensity.compact,
+                      padding: EdgeInsets.zero,
+                      constraints:
+                          const BoxConstraints(minWidth: 32, minHeight: 28),
+                      onPressed: onSubir,
+                      icon: Icon(
+                        Icons.keyboard_arrow_up_rounded,
+                        color: onSubir == null
+                            ? AppColors.textTertiary.withOpacity(0.35)
+                            : AppColors.accent,
+                      ),
+                    ),
+                    IconButton(
+                      tooltip: 'Descer',
+                      visualDensity: VisualDensity.compact,
+                      padding: EdgeInsets.zero,
+                      constraints:
+                          const BoxConstraints(minWidth: 32, minHeight: 28),
+                      onPressed: onDescer,
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: onDescer == null
+                            ? AppColors.textTertiary.withOpacity(0.35)
+                            : AppColors.accent,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 8),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: SizedBox(
@@ -398,7 +506,7 @@ class _LinhaAdmin extends StatelessWidget {
                       const SizedBox(height: 5),
                       Text(
                         [
-                          '#$posicao',
+                          'Ordem $posicao',
                           video.category.shortLabel,
                           if (video.durationLabel.isNotEmpty) video.durationLabel,
                           if (video.isPremium) 'Premium',

@@ -21,6 +21,7 @@ Future<VideoContent?> mostrarEditorDeVideo(
   BuildContext context, {
   VideoContent? existente,
   int ordemSugerida = 0,
+  VideoCategory? categoriaFixa,
 }) {
   return showModalBottomSheet<VideoContent>(
     context: context,
@@ -30,14 +31,20 @@ Future<VideoContent?> mostrarEditorDeVideo(
     builder: (_) => _VideoEditorSheet(
       existente: existente,
       ordemSugerida: ordemSugerida,
+      categoriaFixa: categoriaFixa,
     ),
   );
 }
 
 class _VideoEditorSheet extends ConsumerStatefulWidget {
-  const _VideoEditorSheet({required this.existente, required this.ordemSugerida});
+  const _VideoEditorSheet({
+    required this.existente,
+    required this.ordemSugerida,
+    this.categoriaFixa,
+  });
   final VideoContent? existente;
   final int ordemSugerida;
+  final VideoCategory? categoriaFixa;
 
   @override
   ConsumerState<_VideoEditorSheet> createState() => _VideoEditorSheetState();
@@ -83,7 +90,8 @@ class _VideoEditorSheetState extends ConsumerState<_VideoEditorSheet> {
     _minutos = TextEditingController(text: total > 0 ? '${total ~/ 60}' : '');
     _segundos = TextEditingController(text: total > 0 ? '${total % 60}' : '');
 
-    _categoria = v?.category ?? VideoCategory.boasVindas;
+    _categoria =
+        v?.category ?? widget.categoriaFixa ?? VideoCategory.boasVindas;
     _premium = v?.isPremium ?? false;
     _publicado = v?.active ?? true;
     _capaUrl = v?.thumbnailUrl ?? '';
@@ -258,21 +266,32 @@ class _VideoEditorSheetState extends ConsumerState<_VideoEditorSheet> {
                 ),
                 const SizedBox(height: 16),
 
-                _Rotulo('Categoria'),
-                DropdownButtonFormField<VideoCategory>(
-                  value: _categoria,
-                  isExpanded: true,
-                  dropdownColor: AppColors.surfaceElevated,
-                  items: VideoCategory.values
-                      .map((c) => DropdownMenuItem(
-                            value: c,
-                            child: Text(c.label,
-                                overflow: TextOverflow.ellipsis),
-                          ))
-                      .toList(),
-                  onChanged: (v) =>
-                      setState(() => _categoria = v ?? _categoria),
-                ),
+                if (widget.categoriaFixa == null) ...[
+                  _Rotulo('Categoria'),
+                  DropdownButtonFormField<VideoCategory>(
+                    value: _categoria,
+                    isExpanded: true,
+                    dropdownColor: AppColors.surfaceElevated,
+                    items: VideoCategory.values
+                        .map((c) => DropdownMenuItem(
+                              value: c,
+                              child: Text(c.label,
+                                  overflow: TextOverflow.ellipsis),
+                            ))
+                        .toList(),
+                    onChanged: (v) =>
+                        setState(() => _categoria = v ?? _categoria),
+                  ),
+                ] else ...[
+                  _Rotulo('Categoria'),
+                  Text(
+                    widget.categoriaFixa!.label,
+                    style: const TextStyle(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 16),
 
                 _Rotulo('Link do YouTube'),

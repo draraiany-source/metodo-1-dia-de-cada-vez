@@ -14,6 +14,28 @@ final videosProvider = FutureProvider<List<VideoContent>>((ref) {
   return ref.read(videosRepositoryProvider).fetchAll();
 });
 
+/// Biblioteca de Vídeos (sem meditações — tela própria).
+final videoLibraryProvider = Provider<AsyncValue<List<VideoContent>>>((ref) {
+  return ref.watch(videosProvider).whenData(
+        (list) => list.where((v) => v.category.isVideoLibrary).toList(),
+      );
+});
+
+/// Meditações ativas (YouTube), na ordem do CMS.
+final meditationsProvider = Provider<AsyncValue<List<VideoContent>>>((ref) {
+  return ref.watch(videosProvider).whenData(
+        (list) => list.where((v) => v.isMeditation).toList(),
+      );
+});
+
+/// Meditações no painel (inclui despublicadas).
+final meditationsAdminProvider =
+    Provider<AsyncValue<List<VideoContent>>>((ref) {
+  return ref.watch(videosAdminListProvider).whenData(
+        (list) => list.where((v) => v.isMeditation).toList(),
+      );
+});
+
 /// Inclui desativados — só para telas de CMS / admin.
 final videosAdminListProvider = FutureProvider<List<VideoContent>>((ref) {
   return ref.read(videosRepositoryProvider).fetchAllForAdmin();
@@ -24,8 +46,13 @@ final videosAdminListProvider = FutureProvider<List<VideoContent>>((ref) {
 final videoCategoriasComConteudoProvider =
     Provider<List<VideoCategory>>((ref) {
   final videos = ref.watch(videosProvider).valueOrNull ?? const [];
-  final presentes = videos.map((v) => v.category).toSet();
-  return VideoCategory.values.where(presentes.contains).toList(growable: false);
+  final presentes = videos
+      .where((v) => v.category.isVideoLibrary)
+      .map((v) => v.category)
+      .toSet();
+  return VideoCategory.values
+      .where((c) => c.isVideoLibrary && presentes.contains(c))
+      .toList(growable: false);
 });
 
 class VideoFavoritesNotifier extends StateNotifier<Set<String>> {
@@ -182,7 +209,9 @@ final videoWatchStateProvider = StateNotifierProvider<VideoWatchStateNotifier,
 
 /// Vídeos começados e não concluídos, do mais recente para o mais antigo.
 final continuarAssistindoProvider = Provider<List<VideoContent>>((ref) {
-  final videos = ref.watch(videosProvider).valueOrNull ?? const [];
+  final videos = (ref.watch(videosProvider).valueOrNull ?? const [])
+      .where((v) => v.category.isVideoLibrary)
+      .toList();
   final estados = ref.watch(videoWatchStateProvider);
 
   final pendentes = videos.where((v) {

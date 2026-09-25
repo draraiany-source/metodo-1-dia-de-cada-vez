@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
@@ -107,23 +108,34 @@ class _MissionsScreenState extends ConsumerState<MissionsScreen>
     final state = ref.watch(missionsProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Missões'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.history),
-            tooltip: 'Histórico',
-            onPressed: () => context.push(Routes.missionsHistory),
-          ),
-        ],
-        bottom: TabBar(
-          controller: _tab,
-          labelColor: Colors.white,
-          unselectedLabelColor: AppColors.textSecondary,
-          indicatorColor: AppColors.primary,
-          tabs: [
-            for (final p in MissionPeriod.values)
-              Tab(text: '${p.emoji} ${p.label}'),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight + 48),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PremiumAppBar(
+              title: 'Missões',
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.history),
+                  tooltip: 'Histórico',
+                  onPressed: () => context.push(Routes.missionsHistory),
+                ),
+              ],
+            ),
+            Material(
+              color: AppColors.background,
+              child: TabBar(
+                controller: _tab,
+                labelColor: Colors.white,
+                unselectedLabelColor: AppColors.textSecondary,
+                indicatorColor: AppColors.primary,
+                tabs: [
+                  for (final p in MissionPeriod.values)
+                    Tab(text: '${p.emoji} ${p.label}'),
+                ],
+              ),
+            ),
           ],
         ),
       ),

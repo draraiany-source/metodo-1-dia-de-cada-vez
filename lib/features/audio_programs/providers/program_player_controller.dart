@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/favorites/unified_favorites.dart';
+import '../../../core/utils/youtube_url.dart';
 import '../../audio_courses/providers/audio_course_providers.dart';
 import '../data/services/audio_playback_engine.dart';
 import '../data/services/shared_audio_playback_engine.dart';
 import '../domain/entities/audio_program.dart';
 import '../domain/entities/program_progress.dart';
-import '../data/repositories/audio_program_repository_impl.dart';
 import 'audio_program_providers.dart';
 
 class ProgramPlayerState {
@@ -21,6 +21,8 @@ class ProgramPlayerState {
   final String? error;
   /// True once when the current track completes — UI shows celebration sheet.
   final bool celebrationPending;
+  /// Quando preenchida, o player abre o YouTube embutido (Programa 7 Dias).
+  final String? youtubeUrl;
 
   const ProgramPlayerState({
     this.audio,
@@ -31,6 +33,7 @@ class ProgramPlayerState {
     this.isFavorite = false,
     this.error,
     this.celebrationPending = false,
+    this.youtubeUrl,
   });
 
   double get progressFraction {
@@ -53,6 +56,8 @@ class ProgramPlayerState {
     String? error,
     bool clearError = false,
     bool? celebrationPending,
+    String? youtubeUrl,
+    bool clearYoutubeUrl = false,
   }) {
     return ProgramPlayerState(
       audio: audio ?? this.audio,
@@ -63,6 +68,7 @@ class ProgramPlayerState {
       isFavorite: isFavorite ?? this.isFavorite,
       error: clearError ? null : (error ?? this.error),
       celebrationPending: celebrationPending ?? this.celebrationPending,
+      youtubeUrl: clearYoutubeUrl ? null : (youtubeUrl ?? this.youtubeUrl),
     );
   }
 }
@@ -107,6 +113,7 @@ class ProgramPlayerController extends StateNotifier<ProgramPlayerState> {
       position: Duration.zero,
       clearError: true,
       celebrationPending: false,
+      clearYoutubeUrl: true,
     );
     try {
       final repo = ref.read(audioProgramRepositoryProvider);
@@ -118,18 +125,21 @@ class ProgramPlayerController extends StateNotifier<ProgramPlayerState> {
         throw StateError('Áudio sem URL válida.');
       }
 
-      try {
-        await _engine
-            .load(url, title: audio.title, artUrl: audio.coverUrl)
-            .timeout(const Duration(seconds: 20));
-      } catch (_) {
-        // Se a URL remota falhar, tenta asset local (IDs do Programa 7 Dias).
-        final local = _localAssetFallback(audio.id);
-        if (local == null) rethrow;
-        await _engine
-            .load(local, title: audio.title, artUrl: audio.coverUrl)
-            .timeout(const Duration(seconds: 10));
+      if (YoutubeUrl.extractVideoId(url) != null) {
+        try {
+          await repo.setCurrentAudio(programId, audio.id);
+        } catch (_) {}
+        state = state.copyWith(
+          isLoading: false,
+          isPlaying: false,
+          youtubeUrl: url,
+        );
+        return;
       }
+
+      await _engine
+          .load(url, title: audio.title, artUrl: audio.coverUrl)
+          .timeout(const Duration(seconds: 20));
 
       final progressAsync = ref.read(programProgressProvider(programId));
       ProgramProgress progress;
@@ -167,10 +177,6 @@ class ProgramPlayerController extends StateNotifier<ProgramPlayerState> {
             : 'Não consegui tocar este áudio agora.',
       );
     }
-  }
-
-  String? _localAssetFallback(String audioId) {
-    return AudioProgramRepositoryImpl.localAssetUrlFor(audioId);
   }
 
   Future<void> togglePlayPause() async {

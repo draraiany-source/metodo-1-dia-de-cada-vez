@@ -1,0 +1,35 @@
+treino_015|Mobilidade de Ombros|mobilidade_de_ombros
+treino_023|Polichinelo|polichinelo
+treino_024|Burpee|burpee
+treino_025|Escalador|escalador
+treino_046|Cadeira Abdutora|cadeira_abdutora
+treino_048|Glúteo 4 Apoios com Perna Estendida e Caneleira|gluteo_4_apoios_com_perna_estendida_e_caneleira
+treino_049|Glúteo 4 Apoios com Caneleira|gluteo_4_apoios_com_caneleira
+treino_051|Glúteo em Pé – Coice|gluteo_em_pe_coice
+treino_055|Glúteo Coice no Cabo – Polia Baixa|gluteo_coice_no_cabo_polia_baixa
+treino_056|Glúteo na Polia com Cabo no Quadríceps|gluteo_na_polia_com_cabo_no_quadriceps
+treino_060|Búlgaro no Smith|bulgaro_no_smith
+treino_061|Elevação Pélvica|elevacao_pelvica
+treino_062|Máquina de Elevação Pélvica|maquina_de_elevacao_pelvica
+treino_065|Stiff|stiff
+treino_067|Subida no Caixote Segurando no Espaldar|subida_no_caixote_segurando_no_espaldar
+treino_075|Supino com Halteres no Banco Inclinado|supino_com_halteres_no_banco_inclinado
+treino_079|Puxada com Triângulo|puxada_com_triangulo
+treino_080|Puxada com Barra W|puxada_com_barra_w
+treino_082|Pulldown com Barra Reta|pulldown_com_barra_reta
+treino_088|Bíceps Alternado / Unilateral|biceps_alternado_unilateral
+treino_089|Rosca Direta na Máquina|rosca_direta_na_maquina
+treino_090|Rosca Direta Alternada com Rotação de Cotovelos|rosca_direta_alternada_com_rotacao_de_cotovelos
+treino_092|Rosca Unilateral na Polia Baixa|rosca_unilateral_na_polia_baixa
+treino_097|Desenvolvimento Arnold em Pé|desenvolvimento_arnold_em_pe
+treino_098|Desenvolvimento na Máquina|desenvolvimento_na_maquina
+treino_101|Elevação Lateral + Desenvolvimento com Cotovelos à Frente|elevacao_lateral_desenvolvimento_com_cotovelos_a_frente
+treino_103|Elevação Lateral na Polia|elevacao_lateral_na_polia
+treino_104|Elevação Lateral no Banco|elevacao_lateral_no_banco
+treino_105|Elevação Frontal com Anilha|elevacao_frontal_com_anilha
+treino_106|Elevação Lateral com Halteres|elevacao_lateral_com_halteres
+treino_110|Tríceps Francês com Corda|triceps_frances_com_corda
+treino_111|Tríceps Testa na Polia|triceps_testa_na_polia
+treino_112|Tríceps Francês com Corda|triceps_frances_com_corda
+treino_116|Búlgaro sem Peso|bulgaro_sem_peso
+treino_117|Remada Articulada|remada_articulada

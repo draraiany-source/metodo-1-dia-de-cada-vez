@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/router/app_navigation.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../personal_amanda/presentation/amanda_image.dart';
 import '../../../models/app_user.dart';
@@ -76,38 +76,17 @@ class _AmandaScreenState extends ConsumerState<AmandaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          tooltip: 'Voltar',
-          onPressed: () => AppNavigation.back(context),
-          icon: Icon(
-            context.canPop()
-                ? Icons.arrow_back_ios_new_rounded
-                : Icons.home_rounded,
-            size: 20,
+      appBar: PremiumAppBar(
+        title: 'Amanda',
+        actions: [
+          IconButton(
+            tooltip: 'Perfil da Amanda',
+            onPressed: () => context.push(Routes.amandaProfile),
+            icon: const ClipOval(
+              child: AmandaImage(size: 32),
+            ),
           ),
-        ),
-        title: GestureDetector(
-          onTap: () => context.push(Routes.amandaProfile),
-          child: Row(
-            children: [
-              const ClipOval(
-                child: AmandaImage(size: 36),
-              ),
-              const SizedBox(width: 10),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Amanda', style: TextStyle(fontSize: 16)),
-                  Text('sua personal virtual',
-                      style: TextStyle(
-                          fontSize: 11, color: AppColors.textSecondary)),
-                ],
-              ),
-            ],
-          ),
-        ),
+        ],
       ),
       body: Column(
         children: [

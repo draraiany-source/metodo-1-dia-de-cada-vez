@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../models/app_user.dart';
@@ -35,8 +36,8 @@ class CourseDetailScreen extends ConsumerWidget {
     final concluidas = ref.watch(courseProgressProvider)[course.id] ?? {};
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(course.title, overflow: TextOverflow.ellipsis),
+      appBar: PremiumAppBar(
+        title: course.title,
         actions: [
           IconButton(
             icon: FavoriteAssetIcon(active: isFavorite, size: 22),

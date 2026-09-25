@@ -49,20 +49,20 @@ class VideosAdminRepository {
     }
   }
 
-  /// Grava a nova ordem da lista inteira em um único batch, para a tela não
-  /// ficar em estado intermediário se algo falhar no meio.
+  /// Grava a nova ordem da lista.
   ///
-  /// Grava o documento completo, e não apenas `order`, porque a lista pode
-  /// conter vídeos semeados do asset local que ainda não existem no Firestore —
-  /// escrever só `order` criaria documentos sem nome nem URL.
+  /// Reaproveita os valores de `order` já existentes (só permuta), para não
+  /// colidir com outras categorias da mesma coleção (ex.: meditações 1–7 vs
+  /// shorts 10–12).
   Future<void> reorder(List<VideoContent> naNovaOrdem) async {
     final batch = FirebaseFirestore.instance.batch();
+    final slots = naNovaOrdem.map((v) => v.order).toList()..sort();
     for (var i = 0; i < naNovaOrdem.length; i++) {
       final v = naNovaOrdem[i];
       if (v.id.trim().isEmpty) continue;
       batch.set(
         _col.doc(v.id),
-        v.copyWith(order: i).toMap(),
+        v.copyWith(order: slots[i]).toMap(),
         SetOptions(merge: true),
       );
     }

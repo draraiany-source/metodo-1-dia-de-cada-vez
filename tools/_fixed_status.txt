@@ -1,0 +1,10 @@
+﻿LOG_BYTES=335
+H	START 22/09/2026 20:55:06,46
+H	JAVA_HOME=C:\Program Files\Android\Android Studio\jbr
+H	GRADLE_USER_HOME=C:\Users\Lenovo\.gradle
+H	openjdk version "21.0.10" 2026-01-20
+H	OpenJDK Runtime Environment (build 21.0.10+-14961533-b1163.108)
+H	OpenJDK 64-Bit Server VM (build 21.0.10+-14961533-b1163.108, mixed mode)
+H	CLEANING_SANDBOX_GRADLE_CACHE
+HIT	GRADLE_USER_HOME=C:\Users\Lenovo\.gradle
+FREE_GB=25.28

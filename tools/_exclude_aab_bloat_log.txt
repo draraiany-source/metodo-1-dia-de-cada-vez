@@ -1,0 +1,31 @@
+﻿DEST=C:\Users\Lenovo\Desktop\metodo 1 dia perfil premium 2\tools\_excluded_from_bundle\aab_regression_20260922_192425
+MOVED	0,43 MB	assets\lily_exercicios\_backup_before_cadeiras_20260922
+MOVED	4,94 MB	assets\lily_exercicios\_incoming
+MOVED	105,41 MB	assets\amanda\originals
+MOVED	11,13 MB	assets\images\icons_3d
+MOVED	38,02 MB	assets\images\icons_3d_pack2
+MOVED	2,31 MB	assets\icons\neon\navegacao
+MOVED	4,45 MB	assets\icons\neon\saude
+MOVED	4,01 MB	assets\icons\neon\nutricao
+MOVED	5,56 MB	assets\icons\neon\conquistas
+MOVED	0,50 MB	assets\icons\neon\perfil
+MOVED	15,29 MB	assets\_lily_backup_before_frame_fix
+MOVED	2,53 MB	assets\_lily_backup_before_pack_20260911_002213
+MOVED	0,21 MB	assets\_lily_trim_preview
+MOVED_CORRIDA_EXTRA	0,03 MB	ciclista_neon_em_bicicleta_spinning.jpg
+MOVED_CORRIDA_EXTRA	0,04 MB	corredora_neon_com_coracao_pulsante.jpg
+MOVED_CORRIDA_EXTRA	0,03 MB	icone_fitness_neon_na_esteira.jpg
+MOVED_CORRIDA_EXTRA	0,03 MB	icone_neon_de_atleta_caminhando.jpg
+MOVED_CORRIDA_EXTRA	0,03 MB	icone_neon_de_corredor_cardiaco.jpg
+MOVED_CORRIDA_EXTRA	0,03 MB	icone_neon_de_corrida_em_movimento.jpg
+MOVED_CORRIDA_EXTRA	0,04 MB	icone_neon_de_corrida_e_batimentos.jpg
+MOVED_CORRIDA_EXTRA	1,38 MB	icone_neon_de_corrida_e_rota.png
+MOVED_CORRIDA_EXTRA	0,03 MB	icone_neon_de_rota_gps.jpg
+MOVED_CORRIDA_EXTRA	0,03 MB	icone_neon_de_treino_na_escada.jpg
+CADEIRA	lily_fit_cadeira_abdutora.jpeg	EXISTS=True
+CADEIRA	lily_fit_cadeira_extensora.jpeg	EXISTS=True
+images_root_files=3
+IMG_ROOT	logo.svg
+IMG_ROOT	logo_mark.svg
+IMG_ROOT	splash.svg
+icons_root_files=68

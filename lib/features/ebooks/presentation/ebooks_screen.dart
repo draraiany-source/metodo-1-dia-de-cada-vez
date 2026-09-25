@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/widgets/app_icon_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/app_states.dart';
@@ -31,7 +32,7 @@ class _EbooksScreenState extends ConsumerState<EbooksScreen> {
     final user = ref.watch(currentUserProvider) ?? AppUser.uiFallback();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('E-books 📚')),
+      appBar: const PremiumAppBar(title: 'E-books 📚'),
       body: SafeArea(
         child: ebooksAsync.when(
           loading: () => const AppListSkeleton(),

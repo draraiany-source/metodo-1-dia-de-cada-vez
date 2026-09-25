@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Preview cadeiras Lily — treino_046 / treino_034</title>
+  <style>
+    :root {
+      --bg: #1a1420;
+      --card: #2a2233;
+      --text: #f5f0fa;
+      --muted: #b9aec8;
+      --accent: #e8a0bf;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px;
+    }
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 8px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 1100px;
+    }
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    figure {
+      margin: 0;
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #3d3348;
+    }
+    figcaption {
+      padding: 12px 16px;
+      border-bottom: 1px solid #3d3348;
+    }
+    figcaption strong {
+      display: block;
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
+    figcaption span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #000;
+    }
+    .note {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      max-width: 1100px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Evidência visual — cadeiras Lily Fit (2026-09-23)</h1>
+  <p class="meta">
+    Assets atuais em <code>assets/lily_exercicios/</code>.
+    Flexora (<code>treino_063.jpg</code>) não exibida — intocada.
+  </p>
+  <div class="grid">
+    <figure>
+      <figcaption>
+        <strong>Cadeira Abdutora</strong>
+        <span>treino_046 → lily_fit_cadeira_abdutora.jpeg</span>
+      </figcaption>
+      <img
+        src="../assets/lily_exercicios/lily_fit_cadeira_abdutora.jpeg"
+        alt="Cadeira Abdutora — Lily Fit"
+        width="800"
+        height="800"
+      />
+    </figure>
+    <figure>
+      <figcaption>
+        <strong>Cadeira Extensora</strong>
+        <span>treino_034 → lily_fit_cadeira_extensora.jpeg</span>
+      </figcaption>
+      <img
+        src="../assets/lily_exercicios/lily_fit_cadeira_extensora.jpeg"
+        alt="Cadeira Extensora — Lily Fit"
+        width="800"
+        height="800"
+      />
+    </figure>
+  </div>
+  <p class="note">
+    Preview estático para homologação visual sem subir o app completo.
+    Mapa Dart: <code>lib/core/lily/lily_exercicio_assets.dart</code>.
+  </p>
+</body>
+</html>

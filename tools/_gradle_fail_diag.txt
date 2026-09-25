@@ -1,0 +1,10 @@
+﻿JAVA_CAND	C:\Program Files\Android\Android Studio\jbr	java=True
+JAVA_CAND	C:\Program Files\Android\Android Studio\jbr	java=True
+KOTLIN_ERR	errors-1788438923720.log	09/03/2026 09:42:46
+K	kotlin version: 2.3.20
+K	error message: Daemon compilation failed
+K	
+KOTLIN_ERR	errors-1788438468760.log	09/03/2026 09:42:41
+K	kotlin version: 2.3.20
+K	error message: Daemon compilation failed
+K	

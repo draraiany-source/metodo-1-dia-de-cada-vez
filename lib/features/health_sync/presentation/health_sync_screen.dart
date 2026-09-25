@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/services/feedback_service.dart';
 import '../../../core/widgets/lili_animated.dart';
 import '../../../core/theme/app_colors.dart';
@@ -22,7 +23,7 @@ class HealthSyncScreen extends ConsumerWidget {
     final plataforma = detectPlatformSource();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Sincronização de Saúde')),
+      appBar: const PremiumAppBar(title: 'Sincronização de Saúde'),
       body: SafeArea(
         child: state.loading
             ? const Center(child: CircularProgressIndicator())

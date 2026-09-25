@@ -1,0 +1,127 @@
+# Relatório YouTube — catálogo de treinos
+
+- Treinos no catálogo: 117
+- Vídeos únicos: 112
+- Funcionando (público/não listado): 0
+- Privados/restritos: 111
+- Indisponíveis: 1
+
+## Ação necessária no YouTube
+No YouTube Studio, altere a privacidade de **Privado** para **Não listado** (recomendado) ou **Público**.
+Enquanto estiverem Privados, o aluno vê "Private video" e o app NÃO consegue reproduzir — isso não se resolve no código do app.
+
+## Lista completa — vídeos PRIVADOS (alterar para Não listado)
+- `yirpahOImBs` — Bike – Queima Gordura — https://youtube.com/shorts/yirpahOImBs?si=8YufptI_E0HdBvrs
+- `4mBJliQoI8g` — Bike Horizontal – Queima Gordura — https://youtube.com/shorts/4mBJliQoI8g?si=ZssJk_664_6-hg9X
+- `leJO-flyPDY` — Esteira – Caminhada/Corrida – Queima Gordura — https://youtube.com/shorts/leJO-flyPDY?si=_pggWV5Q4FjovTpN
+- `G7F5uB99jfM` — Bike Spinning – Queima Gordura — https://youtube.com/shorts/G7F5uB99jfM?si=e5jlgXxt1XUqP80w
+- `POATWbGnldc` — Simulador de Escada – Queima Gordura — https://youtube.com/shorts/POATWbGnldc?si=Yl9Hg-kwWbffHueE
+- `-uiqrqMfGIk` — Elíptico – Queima Gordura — https://youtube.com/shorts/-uiqrqMfGIk?si=TK6k8U74-2mCNuHv
+- `k4NfeFjj2D8` — Abdominal Supra no Solo — https://youtube.com/shorts/k4NfeFjj2D8?si=mnaFJ0dirzaR8-EK
+- `1ddzMcIDvA0` — Abdominal – Queima Gordura — https://youtube.com/shorts/1ddzMcIDvA0?si=x6hvTokb_DmVNBR6
+- `2Ln9Q1MVRK0` — Abdominal Supra com Toque nos Joelhos – Unilateral — https://youtube.com/shorts/2Ln9Q1MVRK0?si=8ws6ogwGVGMf6hSz
+- `tIleTzoq8zI` — Abdominal Remador — https://youtube.com/shorts/tIleTzoq8zI?si=O0M2UMt4x1YalE94
+- `SLLfnl6bdlU` — Prancha Abdominal – Isometria — https://youtube.com/shorts/SLLfnl6bdlU?si=LHvGwnJMh9en6gEP
+- `758wZZ3oKmU` — Abdominal na Máquina — https://youtube.com/shorts/758wZZ3oKmU?si=01zcpC2W94VLe0J7
+- `nd_mlcU0cxQ` — Abdominal Infra na Paralela — https://youtube.com/shorts/nd_mlcU0cxQ?si=1_c-5Q1Uj4udpIdu
+- `_gUE10Qfowo` — Mobilidade de Ombros — https://youtube.com/shorts/_gUE10Qfowo?si=O6jhIrVdEQKnDZuH
+- `TTQVrv0C3Rg` — Alongamento de Superiores no Espaldar — https://youtube.com/shorts/TTQVrv0C3Rg?si=d9WDhbpZruo8duhU
+- `xuhVul5UDiQ` — Aquecimento de Membros Inferiores com Agachamento e Afundo — https://youtube.com/shorts/xuhVul5UDiQ?si=5qy_tibhvXzOQgdc
+- `k_3dTw9n5X4` — Alongamento de Membros Inferiores no Espaldar — https://youtube.com/shorts/k_3dTw9n5X4?si=81m-wbEqWUIT5By-
+- `pEmUIyw1uBY` — Agachamento com Salto — https://youtube.com/shorts/pEmUIyw1uBY?si=eczT17nzi0ns19Ig
+- `Xl07Ws1S7iE` — Agachamento com Passada Lateral — https://youtube.com/shorts/Xl07Ws1S7iE?si=PKZuzgF4800GMFNp
+- `yzrGaDYac4A` — Agachamento com Salto Lateral no Step — https://youtube.com/shorts/yzrGaDYac4A?si=8Qhwne13d9Aby2ZS
+- `It6qK10vZXc` — Polichinelo — https://youtube.com/shorts/It6qK10vZXc?si=2zdZG9KYdC_gO8PE
+- `9bvu1V0y8fQ` — Burpee — https://youtube.com/shorts/9bvu1V0y8fQ?si=MzICXqtWt96Zs0_t
+- `cbI1RcL-oy0` — Escalador — https://youtube.com/shorts/cbI1RcL-oy0?si=ZastuvTJb1T9oqfT
+- `RTph1PxyQiA` — Aquecimento com Agachamento + Recuo + Avanço — https://youtube.com/shorts/RTph1PxyQiA?si=32SXL18TwscOi_ja
+- `YrTUqOU38TU` — Agachamento no TRX — https://youtube.com/shorts/YrTUqOU38TU?si=DiJGSooxpdNFeuDf
+- `gfpouEYdvrE` — Afundo no TRX — https://youtube.com/shorts/gfpouEYdvrE?si=cSeZd2E7Ogd1MnOp
+- `wXt_LljU0Eg` — Afundo no Step sem Peso — https://youtube.com/shorts/wXt_LljU0Eg?si=5-fhEWB2LkiPSzqb
+- `PyBrW3YQxTw` — Agachamento no Banco/Cadeira/Caixote — https://youtube.com/shorts/PyBrW3YQxTw?si=iEE3_4eacXmup5h6
+- `pap0SG2aCP4` — Afundo com Halteres — https://youtube.com/shorts/pap0SG2aCP4?si=3tMp-vWTsL-POsV6
+- `OQSVGNaOs08` — Afundo com Halteres no Step — https://youtube.com/shorts/OQSVGNaOs08?si=zRRnhOp1AvUzvsIC
+- `eY5fFXM-Vlk` — Agachamento Taça — https://youtube.com/shorts/eY5fFXM-Vlk?si=-CHcvbDP-FzGvag7
+- `75ytAlJR2sM` — Cadeira Extensora — https://youtube.com/shorts/75ytAlJR2sM?si=5pOCbXsHVovDewpz
+- `TSlnWLSdh2I` — Leg Press 45° — https://youtube.com/shorts/TSlnWLSdh2I?si=leyWoCcrJnYTMkWM
+- `GE8s9FHQr-M` — Agachamento Hack Squat — https://youtube.com/shorts/GE8s9FHQr-M?si=AmtrYi7_3I6QBSbv
+- `ySvn7ckhwwo` — Agachamento Livre — https://youtube.com/shorts/ySvn7ckhwwo?si=CuNJQZfq5MYdPhxA
+- `_9nQzUNjfvc` — Agachamento Smith — https://youtube.com/shorts/_9nQzUNjfvc?si=pNzBZL2mTH8bfQy6
+- `p3J6enrTzBM` — Agachamento Smith Profundo — https://youtube.com/shorts/p3J6enrTzBM?si=G5JSqrmG5xDWVnsb
+- `85rvs19HF3k` — Afundo no Smith — https://youtube.com/shorts/85rvs19HF3k?si=IMfKr16HkSHoWxoU
+- `d_8-oa7iXuo` — Leg Press Horizontal — https://youtube.com/shorts/d_8-oa7iXuo?si=uMW-Ao5p73zUiNp9
+- `tan_NmtrO0o` — Agachamento Livre com Halteres — https://youtube.com/shorts/tan_NmtrO0o?si=tSgoNeI6LSWrTlHl
+- `ZGgd7HZlC_Q` — Máquina Adutora — https://youtube.com/shorts/ZGgd7HZlC_Q?si=ByQ_UcGBXiIoSvLQ
+- `z8_JPPUD24Q` — Agachamento Pêndulo — https://youtube.com/shorts/z8_JPPUD24Q?si=7UNkRaE8wRDI9ehP
+- `d0916AxqWYU` — Elevação Pélvica no Solo com Peso Corporal — https://youtube.com/shorts/d0916AxqWYU?si=Opfj6icsh5hblfvv
+- `8NZq6doH4e8` — Cadeira Abdutora — https://youtube.com/shorts/8NZq6doH4e8?si=A93orLFDcutnNgTX
+- `l7JzAO44-ug` — Stiff Unilateral — https://youtube.com/shorts/l7JzAO44-ug?si=o-53fxKHdAW7Ih0e
+- `jYJWodhepQ8` — Glúteo 4 Apoios com Perna Estendida e Caneleira — https://youtube.com/shorts/jYJWodhepQ8?si=hoGoq9U_iubSN_pL
+- `2LLqyldCC1o` — Glúteo 4 Apoios com Caneleira — https://youtube.com/shorts/2LLqyldCC1o?si=zOUm8V3BrAYaPTqT
+- `YDahr-nnILI` — Abdução com Caneleira — https://youtube.com/shorts/YDahr-nnILI?si=Up4DPweWdHabPmRP
+- `-ePb7y_2pps` — Glúteo em Pé – Coice — https://youtube.com/shorts/-ePb7y_2pps?si=6CAvtiZRnOYVEldd
+- `AUyW87iK3-o` — Agachamento Búlgaro com Halteres — https://youtube.com/shorts/AUyW87iK3-o?si=wr3nFE89TUUXlOcb
+- `zNP0o_9o-6E` — Afundo com Recuo e Rosca Direta — https://youtube.com/shorts/zNP0o_9o-6E?si=2NVXvlOscZah13Rl
+- `tHZSzehWIlQ` — Afundo com Recuo e Halteres — https://youtube.com/shorts/tHZSzehWIlQ?si=2CHpdqwHvuM5Z26V
+- `TwwPcrYt-CM` — Glúteo Coice no Cabo – Polia Baixa — https://youtube.com/shorts/TwwPcrYt-CM?si=yqPDKb51lkzFmzjT
+- `h6sCPo6_oJA` — Glúteo na Polia com Cabo no Quadríceps — https://youtube.com/shorts/h6sCPo6_oJA?si=NiAkg5OtKGVs-pO2
+- `Fh-9MyLkIQM` — Agachamento Sumô no Step — https://youtube.com/shorts/Fh-9MyLkIQM?si=iN4k17AIUTOTGa_p
+- `tiUsxRN1AN0` — Levantamento Terra Sumô — https://youtube.com/shorts/tiUsxRN1AN0?si=XEssqSkvEmASLTeJ
+- `Xp4rt7_7q0A` — Agachamento Sumô na Máquina — https://youtube.com/shorts/Xp4rt7_7q0A?si=F33nOVglh8_3qDKy
+- `tytxNh9osL4` — Búlgaro no Smith — https://youtube.com/shorts/tytxNh9osL4?si=w_k_5mhgr5WNxRqG
+- `s2-O675h0SY` — Elevação Pélvica — https://youtube.com/shorts/s2-O675h0SY?si=fiB7YcrAtAYCn1hZ
+- `IewprR7AoVA` — Máquina de Elevação Pélvica — https://youtube.com/shorts/IewprR7AoVA?si=g6I_jeVVNJdgsi-O
+- `LAntVFSgwFc` — Cadeira Flexora — https://youtube.com/shorts/LAntVFSgwFc?si=t3sKhNM-ag93MUeV
+- `W7Zz9uL-HHU` — Mesa Flexora — https://youtube.com/shorts/W7Zz9uL-HHU?si=X8aVs9kCE2gB_npJ
+- `0GNrMc7NO4k` — Stiff — https://youtube.com/shorts/0GNrMc7NO4k?si=IP1e6MBCi9AfMAAZ
+- `V4pwGhq7qpA` — Panturrilha Sentada — https://youtube.com/shorts/V4pwGhq7qpA?si=P1KV3VL2Aj5w60Ix
+- `jl8OaKKaFwE` — Subida no Caixote Segurando no Espaldar — https://youtube.com/shorts/jl8OaKKaFwE?si=vM6d2xE96QH790DR
+- `0MKFEj7z5Yk` — Full Body – Agachamento Sumô com Elevação Frontal — https://youtube.com/shorts/0MKFEj7z5Yk?si=2Rtq7MMYsoC39GZh
+- `gaE0M36EdwE` — Agachamento com Desenvolvimento — https://youtube.com/shorts/gaE0M36EdwE?si=X2RMD3WZAbv4ukfp
+- `kEcWDobhIO0` — Supino Reto Articulado – Pegada Neutra — https://youtube.com/shorts/kEcWDobhIO0?si=M01Yu7LFX-kpmZkW
+- `jmzpzl77boY` — Supino Reto – Pegada Supinada na Máquina Articulada — https://youtube.com/shorts/jmzpzl77boY?si=mCpXXkwkUiyyBvDq
+- `tC0Oq1eDNeI` — Supino Inclinado – Pegada Neutra — https://youtube.com/shorts/tC0Oq1eDNeI?si=yjuLHG3A-MkZI3hn
+- `YkX3QnccXrA` — Supino Inclinado – Pegada Supinada — https://youtube.com/shorts/YkX3QnccXrA?si=UnyhIyQjBKCmF8EG
+- `BThtw2B2-tM` — Supino com Halteres no Banco Inclinado — https://youtube.com/shorts/BThtw2B2-tM?si=TgT9DWV96VyFJ-_Q
+- `J66_ke7Gg24` — Peitoral no Peck Fly — https://youtube.com/shorts/J66_ke7Gg24?si=JJ7fedb72yXv43PZ
+- `TmQCiCrhKi8` — Puxada com Barra Longa — https://youtube.com/shorts/TmQCiCrhKi8?si=XRMd25V8X8fPyN9Z
+- `7GVmUYU4ylg` — Barra Fixa no Graviton — https://youtube.com/shorts/7GVmUYU4ylg?si=f602auXmvscYdj_p
+- `-iocIY-QNpk` — Puxada com Triângulo — https://youtube.com/shorts/-iocIY-QNpk?si=tkSKrK1xwfEjAoMh
+- `Qq5haPnLDKQ` — Puxada com Barra W — https://youtube.com/shorts/Qq5haPnLDKQ?si=6Gz7pCOLCRZ1RHpf
+- `Q9eCRp2RbWI` — Face Pull — https://youtube.com/shorts/Q9eCRp2RbWI?si=J3mZsu42iEnarrNw
+- `8rsYp8jmRcw` — Pulldown com Barra Reta — https://youtube.com/shorts/8rsYp8jmRcw?si=yjmEi76KJpDFAnIp
+- `sC7YdLAYy4c` — Puxada Alta com Corda — https://youtube.com/shorts/sC7YdLAYy4c?si=RFoLiegkJAYpp80l
+- `lN9zwH-SFDY` — Remada Sentada com Triângulo — https://youtube.com/shorts/lN9zwH-SFDY?si=pdv2B5FbUEJqoqqo
+- `sMuQuVGdzH4` — Remada Curvada com Barra — https://youtube.com/shorts/sMuQuVGdzH4?si=J5xey8a4yCVSkfhU
+- `-nHHx4w_z58` — Rosca Direta na Polia Baixa com Barra Reta — https://youtube.com/shorts/-nHHx4w_z58?si=h7Jour7zcclYbvyC
+- `B99EvbkQlSg` — Rosca Direta com Halteres — https://youtube.com/shorts/B99EvbkQlSg?si=ZXUplRA1L_1dxDS5
+- `Gj75IWVUtZE` — Bíceps Alternado / Unilateral — https://youtube.com/shorts/Gj75IWVUtZE?si=l3Us6Z1Wqx-haXGf
+- `JfSq8ZY8u7o` — Rosca Direta na Máquina — https://youtube.com/shorts/JfSq8ZY8u7o?si=vivwxlQLQedqQGKH
+- `e_WyY6qexxs` — Rosca Direta Alternada com Rotação de Cotovelos — https://youtube.com/shorts/e_WyY6qexxs?si=Nb2wZWFJwmCt6fwx
+- `ho2xYGl4jMc` — Rosca Martelo com Corda — https://youtube.com/shorts/ho2xYGl4jMc?si=5qb2UZ-l0TGUkFUx
+- `Ihbj7gvP1jM` — Rosca Unilateral na Polia Baixa — https://youtube.com/shorts/Ihbj7gvP1jM?si=uBZk6p8lYNL3qWO1
+- `34KR3KY7MTU` — Remada Alta na Polia — https://youtube.com/shorts/34KR3KY7MTU?si=v7yPHd7bnyJtzzFR
+- `W-l_RcPfcmQ` — Remada Alta com Barra — https://youtube.com/shorts/W-l_RcPfcmQ?si=am9tiT1I011v9eEp
+- `padLB1_wPCI` — Remada Alta + Desenvolvimento com Barra — https://youtube.com/shorts/padLB1_wPCI?si=DOs4CwD7KKVlZzrp
+- `8N4zSvFhK70` — Desenvolvimento com Halteres — https://youtube.com/shorts/8N4zSvFhK70?si=MswGhYDyRbshKLa4
+- `PaZ5hKF9vOM` — Desenvolvimento Arnold em Pé — https://youtube.com/shorts/PaZ5hKF9vOM?si=SFiDy2Fg99I_0lyZ
+- `N4tBs0INJ74` — Desenvolvimento na Máquina — https://youtube.com/shorts/N4tBs0INJ74?si=l9sSah8KTnA0L0rJ
+- `CWPHxF7aupI` — Elevação Frontal na Polia com Barra Reta — https://youtube.com/shorts/CWPHxF7aupI?si=Dz9Ux9gLhEgsKQd0
+- `QqTHPbfYNYA` — Elevação Frontal – Ombro e Peitoral — https://youtube.com/shorts/QqTHPbfYNYA?si=u3KeZNmJc-xzVEGo
+- `SCGgjjgwCTU` — Elevação Lateral + Desenvolvimento com Cotovelos à Frente — https://youtube.com/shorts/SCGgjjgwCTU?si=DJlCIQLwZKVxOXcF
+- `_bUAUAzix24` — Elevação Frontal com Halteres — https://youtube.com/shorts/_bUAUAzix24?si=dKUi2P6D-d6T0hba
+- `gCWL7BWg-Bw` — Elevação Lateral na Polia — https://youtube.com/shorts/gCWL7BWg-Bw?si=H2_yvdiTxWSxEK-9
+- `gfHSUJwfXno` — Elevação Lateral no Banco — https://youtube.com/shorts/gfHSUJwfXno?si=C9S8PPGM_jKnDnTF
+- `l9tii1W0o0o` — Elevação Frontal com Anilha — https://youtube.com/shorts/l9tii1W0o0o?si=3gP2FSoeMEjIQYPK
+- `uTbSbR6ldCA` — Elevação Lateral com Halteres — https://youtube.com/shorts/uTbSbR6ldCA?si=d8jryjIzgxazq6B3
+- `DdkHt6iDgkc` — Tríceps com Corda — https://youtube.com/shorts/DdkHt6iDgkc?si=aVWeat1GxZvr1Bu5
+- `al3tbFYX0sk` — Tríceps Francês com Corda — https://youtube.com/shorts/al3tbFYX0sk?si=zt6pTdT6NPKvVtSW
+- `TqNUzUfXaHo` — Tríceps Paralelo — https://youtube.com/shorts/TqNUzUfXaHo?si=WMPJpd0znd8zXuWd
+- `oyKBbsr5uLk` — Tríceps Testa na Polia — https://youtube.com/shorts/oyKBbsr5uLk?si=Dp4FDtY45bYv9Xdx
+- `swkOBzTV_Go` — Full Body – Agachamento Sumô com Elevação Lateral — https://youtube.com/shorts/swkOBzTV_Go?si=mSuxE_M-XTZjjG-q
+- `Hc6YrnfIqfM` — Full Body – Afundo com Recuo e Remada Curvada — https://youtube.com/shorts/Hc6YrnfIqfM?si=l6fYFUTjTe0eHsf9
+- `aVBOKGQ3KDg` — Búlgaro sem Peso — https://youtube.com/shorts/aVBOKGQ3KDg?si=RCZPycavG1K3dxO7
+- `31iMfebta4s` — Remada Articulada — https://youtube.com/shorts/31iMfebta4s?si=GueVQDOzXrA-cy9M
+
+## Indisponíveis
+- `MDhxgtIcT1g` — Simulação de Pular Corda — https://youtube.com/shorts/MDhxgtIcT1g?si=t_sG-M97m0E-aDwr

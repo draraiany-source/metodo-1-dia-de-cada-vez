@@ -1,0 +1,126 @@
+MAP 117 x Lily Fit
+Pasta: assets/lily/treinos lily fit (146 imagens)
+Mapeados auto (forte): 82
+Override imagem exclusiva: 18
+Override imagem compartilhada: 17
+Ainda sem imagem: 0
+Imagens unicas usadas: 100
+
+--- por status ---
+treino_001 | mapped | Bike – Queima Gordura | mulher_pedalando_em_bike_neon_roxa.jpg
+treino_002 | mapped | Bike Horizontal – Queima Gordura | mulher_treinando_em_bicicleta_reclinada_neon.jpg
+treino_003 | mapped | Caminhada – Queima Gordura | caminhada_fitness_neon_roxo.jpg
+treino_004 | mapped | Esteira – Caminhada/Corrida – Queima Gordura | corrida_fitness_neon_em_roxo_intens_o.jpg
+treino_005 | mapped | Bike Spinning – Queima Gordura | retrato_neon_na_bicicleta_de_spinning.jpg
+treino_006 | mapped | Simulador de Escada – Queima Gordura | 16_simulador_de_escada_queima_gordura.jpg
+treino_007 | mapped | Elíptico – Queima Gordura | 17_eliptico_queima_gordura.jpg
+treino_008 | mapped | Abdominal Supra no Solo | abdominal_com_brilho_roxo.jpg
+treino_009 | mapped | Abdominal – Queima Gordura | crunch_abdominal_com_brilho_neon_roxo.jpg
+treino_010 | mapped | Abdominal Supra com Toque nos Joelhos – Unilateral | treino_abdominal_com_brilho_violeta.jpg
+treino_011 | mapped | Abdominal Remador | treino_abdominal_remador_em_neon_roxo.jpg
+treino_012 | mapped | Prancha Abdominal – Isometria | prancha_fitness_com_brilho_roxo.jpg
+treino_013 | mapped | Abdominal na Máquina | treino_abdominal_com_estilo_neon_roxo.jpg
+treino_014 | mapped | Abdominal Infra na Paralela | crunch_com_estilo_neon_roxo.jpg
+treino_015 | override_shared | Mobilidade de Ombros | pressão_de_ombros_com_halteres_em_neon.jpg
+treino_016 | mapped | Alongamento de Superiores no Espaldar | alongamento_fitness_com_luzes_roxas.jpg
+treino_017 | mapped | Aquecimento de Membros Inferiores com Agachamento e Afundo | afundo_búlgaro_com_halteres_em_academia_neon.jpg
+treino_018 | mapped | Alongamento de Membros Inferiores no Espaldar | alongamento_fitness_sob_luz_púrpura.jpg
+treino_019 | mapped | Simulação de Pular Corda | mulher_fitness_pulando_corda_neon.jpg
+treino_020 | mapped | Agachamento com Salto | agachamento_búlgaro_em_luz_neon.jpg
+treino_021 | mapped | Agachamento com Passada Lateral | agachamento_lateral_no_estúdio_neon.jpg
+treino_022 | mapped | Agachamento com Salto Lateral no Step | agachamento_búlgaro_neon_lily_fit.jpg
+treino_023 | override_unused | Polichinelo | estrela_fitness_em_neon_roxo.jpg
+treino_024 | override_unused | Burpee | treino_dinâmico_sob_luzes_roxas.jpg
+treino_025 | override_unused | Escalador | treino_mountain_climber_com_glow_roxo.jpg
+treino_026 | mapped | Aquecimento com Agachamento + Recuo + Avanço | agachamento_búlgaro_sob_luz_neon_roxa.jpg
+treino_027 | mapped | Agachamento no TRX | agachamento_com_halter_sob_luz_neon_roxa.jpg
+treino_028 | mapped | Afundo no TRX | mulher_em_afundo_com_trx_sob_luz_neon_roxa.jpg
+treino_029 | mapped | Afundo no Step sem Peso | afundo_com_halteres_sob_luz_neon_roxa.jpg
+treino_030 | mapped | Agachamento no Banco/Cadeira/Caixote | agachamento_com_halteres_sob_luz_neon.jpg
+treino_031 | mapped | Afundo com Halteres | afundo_fitness_em_luz_roxa.jpg
+treino_032 | mapped | Afundo com Halteres no Step | afundo_no_smith_sob_luz_púrpura.jpg
+treino_033 | mapped | Agachamento Taça | agachamento_com_neon_roxo_no_ginásio.jpg
+treino_034 | mapped | Cadeira Extensora | treino_neon_roxo_na_máquina_extensora.jpg
+treino_035 | mapped | Leg Press 45° | atleta_no_leg_press_sob_luz_roxa.jpg
+treino_036 | mapped | Agachamento Hack Squat | agachamento_no_hack_sob_luz_violeta.jpg
+treino_037 | mapped | Agachamento Livre | agachamento_fitness_com_brilho_roxo.jpg
+treino_038 | mapped | Agachamento Smith | agachamento_no_smith_sob_luz_púrpura.jpg
+treino_039 | mapped | Agachamento Smith Profundo | agachamento_no_smith_sob_luz_roxa.jpg
+treino_040 | mapped | Afundo no Smith | treino_neon_com_curls_e_afundo.jpg
+treino_041 | mapped | Leg Press Horizontal | mulher_sorridente_no_leg_press_neon_roxo.jpg
+treino_042 | mapped | Agachamento Livre com Halteres | agachamento_sumô_com_halteres_neon.jpg
+treino_043 | mapped | Máquina Adutora | treino_adutor_em_academia_neon_roxa.jpg
+treino_044 | mapped | Agachamento Pêndulo | agachamento_fitness_sob_luz_neon_roxa.jpg
+treino_045 | mapped | Elevação Pélvica no Solo com Peso Corporal | elevação_frontal_com_peso_em_luz_roxa.jpg
+treino_046 | override_shared | Cadeira Abdutora | treino_de_abdução_com_neon_roxo.jpg
+treino_047 | mapped | Stiff Unilateral | levantamento_terra_com_brilho_violeta.jpg
+treino_048 | override_unused | Glúteo 4 Apoios com Perna Estendida e Caneleira | chute_de_glúteo_com_neon_roxo.jpg
+treino_049 | override_unused | Glúteo 4 Apoios com Caneleira | kickback_no_estúdio_fitness_neon.jpg
+treino_050 | mapped | Abdução com Caneleira | treino_de_abdução_com_neon_roxo.jpg
+treino_051 | override_shared | Glúteo em Pé – Coice | chute_de_glúteo_com_neon_roxo.jpg
+treino_052 | mapped | Agachamento Búlgaro com Halteres | agachamento_sumô_com_halteres_neon_roxo.jpg
+treino_053 | mapped | Afundo com Recuo e Rosca Direta | rosca_bíceps_no_estúdio_roxo.jpg
+treino_054 | mapped | Afundo com Recuo e Halteres | lunge_e_remada_com_estilo_roxo.jpg
+treino_055 | override_unused | Glúteo Coice no Cabo – Polia Baixa | glúteos_em_destaque_no_treino_neon.jpg
+treino_056 | override_unused | Glúteo na Polia com Cabo no Quadríceps | treino_de_glúteos_com_luz_neon_roxa.jpg
+treino_057 | mapped | Agachamento Sumô no Step | agachamento_sumo_com_kettlebell_neon.jpg
+treino_058 | mapped | Levantamento Terra Sumô | levantamento_terra_sumô_em_neon_roxo.jpg
+treino_059 | mapped | Agachamento Sumô na Máquina | agachamento_sumô_sob_luz_neon_roxa.jpg
+treino_060 | override_unused | Búlgaro no Smith | treino_neon_em_lunge_fitness.jpg
+treino_061 | override_unused | Elevação Pélvica | hip_thrust_com_iluminação_neon_roxa.jpg
+treino_062 | override_unused | Máquina de Elevação Pélvica | treino_de_hip_thrust_com_neon_roxo.jpg
+treino_063 | mapped | Cadeira Flexora | treino_intenso_na_cadeira_flexora_roxa.jpg
+treino_064 | mapped | Mesa Flexora | treino_neon_no_leg_curl.jpg
+treino_065 | override_shared | Stiff | levantamento_terra_com_brilho_violeta.jpg
+treino_066 | mapped | Panturrilha Sentada | sorriso_e_força_no_calf_raise.jpg
+treino_067 | override_unused | Subida no Caixote Segurando no Espaldar | treino_neon_na_escada_fitness.jpg
+treino_068 | mapped | Full Body – Agachamento Sumô com Elevação Frontal | agachamento_sumô_sob_luz_roxa.jpg
+treino_069 | mapped | Agachamento com Desenvolvimento | agachamento_pendular_sob_luz_neon_roxa.jpg
+treino_070 | mapped | Full Body – Agachamento com Desenvolvimento Unilateral Alternado | treino_neon_com_desenvolvimento_unilateral.jpg
+treino_071 | mapped | Supino Reto Articulado – Pegada Neutra | mulher_treinando_no_supino_com_neon_roxo.jpg
+treino_072 | mapped | Supino Reto – Pegada Supinada na Máquina Articulada | supino_inclinado_com_halteres_sob_luz_neon_lilás.jpg
+treino_073 | mapped | Supino Inclinado – Pegada Neutra | prensa_de_peito_sob_luzes_roxas.jpg
+treino_074 | mapped | Supino Inclinado – Pegada Supinada | pressão_de_peito_com_halo_roxo.jpg
+treino_075 | override_unused | Supino com Halteres no Banco Inclinado | treino_de_peito_com_brilho_roxo.jpg
+treino_076 | mapped | Peitoral no Peck Fly | treino_neon_no_peck_deck.jpg
+treino_077 | mapped | Puxada com Barra Longa | puxada_na_polia_com_iluminação_roxa.jpg
+treino_078 | mapped | Barra Fixa no Graviton | treino_graviton_sob_luz_neon_roxa.jpg
+treino_079 | override_unused | Puxada com Triângulo | treino_de_costas_com_brilho_neon_roxo.jpg
+treino_080 | override_unused | Puxada com Barra W | treino_de_costas_com_brilho_roxo.jpg
+treino_081 | mapped | Face Pull | mulher_treinando_face_pull_em_academia_neon.jpg
+treino_082 | override_unused | Pulldown com Barra Reta | treino_de_costas_sob_luz_neon_roxa.jpg
+treino_083 | mapped | Puxada Alta com Corda | mulher_fitness_saltando_à_corda_neon.jpg
+treino_084 | mapped | Remada Sentada com Triângulo | remada_alta_com_brilho_neon_roxo.jpg
+treino_085 | mapped | Remada Curvada com Barra | remada_com_barra_em_luz_neon_roxa.jpg
+treino_086 | mapped | Rosca Direta na Polia Baixa com Barra Reta | treino_de_bíceps_sob_luz_neon_roxa.jpg
+treino_087 | mapped | Rosca Direta com Halteres | treino_de_bíceps_sob_luzes_roxas.jpg
+treino_088 | override_unused | Bíceps Alternado / Unilateral | levantamento_unilateral_com_halteres_em_academia_n.jpg
+treino_089 | override_shared | Rosca Direta na Máquina | rosca_bíceps_no_estúdio_roxo.jpg
+treino_090 | override_shared | Rosca Direta Alternada com Rotação de Cotovelos | rosca_bíceps_no_estúdio_roxo.jpg
+treino_091 | mapped | Rosca Martelo com Corda | treino_com_corda_sob_luz_neon_roxa.jpg
+treino_092 | override_shared | Rosca Unilateral na Polia Baixa | rosca_bíceps_no_estúdio_roxo.jpg
+treino_093 | mapped | Remada Alta na Polia | remada_articulada_sob_luz_neon_roxa.jpg
+treino_094 | mapped | Remada Alta com Barra | remada_baixa_no_aparelho_com_neon_roxo.jpg
+treino_095 | mapped | Remada Alta + Desenvolvimento com Barra | pressão_de_ombros_com_halteres_em_neon.jpg
+treino_096 | mapped | Desenvolvimento com Halteres | treino_neon_no_press_de_ombros.jpg
+treino_097 | override_shared | Desenvolvimento Arnold em Pé | treino_neon_com_desenvolvimento_unilateral.jpg
+treino_098 | override_shared | Desenvolvimento na Máquina | treino_neon_no_press_de_ombros.jpg
+treino_099 | mapped | Elevação Frontal na Polia com Barra Reta | elevação_frontal_com_brilho_púrpura.jpg
+treino_100 | mapped | Elevação Frontal – Ombro e Peitoral | elevação_frontal_com_luz_roxa.jpg
+treino_101 | override_unused | Elevação Lateral + Desenvolvimento com Cotovelos à Frente | mulher_em_elevação_de_joelhos_com_halo_roxo.jpg
+treino_102 | mapped | Elevação Frontal com Halteres | elevação_frontal_sob_luzes_roxas.jpg
+treino_103 | override_shared | Elevação Lateral na Polia | elevação_frontal_com_brilho_púrpura.jpg
+treino_104 | override_shared | Elevação Lateral no Banco | elevação_frontal_com_brilho_púrpura.jpg
+treino_105 | override_shared | Elevação Frontal com Anilha | elevação_frontal_com_brilho_púrpura.jpg
+treino_106 | override_unused | Elevação Lateral com Halteres | encarada_fitness_com_halteres_e_neon_roxo.jpg
+treino_107 | mapped | Tríceps com Corda | treino_de_tríceps_com_iluminação_neon_roxa.jpg
+treino_108 | mapped | Tríceps Francês com Corda | treino_de_tríceps_com_neon_roxo.jpg
+treino_109 | mapped | Tríceps Paralelo | treino_de_tríceps_sob_luz_violeta.jpg
+treino_110 | override_shared | Tríceps Francês com Corda | treino_de_tríceps_com_iluminação_neon_roxa.jpg
+treino_111 | override_shared | Tríceps Testa na Polia | treino_de_tríceps_com_iluminação_neon_roxa.jpg
+treino_112 | override_shared | Tríceps Francês com Corda | treino_de_tríceps_com_iluminação_neon_roxa.jpg
+treino_113 | mapped | Full Body – Afundo com Recuo e Rosca Direta | lunge_fitness_com_brilho_neon_roxo.jpg
+treino_114 | mapped | Full Body – Agachamento Sumô com Elevação Lateral | mulher_em_agachamento_com_luzes_roxas.jpg
+treino_115 | mapped | Full Body – Afundo com Recuo e Remada Curvada | lunge_fitness_neon_roxo_gloss.jpg
+treino_116 | override_shared | Búlgaro sem Peso | afundo_búlgaro_com_halteres_em_academia_neon.jpg
+treino_117 | override_shared | Remada Articulada | remada_articulada_sob_luz_neon_roxa.jpg

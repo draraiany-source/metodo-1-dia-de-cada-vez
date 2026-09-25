@@ -6,6 +6,7 @@ import '../../../../core/design_system/app_spacing.dart';
 import '../../../../core/router/premium_app_bar.dart';
 import '../../../../core/mascot/lily_catalog.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/youtube_launch.dart';
 import '../../../../core/widgets/lily_character_widget.dart';
 import '../../domain/entities/audio_program.dart';
 import '../../providers/audio_program_providers.dart';
@@ -32,6 +33,7 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
   String? _openedFor;
   bool _celebrationSheetOpen = false;
   bool _lookupFailed = false;
+  String? _youtubeOpened;
 
   @override
   void didChangeDependencies() {
@@ -166,6 +168,21 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
             _showCelebrationSheet();
           });
         }
+        final yt = next.youtubeUrl;
+        if (yt != null &&
+            yt.isNotEmpty &&
+            yt != _youtubeOpened &&
+            context.mounted) {
+          _youtubeOpened = yt;
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
+            if (!mounted) return;
+            await YoutubeLaunch.open(
+              context,
+              yt,
+              title: next.audio?.title ?? widget.initialAudio?.title,
+            );
+          });
+        }
       },
     );
 
@@ -260,6 +277,22 @@ class _ProgramPlayerScreenState extends ConsumerState<ProgramPlayerScreen> {
                   ),
                 ],
               )
+            else if (state.youtubeUrl != null) ...[
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  onPressed: () {
+                    YoutubeLaunch.open(
+                      context,
+                      state.youtubeUrl!,
+                      title: audio?.title,
+                    );
+                  },
+                  icon: const Icon(Icons.play_arrow_rounded),
+                  label: const Text('Reproduzir no YouTube'),
+                ),
+              ),
+            ]
             else if (state.error == null) ...[
               SliderTheme(
                 data: SliderTheme.of(context).copyWith(

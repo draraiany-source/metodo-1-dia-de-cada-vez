@@ -1,11 +1,14 @@
 .dart_tool/
 .packages
 build/
+**/build/
 .flutter-plugins
 .flutter-plugins-dependencies
 *.iml
 .idea/
 .vscode/
+.pub-cache/
+.pub/
 
 # Firebase / chaves — NÃO commitar
 google-services.json
@@ -13,6 +16,7 @@ GoogleService-Info.plist
 **/google-services.json
 **/GoogleService-Info.plist
 functions/node_modules/
+**/node_modules/
 tools/audio_seed/node_modules/
 tools/audio_seed/mp3/
 adc_login.txt
@@ -44,23 +48,59 @@ android/app/keystore/
 RECUPERACAO_PROJETO_COMPLETO/SOMENTE_LOCAL_SEGREDOS_NAO_COPIADOS.txt
 **/SOMENTE_LOCAL_SEGREDOS*.txt
 
-# Backups / cache local
+# Backups / cache local / exclusões de bundle
 backup_visual_*/
 backup_nav_*/
+backup_assets*/
 .gradle-home/
 .gradle-homolog/
+.gradle/
+**/.gradle/
+caches/
+.caches/
 .firebase/
 android/.gradle/
 android/.kotlin/
 **/.kotlin/
+tools/_excluded_from_bundle/
+assets/_lily_backup*/
+assets/_lily_trim_preview/
+assets/_incoming*/
+assets/_validation/
+assets/_offbundle_backups/
+assets/**/_backup*/
+assets/**/_incoming/
+**/hs_err_pid*.log
 *.log
-analyze_out.txt
-analyze_phase*.txt
-analyze_agent_run.txt
-analyze_*_out.txt
+analyze_*.txt
+RELATORIO_ANALYZE*.txt
 build_release*.txt
+build_apk_*.txt
+build_debug_*.txt
+build_web_*.txt
+build_lily_*.txt
+compile_*.txt
+homolog_*.txt
+flutter_*.txt
+test_apk_*.txt
+test_analyze_*.txt
+test_out*.txt
+test_pubget.txt
+final_analyze*.txt
+final_asset_test.txt
+env_devices.txt
+ui_*.xml
+*_tmp_*.json
 test_phase*.txt
 _deploy_*.txt
 functions/src/_patch_index.js
 .DS_Store
 Thumbs.db
+
+# Artefatos de probe/build locais (scripts auxiliares podem ficar; outputs não)
+tools/_probe_*_out.txt
+tools/_folder_sizes_*.txt
+tools/_aab_final_verify*.txt
+tools/_shell_alive.txt
+tools/_verbose_status.txt
+tools/_probe_aab_paths.txt

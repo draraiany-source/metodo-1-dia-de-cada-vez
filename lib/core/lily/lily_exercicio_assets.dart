@@ -5,6 +5,9 @@
 // ATENÇÃO: o mapa `reatribuicoesAuditoria` abaixo é MANUAL (auditoria de
 // imagens de 2026-09-17, ver AUDITORIA_IMAGENS_LILI_FIT.md na raiz).
 // Ao regerar `byId`, preserve `reatribuicoesAuditoria`.
+//
+// Asset version / cache-bust: 2026-09-23 — lily_fit_cadeira_abdutora.jpeg
+// e lily_fit_cadeira_extensora.jpeg substituídos (novas artes PNG→JPEG q92).
 
 /// Assets Lily Fit por exercício do catálogo (117).
 class LilyExercicioAssets {
@@ -60,8 +63,10 @@ class LilyExercicioAssets {
     'treino_042': 'assets/lily_exercicios/treino_030.jpg',
     // 044 (agachamento pêndulo): a máquina pêndulo estava no arquivo 069.
     'treino_044': 'assets/lily_exercicios/treino_069.jpg',
-    // 046 (cadeira abdutora): a máquina abdutora estava no arquivo 013.
-    'treino_046': 'assets/lily_exercicios/treino_013.jpg',
+    // 034 (cadeira extensora): arte Lily Fit com rolo anterior (2026-09-23). NÃO usar em flexora.
+    'treino_034': 'assets/lily_exercicios/lily_fit_cadeira_extensora.jpeg',
+    // 046 (cadeira abdutora): arte Lily Fit biomecanicamente correta (2026-09-23).
+    'treino_046': 'assets/lily_exercicios/lily_fit_cadeira_abdutora.jpeg',
     // 047 (stiff unilateral): o stiff unilateral com halteres estava no 088.
     'treino_047': 'assets/lily_exercicios/treino_088.jpg',
     // 048 e 049 usam a arte de 4 apoios com caneleira (055); a variação com a
@@ -158,7 +163,7 @@ class LilyExercicioAssets {
     'treino_031': 'assets/lily_exercicios/treino_031.jpg',
     'treino_032': 'assets/lily_exercicios/treino_032.jpg',
     'treino_033': 'assets/lily_exercicios/treino_033.jpg',
-    'treino_034': 'assets/lily_exercicios/treino_034.jpg',
+    'treino_034': 'assets/lily_exercicios/lily_fit_cadeira_extensora.jpeg',
     'treino_035': 'assets/lily_exercicios/treino_035.jpg',
     'treino_036': 'assets/lily_exercicios/treino_036.jpg',
     'treino_037': 'assets/lily_exercicios/treino_037.jpg',
@@ -170,7 +175,7 @@ class LilyExercicioAssets {
     'treino_043': 'assets/lily_exercicios/treino_043.jpg',
     'treino_044': 'assets/lily_exercicios/treino_044.jpg',
     'treino_045': 'assets/lily_exercicios/treino_045.jpg',
-    'treino_046': 'assets/lily_exercicios/treino_046.jpg',
+    'treino_046': 'assets/lily_exercicios/lily_fit_cadeira_abdutora.jpeg',
     'treino_047': 'assets/lily_exercicios/treino_047.jpg',
     'treino_048': 'assets/lily_exercicios/treino_048.jpg',
     'treino_049': 'assets/lily_exercicios/treino_049.jpg',

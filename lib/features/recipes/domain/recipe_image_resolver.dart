@@ -56,7 +56,7 @@ class RecipeImageResolver {
       neededImage: 'Shake/bebida de chocolate proteico (estilo neon)',
       suggestedFile:
           'assets/images/recipes/neon/41_shake_chocolate_proteico_neon.png',
-      currentFallback: '14_parfait_de_iogurte_com_neon_vibrante.png',
+      currentFallback: '14_parfait_de_iogurte_com_neon_vibrante.jpg',
     ),
   ];
 

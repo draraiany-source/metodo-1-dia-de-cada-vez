@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/design_system/app_spacing.dart';
 import '../../../core/design_system/app_typography.dart';
 import '../../../core/mascot/mascot_sizes.dart';
@@ -74,7 +75,7 @@ class _DailyChestScreenState extends ConsumerState<DailyChestScreen>
     final canOpen = chest.claimable && !_opening && !chest.loading;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Baú diário 🎁')),
+      appBar: const PremiumAppBar(title: 'Baú diário 🎁'),
       body: SafeArea(
         child: Center(
           child: Padding(

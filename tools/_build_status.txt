@@ -1,0 +1,24 @@
+﻿LOG_BYTES=4181
+LOG_MTIME=09/22/2026 20:08:17
+TAIL	  riverpod 2.6.1 (3.4.3 available)
+TAIL	  share_plus 10.1.4 (13.3.0 available)
+TAIL	  share_plus_platform_interface 5.0.2 (7.2.0 available)
+TAIL	  stack_trace 1.12.1 (1.12.2 available)
+TAIL	  table_calendar 3.1.3 (3.2.1 available)
+TAIL	  test_api 0.7.11 (0.7.14 available)
+TAIL	  timezone 0.9.4 (0.11.1 available)
+TAIL	  unicode 0.3.1 (1.1.9 available)
+TAIL	  vector_math 2.2.0 (2.4.3 available)
+TAIL	  wakelock_plus 1.5.2 (1.8.0 available)
+TAIL	  win32 5.15.0 (6.4.0 available)
+TAIL	Got dependencies!
+TAIL	82 packages have newer versions incompatible with dependency constraints.
+TAIL	Try `flutter pub outdated` for more information.
+TAIL	Running Gradle task 'bundleRelease'...                          
+AAB_BYTES=155639603
+AAB_MTIME=09/22/2026 17:10:39
+JAVA_COUNT=4
+JAVA	PID=9156	CPU=602.40625
+JAVA	PID=9796	CPU=6.734375
+JAVA	PID=11888	CPU=683.828125
+JAVA	PID=18232	CPU=10.390625

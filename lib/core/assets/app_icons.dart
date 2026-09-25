@@ -27,54 +27,54 @@ class AppIcons {
   static const String _app = 'assets/icons/app/';
 
   // ---- Navegação ----
-  static const String home = '${_app}inicio.png';
+  static const String home = '${_app}inicio.jpg';
   static const String homeAlt = home;
-  static const String workout = '${_app}treinos.png';
+  static const String workout = '${_app}treinos.jpg';
   static const String workoutDumbbell = workout;
-  static const String recipes = '${_app}receitas.png';
+  static const String recipes = '${_app}receitas.jpg';
   static const String nutrition = recipes;
-  static const String evolution = '${_app}evolucao.png';
-  static const String profile = '${_app}perfil.png';
-  static const String checkin = '${_app}checkin.png';
-  static const String diary = '${_app}diario.png';
+  static const String evolution = '${_app}evolucao.jpg';
+  static const String profile = '${_app}perfil.jpg';
+  static const String checkin = '${_app}checkin.jpg';
+  static const String diary = '${_app}diario.jpg';
   static const String photos = '${_nav}photos.jpg';
   static const String gallery = photos;
   static const String measurement = '${_nav}measurements.jpg';
   static const String measurements = measurement;
   static const String history = '${_nav}history.jpg';
-  static const String notifications = '${_app}notificacoes.png';
-  static const String settings = '${_app}configuracoes.png';
-  static const String premium = '${_app}premium.png';
+  static const String notifications = '${_app}notificacoes.jpg';
+  static const String settings = '${_app}configuracoes.jpg';
+  static const String premium = '${_app}premium.jpg';
   static const String subscription = '${_nav}subscription.jpg';
 
   // ---- Saúde / métricas ----
-  static const String running = '${_app}corrida_gps.png';
+  static const String running = '${_app}corrida_gps.jpg';
   static const String gpsRunning = running;
   static const String gps = running;
-  static const String water = '${_app}hidratacao.png';
+  static const String water = '${_app}hidratacao.jpg';
   static const String hydration = water;
   static const String hydrationGoal = '${_health}hydration_alt.jpg';
 
   /// Pacote dedicado da tela Meta de água (neon 3D gloss).
   static const String _hydrationDir = 'assets/icons/app/extras_hidratacao/';
   static const String hydrationProgress =
-      '${_hydrationDir}hidratacao_rastreamento.png';
-  static const String hydrationCheck = '${_hydrationDir}hidratacao_check.png';
-  static const String hydrationBottle = '${_hydrationDir}hidratacao_garrafa.png';
-  static const String hydrationGlass = '${_hydrationDir}hidratacao_extra_1.png';
+      '${_hydrationDir}hidratacao_rastreamento.jpg';
+  static const String hydrationCheck = '${_hydrationDir}hidratacao_check.jpg';
+  static const String hydrationBottle = '${_hydrationDir}hidratacao_garrafa.jpg';
+  static const String hydrationGlass = '${_hydrationDir}hidratacao_extra_1.jpg';
   static const String hydrationExtra = hydrationGlass;
-  static const String sleep = '${_app}sono.png';
+  static const String sleep = '${_app}sono.jpg';
   static const String steps = '${_health}steps.jpg';
   static const String walk = steps;
   static const String weight = '${_health}weight_bmi.jpg';
   static const String bmiMeasure = weight;
   static const String calories = '${_health}calories.jpg';
   static const String camera = '${_health}camera.jpg';
-  static const String cameraFood = '${_app}analisar_refeicao_ia.png';
+  static const String cameraFood = '${_app}analisar_refeicao_ia.jpg';
   static const String food = cameraFood;
   static const String scanner = cameraFood;
   static const String stretching = '${_health}stretching.jpg';
-  static const String meditation = '${_app}meditacoes.png';
+  static const String meditation = '${_app}meditacoes.jpg';
   static const String yoga = meditation;
   static const String favorite = '${_health}favorite.jpg';
   static const String favorites = favorite;
@@ -82,10 +82,10 @@ class AppIcons {
   static const String filter = search;
   static const String audio = '${_health}audio.jpg';
   static const String calendar = '${_health}calendar.jpg';
-  static const String goals = '${_app}metas.png';
+  static const String goals = '${_app}metas.jpg';
   static const String goal = goals;
   static const String healthHeart = '${_health}health_fitness.jpg';
-  static const String healthFitness = '${_app}bem_estar.png';
+  static const String healthFitness = '${_app}bem_estar.jpg';
   static const String bemEstar = healthFitness;
 
   // ---- Ações ----
@@ -101,7 +101,7 @@ class AppIcons {
   static const String location = '${_actions}location_map.jpg';
   static const String retry = '${_actions}retry_refresh.jpg';
   static const String refresh = retry;
-  static const String logout = '${_app}sair.png';
+  static const String logout = '${_app}sair.jpg';
   static const String target = '${_actions}target.jpg';
 
   // ---- Humor / check-in ----
@@ -125,10 +125,10 @@ class AppIcons {
   ];
 
   // ---- Premium / conquistas genéricas ----
-  static const String trophy = '${_app}desafios.png';
+  static const String trophy = '${_app}desafios.jpg';
   static const String desafios = trophy;
   static const String challenges = trophy;
-  static const String premiumCrown = '${_app}premium.png';
+  static const String premiumCrown = '${_app}premium.jpg';
   static const String achievement = trophy;
   static const String medalRanking = trophy;
   static const String medal = trophy;
@@ -161,9 +161,9 @@ class AppIcons {
 
   // ---- Compat / aliases (telas existentes) ----
   static const String checklist = checkin;
-  static const String habits = '${_app}habitos.png';
+  static const String habits = '${_app}habitos.jpg';
   static const String habitos = habits;
-  static const String video = '${_app}videos.png';
+  static const String video = '${_app}videos.jpg';
   static const String videos = video;
   static const String stopwatch = history;
   static const String timer = history;
@@ -174,8 +174,8 @@ class AppIcons {
   static const String course = program7Days;
   static const String courses = program7Days;
   static const String ebook = diary;
-  static const String community = '${_app}comunidade.png';
-  static const String messages = '${_app}suporte.png';
+  static const String community = '${_app}comunidade.jpg';
+  static const String messages = '${_app}suporte.jpg';
   static const String personal = profile;
 
   /// Pacote visual Personal / Consultoria / IA (não substitui [personal]).
@@ -189,8 +189,8 @@ class AppIcons {
   static const String sugestaoResposta = PersonalAiIcons.sugestaoResposta;
   static const String resumoConversa = PersonalAiIcons.resumoConversa;
   static const String pontosAtencao = PersonalAiIcons.pontosAtencao;
-  static const String support = '${_app}suporte.png';
-  static const String help = '${_app}ajuda.png';
+  static const String support = '${_app}suporte.jpg';
+  static const String help = '${_app}ajuda.jpg';
   static const String ajuda = help;
   static const String reminders = notifications;
   static const String security = settings;
@@ -208,76 +208,76 @@ class AppIcons {
   static const String cardioRun = running;
   /// Cardio genuíno — ícone neon legado (não confundir com favorito/coração).
   static const String cardio =
-      'assets/icons/neon/corrida/icone_neon_de_corrida_e_saude_cardiaca.png';
+      'assets/icons/neon/corrida/icone_neon_de_corrida_e_saude_cardiaca.jpg';
   static const String workoutPlaceholder =
-      'assets/icons/neon/treinos/icone_fitness_neon_em_vidro_3d.png';
+      'assets/icons/neon/treinos/icone_fitness_neon_em_vidro_3d.jpg';
   static const String workoutGoal = target;
 
   // ---- Exercícios específicos (kit neon legado — sem equivalentes no pacote) ----
-  static const String exAbs = '${_treino}icone_neon_de_abdominais_futurista.png';
+  static const String exAbs = '${_treino}icone_neon_de_abdominais_futurista.jpg';
   static const String abs = exAbs;
   static const String exAbsAlt =
-      '${_treino}icone_fitness_neon_com_abdomen_esculpido.png';
+      '${_treino}icone_fitness_neon_com_abdomen_esculpido.jpg';
   static const String glutes =
-      '${_treino}icone_neon_de_hip_thrust_com_barra.png';
+      '${_treino}icone_neon_de_hip_thrust_com_barra.jpg';
   static const String exSquat =
-      '${_treino}icone_fitness_neon_em_agachamento.png';
+      '${_treino}icone_fitness_neon_em_agachamento.jpg';
   static const String exSquatBar =
-      '${_treino}icone_neon_de_agachamento_com_barra.png';
+      '${_treino}icone_neon_de_agachamento_com_barra.jpg';
   static const String exSquatSumo =
-      '${_treino}icone_fitness_neon_com_agachamento_sumo.png';
+      '${_treino}icone_fitness_neon_com_agachamento_sumo.jpg';
   static const String exHipThrust =
-      '${_treino}icone_fitness_neon_hip_thrust_dramatico.png';
+      '${_treino}icone_fitness_neon_hip_thrust_dramatico.jpg';
   static const String exLegPress =
-      '${_treino}icone_fitness_neon_de_leg_press.png';
+      '${_treino}icone_fitness_neon_de_leg_press.jpg';
   static const String exLegExtension =
-      '${_treino}icone_neon_de_extensao_de_pernas.png';
-  static const String exLegCurl = '${_treino}icone_neon_de_mesa_flexora.png';
+      '${_treino}icone_neon_de_extensao_de_pernas.jpg';
+  static const String exLegCurl = '${_treino}icone_neon_de_mesa_flexora.jpg';
   static const String exLunge =
-      '${_treino}icone_neon_de_lunge_com_halteres.png';
+      '${_treino}icone_neon_de_lunge_com_halteres.jpg';
   static const String exCalf =
-      '${_treino}icone_neon_de_elevacao_de_panturrilha.png';
+      '${_treino}icone_neon_de_elevacao_de_panturrilha.jpg';
   static const String exLegRaise =
-      '${_treino}icone_neon_de_elevacao_de_pernas.png';
+      '${_treino}icone_neon_de_elevacao_de_pernas.jpg';
   static const String exCurl =
-      '${_treino}icone_fitness_neon_com_rosca_direta.png';
+      '${_treino}icone_fitness_neon_com_rosca_direta.jpg';
   static const String exArm =
-      '${_treino}icone_fitness_neon_com_braco_musculoso.png';
+      '${_treino}icone_fitness_neon_com_braco_musculoso.jpg';
   static const String exTriceps =
-      '${_treino}icone_neon_de_triceps_na_polia.png';
+      '${_treino}icone_neon_de_triceps_na_polia.jpg';
   static const String exTricepsExt =
-      '${_treino}extensao_de_triceps_neon_na_academia.png';
+      '${_treino}extensao_de_triceps_neon_na_academia.jpg';
   static const String exLateralRaise =
-      '${_treino}icone_neon_de_elevacao_lateral.png';
+      '${_treino}icone_neon_de_elevacao_lateral.jpg';
   static const String exBench =
-      '${_treino}icone_neon_de_supino_fitness.png';
+      '${_treino}icone_neon_de_supino_fitness.jpg';
   static const String exBenchDb =
-      '${_treino}icone_fitness_neon_de_supino_com_halteres.png';
+      '${_treino}icone_fitness_neon_de_supino_com_halteres.jpg';
   static const String exRow =
-      '${_treino}icone_neon_de_remada_com_halter.png';
+      '${_treino}icone_neon_de_remada_com_halter.jpg';
   static const String exRowLow =
-      '${_treino}icone_neon_de_remada_baixa_fitness.png';
+      '${_treino}icone_neon_de_remada_baixa_fitness.jpg';
   static const String exPulldown =
-      '${_treino}icone_neon_de_puxada_na_maquina.png';
-  static const String exBack = '${_treino}icone_neon_de_treino_de_costas.png';
+      '${_treino}icone_neon_de_puxada_na_maquina.jpg';
+  static const String exBack = '${_treino}icone_neon_de_treino_de_costas.jpg';
   static const String exKickback =
-      '${_treino}icone_neon_de_kickback_na_polia.png';
+      '${_treino}icone_neon_de_kickback_na_polia.jpg';
   static const String exKettlebell =
-      '${_treino}icone_neon_de_swing_com_kettlebell.png';
+      '${_treino}icone_neon_de_swing_com_kettlebell.jpg';
   static const String exPushup =
-      '${_treino}icone_neon_de_flexao_atletica.png';
+      '${_treino}icone_neon_de_flexao_atletica.jpg';
   static const String exPlank =
-      '${_treino}icone_neon_de_prancha_fitness.png';
-  static const String exBurpee = '${_treino}burpee_em_prancha_neon.png';
+      '${_treino}icone_neon_de_prancha_fitness.jpg';
+  static const String exBurpee = '${_treino}burpee_em_prancha_neon.jpg';
   static const String exJumpingJack =
-      '${_treino}icone_neon_de_polichinelo_fitness.png';
+      '${_treino}icone_neon_de_polichinelo_fitness.jpg';
   static const String exStretch =
-      '${_treino}icone_neon_de_alongamento_fitness.png';
+      '${_treino}icone_neon_de_alongamento_fitness.jpg';
   static const String exStretchAlt =
-      '${_treino}icone_neon_de_alongamento_feminino.png';
-  static const String exTorso = '${_treino}icone_neon_de_torso_atletico.png';
+      '${_treino}icone_neon_de_alongamento_feminino.jpg';
+  static const String exTorso = '${_treino}icone_neon_de_torso_atletico.jpg';
   static const String exFunctional =
-      '${_treino}icone_fitness_neon_em_movimento.png';
+      '${_treino}icone_fitness_neon_em_movimento.jpg';
 
   /// Principais do pacote Cursor (auditoria / pré-cache).
   static const List<String> allCursor = [

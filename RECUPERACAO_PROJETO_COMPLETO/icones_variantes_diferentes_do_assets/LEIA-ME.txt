@@ -1,0 +1,5 @@
+﻿Variantes com hash diferente (nao sao features perdidas):
+- icon_hydration.png (backup vs assets)
+- icon_recipes.png (backup vs assets)
+
+Recuperacao opcional visual apenas. App principal nao foi alterado.

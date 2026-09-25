@@ -26,6 +26,7 @@ enum VideoCategory {
   treinamento,
   alongamentoMobilidade,
   especiais,
+  meditacao,
 }
 
 extension VideoCategoryInfo on VideoCategory {
@@ -40,14 +41,19 @@ extension VideoCategoryInfo on VideoCategory {
         VideoCategory.treinamento => 'Treinamento',
         VideoCategory.alongamentoMobilidade => 'Alongamento e mobilidade',
         VideoCategory.especiais => 'Conteúdos especiais',
+        VideoCategory.meditacao => 'Meditação',
       };
 
   /// Rótulo curto para chips e badges, onde o nome completo estoura a linha.
   String get shortLabel => switch (this) {
         VideoCategory.metodo1Dia => 'Método 1 Dia',
         VideoCategory.alongamentoMobilidade => 'Along. e mobilidade',
+        VideoCategory.meditacao => 'Meditação',
         _ => label,
       };
+
+  /// A biblioteca de Vídeos não mistura meditações — elas têm tela própria.
+  bool get isVideoLibrary => this != VideoCategory.meditacao;
 }
 
 /// Valores de `category` gravados antes da biblioteca virar conteúdo (quando as
@@ -126,6 +132,8 @@ class VideoContent {
   final DateTime? publishedAt;
 
   /// True quando o vídeo toca via YouTube em vez da Cloud Function.
+  bool get isMeditation => category == VideoCategory.meditacao;
+
   bool get isYoutube => youtubeVideoId != null;
 
   String? get youtubeVideoId =>

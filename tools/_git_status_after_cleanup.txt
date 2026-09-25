@@ -1,0 +1,944 @@
+﻿ M .gitignore
+ M .metadata
+ M analyze_lib_out.txt
+ M android/gradle.properties
+D  assets/_incoming_lily/lily_upload_01.png
+D  assets/_incoming_lily/lily_upload_01_clean.png
+D  assets/_incoming_lily/lily_upload_02.png
+D  assets/_incoming_lily/lily_upload_02_clean.png
+D  assets/_incoming_lily/lily_upload_03.png
+D  assets/_incoming_lily/lily_upload_03_clean.png
+D  assets/_incoming_lily/lily_upload_04.png
+D  assets/_incoming_lily/lily_upload_04_clean.png
+D  assets/_incoming_lily/lily_upload_05.png
+D  assets/_incoming_lily/lily_upload_05_clean.png
+D  assets/_incoming_lily/lily_upload_06.png
+D  assets/_incoming_lily/lily_upload_06_clean.png
+D  assets/_incoming_lily/lily_upload_07.png
+D  assets/_incoming_lily/lily_upload_07_clean.png
+D  assets/_validation/icon_dumbbell_on_black.png
+D  assets/_validation/icon_dumbbell_on_lilac.png
+D  assets/_validation/icon_dumbbell_on_pink.png
+D  assets/_validation/icon_dumbbell_on_white.png
+D  assets/_validation/icon_home_on_black.png
+D  assets/_validation/icon_home_on_black_v2.png
+D  assets/_validation/icon_home_on_lilac.png
+D  assets/_validation/icon_home_on_lilac_v2.png
+D  assets/_validation/icon_home_on_pink.png
+D  assets/_validation/icon_home_on_pink_v2.png
+D  assets/_validation/icon_home_on_white.png
+D  assets/_validation/icon_home_on_white_v2.png
+D  assets/_validation/mascot_profile_on_black.png
+D  assets/_validation/mascot_profile_on_black_v2.png
+D  assets/_validation/mascot_profile_on_lilac.png
+D  assets/_validation/mascot_profile_on_pink.png
+D  assets/_validation/mascot_profile_on_white.png
+D  assets/_validation/mascot_profile_on_white_v2.png
+D  assets/_validation/upload03_thumb_on_black.png
+D  assets/_validation/upload03_thumb_on_lilac.png
+D  assets/_validation/upload03_thumb_on_pink.png
+D  assets/_validation/upload03_thumb_on_white.png
+D  assets/_validation/upload04_celeb_on_black.png
+D  assets/_validation/upload04_celeb_on_lilac.png
+D  assets/_validation/upload04_celeb_on_pink.png
+D  assets/_validation/upload04_celeb_on_white.png
+D  assets/_validation/upload06_arms_on_black.png
+D  assets/_validation/upload06_arms_on_lilac.png
+D  assets/_validation/upload06_arms_on_pink.png
+D  assets/_validation/upload06_arms_on_white.png
+D  assets/_validation/upload07_run_on_black.png
+D  assets/_validation/upload07_run_on_lilac.png
+D  assets/_validation/upload07_run_on_pink.png
+D  assets/_validation/upload07_run_on_white.png
+ M assets/amanda/optimized/amanda-about-01.webp
+ M assets/amanda/optimized/amanda-about-02.webp
+ M assets/amanda/optimized/amanda-audio.webp
+ M assets/amanda/optimized/amanda-banner-01.webp
+ M assets/amanda/optimized/amanda-banner-02.webp
+ M assets/amanda/optimized/amanda-challenge.webp
+ M assets/amanda/optimized/amanda-home.webp
+ M assets/amanda/optimized/amanda-motivation-01.webp
+ M assets/amanda/optimized/amanda-motivation-02.webp
+ M assets/amanda/optimized/amanda-profile.webp
+ M assets/amanda/optimized/amanda-program.webp
+ M assets/amanda/optimized/amanda-welcome.webp
+ M assets/amanda/optimized/amanda-workout-01.webp
+ M assets/amanda/optimized/amanda-workout-02.webp
+ M assets/amanda/optimized/amanda-workout-03.webp
+ D assets/amanda/originals/amanda-about-01.jpg
+ D assets/amanda/originals/amanda-about-02.jpg
+ D assets/amanda/originals/amanda-audio.jpg
+ D assets/amanda/originals/amanda-banner-01.jpg
+ D assets/amanda/originals/amanda-banner-02.jpg
+ D assets/amanda/originals/amanda-challenge.jpg
+ D assets/amanda/originals/amanda-home.jpg
+ D assets/amanda/originals/amanda-motivation-01.jpg
+ D assets/amanda/originals/amanda-motivation-02.jpg
+ D assets/amanda/originals/amanda-profile.jpg
+ D assets/amanda/originals/amanda-program.jpg
+ D assets/amanda/originals/amanda-welcome.jpg
+ D assets/amanda/originals/amanda-workout-01.jpg
+ D assets/amanda/originals/amanda-workout-02.jpg
+ D assets/amanda/originals/amanda-workout-03.jpg
+ D assets/amanda/promo/amanda_acenando.png
+ D assets/amanda/promo/amanda_alongamento.png
+ D assets/amanda/promo/amanda_alongamento_alt.png
+ D assets/amanda/promo/amanda_apontando_baixo.png
+ D assets/amanda/promo/amanda_apontando_cima.png
+ D assets/amanda/promo/amanda_apontando_direita.png
+ D assets/amanda/promo/amanda_apontando_esquerda.png
+ D assets/amanda/promo/amanda_apresentando.png
+ D assets/amanda/promo/amanda_calendario_check.png
+ D assets/amanda/promo/amanda_ciclo_metodo.png
+ D assets/amanda/promo/amanda_corrida.png
+ D assets/amanda/promo/amanda_forca.png
+ D assets/amanda/promo/amanda_hidratacao.png
+ D assets/amanda/promo/amanda_joinha.png
+ D assets/amanda/promo/amanda_lembrete_hidratacao.png
+ D assets/amanda/promo/amanda_meditacao.png
+ D assets/amanda/promo/amanda_meta_concluida.png
+ D assets/amanda/promo/amanda_mostrando_app.png
+ D assets/amanda/promo/amanda_nutricao_prato.png
+ D assets/amanda/promo/amanda_orientando.png
+ D assets/amanda/promo/amanda_treino_halteres.png
+ D assets/amanda/promo/amanda_trofeu.png
+ D assets/amanda/promo/amanda_vitoria.png
+ M assets/app_icon/android_adaptive_foreground.png
+ D assets/audio_programs/01_como_vencer_a_procrastinacao.mp3
+ D assets/audio_programs/02_como_criar_disciplina.mp3
+ D assets/audio_programs/03_como_vencer_a_preguica.mp3
+ D assets/audio_programs/04_como_manter_a_constancia.mp3
+ D assets/audio_programs/05_como_voltar_depois_de_errar.mp3
+ D assets/audio_programs/06_como_criar_habitos_saudaveis.mp3
+ D assets/audio_programs/07_como_acreditar_em_voce.mp3
+ M assets/content/videos_biblioteca.json
+ M assets/icons/achievements/first_run.jpg
+ M assets/icons/achievements/hydration_achievement.jpg
+ M assets/icons/achievements/perfect_week.jpg
+ M assets/icons/achievements/seven_day_goal.jpg
+ M assets/icons/achievements/streak_30_days.jpg
+ M assets/icons/achievements/thirty_day_goal.jpg
+ M assets/icons/achievements/weight_goal.jpg
+ M assets/icons/achievements/weight_loss_10kg.jpg
+ D assets/icons/app/ajuda.png
+ D assets/icons/app/analisar_refeicao_ia.png
+ D assets/icons/app/bem_estar.png
+ D assets/icons/app/checkin.png
+ D assets/icons/app/comunidade.png
+ D assets/icons/app/configuracoes.png
+ D assets/icons/app/corrida_gps.png
+ D assets/icons/app/desafios.png
+ D assets/icons/app/diario.png
+ D assets/icons/app/evolucao.png
+ D assets/icons/app/extras_hidratacao/hidratacao_check.png
+ D assets/icons/app/extras_hidratacao/hidratacao_extra_1.png
+ D assets/icons/app/extras_hidratacao/hidratacao_garrafa.png
+ D assets/icons/app/extras_hidratacao/hidratacao_rastreamento.png
+ D assets/icons/app/habitos.png
+ D assets/icons/app/hidratacao.png
+ D assets/icons/app/inicio.png
+ D assets/icons/app/meditacoes.png
+ D assets/icons/app/metas.png
+ D assets/icons/app/notificacoes.png
+ D assets/icons/app/perfil.png
+ D assets/icons/app/premium.png
+ D assets/icons/app/receitas.png
+ D assets/icons/app/sair.png
+ D assets/icons/app/sono.png
+ D assets/icons/app/suporte.png
+ D assets/icons/app/treinos.png
+ D assets/icons/app/videos.png
+ D assets/icons/hydration/hydration_bottle.png
+ D assets/icons/hydration/hydration_check.png
+ D assets/icons/hydration/hydration_glass.png
+ D assets/icons/hydration/hydration_progress.png
+ D assets/icons/neon/conquistas/coroa_dourada_neon_em_vidro_luminoso.png
+ D assets/icons/neon/conquistas/coroa_neon_em_icone_premium.png
+ D assets/icons/neon/conquistas/icone_fitness_coroa_neon.png
+ D assets/icons/neon/conquistas/icone_neon_de_coroa_dourada.png
+ D assets/icons/neon/conquistas/icone_neon_de_coroa_real.png
+ D assets/icons/neon/conquistas/icone_neon_de_crescimento_progressivo.png
+ D assets/icons/neon/conquistas/icone_neon_de_grafico_ascendente.png
+ D assets/icons/neon/conquistas/icone_neon_de_plano_fitness_7_dias.png
+ D assets/icons/neon/conquistas/icone_neon_de_progresso_fitness.png
+ D assets/icons/neon/conquistas/icone_neon_de_trofeu_glorioso.png
+ D assets/icons/neon/corrida/ciclista_neon_em_bicicleta_spinning.png
+ D assets/icons/neon/corrida/corredora_neon_com_coracao_pulsante.png
+ D assets/icons/neon/corrida/icone_fitness_neon_na_esteira.png
+ D assets/icons/neon/corrida/icone_neon_de_atleta_caminhando.png
+ D assets/icons/neon/corrida/icone_neon_de_corredor_cardiaco.png
+ D assets/icons/neon/corrida/icone_neon_de_corrida_e_batimentos.png
+ D assets/icons/neon/corrida/icone_neon_de_corrida_e_rota.png
+ D assets/icons/neon/corrida/icone_neon_de_corrida_e_saude_cardiaca.png
+ D assets/icons/neon/corrida/icone_neon_de_corrida_em_movimento.png
+ D assets/icons/neon/corrida/icone_neon_de_rota_gps.png
+ D assets/icons/neon/corrida/icone_neon_de_treino_na_escada.png
+ D assets/icons/neon/navegacao/01_notificacoes.png
+ D assets/icons/neon/navegacao/02_configuracoes.png
+ D assets/icons/neon/navegacao/03_favoritos.png
+ D assets/icons/neon/navegacao/icone_de_casa_neon_em_vidro.png
+ D assets/icons/neon/navegacao/icone_de_casa_neon_em_vidro_3d.png
+ D assets/icons/neon/navegacao/icone_neon_de_calendario_com_checkmark.png
+ D assets/icons/neon/navegacao/icone_neon_de_casa_fitness.png
+ D assets/icons/neon/navegacao/icone_neon_de_checklist_em_vidro.png
+ D assets/icons/neon/navegacao/icone_neon_de_player_de_video.png
+ D assets/icons/neon/nutricao/icone_neon_de_alimentacao_saudavel.png
+ D assets/icons/neon/nutricao/icone_neon_de_bowl_saudavel.png
+ D assets/icons/neon/nutricao/icone_neon_de_camera_com_salada.png
+ D assets/icons/neon/nutricao/icone_neon_de_salada_saudavel.png
+ D assets/icons/neon/nutricao/tigela_de_salada_neon_vibrante.png
+ D assets/icons/neon/nutricao/tigela_saudavel_neon_futurista.png
+ D assets/icons/neon/perfil/04_comunidade.png
+ D assets/icons/neon/perfil/05_chat_ia.png
+ D assets/icons/neon/perfil/10_lembretes.png
+ D assets/icons/neon/perfil/icone_neon_de_avatar_feminino.png
+ D assets/icons/neon/saude/06_imc.png
+ D assets/icons/neon/saude/07_calorias.png
+ D assets/icons/neon/saude/08_sono.png
+ D assets/icons/neon/saude/09_peso_balanca.png
+ D assets/icons/neon/saude/garrafa_neon_com_gota_luminosa.png
+ D assets/icons/neon/saude/icone_neon_de_busca_cardiaca.png
+ D assets/icons/neon/saude/icone_neon_de_busca_e_batimentos.png
+ D assets/icons/neon/saude/icone_neon_de_busca_e_pulso.png
+ D assets/icons/neon/saude/icone_neon_de_busca_e_pulso_cardiaco.png
+ D assets/icons/neon/saude/icone_neon_de_corrida_e_pulso.png
+ D assets/icons/neon/saude/icone_neon_de_hidratacao_fitness.png
+ D assets/icons/neon/saude/icone_neon_de_meditacao_com_fones.png
+ D assets/icons/neon/saude/icone_neon_de_pulso_vital.png
+ D assets/icons/neon/treinos/burpee_em_prancha_neon.png
+ D assets/icons/neon/treinos/extensao_de_triceps_neon_na_academia.png
+ D assets/icons/neon/treinos/icone_fitness_neon_com_abdomen_definido.png
+ D assets/icons/neon/treinos/icone_fitness_neon_com_abdomen_esculpido.png
+ D assets/icons/neon/treinos/icone_fitness_neon_com_agachamento_sumo.png
+ D assets/icons/neon/treinos/icone_fitness_neon_com_braco_musculoso.png
+ D assets/icons/neon/treinos/icone_fitness_neon_com_halter_futurista.png
+ D assets/icons/neon/treinos/icone_fitness_neon_com_halteres.png
+ D assets/icons/neon/treinos/icone_fitness_neon_com_rosca_direta.png
+ D assets/icons/neon/treinos/icone_fitness_neon_de_leg_press.png
+ D assets/icons/neon/treinos/icone_fitness_neon_de_supino_com_halteres.png
+ D assets/icons/neon/treinos/icone_fitness_neon_em_agachamento.png
+ D assets/icons/neon/treinos/icone_fitness_neon_em_alongamento.png
+ D assets/icons/neon/treinos/icone_fitness_neon_em_movimento.png
+ D assets/icons/neon/treinos/icone_fitness_neon_em_vidro_3d.png
+ D assets/icons/neon/treinos/icone_fitness_neon_hip_thrust_dramatico.png
+ D assets/icons/neon/treinos/icone_neon_de_abdominais_futurista.png
+ D assets/icons/neon/treinos/icone_neon_de_abdominais_futuristas.png
+ D assets/icons/neon/treinos/icone_neon_de_agachamento_com_barra.png
+ D assets/icons/neon/treinos/icone_neon_de_alongamento.png
+ D assets/icons/neon/treinos/icone_neon_de_alongamento_feminino.png
+ D assets/icons/neon/treinos/icone_neon_de_alongamento_fitness.png
+ D assets/icons/neon/treinos/icone_neon_de_cronometro_em_vidro.png
+ D assets/icons/neon/treinos/icone_neon_de_elevacao_de_panturrilha.png
+ D assets/icons/neon/treinos/icone_neon_de_elevacao_de_pernas.png
+ D assets/icons/neon/treinos/icone_neon_de_elevacao_lateral.png
+ D assets/icons/neon/treinos/icone_neon_de_extensao_de_pernas.png
+ D assets/icons/neon/treinos/icone_neon_de_flexao_atletica.png
+ D assets/icons/neon/treinos/icone_neon_de_haltere_futurista.png
+ D assets/icons/neon/treinos/icone_neon_de_halteres_fitness.png
+ D assets/icons/neon/treinos/icone_neon_de_hip_thrust_com_barra.png
+ D assets/icons/neon/treinos/icone_neon_de_kickback_na_polia.png
+ D assets/icons/neon/treinos/icone_neon_de_lunge_com_halteres.png
+ D assets/icons/neon/treinos/icone_neon_de_mesa_flexora.png
+ D assets/icons/neon/treinos/icone_neon_de_polichinelo_fitness.png
+ D assets/icons/neon/treinos/icone_neon_de_prancha_fitness.png
+ D assets/icons/neon/treinos/icone_neon_de_puxada_na_maquina.png
+ D assets/icons/neon/treinos/icone_neon_de_remada_baixa_fitness.png
+ D assets/icons/neon/treinos/icone_neon_de_remada_com_halter.png
+ D assets/icons/neon/treinos/icone_neon_de_supino_fitness.png
+ D assets/icons/neon/treinos/icone_neon_de_swing_com_kettlebell.png
+ D assets/icons/neon/treinos/icone_neon_de_torso_atletico.png
+ D assets/icons/neon/treinos/icone_neon_de_treino_de_costas.png
+ D assets/icons/neon/treinos/icone_neon_de_triceps_na_polia.png
+ D assets/icons/personal-ai/01_chat_com_amanda.png
+ D assets/icons/personal-ai/02_agenda_consultoria.png
+ D assets/icons/personal-ai/03_area_da_personal.png
+ D assets/icons/personal-ai/04_anamnese.png
+ D assets/icons/personal-ai/05_analisar_com_ia.png
+ D assets/icons/personal-ai/06_assistente_ia.png
+ D assets/icons/personal-ai/07_insights_ia.png
+ D assets/icons/personal-ai/08_sugestao_de_resposta.png
+ D assets/icons/personal-ai/09_resumo_da_conversa.png
+ D assets/icons/personal-ai/10_pontos_de_atencao.png
+ M assets/images/alimentacao/alimentacao.jpeg
+ M assets/images/bem_estar/bem_estar.jpeg
+ M assets/images/corrida/corrida.jpeg
+ M assets/images/corrida/corrida_gps_app.jpeg
+ M assets/images/corrida/corrida_gps_dark.jpeg
+ M assets/images/hidratacao/controle_agua.jpeg
+ M assets/images/hidratacao/hidratacao_dark.jpeg
+ D assets/images/icons_3d/icon_abs_3d.png
+ D assets/images/icons_3d/icon_calendar_3d.png
+ D assets/images/icons_3d/icon_calories_3d.png
+ D assets/images/icons_3d/icon_cardio_3d.png
+ D assets/images/icons_3d/icon_glutes_3d.png
+ D assets/images/icons_3d/icon_home_3d.png
+ D assets/images/icons_3d/icon_profile_3d.png
+ D assets/images/icons_3d/icon_progress_3d.png
+ D assets/images/icons_3d/icon_recipes_3d.png
+ D assets/images/icons_3d/icon_running_3d.png
+ D assets/images/icons_3d/icon_stopwatch_3d.png
+ D assets/images/icons_3d/icon_trophy_3d.png
+ D assets/images/icons_3d/icon_water_3d.png
+ D assets/images/icons_3d/icon_workout_3d.png
+ D assets/images/icons_3d/icon_yoga_3d.png
+ D assets/images/icons_3d_pack2/README.md
+ D assets/images/icons_3d_pack2/icon_achievement.png
+ D assets/images/icons_3d_pack2/icon_audio.png
+ D assets/images/icons_3d_pack2/icon_back.png
+ D assets/images/icons_3d_pack2/icon_before_after.png
+ D assets/images/icons_3d_pack2/icon_bmi.png
+ D assets/images/icons_3d_pack2/icon_calendar.png
+ D assets/images/icons_3d_pack2/icon_calories.png
+ D assets/images/icons_3d_pack2/icon_camera.png
+ D assets/images/icons_3d_pack2/icon_checkin.png
+ D assets/images/icons_3d_pack2/icon_community.png
+ D assets/images/icons_3d_pack2/icon_complete.png
+ D assets/images/icons_3d_pack2/icon_diary.png
+ D assets/images/icons_3d_pack2/icon_evolution.png
+ D assets/images/icons_3d_pack2/icon_favorites.png
+ D assets/images/icons_3d_pack2/icon_filter.png
+ D assets/images/icons_3d_pack2/icon_gallery.png
+ D assets/images/icons_3d_pack2/icon_goal.png
+ D assets/images/icons_3d_pack2/icon_gps.png
+ D assets/images/icons_3d_pack2/icon_habits.png
+ D assets/images/icons_3d_pack2/icon_home.png
+ D assets/images/icons_3d_pack2/icon_hydration_goal.png
+ D assets/images/icons_3d_pack2/icon_next.png
+ D assets/images/icons_3d_pack2/icon_notifications.png
+ D assets/images/icons_3d_pack2/icon_pause.png
+ D assets/images/icons_3d_pack2/icon_personal.png
+ D assets/images/icons_3d_pack2/icon_play.png
+ D assets/images/icons_3d_pack2/icon_premium.png
+ D assets/images/icons_3d_pack2/icon_profile.png
+ D assets/images/icons_3d_pack2/icon_progress.png
+ D assets/images/icons_3d_pack2/icon_recipes.png
+ D assets/images/icons_3d_pack2/icon_search.png
+ D assets/images/icons_3d_pack2/icon_security.png
+ D assets/images/icons_3d_pack2/icon_settings.png
+ D assets/images/icons_3d_pack2/icon_streak.png
+ D assets/images/icons_3d_pack2/icon_support.png
+ D assets/images/icons_3d_pack2/icon_upload_photo.png
+ D assets/images/icons_3d_pack2/icon_videos.png
+ D assets/images/icons_3d_pack2/icon_water.png
+ D assets/images/icons_3d_pack2/icon_weight.png
+ D assets/images/icons_3d_pack2/icon_workout_goal.png
+ M assets/images/lily_fit/01_lili_fit_joinha.png
+ M assets/images/lily_fit/05_lili_fit_correndo.png
+ M assets/images/lily_fit/09_lili_fit_halter.png
+ M assets/images/mascote/avatar_boas_vindas.png
+ M assets/images/mascote/avatar_correndo.png
+ M assets/images/mascote/avatar_forte.png
+ M assets/images/mascote/avatar_halteres.png
+ M assets/images/mascote/avatar_joinha.png
+ M assets/images/progresso/balanca_medidas.jpeg
+ M assets/images/progresso/evolucao_medidas_dark.jpeg
+ M assets/images/progresso/evolucao_resultados.jpeg
+ M assets/images/receitas/receitas_nutricao_dark.jpeg
+ D assets/images/recipes/neon/01_batatas_assadas_com_brilho_neon.png
+ D assets/images/recipes/neon/02_bowl_de_salada_neon_com_frango_grelhado.png
+ D assets/images/recipes/neon/03_bowl_de_salmao_neon_com_quinoa.png
+ D assets/images/recipes/neon/04_crepioca_de_frango_neon.png
+ D assets/images/recipes/neon/05_cuscuz_com_ovo_fit_neon.png
+ D assets/images/recipes/neon/06_file_de_peixe_grelhado_neon_com_legumes.png
+ D assets/images/recipes/neon/07_frango_grelhado_neon_com_legumes.png
+ D assets/images/recipes/neon/08_massa_integral_neon_com_frango_grelhado.png
+ D assets/images/recipes/neon/09_muffin_de_chocolate_neon_futurista.png
+ D assets/images/recipes/neon/10_omelete_de_espinafre_neon_com_tomates.png
+ D assets/images/recipes/neon/11_omelete_neon_de_espinafre_e_cogumelos.png
+ D assets/images/recipes/neon/12_ovos_mexidos_neon_com_acompanhamentos_frescos.png
+ D assets/images/recipes/neon/13_panquecas_neon_com_frutas_e_mel.png
+ D assets/images/recipes/neon/14_parfait_de_iogurte_com_neon_vibrante.png
+ D assets/images/recipes/neon/15_parfait_neon_de_frutas_e_granola.png
+ D assets/images/recipes/neon/16_parfait_neon_de_frutas_vermelhas.png
+ D assets/images/recipes/neon/17_pote_neon_de_aveia_com_frutas.png
+ D assets/images/recipes/neon/18_sanduiche_integral_neon_gourmet.png
+ D assets/images/recipes/neon/19_sanduiche_neon_de_frango_grelhado.png
+ D assets/images/recipes/neon/20_smoothie_de_frutas_neon.png
+ D assets/images/recipes/neon/21_suco_verde_detox_neon.png
+ D assets/images/recipes/neon/22_tigela_neon_de_frango_grelhado.png
+ D assets/images/recipes/neon/23_tigela_neon_de_iogurte_com_frutas.png
+ D assets/images/recipes/neon/24_wrap_neon_de_frango_e_vegetais.png
+ D assets/images/recipes/neon/25_icone_neon_de_aveia_com_frutas.png
+ D assets/images/recipes/neon/26_icone_neon_de_bowl_de_acai.png
+ D assets/images/recipes/neon/27_icone_neon_de_bowl_de_quinoa_colorido.png
+ D assets/images/recipes/neon/28_icone_neon_de_frango_grelhado_e_legumes.png
+ D assets/images/recipes/neon/29_icone_neon_de_mix_de_castanhas.png
+ D assets/images/recipes/neon/30_icone_neon_de_omelete_gourmet.png
+ D assets/images/recipes/neon/31_icone_neon_de_panquecas_com_frutas.png
+ D assets/images/recipes/neon/32_icone_neon_de_salada_caesar.png
+ D assets/images/recipes/neon/33_icone_neon_de_salada_saudavel.png
+ D assets/images/recipes/neon/34_icone_neon_de_salmao_grelhado.png
+ D assets/images/recipes/neon/35_icone_neon_de_sopa_caseira.png
+ D assets/images/recipes/neon/36_icone_neon_de_sopa_de_abobora_cremosa.png
+ D assets/images/recipes/neon/37_icone_neon_de_sopa_de_legumes.png
+ D assets/images/recipes/neon/38_icone_neon_de_suco_detox_verde.png
+ D assets/images/recipes/neon/39_icone_neon_de_tapioca_recheada.png
+ D assets/images/recipes/neon/40_icone_neon_de_torrada_com_abacate.png
+ M assets/images/referencias/conjunto_icones_fitness_1.jpeg
+ M assets/images/referencias/grade_icones_funcionalidades_1.jpeg
+ M assets/images/referencias/grade_icones_funcionalidades_2.jpeg
+ M assets/images/rotina/rotina_habitos_dark.jpeg
+ M assets/images/rotina/rotina_tempo_meta.jpeg
+ M assets/images/treinos/halter.jpeg
+ M assets/images/treinos/kit_treino.jpeg
+ M assets/images/treinos/plano_treino_personal.jpeg
+ M assets/images/treinos/treino_checklist_dark.jpeg
+ M assets/lily/lily_achievement.png
+ D assets/lily/lily_alongamento.png
+ D assets/lily/lily_apontando_baixo.png
+ D assets/lily/lily_apontando_cima.png
+ D assets/lily/lily_apontando_direita.png
+ D assets/lily/lily_apontando_esquerda.png
+ D assets/lily/lily_apresentando_aberta.png
+ D assets/lily/lily_apresentando_esquerda.png
+ D assets/lily/lily_boas_vindas_acenando.png
+ D assets/lily/lily_calendario_check.png
+ D assets/lily/lily_comemorando_trofeu.png
+ D assets/lily/lily_corrida.png
+ D assets/lily/lily_forca.png
+ D assets/lily/lily_joinha.png
+ D assets/lily/lily_lembrete_hidratacao.png
+ D assets/lily/lily_meditacao.png
+ D assets/lily/lily_meta_concluida.png
+ D assets/lily/lily_mostrando_app.png
+ M assets/lily/lily_motivation.png
+ D assets/lily/lily_pos_treino.png
+ D assets/lily/lily_prato_saudavel.png
+ M assets/lily/lily_success.png
+ D assets/lily/lily_tentar_novamente.png
+ D assets/lily/lily_tomando_agua.png
+ D assets/lily/lily_treino_halteres.png
+ D assets/lily/lily_vitoria.png
+ M assets/lily/lily_workout.png
+D  assets/lily_exercicios/_incoming/01_desenvolvimento_halteres.jpg
+D  assets/lily_exercicios/_incoming/02_supino_maquina_peitoral.jpg
+D  assets/lily_exercicios/_incoming/03_puxada_alta_barra.jpg
+D  assets/lily_exercicios/_incoming/04_remada_articulada.jpg
+D  assets/lily_exercicios/_incoming/05_remada_sentada_triangulo.jpg
+D  assets/lily_exercicios/_incoming/06_remada_curvada_barra.jpg
+D  assets/lily_exercicios/_incoming/07_remada_alta_barra.jpg
+D  assets/lily_exercicios/_incoming/08_prancha_alta.jpg
+D  assets/lily_exercicios/_incoming/09_prancha_antebraco_tapete.jpg
+D  assets/lily_exercicios/_incoming/10_prancha_antebraco_gym.jpg
+D  assets/lily_exercicios/_incoming/11_supino_maquina_variante.jpg
+D  assets/lily_exercicios/_incoming/12_elevacao_pelvica_banco.jpg
+D  assets/lily_exercicios/_incoming/13_triceps_corda_overhead.jpg
+D  assets/lily_exercicios/_incoming/14_supino_maquina_peito.jpg
+D  assets/lily_exercicios/_incoming/15_leg_press.jpg
+D  assets/lily_exercicios/_incoming/16_bike_horizontal.jpg
+D  assets/lily_exercicios/_incoming/17_bike_horizontal_academia.jpg
+ M assets/lily_exercicios/treino_034.jpg
+ M assets/lily_exercicios/treino_046.jpg
+ D assets/lily_treinos/lily_abducao_com_faixa.png
+ D assets/lily_treinos/lily_agachamento.png
+ D assets/lily_treinos/lily_alongamento.png
+ D assets/lily_treinos/lily_bicicleta.png
+ D assets/lily_treinos/lily_caminhada.png
+ D assets/lily_treinos/lily_coice_gluteo.png
+ D assets/lily_treinos/lily_corda_naval.png
+ D assets/lily_treinos/lily_corrida.png
+ D assets/lily_treinos/lily_desenvolvimento_ombros.png
+ D assets/lily_treinos/lily_elevacao_lateral.png
+ D assets/lily_treinos/lily_esteira.png
+ D assets/lily_treinos/lily_hip_thrust.png
+ D assets/lily_treinos/lily_kettlebell.png
+ D assets/lily_treinos/lily_panturrilha.png
+ D assets/lily_treinos/lily_prancha.png
+ D assets/lily_treinos/lily_remada.png
+ D assets/lily_treinos/lily_rosca_biceps.png
+ D assets/lily_treinos/lily_supino.png
+ D assets/lily_treinos/lily_treino_generico_1.png
+ D assets/lily_treinos/lily_treino_generico_2.png
+ D assets/lily_treinos/lily_treino_generico_3.png
+ D assets/lily_treinos/lily_treino_generico_4.png
+ D assets/lily_treinos/lily_treino_halteres.png
+ D assets/lily_treinos/lily_triceps.png
+ M assets/mascot/extras/lily_celebrating_ring_official.png
+ M assets/mascot/extras/lily_thumbs_up_official.png
+ M assets/mascot/extras/mascot_calendar.png
+ M assets/mascot/extras/mascot_medal.png
+ M assets/mascot/extras/mascot_promo.png
+ M assets/mascot/extras/mascot_thinking.png
+ M assets/mascot/png/mascot_dumbbell.png
+ M assets/mascot/png/mascot_running.png
+ M assets/mascot/png/mascot_strong.png
+ M assets/mascot/png/mascot_thumbs_up.png
+ M assets/mascot/png/mascot_welcome.png
+D  backup_assets_fast_20260815_095605/assets/_incoming_lily/lily_upload_01.png
+D  backup_assets_fast_20260815_095605/assets/_incoming_lily/lily_upload_02.png
+D  backup_assets_fast_20260815_095605/assets/_incoming_lily/lily_upload_03.png
+D  backup_assets_fast_20260815_095605/assets/_incoming_lily/lily_upload_04.png
+D  backup_assets_fast_20260815_095605/assets/_incoming_lily/lily_upload_05.png
+D  backup_assets_fast_20260815_095605/assets/_incoming_lily/lily_upload_06.png
+D  backup_assets_fast_20260815_095605/assets/_incoming_lily/lily_upload_07.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_audio.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_bmi_measure.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_calendar.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_calories.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_camera_food.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_checklist.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_community.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_courses.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_edit.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_favorite.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_goal.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_gps_running.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_health_heart.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_home.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_hydration.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_login.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_logout.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_medal_ranking.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_meditation.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_messages.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_notifications.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_nutrition.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_premium.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_privacy.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_profile.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_progress.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_recipes.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_running.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_scanner.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_search.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_settings.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_share.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_shopping_list.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_sleep.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_statistics.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_stopwatch.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_streak.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_support.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_trophy.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_video.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_weight.png
+D  backup_assets_fast_20260815_095605/assets/icons/icon_workout_dumbbell.png
+D  backup_assets_fast_20260815_095605/assets/images/mascote/avatar_trofeu.png
+D  backup_assets_pre_alpha_20260814_193732/assets/mascot/png/mascot_celebrating.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_agachamento.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_apontando.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_boas_vindas.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_celebrando.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_checklist.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_coracao.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_correndo.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_forte.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_halteres.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_halteres_sentada.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_hidratacao.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_joinha.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_meditacao.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_padrao.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_perfil.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_rainha.png
+D  backup_assets_pre_alpha_20260814_193858/assets/images/mascote/avatar_triste.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/extras/mascot_calendar.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/extras/mascot_healthy_food.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/extras/mascot_meal_prep.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/extras/mascot_medal.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/extras/mascot_progress.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/extras/mascot_promo.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/extras/mascot_thinking.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_celebrating.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_checklist.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_default.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_dumbbell.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_dumbbell_seated.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_heart.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_hydration.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_meditation.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_pointing.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_profile.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_queen.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_running.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_sad.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_squat.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_strong.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_thumbs_up.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_trophy.png
+D  backup_assets_pre_alpha_20260814_193858/assets/mascot/png/mascot_welcome.png
+ M build_web_out.txt
+ M firebase.json
+ M integration_test/audio_programs_playback_test.dart
+ M lib/core/assets/app_icons.dart
+ M lib/core/assets/app_icons_pack2.dart
+ M lib/core/assets/personal_ai_icons.dart
+ M lib/core/constants/app_assets.dart
+ M lib/core/lily/lily_assets.dart
+ M lib/core/lily/lily_exercicio_assets.dart
+ M lib/core/lily/lily_treino_assets.dart
+ M lib/features/audio_courses/presentation/meditations_screen.dart
+ M lib/features/audio_programs/data/repositories/audio_program_repository_impl.dart
+ M lib/features/audio_programs/presentation/screens/program_player_screen.dart
+ M lib/features/audio_programs/providers/program_player_controller.dart
+ M lib/features/personal_cms/presentation/meditations_cms_screen.dart
+ M lib/features/personal_cms/presentation/personal_cms_hub_screen.dart
+ M lib/features/recipes/domain/recipe_image_resolver.dart
+ M lib/features/recipes/domain/recipe_neon_icons.dart
+ M lib/features/video_streaming/domain/video_models.dart
+ M lib/features/video_streaming/presentation/video_editor_sheet.dart
+ M lib/features/video_streaming/presentation/videos_admin_screen.dart
+ M lib/features/video_streaming/presentation/videos_screen.dart
+ M lib/features/video_streaming/providers/video_providers.dart
+ M lib/firebase_options.dart
+ M pubspec.yaml
+ M test/audio_programs_assets_test.dart
+ M tools/audio_seed/seed_data.json
+?? AUDITORIA_FINAL_METODO_1_DIA.pdf
+?? CHECKLIST_APP_STORE.md
+?? CHECKLIST_GOOGLE_PLAY.md
+?? CHECKLIST_HOMOLOGACAO_FINAL.md
+?? CHECKLIST_PUBLICACAO_ANDROID_IOS.md
+?? FINALIZACAO_TECNICA_20260922.md
+?? INVENTARIO_ENTREGA_TECNICA.md
+?? LISTA_AMANDA_MANUAL_APP.md
+?? LISTA_DEPENDENCIAS_PLAY_APPLE_MAC.md
+?? PENDENCIAS_AMANDA.md
+?? PENDENCIAS_PROGRAMADOR.md
+?? PUBLICACAO_ANDROID_IOS.md
+?? RBAC_TESTE_PERFIS_METODO_1_DIA.pdf
+?? RECUPERACAO_PROJETO_COMPLETO/
+?? REGRESSAO_AAB_20260922.md
+?? RELATORIO_FINAL_METODO_1_DIA_DE_CADA_VEZ.md
+?? RELATORIO_PLANOS_ASSINATURAS.md
+?? RELATORIO_REVENUECAT_SANDBOX.md
+?? RELATORIO_YOUTUBE_VIDEOS_STATUS.json
+?? RELATORIO_YOUTUBE_VIDEOS_STATUS.md
+?? ROTEIRO_E2E_TRES_PERFIS_EXECUCAO.md
+?? assets/amanda/promo/amanda_acenando.jpg
+?? assets/amanda/promo/amanda_alongamento.jpg
+?? assets/amanda/promo/amanda_alongamento_alt.jpg
+?? assets/amanda/promo/amanda_apontando_baixo.jpg
+?? assets/amanda/promo/amanda_apontando_cima.jpg
+?? assets/amanda/promo/amanda_apontando_direita.jpg
+?? assets/amanda/promo/amanda_apontando_esquerda.jpg
+?? assets/amanda/promo/amanda_apresentando.jpg
+?? assets/amanda/promo/amanda_calendario_check.jpg
+?? assets/amanda/promo/amanda_ciclo_metodo.jpg
+?? assets/amanda/promo/amanda_corrida.jpg
+?? assets/amanda/promo/amanda_forca.jpg
+?? assets/amanda/promo/amanda_hidratacao.jpg
+?? assets/amanda/promo/amanda_joinha.jpg
+?? assets/amanda/promo/amanda_lembrete_hidratacao.jpg
+?? assets/amanda/promo/amanda_meditacao.jpg
+?? assets/amanda/promo/amanda_meta_concluida.jpg
+?? assets/amanda/promo/amanda_mostrando_app.jpg
+?? assets/amanda/promo/amanda_nutricao_prato.jpg
+?? assets/amanda/promo/amanda_orientando.jpg
+?? assets/amanda/promo/amanda_treino_halteres.jpg
+?? assets/amanda/promo/amanda_trofeu.jpg
+?? assets/amanda/promo/amanda_vitoria.jpg
+?? assets/icons/app/ajuda.jpg
+?? assets/icons/app/analisar_refeicao_ia.jpg
+?? assets/icons/app/bem_estar.jpg
+?? assets/icons/app/checkin.jpg
+?? assets/icons/app/comunidade.jpg
+?? assets/icons/app/configuracoes.jpg
+?? assets/icons/app/corrida_gps.jpg
+?? assets/icons/app/desafios.jpg
+?? assets/icons/app/diario.jpg
+?? assets/icons/app/evolucao.jpg
+?? assets/icons/app/extras_hidratacao/hidratacao_check.jpg
+?? assets/icons/app/extras_hidratacao/hidratacao_extra_1.jpg
+?? assets/icons/app/extras_hidratacao/hidratacao_garrafa.jpg
+?? assets/icons/app/extras_hidratacao/hidratacao_rastreamento.jpg
+?? assets/icons/app/habitos.jpg
+?? assets/icons/app/hidratacao.jpg
+?? assets/icons/app/inicio.jpg
+?? assets/icons/app/meditacoes.jpg
+?? assets/icons/app/metas.jpg
+?? assets/icons/app/notificacoes.jpg
+?? assets/icons/app/perfil.jpg
+?? assets/icons/app/premium.jpg
+?? assets/icons/app/receitas.jpg
+?? assets/icons/app/sair.jpg
+?? assets/icons/app/sono.jpg
+?? assets/icons/app/suporte.jpg
+?? assets/icons/app/treinos.jpg
+?? assets/icons/app/videos.jpg
+?? assets/icons/hydration/hydration_bottle.jpg
+?? assets/icons/hydration/hydration_check.jpg
+?? assets/icons/hydration/hydration_glass.jpg
+?? assets/icons/hydration/hydration_progress.jpg
+?? assets/icons/neon/corrida/icone_neon_de_corrida_e_saude_cardiaca.jpg
+?? assets/icons/neon/treinos/burpee_em_prancha_neon.jpg
+?? assets/icons/neon/treinos/extensao_de_triceps_neon_na_academia.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_com_abdomen_definido.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_com_abdomen_esculpido.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_com_agachamento_sumo.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_com_braco_musculoso.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_com_halter_futurista.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_com_halteres.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_com_rosca_direta.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_de_leg_press.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_de_supino_com_halteres.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_em_agachamento.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_em_alongamento.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_em_movimento.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_em_vidro_3d.jpg
+?? assets/icons/neon/treinos/icone_fitness_neon_hip_thrust_dramatico.jpg
+?? assets/icons/neon/treinos/icone_neon_de_abdominais_futurista.jpg
+?? assets/icons/neon/treinos/icone_neon_de_abdominais_futuristas.jpg
+?? assets/icons/neon/treinos/icone_neon_de_agachamento_com_barra.jpg
+?? assets/icons/neon/treinos/icone_neon_de_alongamento.jpg
+?? assets/icons/neon/treinos/icone_neon_de_alongamento_feminino.jpg
+?? assets/icons/neon/treinos/icone_neon_de_alongamento_fitness.jpg
+?? assets/icons/neon/treinos/icone_neon_de_cronometro_em_vidro.jpg
+?? assets/icons/neon/treinos/icone_neon_de_elevacao_de_panturrilha.jpg
+?? assets/icons/neon/treinos/icone_neon_de_elevacao_de_pernas.jpg
+?? assets/icons/neon/treinos/icone_neon_de_elevacao_lateral.jpg
+?? assets/icons/neon/treinos/icone_neon_de_extensao_de_pernas.jpg
+?? assets/icons/neon/treinos/icone_neon_de_flexao_atletica.jpg
+?? assets/icons/neon/treinos/icone_neon_de_haltere_futurista.jpg
+?? assets/icons/neon/treinos/icone_neon_de_halteres_fitness.jpg
+?? assets/icons/neon/treinos/icone_neon_de_hip_thrust_com_barra.jpg
+?? assets/icons/neon/treinos/icone_neon_de_kickback_na_polia.jpg
+?? assets/icons/neon/treinos/icone_neon_de_lunge_com_halteres.jpg
+?? assets/icons/neon/treinos/icone_neon_de_mesa_flexora.jpg
+?? assets/icons/neon/treinos/icone_neon_de_polichinelo_fitness.jpg
+?? assets/icons/neon/treinos/icone_neon_de_prancha_fitness.jpg
+?? assets/icons/neon/treinos/icone_neon_de_puxada_na_maquina.jpg
+?? assets/icons/neon/treinos/icone_neon_de_remada_baixa_fitness.jpg
+?? assets/icons/neon/treinos/icone_neon_de_remada_com_halter.jpg
+?? assets/icons/neon/treinos/icone_neon_de_supino_fitness.jpg
+?? assets/icons/neon/treinos/icone_neon_de_swing_com_kettlebell.jpg
+?? assets/icons/neon/treinos/icone_neon_de_torso_atletico.jpg
+?? assets/icons/neon/treinos/icone_neon_de_treino_de_costas.jpg
+?? assets/icons/neon/treinos/icone_neon_de_triceps_na_polia.jpg
+?? assets/icons/personal-ai/01_chat_com_amanda.jpg
+?? assets/icons/personal-ai/02_agenda_consultoria.jpg
+?? assets/icons/personal-ai/03_area_da_personal.jpg
+?? assets/icons/personal-ai/04_anamnese.jpg
+?? assets/icons/personal-ai/05_analisar_com_ia.jpg
+?? assets/icons/personal-ai/06_assistente_ia.jpg
+?? assets/icons/personal-ai/07_insights_ia.jpg
+?? assets/icons/personal-ai/08_sugestao_de_resposta.jpg
+?? assets/icons/personal-ai/09_resumo_da_conversa.jpg
+?? assets/icons/personal-ai/10_pontos_de_atencao.jpg
+?? assets/images/recipes/neon/01_batatas_assadas_com_brilho_neon.jpg
+?? assets/images/recipes/neon/02_bowl_de_salada_neon_com_frango_grelhado.jpg
+?? assets/images/recipes/neon/03_bowl_de_salmao_neon_com_quinoa.jpg
+?? assets/images/recipes/neon/04_crepioca_de_frango_neon.jpg
+?? assets/images/recipes/neon/05_cuscuz_com_ovo_fit_neon.jpg
+?? assets/images/recipes/neon/06_file_de_peixe_grelhado_neon_com_legumes.jpg
+?? assets/images/recipes/neon/07_frango_grelhado_neon_com_legumes.jpg
+?? assets/images/recipes/neon/08_massa_integral_neon_com_frango_grelhado.jpg
+?? assets/images/recipes/neon/09_muffin_de_chocolate_neon_futurista.jpg
+?? assets/images/recipes/neon/10_omelete_de_espinafre_neon_com_tomates.jpg
+?? assets/images/recipes/neon/11_omelete_neon_de_espinafre_e_cogumelos.jpg
+?? assets/images/recipes/neon/12_ovos_mexidos_neon_com_acompanhamentos_frescos.jpg
+?? assets/images/recipes/neon/13_panquecas_neon_com_frutas_e_mel.jpg
+?? assets/images/recipes/neon/14_parfait_de_iogurte_com_neon_vibrante.jpg
+?? assets/images/recipes/neon/15_parfait_neon_de_frutas_e_granola.jpg
+?? assets/images/recipes/neon/16_parfait_neon_de_frutas_vermelhas.jpg
+?? assets/images/recipes/neon/17_pote_neon_de_aveia_com_frutas.jpg
+?? assets/images/recipes/neon/18_sanduiche_integral_neon_gourmet.jpg
+?? assets/images/recipes/neon/19_sanduiche_neon_de_frango_grelhado.jpg
+?? assets/images/recipes/neon/20_smoothie_de_frutas_neon.jpg
+?? assets/images/recipes/neon/21_suco_verde_detox_neon.jpg
+?? assets/images/recipes/neon/22_tigela_neon_de_frango_grelhado.jpg
+?? assets/images/recipes/neon/23_tigela_neon_de_iogurte_com_frutas.jpg
+?? assets/images/recipes/neon/24_wrap_neon_de_frango_e_vegetais.jpg
+?? assets/images/recipes/neon/25_icone_neon_de_aveia_com_frutas.jpg
+?? assets/images/recipes/neon/26_icone_neon_de_bowl_de_acai.jpg
+?? assets/images/recipes/neon/27_icone_neon_de_bowl_de_quinoa_colorido.jpg
+?? assets/images/recipes/neon/28_icone_neon_de_frango_grelhado_e_legumes.jpg
+?? assets/images/recipes/neon/29_icone_neon_de_mix_de_castanhas.jpg
+?? assets/images/recipes/neon/30_icone_neon_de_omelete_gourmet.jpg
+?? assets/images/recipes/neon/31_icone_neon_de_panquecas_com_frutas.jpg
+?? assets/images/recipes/neon/32_icone_neon_de_salada_caesar.jpg
+?? assets/images/recipes/neon/33_icone_neon_de_salada_saudavel.jpg
+?? assets/images/recipes/neon/34_icone_neon_de_salmao_grelhado.jpg
+?? assets/images/recipes/neon/35_icone_neon_de_sopa_caseira.jpg
+?? assets/images/recipes/neon/36_icone_neon_de_sopa_de_abobora_cremosa.jpg
+?? assets/images/recipes/neon/37_icone_neon_de_sopa_de_legumes.jpg
+?? assets/images/recipes/neon/38_icone_neon_de_suco_detox_verde.jpg
+?? assets/images/recipes/neon/39_icone_neon_de_tapioca_recheada.jpg
+?? assets/images/recipes/neon/40_icone_neon_de_torrada_com_abacate.jpg
+?? assets/lily/lily_alongamento.jpg
+?? assets/lily/lily_apontando_baixo.jpg
+?? assets/lily/lily_apontando_cima.jpg
+?? assets/lily/lily_apontando_direita.jpg
+?? assets/lily/lily_apontando_esquerda.jpg
+?? assets/lily/lily_apresentando_aberta.jpg
+?? assets/lily/lily_apresentando_esquerda.jpg
+?? assets/lily/lily_boas_vindas_acenando.jpg
+?? assets/lily/lily_calendario_check.jpg
+?? assets/lily/lily_comemorando_trofeu.jpg
+?? assets/lily/lily_corrida.jpg
+?? assets/lily/lily_forca.jpg
+?? assets/lily/lily_joinha.jpg
+?? assets/lily/lily_lembrete_hidratacao.jpg
+?? assets/lily/lily_meditacao.jpg
+?? assets/lily/lily_meta_concluida.jpg
+?? assets/lily/lily_mostrando_app.jpg
+?? assets/lily/lily_pos_treino.jpg
+?? assets/lily/lily_prato_saudavel.jpg
+?? assets/lily/lily_tentar_novamente.jpg
+?? assets/lily/lily_tomando_agua.jpg
+?? assets/lily/lily_treino_halteres.jpg
+?? assets/lily/lily_vitoria.jpg
+?? assets/lily_exercicios/lily_fit_cadeira_abdutora.jpeg
+?? assets/lily_exercicios/lily_fit_cadeira_extensora.jpeg
+?? assets/lily_treinos/lily_abducao_com_faixa.jpg
+?? assets/lily_treinos/lily_agachamento.jpg
+?? assets/lily_treinos/lily_alongamento.jpg
+?? assets/lily_treinos/lily_bicicleta.jpg
+?? assets/lily_treinos/lily_caminhada.jpg
+?? assets/lily_treinos/lily_coice_gluteo.jpg
+?? assets/lily_treinos/lily_corda_naval.jpg
+?? assets/lily_treinos/lily_corrida.jpg
+?? assets/lily_treinos/lily_desenvolvimento_ombros.jpg
+?? assets/lily_treinos/lily_elevacao_lateral.jpg
+?? assets/lily_treinos/lily_esteira.jpg
+?? assets/lily_treinos/lily_hip_thrust.jpg
+?? assets/lily_treinos/lily_kettlebell.jpg
+?? assets/lily_treinos/lily_panturrilha.jpg
+?? assets/lily_treinos/lily_prancha.jpg
+?? assets/lily_treinos/lily_remada.jpg
+?? assets/lily_treinos/lily_rosca_biceps.jpg
+?? assets/lily_treinos/lily_supino.jpg
+?? assets/lily_treinos/lily_treino_generico_1.jpg
+?? assets/lily_treinos/lily_treino_generico_2.jpg
+?? assets/lily_treinos/lily_treino_generico_3.jpg
+?? assets/lily_treinos/lily_treino_generico_4.jpg
+?? assets/lily_treinos/lily_treino_halteres.jpg
+?? assets/lily_treinos/lily_triceps.jpg
+?? audit_after_continuar.png
+?? audit_after_swipe.png
+?? audit_analyze_final.txt
+?? audit_build_aab_final.txt
+?? audit_build_apk.txt
+?? audit_build_apk_final.txt
+?? audit_clean.txt
+?? audit_final_auth.png
+?? audit_firebase_audio.txt
+?? audit_forgot_password.png
+?? audit_scr_after_splash.png
+?? audit_scr_launch.png
+?? audit_scr_now.png
+?? audit_size_1440.png
+?? audit_size_720.png
+?? audit_size_default.png
+?? audit_skip1.png
+?? audit_step_1.png
+?? audit_step_2.png
+?? audit_step_3.png
+?? audit_step_4.png
+?? audit_step_after1.png
+?? audit_step_after2.png
+?? audit_step_login.png
+?? audit_treino_icons.txt
+?? audit_unit_tests.txt
+?? build_aab_audio.txt
+?? build_aab_prepub.txt
+?? build_amanda_analyze.txt
+?? deploy_functions.txt
+?? deploy_functions2.txt
+?? docs/_audit_tamanho_20260921.json
+?? docs/_otimizacao_imagens_pass2.json
+?? homologacao_visual_android/
+?? homologacao_web_screenshots/
+?? ios/.gitignore
+?? ios/Flutter/
+?? ios/Runner.xcodeproj/
+?? ios/Runner.xcworkspace/
+?? ios/Runner/AppDelegate.swift
+?? ios/Runner/Base.lproj/
+?? ios/Runner/PrivacyInfo.xcprivacy
+?? ios/Runner/Runner-Bridging-Header.h
+?? ios/Runner/SceneDelegate.swift
+?? ios/RunnerTests/
+?? lily_frame_fix_log.txt
+?? neon_analyze.txt
+?? neon_build_debug.txt
+?? neon_pubget.txt
+?? neon_tests.txt
+?? public/404.html
+?? test/meditations_youtube_test.dart
+?? tools/__pycache__/
+?? tools/_aab_final_verify.ps1
+?? tools/_aab_rebuild_tail.txt
+?? tools/_aplicar_png_to_jpg.py
+?? tools/_audit_117_exercicios.csv
+?? tools/_audit_lily_images_dump.json
+?? tools/_audit_tamanho_20260921.py
+?? tools/_build_status.ps1
+?? tools/_build_status.txt
+?? tools/_cadeira_verify.txt
+?? tools/_check_aab_size.ps1
+?? tools/_check_empty_assets.ps1
+?? tools/_check_mascote.py
+?? tools/_disk_free.ps1
+?? tools/_disk_free.txt
+?? tools/_empty_declared_assets.txt
+?? tools/_exclude_aab_bloat.ps1
+?? tools/_exclude_aab_bloat_log.txt
+?? tools/_fix_audio_root_cause.py
+?? tools/_fix_empty_hyd.py
+?? tools/_fix_lily_names.py
+?? tools/_fixed_status.ps1
+?? tools/_fixed_status.txt
+?? tools/_fixed_status2.ps1
+?? tools/_fixed_status2.txt
+?? tools/_folder_sizes_after.ps1
+?? tools/_gradle_fail_diag.ps1
+?? tools/_gradle_fail_diag.txt
+?? tools/_insert_canonicalize.py
+?? tools/_lily_pack_146_files.txt
+?? tools/_lily_roll_previews/
+?? tools/_lowmem_status.ps1
+?? tools/_lowmem_status.txt
+?? tools/_map_117_lily_fit.csv
+?? tools/_map_117_lily_fit_missing.txt
+?? tools/_map_117_lily_fit_report.txt
+?? tools/_map_117_lily_fit_unused.txt
+?? tools/_otimizar_imagens_pass2.py
+?? tools/_patch_check.py
+?? tools/_patch_fix2.py
+?? tools/_patch_lily_homolog.py
+?? tools/_polish_hydration.py
+?? tools/_prep_hosting_homolog.py
+?? tools/_probe_aab_paths.ps1
+?? tools/_probe_aab_regression.ps1
+?? tools/_read_rebuild_log.ps1
+?? tools/_rebuild_aab.cmd
+?? tools/_rebuild_aab.ps1
+?? tools/_rebuild_aab3.cmd
+?? tools/_rebuild_aab_fixed.cmd
+?? tools/_rebuild_aab_lowmem.cmd
+?? tools/_rebuild_aab_verbose.cmd
+?? tools/_verbose_status.ps1
+?? tools/_verify_cadeira_and_logs.ps1
+?? tools/_wire_amanda2.py
+?? tools/_wire_amanda3.py
+?? tools/_wire_amanda_poses.py
+?? tools/_wire_habitos.py
+?? tools/_wire_hydration_extras.py
+?? tools/_wire_icons4.py
+?? tools/_wire_icons6.py
+?? tools/_wire_icons_final_batch.py
+?? tools/_wire_lily_mascot.py
+?? tools/_wire_lily_treino.py
+?? tools/audio_seed/audit_install.txt
+?? tools/audit_neon_treino_dist.py
+?? tools/fix_detail_lily.py
+?? tools/fix_visual_fallback.py
+?? tools/fix_youtube_report.py
+?? tools/gerar_auditoria_pdf.py
+?? tools/gerar_rbac_pdf.py
+?? tools/map_117_lily.py
+?? tools/organize_117_lily.py
+?? tools/patch_cadeiras_lily.py
+?? tools/refine_117_lily.py
+?? tools/strip_bom.py
+?? tools/upsert_youtube_shorts.cjs
+?? tools/verify_neon_paths.py
+?? used_appicons.txt
+?? web_fix_analyze.txt
+?? web_homolog_analyze.txt
+?? web_homolog_run.txt
+?? web_homolog_run2.txt
+?? web_homolog_run3.txt
+?? web_homolog_run4.txt
+?? web_homolog_test.txt

@@ -12,6 +12,7 @@ import '../../../core/mascot/lily_catalog.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/widgets/lily_character_widget.dart';
 import '../../../models/app_user.dart';
 import '../../auth/providers/auth_providers.dart';
@@ -202,7 +203,7 @@ class _AudioCoursePlayerScreenState
 
     if (bloqueado) {
       return Scaffold(
-        appBar: AppBar(title: Text(widget.course.title)),
+        appBar: PremiumAppBar(title: widget.course.title),
         body: SafeArea(
           child: Center(
             child: Padding(
@@ -243,8 +244,8 @@ class _AudioCoursePlayerScreenState
     final isFavorite = favoritos.contains(widget.course.id);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.course.title, overflow: TextOverflow.ellipsis),
+      appBar: PremiumAppBar(
+        title: widget.course.title,
         actions: [
           IconButton(
             icon: FavoriteAssetIcon(active: isFavorite, size: 22),

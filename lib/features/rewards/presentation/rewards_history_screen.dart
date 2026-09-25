@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/router/premium_app_bar.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/animations.dart';
 import '../../../core/utils/date_format.dart';
@@ -17,7 +18,7 @@ class RewardsHistoryScreen extends ConsumerWidget {
     final state = ref.watch(rewardsProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Recompensas resgatadas')),
+      appBar: const PremiumAppBar(title: 'Recompensas resgatadas'),
       body: SafeArea(
         child: state.history.isEmpty
             ? Center(
